@@ -11,7 +11,7 @@ struct FileState {
     ino_t inode;          // Identificatore unico del file
     off_t last_size;      // Ultima dimensione conosciuta
     std::string path;     // Percorso completo del file
-
+    FileState() = default;
     FileState(const std::string& p) : path(p), last_size(0), inode(0) {
         update();
     }
@@ -25,6 +25,12 @@ public:
     explicit ZeekLogParser(const std::string& log_dir) : log_directory(log_dir) {}
 
     void monitor_logs();
+
+    void process_new_file(const FileState &file);
+
+    void process_appended_data(const std::string &path, off_t old_size, off_t new_size);
+
+    void process_content(const std::string &path, const std::string &content);
 
 private:
     std::unordered_map<std::string, FileState> tracked_files;
