@@ -5,15 +5,15 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(graph_builder main.cpp
         ZeekLogParser.cpp
-        ZeekLogParser.h
+        includes/ZeekLogParser.h
         GraphBuilder.cpp
-        GraphBuilder.h
+        includes/GraphBuilder.h
         LogMonitor.cpp
-        LogMonitor.h
+        includes/LogMonitor.h
         TrafficAnalyzer.cpp
-        TrafficAnalyzer.h
+        includes/TrafficAnalyzer.h
         GraphVisualizer.cpp
-        GraphVisualizer.h)
+        includes/GraphVisualizer.h)
 
 
 # Manually specify the Graphviz libraries

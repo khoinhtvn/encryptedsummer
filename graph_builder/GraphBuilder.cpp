@@ -46,6 +46,7 @@ std::vector<std::shared_ptr<GraphEdge> > TrafficGraph::get_edges() const {
 void GraphBuilder::add_connection(const std::string &src_ip, const std::string &dst_ip,
                                   const std::string &proto, const std::string &timestamp,
                                   int src_port, int dst_port) {
+    // TODO: separate long and short flows
     // Add nodes
     graph.add_node(src_ip, "host");
     graph.add_node(dst_ip, "host");

@@ -1,16 +1,14 @@
 # ninja log v6
-1	690	1745835576755406941	CMakeFiles/graph_builder.dir/main.cpp.o	29cebcb912b45f0
-691	752	1745835577445398592	graph_builder	6c3b6d2a2ca42004
-2	535	1745832226975226694	CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o	7f886dcf45a17c18
-0	34	1745845991757671875	build.ninja	4e49762917e058b3
-2	676	1745832259130429655	CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o	caee09a01b262b0d
-2	1135	1745829915231596937	CMakeFiles/graph_builder.dir/LogMonitor.cpp.o	a0aa2d5ed5ac33f8
-1	1116	1745833364760223696	CMakeFiles/graph_builder.dir/ZeekLogParser.cpp.o	3a9d6d2968bb6ef3
-1	635	1745834299317262308	CMakeFiles/graph_builder.dir/GraphVisualizer.cpp.o	323a25e8fb0cf3cb
-5	732	1745846765991019125	CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o	7f886dcf45a17c18
 5	911	1745846765991019125	CMakeFiles/graph_builder.dir/GraphVisualizer.cpp.o	323a25e8fb0cf3cb
-5	946	1745846765991019125	CMakeFiles/graph_builder.dir/main.cpp.o	29cebcb912b45f0
-5	986	1745846765991019125	CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o	caee09a01b262b0d
-5	1207	1745846765991019125	CMakeFiles/graph_builder.dir/LogMonitor.cpp.o	a0aa2d5ed5ac33f8
 5	1340	1745846765991019125	CMakeFiles/graph_builder.dir/ZeekLogParser.cpp.o	3a9d6d2968bb6ef3
+5	1207	1745846765991019125	CMakeFiles/graph_builder.dir/LogMonitor.cpp.o	a0aa2d5ed5ac33f8
+5	986	1745846765991019125	CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o	caee09a01b262b0d
+0	34	1745854807955608458	build.ninja	4e49762917e058b3
+5	732	1745846765991019125	CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o	7f886dcf45a17c18
 1340	1436	1745846767326028863	graph_builder	6c3b6d2a2ca42004
+5	946	1745846765991019125	CMakeFiles/graph_builder.dir/main.cpp.o	29cebcb912b45f0
+0	29	1745854807955608458	build.ninja	4e49762917e058b3
+2	798	1745854807962608493	CMakeFiles/graph_builder.dir/GraphVisualizer.cpp.o	323a25e8fb0cf3cb
+1	848	1745854807961608488	CMakeFiles/graph_builder.dir/main.cpp.o	29cebcb912b45f0
+1	870	1745854807961608488	CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o	caee09a01b262b0d
+870	967	1745854808830612762	graph_builder	6c3b6d2a2ca42004
