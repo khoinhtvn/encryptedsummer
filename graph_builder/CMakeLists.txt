@@ -10,10 +10,10 @@ add_executable(graph_builder main.cpp
         includes/GraphBuilder.h
         LogMonitor.cpp
         includes/LogMonitor.h
-        TrafficAnalyzer.cpp
-        includes/TrafficAnalyzer.h
         GraphVisualizer.cpp
-        includes/GraphVisualizer.h)
+        includes/GraphVisualizer.h
+        RealTimeAnomalyDetector.cpp
+        includes/RealTimeAnomalyDetector.h)
 
 
 # Manually specify the Graphviz libraries

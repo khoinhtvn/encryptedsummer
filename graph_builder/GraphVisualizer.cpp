@@ -6,10 +6,11 @@
 
 #include <algorithm>
 #include <iostream>
-#include <cstdlib>
 #include <fstream>
 #include <thread>
 #include <graphviz/gvc.h>
+
+#include "includes/RealTimeAnomalyDetector.h"
 
 GraphVisualizer::GraphVisualizer() {
     gvc = gvContext();
@@ -57,23 +58,42 @@ void GraphVisualizer::visualize(const TrafficGraph &graph,
 
 void GraphVisualizer::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph) {
     auto nodes = traffic_graph.get_nodes();
+    auto anomalies = RealTimeAnomalyDetector().detect(traffic_graph);
+    auto now = std::chrono::system_clock::now();
 
     for (const auto &node: nodes) {
         std::string node_id = generate_node_id(node->id);
         Agnode_t *n = agnode(graph, const_cast<char *>(node_id.c_str()), 1);
 
-        // Imposta attributi del nodo
-        agsafeset(n, const_cast<char *>("label"), const_cast<char *>(node->id.c_str()), const_cast<char *>(""));
-        agsafeset(n, const_cast<char *>("shape"), const_cast<char *>("ellipse"), const_cast<char *>(""));
+        // Base attributes
+        agsafeset(n, "label", const_cast<char *>(node->id.c_str()), "");
+        agsafeset(n, "shape", "ellipse", "");
 
-        // Stile in base al tipo
-        if (node->type == "host") {
-            agsafeset(n, const_cast<char *>("color"), const_cast<char *>("blue"), const_cast<char *>(""));
-            agsafeset(n, const_cast<char *>("style"), const_cast<char *>("filled"), const_cast<char *>(""));
-            agsafeset(n, const_cast<char *>("fillcolor"), const_cast<char *>("lightblue"), const_cast<char *>(""));
+        // Color based on anomaly score
+        double anomaly_score = anomalies.at(node->id).score;
+        if (anomaly_score > 0.8) {
+            agsafeset(n, "color", "red", "");
+            agsafeset(n, "style", "filled", "");
+            agsafeset(n, "fillcolor", "#ffcccc", "");
+        } else if (anomaly_score > 0.6) {
+            agsafeset(n, "color", "orange", "");
         } else {
-            agsafeset(n, const_cast<char *>("color"), const_cast<char *>("green"), const_cast<char *>(""));
+            agsafeset(n, "color", "blue", "");
         }
+
+        // Tooltip with features
+        //std::string tooltip = "Connections: " + std::to_string(node->features.degree) +
+        //                    "\nLast min: " + std::to_string(node->temporal.connections_last_minute) +
+        //             "\nAnomaly: " + std::to_string(anomaly_score);
+        auto monitoring_duration = now - node->temporal.monitoring_start;
+        double monitoring_minutes = std::chrono::duration<double>(monitoring_duration).count() / 60.0;
+
+        std::string tooltip = "Monitoring: " + std::to_string((int) monitoring_minutes) + " mins\n" +
+                              "Connections: " + std::to_string(node->temporal.total_connections) +
+                              "\nAnomaly: " + std::to_string(anomalies.at(node->id).score);
+        // std::string tooltip = "Last min: " + std::to_string(node->get_connections_last_minute()) +
+        //               "\nLast hour: " + std::to_string(node->get_connections_last_hour());
+        agsafeset(n, "tooltip", const_cast<char *>(tooltip.c_str()), "");
     }
 }
 

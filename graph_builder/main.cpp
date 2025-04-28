@@ -5,7 +5,7 @@
 #include "includes/GraphBuilder.h"
 #include "includes/GraphVisualizer.h"
 #include "includes/LogMonitor.h"
-#include "includes/TrafficAnalyzer.h"
+#include "includes/RealTimeAnomalyDetector.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -13,6 +13,7 @@ int main(int argc, char *argv[]) {
         return 1;
     }
 
+    RealTimeAnomalyDetector detector;
     GraphVisualizer visualizer;
     // Start monitoring Zeek logs
     LogMonitor monitor(argv[1]);
@@ -28,6 +29,17 @@ int main(int argc, char *argv[]) {
             auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
             auto &graph = GraphBuilder::get_instance().get_graph();
             visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC), true, false);
+            auto anomalies = detector.detect(GraphBuilder::get_instance().get_graph());
+            for (const auto &[node, score]: anomalies) {
+                if (score.score > 0.8) {
+                    std::cout << "ALERT: " << node << " anomaly score " << score.score
+                            << " (factors: ";
+                    for (const auto &factor: score.contributing_factors) {
+                        std::cout << factor << " ";
+                    }
+                    std::cout << ")\n";
+                }
+            }
         }
 
         // Perform periodic analysis
