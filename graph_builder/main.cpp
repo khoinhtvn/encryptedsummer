@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
             auto now = std::chrono::system_clock::now();
             auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
             auto& graph = GraphBuilder::get_instance().get_graph();
-            visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC));
+            visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC), true, false);
         }
 
         // Perform periodic analysis

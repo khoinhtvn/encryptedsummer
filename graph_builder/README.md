@@ -28,7 +28,7 @@ Usage
 # Core dependencies
 - Zeek Network Security Monitor
 - C++17 compatible compiler
-- CMake 3.21+
+- CMake 3.28+
 
 # Visualization dependencies
 - Graphviz (libgraphviz-dev)
@@ -50,5 +50,5 @@ cmake --build . --config Release
 ## Usage
 ### Basic Analysis
 ```bash
-./main /path/to/zeek/logs
+./graph_builder /path/to/zeek/logs
 ```
