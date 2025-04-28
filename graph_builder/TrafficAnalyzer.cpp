@@ -2,9 +2,9 @@
 // Created by lu on 4/25/25.
 //
 
-#include "TrafficAnalyzer.h"
+#include "includes/TrafficAnalyzer.h"
 
-    static std::vector<std::string> detect_suspicious_activity(const TrafficGraph& graph) {
+static std::vector<std::string> detect_suspicious_activity(const TrafficGraph& graph) {
         std::vector<std::string> anomalies;
 
         // Example: Detect port scanning

@@ -2,7 +2,7 @@
 // Created by lu on 4/25/25.
 //
 
-#include "ZeekLogParser.h"
+#include "includes/ZeekLogParser.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -12,7 +12,7 @@
 #include <filesystem>
 #include <algorithm>
 
-#include "GraphBuilder.h"
+#include "includes/GraphBuilder.h"
 
 #include <sys/stat.h>
 #include <unistd.h>

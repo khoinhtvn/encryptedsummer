@@ -2,12 +2,12 @@
 #include <iostream>
 #include <thread>
 
-#include "GraphBuilder.h"
-#include "GraphVisualizer.h"
-#include "LogMonitor.h"
-#include "TrafficAnalyzer.h"
+#include "includes/GraphBuilder.h"
+#include "includes/GraphVisualizer.h"
+#include "includes/LogMonitor.h"
+#include "includes/TrafficAnalyzer.h"
 
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[]) {
     if (argc < 2) {
         std::cerr << "Usage: " << argv[0] << " <zeek_log_directory>" << std::endl;
         return 1;
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
         if (++counter % 3 == 0) {
             auto now = std::chrono::system_clock::now();
             auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
-            auto& graph = GraphBuilder::get_instance().get_graph();
+            auto &graph = GraphBuilder::get_instance().get_graph();
             visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC), true, false);
         }
 

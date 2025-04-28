@@ -3,12 +3,13 @@
 ![Project Logo](https://via.placeholder.com/150x50?text=Zeek+Traffic+Graph)  
 *Real-time network traffic analysis using graph theory*
 Usage
+
 ## Table of Contents
+
 - [Features](#Features)
 - [Requirements](#Requirements)
 - [Installation](#Installation)
 - [Usage](#Usage)
-
 
 ## Features
 
@@ -33,8 +34,11 @@ Usage
 # Visualization dependencies
 - Graphviz (libgraphviz-dev)
 ```
+
 ## Installation
+
 ### Linux/maxOS
+
 ```bash
 git clone https://github.com/khoinhtvn/encryptedsummer
 cd encryptedsummer/graph_builder
@@ -42,13 +46,18 @@ mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
 ```
+
 ### Windows (Visual Studio)
+
 ```shell
 cmake -G "Visual Studio 17 2022" -A x64 ..
 cmake --build . --config Release
 ```
+
 ## Usage
+
 ### Basic Analysis
+
 ```bash
 ./graph_builder /path/to/zeek/logs
 ```

@@ -138,13 +138,6 @@ build rebuild_cache: phony CMakeFiles/rebuild_cache.util
 #############################################
 # Folder: /home/lu/Documents/encryptedsummer/graph_builder/cmake-build-debug
 
-build codegen: phony
-
-# =============================================================================
-
-#############################################
-# Folder: /home/lu/Documents/encryptedsummer/graph_builder/cmake-build-debug
-
 build all: phony graph_builder
 
 # =============================================================================

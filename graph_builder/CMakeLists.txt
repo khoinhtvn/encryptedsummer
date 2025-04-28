@@ -22,6 +22,6 @@ find_library(CGRC_LIB cgraph)
 
 if (GVC_LIB AND CGRC_LIB)
     target_link_libraries(graph_builder ${GVC_LIB} ${CGRC_LIB})
-else()
+else ()
     message(FATAL_ERROR "Graphviz libraries not found. Make sure libgraphviz-dev is installed.")
-endif()
+endif ()

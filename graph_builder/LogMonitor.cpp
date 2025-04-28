@@ -2,7 +2,7 @@
 // Created by lu on 4/25/25.
 //
 
-#include "LogMonitor.h"
+#include "includes/LogMonitor.h"
 //
 // Created by lu on 4/25/25.
 //
@@ -13,9 +13,9 @@
 #include <atomic>
 #include <chrono>
 
-#include "ZeekLogParser.h"
+#include "includes/ZeekLogParser.h"
 
-    LogMonitor::LogMonitor(const std::string& log_dir) : parser(log_dir) {}
+LogMonitor::LogMonitor(const std::string& log_dir) : parser(log_dir) {}
 
     LogMonitor::~LogMonitor() {
         stop();
