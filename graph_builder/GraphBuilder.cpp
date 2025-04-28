@@ -39,6 +39,9 @@ std::mutex GraphBuilder::instance_mutex;
         return result;
     }
 
+std::vector<std::shared_ptr<GraphEdge>> TrafficGraph::get_edges() const {
+        return edges;
+    }
 
     void GraphBuilder::add_connection(const std::string& src_ip, const std::string& dst_ip,
                        const std::string& proto, const std::string& timestamp,

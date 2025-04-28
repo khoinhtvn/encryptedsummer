@@ -79,6 +79,12 @@ build CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o: CXX_COMPILER__graph_bu
   OBJECT_DIR = CMakeFiles/graph_builder.dir
   OBJECT_FILE_DIR = CMakeFiles/graph_builder.dir
 
+build CMakeFiles/graph_builder.dir/GraphVisualizer.cpp.o: CXX_COMPILER__graph_builder_unscanned_Debug /home/lu/Documents/encryptedsummer/graph_builder/GraphVisualizer.cpp || cmake_object_order_depends_target_graph_builder
+  DEP_FILE = CMakeFiles/graph_builder.dir/GraphVisualizer.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/graph_builder.dir
+  OBJECT_FILE_DIR = CMakeFiles/graph_builder.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target graph_builder
@@ -87,10 +93,11 @@ build CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o: CXX_COMPILER__graph_bu
 #############################################
 # Link the executable graph_builder
 
-build graph_builder: CXX_EXECUTABLE_LINKER__graph_builder_Debug CMakeFiles/graph_builder.dir/main.cpp.o CMakeFiles/graph_builder.dir/ZeekLogParser.cpp.o CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o CMakeFiles/graph_builder.dir/LogMonitor.cpp.o CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o
+build graph_builder: CXX_EXECUTABLE_LINKER__graph_builder_Debug CMakeFiles/graph_builder.dir/main.cpp.o CMakeFiles/graph_builder.dir/ZeekLogParser.cpp.o CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o CMakeFiles/graph_builder.dir/LogMonitor.cpp.o CMakeFiles/graph_builder.dir/TrafficAnalyzer.cpp.o CMakeFiles/graph_builder.dir/GraphVisualizer.cpp.o | /usr/lib/x86_64-linux-gnu/libgvc.so /usr/lib/x86_64-linux-gnu/libcgraph.so
   DEP_FILE = CMakeFiles/graph_builder.dir/link.d
   FLAGS = -g
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/graph_builder.dir/link.d
+  LINK_LIBRARIES = /usr/lib/x86_64-linux-gnu/libgvc.so  /usr/lib/x86_64-linux-gnu/libcgraph.so
   OBJECT_DIR = CMakeFiles/graph_builder.dir
   POST_BUILD = :
   PRE_LINK = :

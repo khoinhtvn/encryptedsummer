@@ -52,6 +52,7 @@ public:
 
     // Thread-safe graph access methods
     std::vector<std::shared_ptr<GraphNode>> get_nodes() const;
+    std::vector<std::shared_ptr<GraphEdge>> get_edges() const;
 
     // Analysis methods
     std::vector<std::string> find_connected_components() const;

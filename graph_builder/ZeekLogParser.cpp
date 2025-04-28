@@ -145,10 +145,15 @@ void  ZeekLogParser::process_conn_entry(const std::string& entry) {
     std::string timestamp = fields[0];
     std::string uid = fields[1];
     std::string src_ip = fields[2];
-    std::string dst_ip = fields[3];
-    std::string src_port = fields[4];
+    std::string src_port = fields[3];
+    std::string dst_ip = fields[4];
     std::string dst_port = fields[5];
     std::string proto = fields[6];
+    std::string duration = fields[7];
+    std::string orig_bytes = fields[8];
+    std::string resp_bytes = fields[9];
+    std::string conn_state = fields[10];
+
 
     // Add to graph builder
     GraphBuilder::get_instance().add_connection(

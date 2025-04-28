@@ -3,6 +3,7 @@
 #include <thread>
 
 #include "GraphBuilder.h"
+#include "GraphVisualizer.h"
 #include "LogMonitor.h"
 #include "TrafficAnalyzer.h"
 
@@ -12,6 +13,7 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    GraphVisualizer visualizer;
     // Start monitoring Zeek logs
     LogMonitor monitor(argv[1]);
     monitor.start();
@@ -20,9 +22,18 @@ int main(int argc, char* argv[]) {
     while (true) {
         std::this_thread::sleep_for(std::chrono::seconds(10));
 
+        static int counter = 0;
+        if (++counter % 3 == 0) {
+            auto now = std::chrono::system_clock::now();
+            auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+            auto& graph = GraphBuilder::get_instance().get_graph();
+            visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC));
+        }
+
         // Perform periodic analysis
+        /*
         auto& graph = GraphBuilder::get_instance().get_graph();
-       /* auto anomalies = TrafficAnalyzer::detect_suspicious_activity(graph);
+        auto anomalies = TrafficAnalyzer::detect_suspicious_activity(graph);
 
         if (!anomalies.empty()) {
             std::cout << "Detected anomalies:" << std::endl;
