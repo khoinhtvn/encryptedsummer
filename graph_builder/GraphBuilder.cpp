@@ -133,6 +133,7 @@ GraphNode &TrafficGraph::get_or_create_node(const std::string &id, const std::st
 
 void TrafficGraph::add_edge(const std::string &src, const std::string &tgt,
                             const std::string &rel, const std::unordered_map<std::string, std::string> &attrs) {
+    //TODO: maybe in the future think about aggregating edges periodically. To reduce graph size and improve performance. Retain metadata such as connection_count, last_active, ports_used
     std::unique_lock lock(graph_mutex);
     auto edge = std::make_shared<GraphEdge>(src, tgt, rel);
     edge->attributes = attrs;

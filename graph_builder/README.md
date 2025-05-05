@@ -18,9 +18,12 @@ Usage
   - *Node level*:
     - Degree (in/out/combined)
     - Temporal features (connection in the last minute and hour)
-  - *Edge level*
+  - *Edge level (one edge per connection)*
     - Source, target IP and port number
     - Protocol, timestamp
+    - Host, Uri and HTTP method
+    - Version, user agent, status code
+    - Request and response body len
 - **Advanced Analysis**:
     - Anomaly detection
     - Traffic pattern recognition
