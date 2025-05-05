@@ -66,7 +66,7 @@ cmake --build . --config Release
 ## Usage
 
 ### Basic Analysis
-
+The program checks for files in the specified path. It just processes files with known names (conn.log).
 ```bash
 ./graph_builder /path/to/zeek/logs
 ```
