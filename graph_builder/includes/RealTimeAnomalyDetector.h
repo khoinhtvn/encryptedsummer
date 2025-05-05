@@ -1,66 +1,60 @@
-//
+/**
+ * @file RealTimeAnomalyDetector.h
+ * @brief Header file for the RealTimeAnomalyDetector class, responsible for detecting anomalies in network traffic in real-time.
+ *
+ * This file defines the `RealTimeAnomalyDetector` class, which analyzes the network traffic graph
+ * to identify potentially anomalous nodes based on their connection patterns and other features.
+ */
+
 // Created by lu on 4/28/25.
 //
 
 #ifndef REALTIMEANOMALYDETECTOR_H
 #define REALTIMEANOMALYDETECTOR_H
 
-
 #include <string>
 #include <vector>
 #include <unordered_map>
 
-#include "GraphBuilder.h"
+#include "GraphBuilder.h" // Include the header for GraphBuilder
 
+/**
+ * @brief Class for detecting real-time anomalies in network traffic.
+ *
+ * The `RealTimeAnomalyDetector` class analyzes the network traffic graph constructed by the
+ * `GraphBuilder` to identify nodes that exhibit unusual behavior.  It calculates an anomaly
+ * score for each node and provides information about the factors contributing to the score.
+ */
 class RealTimeAnomalyDetector {
 public:
+    /**
+     * @brief Structure to store the anomaly score and contributing factors for a node.
+     */
     struct AnomalyScore {
+        /**
+         * @brief The overall anomaly score for the node (higher values indicate higher anomaly likelihood).
+         */
         double score;
+        /**
+         * @brief A vector of strings describing the factors that contributed to the anomaly score.
+         * Examples: "high connection rate", "unusual protocol mix".
+         */
         std::vector<std::string> contributing_factors;
     };
 
-    std::unordered_map<std::string, AnomalyScore> detect(const TrafficGraph &graph) {
-        std::unordered_map<std::string, AnomalyScore> results;
-        auto now = std::chrono::system_clock::now();
-
-        for (const auto &[id, node]: graph.nodes) {
-            AnomalyScore score;
-            auto monitoring_duration = now - node->temporal.monitoring_start;
-            double monitoring_minutes = std::chrono::duration<double>(monitoring_duration).count() / 60.0;
-
-            // Only calculate score after sufficient monitoring time
-            if (monitoring_minutes >= 1.0) {
-                score.score = node->calculate_anomaly_score();
-
-                // Dynamic threshold based on monitoring duration
-                double threshold = 0.7 + (0.2 / (1 + monitoring_minutes / 60));
-
-                if (score.score > threshold) {
-                    // Identify contributing factors
-                    double total_rate = node->temporal.total_connections / monitoring_minutes;
-                    double recent_rate = node->temporal.connections_last_minute;
-
-                    if (recent_rate > 2 * total_rate) {
-                        score.contributing_factors.push_back(
-                            "connection_rate(" + std::to_string(recent_rate) + " vs avg " +
-                            std::to_string(total_rate) + ")");
-                    }
-
-                    if (node->features.protocol_counts.size() > 3) {
-                        score.contributing_factors.push_back(
-                            "protocols(" + std::to_string(node->features.protocol_counts.size()) + ")");
-                    }
-                }
-            } else {
-                score.score = 0.0;
-                score.contributing_factors.push_back("learning (only " +
-                                                     std::to_string((int) monitoring_minutes) + " mins data)");
-            }
-
-            results[id] = score;
-        }
-
-        return results;
-    }
+    /**
+     * @brief Detects anomalies in the given network traffic graph.
+     *
+     * This method analyzes the nodes in the graph to identify those with anomalous behavior.
+     * It calculates an anomaly score for each node based on its connection patterns,
+     * protocol usage, and other relevant features.
+     *
+     * @param graph A const reference to the TrafficGraph object representing the network traffic.
+     * The method does not modify the graph.
+     * @return An unordered map where the key is the node ID (string) and the value is an
+     * AnomalyScore struct containing the anomaly score and contributing factors for that node.
+     */
+    std::unordered_map<std::string, AnomalyScore> detect(const TrafficGraph &graph);
 };
-#endif
+
+#endif // REALTIMEANOMALYDETECTOR_H
