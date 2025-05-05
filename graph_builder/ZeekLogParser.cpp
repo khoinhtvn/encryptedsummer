@@ -16,7 +16,8 @@
 
 #include <sys/stat.h>
 #include <unistd.h>
-
+#include <iomanip>
+#include "includes/json.hpp" // Include the nlohmann/json library
 
     bool FileState::update() {
         struct stat file_stat;
@@ -43,6 +44,7 @@ void ZeekLogParser::monitor_logs() {
 
         if (it == tracked_files.end()) {
             // Nuovo file rilevato
+            std::cout << "New File found! " << path << std::endl;
             FileState new_file(path);
             if (new_file.update()) {
                 process_new_file(new_file);
@@ -125,7 +127,7 @@ void  ZeekLogParser::process_log_entry(const std::string& log_type, const std::s
     }
     // Add other log types as needed
 }
-
+/*
 void  ZeekLogParser::process_conn_entry(const std::string& entry) {
     // Parse conn.log entry (TSV format)
     std::vector<std::string> fields;
@@ -161,4 +163,48 @@ void  ZeekLogParser::process_conn_entry(const std::string& entry) {
     );
 }
 
+*/
+
+using json = nlohmann::json;
+
+void ZeekLogParser::process_conn_entry(const std::string& entry) {
+    try {
+        json j = json::parse(entry);
+
+        // Extract fields - Safely access and handle potential missing fields
+        double ts = j.contains("ts") ? j["ts"].get<double>() : 0.0; // Or a default value
+        std::string uid = j.contains("uid") ? j["uid"].get<std::string>() : "";
+        std::string orig_h = j.contains("id.orig_h") ? j["id.orig_h"].get<std::string>() : "";
+        int orig_p = j.contains("id.orig_p") ? j["id.orig_p"].get<int>() : 0;
+        std::string resp_h = j.contains("id.resp_h") ? j["id.resp_h"].get<std::string>() : "";
+        int resp_p = j.contains("id.resp_p") ? j["id.resp_p"].get<int>() : 0;
+        int trans_depth = j.contains("trans_depth") ? j["trans_depth"].get<int>() : 0;
+        std::string method = j.contains("method") ? j["method"].get<std::string>() : "";
+        std::string host = j.contains("host") ? j["host"].get<std::string>() : "";
+        std::string uri = j.contains("uri") ? j["uri"].get<std::string>() : "";
+        std::string version = j.contains("version") ? j["version"].get<std::string>() : "";
+        std::string user_agent = j.contains("user_agent") ? j["user_agent"].get<std::string>() : "";
+        int request_body_len = j.contains("request_body_len") ? j["request_body_len"].get<int>() : 0;
+        int response_body_len = j.contains("response_body_len") ? j["response_body_len"].get<int>() : 0;
+        int status_code = j.contains("status_code") ? j["status_code"].get<int>() : 0;
+        std::string status_msg = j.contains("status_msg") ? j["status_msg"].get<std::string>() : "";
+        std::vector<std::string> tags = j.contains("tags") ? j["tags"].get<std::vector<std::string>>() : std::vector<std::string>();
+
+
+        // Add to graph builder (example - adjust as needed for your GraphBuilder)
+        // Assuming GraphBuilder's add_connection takes appropriate types
+        GraphBuilder::get_instance().add_connection(
+            orig_h, resp_h, "tcp", std::to_string(ts), orig_p, resp_p  //Simple "tcp" -  You might need to determine the actual protocol
+        );
+
+
+    } catch (const json::parse_error& e) {
+        std::cerr << "Error parsing log entry: " << e.what() << " - Entry: " << entry << std::endl;
+        // Handle the error appropriately (e.g., log it, skip the entry, etc.)
+    }  catch (const json::type_error& e) {
+        std::cerr << "Error extracting data: " << e.what() << " - Entry: " << entry << std::endl;
+    } catch (const std::exception& e) {
+        std::cerr << "General error processing log entry: " << e.what() << " - Entry: " << entry << std::endl;
+    }
+}
 

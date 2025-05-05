@@ -115,7 +115,7 @@ std::mutex GraphBuilder::instance_mutex;
 
 void TrafficGraph::add_node(const std::string &id, const std::string &type) {
     std::unique_lock lock(graph_mutex);
-    if (nodes.find(id) == nodes.end()) {
+    if (!nodes.contains(id)) {
         nodes[id] = std::make_shared<GraphNode>(id, type);
     }
 }
