@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
              */
             visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC), false, true);
             /**
-             * @brief Detects anomalies in the current network graph.
+             * @brief Detects anomalies in the current network graph, based on basic .
              *
              * @param GraphBuilder::get_instance().get_graph() The graph to analyze for anomalies.
              * @return A map where the keys are the nodes identified as anomalous and the values

@@ -26,7 +26,7 @@ void GraphNode::update_connection_features(const std::string &protocol, bool is_
     // Update temporal features
     auto now = std::chrono::system_clock::now();
     temporal.recent_connections.push_back(now);
-    temporal.total_connections++; {
+    ++temporal.total_connections; {
         std::lock_guard<std::mutex> lock(temporal.window_mutex);
         temporal.minute_window.push(now);
         temporal.hour_window.push(now);

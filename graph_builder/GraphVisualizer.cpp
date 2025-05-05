@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 #include <thread>
 #include <graphviz/gvc.h>
 
@@ -23,45 +24,48 @@ GraphVisualizer::~GraphVisualizer() {
 void GraphVisualizer::visualize(const TrafficGraph &graph,
                                 const std::string &output_file,
                                 const bool open_image, const bool export_cond) {
-    if (graph.is_empty())
+    if (!graph.is_empty()) {
+        // Crea un nuovo grafo
+        Agraph_t *g = agopen(const_cast<char *>("ZeekTraffic"), Agdirected, nullptr);
+
+        // Applica stili predefiniti
+        apply_default_styles(g);
+
+        // Aggiungi nodi e archi
+        add_nodes(g, graph);
+        add_edges(g, graph);
+
+        if (export_cond) {
+            export_to_dot(graph, output_file + ".dot");
+        }
+
+        // Layout e rendering
+        if (gvLayout(gvc, g, "dot") != 0) {
+            std::cerr << "Graphviz layout failed!" << std::endl;
+        }
+        if (FILE *fp = fopen((output_file + ".png").c_str(), "wb"); fp == nullptr) {
+            std::cerr << "Graphviz file open failed!" << std::endl;
+        } else {
+            if (gvRender(gvc, g, "png", fp) != 0)
+                std::cerr << "Graphviz render failed!" << std::endl;
+            fclose(fp);
+        }
+
+        gvFreeLayout(gvc, g);
+
+        // Chiudi il grafo
+        agclose(g);
+
+        // Apri l'immagine se richiesto
+        if (open_image) {
+            std::string command = "xdg-open " + output_file + ".png";
+            system(command.c_str());
+        }
+    }else {
         std::cout << "Empty graph!" << std::endl;
-        return;
-    // Crea un nuovo grafo
-    Agraph_t *g = agopen(const_cast<char *>("ZeekTraffic"), Agdirected, nullptr);
-
-    // Applica stili predefiniti
-    apply_default_styles(g);
-
-    // Aggiungi nodi e archi
-    add_nodes(g, graph);
-    add_edges(g, graph);
-
-    if (export_cond) {
-        export_to_dot(graph, output_file + ".dot");
     }
 
-    // Layout e rendering
-    if (gvLayout(gvc, g, "dot") != 0) {
-        std::cerr << "Graphviz layout failed!" << std::endl;
-    }
-    if (FILE *fp = fopen((output_file + ".png").c_str(), "wb"); fp == nullptr) {
-        std::cerr << "Graphviz file open failed!" << std::endl;
-    } else {
-        if (gvRender(gvc, g, "png", fp) != 0)
-            std::cerr << "Graphviz render failed!" << std::endl;
-        fclose(fp);
-    }
 
-    gvFreeLayout(gvc, g);
-
-    // Chiudi il grafo
-    agclose(g);
-
-    // Apri l'immagine se richiesto
-    if (open_image) {
-        std::string command = "xdg-open " + output_file + ".png";
-        system(command.c_str());
-    }
 }
 
 void GraphVisualizer::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph) {
@@ -158,16 +162,67 @@ void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string
     dot_file << "digraph ZeekTraffic {\n";
 
     // Aggiungi nodi
-    for (const auto &node: graph.get_nodes()) {
-        dot_file << "  \"" << node->id << "\" [shape=ellipse];\n";
+    for (const auto &node : graph.get_nodes()) {
+        dot_file << "  \"" << escape_dot_string(node->id) << "\" [shape=ellipse";
+
+        dot_file << ", degree=" << node->features.degree;
+        dot_file << ", in_degree=" << node->features.in_degree;
+        dot_file << ", out_degree=" << node->features.out_degree;
+        dot_file << ", activity_score=" << std::fixed << std::setprecision(2) << node->features.activity_score.load();
+        dot_file << ", total_connections=" << node->temporal.total_connections;
+
+        // Aggiungi la distribuzione dei protocolli come un singolo attributo (potrebbe essere lungo)
+        /*
+
+        std::string protocol_str = "{";
+        for (const auto &pair : node->features.protocol_counts) {
+            if (!protocol_str.empty() && protocol_str != "{") {
+                protocol_str += ",";
+            }
+            protocol_str += escape_dot_string(pair.first) + ":" + std::to_string(pair.second);
+        }
+        protocol_str += "}";
+        dot_file << ", protocols=\"" << protocol_str << "\"";
+        */
+        dot_file << "];\n";
     }
 
-    // Aggiungi archi
-    for (const auto &edge: graph.get_edges()) {
-        dot_file << "  \"" << edge->source << "\" -> \"" << edge->target
-                << "\" [label=\"" << edge->relationship << "\"];\n";
+
+    // Aggiungi archi con attributi
+    for (const auto &edge : graph.get_edges()) {
+        dot_file << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) << "\" [";
+
+        // Aggiungi l'attributo 'label' se presente, altrimenti usa la relazione
+        if (edge->attributes.count("label")) {
+            dot_file << "label=\"" << escape_dot_string(edge->attributes.at("label")) << "\"";
+        } else {
+            dot_file << "label=\"" << escape_dot_string(edge->relationship) << "\"";
+        }
+
+        // Aggiungi altri attributi
+        for (const auto &attr_pair : edge->attributes) {
+            if (attr_pair.first != "label") { // Evita di duplicare l'etichetta
+                dot_file << ", " << escape_dot_string(attr_pair.first) << "=\"" << escape_dot_string(attr_pair.second) << "\"";
+            }
+        }
+        dot_file << "];\n";
     }
 
     dot_file << "}\n";
     dot_file.close();
+}
+
+// Funzione di utilità per fare l'escape di caratteri speciali nelle stringhe DOT
+std::string GraphVisualizer::escape_dot_string(const std::string &str) {
+    std::string result = "";
+    for (char c : str) {
+        if (c == '"') {
+            result += "\\\"";
+        } else if (c == '\\') {
+            result += "\\\\";
+        } else {
+            result += c;
+        }
+    }
+    return result;
 }

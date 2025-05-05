@@ -120,6 +120,8 @@ private:
      * @param filename The name of the output DOT file.
      */
     void export_to_dot(const TrafficGraph& graph, const std::string& filename);
+
+    std::string escape_dot_string(const std::string &str);
 };
 
 #endif // GRAPH_VISUALIZER_H
