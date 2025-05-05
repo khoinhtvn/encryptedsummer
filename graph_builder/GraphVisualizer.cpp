@@ -23,6 +23,9 @@ GraphVisualizer::~GraphVisualizer() {
 void GraphVisualizer::visualize(const TrafficGraph &graph,
                                 const std::string &output_file,
                                 const bool open_image, const bool export_cond) {
+    if (graph.is_empty())
+        std::cout << "Empty graph!" << std::endl;
+        return;
     // Crea un nuovo grafo
     Agraph_t *g = agopen(const_cast<char *>("ZeekTraffic"), Agdirected, nullptr);
 

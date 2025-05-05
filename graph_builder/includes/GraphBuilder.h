@@ -129,6 +129,8 @@ public:
 
     std::vector<std::string> detect_anomalies() const;
 
+    bool is_empty() const;
+
     // Add more analysis methods as needed
 };
 
