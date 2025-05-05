@@ -189,12 +189,35 @@ void ZeekLogParser::process_conn_entry(const std::string& entry) {
         int status_code = j.contains("status_code") ? j["status_code"].get<int>() : 0;
         std::string status_msg = j.contains("status_msg") ? j["status_msg"].get<std::string>() : "";
         std::vector<std::string> tags = j.contains("tags") ? j["tags"].get<std::vector<std::string>>() : std::vector<std::string>();
+        std::vector<std::string> resp_fuids = j.contains("resp_fuids") ? j["resp_fuids"].get<std::vector<std::string>>() : std::vector<std::string>();
+        std::vector<std::string> resp_mime_types = j.contains("resp_mime_types") ? j["resp_mime_types"].get<std::vector<std::string>>() : std::vector<std::string>();
 
+        std::string protocol = "tcp"; // Default
+        if (j.contains("proto")) {
+            protocol = j["proto"].get<std::string>();
+        } else if (!method.empty()) {
+            protocol = "http"; // If there's an HTTP method, assume HTTP
+        }
 
-        // Add to graph builder (example - adjust as needed for your GraphBuilder)
-        // Assuming GraphBuilder's add_connection takes appropriate types
         GraphBuilder::get_instance().add_connection(
-            orig_h, resp_h, "tcp", std::to_string(ts), orig_p, resp_p  //Simple "tcp" -  You might need to determine the actual protocol
+            orig_h,
+            resp_h,
+            protocol, // TODO: Use determined protocol instead of hardcoded "tcp" or "http"
+            std::to_string(ts),
+            orig_p,
+            resp_p,
+            method,
+            host,
+            uri,
+            version,
+            user_agent,
+            request_body_len,
+            response_body_len,
+            status_code,
+            status_msg,
+            tags,
+            resp_fuids,
+            resp_mime_types
         );
 
 

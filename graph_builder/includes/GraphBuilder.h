@@ -158,7 +158,18 @@ public:
 
     void add_connection(const std::string &src_ip, const std::string &dst_ip,
                         const std::string &proto, const std::string &timestamp,
-                        int src_port, int dst_port);
+                        int src_port, int dst_port,const std::string &method = "",
+                                 const std::string &host = "",
+                                 const std::string &uri = "",
+                                 const std::string &version = "",
+                                 const std::string &user_agent = "",
+                                 int request_body_len = 0,
+                                 int response_body_len = 0,
+                                 int status_code = 0,
+                                 const std::string &status_msg = "",
+                                 const std::vector<std::string> &tags = {},
+                                 const std::vector<std::string> &resp_fuids = {},
+                                 const std::vector<std::string> &resp_mime_types = {});
 
     TrafficGraph &get_graph();
 };

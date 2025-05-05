@@ -159,9 +159,23 @@ bool TrafficGraph::is_empty() const {
 
 TrafficGraph &GraphBuilder::get_graph() { return graph; }
 
+
+
 void GraphBuilder::add_connection(const std::string &src_ip, const std::string &dst_ip,
-                                  const std::string &proto, const std::string &timestamp,
-                                  int src_port, int dst_port) {
+                                 const std::string &proto, const std::string &timestamp,
+                                 const int src_port, const int dst_port,
+                                 const std::string &method,
+                                 const std::string &host,
+                                 const std::string &uri ,
+                                 const std::string &version ,
+                                 const std::string &user_agent ,
+                                 const int request_body_len ,
+                                 const int response_body_len,
+                                 const int status_code ,
+                                 const std::string &status_msg,
+                                 const std::vector<std::string> &tags ,
+                                 const std::vector<std::string> &resp_fuids ,
+                                 const std::vector<std::string> &resp_mime_types ) {
     // Get or create nodes
     auto &src_node = graph.get_or_create_node(src_ip, "host");
     auto &dst_node = graph.get_or_create_node(dst_ip, "host");
@@ -175,9 +189,44 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
         {"protocol", proto},
         {"timestamp", timestamp},
         {"src_port", std::to_string(src_port)},
-        {"dst_port", std::to_string(dst_port)}
+        {"dst_port", std::to_string(dst_port)},
+        {"method", method},
+        {"host", host},
+        {"uri", uri},
+        {"version", version},
+        {"user_agent", user_agent},
+        {"request_body_len", std::to_string(request_body_len)},
+        {"response_body_len", std::to_string(response_body_len)},
+        {"status_code", std::to_string(status_code)},
+        {"status_msg", status_msg}
     };
+    // Handle vector attributes by joining them with commas
+    if (!tags.empty()) {
+        std::string tags_str;
+        for (const auto &tag : tags) {
+            if (!tags_str.empty()) tags_str += ",";
+            tags_str += tag;
+        }
+        attrs["tags"] = tags_str;
+    }
 
+    if (!resp_fuids.empty()) {
+        std::string fuids_str;
+        for (const auto &fuid : resp_fuids) {
+            if (!fuids_str.empty()) fuids_str += ",";
+            fuids_str += fuid;
+        }
+        attrs["resp_fuids"] = fuids_str;
+    }
+
+    if (!resp_mime_types.empty()) {
+        std::string mime_str;
+        for (const auto &mime : resp_mime_types) {
+            if (!mime_str.empty()) mime_str += ",";
+            mime_str += mime;
+        }
+        attrs["resp_mime_types"] = mime_str;
+    }
     graph.add_edge(src_ip, dst_ip, proto + "_connection", attrs);
 }
 
