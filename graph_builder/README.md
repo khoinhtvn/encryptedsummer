@@ -14,7 +14,13 @@ Usage
 ## Features
 
 - **Real-time Processing**: Continuously monitors Zeek logs
-- **Graph Construction**: Builds interactive network graphs
+- **Graph Construction**: Builds interactive network graphs with the following features
+  - *Node level*:
+    - Degree (in/out/combined)
+    - Temporal features (connection in the last minute and hour)
+  - *Edge level*
+    - Source, target IP and port number
+    - Protocol, timestamp
 - **Advanced Analysis**:
     - Anomaly detection
     - Traffic pattern recognition

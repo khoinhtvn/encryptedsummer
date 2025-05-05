@@ -22,7 +22,7 @@ GraphVisualizer::~GraphVisualizer() {
 
 void GraphVisualizer::visualize(const TrafficGraph &graph,
                                 const std::string &output_file,
-                                bool open_image, bool export_cond) {
+                                const bool open_image, const bool export_cond) {
     // Crea un nuovo grafo
     Agraph_t *g = agopen(const_cast<char *>("ZeekTraffic"), Agdirected, nullptr);
 
@@ -41,9 +41,14 @@ void GraphVisualizer::visualize(const TrafficGraph &graph,
     if (gvLayout(gvc, g, "dot") != 0) {
         std::cerr << "Graphviz layout failed!" << std::endl;
     }
-    if (gvRender(gvc, g, "png", fopen((output_file + ".png").c_str(), "wb")) != 0) {
-        std::cerr << "Graphviz render failed!" << std::endl;
+    if (FILE *fp = fopen((output_file + ".png").c_str(), "wb"); fp == nullptr) {
+        std::cerr << "Graphviz file open failed!" << std::endl;
+    } else {
+        if (gvRender(gvc, g, "png", fp) != 0)
+            std::cerr << "Graphviz render failed!" << std::endl;
+        fclose(fp);
     }
+
     gvFreeLayout(gvc, g);
 
     // Chiudi il grafo
