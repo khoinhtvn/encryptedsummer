@@ -10,8 +10,8 @@ add_executable(graph_builder main.cpp
         includes/GraphBuilder.h
         LogMonitor.cpp
         includes/LogMonitor.h
-        GraphVisualizer.cpp
-        includes/GraphVisualizer.h
+        GraphExporter.cpp
+        includes/GraphExporter.h
         RealTimeAnomalyDetector.cpp
         includes/RealTimeAnomalyDetector.h
         includes/GraphUpdateQueue.h

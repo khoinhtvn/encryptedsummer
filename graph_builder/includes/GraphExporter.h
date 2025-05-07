@@ -1,16 +1,16 @@
 /**
- * @file GraphVisualizer.h
- * @brief Header file for the GraphVisualizer class, responsible for visualizing the network traffic graph.
+ * @file GraphExporter.h
+ * @brief Header file for the GraphExporter class, responsible for visualizing the network traffic graph.
  *
- * This file defines the `GraphVisualizer` class, which uses the Graphviz library
+ * This file defines the `GraphExporter` class, which uses the Graphviz library
  * to generate visual representations of the `TrafficGraph`.
  */
 
 // Created by lu on 4/28/25.
 //
 
-#ifndef GRAPH_VISUALIZER_H
-#define GRAPH_VISUALIZER_H
+#ifndef GRAPH_EXPORTER_H
+#define GRAPH_EXPORTER_H
 
 #include "GraphBuilder.h"
 #include <graphviz/gvc.h>
@@ -22,25 +22,25 @@
 /**
  * @brief Class responsible for visualizing the network traffic graph using Graphviz.
  *
- * The `GraphVisualizer` class takes a `TrafficGraph` object and renders it as a visual
+ * The `GraphExporter` class takes a `TrafficGraph` object and renders it as a visual
  * representation, typically saving it as a PNG image. It utilizes the Graphviz library
  * for graph layout and rendering.
  */
-class GraphVisualizer {
+class GraphExporter {
 public:
     /**
-     * @brief Constructor for the GraphVisualizer.
+     * @brief Constructor for the GraphExporter.
      *
      * Initializes the Graphviz context (`GVC_t`).
      */
-    GraphVisualizer();
+    GraphExporter();
 
     /**
-     * @brief Destructor for the GraphVisualizer.
+     * @brief Destructor for the GraphExporter.
      *
      * Releases the Graphviz context to free allocated resources.
      */
-    ~GraphVisualizer();
+    ~GraphExporter();
 
     /**
      * @brief Visualizes the given traffic graph and saves it to a file.
@@ -124,4 +124,4 @@ private:
     std::string escape_dot_string(const std::string &str);
 };
 
-#endif // GRAPH_VISUALIZER_H
+#endif // GRAPH_EXPORTER_H

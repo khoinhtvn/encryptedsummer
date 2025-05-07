@@ -10,7 +10,7 @@
 #include <thread>
 
 #include "includes/GraphBuilder.h"
-#include "includes/GraphVisualizer.h"
+#include "includes/GraphExporter.h"
 #include "includes/LogMonitor.h"
 #include "includes/RealTimeAnomalyDetector.h"
 
@@ -18,7 +18,7 @@
  * @brief Main function of the application.
  *
  * This function parses command-line arguments, initializes the log monitor,
- * anomaly detector, and graph visualizer, and then enters a main loop for
+ * anomaly detector, and graph exporter, and then enters a main loop for
  * continuous monitoring and analysis.
  *
  * @param argc Number of command-line arguments.
@@ -37,9 +37,9 @@ int main(int argc, char *argv[]) {
      */
     RealTimeAnomalyDetector detector;
     /**
-     * @brief Instance of the graph visualizer.
+     * @brief Instance of the graph exporter.
      */
-    GraphVisualizer visualizer;
+    GraphExporter exporter;
     /**
      * @brief Instance of the log monitor, responsible for reading and processing Zeek logs.
      *
@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
              * @param false Flag indicating whether to clear the graph before visualization.
              * @param true Flag indicating whether to include labels on the nodes.
              */
-            visualizer.visualize(graph, "./zeek_graph_" + std::to_string(UTC), false, true);
+            exporter.visualize(graph, "./zeek_graph_" + std::to_string(UTC), false, true);
             /**
              * @brief Detects anomalies in the current network graph, based on basic .
              *

@@ -2,7 +2,7 @@
 // Created by lu on 4/28/25.
 //
 
-#include "includes/GraphVisualizer.h"
+#include "includes/GraphExporter.h"
 
 #include <algorithm>
 #include <iostream>
@@ -13,15 +13,15 @@
 
 #include "includes/RealTimeAnomalyDetector.h"
 
-GraphVisualizer::GraphVisualizer() {
+GraphExporter::GraphExporter() {
     gvc = gvContext();
 }
 
-GraphVisualizer::~GraphVisualizer() {
+GraphExporter::~GraphExporter() {
     gvFreeContext(gvc);
 }
 
-void GraphVisualizer::visualize(const TrafficGraph &graph,
+void GraphExporter::visualize(const TrafficGraph &graph,
                                 const std::string &output_file,
                                 const bool open_image, const bool export_cond) {
     if (!graph.is_empty()) {
@@ -66,7 +66,7 @@ void GraphVisualizer::visualize(const TrafficGraph &graph,
     }
 }
 
-void GraphVisualizer::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph) {
+void GraphExporter::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph) {
     auto nodes = traffic_graph.get_nodes();
     auto anomalies = RealTimeAnomalyDetector().detect(traffic_graph);
     auto now = std::chrono::system_clock::now();
@@ -107,7 +107,7 @@ void GraphVisualizer::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_gra
     }
 }
 
-void GraphVisualizer::add_edges(Agraph_t *graph, const TrafficGraph &traffic_graph) {
+void GraphExporter::add_edges(Agraph_t *graph, const TrafficGraph &traffic_graph) {
     auto edges = traffic_graph.get_edges();
 
     for (const auto &edge: edges) {
@@ -138,7 +138,7 @@ void GraphVisualizer::add_edges(Agraph_t *graph, const TrafficGraph &traffic_gra
     }
 }
 
-void GraphVisualizer::apply_default_styles(Agraph_t *graph) {
+void GraphExporter::apply_default_styles(Agraph_t *graph) {
     // Stili globali del grafo
     agsafeset(graph, const_cast<char *>("overlap"), const_cast<char *>("scale"), const_cast<char *>(""));
     agsafeset(graph, const_cast<char *>("splines"), const_cast<char *>("true"), const_cast<char *>(""));
@@ -147,7 +147,7 @@ void GraphVisualizer::apply_default_styles(Agraph_t *graph) {
     agsafeset(graph, const_cast<char *>("fontsize"), const_cast<char *>("10"), const_cast<char *>(""));
 }
 
-std::string GraphVisualizer::generate_node_id(const std::string &original_id) {
+std::string GraphExporter::generate_node_id(const std::string &original_id) {
     // Crea un ID valido per Graphviz (senza caratteri speciali)
     std::string id = original_id;
     std::replace(id.begin(), id.end(), '.', '_');
@@ -155,7 +155,7 @@ std::string GraphVisualizer::generate_node_id(const std::string &original_id) {
     return "node_" + id;
 }
 
-void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string &filename) {
+void GraphExporter::export_to_dot(const TrafficGraph &graph, const std::string &filename) {
     std::ofstream dot_file(filename);
     dot_file << "digraph ZeekTraffic {\n";
 
@@ -214,7 +214,7 @@ void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string
 }
 
 // Funzione di utilità per fare l'escape di caratteri speciali nelle stringhe DOT
-std::string GraphVisualizer::escape_dot_string(const std::string &str) {
+std::string GraphExporter::escape_dot_string(const std::string &str) {
     std::string result = "";
     for (char c: str) {
         if (c == '"') {
