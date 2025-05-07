@@ -126,6 +126,7 @@ GraphNode &TrafficGraph::get_or_create_node(const std::string &id, const std::st
     if (!nodes.contains(id)) {
         const auto node = std::make_shared<GraphNode>(id, type);
         nodes[id] = node;
+        ++update_counter;
     }
 
     return *nodes[id];
@@ -151,10 +152,12 @@ std::vector<std::shared_ptr<GraphNode> > TrafficGraph::get_nodes() const {
 }
 
 std::vector<std::shared_ptr<GraphEdge> > TrafficGraph::get_edges() const {
+    std::shared_lock lock(graph_mutex);
     return edges;
 }
 
 bool TrafficGraph::is_empty() const {
+    std::shared_lock lock(graph_mutex);
     return this->edges.empty();
 }
 

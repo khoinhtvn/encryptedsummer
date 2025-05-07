@@ -237,7 +237,7 @@ private:
      * @brief Shared mutex to protect concurrent access to the graph data structures.
      * Allows multiple readers or a single writer.
      */
-    mutable std::shared_mutex graph_mutex;
+    std::shared_mutex graph_mutex;
     /**
      * @brief Background thread responsible for performing periodic maintenance tasks on the graph.
      */
@@ -246,6 +246,10 @@ private:
      * @brief Atomic boolean flag to control the execution of the maintenance thread.
      */
     std::atomic<bool> running{true};
+    /**
+     * @brief Atomic integer counter to keep track of the changes since the last incremental export.
+     */
+    std::atomic<size_t> update_counter{0};
 
 public:
     /**
@@ -323,7 +327,7 @@ public:
      * @param type The type of the node.
      * @return A reference to the GraphNode.
      */
-    GraphNode &get_or_create_node(const std::string &id, const std::string &type);
+    GraphNode &get_or_create_node(const std::string &id, const std::string &type) ;
 
     /**
      * @brief Gets a vector of all nodes in the graph.
