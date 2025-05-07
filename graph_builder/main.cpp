@@ -77,7 +77,7 @@ int main(int argc, char *argv[]) {
              * @param false Flag indicating whether to clear the graph before visualization.
              * @param true Flag indicating whether to include labels on the nodes.
              */
-            exporter.visualize(graph, "./zeek_graph_" + std::to_string(UTC), false, true);
+            exporter.export_full_graph(graph, "./nw_graph_" + std::to_string(UTC), false, true);
             /**
              * @brief Detects anomalies in the current network graph, based on basic .
              *

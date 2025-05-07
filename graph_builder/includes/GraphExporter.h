@@ -55,10 +55,12 @@ public:
      * @param open_image A boolean indicating whether to attempt to open the generated image (default: true).
      * @param export_cond A boolean controlling whether the export process should proceed (default: true).
      */
-    void visualize(const TrafficGraph& graph,
+    void export_full_graph(const TrafficGraph& graph,
                    const std::string& output_file = "graph.png",
                    bool open_image = true,  bool export_cond = true);
-
+    void export_incremental_update(const TrafficGraph& graph,
+                   const std::string& output_file = "update.dot",
+                   bool open_image = true,  bool export_cond = true);
 private:
     /**
      * @brief Graphviz context object.

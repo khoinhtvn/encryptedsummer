@@ -21,7 +21,7 @@ GraphExporter::~GraphExporter() {
     gvFreeContext(gvc);
 }
 
-void GraphExporter::visualize(const TrafficGraph &graph,
+void GraphExporter::export_full_graph(const TrafficGraph &graph,
                                 const std::string &output_file,
                                 const bool open_image, const bool export_cond) {
     if (!graph.is_empty()) {
@@ -161,8 +161,8 @@ void GraphExporter::export_to_dot(const TrafficGraph &graph, const std::string &
 
     // Aggiungi nodi
     for (const auto &node: graph.get_nodes()) {
-        dot_file << "  \"" << escape_dot_string(node->id) << "\" [shape=ellipse";
-
+        //dot_file << "  \"" << escape_dot_string(node->id) << "\" [shape=ellipse";
+		dot_file << "  \"" << escape_dot_string(node->id) << "\" [";
         dot_file << ", degree=" << node->features.degree;
         dot_file << ", in_degree=" << node->features.in_degree;
         dot_file << ", out_degree=" << node->features.out_degree;
