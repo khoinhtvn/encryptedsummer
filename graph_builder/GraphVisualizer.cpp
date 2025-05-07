@@ -61,11 +61,9 @@ void GraphVisualizer::visualize(const TrafficGraph &graph,
             std::string command = "xdg-open " + output_file + ".png";
             system(command.c_str());
         }
-    }else {
+    } else {
         std::cout << "Empty graph!" << std::endl;
     }
-
-
 }
 
 void GraphVisualizer::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph) {
@@ -162,7 +160,7 @@ void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string
     dot_file << "digraph ZeekTraffic {\n";
 
     // Aggiungi nodi
-    for (const auto &node : graph.get_nodes()) {
+    for (const auto &node: graph.get_nodes()) {
         dot_file << "  \"" << escape_dot_string(node->id) << "\" [shape=ellipse";
 
         dot_file << ", degree=" << node->features.degree;
@@ -189,8 +187,9 @@ void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string
 
 
     // Aggiungi archi con attributi
-    for (const auto &edge : graph.get_edges()) {
-        dot_file << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) << "\" [";
+    for (const auto &edge: graph.get_edges()) {
+        dot_file << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) <<
+                "\" [";
 
         // Aggiungi l'attributo 'label' se presente, altrimenti usa la relazione
         if (edge->attributes.count("label")) {
@@ -200,9 +199,11 @@ void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string
         }
 
         // Aggiungi altri attributi
-        for (const auto &attr_pair : edge->attributes) {
-            if (attr_pair.first != "label") { // Evita di duplicare l'etichetta
-                dot_file << ", " << escape_dot_string(attr_pair.first) << "=\"" << escape_dot_string(attr_pair.second) << "\"";
+        for (const auto &attr_pair: edge->attributes) {
+            if (attr_pair.first != "label") {
+                // Evita di duplicare l'etichetta
+                dot_file << ", " << escape_dot_string(attr_pair.first) << "=\"" << escape_dot_string(attr_pair.second)
+                        << "\"";
             }
         }
         dot_file << "];\n";
@@ -215,7 +216,7 @@ void GraphVisualizer::export_to_dot(const TrafficGraph &graph, const std::string
 // Funzione di utilità per fare l'escape di caratteri speciali nelle stringhe DOT
 std::string GraphVisualizer::escape_dot_string(const std::string &str) {
     std::string result = "";
-    for (char c : str) {
+    for (char c: str) {
         if (c == '"') {
             result += "\\\"";
         } else if (c == '\\') {

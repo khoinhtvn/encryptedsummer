@@ -92,7 +92,7 @@ int main(int argc, char *argv[]) {
             for (const auto &[node, score]: anomalies) {
                 if (score.score > 0.8) {
                     std::cout << "ALERT: " << node << " anomaly score " << score.score
-                              << " (factors: ";
+                            << " (factors: ";
                     for (const auto &factor: score.contributing_factors) {
                         std::cout << factor << " ";
                     }

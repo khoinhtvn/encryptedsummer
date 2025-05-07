@@ -15,15 +15,15 @@ Usage
 
 - **Real-time Processing**: Continuously monitors Zeek logs
 - **Graph Construction**: Builds interactive network graphs with the following features
-  - *Node level*:
-    - Degree (in/out/combined)
-    - Temporal features (connection in the last minute and hour)
-  - *Edge level (one edge per connection)*
-    - Source, target IP and port number
-    - Protocol, timestamp
-    - Host, Uri and HTTP method
-    - Version, user agent, status code
-    - Request and response body len
+    - *Node level*:
+        - Degree (in/out/combined)
+        - Temporal features (connection in the last minute and hour)
+    - *Edge level (one edge per connection)*
+        - Source, target IP and port number
+        - Protocol, timestamp
+        - Host, Uri and HTTP method
+        - Version, user agent, status code
+        - Request and response body len
 - **Advanced Analysis**:
     - Anomaly detection
     - Traffic pattern recognition
@@ -66,7 +66,9 @@ cmake --build . --config Release
 ## Usage
 
 ### Basic Analysis
+
 The program checks for files in the specified path. It just processes files with known names (conn.log).
+
 ```bash
 ./graph_builder /path/to/zeek/logs
 ```
