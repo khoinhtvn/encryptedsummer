@@ -6,6 +6,14 @@
 #include <memory>
 #include <mutex>
 #include <shared_mutex>
+#include <tuple>
+#include <tuple>
+#include <tuple>
+#include <tuple>
+#include <tuple>
+#include <tuple>
+#include <tuple>
+#include <tuple>
 #include <unordered_map>
 #include <vector>
 
@@ -20,16 +28,16 @@ void TrafficGraph::add_node(const std::string &id, const std::string &type) {
     }
 }
 
-GraphNode &TrafficGraph::get_or_create_node(const std::string &id, const std::string &type) {
+std::pair<GraphNode &, bool> TrafficGraph::get_or_create_node(const std::string &id, const std::string &type) {
     std::unique_lock lock(graph_mutex);
-
-    if (!nodes.contains(id)) {
+    bool create = !nodes.contains(id);
+    if (create) {
         const auto node = std::make_shared<GraphNode>(id, type);
         nodes[id] = node;
         ++update_counter;
     }
 
-    return *nodes[id];
+    return {*nodes[id], create};
 }
 
 std::weak_ptr<GraphNode> TrafficGraph::get_node_reference(const std::string &id) {
@@ -73,4 +81,3 @@ bool TrafficGraph::is_empty() const {
     return this->edges.empty();
 }
 
-TrafficGraph &GraphBuilder::get_graph() { return graph; }

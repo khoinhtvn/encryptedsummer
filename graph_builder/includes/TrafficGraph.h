@@ -129,9 +129,9 @@ public:
      *
      * @param id The unique identifier of the node.
      * @param type The type of the node.
-     * @return A reference to the GraphNode.
+     * @return A pair containing a reference to the GraphNode and a boolean indicating if the node was freshly created.
      */
-    GraphNode &get_or_create_node(const std::string &id, const std::string &type);
+    std::pair<GraphNode &, bool> get_or_create_node(const std::string &id, const std::string &type);
 
     /**
      * @brief Retrieves a weak reference to an existing node. Used to create updatre queue.

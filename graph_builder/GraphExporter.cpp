@@ -22,11 +22,11 @@ GraphExporter::~GraphExporter() {
 }
 
 void GraphExporter::export_full_graph(const TrafficGraph &graph,
-                                const std::string &output_file,
-                                const bool open_image, const bool export_cond) {
+                                      const std::string &output_file,
+                                      const bool open_image, const bool export_cond) {
     if (!graph.is_empty()) {
         // Crea un nuovo grafo
-        Agraph_t *g = agopen(const_cast<char *>("ZeekTraffic"), Agdirected, nullptr);
+        Agraph_t *g = agopen(const_cast<char *>("NWTraffic"), Agdirected, nullptr);
 
         // Applica stili predefiniti
         apply_default_styles(g);
@@ -63,6 +63,46 @@ void GraphExporter::export_full_graph(const TrafficGraph &graph,
         }
     } else {
         std::cout << "Empty graph!" << std::endl;
+    }
+}
+
+void GraphExporter::export_incremental_update(std::vector<GraphUpdate> updates, const std::string &output_file) {
+    if (!updates.empty()) {
+        std::ofstream ofs(output_file);
+        if (!ofs.is_open()) {
+            throw std::runtime_error("Failed to open output file.");
+        }
+
+        // Write DOT format header
+        ofs << "digraph NWTraffic_update {\n";
+        //TODO: divide node updates and creation in output file
+        for (const auto &update : updates) {
+            switch (update.type) {
+                case GraphUpdate::Type::NODE_CREATE:
+                    if (auto node = update.node.lock()) {
+                        write_node_to_file(node, ofs);
+                    }
+                    break;
+                case GraphUpdate::Type::EDGE_CREATE:
+                    if (auto edge = update.edge.lock()) {
+                        write_edge_to_file(edge, ofs);
+                    }
+                    break;
+                case GraphUpdate::Type::NODE_UPDATE:
+                    if (auto node = update.node.lock()) {
+                        write_node_to_file(node, ofs);
+                    }
+                    break;
+                default:
+                    throw std::runtime_error("Unknown GraphUpdate type.");
+            }
+        }
+
+        // End DOT format
+        ofs << "}\n";
+        ofs.close();
+    }else {
+        std::cout << "Empty updates vector!" << std::endl;
     }
 }
 
@@ -155,62 +195,71 @@ std::string GraphExporter::generate_node_id(const std::string &original_id) {
     return "node_" + id;
 }
 
+void GraphExporter::write_node_to_file(const std::shared_ptr<GraphNode> &node, std::ofstream &dot_file) {
+    //dot_file << "  \"" << escape_dot_string(node->id) << "\" [shape=ellipse,";
+    dot_file << "  \"" << escape_dot_string(node->id) << "\" [";
+    dot_file << "degree=" << node->features.degree;
+    dot_file << ", in_degree=" << node->features.in_degree;
+    dot_file << ", out_degree=" << node->features.out_degree;
+    dot_file << ", activity_score=" << std::fixed << std::setprecision(2) << node->features.activity_score.load();
+    dot_file << ", total_connections=" << node->temporal.total_connections;
+
+    // Aggiungi la distribuzione dei protocolli come un singolo attributo (potrebbe essere lungo)
+    /*
+
+    std::string protocol_str = "{";
+    for (const auto &pair : node->features.protocol_counts) {
+        if (!protocol_str.empty() && protocol_str != "{") {
+            protocol_str += ",";
+        }
+        protocol_str += escape_dot_string(pair.first) + ":" + std::to_string(pair.second);
+    }
+    protocol_str += "}";
+    dot_file << ", protocols=\"" << protocol_str << "\"";
+    */
+    dot_file << "];\n";
+}
+
+void GraphExporter::write_edge_to_file(const std::shared_ptr<GraphEdge> &edge, std::ofstream &dot_file) {
+    dot_file << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) <<
+        "\" [";
+
+    // Aggiungi l'attributo 'label' se presente, altrimenti usa la relazione
+    if (edge->attributes.count("label")) {
+        dot_file << "label=\"" << escape_dot_string(edge->attributes.at("label")) << "\"";
+    } else {
+        dot_file << "label=\"" << escape_dot_string(edge->relationship) << "\"";
+    }
+
+    // Aggiungi altri attributi
+    for (const auto &attr_pair: edge->attributes) {
+        if (attr_pair.first != "label") {
+            // Evita di duplicare l'etichetta
+            dot_file << ", " << escape_dot_string(attr_pair.first) << "=\"" << escape_dot_string(attr_pair.second)
+                    << "\"";
+        }
+    }
+    dot_file << "];\n";
+}
+
 void GraphExporter::export_to_dot(const TrafficGraph &graph, const std::string &filename) {
     std::ofstream dot_file(filename);
     dot_file << "digraph ZeekTraffic {\n";
 
     // Aggiungi nodi
     for (const auto &node: graph.get_nodes()) {
-        //dot_file << "  \"" << escape_dot_string(node->id) << "\" [shape=ellipse";
-		dot_file << "  \"" << escape_dot_string(node->id) << "\" [";
-        dot_file << ", degree=" << node->features.degree;
-        dot_file << ", in_degree=" << node->features.in_degree;
-        dot_file << ", out_degree=" << node->features.out_degree;
-        dot_file << ", activity_score=" << std::fixed << std::setprecision(2) << node->features.activity_score.load();
-        dot_file << ", total_connections=" << node->temporal.total_connections;
-
-        // Aggiungi la distribuzione dei protocolli come un singolo attributo (potrebbe essere lungo)
-        /*
-
-        std::string protocol_str = "{";
-        for (const auto &pair : node->features.protocol_counts) {
-            if (!protocol_str.empty() && protocol_str != "{") {
-                protocol_str += ",";
-            }
-            protocol_str += escape_dot_string(pair.first) + ":" + std::to_string(pair.second);
-        }
-        protocol_str += "}";
-        dot_file << ", protocols=\"" << protocol_str << "\"";
-        */
-        dot_file << "];\n";
+        write_node_to_file(node, dot_file);
     }
 
 
     // Aggiungi archi con attributi
     for (const auto &edge: graph.get_edges()) {
-        dot_file << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) <<
-                "\" [";
-
-        // Aggiungi l'attributo 'label' se presente, altrimenti usa la relazione
-        if (edge->attributes.count("label")) {
-            dot_file << "label=\"" << escape_dot_string(edge->attributes.at("label")) << "\"";
-        } else {
-            dot_file << "label=\"" << escape_dot_string(edge->relationship) << "\"";
-        }
-
-        // Aggiungi altri attributi
-        for (const auto &attr_pair: edge->attributes) {
-            if (attr_pair.first != "label") {
-                // Evita di duplicare l'etichetta
-                dot_file << ", " << escape_dot_string(attr_pair.first) << "=\"" << escape_dot_string(attr_pair.second)
-                        << "\"";
-            }
-        }
-        dot_file << "];\n";
+        write_edge_to_file(edge,dot_file);
     }
 
     dot_file << "}\n";
     dot_file.close();
+    std::cout << "File" << filename << " written" << std::endl;
 }
 
 // Funzione di utilità per fare l'escape di caratteri speciali nelle stringhe DOT

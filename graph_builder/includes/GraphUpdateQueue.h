@@ -7,16 +7,14 @@
  * condition variable to allow consumer threads to wait for updates.
  */
 
-// Created by lu on 5/7/25.
-//
-
 #ifndef GRAPHUPDATEQUEUE_H
 #define GRAPHUPDATEQUEUE_H
-// GraphUpdateQueue.h  --> Redundant comment
 
 #include <queue>
 #include <mutex>
 #include <condition_variable>
+#include <vector>
+#include <memory> // Include for std::unique_ptr
 
 #include "GraphEdge.h"
 #include "GraphNode.h"
@@ -34,13 +32,17 @@ struct GraphUpdate {
      */
     enum class Type {
         /**
+       * @brief Represents the creation of a new graph node.
+       */
+        NODE_CREATE,
+        /**
          * @brief Represents an update to a graph node.
          */
         NODE_UPDATE,
         /**
-         * @brief Represents an update to a graph edge.
+         * @brief Represents te creation of a graph edge.
          */
-        EDGE_UPDATE
+        EDGE_CREATE
     };
 
     /**
@@ -77,7 +79,7 @@ private:
     /**
      * @brief Condition variable used to signal when new updates are available.
      */
-    //std::condition_variable cv;
+    std::condition_variable cv;
     /**
      * @brief Flag indicating whether the queue is shutting down.
      */
@@ -95,7 +97,7 @@ public:
     void push(const GraphUpdate &update) {
         std::lock_guard<std::mutex> lock(queue_mutex);
         updates.push(update);
-        // cv.notify_one();
+        cv.notify_one();
     }
 
     /**
@@ -109,13 +111,39 @@ public:
      */
     bool pop(GraphUpdate &update) {
         std::unique_lock<std::mutex> lock(queue_mutex);
-        //cv.wait(lock, [this]() { return !updates.empty() || shutdown_flag; });
+        cv.wait(lock, [this]() { return !updates.empty() || shutdown_flag; });
 
         if (shutdown_flag && updates.empty()) return false;
 
         update = updates.front();
         updates.pop();
         return true;
+    }
+
+    /**
+     * @brief Pops all graph updates from the queue.
+     *
+     * This method retrieves all `GraphUpdate`s from the queue and returns them as a vector.
+     * If the queue is empty, it returns an empty vector.  The queue is emptied
+     * as a result of calling this method.
+     *
+     * @return A vector containing all graph updates currently in the queue.
+     */
+    std::vector<GraphUpdate> popAll() {
+        std::lock_guard<std::mutex> lock(queue_mutex);
+
+        // Create a temporary queue to swap
+        std::queue<GraphUpdate> temp;
+        std::swap(temp, updates); // Efficiently clears the main queue
+
+        // Transfer elements to the vector
+        std::vector<GraphUpdate> allUpdates;
+        while (!temp.empty()) {
+            allUpdates.push_back(std::move(temp.front())); // Move instead of copy
+            temp.pop();
+        }
+
+        return std::move(allUpdates);
     }
 
     /**
@@ -128,7 +156,7 @@ public:
     void shutdown() {
         std::lock_guard<std::mutex> lock(queue_mutex);
         shutdown_flag = true;
-        //cv.notify_all();
+        cv.notify_all();
     }
 };
 

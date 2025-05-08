@@ -30,24 +30,29 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
                                   const std::vector<std::string> &resp_fuids,
                                   const std::vector<std::string> &resp_mime_types) {
     // Get or create nodes
-    auto &src_node = graph.get_or_create_node(src_ip, host);
-    auto &dst_node = graph.get_or_create_node(dst_ip, host);
-
-    // Update node features
-    src_node.update_connection_features(proto, true); // Outgoing connection
-    dst_node.update_connection_features(proto, false); // Incoming connection
+    auto create_src = graph.get_or_create_node(src_ip, host);
+    auto create_dst = graph.get_or_create_node(dst_ip, host);
+    auto &src_node = create_src.first;
+    auto &dst_node = create_dst.first;
+    const bool src_created = create_src.second;
+    const bool dst_created = create_dst.second;
 
     update_queue.push({
-        GraphUpdate::Type::NODE_UPDATE,
+        src_created ? GraphUpdate::Type::NODE_CREATE : GraphUpdate::Type::NODE_UPDATE,
         graph.get_node_reference(src_ip),
         std::weak_ptr<GraphEdge>()
     });
 
     update_queue.push({
-        GraphUpdate::Type::NODE_UPDATE,
+        dst_created ? GraphUpdate::Type::NODE_CREATE : GraphUpdate::Type::NODE_UPDATE,
         graph.get_node_reference(dst_ip),
         std::weak_ptr<GraphEdge>()
     });
+
+    // Update node features
+    src_node.update_connection_features(proto, true); // Outgoing connection
+    dst_node.update_connection_features(proto, false); // Incoming connection
+
 
     // Add edge
     std::unordered_map<std::string, std::string> attrs = {
@@ -94,10 +99,11 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
     }
     auto edge = graph.add_edge(src_ip, dst_ip, proto + "_connection", attrs);
     update_queue.push({
-        GraphUpdate::Type::EDGE_UPDATE,
+        GraphUpdate::Type::EDGE_CREATE,
         std::weak_ptr<GraphNode>(),
         edge
     });
 }
-
-
+TrafficGraph &GraphBuilder::get_graph() {
+    return graph;
+}

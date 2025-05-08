@@ -55,19 +55,21 @@ public:
      * @param open_image A boolean indicating whether to attempt to open the generated image (default: true).
      * @param export_cond A boolean controlling whether the export process should proceed (default: true).
      */
-    void export_full_graph(const TrafficGraph& graph,
-                   const std::string& output_file = "graph.png",
-                   bool open_image = true,  bool export_cond = true);
-    void export_incremental_update(const TrafficGraph& graph,
-                   const std::string& output_file = "update.dot",
-                   bool open_image = true,  bool export_cond = true);
+    void export_full_graph(const TrafficGraph &graph,
+                           const std::string &output_file = "graph.png",
+                           bool open_image = true, bool export_cond = true);
+
+
+    void export_incremental_update(std::vector<GraphUpdate> updates,
+                                   const std::string &output_file = "update.dot");
+
 private:
     /**
      * @brief Graphviz context object.
      *
      * This context is required for interacting with the Graphviz library.
      */
-    GVC_t* gvc;
+    GVC_t *gvc;
 
     /**
      * @brief Adds nodes from the `TrafficGraph` to the Graphviz graph.
@@ -78,7 +80,7 @@ private:
      * @param graph The Graphviz graph to add nodes to.
      * @param traffic_graph The `TrafficGraph` containing the nodes to visualize.
      */
-    void add_nodes(Agraph_t* graph, const TrafficGraph& traffic_graph);
+    void add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph);
 
     /**
      * @brief Adds edges from the `TrafficGraph` to the Graphviz graph.
@@ -89,7 +91,7 @@ private:
      * @param graph The Graphviz graph to add edges to.
      * @param traffic_graph The `TrafficGraph` containing the edges to visualize.
      */
-    void add_edges(Agraph_t* graph, const TrafficGraph& traffic_graph);
+    void add_edges(Agraph_t *graph, const TrafficGraph &traffic_graph);
 
     /**
      * @brief Applies default visual styles to the Graphviz graph.
@@ -99,7 +101,7 @@ private:
      *
      * @param graph The Graphviz graph to apply styles to.
      */
-    void apply_default_styles(Agraph_t* graph);
+    void apply_default_styles(Agraph_t *graph);
 
     /**
      * @brief Generates a valid Graphviz node ID from the original node ID.
@@ -110,7 +112,11 @@ private:
      * @param original_id The original node identifier from the `TrafficGraph`.
      * @return A string representing a valid Graphviz node ID.
      */
-    std::string generate_node_id(const std::string& original_id);
+    std::string generate_node_id(const std::string &original_id);
+
+    void write_node_to_file(const std::shared_ptr<GraphNode> & node, std::ofstream & ofstream);
+
+    void write_edge_to_file(const std::shared_ptr<GraphEdge> & edge, std::ofstream & ofstream);
 
     /**
      * @brief Exports the `TrafficGraph` structure to a DOT file.
@@ -121,7 +127,7 @@ private:
      * @param graph The `TrafficGraph` to export.
      * @param filename The name of the output DOT file.
      */
-    void export_to_dot(const TrafficGraph& graph, const std::string& filename);
+    void export_to_dot(const TrafficGraph &graph, const std::string &filename);
 
     std::string escape_dot_string(const std::string &str);
 };

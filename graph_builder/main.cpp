@@ -78,14 +78,16 @@ int main(int argc, char *argv[]) {
              * @param true Flag indicating whether to include labels on the nodes.
              */
             exporter.export_full_graph(graph, "./nw_graph_" + std::to_string(UTC), false, true);
+
+            exporter.export_incremental_update(GraphBuilder::get_instance().get_last_updates(), "./nw_graph_" + std::to_string(UTC));
             /**
              * @brief Detects anomalies in the current network graph, based on basic .
              *
-             * @param GraphBuilder::get_instance().get_graph() The graph to analyze for anomalies.
+             * @param graph The graph to analyze for anomalies.
              * @return A map where the keys are the nodes identified as anomalous and the values
              * are their corresponding anomaly scores and contributing factors.
              */
-            auto anomalies = detector.detect(GraphBuilder::get_instance().get_graph());
+            auto anomalies = detector.detect(graph);
             /**
              * @brief Iterates through the detected anomalies and prints alerts for high-scoring ones.
              */

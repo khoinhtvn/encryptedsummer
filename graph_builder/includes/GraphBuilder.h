@@ -2,8 +2,8 @@
  * @file GraphBuilder.h
  * @brief Header file for the GraphBuilder class, responsible for constructing the network traffic graph.
  *
- * This file defines the `GraphNode`, `GraphEdge`, `TrafficGraph`, and `GraphBuilder` classes,
- * which together form the data structures and logic for representing and building a graph
+ * This file defines the `GraphBuilder` class,
+ * which form the data structures and logic for building a graph
  * of network traffic based on Zeek logs.
  */
 
@@ -57,6 +57,8 @@ private:
  * @brief Queue of incremental updates. Useful for passing just new graph features when needed.
  */
     GraphUpdateQueue update_queue;
+
+private:
     std::atomic<bool> save_pending{false};
 
 public:
@@ -85,6 +87,17 @@ public:
             instance = std::unique_ptr<GraphBuilder>(new GraphBuilder());
         }
         return *instance;
+    }
+
+    /**
+     * @brief Gets the update list for the graph.
+     *
+     * This is useful for periodic dumping, to just export incremental updates.
+     *
+     * @return
+     */
+    std::vector<GraphUpdate> get_last_updates() {
+        return std::move(update_queue.popAll());
     }
 
     /**
