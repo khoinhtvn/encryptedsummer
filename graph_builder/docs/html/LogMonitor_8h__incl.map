@@ -1,0 +1,10 @@
+<map id="includes/LogMonitor.h" name="includes/LogMonitor.h">
+<area shape="rect" id="Node000001" title="Header file for the LogMonitor class, responsible for monitoring Zeek log files." alt="" coords="5,5,169,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="83,152,142,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,33,50,65,43,84,46,103,61,125,82,142,78,146,57,128,41,105,38,83,45,62,71,30"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="55,79,119,104"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="90,31,90,65,85,65,85,31"/>
+<area shape="rect" id="Node000004" href="$ZeekLogParser_8h.html" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files." alt="" coords="144,79,273,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="108,28,179,69,176,74,105,33"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="195,106,141,146,138,141,192,102"/>
+</map>

@@ -1,0 +1,61 @@
+\doxysection{Zeek\+Log\+Parser.\+h}
+\hypertarget{ZeekLogParser_8h_source}{}\label{ZeekLogParser_8h_source}\index{includes/ZeekLogParser.h@{includes/ZeekLogParser.h}}
+\mbox{\hyperlink{ZeekLogParser_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 4/25/25.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ ZEEKLOGPARSER\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ ZEEKLOGPARSER\_H}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <filesystem>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structFileState_a29ca2864c94e4eca416d81007058eb4f}{FileState}}\ \{}
+\DoxyCodeLine{00029\ \ \ \ \ ino\_t\ \mbox{\hyperlink{structFileState_ae010c4938bde94f555a4589146fa7b39}{inode}};}
+\DoxyCodeLine{00033\ \ \ \ \ off\_t\ \mbox{\hyperlink{structFileState_acb4eeb0f402fe2ff73624f40fd8b6183}{last\_size}};}
+\DoxyCodeLine{00037\ \ \ \ \ std::string\ \mbox{\hyperlink{structFileState_aa54fe5f4df7f270814dd53db110bb7d5}{path}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{structFileState_a29ca2864c94e4eca416d81007058eb4f}{FileState}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{structFileState_ae6c916efcf345fedb2a4165b5c637aba}{FileState}}(\textcolor{keyword}{const}\ std::string\&\ p)\ :\ \mbox{\hyperlink{structFileState_aa54fe5f4df7f270814dd53db110bb7d5}{path}}(p),\ \mbox{\hyperlink{structFileState_acb4eeb0f402fe2ff73624f40fd8b6183}{last\_size}}(0),\ \mbox{\hyperlink{structFileState_ae010c4938bde94f555a4589146fa7b39}{inode}}(0)\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structFileState_a8a334d569b2977c7ccc221d6d01ada41}{update}}();}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFileState_a8a334d569b2977c7ccc221d6d01ada41}{update}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structFileState_ac6b4ee72d0eac3bd51186f1d84af950b}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFileState}{FileState}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00083\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classZeekLogParser_ac14af41e221d8102cebb6f73ab750f20}{ZeekLogParser}}\ \{}
+\DoxyCodeLine{00084\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classZeekLogParser_ac14af41e221d8102cebb6f73ab750f20}{ZeekLogParser}}(\textcolor{keyword}{const}\ std::string\&\ log\_dir)\ :\ log\_directory(log\_dir)\ \{\}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classZeekLogParser_af922e185b33640058001015a136545a3}{monitor\_logs}}();}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classZeekLogParser_afc2dc1c7ef6b3d99d96c17156b565bff}{process\_new\_file}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structFileState}{FileState}}\ \&file);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classZeekLogParser_ab40d5d847d4254335368a0231bca696d}{process\_appended\_data}}(\textcolor{keyword}{const}\ std::string\ \&path,\ off\_t\ old\_size,\ off\_t\ new\_size);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classZeekLogParser_a5a5dee5a6d6c6daf5fb1a517f848961e}{process\_content}}(\textcolor{keyword}{const}\ std::string\ \&path,\ \textcolor{keyword}{const}\ std::string\ \&content);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00139\ \ \ \ \ std::unordered\_map<std::string,\ FileState>\ tracked\_files;}
+\DoxyCodeLine{00143\ \ \ \ \ std::string\ log\_directory;}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00151\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ partial\_lines;}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keywordtype}{void}\ process\_log\_file(\textcolor{keyword}{const}\ std::filesystem::path\&\ file\_path);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ process\_log\_entry(\textcolor{keyword}{const}\ std::string\&\ log\_type,\ \textcolor{keyword}{const}\ std::string\&\ entry);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ process\_conn\_entry(\textcolor{keyword}{const}\ std::string\&\ entry);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{void}\ process\_http\_entry(\textcolor{keyword}{const}\ std::string\&\ entry);}
+\DoxyCodeLine{00191\ \};}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ ZEEKLOGPARSER\_H}}
+
+\end{DoxyCode}

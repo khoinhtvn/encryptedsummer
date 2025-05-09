@@ -1,0 +1,95 @@
+\doxysection{main.\+cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{main.cpp@{main.cpp}}
+
+
+Main entry point for the Zeek log analysis and anomaly detection application.  
+
+
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include "{}includes/\+Graph\+Builder.\+h"{}}\newline
+{\ttfamily \#include "{}includes/\+Graph\+Exporter.\+h"{}}\newline
+{\ttfamily \#include "{}includes/\+Log\+Monitor.\+h"{}}\newline
+{\ttfamily \#include "{}includes/\+Real\+Time\+Anomaly\+Detector.\+h"{}}\newline
+Include dependency graph for main.\+cpp\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{main_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main function of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main entry point for the Zeek log analysis and anomaly detection application. 
+
+This application monitors Zeek logs from a specified directory, builds a graph representation of the network traffic, visualizes the graph periodically, and detects real-\/time anomalies. 
+
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Main function of the application. 
+
+This function parses command-\/line arguments, initializes the log monitor, anomaly detector, and graph exporter, and then enters a main loop for continuous monitoring and analysis.
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Number of command-\/line arguments. \\
+\hline
+{\em argv} & Array of command-\/line arguments. The first argument should be the path to the Zeek log directory. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0 if the application runs successfully, 1 otherwise. 
+\end{DoxyReturn}
+Instance of the real-\/time anomaly detector.
+
+Instance of the graph exporter.
+
+Instance of the log monitor, responsible for reading and processing Zeek logs.
+
+The monitor is initialized with the directory containing the Zeek log files provided as a command-\/line argument.
+
+Starts the log monitoring process in a separate thread.
+
+Retrieves the singleton instance of the \doxylink{classGraphBuilder}{Graph\+Builder} and gets the current graph.
+
+Visualizes the current network graph and saves it as a PNG file.
+
+The filename includes the current UTC timestamp. The \textquotesingle{}false\textquotesingle{} argument likely controls whether to clear the graph before visualizing (in this context, it\textquotesingle{}s probably not clearing), and \textquotesingle{}true\textquotesingle{} might indicate whether to include labels on the nodes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to visualize. \\
+\hline
+{\em ./zeek\+\_\+graph\+\_\+} & + std\+::to\+\_\+string(\+UTC) The base filename for the output PNG. \\
+\hline
+{\em false} & Flag indicating whether to clear the graph before visualization. \\
+\hline
+{\em true} & Flag indicating whether to include labels on the nodes.\\
+\hline
+\end{DoxyParams}
+Detects anomalies in the current network graph, based on basic .
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to analyze for anomalies. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A map where the keys are the nodes identified as anomalous and the values are their corresponding anomaly scores and contributing factors.
+\end{DoxyReturn}
+Iterates through the detected anomalies and prints alerts for high-\/scoring ones.
+
+Stops the log monitoring process.

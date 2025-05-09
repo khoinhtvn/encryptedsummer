@@ -1,0 +1,106 @@
+\doxysection{Graph\+Update\+Queue Class Reference}
+\hypertarget{classGraphUpdateQueue}{}\label{classGraphUpdateQueue}\index{GraphUpdateQueue@{GraphUpdateQueue}}
+
+
+Thread-\/safe queue for storing and processing graph updates.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Update\+Queue.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Update\+Queue\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=187pt]{classGraphUpdateQueue__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classGraphUpdateQueue_aabd051e04032dafa172de9a2b289a2b9}{push}} (const \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} \&update)
+\begin{DoxyCompactList}\small\item\em Pushes a new graph update onto the queue. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classGraphUpdateQueue_a87f3e51b959f4ac6403d95c1e3dba4c3}{pop}} (\mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} \&update)
+\begin{DoxyCompactList}\small\item\em Pops a graph update from the queue. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ \mbox{\hyperlink{classGraphUpdateQueue_a878ff033814bd6228f09c74260fefe44}{pop\+All}} ()
+\begin{DoxyCompactList}\small\item\em Pops all graph updates from the queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphUpdateQueue_a7867ed8e468ee74d679b01172991ce05}{shutdown}} ()
+\begin{DoxyCompactList}\small\item\em Shuts down the queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Thread-\/safe queue for storing and processing graph updates. 
+
+The {\ttfamily \doxylink{classGraphUpdateQueue}{Graph\+Update\+Queue}} class provides a thread-\/safe mechanism for adding and retrieving updates to the network traffic graph. It uses a mutex to protect the queue and a condition variable to signal when new updates are available. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGraphUpdateQueue_a87f3e51b959f4ac6403d95c1e3dba4c3}\index{GraphUpdateQueue@{GraphUpdateQueue}!pop@{pop}}
+\index{pop@{pop}!GraphUpdateQueue@{GraphUpdateQueue}}
+\doxysubsubsection{\texorpdfstring{pop()}{pop()}}
+{\footnotesize\ttfamily \label{classGraphUpdateQueue_a87f3e51b959f4ac6403d95c1e3dba4c3} 
+bool Graph\+Update\+Queue\+::pop (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} \&}]{update}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pops a graph update from the queue. 
+
+This method retrieves the next {\ttfamily \doxylink{structGraphUpdate}{Graph\+Update}} from the queue. If the queue is empty, it waits until an update is available or the queue is shut down.
+
+
+\begin{DoxyParams}{Parameters}
+{\em update} & A reference to the \doxylink{structGraphUpdate}{Graph\+Update} object where the retrieved update will be stored. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if an update was successfully retrieved, false if the queue is shut down and empty. 
+\end{DoxyReturn}
+\Hypertarget{classGraphUpdateQueue_a878ff033814bd6228f09c74260fefe44}\index{GraphUpdateQueue@{GraphUpdateQueue}!popAll@{popAll}}
+\index{popAll@{popAll}!GraphUpdateQueue@{GraphUpdateQueue}}
+\doxysubsubsection{\texorpdfstring{popAll()}{popAll()}}
+{\footnotesize\ttfamily \label{classGraphUpdateQueue_a878ff033814bd6228f09c74260fefe44} 
+std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ Graph\+Update\+Queue\+::pop\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pops all graph updates from the queue. 
+
+This method retrieves all {\ttfamily \doxylink{structGraphUpdate}{Graph\+Update}}s from the queue and returns them as a vector. If the queue is empty, it returns an empty vector. The queue is emptied as a result of calling this method.
+
+\begin{DoxyReturn}{Returns}
+A vector containing all graph updates currently in the queue. 
+\end{DoxyReturn}
+\Hypertarget{classGraphUpdateQueue_aabd051e04032dafa172de9a2b289a2b9}\index{GraphUpdateQueue@{GraphUpdateQueue}!push@{push}}
+\index{push@{push}!GraphUpdateQueue@{GraphUpdateQueue}}
+\doxysubsubsection{\texorpdfstring{push()}{push()}}
+{\footnotesize\ttfamily \label{classGraphUpdateQueue_aabd051e04032dafa172de9a2b289a2b9} 
+void Graph\+Update\+Queue\+::push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} \&}]{update}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pushes a new graph update onto the queue. 
+
+This method adds a new {\ttfamily \doxylink{structGraphUpdate}{Graph\+Update}} to the queue and notifies any waiting threads that an update is available.
+
+
+\begin{DoxyParams}{Parameters}
+{\em update} & The graph update to add to the queue. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classGraphUpdateQueue_a7867ed8e468ee74d679b01172991ce05}\index{GraphUpdateQueue@{GraphUpdateQueue}!shutdown@{shutdown}}
+\index{shutdown@{shutdown}!GraphUpdateQueue@{GraphUpdateQueue}}
+\doxysubsubsection{\texorpdfstring{shutdown()}{shutdown()}}
+{\footnotesize\ttfamily \label{classGraphUpdateQueue_a7867ed8e468ee74d679b01172991ce05} 
+void Graph\+Update\+Queue\+::shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shuts down the queue. 
+
+This method sets the shutdown flag, preventing further updates from being added and signals all waiting threads to wake up. This allows threads waiting on the queue to exit gracefully. 
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphUpdateQueue_8h}{Graph\+Update\+Queue.\+h}}\end{DoxyCompactItemize}

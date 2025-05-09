@@ -1,0 +1,111 @@
+\doxysection{Graph\+Edge Class Reference}
+\hypertarget{classGraphEdge}{}\label{classGraphEdge}\index{GraphEdge@{GraphEdge}}
+
+
+Represents an edge in the network traffic graph, connecting two Graph\+Nodes.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Edge.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Edge\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{classGraphEdge__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{Graph\+Edge}} (const std\+::string \&src, const std\+::string \&tgt, const std\+::string \&rel)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphEdge}{Graph\+Edge}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}}
+\begin{DoxyCompactList}\small\item\em Identifier of the source node. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}}
+\begin{DoxyCompactList}\small\item\em Identifier of the target node. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}}
+\begin{DoxyCompactList}\small\item\em Type of relationship between the source and target nodes (e.\+g., "{}connects\+\_\+to"{}, "{}sends\+\_\+data\+\_\+to"{}). \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}{attributes}}
+\begin{DoxyCompactList}\small\item\em Additional attributes associated with the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an edge in the network traffic graph, connecting two Graph\+Nodes. 
+
+Each {\ttfamily \doxylink{classGraphEdge}{Graph\+Edge}} represents a communication or relationship between two network entities. It stores the identifiers of the source and target nodes, the type of relationship, and any additional attributes associated with the connection. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}\index{GraphEdge@{GraphEdge}!GraphEdge@{GraphEdge}}
+\index{GraphEdge@{GraphEdge}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{GraphEdge()}{GraphEdge()}}
+{\footnotesize\ttfamily \label{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def} 
+Graph\+Edge\+::\+Graph\+Edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src}{, }\item[{const std\+::string \&}]{tgt}{, }\item[{const std\+::string \&}]{rel}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for the \doxylink{classGraphEdge}{Graph\+Edge}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em src} & The identifier of the source node. \\
+\hline
+{\em tgt} & The identifier of the target node. \\
+\hline
+{\em rel} & The type of relationship between the nodes. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}\index{GraphEdge@{GraphEdge}!attributes@{attributes}}
+\index{attributes@{attributes}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{attributes}{attributes}}
+{\footnotesize\ttfamily \label{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ Graph\+Edge\+::attributes}
+
+
+
+Additional attributes associated with the edge. 
+
+\Hypertarget{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}\index{GraphEdge@{GraphEdge}!relationship@{relationship}}
+\index{relationship@{relationship}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{relationship}{relationship}}
+{\footnotesize\ttfamily \label{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370} 
+std\+::string Graph\+Edge\+::relationship}
+
+
+
+Type of relationship between the source and target nodes (e.\+g., "{}connects\+\_\+to"{}, "{}sends\+\_\+data\+\_\+to"{}). 
+
+\Hypertarget{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}\index{GraphEdge@{GraphEdge}!source@{source}}
+\index{source@{source}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{source}{source}}
+{\footnotesize\ttfamily \label{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80} 
+std\+::string Graph\+Edge\+::source}
+
+
+
+Identifier of the source node. 
+
+\Hypertarget{classGraphEdge_a96de026803e8fceda55bf716e7416303}\index{GraphEdge@{GraphEdge}!target@{target}}
+\index{target@{target}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{target}{target}}
+{\footnotesize\ttfamily \label{classGraphEdge_a96de026803e8fceda55bf716e7416303} 
+std\+::string Graph\+Edge\+::target}
+
+
+
+Identifier of the target node. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphEdge_8h}{Graph\+Edge.\+h}}\end{DoxyCompactItemize}

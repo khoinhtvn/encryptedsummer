@@ -1,0 +1,431 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classGraphExporter" kind="class" language="C++" prot="public">
+    <compoundname>GraphExporter</compoundname>
+    <includes refid="GraphExporter_8h" local="no">GraphExporter.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGraphExporter_1a360987d76ced636de129746c14536b5b" prot="private" static="no" mutable="no">
+        <type>GVC_t *</type>
+        <definition>GVC_t* GraphExporter::gvc</definition>
+        <argsstring></argsstring>
+        <name>gvc</name>
+        <qualifiedname>GraphExporter::gvc</qualifiedname>
+        <briefdescription>
+<para>Graphviz context object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This context is required for interacting with the Graphviz library. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="72" column="11" bodyfile="includes/GraphExporter.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGraphExporter_1ad6ec946fe1111d8543118747b9883895" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>GraphExporter::GraphExporter</definition>
+        <argsstring>()</argsstring>
+        <name>GraphExporter</name>
+        <qualifiedname>GraphExporter::GraphExporter</qualifiedname>
+        <briefdescription>
+<para>Constructor for the <ref refid="classGraphExporter" kindref="compound">GraphExporter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the Graphviz context (<computeroutput>GVC_t</computeroutput>). </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="36" column="5" bodyfile="GraphExporter.cpp" bodystart="16" bodyend="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>GraphExporter::~GraphExporter</definition>
+        <argsstring>()</argsstring>
+        <name>~GraphExporter</name>
+        <qualifiedname>GraphExporter::~GraphExporter</qualifiedname>
+        <briefdescription>
+<para>Destructor for the <ref refid="classGraphExporter" kindref="compound">GraphExporter</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Releases the Graphviz context to free allocated resources. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="43" column="5" bodyfile="GraphExporter.cpp" bodystart="20" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a87081ce287618fcb2dd12d1ed08b2c52" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::export_full_graph</definition>
+        <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;output_file=&quot;graph.png&quot;, bool open_image=true, bool export_cond=true)</argsstring>
+        <name>export_full_graph</name>
+        <qualifiedname>GraphExporter::export_full_graph</qualifiedname>
+        <param>
+          <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_file</declname>
+          <defval>&quot;graph.png&quot;</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>open_image</declname>
+          <defval>true</defval>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>export_cond</declname>
+          <defval>true</defval>
+        </param>
+        <briefdescription>
+<para>Visualizes the given traffic graph and saves it to a file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method takes a <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to &quot;graph.png&quot;). It can also optionally open the generated image and control whether the export should proceed.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> object to visualize. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the output image file (default: &quot;graph.png&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>open_image</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A boolean indicating whether to attempt to open the generated image (default: true). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>export_cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A boolean controlling whether the export process should proceed (default: true). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="58" column="10" bodyfile="GraphExporter.cpp" bodystart="24" bodyend="67"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1aa7f00e63a59e4a1739bc5742578bf63e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::export_incremental_update</definition>
+        <argsstring>(std::vector&lt; GraphUpdate &gt; updates, const std::string &amp;output_file=&quot;update.dot&quot;)</argsstring>
+        <name>export_incremental_update</name>
+        <qualifiedname>GraphExporter::export_incremental_update</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &gt;</type>
+          <declname>updates</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_file</declname>
+          <defval>&quot;update.dot&quot;</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="63" column="10" bodyfile="GraphExporter.cpp" bodystart="69" bodyend="107"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::add_nodes</definition>
+        <argsstring>(Agraph_t *graph, const TrafficGraph &amp;traffic_graph)</argsstring>
+        <name>add_nodes</name>
+        <qualifiedname>GraphExporter::add_nodes</qualifiedname>
+        <param>
+          <type>Agraph_t *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
+          <declname>traffic_graph</declname>
+        </param>
+        <briefdescription>
+<para>Adds nodes from the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> to the Graphviz graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through the nodes in the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> and creates corresponding nodes in the Graphviz graph (<computeroutput>Agraph_t</computeroutput>).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Graphviz graph to add nodes to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>traffic_graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> containing the nodes to visualize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="83" column="10" bodyfile="GraphExporter.cpp" bodystart="109" bodyend="148"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::add_edges</definition>
+        <argsstring>(Agraph_t *graph, const TrafficGraph &amp;traffic_graph)</argsstring>
+        <name>add_edges</name>
+        <qualifiedname>GraphExporter::add_edges</qualifiedname>
+        <param>
+          <type>Agraph_t *</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
+          <declname>traffic_graph</declname>
+        </param>
+        <briefdescription>
+<para>Adds edges from the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> to the Graphviz graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Iterates through the edges in the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> and creates corresponding edges in the Graphviz graph (<computeroutput>Agraph_t</computeroutput>), connecting the appropriate nodes.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Graphviz graph to add edges to. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>traffic_graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> containing the edges to visualize. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="94" column="10" bodyfile="GraphExporter.cpp" bodystart="150" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::apply_default_styles</definition>
+        <argsstring>(Agraph_t *graph)</argsstring>
+        <name>apply_default_styles</name>
+        <qualifiedname>GraphExporter::apply_default_styles</qualifiedname>
+        <param>
+          <type>Agraph_t *</type>
+          <declname>graph</declname>
+        </param>
+        <briefdescription>
+<para>Applies default visual styles to the Graphviz graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Sets basic attributes for the graph, such as layout engine, node styles, and edge styles, to provide a consistent and readable visualization.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Graphviz graph to apply styles to. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="104" column="10" bodyfile="GraphExporter.cpp" bodystart="181" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1ae8e782903a09b03895db658af8b1863e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string GraphExporter::generate_node_id</definition>
+        <argsstring>(const std::string &amp;original_id)</argsstring>
+        <name>generate_node_id</name>
+        <qualifiedname>GraphExporter::generate_node_id</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>original_id</declname>
+        </param>
+        <briefdescription>
+<para>Generates a valid Graphviz node ID from the original node ID. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Ensures that node IDs are compatible with Graphviz&apos;s requirements, potentially escaping or modifying characters that could cause issues.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>original_id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The original node identifier from the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A string representing a valid Graphviz node ID. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="115" column="17" bodyfile="GraphExporter.cpp" bodystart="190" bodyend="196"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a3e0a34f0682f1aa34915ca87449f2499" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::write_node_to_file</definition>
+        <argsstring>(const std::shared_ptr&lt; GraphNode &gt; &amp;node, std::ofstream &amp;ofstream)</argsstring>
+        <name>write_node_to_file</name>
+        <qualifiedname>GraphExporter::write_node_to_file</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt; &amp;</type>
+          <declname>node</declname>
+        </param>
+        <param>
+          <type>std::ofstream &amp;</type>
+          <declname>ofstream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="117" column="10" bodyfile="GraphExporter.cpp" bodystart="198" bodyend="221"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1aa1a6dd4e12a4732aab0631f8b1f62f69" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::write_edge_to_file</definition>
+        <argsstring>(const std::shared_ptr&lt; GraphEdge &gt; &amp;edge, std::ofstream &amp;ofstream)</argsstring>
+        <name>write_edge_to_file</name>
+        <qualifiedname>GraphExporter::write_edge_to_file</qualifiedname>
+        <param>
+          <type>const std::shared_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt; &amp;</type>
+          <declname>edge</declname>
+        </param>
+        <param>
+          <type>std::ofstream &amp;</type>
+          <declname>ofstream</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="119" column="10" bodyfile="GraphExporter.cpp" bodystart="223" bodyend="243"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::export_to_dot</definition>
+        <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;filename)</argsstring>
+        <name>export_to_dot</name>
+        <qualifiedname>GraphExporter::export_to_dot</qualifiedname>
+        <param>
+          <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>filename</declname>
+        </param>
+        <briefdescription>
+<para>Exports the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> structure to a DOT file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method can be used for debugging or if a DOT representation of the graph is needed. The DOT file can then be processed by Graphviz separately.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> to export. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>filename</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the output DOT file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="130" column="10" bodyfile="GraphExporter.cpp" bodystart="245" bodyend="263"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string GraphExporter::escape_dot_string</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>escape_dot_string</name>
+        <qualifiedname>GraphExporter::escape_dot_string</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="132" column="17" bodyfile="GraphExporter.cpp" bodystart="266" bodyend="278"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class responsible for visualizing the network traffic graph using Graphviz. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <computeroutput><ref refid="classGraphExporter" kindref="compound">GraphExporter</ref></computeroutput> class takes a <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> object and renders it as a visual representation, typically saving it as a PNG image. It utilizes the Graphviz library for graph layout and rendering. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>GraphExporter</label>
+        <link refid="classGraphExporter"/>
+      </node>
+    </collaborationgraph>
+    <location file="includes/GraphExporter.h" line="29" column="1" bodyfile="includes/GraphExporter.h" bodystart="29" bodyend="133"/>
+    <listofallmembers>
+      <member refid="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>add_edges</name></member>
+      <member refid="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>add_nodes</name></member>
+      <member refid="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>apply_default_styles</name></member>
+      <member refid="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>escape_dot_string</name></member>
+      <member refid="classGraphExporter_1a87081ce287618fcb2dd12d1ed08b2c52" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph</name></member>
+      <member refid="classGraphExporter_1aa7f00e63a59e4a1739bc5742578bf63e" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_incremental_update</name></member>
+      <member refid="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_to_dot</name></member>
+      <member refid="classGraphExporter_1ae8e782903a09b03895db658af8b1863e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>generate_node_id</name></member>
+      <member refid="classGraphExporter_1ad6ec946fe1111d8543118747b9883895" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>GraphExporter</name></member>
+      <member refid="classGraphExporter_1a360987d76ced636de129746c14536b5b" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>gvc</name></member>
+      <member refid="classGraphExporter_1aa1a6dd4e12a4732aab0631f8b1f62f69" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>write_edge_to_file</name></member>
+      <member refid="classGraphExporter_1a3e0a34f0682f1aa34915ca87449f2499" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>write_node_to_file</name></member>
+      <member refid="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>~GraphExporter</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

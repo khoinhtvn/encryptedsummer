@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.13.2" xml:lang="en-US">
+  <compound refid="structRealTimeAnomalyDetector_1_1AnomalyScore" kind="struct"><name>RealTimeAnomalyDetector::AnomalyScore</name>
+    <member refid="structRealTimeAnomalyDetector_1_1AnomalyScore_1af78f3e437b8b9b0988f9334ff378d240" kind="variable"><name>score</name></member>
+    <member refid="structRealTimeAnomalyDetector_1_1AnomalyScore_1acd217a71de0895b7e2880adefac0d493" kind="variable"><name>contributing_factors</name></member>
+  </compound>
+  <compound refid="structFileState" kind="struct"><name>FileState</name>
+    <member refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kind="variable"><name>inode</name></member>
+    <member refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kind="variable"><name>last_size</name></member>
+    <member refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kind="variable"><name>path</name></member>
+    <member refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" kind="function"><name>FileState</name></member>
+    <member refid="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" kind="function"><name>FileState</name></member>
+    <member refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kind="function"><name>update</name></member>
+    <member refid="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" kind="function"><name>operator==</name></member>
+  </compound>
+  <compound refid="classGraphBuilder" kind="class"><name>GraphBuilder</name>
+    <member refid="classGraphBuilder_1a8b766006264e9775c5cf59cf4f75ccc6" kind="variable"><name>instance</name></member>
+    <member refid="classGraphBuilder_1a5788850f0b02cac0674a723779eea95f" kind="variable"><name>instance_mutex</name></member>
+    <member refid="classGraphBuilder_1aa920996ec34f9e7ff2bbb6249a5b91fd" kind="variable"><name>graph</name></member>
+    <member refid="classGraphBuilder_1a3ae808c157c8286259e73cb5082ab04d" kind="variable"><name>update_queue</name></member>
+    <member refid="classGraphBuilder_1ad2bbcc61e251124d3e89140596f9bcbe" kind="variable"><name>save_pending</name></member>
+    <member refid="classGraphBuilder_1abadf20e37df1dbd53d0a9e4f2e63dfee" kind="function"><name>GraphBuilder</name></member>
+    <member refid="classGraphBuilder_1a3af3213174c72b1eda8f3a0e21bba54b" kind="function"><name>GraphBuilder</name></member>
+    <member refid="classGraphBuilder_1acbd5f45fa3be1fa61975e8fefedd3278" kind="function"><name>operator=</name></member>
+    <member refid="classGraphBuilder_1a88d61bc652bfa5a60a8cd1aa8509d27c" kind="function"><name>get_last_updates</name></member>
+    <member refid="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" kind="function"><name>add_connection</name></member>
+    <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kind="function"><name>get_graph</name></member>
+    <member refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kind="function"><name>get_instance</name></member>
+  </compound>
+  <compound refid="classGraphEdge" kind="class"><name>GraphEdge</name>
+    <member refid="classGraphEdge_1a15bf6a4cc4dae4f0368ef9112273ab80" kind="variable"><name>source</name></member>
+    <member refid="classGraphEdge_1a96de026803e8fceda55bf716e7416303" kind="variable"><name>target</name></member>
+    <member refid="classGraphEdge_1ad3ce59edfe79128ddd587bc3df2c3370" kind="variable"><name>relationship</name></member>
+    <member refid="classGraphEdge_1a7a0dcb05bfdb31ed7735a746b13be8d6" kind="variable"><name>attributes</name></member>
+    <member refid="classGraphEdge_1a3cb272137fcf01bf7985e6ab17e71def" kind="function"><name>GraphEdge</name></member>
+  </compound>
+  <compound refid="classGraphExporter" kind="class"><name>GraphExporter</name>
+    <member refid="classGraphExporter_1a360987d76ced636de129746c14536b5b" kind="variable"><name>gvc</name></member>
+    <member refid="classGraphExporter_1ad6ec946fe1111d8543118747b9883895" kind="function"><name>GraphExporter</name></member>
+    <member refid="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" kind="function"><name>~GraphExporter</name></member>
+    <member refid="classGraphExporter_1a87081ce287618fcb2dd12d1ed08b2c52" kind="function"><name>export_full_graph</name></member>
+    <member refid="classGraphExporter_1aa7f00e63a59e4a1739bc5742578bf63e" kind="function"><name>export_incremental_update</name></member>
+    <member refid="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" kind="function"><name>add_nodes</name></member>
+    <member refid="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" kind="function"><name>add_edges</name></member>
+    <member refid="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" kind="function"><name>apply_default_styles</name></member>
+    <member refid="classGraphExporter_1ae8e782903a09b03895db658af8b1863e" kind="function"><name>generate_node_id</name></member>
+    <member refid="classGraphExporter_1a3e0a34f0682f1aa34915ca87449f2499" kind="function"><name>write_node_to_file</name></member>
+    <member refid="classGraphExporter_1aa1a6dd4e12a4732aab0631f8b1f62f69" kind="function"><name>write_edge_to_file</name></member>
+    <member refid="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" kind="function"><name>export_to_dot</name></member>
+    <member refid="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" kind="function"><name>escape_dot_string</name></member>
+  </compound>
+  <compound refid="classGraphNode" kind="class"><name>GraphNode</name>
+    <member refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" kind="variable"><name>id</name></member>
+    <member refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kind="variable"><name>type</name></member>
+    <member refid="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" kind="variable"><name>attributes</name></member>
+    <member refid="classGraphNode_1a670878b3732a867f03d647293ff8c999" kind="variable"><name>degree</name></member>
+    <member refid="classGraphNode_1a801dee56f15b6fbd0c467b5bf16902b4" kind="variable"><name>in_degree</name></member>
+    <member refid="classGraphNode_1a08b422a344b59db81fa9b24752a6dd46" kind="variable"><name>out_degree</name></member>
+    <member refid="classGraphNode_1a90ac84a35374b57bf0eee149a1be810c" kind="variable"><name>protocol_counts</name></member>
+    <member refid="classGraphNode_1a703ca88ecc4d49629d8978b2768f4d9c" kind="variable"><name>activity_score</name></member>
+    <member refid="classGraphNode_1a639d48f16977a8df7a06064719a55096" kind="variable"><name>features</name></member>
+    <member refid="classGraphNode_1a164b7d24668bfd11140684f8e1588fcd" kind="variable"><name>connections_last_minute</name></member>
+    <member refid="classGraphNode_1a76b6d95dfe863ad77a818d2b36f450b9" kind="variable"><name>connections_last_hour</name></member>
+    <member refid="classGraphNode_1a8168b02a72ea169890faff00696f52a8" kind="variable"><name>monitoring_start</name></member>
+    <member refid="classGraphNode_1a8ddd1cab02cd802a3a9544511d94856c" kind="variable"><name>total_connections</name></member>
+    <member refid="classGraphNode_1ab677cd2fc13c49b7771adb3c7e7da2b9" kind="variable"><name>recent_connections</name></member>
+    <member refid="classGraphNode_1a7442585422a9af484aa4ee1cbb8701ae" kind="variable"><name>minute_window</name></member>
+    <member refid="classGraphNode_1a963ae60d35fec246688469f2f47be491" kind="variable"><name>hour_window</name></member>
+    <member refid="classGraphNode_1af5c627d7ac20f7c90598ca7c3abfaf0a" kind="variable"><name>window_mutex</name></member>
+    <member refid="classGraphNode_1a1e915cfefcf770cc1ceb007593b03511" kind="variable"><name>temporal</name></member>
+    <member refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" kind="function"><name>GraphNode</name></member>
+    <member refid="classGraphNode_1aec41bf6dc8c079924a0076c6388b8de6" kind="function"><name>update_connection_features</name></member>
+    <member refid="classGraphNode_1a9f6e0e9f78b21d99d3c858928762f983" kind="function"><name>cleanup_old_connections</name></member>
+    <member refid="classGraphNode_1a92cd7727c4e791176e9e255b929b9603" kind="function"><name>calculate_anomaly_score</name></member>
+    <member refid="classGraphNode_1a02be43aa36aa04eb5f47095fde4f95eb" kind="function"><name>cleanup_time_windows</name></member>
+    <member refid="classGraphNode_1aac8f32f0478ee7262d5db9c6ea4ee1c5" kind="function"><name>get_connections_last_minute</name></member>
+    <member refid="classGraphNode_1ab197cc5d8d2abda61c831cae073cb140" kind="function"><name>get_connections_last_hour</name></member>
+  </compound>
+  <compound refid="structGraphUpdate" kind="struct"><name>GraphUpdate</name>
+    <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" kind="enum"><name>Type</name></member>
+    <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad" kind="enumvalue"><name>NODE_CREATE</name></member>
+    <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7" kind="enumvalue"><name>NODE_UPDATE</name></member>
+    <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b" kind="enumvalue"><name>EDGE_CREATE</name></member>
+    <member refid="structGraphUpdate_1a5da40c0a068e966f7e16bdd40d7d00c0" kind="variable"><name>type</name></member>
+    <member refid="structGraphUpdate_1a47890c709372ac8f0c65d819390fab47" kind="variable"><name>node</name></member>
+    <member refid="structGraphUpdate_1aaf9da414880949a68ec96bd30d00fa12" kind="variable"><name>edge</name></member>
+  </compound>
+  <compound refid="classGraphUpdateQueue" kind="class"><name>GraphUpdateQueue</name>
+    <member refid="classGraphUpdateQueue_1ada39241b3a6a6e7a581c7d1c508eb5ed" kind="variable"><name>updates</name></member>
+    <member refid="classGraphUpdateQueue_1a05dfed6d12a7c75b7b472ed33bb17867" kind="variable"><name>queue_mutex</name></member>
+    <member refid="classGraphUpdateQueue_1a5c40a9bb2b9822f5ed35d1b040dfd300" kind="variable"><name>cv</name></member>
+    <member refid="classGraphUpdateQueue_1aca49e36b63db25db6c28407747d948f9" kind="variable"><name>shutdown_flag</name></member>
+    <member refid="classGraphUpdateQueue_1aabd051e04032dafa172de9a2b289a2b9" kind="function"><name>push</name></member>
+    <member refid="classGraphUpdateQueue_1a87f3e51b959f4ac6403d95c1e3dba4c3" kind="function"><name>pop</name></member>
+    <member refid="classGraphUpdateQueue_1a878ff033814bd6228f09c74260fefe44" kind="function"><name>popAll</name></member>
+    <member refid="classGraphUpdateQueue_1a7867ed8e468ee74d679b01172991ce05" kind="function"><name>shutdown</name></member>
+  </compound>
+  <compound refid="classLogMonitor" kind="class"><name>LogMonitor</name>
+    <member refid="classLogMonitor_1a6dc3d433f8b192938592dbe40de9a360" kind="variable"><name>running</name></member>
+    <member refid="classLogMonitor_1a2a98b0f60af7779ac8a793cd31ba77fa" kind="variable"><name>monitor_thread</name></member>
+    <member refid="classLogMonitor_1ab753311ac18f38efe399f01276d699e6" kind="variable"><name>parser</name></member>
+    <member refid="classLogMonitor_1a1574c6cc7f766782e8d4b9d22cfba910" kind="function"><name>LogMonitor</name></member>
+    <member refid="classLogMonitor_1a457807b7ece78c43bddb00d2a370d337" kind="function"><name>~LogMonitor</name></member>
+    <member refid="classLogMonitor_1a06798e36d1f46ba50036cdf4e511464a" kind="function"><name>start</name></member>
+    <member refid="classLogMonitor_1af306da2a690908fb9a9369946791cafb" kind="function"><name>stop</name></member>
+  </compound>
+  <compound refid="classRealTimeAnomalyDetector" kind="class"><name>RealTimeAnomalyDetector</name>
+    <member refid="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" kind="function"><name>detect</name></member>
+  </compound>
+  <compound refid="classTrafficGraph" kind="class"><name>TrafficGraph</name>
+    <member refid="classTrafficGraph_1a1134b1f485145d7ba90b1075ec058533" kind="friend"><name>RealTimeAnomalyDetector</name></member>
+    <member refid="classTrafficGraph_1ad5331ff664bcdb1664c6acc6682dd57e" kind="variable"><name>nodes</name></member>
+    <member refid="classTrafficGraph_1a2e8a442b2b29889c8b7310b0fc72a6be" kind="variable"><name>edges</name></member>
+    <member refid="classTrafficGraph_1a491ba60f07d174bb8e3dc781df2eff15" kind="variable"><name>graph_mutex</name></member>
+    <member refid="classTrafficGraph_1a6eb9871391310c048bbeb608de0448dd" kind="variable"><name>maintenance_thread</name></member>
+    <member refid="classTrafficGraph_1a6938d0393ac1d31e070c688c3176e3e8" kind="variable"><name>running</name></member>
+    <member refid="classTrafficGraph_1a92dd4e1eb2b39f8512f45ab3b86ec3db" kind="variable"><name>update_counter</name></member>
+    <member refid="classTrafficGraph_1aa52225cd200774fe315bfcf344635fc9" kind="function"><name>TrafficGraph</name></member>
+    <member refid="classTrafficGraph_1a0bbbfe4c14d9611db5060a1af21e3948" kind="function"><name>~TrafficGraph</name></member>
+    <member refid="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" kind="function"><name>clean_all_time_windows</name></member>
+    <member refid="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" kind="function"><name>add_node</name></member>
+    <member refid="classTrafficGraph_1a3280806b85e7a6a1b534551c5d1340d1" kind="function"><name>add_edge</name></member>
+    <member refid="classTrafficGraph_1a4fe8bf82ebe5a118c488142e2a0a0711" kind="function"><name>get_or_create_node</name></member>
+    <member refid="classTrafficGraph_1a050fc4ccd24adf28afb04769841bd738" kind="function"><name>get_node_reference</name></member>
+    <member refid="classTrafficGraph_1a503a7eb165f5df6b3099b10e71774735" kind="function"><name>get_nodes</name></member>
+    <member refid="classTrafficGraph_1a9537afb96e766b4d910038a7b503af7f" kind="function"><name>get_edges</name></member>
+    <member refid="classTrafficGraph_1aff5c1921c0c1614230fa3c43b215b320" kind="function"><name>find_connected_components</name></member>
+    <member refid="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" kind="function"><name>detect_anomalies</name></member>
+    <member refid="classTrafficGraph_1ae485051f1b4e6f8cbb91ad7d89dc89b1" kind="function"><name>is_empty</name></member>
+  </compound>
+  <compound refid="classZeekLogParser" kind="class"><name>ZeekLogParser</name>
+    <member refid="classZeekLogParser_1a5ca203e4d6e28420823f7e9f5760fa85" kind="variable"><name>tracked_files</name></member>
+    <member refid="classZeekLogParser_1af3d423cd8c73ef0b371b7eea714aa8cb" kind="variable"><name>log_directory</name></member>
+    <member refid="classZeekLogParser_1a87f78baa9d273f261b81e9d778d53267" kind="variable"><name>partial_lines</name></member>
+    <member refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" kind="function"><name>ZeekLogParser</name></member>
+    <member refid="classZeekLogParser_1af922e185b33640058001015a136545a3" kind="function"><name>monitor_logs</name></member>
+    <member refid="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" kind="function"><name>process_new_file</name></member>
+    <member refid="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" kind="function"><name>process_appended_data</name></member>
+    <member refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kind="function"><name>process_content</name></member>
+    <member refid="classZeekLogParser_1ae465ab2585645bd649f2c20cd6ef5bb7" kind="function"><name>process_log_file</name></member>
+    <member refid="classZeekLogParser_1aa6f4a83226256c9d9375d9e704a410f9" kind="function"><name>process_log_entry</name></member>
+    <member refid="classZeekLogParser_1a849d1765b0cab7cafc056c8465341a32" kind="function"><name>process_conn_entry</name></member>
+    <member refid="classZeekLogParser_1aab815de3963d42eb72aec94fb1c7e2f2" kind="function"><name>process_http_entry</name></member>
+  </compound>
+  <compound refid="CMakeCCompilerId_8c" kind="file"><name>CMakeCCompilerId.c</name>
+    <member refid="CMakeCCompilerId_8c_1ae5510d82e4946f1656f4969911c54736" kind="define"><name>__has_include</name></member>
+    <member refid="CMakeCCompilerId_8c_1a81dee0709ded976b2e0319239f72d174" kind="define"><name>COMPILER_ID</name></member>
+    <member refid="CMakeCCompilerId_8c_1a2ae9b72bb13abaabfcf2ee0ba7d3fa1d" kind="define"><name>STRINGIFY_HELPER</name></member>
+    <member refid="CMakeCCompilerId_8c_1a43e1cad902b6477bec893cb6430bd6c8" kind="define"><name>STRINGIFY</name></member>
+    <member refid="CMakeCCompilerId_8c_1adbc5372f40838899018fadbc89bd588b" kind="define"><name>PLATFORM_ID</name></member>
+    <member refid="CMakeCCompilerId_8c_1aba35d0d200deaeb06aee95ca297acb28" kind="define"><name>ARCHITECTURE_ID</name></member>
+    <member refid="CMakeCCompilerId_8c_1ad1280362da42492bbc11aa78cbf776ad" kind="define"><name>DEC</name></member>
+    <member refid="CMakeCCompilerId_8c_1a46d5d95daa1bef867bd0179594310ed5" kind="define"><name>HEX</name></member>
+    <member refid="CMakeCCompilerId_8c_1af6079dc519dac099ee85a1df6ae5e5e8" kind="define"><name>C_STD_99</name></member>
+    <member refid="CMakeCCompilerId_8c_1a7c35af7e67642a2c62eb27dd81be11b2" kind="define"><name>C_STD_11</name></member>
+    <member refid="CMakeCCompilerId_8c_1aa8cd9c2c76dde36abac0bd7698090693" kind="define"><name>C_STD_17</name></member>
+    <member refid="CMakeCCompilerId_8c_1a81af617e8f7b5417689ca478ce9f4d69" kind="define"><name>C_STD_23</name></member>
+    <member refid="CMakeCCompilerId_8c_1adaee3ee7c5a7a22451ea25e762e1d7d5" kind="define"><name>C_VERSION</name></member>
+    <member refid="CMakeCCompilerId_8c_1a4b0efeb7a5d59313986b3a0390f050f6" kind="variable"><name>info_compiler</name></member>
+    <member refid="CMakeCCompilerId_8c_1a2321403dee54ee23f0c2fa849c60f7d4" kind="variable"><name>info_platform</name></member>
+    <member refid="CMakeCCompilerId_8c_1a59647e99d304ed33b15cb284c27ed391" kind="variable"><name>info_arch</name></member>
+    <member refid="CMakeCCompilerId_8c_1a4607cccf070750927b458473ca82c090" kind="variable"><name>info_language_standard_default</name></member>
+    <member refid="CMakeCCompilerId_8c_1a0f46a8a39e09d9b803c4766904fd7e99" kind="variable"><name>info_language_extensions_default</name></member>
+    <member refid="CMakeCCompilerId_8c_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="CMakeCXXCompilerId_8cpp" kind="file"><name>CMakeCXXCompilerId.cpp</name>
+    <member refid="CMakeCXXCompilerId_8cpp_1ae5510d82e4946f1656f4969911c54736" kind="define"><name>__has_include</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a81dee0709ded976b2e0319239f72d174" kind="define"><name>COMPILER_ID</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a2ae9b72bb13abaabfcf2ee0ba7d3fa1d" kind="define"><name>STRINGIFY_HELPER</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a43e1cad902b6477bec893cb6430bd6c8" kind="define"><name>STRINGIFY</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1adbc5372f40838899018fadbc89bd588b" kind="define"><name>PLATFORM_ID</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1aba35d0d200deaeb06aee95ca297acb28" kind="define"><name>ARCHITECTURE_ID</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1ad1280362da42492bbc11aa78cbf776ad" kind="define"><name>DEC</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a46d5d95daa1bef867bd0179594310ed5" kind="define"><name>HEX</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a2454727f55dd7af9210ab341ca8be2c8" kind="define"><name>CXX_STD_98</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a2c21af1889e9ca5cda36069184cc3234" kind="define"><name>CXX_STD_11</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a39fb4789a452bfb5df17d40f640dd720" kind="define"><name>CXX_STD_14</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1ae17f1ae0bf56cf631eadff4f73e96ff9" kind="define"><name>CXX_STD_17</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1aa52ec6104623a66734cc5d5d28733bed" kind="define"><name>CXX_STD_20</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1ae5e2d955d2884c65b7de2e1ad29a4f1d" kind="define"><name>CXX_STD_23</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a34cc889e576a1ae6c84ae9e0a851ba21" kind="define"><name>CXX_STD</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a4b0efeb7a5d59313986b3a0390f050f6" kind="variable"><name>info_compiler</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a2321403dee54ee23f0c2fa849c60f7d4" kind="variable"><name>info_platform</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a59647e99d304ed33b15cb284c27ed391" kind="variable"><name>info_arch</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a4607cccf070750927b458473ca82c090" kind="variable"><name>info_language_standard_default</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a0f46a8a39e09d9b803c4766904fd7e99" kind="variable"><name>info_language_extensions_default</name></member>
+    <member refid="CMakeCXXCompilerId_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="GraphBuilder_8cpp" kind="file"><name>GraphBuilder.cpp</name>
+  </compound>
+  <compound refid="GraphExporter_8cpp" kind="file"><name>GraphExporter.cpp</name>
+  </compound>
+  <compound refid="GraphNode_8cpp" kind="file"><name>GraphNode.cpp</name>
+  </compound>
+  <compound refid="GraphBuilder_8h" kind="file"><name>GraphBuilder.h</name>
+  </compound>
+  <compound refid="GraphEdge_8h" kind="file"><name>GraphEdge.h</name>
+  </compound>
+  <compound refid="GraphExporter_8h" kind="file"><name>GraphExporter.h</name>
+  </compound>
+  <compound refid="GraphNode_8h" kind="file"><name>GraphNode.h</name>
+  </compound>
+  <compound refid="GraphUpdateQueue_8h" kind="file"><name>GraphUpdateQueue.h</name>
+  </compound>
+  <compound refid="LogMonitor_8h" kind="file"><name>LogMonitor.h</name>
+  </compound>
+  <compound refid="RealTimeAnomalyDetector_8h" kind="file"><name>RealTimeAnomalyDetector.h</name>
+  </compound>
+  <compound refid="TrafficGraph_8h" kind="file"><name>TrafficGraph.h</name>
+  </compound>
+  <compound refid="ZeekLogParser_8h" kind="file"><name>ZeekLogParser.h</name>
+  </compound>
+  <compound refid="LogMonitor_8cpp" kind="file"><name>LogMonitor.cpp</name>
+  </compound>
+  <compound refid="main_8cpp" kind="file"><name>main.cpp</name>
+    <member refid="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="README_8md" kind="file"><name>README.md</name>
+  </compound>
+  <compound refid="RealTimeAnomalyDetector_8cpp" kind="file"><name>RealTimeAnomalyDetector.cpp</name>
+  </compound>
+  <compound refid="TrafficGraph_8cpp" kind="file"><name>TrafficGraph.cpp</name>
+  </compound>
+  <compound refid="ZeekLogParser_8cpp" kind="file"><name>ZeekLogParser.cpp</name>
+    <member refid="ZeekLogParser_8cpp_1ab701e3ac61a85b337ec5c1abaad6742d" kind="typedef"><name>json</name></member>
+  </compound>
+  <compound refid="md_README" kind="page"><name>md_README</name>
+  </compound>
+  <compound refid="dir_860c11998a3807e839f8c74cce4c2bd1" kind="dir"><name>cmake-build-debug/CMakeFiles/3.31.6</name>
+  </compound>
+  <compound refid="dir_95e29a8b8ee7c54052c171a88bb95675" kind="dir"><name>cmake-build-debug</name>
+  </compound>
+  <compound refid="dir_f89abcb304c928c7d889aa5625570de5" kind="dir"><name>cmake-build-debug/CMakeFiles</name>
+  </compound>
+  <compound refid="dir_007ad4948e580287e9d3cd339e78f152" kind="dir"><name>cmake-build-debug/CMakeFiles/3.31.6/CompilerIdC</name>
+  </compound>
+  <compound refid="dir_08cec4c655d37361da453b6dde918433" kind="dir"><name>cmake-build-debug/CMakeFiles/3.31.6/CompilerIdCXX</name>
+  </compound>
+  <compound refid="dir_09e761304027c904456130627fd4dcf5" kind="dir"><name>includes</name>
+  </compound>
+</doxygenindex>

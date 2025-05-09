@@ -1,0 +1,36 @@
+\doxysection{Log\+Monitor.\+h}
+\hypertarget{LogMonitor_8h_source}{}\label{LogMonitor_8h_source}\index{includes/LogMonitor.h@{includes/LogMonitor.h}}
+\mbox{\hyperlink{LogMonitor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 4/25/25.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ LOGMONITOR\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ LOGMONITOR\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{ZeekLogParser_8h}{ZeekLogParser.h}}"{}}\ \textcolor{comment}{//\ Assuming\ this\ is\ the\ correct\ header\ for\ ZeekLogParser}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classLogMonitor_a1574c6cc7f766782e8d4b9d22cfba910}{LogMonitor}}\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00031\ \ \ \ \ std::atomic<bool>\ running\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00035\ \ \ \ \ std::thread\ monitor\_thread;}
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classZeekLogParser}{ZeekLogParser}}\ parser;\ \textcolor{comment}{//\ \ Instance,\ not\ pointer.}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classLogMonitor_a1574c6cc7f766782e8d4b9d22cfba910}{LogMonitor}}(\textcolor{keyword}{const}\ std::string\&\ log\_dir);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classLogMonitor_a457807b7ece78c43bddb00d2a370d337}{\string~LogMonitor}}();}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLogMonitor_a06798e36d1f46ba50036cdf4e511464a}{start}}();}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classLogMonitor_af306da2a690908fb9a9369946791cafb}{stop}}();}
+\DoxyCodeLine{00073\ \};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//LOGMONITOR\_H}}
+
+\end{DoxyCode}

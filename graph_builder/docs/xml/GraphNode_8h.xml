@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="GraphNode_8h" kind="file" language="C++">
+    <compoundname>GraphNode.h</compoundname>
+    <includes local="no">atomic</includes>
+    <includes local="no">map</includes>
+    <includes local="no">queue</includes>
+    <includes local="no">unordered_map</includes>
+    <includedby refid="GraphNode_8cpp" local="yes">GraphNode.cpp</includedby>
+    <includedby refid="TrafficGraph_8cpp" local="yes">TrafficGraph.cpp</includedby>
+    <includedby refid="GraphUpdateQueue_8h" local="yes">includes/GraphUpdateQueue.h</includedby>
+    <includedby refid="TrafficGraph_8h" local="yes">includes/TrafficGraph.h</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>includes/GraphNode.h</label>
+        <link refid="GraphNode_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>atomic</label>
+      </node>
+      <node id="3">
+        <label>map</label>
+      </node>
+      <node id="4">
+        <label>queue</label>
+      </node>
+      <node id="5">
+        <label>unordered_map</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="6">
+        <label>GraphBuilder.cpp</label>
+        <link refid="GraphBuilder_8cpp"/>
+      </node>
+      <node id="9">
+        <label>GraphExporter.cpp</label>
+        <link refid="GraphExporter_8cpp"/>
+      </node>
+      <node id="2">
+        <label>GraphNode.cpp</label>
+        <link refid="GraphNode_8cpp"/>
+      </node>
+      <node id="12">
+        <label>RealTimeAnomalyDetector.cpp</label>
+        <link refid="RealTimeAnomalyDetector_8cpp"/>
+      </node>
+      <node id="3">
+        <label>TrafficGraph.cpp</label>
+        <link refid="TrafficGraph_8cpp"/>
+      </node>
+      <node id="7">
+        <label>ZeekLogParser.cpp</label>
+        <link refid="ZeekLogParser_8cpp"/>
+      </node>
+      <node id="5">
+        <label>includes/GraphBuilder.h</label>
+        <link refid="GraphBuilder_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>includes/GraphExporter.h</label>
+        <link refid="GraphExporter_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>includes/GraphNode.h</label>
+        <link refid="GraphNode_8h"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>includes/GraphUpdateQueue.h</label>
+        <link refid="GraphUpdateQueue_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>includes/RealTimeAnomalyDetector.h</label>
+        <link refid="RealTimeAnomalyDetector_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>includes/TrafficGraph.h</label>
+        <link refid="TrafficGraph_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>main.cpp</label>
+        <link refid="main_8cpp"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="classGraphNode" prot="public">GraphNode</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>lu<sp/>on<sp/>5/7/25.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>GRAPHNODE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>GRAPHNODE_H</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;atomic&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;queue&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="classGraphNode" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" kindref="member">GraphNode</ref><sp/>{</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="23" refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" kindref="member">id</ref>;</highlight></codeline>
+<codeline lineno="27" refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kindref="member">type</ref>;</highlight></codeline>
+<codeline lineno="31" refid="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::string,<sp/>std::string&gt;<sp/><ref refid="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" kindref="member">attributes</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="40" refid="classGraphNode_1a670878b3732a867f03d647293ff8c999" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;int&gt;<sp/><ref refid="classGraphNode_1a670878b3732a867f03d647293ff8c999" kindref="member">degree</ref>{0};</highlight></codeline>
+<codeline lineno="44" refid="classGraphNode_1a801dee56f15b6fbd0c467b5bf16902b4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;int&gt;<sp/><ref refid="classGraphNode_1a801dee56f15b6fbd0c467b5bf16902b4" kindref="member">in_degree</ref>{0};</highlight></codeline>
+<codeline lineno="48" refid="classGraphNode_1a08b422a344b59db81fa9b24752a6dd46" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;int&gt;<sp/><ref refid="classGraphNode_1a08b422a344b59db81fa9b24752a6dd46" kindref="member">out_degree</ref>{0};</highlight></codeline>
+<codeline lineno="53" refid="classGraphNode_1a90ac84a35374b57bf0eee149a1be810c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::map&lt;std::string,<sp/>int&gt;<sp/><ref refid="classGraphNode_1a90ac84a35374b57bf0eee149a1be810c" kindref="member">protocol_counts</ref>;</highlight></codeline>
+<codeline lineno="57" refid="classGraphNode_1a703ca88ecc4d49629d8978b2768f4d9c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;double&gt;<sp/><ref refid="classGraphNode_1a703ca88ecc4d49629d8978b2768f4d9c" kindref="member">activity_score</ref>{0.0};</highlight></codeline>
+<codeline lineno="58" refid="classGraphNode_1a639d48f16977a8df7a06064719a55096" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><ref refid="classGraphNode_1a639d48f16977a8df7a06064719a55096" kindref="member">features</ref>;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="67" refid="classGraphNode_1a164b7d24668bfd11140684f8e1588fcd" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;int&gt;<sp/><ref refid="classGraphNode_1a164b7d24668bfd11140684f8e1588fcd" kindref="member">connections_last_minute</ref>{0};</highlight></codeline>
+<codeline lineno="71" refid="classGraphNode_1a76b6d95dfe863ad77a818d2b36f450b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;int&gt;<sp/><ref refid="classGraphNode_1a76b6d95dfe863ad77a818d2b36f450b9" kindref="member">connections_last_hour</ref>{0};</highlight></codeline>
+<codeline lineno="75" refid="classGraphNode_1a8168b02a72ea169890faff00696f52a8" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::chrono::system_clock::time_point<sp/><ref refid="classGraphNode_1a8168b02a72ea169890faff00696f52a8" kindref="member">monitoring_start</ref>;</highlight></codeline>
+<codeline lineno="79" refid="classGraphNode_1a8ddd1cab02cd802a3a9544511d94856c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::atomic&lt;int&gt;<sp/><ref refid="classGraphNode_1a8ddd1cab02cd802a3a9544511d94856c" kindref="member">total_connections</ref>{0};</highlight></codeline>
+<codeline lineno="83" refid="classGraphNode_1ab677cd2fc13c49b7771adb3c7e7da2b9" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::chrono::system_clock::time_point&gt;<sp/><ref refid="classGraphNode_1ab677cd2fc13c49b7771adb3c7e7da2b9" kindref="member">recent_connections</ref>;</highlight></codeline>
+<codeline lineno="87" refid="classGraphNode_1a7442585422a9af484aa4ee1cbb8701ae" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::queue&lt;std::chrono::system_clock::time_point&gt;<sp/><ref refid="classGraphNode_1a7442585422a9af484aa4ee1cbb8701ae" kindref="member">minute_window</ref>;</highlight></codeline>
+<codeline lineno="91" refid="classGraphNode_1a963ae60d35fec246688469f2f47be491" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::queue&lt;std::chrono::system_clock::time_point&gt;<sp/><ref refid="classGraphNode_1a963ae60d35fec246688469f2f47be491" kindref="member">hour_window</ref>;</highlight></codeline>
+<codeline lineno="95" refid="classGraphNode_1af5c627d7ac20f7c90598ca7c3abfaf0a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">mutable</highlight><highlight class="normal"><sp/>std::mutex<sp/><ref refid="classGraphNode_1af5c627d7ac20f7c90598ca7c3abfaf0a" kindref="member">window_mutex</ref>;</highlight></codeline>
+<codeline lineno="96" refid="classGraphNode_1a1e915cfefcf770cc1ceb007593b03511" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><ref refid="classGraphNode_1a1e915cfefcf770cc1ceb007593b03511" kindref="member">temporal</ref>;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103" refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" kindref="member">GraphNode</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;<ref refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kindref="member">type</ref>)</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" kindref="member">id</ref>(<ref refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" kindref="member">id</ref>),<sp/><ref refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kindref="member">type</ref>(<ref refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kindref="member">type</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classGraphNode_1a1e915cfefcf770cc1ceb007593b03511" kindref="member">temporal</ref>.monitoring_start<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classGraphNode_1aec41bf6dc8c079924a0076c6388b8de6" kindref="member">update_connection_features</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;protocol,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_outgoing);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classGraphNode_1a9f6e0e9f78b21d99d3c858928762f983" kindref="member">cleanup_old_connections</ref>();</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classGraphNode_1a92cd7727c4e791176e9e255b929b9603" kindref="member">calculate_anomaly_score</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classGraphNode_1a02be43aa36aa04eb5f47095fde4f95eb" kindref="member">cleanup_time_windows</ref>();</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classGraphNode_1aac8f32f0478ee7262d5db9c6ea4ee1c5" kindref="member">get_connections_last_minute</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="classGraphNode_1ab197cc5d8d2abda61c831cae073cb140" kindref="member">get_connections_last_hour</ref>()<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//GRAPHNODE_H</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="includes/GraphNode.h"/>
+  </compounddef>
+</doxygen>

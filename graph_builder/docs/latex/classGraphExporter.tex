@@ -1,0 +1,97 @@
+\doxysection{Graph\+Exporter Class Reference}
+\hypertarget{classGraphExporter}{}\label{classGraphExporter}\index{GraphExporter@{GraphExporter}}
+
+
+Class responsible for visualizing the network traffic graph using Graphviz.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Exporter.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Exporter\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=197pt]{classGraphExporter__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraphExporter_ad6ec946fe1111d8543118747b9883895}{Graph\+Exporter}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphExporter}{Graph\+Exporter}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGraphExporter_af8456887e192d89491c058fb1eb09e97}{\texorpdfstring{$\sim$}{\string~}\+Graph\+Exporter}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classGraphExporter}{Graph\+Exporter}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphExporter_a87081ce287618fcb2dd12d1ed08b2c52}{export\+\_\+full\+\_\+graph}} (const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&graph, const std\+::string \&output\+\_\+file="{}graph.\+png"{}, bool open\+\_\+image=true, bool export\+\_\+cond=true)
+\begin{DoxyCompactList}\small\item\em Visualizes the given traffic graph and saves it to a file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphExporter_aa7f00e63a59e4a1739bc5742578bf63e}{export\+\_\+incremental\+\_\+update}} (std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ updates, const std\+::string \&output\+\_\+file="{}update.\+dot"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for visualizing the network traffic graph using Graphviz. 
+
+The {\ttfamily \doxylink{classGraphExporter}{Graph\+Exporter}} class takes a {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} object and renders it as a visual representation, typically saving it as a PNG image. It utilizes the Graphviz library for graph layout and rendering. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGraphExporter_ad6ec946fe1111d8543118747b9883895}\index{GraphExporter@{GraphExporter}!GraphExporter@{GraphExporter}}
+\index{GraphExporter@{GraphExporter}!GraphExporter@{GraphExporter}}
+\doxysubsubsection{\texorpdfstring{GraphExporter()}{GraphExporter()}}
+{\footnotesize\ttfamily \label{classGraphExporter_ad6ec946fe1111d8543118747b9883895} 
+Graph\+Exporter\+::\+Graph\+Exporter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{classGraphExporter}{Graph\+Exporter}. 
+
+Initializes the Graphviz context ({\ttfamily GVC\+\_\+t}). \Hypertarget{classGraphExporter_af8456887e192d89491c058fb1eb09e97}\index{GraphExporter@{GraphExporter}!````~GraphExporter@{\texorpdfstring{$\sim$}{\string~}GraphExporter}}
+\index{````~GraphExporter@{\texorpdfstring{$\sim$}{\string~}GraphExporter}!GraphExporter@{GraphExporter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GraphExporter()}{\string~GraphExporter()}}
+{\footnotesize\ttfamily \label{classGraphExporter_af8456887e192d89491c058fb1eb09e97} 
+Graph\+Exporter\+::\texorpdfstring{$\sim$}{\string~}\+Graph\+Exporter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{classGraphExporter}{Graph\+Exporter}. 
+
+Releases the Graphviz context to free allocated resources. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGraphExporter_a87081ce287618fcb2dd12d1ed08b2c52}\index{GraphExporter@{GraphExporter}!export\_full\_graph@{export\_full\_graph}}
+\index{export\_full\_graph@{export\_full\_graph}!GraphExporter@{GraphExporter}}
+\doxysubsubsection{\texorpdfstring{export\_full\_graph()}{export\_full\_graph()}}
+{\footnotesize\ttfamily \label{classGraphExporter_a87081ce287618fcb2dd12d1ed08b2c52} 
+void Graph\+Exporter\+::export\+\_\+full\+\_\+graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&}]{graph}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}graph.png"{}}, }\item[{bool}]{open\+\_\+image}{ = {\ttfamily true}, }\item[{bool}]{export\+\_\+cond}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Visualizes the given traffic graph and saves it to a file. 
+
+This method takes a {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}}, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to "{}graph.\+png"{}). It can also optionally open the generated image and control whether the export should proceed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} object to visualize. \\
+\hline
+{\em output\+\_\+file} & The name of the output image file (default\+: "{}graph.\+png"{}). \\
+\hline
+{\em open\+\_\+image} & A boolean indicating whether to attempt to open the generated image (default\+: true). \\
+\hline
+{\em export\+\_\+cond} & A boolean controlling whether the export process should proceed (default\+: true). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classGraphExporter_aa7f00e63a59e4a1739bc5742578bf63e}\index{GraphExporter@{GraphExporter}!export\_incremental\_update@{export\_incremental\_update}}
+\index{export\_incremental\_update@{export\_incremental\_update}!GraphExporter@{GraphExporter}}
+\doxysubsubsection{\texorpdfstring{export\_incremental\_update()}{export\_incremental\_update()}}
+{\footnotesize\ttfamily \label{classGraphExporter_aa7f00e63a59e4a1739bc5742578bf63e} 
+void Graph\+Exporter\+::export\+\_\+incremental\+\_\+update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$}]{updates}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}update.dot"{}}}\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphExporter_8h}{Graph\+Exporter.\+h}}\item 
+\mbox{\hyperlink{GraphExporter_8cpp}{Graph\+Exporter.\+cpp}}\end{DoxyCompactItemize}

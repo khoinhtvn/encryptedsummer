@@ -1,0 +1,485 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classTrafficGraph" kind="class" language="C++" prot="public">
+    <compoundname>TrafficGraph</compoundname>
+    <includes refid="TrafficGraph_8h" local="no">TrafficGraph.h</includes>
+    <sectiondef kind="friend">
+      <memberdef kind="friend" id="classTrafficGraph_1a1134b1f485145d7ba90b1075ec058533" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>class</type>
+        <definition>friend class RealTimeAnomalyDetector</definition>
+        <argsstring></argsstring>
+        <name>RealTimeAnomalyDetector</name>
+        <qualifiedname>TrafficGraph::RealTimeAnomalyDetector</qualifiedname>
+        <param>
+          <type><ref refid="classRealTimeAnomalyDetector" kindref="compound">RealTimeAnomalyDetector</ref></type>
+        </param>
+        <briefdescription>
+<para>Friend class allowing the anomaly detector to access the graph&apos;s internal data. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="26" column="18" bodyfile="includes/TrafficGraph.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classTrafficGraph_1ad5331ff664bcdb1664c6acc6682dd57e" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::shared_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt; &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::shared_ptr&lt;GraphNode&gt; &gt; TrafficGraph::nodes</definition>
+        <argsstring></argsstring>
+        <name>nodes</name>
+        <qualifiedname>TrafficGraph::nodes</qualifiedname>
+        <briefdescription>
+<para>Map of node IDs to shared pointers of <ref refid="classGraphNode" kindref="compound">GraphNode</ref> objects. Using shared pointers for automatic memory management and shared ownership. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="33" column="24" bodyfile="includes/TrafficGraph.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classTrafficGraph_1a2e8a442b2b29889c8b7310b0fc72a6be" prot="private" static="no" mutable="no">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt; &gt;</type>
+        <definition>std::vector&lt;std::shared_ptr&lt;GraphEdge&gt; &gt; TrafficGraph::edges</definition>
+        <argsstring></argsstring>
+        <name>edges</name>
+        <qualifiedname>TrafficGraph::edges</qualifiedname>
+        <briefdescription>
+<para>Vector of shared pointers to <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> objects. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="37" column="17" bodyfile="includes/TrafficGraph.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classTrafficGraph_1a491ba60f07d174bb8e3dc781df2eff15" prot="private" static="no" mutable="yes">
+        <type>std::shared_mutex</type>
+        <definition>std::shared_mutex TrafficGraph::graph_mutex</definition>
+        <argsstring></argsstring>
+        <name>graph_mutex</name>
+        <qualifiedname>TrafficGraph::graph_mutex</qualifiedname>
+        <briefdescription>
+<para>Shared mutex to protect concurrent access to the graph data structures. Allows multiple readers or a single writer. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="42" column="31" bodyfile="includes/TrafficGraph.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classTrafficGraph_1a6eb9871391310c048bbeb608de0448dd" prot="private" static="no" mutable="no">
+        <type>std::thread</type>
+        <definition>std::thread TrafficGraph::maintenance_thread</definition>
+        <argsstring></argsstring>
+        <name>maintenance_thread</name>
+        <qualifiedname>TrafficGraph::maintenance_thread</qualifiedname>
+        <briefdescription>
+<para>Background thread responsible for performing periodic maintenance tasks on the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="46" column="17" bodyfile="includes/TrafficGraph.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classTrafficGraph_1a6938d0393ac1d31e070c688c3176e3e8" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; TrafficGraph::running</definition>
+        <argsstring></argsstring>
+        <name>running</name>
+        <qualifiedname>TrafficGraph::running</qualifiedname>
+        <initializer>{true}</initializer>
+        <briefdescription>
+<para>Atomic boolean flag to control the execution of the maintenance thread. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="50" column="17" bodyfile="includes/TrafficGraph.h" bodystart="50" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="variable" id="classTrafficGraph_1a92dd4e1eb2b39f8512f45ab3b86ec3db" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; size_t &gt;</type>
+        <definition>std::atomic&lt;size_t&gt; TrafficGraph::update_counter</definition>
+        <argsstring></argsstring>
+        <name>update_counter</name>
+        <qualifiedname>TrafficGraph::update_counter</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Atomic integer counter to keep track of the changes since the last incremental export. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="54" column="17" bodyfile="includes/TrafficGraph.h" bodystart="54" bodyend="54"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classTrafficGraph_1aa52225cd200774fe315bfcf344635fc9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TrafficGraph::TrafficGraph</definition>
+        <argsstring>()</argsstring>
+        <name>TrafficGraph</name>
+        <qualifiedname>TrafficGraph::TrafficGraph</qualifiedname>
+        <briefdescription>
+<para>Constructor for the <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the maintenance thread, which periodically cleans up the time windows of all nodes in the graph. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="63" column="5" bodyfile="includes/TrafficGraph.h" bodystart="63" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a0bbbfe4c14d9611db5060a1af21e3948" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>TrafficGraph::~TrafficGraph</definition>
+        <argsstring>()</argsstring>
+        <name>~TrafficGraph</name>
+        <qualifiedname>TrafficGraph::~TrafficGraph</qualifiedname>
+        <briefdescription>
+<para>Destructor for the <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stops the maintenance thread gracefully by setting the <computeroutput>running</computeroutput> flag to false and joining the thread. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="78" column="5" bodyfile="includes/TrafficGraph.h" bodystart="78" bodyend="83"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void TrafficGraph::clean_all_time_windows</definition>
+        <argsstring>()</argsstring>
+        <name>clean_all_time_windows</name>
+        <qualifiedname>TrafficGraph::clean_all_time_windows</qualifiedname>
+        <briefdescription>
+<para>Cleans up the minute and hour time windows for all nodes in the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method acquires a shared lock on the graph and then iterates through all nodes, calling their <computeroutput>cleanup_time_windows()</computeroutput> method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="91" column="10" bodyfile="includes/TrafficGraph.h" bodystart="91" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void TrafficGraph::add_node</definition>
+        <argsstring>(const std::string &amp;id, const std::string &amp;type)</argsstring>
+        <name>add_node</name>
+        <qualifiedname>TrafficGraph::add_node</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Adds a new node to the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>If a node with the given ID already exists, this method does nothing.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the node to add. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the node (e.g., &quot;host&quot;, &quot;service&quot;). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="106" column="10" bodyfile="TrafficGraph.cpp" bodystart="24" bodyend="29"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a3280806b85e7a6a1b534551c5d1340d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::weak_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt;</type>
+        <definition>std::weak_ptr&lt; GraphEdge &gt; TrafficGraph::add_edge</definition>
+        <argsstring>(const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={})</argsstring>
+        <name>add_edge</name>
+        <qualifiedname>TrafficGraph::add_edge</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>src</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>tgt</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>rel</declname>
+        </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::string &gt; &amp;</type>
+          <declname>attrs</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Adds a new edge to the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Creates a new <computeroutput><ref refid="classGraphEdge" kindref="compound">GraphEdge</ref></computeroutput> object, adds it to the list of edges and returns a weak reference.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier of the source node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tgt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The identifier of the target node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>rel</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of relationship between the nodes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional attributes to associate with the edge. Defaults to an empty map. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A weak reference to the <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref>. Useful for incremental updates. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="119" column="19" bodyfile="TrafficGraph.cpp" bodystart="53" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a4fe8bf82ebe5a118c488142e2a0a0711" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::pair&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &amp;, bool &gt;</type>
+        <definition>std::pair&lt; GraphNode &amp;, bool &gt; TrafficGraph::get_or_create_node</definition>
+        <argsstring>(const std::string &amp;id, const std::string &amp;type)</argsstring>
+        <name>get_or_create_node</name>
+        <qualifiedname>TrafficGraph::get_or_create_node</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>type</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves an existing node or creates a new one if it doesn&apos;t exist. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method first tries to find a node with the given ID. If found, it returns a reference to it. If not found, it creates a new node with the given ID and type, adds it to the graph, and then returns a reference to the newly created node.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the node. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the node. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pair containing a reference to the <ref refid="classGraphNode" kindref="compound">GraphNode</ref> and a boolean indicating if the node was freshly created. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="134" column="15" bodyfile="TrafficGraph.cpp" bodystart="31" bodyend="41"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a050fc4ccd24adf28afb04769841bd738" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::weak_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt;</type>
+        <definition>std::weak_ptr&lt; GraphNode &gt; TrafficGraph::get_node_reference</definition>
+        <argsstring>(const std::string &amp;id)</argsstring>
+        <name>get_node_reference</name>
+        <qualifiedname>TrafficGraph::get_node_reference</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>id</declname>
+        </param>
+        <briefdescription>
+<para>Retrieves a weak reference to an existing node. Used to create updatre queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>id</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The unique identifier of the node. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the <ref refid="classGraphNode" kindref="compound">GraphNode</ref>. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="142" column="19" bodyfile="TrafficGraph.cpp" bodystart="43" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a503a7eb165f5df6b3099b10e71774735" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GraphNode &gt; &gt; TrafficGraph::get_nodes</definition>
+        <argsstring>() const</argsstring>
+        <name>get_nodes</name>
+        <qualifiedname>TrafficGraph::get_nodes</qualifiedname>
+        <briefdescription>
+<para>Gets a vector of all nodes in the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Acquires a shared lock for read access before returning the nodes.</para>
+<para><simplesect kind="return"><para>A vector of shared pointers to all <ref refid="classGraphNode" kindref="compound">GraphNode</ref> objects in the graph. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="151" column="17" bodyfile="TrafficGraph.cpp" bodystart="65" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a9537afb96e766b4d910038a7b503af7f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt; &gt;</type>
+        <definition>std::vector&lt; std::shared_ptr&lt; GraphEdge &gt; &gt; TrafficGraph::get_edges</definition>
+        <argsstring>() const</argsstring>
+        <name>get_edges</name>
+        <qualifiedname>TrafficGraph::get_edges</qualifiedname>
+        <briefdescription>
+<para>Gets a vector of all edges in the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Acquires a shared lock for read access before returning the edges.</para>
+<para><simplesect kind="return"><para>A vector of shared pointers to all <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> objects in the graph. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="160" column="17" bodyfile="TrafficGraph.cpp" bodystart="74" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1aff5c1921c0c1614230fa3c43b215b320" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; TrafficGraph::find_connected_components</definition>
+        <argsstring>() const</argsstring>
+        <name>find_connected_components</name>
+        <qualifiedname>TrafficGraph::find_connected_components</qualifiedname>
+        <briefdescription>
+<para>Finds the connected components of the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method performs a graph traversal (e.g., Depth-First Search or Breadth-First Search) to identify groups of nodes that are connected to each other.</para>
+<para><simplesect kind="return"><para>A vector of vectors of strings, where each inner vector represents a connected component (e.g., by listing the IDs of the nodes in that component). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="171" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::vector&lt; std::string &gt;</type>
+        <definition>std::vector&lt; std::string &gt; TrafficGraph::detect_anomalies</definition>
+        <argsstring>() const</argsstring>
+        <name>detect_anomalies</name>
+        <qualifiedname>TrafficGraph::detect_anomalies</qualifiedname>
+        <briefdescription>
+<para>Detects anomalous nodes in the graph based on certain criteria. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method analyzes the features of the nodes (e.g., degree, activity score) to identify nodes that deviate significantly from the norm.</para>
+<para><simplesect kind="return"><para>A vector of strings, where each string is the ID of an anomalous node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="181" column="17"/>
+      </memberdef>
+      <memberdef kind="function" id="classTrafficGraph_1ae485051f1b4e6f8cbb91ad7d89dc89b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool TrafficGraph::is_empty</definition>
+        <argsstring>() const</argsstring>
+        <name>is_empty</name>
+        <qualifiedname>TrafficGraph::is_empty</qualifiedname>
+        <briefdescription>
+<para>Checks if the graph contains any nodes. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>True if the graph is empty (contains no nodes), false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/TrafficGraph.h" line="187" column="10" bodyfile="TrafficGraph.cpp" bodystart="79" bodyend="82"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represents the entire network traffic graph. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> class manages a collection of <computeroutput><ref refid="classGraphNode" kindref="compound">GraphNode</ref></computeroutput> and <computeroutput><ref refid="classGraphEdge" kindref="compound">GraphEdge</ref></computeroutput> objects, providing methods to add nodes and edges, access the graph data, and perform graph-based analysis. It also includes a background thread for maintenance tasks. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>TrafficGraph</label>
+        <link refid="classTrafficGraph"/>
+      </node>
+    </collaborationgraph>
+    <location file="includes/TrafficGraph.h" line="22" column="1" bodyfile="includes/TrafficGraph.h" bodystart="22" bodyend="190"/>
+    <listofallmembers>
+      <member refid="classTrafficGraph_1a3280806b85e7a6a1b534551c5d1340d1" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_edge</name></member>
+      <member refid="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_node</name></member>
+      <member refid="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>clean_all_time_windows</name></member>
+      <member refid="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>detect_anomalies</name></member>
+      <member refid="classTrafficGraph_1a2e8a442b2b29889c8b7310b0fc72a6be" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>edges</name></member>
+      <member refid="classTrafficGraph_1aff5c1921c0c1614230fa3c43b215b320" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>find_connected_components</name></member>
+      <member refid="classTrafficGraph_1a9537afb96e766b4d910038a7b503af7f" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>get_edges</name></member>
+      <member refid="classTrafficGraph_1a050fc4ccd24adf28afb04769841bd738" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>get_node_reference</name></member>
+      <member refid="classTrafficGraph_1a503a7eb165f5df6b3099b10e71774735" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>get_nodes</name></member>
+      <member refid="classTrafficGraph_1a4fe8bf82ebe5a118c488142e2a0a0711" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>get_or_create_node</name></member>
+      <member refid="classTrafficGraph_1a491ba60f07d174bb8e3dc781df2eff15" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>graph_mutex</name></member>
+      <member refid="classTrafficGraph_1ae485051f1b4e6f8cbb91ad7d89dc89b1" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>is_empty</name></member>
+      <member refid="classTrafficGraph_1a6eb9871391310c048bbeb608de0448dd" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>maintenance_thread</name></member>
+      <member refid="classTrafficGraph_1ad5331ff664bcdb1664c6acc6682dd57e" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>nodes</name></member>
+      <member refid="classTrafficGraph_1a1134b1f485145d7ba90b1075ec058533" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>RealTimeAnomalyDetector</name></member>
+      <member refid="classTrafficGraph_1a6938d0393ac1d31e070c688c3176e3e8" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>running</name></member>
+      <member refid="classTrafficGraph_1aa52225cd200774fe315bfcf344635fc9" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>TrafficGraph</name></member>
+      <member refid="classTrafficGraph_1a92dd4e1eb2b39f8512f45ab3b86ec3db" prot="private" virt="non-virtual"><scope>TrafficGraph</scope><name>update_counter</name></member>
+      <member refid="classTrafficGraph_1a0bbbfe4c14d9611db5060a1af21e3948" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>~TrafficGraph</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

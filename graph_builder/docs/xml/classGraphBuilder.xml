@@ -1,0 +1,477 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classGraphBuilder" kind="class" language="C++" prot="public">
+    <compoundname>GraphBuilder</compoundname>
+    <includes refid="GraphBuilder_8h" local="no">GraphBuilder.h</includes>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classGraphBuilder_1a8b766006264e9775c5cf59cf4f75ccc6" prot="private" static="yes" mutable="no">
+        <type>std::unique_ptr&lt; <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; GraphBuilder &gt; GraphBuilder::instance</definition>
+        <argsstring></argsstring>
+        <name>instance</name>
+        <qualifiedname>GraphBuilder::instance</qualifiedname>
+        <initializer>= nullptr</initializer>
+        <briefdescription>
+<para>Static unique pointer to the single instance of <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="40" column="28" bodyfile="includes/GraphBuilder.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphBuilder_1a5788850f0b02cac0674a723779eea95f" prot="private" static="yes" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex GraphBuilder::instance_mutex</definition>
+        <argsstring></argsstring>
+        <name>instance_mutex</name>
+        <qualifiedname>GraphBuilder::instance_mutex</qualifiedname>
+        <briefdescription>
+<para>Static mutex to protect the creation of the singleton instance in a thread-safe manner. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="44" column="23" bodyfile="includes/GraphBuilder.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGraphBuilder_1aa920996ec34f9e7ff2bbb6249a5b91fd" prot="private" static="no" mutable="no">
+        <type><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></type>
+        <definition>TrafficGraph GraphBuilder::graph</definition>
+        <argsstring></argsstring>
+        <name>graph</name>
+        <qualifiedname>GraphBuilder::graph</qualifiedname>
+        <briefdescription>
+<para>The underlying traffic graph being built and managed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="49" column="18" bodyfile="includes/GraphBuilder.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphBuilder_1a3ae808c157c8286259e73cb5082ab04d" prot="private" static="no" mutable="no">
+        <type><ref refid="classGraphUpdateQueue" kindref="compound">GraphUpdateQueue</ref></type>
+        <definition>GraphUpdateQueue GraphBuilder::update_queue</definition>
+        <argsstring></argsstring>
+        <name>update_queue</name>
+        <qualifiedname>GraphBuilder::update_queue</qualifiedname>
+        <briefdescription>
+<para>Queue of incremental updates. Useful for passing just new graph features when needed. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="59" column="22" bodyfile="includes/GraphBuilder.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphBuilder_1ad2bbcc61e251124d3e89140596f9bcbe" prot="private" static="no" mutable="no">
+        <type>std::atomic&lt; bool &gt;</type>
+        <definition>std::atomic&lt;bool&gt; GraphBuilder::save_pending</definition>
+        <argsstring></argsstring>
+        <name>save_pending</name>
+        <qualifiedname>GraphBuilder::save_pending</qualifiedname>
+        <initializer>{false}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="62" column="17" bodyfile="includes/GraphBuilder.h" bodystart="62" bodyend="62"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classGraphBuilder_1abadf20e37df1dbd53d0a9e4f2e63dfee" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>GraphBuilder::GraphBuilder</definition>
+        <argsstring>()=default</argsstring>
+        <name>GraphBuilder</name>
+        <qualifiedname>GraphBuilder::GraphBuilder</qualifiedname>
+        <briefdescription>
+<para>Default Constructor. Private to enforce signeton pattern. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="54" column="5"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGraphBuilder_1a3af3213174c72b1eda8f3a0e21bba54b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>GraphBuilder::GraphBuilder</definition>
+        <argsstring>(const GraphBuilder &amp;)=delete</argsstring>
+        <name>GraphBuilder</name>
+        <qualifiedname>GraphBuilder::GraphBuilder</qualifiedname>
+        <param>
+          <type>const <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Deleted copy constructor to prevent copying of the singleton instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="68" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphBuilder_1acbd5f45fa3be1fa61975e8fefedd3278" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> &amp;</type>
+        <definition>GraphBuilder &amp; GraphBuilder::operator=</definition>
+        <argsstring>(const GraphBuilder &amp;)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>GraphBuilder::operator=</qualifiedname>
+        <param>
+          <type>const <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> &amp;</type>
+        </param>
+        <briefdescription>
+<para>Deleted assignment operator to prevent assignment of the singleton instance. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>void </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="74" column="18"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphBuilder_1a88d61bc652bfa5a60a8cd1aa8509d27c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &gt;</type>
+        <definition>std::vector&lt; GraphUpdate &gt; GraphBuilder::get_last_updates</definition>
+        <argsstring>()</argsstring>
+        <name>get_last_updates</name>
+        <qualifiedname>GraphBuilder::get_last_updates</qualifiedname>
+        <briefdescription>
+<para>Gets the update list for the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is useful for periodic dumping, to just export incremental updates.</para>
+<para><simplesect kind="return"><para></para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="99" column="17" bodyfile="includes/GraphBuilder.h" bodystart="99" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphBuilder::add_connection</definition>
+        <argsstring>(const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;timestamp, int src_port, int dst_port, const std::string &amp;method=&quot;&quot;, const std::string &amp;host=&quot;&quot;, const std::string &amp;uri=&quot;&quot;, const std::string &amp;version=&quot;&quot;, const std::string &amp;user_agent=&quot;&quot;, int request_body_len=0, int response_body_len=0, int status_code=0, const std::string &amp;status_msg=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;tags={}, const std::vector&lt; std::string &gt; &amp;resp_fuids={}, const std::vector&lt; std::string &gt; &amp;resp_mime_types={})</argsstring>
+        <name>add_connection</name>
+        <qualifiedname>GraphBuilder::add_connection</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>src_ip</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>dst_ip</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>proto</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>timestamp</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>src_port</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>dst_port</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>method</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>host</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>uri</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>version</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>user_agent</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>request_body_len</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>response_body_len</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>status_code</declname>
+          <defval>0</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>status_msg</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>tags</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>resp_fuids</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>const std::vector&lt; std::string &gt; &amp;</type>
+          <declname>resp_mime_types</declname>
+          <defval>{}</defval>
+        </param>
+        <briefdescription>
+<para>Processes a network connection event and adds the corresponding nodes and edges to the graph. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method takes details of a network connection (e.g., source and destination IPs, ports, protocol) and updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>src_ip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Source IP address of the connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dst_ip</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Destination IP address of the connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>proto</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Protocol of the connection (e.g., &quot;tcp&quot;, &quot;udp&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>timestamp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Timestamp of the connection event. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>src_port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Source port of the connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>dst_port</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Destination port of the connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP request method (if applicable). Defaults to &quot;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>host</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP host header (if applicable). Defaults to &quot;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>uri</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP request URI (if applicable). Defaults to &quot;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>version</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP version (if applicable). Defaults to &quot;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>user_agent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP user agent string (if applicable). Defaults to &quot;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>request_body_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the HTTP request body (if applicable). Defaults to 0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>response_body_len</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Length of the HTTP response body (if applicable). Defaults to 0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>status_code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP status code (if applicable). Defaults to 0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>status_msg</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP status message (if applicable). Defaults to &quot;&quot;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tags</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of tags associated with the connection. Defaults to {}. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resp_fuids</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of file unique identifiers from the responder. Defaults to {}. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resp_mime_types</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of MIME types from the responder. Defaults to {}. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="129" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="106"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
+        <definition>TrafficGraph &amp; GraphBuilder::get_graph</definition>
+        <argsstring>()</argsstring>
+        <name>get_graph</name>
+        <qualifiedname>GraphBuilder::get_graph</qualifiedname>
+        <briefdescription>
+<para>Gets a reference to the underlying <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method provides access to the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> object managed by the <computeroutput><ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref></computeroutput>.</para>
+<para><simplesect kind="return"><para>A reference to the <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="151" column="18" bodyfile="GraphBuilder.cpp" bodystart="107" bodyend="109"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> &amp;</type>
+        <definition>static GraphBuilder &amp; GraphBuilder::get_instance</definition>
+        <argsstring>()</argsstring>
+        <name>get_instance</name>
+        <qualifiedname>GraphBuilder::get_instance</qualifiedname>
+        <briefdescription>
+<para>Gets the singleton instance of the <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This is the entry point to access the <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref>. If the instance has not been created yet, it creates one in a thread-safe way.</para>
+<para><simplesect kind="return"><para>A reference to the single <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphBuilder.h" line="84" column="25" bodyfile="includes/GraphBuilder.h" bodystart="84" bodyend="90"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Singleton class responsible for building and managing the network traffic graph. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <computeroutput><ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref></computeroutput> class provides a single point of access to the <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> and offers methods to process raw network traffic data (e.g., from Zeek logs) and add corresponding nodes and edges to the graph. The singleton pattern ensures that only one instance of the graph builder exists throughout the application. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>GraphBuilder</label>
+        <link refid="classGraphBuilder"/>
+      </node>
+    </collaborationgraph>
+    <location file="includes/GraphBuilder.h" line="35" column="1" bodyfile="includes/GraphBuilder.h" bodystart="35" bodyend="152"/>
+    <listofallmembers>
+      <member refid="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>add_connection</name></member>
+      <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_graph</name></member>
+      <member refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_instance</name></member>
+      <member refid="classGraphBuilder_1a88d61bc652bfa5a60a8cd1aa8509d27c" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_last_updates</name></member>
+      <member refid="classGraphBuilder_1aa920996ec34f9e7ff2bbb6249a5b91fd" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>graph</name></member>
+      <member refid="classGraphBuilder_1abadf20e37df1dbd53d0a9e4f2e63dfee" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>GraphBuilder</name></member>
+      <member refid="classGraphBuilder_1a3af3213174c72b1eda8f3a0e21bba54b" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>GraphBuilder</name></member>
+      <member refid="classGraphBuilder_1a8b766006264e9775c5cf59cf4f75ccc6" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>instance</name></member>
+      <member refid="classGraphBuilder_1a5788850f0b02cac0674a723779eea95f" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>instance_mutex</name></member>
+      <member refid="classGraphBuilder_1acbd5f45fa3be1fa61975e8fefedd3278" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>operator=</name></member>
+      <member refid="classGraphBuilder_1ad2bbcc61e251124d3e89140596f9bcbe" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>save_pending</name></member>
+      <member refid="classGraphBuilder_1a3ae808c157c8286259e73cb5082ab04d" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>update_queue</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

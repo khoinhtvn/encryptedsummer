@@ -1,0 +1,85 @@
+\chapter{Zeek Traffic Graph Analyzer}
+\hypertarget{md_README}{}\label{md_README}\index{Zeek Traffic Graph Analyzer@{Zeek Traffic Graph Analyzer}}
+\label{md_README_autotoc_md0}%
+\Hypertarget{md_README_autotoc_md0}%
+
+
+ ~\newline
+ {\itshape Real-\/time network traffic analysis using graph theory} Usage\hypertarget{md_README_autotoc_md1}{}\doxysection{\texorpdfstring{Table of Contents}{Table of Contents}}\label{md_README_autotoc_md1}
+
+\begin{DoxyItemize}
+\item Features
+\item Requirements
+\item Installation
+\item Usage
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md2}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md_README_autotoc_md2}
+
+\begin{DoxyItemize}
+\item {\bfseries{Real-\/time Processing}}\+: Continuously monitors Zeek logs
+\item {\bfseries{Graph Construction}}\+: Builds interactive network graphs with the following features
+\begin{DoxyItemize}
+\item {\itshape Node level}\+:
+\begin{DoxyItemize}
+\item Degree (in/out/combined)
+\item Temporal features (connection in the last minute and hour)
+\end{DoxyItemize}
+\item {\itshape Edge level (one edge per connection)}
+\begin{DoxyItemize}
+\item Source, target IP and port number
+\item Protocol, timestamp
+\item Host, Uri and HTTP method
+\item Version, user agent, status code
+\item Request and response body len
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item {\bfseries{Advanced Analysis}}\+:
+\begin{DoxyItemize}
+\item Anomaly detection
+\item Traffic pattern recognition
+\item Connection profiling
+\end{DoxyItemize}
+\item {\bfseries{Real time Visualization}}\+:
+\begin{DoxyItemize}
+\item Graphviz-\/based diagrams
+\end{DoxyItemize}
+\item {\bfseries{Alert System}}\+: Notifications for suspicious activities
+\end{DoxyItemize}\hypertarget{md_README_autotoc_md3}{}\doxysection{\texorpdfstring{Requirements}{Requirements}}\label{md_README_autotoc_md3}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Core\ dependencies}
+\DoxyCodeLine{-\/\ Zeek\ Network\ Security\ Monitor}
+\DoxyCodeLine{-\/\ C++17\ compatible\ compiler}
+\DoxyCodeLine{-\/\ CMake\ 3.28+}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Visualization\ dependencies}
+\DoxyCodeLine{-\/\ Graphviz\ (libgraphviz-\/dev)}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md4}{}\doxysection{\texorpdfstring{Installation}{Installation}}\label{md_README_autotoc_md4}
+\hypertarget{md_README_autotoc_md5}{}\doxysubsection{\texorpdfstring{Linux/max\+OS}{Linux/max\+OS}}\label{md_README_autotoc_md5}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ https://github.com/khoinhtvn/encryptedsummer}
+\DoxyCodeLine{cd\ encryptedsummer/graph\_builder}
+\DoxyCodeLine{mkdir\ build\ \&\&\ cd\ build}
+\DoxyCodeLine{cmake\ ..\ -\/DCMAKE\_BUILD\_TYPE=Release}
+\DoxyCodeLine{make\ -\/j\$(nproc)}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md6}{}\doxysubsection{\texorpdfstring{Windows (Visual Studio)}{Windows (Visual Studio)}}\label{md_README_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cmake\ -\/G\ "{}Visual\ Studio\ 17\ 2022"{}\ -\/A\ x64\ ..}
+\DoxyCodeLine{cmake\ -\/-\/build\ .\ -\/-\/config\ Release}
+
+\end{DoxyCode}
+\hypertarget{md_README_autotoc_md7}{}\doxysection{\texorpdfstring{Usage}{Usage}}\label{md_README_autotoc_md7}
+\hypertarget{md_README_autotoc_md8}{}\doxysubsection{\texorpdfstring{Basic Analysis}{Basic Analysis}}\label{md_README_autotoc_md8}
+The program checks for files in the specified path. It just processes files with known names (conn.\+log).
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{./graph\_builder\ /path/to/zeek/logs}
+
+\end{DoxyCode}
+ 

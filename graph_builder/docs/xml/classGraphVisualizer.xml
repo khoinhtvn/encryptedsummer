@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="classGraphVisualizer" kind="class" language="C++" prot="public">
+        <compoundname>GraphVisualizer</compoundname>
+        <includes refid="GraphVisualizer_8h" local="no">GraphVisualizer.h</includes>
+        <sectiondef kind="private-attrib">
+            <memberdef kind="variable" id="classGraphVisualizer_1a5239463c0a18331994cb571ae8f30232" prot="private"
+                       static="no" mutable="no">
+                <type>GVC_t *</type>
+                <definition>GVC_t* GraphVisualizer::gvc</definition>
+                <argsstring></argsstring>
+                <name>gvc</name>
+                <qualifiedname>GraphVisualizer::gvc</qualifiedname>
+                <briefdescription>
+                    <para>Graphviz context object.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>This context is required for interacting with the Graphviz library.</para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="68" column="11" bodyfile="includes/GraphVisualizer.h"
+                          bodystart="68" bodyend="-1"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="public-func">
+            <memberdef kind="function" id="classGraphVisualizer_1a287b703bc034030724527683912c298b" prot="public"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type></type>
+                <definition>GraphVisualizer::GraphVisualizer</definition>
+                <argsstring>()</argsstring>
+                <name>GraphVisualizer</name>
+                <qualifiedname>GraphVisualizer::GraphVisualizer</qualifiedname>
+                <briefdescription>
+                    <para>Constructor for the <ref refid="classGraphVisualizer" kindref="compound">GraphVisualizer</ref>.
+                    </para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Initializes the Graphviz context (<computeroutput>GVC_t</computeroutput>).
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="36" column="5" bodyfile="GraphVisualizer.cpp"
+                          bodystart="16" bodyend="18"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a6d1a5753d06a04ae602c9ac77a39da7f" prot="public"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type></type>
+                <definition>GraphVisualizer::~GraphVisualizer</definition>
+                <argsstring>()</argsstring>
+                <name>~GraphVisualizer</name>
+                <qualifiedname>GraphVisualizer::~GraphVisualizer</qualifiedname>
+                <briefdescription>
+                    <para>Destructor for the <ref refid="classGraphVisualizer" kindref="compound">GraphVisualizer</ref>.
+                    </para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Releases the Graphviz context to free allocated resources.</para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="43" column="5" bodyfile="GraphVisualizer.cpp"
+                          bodystart="20" bodyend="22"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a957fb958f7dbe05e5554f8751e71aff9" prot="public"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void GraphVisualizer::visualize</definition>
+                <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;output_file=&quot;graph.png&quot;,
+                    bool open_image=true, bool export_cond=true)
+                </argsstring>
+                <name>visualize</name>
+                <qualifiedname>GraphVisualizer::visualize</qualifiedname>
+                <param>
+                    <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;
+                    </type>
+                    <declname>graph</declname>
+                </param>
+                <param>
+                    <type>const std::string &amp;</type>
+                    <declname>output_file</declname>
+                    <defval>&quot;graph.png&quot;</defval>
+                </param>
+                <param>
+                    <type>bool</type>
+                    <declname>open_image</declname>
+                    <defval>true</defval>
+                </param>
+                <param>
+                    <type>bool</type>
+                    <declname>export_cond</declname>
+                    <defval>true</defval>
+                </param>
+                <briefdescription>
+                    <para>Visualizes the given traffic graph and saves it to a file.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>This method takes a
+                        <computeroutput>
+                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                        </computeroutput>
+                        , generates a visual representation using Graphviz, and saves it to the specified output file
+                        (defaulting to &quot;graph.png&quot;). It can also optionally open the generated image and
+                        control whether the export should proceed.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The
+                                        <computeroutput>
+                                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                                        </computeroutput>
+                                        object to visualize.
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>output_file</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The name of the output image file (default: &quot;graph.png&quot;).</para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>open_image</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>A boolean indicating whether to attempt to open the generated image (default:
+                                        true).
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>export_cond</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>A boolean controlling whether the export process should proceed (default:
+                                        true).
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="58" column="10" bodyfile="GraphVisualizer.cpp"
+                          bodystart="24" bodyend="67"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="private-func">
+            <memberdef kind="function" id="classGraphVisualizer_1a5f313e68baa127e2ab0db6b229dcb3c8" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void GraphVisualizer::add_nodes</definition>
+                <argsstring>(Agraph_t *graph, const TrafficGraph &amp;traffic_graph)</argsstring>
+                <name>add_nodes</name>
+                <qualifiedname>GraphVisualizer::add_nodes</qualifiedname>
+                <param>
+                    <type>Agraph_t *</type>
+                    <declname>graph</declname>
+                </param>
+                <param>
+                    <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;
+                    </type>
+                    <declname>traffic_graph</declname>
+                </param>
+                <briefdescription>
+                    <para>Adds nodes from the
+                        <computeroutput>
+                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                        </computeroutput>
+                        to the Graphviz graph.
+                    </para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Iterates through the nodes in the
+                        <computeroutput>
+                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                        </computeroutput>
+                        and creates corresponding nodes in the Graphviz graph (<computeroutput>Agraph_t</computeroutput>).
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The Graphviz graph to add nodes to.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>traffic_graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The
+                                        <computeroutput>
+                                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                                        </computeroutput>
+                                        containing the nodes to visualize.
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="79" column="10" bodyfile="GraphVisualizer.cpp"
+                          bodystart="69" bodyend="108"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a069b78fa832774c793fa9efa4ba82978" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void GraphVisualizer::add_edges</definition>
+                <argsstring>(Agraph_t *graph, const TrafficGraph &amp;traffic_graph)</argsstring>
+                <name>add_edges</name>
+                <qualifiedname>GraphVisualizer::add_edges</qualifiedname>
+                <param>
+                    <type>Agraph_t *</type>
+                    <declname>graph</declname>
+                </param>
+                <param>
+                    <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;
+                    </type>
+                    <declname>traffic_graph</declname>
+                </param>
+                <briefdescription>
+                    <para>Adds edges from the
+                        <computeroutput>
+                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                        </computeroutput>
+                        to the Graphviz graph.
+                    </para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Iterates through the edges in the
+                        <computeroutput>
+                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                        </computeroutput>
+                        and creates corresponding edges in the Graphviz graph (<computeroutput>Agraph_t</computeroutput>),
+                        connecting the appropriate nodes.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The Graphviz graph to add edges to.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>traffic_graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The
+                                        <computeroutput>
+                                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                                        </computeroutput>
+                                        containing the edges to visualize.
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="90" column="10" bodyfile="GraphVisualizer.cpp"
+                          bodystart="110" bodyend="139"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a760ce1f5219d6cd3481e311042ab273e" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void GraphVisualizer::apply_default_styles</definition>
+                <argsstring>(Agraph_t *graph)</argsstring>
+                <name>apply_default_styles</name>
+                <qualifiedname>GraphVisualizer::apply_default_styles</qualifiedname>
+                <param>
+                    <type>Agraph_t *</type>
+                    <declname>graph</declname>
+                </param>
+                <briefdescription>
+                    <para>Applies default visual styles to the Graphviz graph.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Sets basic attributes for the graph, such as layout engine, node styles, and edge styles, to
+                        provide a consistent and readable visualization.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The Graphviz graph to apply styles to.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="100" column="10" bodyfile="GraphVisualizer.cpp"
+                          bodystart="141" bodyend="148"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a3dde463ff55551d5530eff6eb8a9c56e" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::string</type>
+                <definition>std::string GraphVisualizer::generate_node_id</definition>
+                <argsstring>(const std::string &amp;original_id)</argsstring>
+                <name>generate_node_id</name>
+                <qualifiedname>GraphVisualizer::generate_node_id</qualifiedname>
+                <param>
+                    <type>const std::string &amp;</type>
+                    <declname>original_id</declname>
+                </param>
+                <briefdescription>
+                    <para>Generates a valid Graphviz node ID from the original node ID.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Ensures that node IDs are compatible with Graphviz&apos;s requirements, potentially escaping
+                        or modifying characters that could cause issues.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>original_id</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The original node identifier from the
+                                        <computeroutput>
+                                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                                        </computeroutput>
+                                        .
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                        <simplesect kind="return">
+                            <para>A string representing a valid Graphviz node ID.</para>
+                        </simplesect>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="111" column="17" bodyfile="GraphVisualizer.cpp"
+                          bodystart="150" bodyend="156"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a43e2e2a6bb1cd88df1b86b955bc19870" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void GraphVisualizer::export_to_dot</definition>
+                <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;filename)</argsstring>
+                <name>export_to_dot</name>
+                <qualifiedname>GraphVisualizer::export_to_dot</qualifiedname>
+                <param>
+                    <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;
+                    </type>
+                    <declname>graph</declname>
+                </param>
+                <param>
+                    <type>const std::string &amp;</type>
+                    <declname>filename</declname>
+                </param>
+                <briefdescription>
+                    <para>Exports the
+                        <computeroutput>
+                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                        </computeroutput>
+                        structure to a DOT file.
+                    </para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>This method can be used for debugging or if a DOT representation of the graph is needed. The
+                        DOT file can then be processed by Graphviz separately.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The
+                                        <computeroutput>
+                                            <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                                        </computeroutput>
+                                        to export.
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>filename</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The name of the output DOT file.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="122" column="10" bodyfile="GraphVisualizer.cpp"
+                          bodystart="158" bodyend="214"/>
+            </memberdef>
+            <memberdef kind="function" id="classGraphVisualizer_1a180778df33fe3b76a60d1cc154890f66" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::string</type>
+                <definition>std::string GraphVisualizer::escape_dot_string</definition>
+                <argsstring>(const std::string &amp;str)</argsstring>
+                <name>escape_dot_string</name>
+                <qualifiedname>GraphVisualizer::escape_dot_string</qualifiedname>
+                <param>
+                    <type>const std::string &amp;</type>
+                    <declname>str</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphVisualizer.h" line="124" column="17" bodyfile="GraphVisualizer.cpp"
+                          bodystart="217" bodyend="229"/>
+            </memberdef>
+        </sectiondef>
+        <briefdescription>
+            <para>Class responsible for visualizing the network traffic graph using Graphviz.</para>
+        </briefdescription>
+        <detaileddescription>
+            <para>The
+                <computeroutput>
+                    <ref refid="classGraphVisualizer" kindref="compound">GraphVisualizer</ref>
+                </computeroutput>
+                class takes a
+                <computeroutput>
+                    <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref>
+                </computeroutput>
+                object and renders it as a visual representation, typically saving it as a PNG image. It utilizes the
+                Graphviz library for graph layout and rendering.
+            </para>
+        </detaileddescription>
+        <collaborationgraph>
+            <node id="1">
+                <label>GraphVisualizer</label>
+                <link refid="classGraphVisualizer"/>
+            </node>
+        </collaborationgraph>
+        <location file="includes/GraphVisualizer.h" line="29" column="1" bodyfile="includes/GraphVisualizer.h"
+                  bodystart="29" bodyend="125"/>
+        <listofallmembers>
+            <member refid="classGraphVisualizer_1a069b78fa832774c793fa9efa4ba82978" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>add_edges</name>
+            </member>
+            <member refid="classGraphVisualizer_1a5f313e68baa127e2ab0db6b229dcb3c8" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>add_nodes</name>
+            </member>
+            <member refid="classGraphVisualizer_1a760ce1f5219d6cd3481e311042ab273e" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>apply_default_styles</name>
+            </member>
+            <member refid="classGraphVisualizer_1a180778df33fe3b76a60d1cc154890f66" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>escape_dot_string</name>
+            </member>
+            <member refid="classGraphVisualizer_1a43e2e2a6bb1cd88df1b86b955bc19870" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>export_to_dot</name>
+            </member>
+            <member refid="classGraphVisualizer_1a3dde463ff55551d5530eff6eb8a9c56e" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>generate_node_id</name>
+            </member>
+            <member refid="classGraphVisualizer_1a287b703bc034030724527683912c298b" prot="public" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>GraphVisualizer</name>
+            </member>
+            <member refid="classGraphVisualizer_1a5239463c0a18331994cb571ae8f30232" prot="private" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>gvc</name>
+            </member>
+            <member refid="classGraphVisualizer_1a957fb958f7dbe05e5554f8751e71aff9" prot="public" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>visualize</name>
+            </member>
+            <member refid="classGraphVisualizer_1a6d1a5753d06a04ae602c9ac77a39da7f" prot="public" virt="non-virtual">
+                <scope>GraphVisualizer</scope>
+                <name>~GraphVisualizer</name>
+            </member>
+        </listofallmembers>
+    </compounddef>
+</doxygen>

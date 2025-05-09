@@ -1,0 +1,41 @@
+\doxysection{includes/\+Graph\+Update\+Queue.h File Reference}
+\hypertarget{GraphUpdateQueue_8h}{}\label{GraphUpdateQueue_8h}\index{includes/GraphUpdateQueue.h@{includes/GraphUpdateQueue.h}}
+
+
+Header file for the \doxylink{classGraphUpdateQueue}{Graph\+Update\+Queue} class, which manages a thread-\/safe queue for graph updates.  
+
+
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include "{}Graph\+Edge.\+h"{}}\newline
+{\ttfamily \#include "{}Graph\+Node.\+h"{}}\newline
+Include dependency graph for Graph\+Update\+Queue.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{GraphUpdateQueue_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=245pt]{GraphUpdateQueue_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}}
+\begin{DoxyCompactList}\small\item\em Represents an update to the network traffic graph. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classGraphUpdateQueue}{Graph\+Update\+Queue}}
+\begin{DoxyCompactList}\small\item\em Thread-\/safe queue for storing and processing graph updates. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Header file for the \doxylink{classGraphUpdateQueue}{Graph\+Update\+Queue} class, which manages a thread-\/safe queue for graph updates. 
+
+This file defines the {\ttfamily \doxylink{classGraphUpdateQueue}{Graph\+Update\+Queue}} class, which provides a thread-\/safe queue for storing updates to the network traffic graph (nodes and edges). It uses a condition variable to allow consumer threads to wait for updates. 

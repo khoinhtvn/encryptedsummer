@@ -1,0 +1,58 @@
+\doxysection{Real\+Time\+Anomaly\+Detector\+::Anomaly\+Score Struct Reference}
+\hypertarget{structRealTimeAnomalyDetector_1_1AnomalyScore}{}\label{structRealTimeAnomalyDetector_1_1AnomalyScore}\index{RealTimeAnomalyDetector::AnomalyScore@{RealTimeAnomalyDetector::AnomalyScore}}
+
+
+Structure to store the anomaly score and contributing factors for a node.  
+
+
+
+
+{\ttfamily \#include $<$Real\+Time\+Anomaly\+Detector.\+h$>$}
+
+
+
+Collaboration diagram for Real\+Time\+Anomaly\+Detector\+::Anomaly\+Score\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=288pt]{structRealTimeAnomalyDetector_1_1AnomalyScore__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore_af78f3e437b8b9b0988f9334ff378d240}{score}}
+\begin{DoxyCompactList}\small\item\em The overall anomaly score for the node (higher values indicate higher anomaly likelihood). \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore_acd217a71de0895b7e2880adefac0d493}{contributing\+\_\+factors}}
+\begin{DoxyCompactList}\small\item\em A vector of strings describing the factors that contributed to the anomaly score. Examples\+: "{}high connection rate"{}, "{}unusual protocol mix"{}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure to store the anomaly score and contributing factors for a node. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structRealTimeAnomalyDetector_1_1AnomalyScore_acd217a71de0895b7e2880adefac0d493}\index{RealTimeAnomalyDetector::AnomalyScore@{RealTimeAnomalyDetector::AnomalyScore}!contributing\_factors@{contributing\_factors}}
+\index{contributing\_factors@{contributing\_factors}!RealTimeAnomalyDetector::AnomalyScore@{RealTimeAnomalyDetector::AnomalyScore}}
+\doxysubsubsection{\texorpdfstring{contributing\_factors}{contributing\_factors}}
+{\footnotesize\ttfamily \label{structRealTimeAnomalyDetector_1_1AnomalyScore_acd217a71de0895b7e2880adefac0d493} 
+std\+::vector$<$std\+::string$>$ Real\+Time\+Anomaly\+Detector\+::\+Anomaly\+Score\+::contributing\+\_\+factors}
+
+
+
+A vector of strings describing the factors that contributed to the anomaly score. Examples\+: "{}high connection rate"{}, "{}unusual protocol mix"{}. 
+
+\Hypertarget{structRealTimeAnomalyDetector_1_1AnomalyScore_af78f3e437b8b9b0988f9334ff378d240}\index{RealTimeAnomalyDetector::AnomalyScore@{RealTimeAnomalyDetector::AnomalyScore}!score@{score}}
+\index{score@{score}!RealTimeAnomalyDetector::AnomalyScore@{RealTimeAnomalyDetector::AnomalyScore}}
+\doxysubsubsection{\texorpdfstring{score}{score}}
+{\footnotesize\ttfamily \label{structRealTimeAnomalyDetector_1_1AnomalyScore_af78f3e437b8b9b0988f9334ff378d240} 
+double Real\+Time\+Anomaly\+Detector\+::\+Anomaly\+Score\+::score}
+
+
+
+The overall anomaly score for the node (higher values indicate higher anomaly likelihood). 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{RealTimeAnomalyDetector_8h}{Real\+Time\+Anomaly\+Detector.\+h}}\end{DoxyCompactItemize}

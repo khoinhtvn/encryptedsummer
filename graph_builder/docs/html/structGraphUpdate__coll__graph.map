@@ -1,0 +1,9 @@
+<map id="GraphUpdate" name="GraphUpdate">
+<area shape="rect" id="Node000001" title="Represents an update to the network traffic graph." alt="" coords="112,133,212,199"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,49,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="51,58,62,69,117,120,114,124,59,73,48,62"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="73,5,251,71"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,71,165,117,159,117,159,71"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="275,5,449,71"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="313,73,227,127,224,122,310,69"/>
+</map>

@@ -1,0 +1,390 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classZeekLogParser" kind="class" language="C++" prot="public">
+    <compoundname>ZeekLogParser</compoundname>
+    <includes refid="ZeekLogParser_8h" local="no">ZeekLogParser.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classZeekLogParser_1a5ca203e4d6e28420823f7e9f5760fa85" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, <ref refid="structFileState" kindref="compound">FileState</ref> &gt;</type>
+        <definition>std::unordered_map&lt;std::string, FileState&gt; ZeekLogParser::tracked_files</definition>
+        <argsstring></argsstring>
+        <name>tracked_files</name>
+        <qualifiedname>ZeekLogParser::tracked_files</qualifiedname>
+        <briefdescription>
+<para>Map of file paths to <ref refid="structFileState" kindref="compound">FileState</ref> objects, used to track monitored files. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="139" column="24" bodyfile="includes/ZeekLogParser.h" bodystart="139" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classZeekLogParser_1af3d423cd8c73ef0b371b7eea714aa8cb" prot="private" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string ZeekLogParser::log_directory</definition>
+        <argsstring></argsstring>
+        <name>log_directory</name>
+        <qualifiedname>ZeekLogParser::log_directory</qualifiedname>
+        <briefdescription>
+<para>The directory where Zeek log files are located. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="143" column="17" bodyfile="includes/ZeekLogParser.h" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classZeekLogParser_1a87f78baa9d273f261b81e9d778d53267" prot="private" static="no" mutable="no">
+        <type>std::unordered_map&lt; std::string, std::string &gt;</type>
+        <definition>std::unordered_map&lt;std::string, std::string&gt; ZeekLogParser::partial_lines</definition>
+        <argsstring></argsstring>
+        <name>partial_lines</name>
+        <qualifiedname>ZeekLogParser::partial_lines</qualifiedname>
+        <briefdescription>
+<para>Map to buffer incomplete log lines. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Stores partial log lines, using the file path as the key, until a complete line is received. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="151" column="24" bodyfile="includes/ZeekLogParser.h" bodystart="151" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ZeekLogParser::ZeekLogParser</definition>
+        <argsstring>(const std::string &amp;log_dir)</argsstring>
+        <name>ZeekLogParser</name>
+        <qualifiedname>ZeekLogParser::ZeekLogParser</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>log_dir</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for <ref refid="classZeekLogParser" kindref="compound">ZeekLogParser</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the parser with the directory containing the Zeek log files.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>log_dir</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the directory containing the Zeek log files. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="92" column="14" bodyfile="includes/ZeekLogParser.h" bodystart="92" bodyend="92"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1af922e185b33640058001015a136545a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::monitor_logs</definition>
+        <argsstring>()</argsstring>
+        <name>monitor_logs</name>
+        <qualifiedname>ZeekLogParser::monitor_logs</qualifiedname>
+        <briefdescription>
+<para>Monitors the log directory for new or updated log files. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method continuously checks the log directory for new files or changes to existing files and processes them accordingly. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="100" column="10" bodyfile="ZeekLogParser.cpp" bodystart="38" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_new_file</definition>
+        <argsstring>(const FileState &amp;file)</argsstring>
+        <name>process_new_file</name>
+        <qualifiedname>ZeekLogParser::process_new_file</qualifiedname>
+        <param>
+          <type>const <ref refid="structFileState" kindref="compound">FileState</ref> &amp;</type>
+          <declname>file</declname>
+        </param>
+        <briefdescription>
+<para>Processes a new log file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method is called when a new log file is detected. It parses the entire file and extracts relevant information.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structFileState" kindref="compound">FileState</ref> object representing the new log file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="110" column="10" bodyfile="ZeekLogParser.cpp" bodystart="76" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_appended_data</definition>
+        <argsstring>(const std::string &amp;path, off_t old_size, off_t new_size)</argsstring>
+        <name>process_appended_data</name>
+        <qualifiedname>ZeekLogParser::process_appended_data</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>off_t</type>
+          <declname>old_size</declname>
+        </param>
+        <param>
+          <type>off_t</type>
+          <declname>new_size</declname>
+        </param>
+        <briefdescription>
+<para>Processes appended data in a log file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method is called when an existing log file has been appended with new data. It reads and processes only the new data in the file.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the log file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>old_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The previous size of the log file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>new_size</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The current size of the log file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="122" column="10" bodyfile="ZeekLogParser.cpp" bodystart="88" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_content</definition>
+        <argsstring>(const std::string &amp;path, const std::string &amp;content)</argsstring>
+        <name>process_content</name>
+        <qualifiedname>ZeekLogParser::process_content</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>path</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>content</declname>
+        </param>
+        <briefdescription>
+<para>Processes the content of a log file or a portion of it. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method parses the given content of a log file and extracts relevant information from individual log entries.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the log file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>content</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The content to process. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="133" column="10" bodyfile="ZeekLogParser.cpp" bodystart="100" bodyend="122"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classZeekLogParser_1ae465ab2585645bd649f2c20cd6ef5bb7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_log_file</definition>
+        <argsstring>(const std::filesystem::path &amp;file_path)</argsstring>
+        <name>process_log_file</name>
+        <qualifiedname>ZeekLogParser::process_log_file</qualifiedname>
+        <param>
+          <type>const std::filesystem::path &amp;</type>
+          <declname>file_path</declname>
+        </param>
+        <briefdescription>
+<para>Processes a single log file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method reads the log file and calls the appropriate processing functions for each log entry.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>file_path</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the log file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="161" column="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1aa6f4a83226256c9d9375d9e704a410f9" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_log_entry</definition>
+        <argsstring>(const std::string &amp;log_type, const std::string &amp;entry)</argsstring>
+        <name>process_log_entry</name>
+        <qualifiedname>ZeekLogParser::process_log_entry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>log_type</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+<para>Processes a single log entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method determines the type of log entry and calls the corresponding processing function.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>log_type</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the log entry (e.g., &quot;conn&quot;, &quot;http&quot;). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>entry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The log entry string. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="172" column="10" bodyfile="ZeekLogParser.cpp" bodystart="123" bodyend="129"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1a849d1765b0cab7cafc056c8465341a32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_conn_entry</definition>
+        <argsstring>(const std::string &amp;entry)</argsstring>
+        <name>process_conn_entry</name>
+        <qualifiedname>ZeekLogParser::process_conn_entry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+<para>Processes a connection log entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method extracts information from a connection log entry.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The connection log entry string. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="181" column="10" bodyfile="ZeekLogParser.cpp" bodystart="170" bodyend="232"/>
+      </memberdef>
+      <memberdef kind="function" id="classZeekLogParser_1aab815de3963d42eb72aec94fb1c7e2f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ZeekLogParser::process_http_entry</definition>
+        <argsstring>(const std::string &amp;entry)</argsstring>
+        <name>process_http_entry</name>
+        <qualifiedname>ZeekLogParser::process_http_entry</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>entry</declname>
+        </param>
+        <briefdescription>
+<para>Processes an HTTP log entry. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method extracts information from an HTTP log entry.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>entry</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The HTTP log entry string. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="190" column="10"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class responsible for parsing Zeek log files. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <computeroutput><ref refid="classZeekLogParser" kindref="compound">ZeekLogParser</ref></computeroutput> class monitors a directory for Zeek log files, parses the log entries, and extracts relevant information. It handles different Zeek log formats and keeps track of file state to process updates efficiently. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>ZeekLogParser</label>
+        <link refid="classZeekLogParser"/>
+      </node>
+    </collaborationgraph>
+    <location file="includes/ZeekLogParser.h" line="83" column="1" bodyfile="includes/ZeekLogParser.h" bodystart="83" bodyend="191"/>
+    <listofallmembers>
+      <member refid="classZeekLogParser_1af3d423cd8c73ef0b371b7eea714aa8cb" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>log_directory</name></member>
+      <member refid="classZeekLogParser_1af922e185b33640058001015a136545a3" prot="public" virt="non-virtual"><scope>ZeekLogParser</scope><name>monitor_logs</name></member>
+      <member refid="classZeekLogParser_1a87f78baa9d273f261b81e9d778d53267" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>partial_lines</name></member>
+      <member refid="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" prot="public" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_appended_data</name></member>
+      <member refid="classZeekLogParser_1a849d1765b0cab7cafc056c8465341a32" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_conn_entry</name></member>
+      <member refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" prot="public" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_content</name></member>
+      <member refid="classZeekLogParser_1aab815de3963d42eb72aec94fb1c7e2f2" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_http_entry</name></member>
+      <member refid="classZeekLogParser_1aa6f4a83226256c9d9375d9e704a410f9" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_log_entry</name></member>
+      <member refid="classZeekLogParser_1ae465ab2585645bd649f2c20cd6ef5bb7" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_log_file</name></member>
+      <member refid="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" prot="public" virt="non-virtual"><scope>ZeekLogParser</scope><name>process_new_file</name></member>
+      <member refid="classZeekLogParser_1a5ca203e4d6e28420823f7e9f5760fa85" prot="private" virt="non-virtual"><scope>ZeekLogParser</scope><name>tracked_files</name></member>
+      <member refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" prot="public" virt="non-virtual"><scope>ZeekLogParser</scope><name>ZeekLogParser</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

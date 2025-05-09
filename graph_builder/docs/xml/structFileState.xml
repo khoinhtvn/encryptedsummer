@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="structFileState" kind="struct" language="C++" prot="public">
+    <compoundname>FileState</compoundname>
+    <includes refid="ZeekLogParser_8h" local="no">ZeekLogParser.h</includes>
+    <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structFileState_1ae010c4938bde94f555a4589146fa7b39" prot="public" static="no" mutable="no">
+        <type>ino_t</type>
+        <definition>ino_t FileState::inode</definition>
+        <argsstring></argsstring>
+        <name>inode</name>
+        <qualifiedname>FileState::inode</qualifiedname>
+        <briefdescription>
+<para>Unique identifier of the file (inode). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="29" column="11" bodyfile="includes/ZeekLogParser.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" prot="public" static="no" mutable="no">
+        <type>off_t</type>
+        <definition>off_t FileState::last_size</definition>
+        <argsstring></argsstring>
+        <name>last_size</name>
+        <qualifiedname>FileState::last_size</qualifiedname>
+        <briefdescription>
+<para>Last known size of the file in bytes. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="33" column="11" bodyfile="includes/ZeekLogParser.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" prot="public" static="no" mutable="no">
+        <type>std::string</type>
+        <definition>std::string FileState::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <qualifiedname>FileState::path</qualifiedname>
+        <briefdescription>
+<para>Full path to the file. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="37" column="17" bodyfile="includes/ZeekLogParser.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="structFileState_1a29ca2864c94e4eca416d81007058eb4f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>FileState::FileState</definition>
+        <argsstring>()=default</argsstring>
+        <name>FileState</name>
+        <qualifiedname>FileState::FileState</qualifiedname>
+        <briefdescription>
+<para>Default constructor for <ref refid="structFileState" kindref="compound">FileState</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="42" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FileState::FileState</definition>
+        <argsstring>(const std::string &amp;p)</argsstring>
+        <name>FileState</name>
+        <qualifiedname>FileState::FileState</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>p</declname>
+        </param>
+        <briefdescription>
+<para>Constructor for <ref refid="structFileState" kindref="compound">FileState</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Initializes the <ref refid="structFileState" kindref="compound">FileState</ref> with the file&apos;s path and updates its inode and size.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>p</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The path to the file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="51" column="5" bodyfile="includes/ZeekLogParser.h" bodystart="51" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool FileState::update</definition>
+        <argsstring>()</argsstring>
+        <name>update</name>
+        <qualifiedname>FileState::update</qualifiedname>
+        <briefdescription>
+<para>Updates the file&apos;s inode and size. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Retrieves the current inode and size of the file and updates the corresponding members of the <ref refid="structFileState" kindref="compound">FileState</ref> object.</para>
+<para><simplesect kind="return"><para>true if the update was successful, false otherwise. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="63" column="10" bodyfile="ZeekLogParser.cpp" bodystart="22" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool FileState::operator==</definition>
+        <argsstring>(const FileState &amp;other) const</argsstring>
+        <name>operator==</name>
+        <qualifiedname>FileState::operator==</qualifiedname>
+        <param>
+          <type>const <ref refid="structFileState" kindref="compound">FileState</ref> &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+<para>Equality operator for <ref refid="structFileState" kindref="compound">FileState</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Compares two <ref refid="structFileState" kindref="compound">FileState</ref> objects for equality based on their members</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="structFileState" kindref="compound">FileState</ref> object to compare with </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if the two objects are equal, false otherwise </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/ZeekLogParser.h" line="73" column="10" bodyfile="ZeekLogParser.cpp" bodystart="33" bodyend="35"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Represents the state of a monitored file. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This struct stores information about a file, including its inode, last known size, and path. It is used to track changes to log files over time. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>FileState</label>
+        <link refid="structFileState"/>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+inode</edgelabel>
+        </childnode>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+last_size</edgelabel>
+        </childnode>
+        <childnode refid="4" relation="usage">
+          <edgelabel>+path</edgelabel>
+        </childnode>
+      </node>
+      <node id="2">
+        <label>ino_t</label>
+      </node>
+      <node id="3">
+        <label>off_t</label>
+      </node>
+      <node id="4">
+        <label>string</label>
+      </node>
+    </collaborationgraph>
+    <location file="includes/ZeekLogParser.h" line="25" column="1" bodyfile="includes/ZeekLogParser.h" bodystart="25" bodyend="74"/>
+    <listofallmembers>
+      <member refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" prot="public" virt="non-virtual"><scope>FileState</scope><name>FileState</name></member>
+      <member refid="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" prot="public" virt="non-virtual"><scope>FileState</scope><name>FileState</name></member>
+      <member refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" prot="public" virt="non-virtual"><scope>FileState</scope><name>inode</name></member>
+      <member refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" prot="public" virt="non-virtual"><scope>FileState</scope><name>last_size</name></member>
+      <member refid="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" prot="public" virt="non-virtual"><scope>FileState</scope><name>operator==</name></member>
+      <member refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" prot="public" virt="non-virtual"><scope>FileState</scope><name>path</name></member>
+      <member refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" prot="public" virt="non-virtual"><scope>FileState</scope><name>update</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

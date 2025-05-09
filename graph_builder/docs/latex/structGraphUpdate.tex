@@ -1,0 +1,107 @@
+\doxysection{Graph\+Update Struct Reference}
+\hypertarget{structGraphUpdate}{}\label{structGraphUpdate}\index{GraphUpdate@{GraphUpdate}}
+
+
+Represents an update to the network traffic graph.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Update\+Queue.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Update\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structGraphUpdate__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}{Type}} \{ \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad}{NODE\+\_\+\+CREATE}}
+, \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7}{NODE\+\_\+\+UPDATE}}
+, \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b}{EDGE\+\_\+\+CREATE}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum indicating the type of graph update. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}{Type}} \mbox{\hyperlink{structGraphUpdate_a5da40c0a068e966f7e16bdd40d7d00c0}{type}}
+\begin{DoxyCompactList}\small\item\em The type of graph update (node or edge). \end{DoxyCompactList}\item 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ \mbox{\hyperlink{structGraphUpdate_a47890c709372ac8f0c65d819390fab47}{node}}
+\begin{DoxyCompactList}\small\item\em A weak pointer to the updated graph node. \end{DoxyCompactList}\item 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ \mbox{\hyperlink{structGraphUpdate_aaf9da414880949a68ec96bd30d00fa12}{edge}}
+\begin{DoxyCompactList}\small\item\em A weak pointer to the updated graph edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an update to the network traffic graph. 
+
+This struct encapsulates either a node update or an edge update. It uses a weak pointer to the updated graph element to avoid creating a strong dependency and potential circular references. 
+
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}\index{GraphUpdate@{GraphUpdate}!Type@{Type}}
+\index{Type@{Type}!GraphUpdate@{GraphUpdate}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \label{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba} 
+enum class \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}{Graph\+Update\+::\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum indicating the type of graph update. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NODE\_CREATE@{NODE\_CREATE}!GraphUpdate@{GraphUpdate}}\index{GraphUpdate@{GraphUpdate}!NODE\_CREATE@{NODE\_CREATE}}}\Hypertarget{structGraphUpdate_a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad}\label{structGraphUpdate_a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad} 
+NODE\+\_\+\+CREATE&Represents the creation of a new graph node. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NODE\_UPDATE@{NODE\_UPDATE}!GraphUpdate@{GraphUpdate}}\index{GraphUpdate@{GraphUpdate}!NODE\_UPDATE@{NODE\_UPDATE}}}\Hypertarget{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7}\label{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7} 
+NODE\+\_\+\+UPDATE&Represents an update to a graph node. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EDGE\_CREATE@{EDGE\_CREATE}!GraphUpdate@{GraphUpdate}}\index{GraphUpdate@{GraphUpdate}!EDGE\_CREATE@{EDGE\_CREATE}}}\Hypertarget{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b}\label{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b} 
+EDGE\+\_\+\+CREATE&Represents te creation of a graph edge. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGraphUpdate_aaf9da414880949a68ec96bd30d00fa12}\index{GraphUpdate@{GraphUpdate}!edge@{edge}}
+\index{edge@{edge}!GraphUpdate@{GraphUpdate}}
+\doxysubsubsection{\texorpdfstring{edge}{edge}}
+{\footnotesize\ttfamily \label{structGraphUpdate_aaf9da414880949a68ec96bd30d00fa12} 
+std\+::weak\+\_\+ptr$<$\mbox{\hyperlink{classGraphEdge}{Graph\+Edge}}$>$ Graph\+Update\+::edge}
+
+
+
+A weak pointer to the updated graph edge. 
+
+\Hypertarget{structGraphUpdate_a47890c709372ac8f0c65d819390fab47}\index{GraphUpdate@{GraphUpdate}!node@{node}}
+\index{node@{node}!GraphUpdate@{GraphUpdate}}
+\doxysubsubsection{\texorpdfstring{node}{node}}
+{\footnotesize\ttfamily \label{structGraphUpdate_a47890c709372ac8f0c65d819390fab47} 
+std\+::weak\+\_\+ptr$<$\mbox{\hyperlink{classGraphNode}{Graph\+Node}}$>$ Graph\+Update\+::node}
+
+
+
+A weak pointer to the updated graph node. 
+
+\Hypertarget{structGraphUpdate_a5da40c0a068e966f7e16bdd40d7d00c0}\index{GraphUpdate@{GraphUpdate}!type@{type}}
+\index{type@{type}!GraphUpdate@{GraphUpdate}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{structGraphUpdate_a5da40c0a068e966f7e16bdd40d7d00c0} 
+\mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}{Type}} Graph\+Update\+::type}
+
+
+
+The type of graph update (node or edge). 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphUpdateQueue_8h}{Graph\+Update\+Queue.\+h}}\end{DoxyCompactItemize}

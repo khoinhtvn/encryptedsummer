@@ -1,0 +1,192 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
+  <compounddef id="classGraphUpdateQueue" kind="class" language="C++" prot="public">
+    <compoundname>GraphUpdateQueue</compoundname>
+    <includes refid="GraphUpdateQueue_8h" local="no">GraphUpdateQueue.h</includes>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGraphUpdateQueue_1ada39241b3a6a6e7a581c7d1c508eb5ed" prot="private" static="no" mutable="no">
+        <type>std::queue&lt; <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &gt;</type>
+        <definition>std::queue&lt;GraphUpdate&gt; GraphUpdateQueue::updates</definition>
+        <argsstring></argsstring>
+        <name>updates</name>
+        <qualifiedname>GraphUpdateQueue::updates</qualifiedname>
+        <briefdescription>
+<para>The queue storing the graph updates. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="74" column="16" bodyfile="includes/GraphUpdateQueue.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphUpdateQueue_1a05dfed6d12a7c75b7b472ed33bb17867" prot="private" static="no" mutable="yes">
+        <type>std::mutex</type>
+        <definition>std::mutex GraphUpdateQueue::queue_mutex</definition>
+        <argsstring></argsstring>
+        <name>queue_mutex</name>
+        <qualifiedname>GraphUpdateQueue::queue_mutex</qualifiedname>
+        <briefdescription>
+<para>Mutex to protect access to the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="78" column="24" bodyfile="includes/GraphUpdateQueue.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphUpdateQueue_1a5c40a9bb2b9822f5ed35d1b040dfd300" prot="private" static="no" mutable="no">
+        <type>std::condition_variable</type>
+        <definition>std::condition_variable GraphUpdateQueue::cv</definition>
+        <argsstring></argsstring>
+        <name>cv</name>
+        <qualifiedname>GraphUpdateQueue::cv</qualifiedname>
+        <briefdescription>
+<para>Condition variable used to signal when new updates are available. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="82" column="29" bodyfile="includes/GraphUpdateQueue.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphUpdateQueue_1aca49e36b63db25db6c28407747d948f9" prot="private" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool GraphUpdateQueue::shutdown_flag</definition>
+        <argsstring></argsstring>
+        <name>shutdown_flag</name>
+        <qualifiedname>GraphUpdateQueue::shutdown_flag</qualifiedname>
+        <initializer>= false</initializer>
+        <briefdescription>
+<para>Flag indicating whether the queue is shutting down. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="86" column="10" bodyfile="includes/GraphUpdateQueue.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGraphUpdateQueue_1aabd051e04032dafa172de9a2b289a2b9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphUpdateQueue::push</definition>
+        <argsstring>(const GraphUpdate &amp;update)</argsstring>
+        <name>push</name>
+        <qualifiedname>GraphUpdateQueue::push</qualifiedname>
+        <param>
+          <type>const <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &amp;</type>
+          <declname>update</declname>
+        </param>
+        <briefdescription>
+<para>Pushes a new graph update onto the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method adds a new <computeroutput><ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref></computeroutput> to the queue and notifies any waiting threads that an update is available.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The graph update to add to the queue. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="97" column="10" bodyfile="includes/GraphUpdateQueue.h" bodystart="97" bodyend="101"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphUpdateQueue_1a87f3e51b959f4ac6403d95c1e3dba4c3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>bool</type>
+        <definition>bool GraphUpdateQueue::pop</definition>
+        <argsstring>(GraphUpdate &amp;update)</argsstring>
+        <name>pop</name>
+        <qualifiedname>GraphUpdateQueue::pop</qualifiedname>
+        <param>
+          <type><ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &amp;</type>
+          <declname>update</declname>
+        </param>
+        <briefdescription>
+<para>Pops a graph update from the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method retrieves the next <computeroutput><ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref></computeroutput> from the queue. If the queue is empty, it waits until an update is available or the queue is shut down.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to the <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> object where the retrieved update will be stored. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>true if an update was successfully retrieved, false if the queue is shut down and empty. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="112" column="10" bodyfile="includes/GraphUpdateQueue.h" bodystart="112" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphUpdateQueue_1a878ff033814bd6228f09c74260fefe44" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::vector&lt; <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &gt;</type>
+        <definition>std::vector&lt; GraphUpdate &gt; GraphUpdateQueue::popAll</definition>
+        <argsstring>()</argsstring>
+        <name>popAll</name>
+        <qualifiedname>GraphUpdateQueue::popAll</qualifiedname>
+        <briefdescription>
+<para>Pops all graph updates from the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method retrieves all <computeroutput><ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref></computeroutput>s from the queue and returns them as a vector. If the queue is empty, it returns an empty vector. The queue is emptied as a result of calling this method.</para>
+<para><simplesect kind="return"><para>A vector containing all graph updates currently in the queue. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="132" column="17" bodyfile="includes/GraphUpdateQueue.h" bodystart="132" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphUpdateQueue_1a7867ed8e468ee74d679b01172991ce05" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphUpdateQueue::shutdown</definition>
+        <argsstring>()</argsstring>
+        <name>shutdown</name>
+        <qualifiedname>GraphUpdateQueue::shutdown</qualifiedname>
+        <briefdescription>
+<para>Shuts down the queue. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method sets the shutdown flag, preventing further updates from being added and signals all waiting threads to wake up. This allows threads waiting on the queue to exit gracefully. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphUpdateQueue.h" line="156" column="10" bodyfile="includes/GraphUpdateQueue.h" bodystart="156" bodyend="160"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Thread-safe queue for storing and processing graph updates. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The <computeroutput><ref refid="classGraphUpdateQueue" kindref="compound">GraphUpdateQueue</ref></computeroutput> class provides a thread-safe mechanism for adding and retrieving updates to the network traffic graph. It uses a mutex to protect the queue and a condition variable to signal when new updates are available. </para>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="1">
+        <label>GraphUpdateQueue</label>
+        <link refid="classGraphUpdateQueue"/>
+      </node>
+    </collaborationgraph>
+    <location file="includes/GraphUpdateQueue.h" line="69" column="1" bodyfile="includes/GraphUpdateQueue.h" bodystart="69" bodyend="161"/>
+    <listofallmembers>
+      <member refid="classGraphUpdateQueue_1a5c40a9bb2b9822f5ed35d1b040dfd300" prot="private" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>cv</name></member>
+      <member refid="classGraphUpdateQueue_1a87f3e51b959f4ac6403d95c1e3dba4c3" prot="public" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>pop</name></member>
+      <member refid="classGraphUpdateQueue_1a878ff033814bd6228f09c74260fefe44" prot="public" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>popAll</name></member>
+      <member refid="classGraphUpdateQueue_1aabd051e04032dafa172de9a2b289a2b9" prot="public" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>push</name></member>
+      <member refid="classGraphUpdateQueue_1a05dfed6d12a7c75b7b472ed33bb17867" prot="private" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>queue_mutex</name></member>
+      <member refid="classGraphUpdateQueue_1a7867ed8e468ee74d679b01172991ce05" prot="public" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>shutdown</name></member>
+      <member refid="classGraphUpdateQueue_1aca49e36b63db25db6c28407747d948f9" prot="private" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>shutdown_flag</name></member>
+      <member refid="classGraphUpdateQueue_1ada39241b3a6a6e7a581c7d1c508eb5ed" prot="private" virt="non-virtual"><scope>GraphUpdateQueue</scope><name>updates</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

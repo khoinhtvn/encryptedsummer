@@ -1,0 +1,82 @@
+\doxysection{Graph\+Update\+Queue.\+h}
+\hypertarget{GraphUpdateQueue_8h_source}{}\label{GraphUpdateQueue_8h_source}\index{includes/GraphUpdateQueue.h@{includes/GraphUpdateQueue.h}}
+\mbox{\hyperlink{GraphUpdateQueue_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#ifndef\ GRAPHUPDATEQUEUE\_H}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#define\ GRAPHUPDATEQUEUE\_H}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <memory>}\ \textcolor{comment}{//\ Include\ for\ std::unique\_ptr}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphEdge_8h}{GraphEdge.h}}"{}}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphNode_8h}{GraphNode.h}}"{}}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGraphUpdate}{GraphUpdate}}\ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}{Type}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad}{NODE\_CREATE}},}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7}{NODE\_UPDATE}},}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b}{EDGE\_CREATE}}}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{structGraphUpdate_a37a13b443637ec95ee3f8763587838ba}{Type}}\ \mbox{\hyperlink{structGraphUpdate_a5da40c0a068e966f7e16bdd40d7d00c0}{type}};}
+\DoxyCodeLine{00055\ \ \ \ \ std::weak\_ptr<GraphNode>\ \mbox{\hyperlink{structGraphUpdate_a47890c709372ac8f0c65d819390fab47}{node}};}
+\DoxyCodeLine{00059\ \ \ \ \ std::weak\_ptr<GraphEdge>\ \mbox{\hyperlink{structGraphUpdate_aaf9da414880949a68ec96bd30d00fa12}{edge}};}
+\DoxyCodeLine{00060\ \};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphUpdateQueue}{GraphUpdateQueue}}\ \{}
+\DoxyCodeLine{00070\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ std::queue<GraphUpdate>\ updates;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ queue\_mutex;}
+\DoxyCodeLine{00082\ \ \ \ \ std::condition\_variable\ cv;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ shutdown\_flag\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphUpdateQueue_aabd051e04032dafa172de9a2b289a2b9}{push}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structGraphUpdate}{GraphUpdate}}\ \&update)\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(queue\_mutex);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ updates.push(update);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ cv.notify\_one();}
+\DoxyCodeLine{00101\ \ \ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classGraphUpdateQueue_a87f3e51b959f4ac6403d95c1e3dba4c3}{pop}}(\mbox{\hyperlink{structGraphUpdate}{GraphUpdate}}\ \&update)\ \{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(queue\_mutex);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ cv.wait(lock,\ [\textcolor{keyword}{this}]()\ \{\ \textcolor{keywordflow}{return}\ !updates.empty()\ ||\ shutdown\_flag;\ \});}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (shutdown\_flag\ \&\&\ updates.empty())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ update\ =\ updates.front();}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ updates.pop();}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00121\ \ \ \ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00132\ \ \ \ \ std::vector<GraphUpdate>\ \mbox{\hyperlink{classGraphUpdateQueue_a878ff033814bd6228f09c74260fefe44}{popAll}}()\ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(queue\_mutex);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ a\ temporary\ queue\ to\ swap}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ std::queue<GraphUpdate>\ temp;}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ std::swap(temp,\ updates);\ \textcolor{comment}{//\ Efficiently\ clears\ the\ main\ queue}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Transfer\ elements\ to\ the\ vector}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ std::vector<GraphUpdate>\ allUpdates;}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!temp.empty())\ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ allUpdates.push\_back(std::move(temp.front()));\ \textcolor{comment}{//\ Move\ instead\ of\ copy}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ temp.pop();}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::move(allUpdates);}
+\DoxyCodeLine{00147\ \ \ \ \ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphUpdateQueue_a7867ed8e468ee74d679b01172991ce05}{shutdown}}()\ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(queue\_mutex);}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ shutdown\_flag\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ cv.notify\_all();}
+\DoxyCodeLine{00160\ \ \ \ \ \}}
+\DoxyCodeLine{00161\ \};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHUPDATEQUEUE\_H}}
+
+\end{DoxyCode}

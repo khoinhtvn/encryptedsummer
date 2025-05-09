@@ -1,0 +1,174 @@
+\doxysection{Graph\+Builder Class Reference}
+\hypertarget{classGraphBuilder}{}\label{classGraphBuilder}\index{GraphBuilder@{GraphBuilder}}
+
+
+Singleton class responsible for building and managing the network traffic graph.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Builder.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Builder\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=192pt]{classGraphBuilder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraphBuilder_a3af3213174c72b1eda8f3a0e21bba54b}{Graph\+Builder}} (const \mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted copy constructor to prevent copying of the singleton instance. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \& \mbox{\hyperlink{classGraphBuilder_acbd5f45fa3be1fa61975e8fefedd3278}{operator=}} (const \mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \&)=delete
+\begin{DoxyCompactList}\small\item\em Deleted assignment operator to prevent assignment of the singleton instance. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ \mbox{\hyperlink{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c}{get\+\_\+last\+\_\+updates}} ()
+\begin{DoxyCompactList}\small\item\em Gets the update list for the graph. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}{add\+\_\+connection}} (const std\+::string \&src\+\_\+ip, const std\+::string \&dst\+\_\+ip, const std\+::string \&proto, const std\+::string \&timestamp, int src\+\_\+port, int dst\+\_\+port, const std\+::string \&method="{}"{}, const std\+::string \&host="{}"{}, const std\+::string \&uri="{}"{}, const std\+::string \&version="{}"{}, const std\+::string \&user\+\_\+agent="{}"{}, int request\+\_\+body\+\_\+len=0, int response\+\_\+body\+\_\+len=0, int status\+\_\+code=0, const std\+::string \&status\+\_\+msg="{}"{}, const std\+::vector$<$ std\+::string $>$ \&tags=\{\}, const std\+::vector$<$ std\+::string $>$ \&resp\+\_\+fuids=\{\}, const std\+::vector$<$ std\+::string $>$ \&resp\+\_\+mime\+\_\+types=\{\})
+\begin{DoxyCompactList}\small\item\em Processes a network connection event and adds the corresponding nodes and edges to the graph. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \& \mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\+\_\+graph}} ()
+\begin{DoxyCompactList}\small\item\em Gets a reference to the underlying \doxylink{classTrafficGraph}{Traffic\+Graph} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \& \mbox{\hyperlink{classGraphBuilder_adbe9d786ed3fbcd471f83e3ec9ac9efa}{get\+\_\+instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \doxylink{classGraphBuilder}{Graph\+Builder}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Singleton class responsible for building and managing the network traffic graph. 
+
+The {\ttfamily \doxylink{classGraphBuilder}{Graph\+Builder}} class provides a single point of access to the {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} and offers methods to process raw network traffic data (e.\+g., from Zeek logs) and add corresponding nodes and edges to the graph. The singleton pattern ensures that only one instance of the graph builder exists throughout the application. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGraphBuilder_a3af3213174c72b1eda8f3a0e21bba54b}\index{GraphBuilder@{GraphBuilder}!GraphBuilder@{GraphBuilder}}
+\index{GraphBuilder@{GraphBuilder}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{GraphBuilder()}{GraphBuilder()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_a3af3213174c72b1eda8f3a0e21bba54b} 
+Graph\+Builder\+::\+Graph\+Builder (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Deleted copy constructor to prevent copying of the singleton instance. 
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}\index{GraphBuilder@{GraphBuilder}!add\_connection@{add\_connection}}
+\index{add\_connection@{add\_connection}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{add\_connection()}{add\_connection()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c} 
+void Graph\+Builder\+::add\+\_\+connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src\+\_\+ip}{, }\item[{const std\+::string \&}]{dst\+\_\+ip}{, }\item[{const std\+::string \&}]{proto}{, }\item[{const std\+::string \&}]{timestamp}{, }\item[{int}]{src\+\_\+port}{, }\item[{int}]{dst\+\_\+port}{, }\item[{const std\+::string \&}]{method}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{host}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{uri}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{version}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{user\+\_\+agent}{ = {\ttfamily "{}"{}}, }\item[{int}]{request\+\_\+body\+\_\+len}{ = {\ttfamily 0}, }\item[{int}]{response\+\_\+body\+\_\+len}{ = {\ttfamily 0}, }\item[{int}]{status\+\_\+code}{ = {\ttfamily 0}, }\item[{const std\+::string \&}]{status\+\_\+msg}{ = {\ttfamily "{}"{}}, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{tags}{ = {\ttfamily \{\}}, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{resp\+\_\+fuids}{ = {\ttfamily \{\}}, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{resp\+\_\+mime\+\_\+types}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Processes a network connection event and adds the corresponding nodes and edges to the graph. 
+
+This method takes details of a network connection (e.\+g., source and destination IPs, ports, protocol) and updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em src\+\_\+ip} & Source IP address of the connection. \\
+\hline
+{\em dst\+\_\+ip} & Destination IP address of the connection. \\
+\hline
+{\em proto} & Protocol of the connection (e.\+g., "{}tcp"{}, "{}udp"{}). \\
+\hline
+{\em timestamp} & Timestamp of the connection event. \\
+\hline
+{\em src\+\_\+port} & Source port of the connection. \\
+\hline
+{\em dst\+\_\+port} & Destination port of the connection. \\
+\hline
+{\em method} & HTTP request method (if applicable). Defaults to "{}"{}. \\
+\hline
+{\em host} & HTTP host header (if applicable). Defaults to "{}"{}. \\
+\hline
+{\em uri} & HTTP request URI (if applicable). Defaults to "{}"{}. \\
+\hline
+{\em version} & HTTP version (if applicable). Defaults to "{}"{}. \\
+\hline
+{\em user\+\_\+agent} & HTTP user agent string (if applicable). Defaults to "{}"{}. \\
+\hline
+{\em request\+\_\+body\+\_\+len} & Length of the HTTP request body (if applicable). Defaults to 0. \\
+\hline
+{\em response\+\_\+body\+\_\+len} & Length of the HTTP response body (if applicable). Defaults to 0. \\
+\hline
+{\em status\+\_\+code} & HTTP status code (if applicable). Defaults to 0. \\
+\hline
+{\em status\+\_\+msg} & HTTP status message (if applicable). Defaults to "{}"{}. \\
+\hline
+{\em tags} & A vector of tags associated with the connection. Defaults to \{\}. \\
+\hline
+{\em resp\+\_\+fuids} & A vector of file unique identifiers from the responder. Defaults to \{\}. \\
+\hline
+{\em resp\+\_\+mime\+\_\+types} & A vector of MIME types from the responder. Defaults to \{\}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}\index{GraphBuilder@{GraphBuilder}!get\_graph@{get\_graph}}
+\index{get\_graph@{get\_graph}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{get\_graph()}{get\_graph()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf} 
+\mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \& Graph\+Builder\+::get\+\_\+graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets a reference to the underlying \doxylink{classTrafficGraph}{Traffic\+Graph} object. 
+
+This method provides access to the {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} object managed by the {\ttfamily \doxylink{classGraphBuilder}{Graph\+Builder}}.
+
+\begin{DoxyReturn}{Returns}
+A reference to the \doxylink{classTrafficGraph}{Traffic\+Graph} object. 
+\end{DoxyReturn}
+\Hypertarget{classGraphBuilder_adbe9d786ed3fbcd471f83e3ec9ac9efa}\index{GraphBuilder@{GraphBuilder}!get\_instance@{get\_instance}}
+\index{get\_instance@{get\_instance}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{get\_instance()}{get\_instance()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_adbe9d786ed3fbcd471f83e3ec9ac9efa} 
+static \mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \& Graph\+Builder\+::get\+\_\+instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \doxylink{classGraphBuilder}{Graph\+Builder}. 
+
+This is the entry point to access the \doxylink{classGraphBuilder}{Graph\+Builder}. If the instance has not been created yet, it creates one in a thread-\/safe way.
+
+\begin{DoxyReturn}{Returns}
+A reference to the single \doxylink{classGraphBuilder}{Graph\+Builder} instance. 
+\end{DoxyReturn}
+\Hypertarget{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c}\index{GraphBuilder@{GraphBuilder}!get\_last\_updates@{get\_last\_updates}}
+\index{get\_last\_updates@{get\_last\_updates}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{get\_last\_updates()}{get\_last\_updates()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c} 
+std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ Graph\+Builder\+::get\+\_\+last\+\_\+updates (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the update list for the graph. 
+
+This is useful for periodic dumping, to just export incremental updates.
+
+\begin{DoxyReturn}{Returns}
+
+\end{DoxyReturn}
+\Hypertarget{classGraphBuilder_acbd5f45fa3be1fa61975e8fefedd3278}\index{GraphBuilder@{GraphBuilder}!operator=@{operator=}}
+\index{operator=@{operator=}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_acbd5f45fa3be1fa61975e8fefedd3278} 
+\mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \& Graph\+Builder\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classGraphBuilder}{Graph\+Builder}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+Deleted assignment operator to prevent assignment of the singleton instance. 
+
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphBuilder_8h}{Graph\+Builder.\+h}}\item 
+\mbox{\hyperlink{GraphBuilder_8cpp}{Graph\+Builder.\+cpp}}\end{DoxyCompactItemize}

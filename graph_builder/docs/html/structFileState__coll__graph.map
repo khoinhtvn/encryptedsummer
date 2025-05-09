@@ -1,0 +1,9 @@
+<map id="FileState" name="FileState">
+<area shape="rect" id="Node000001" title="Represents the state of a monitored file." alt="" coords="53,133,169,259"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,52,71"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="41,70,56,108,62,118,57,121,52,110,36,72"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="90,5,133,71"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="114,71,114,117,109,117,109,71"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="190,5,241,71"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="207,72,188,111,181,122,177,119,184,108,202,70"/>
+</map>

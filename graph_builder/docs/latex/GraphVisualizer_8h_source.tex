@@ -1,0 +1,48 @@
+\doxysection{Graph\+Visualizer.\+h}
+\hypertarget{GraphVisualizer_8h_source}{}\label{GraphVisualizer_8h_source}\index{includes/GraphVisualizer.h@{includes/GraphVisualizer.h}}
+\mbox{\hyperlink{GraphVisualizer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 4/28/25.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ GRAPH\_VISUALIZER\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ GRAPH\_VISUALIZER\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphBuilder_8h}{GraphBuilder.h}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <graphviz/gvc.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphBuilder_8h}{GraphBuilder.h}}"{}}\ \textcolor{comment}{//\ Self-\/include\ is\ unusual\ and\ likely\ unintentional.\ Remove\ in\ actual\ code.}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphVisualizer_a287b703bc034030724527683912c298b}{GraphVisualizer}}\ \{}
+\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classGraphVisualizer_a287b703bc034030724527683912c298b}{GraphVisualizer}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classGraphVisualizer_a6d1a5753d06a04ae602c9ac77a39da7f}{\string~GraphVisualizer}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphVisualizer_a957fb958f7dbe05e5554f8751e71aff9}{visualize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\&\ graph,}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ output\_file\ =\ \textcolor{stringliteral}{"{}graph.png"{}},}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ open\_image\ =\ \textcolor{keyword}{true},\ \ \textcolor{keywordtype}{bool}\ export\_cond\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \ \ GVC\_t*\ gvc;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_nodes(Agraph\_t*\ graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\&\ traffic\_graph);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_edges(Agraph\_t*\ graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\&\ traffic\_graph);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ apply\_default\_styles(Agraph\_t*\ graph);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00111\ \ \ \ \ std::string\ generate\_node\_id(\textcolor{keyword}{const}\ std::string\&\ original\_id);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_to\_dot(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\&\ graph,\ \textcolor{keyword}{const}\ std::string\&\ filename);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ std::string\ escape\_dot\_string(\textcolor{keyword}{const}\ std::string\ \&str);}
+\DoxyCodeLine{00125\ \};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPH\_VISUALIZER\_H}}
+
+\end{DoxyCode}

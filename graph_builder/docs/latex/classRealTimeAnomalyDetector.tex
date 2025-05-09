@@ -1,0 +1,64 @@
+\doxysection{Real\+Time\+Anomaly\+Detector Class Reference}
+\hypertarget{classRealTimeAnomalyDetector}{}\label{classRealTimeAnomalyDetector}\index{RealTimeAnomalyDetector@{RealTimeAnomalyDetector}}
+
+
+Class for detecting real-\/time anomalies in network traffic.  
+
+
+
+
+{\ttfamily \#include $<$Real\+Time\+Anomaly\+Detector.\+h$>$}
+
+
+
+Collaboration diagram for Real\+Time\+Anomaly\+Detector\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=223pt]{classRealTimeAnomalyDetector__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore}{Anomaly\+Score}}
+\begin{DoxyCompactList}\small\item\em Structure to store the anomaly score and contributing factors for a node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore}{Anomaly\+Score}} $>$ \mbox{\hyperlink{classRealTimeAnomalyDetector_a3493eb650d0e6f9b541f959a00596d11}{detect}} (const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&graph)
+\begin{DoxyCompactList}\small\item\em Detects anomalies in the given network traffic graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class for detecting real-\/time anomalies in network traffic. 
+
+The {\ttfamily \doxylink{classRealTimeAnomalyDetector}{Real\+Time\+Anomaly\+Detector}} class analyzes the network traffic graph constructed by the {\ttfamily \doxylink{classGraphBuilder}{Graph\+Builder}} to identify nodes that exhibit unusual behavior. It calculates an anomaly score for each node and provides information about the factors contributing to the score. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classRealTimeAnomalyDetector_a3493eb650d0e6f9b541f959a00596d11}\index{RealTimeAnomalyDetector@{RealTimeAnomalyDetector}!detect@{detect}}
+\index{detect@{detect}!RealTimeAnomalyDetector@{RealTimeAnomalyDetector}}
+\doxysubsubsection{\texorpdfstring{detect()}{detect()}}
+{\footnotesize\ttfamily \label{classRealTimeAnomalyDetector_a3493eb650d0e6f9b541f959a00596d11} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore}{Real\+Time\+Anomaly\+Detector\+::\+Anomaly\+Score}} $>$ Real\+Time\+Anomaly\+Detector\+::detect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&}]{graph}{}\end{DoxyParamCaption})}
+
+
+
+Detects anomalies in the given network traffic graph. 
+
+This method analyzes the nodes in the graph to identify those with anomalous behavior. It calculates an anomaly score for each node based on its connection patterns, protocol usage, and other relevant features.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & A const reference to the \doxylink{classTrafficGraph}{Traffic\+Graph} object representing the network traffic. The method does not modify the graph. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+An unordered map where the key is the node ID (string) and the value is an \doxylink{structRealTimeAnomalyDetector_1_1AnomalyScore}{Anomaly\+Score} struct containing the anomaly score and contributing factors for that node. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{RealTimeAnomalyDetector_8h}{Real\+Time\+Anomaly\+Detector.\+h}}\item 
+\mbox{\hyperlink{RealTimeAnomalyDetector_8cpp}{Real\+Time\+Anomaly\+Detector.\+cpp}}\end{DoxyCompactItemize}

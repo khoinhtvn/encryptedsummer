@@ -1,0 +1,95 @@
+\doxysection{Log\+Monitor Class Reference}
+\hypertarget{classLogMonitor}{}\label{classLogMonitor}\index{LogMonitor@{LogMonitor}}
+
+
+Class responsible for monitoring Zeek log files for new entries.  
+
+
+
+
+{\ttfamily \#include $<$Log\+Monitor.\+h$>$}
+
+
+
+Collaboration diagram for Log\+Monitor\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=172pt]{classLogMonitor__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classLogMonitor_a1574c6cc7f766782e8d4b9d22cfba910}{Log\+Monitor}} (const std\+::string \&log\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classLogMonitor}{Log\+Monitor}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classLogMonitor_a457807b7ece78c43bddb00d2a370d337}{\texorpdfstring{$\sim$}{\string~}\+Log\+Monitor}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classLogMonitor}{Log\+Monitor}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLogMonitor_a06798e36d1f46ba50036cdf4e511464a}{start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the log monitoring process in a separate thread. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classLogMonitor_af306da2a690908fb9a9369946791cafb}{stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the log monitoring process. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for monitoring Zeek log files for new entries. 
+
+The {\ttfamily \doxylink{classLogMonitor}{Log\+Monitor}} class runs in a separate thread, continuously scanning a directory for new Zeek log files. It uses a {\ttfamily \doxylink{classZeekLogParser}{Zeek\+Log\+Parser}} to parse the log data and process it (e.\+g., by adding information to the network traffic graph). 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classLogMonitor_a1574c6cc7f766782e8d4b9d22cfba910}\index{LogMonitor@{LogMonitor}!LogMonitor@{LogMonitor}}
+\index{LogMonitor@{LogMonitor}!LogMonitor@{LogMonitor}}
+\doxysubsubsection{\texorpdfstring{LogMonitor()}{LogMonitor()}}
+{\footnotesize\ttfamily \label{classLogMonitor_a1574c6cc7f766782e8d4b9d22cfba910} 
+Log\+Monitor\+::\+Log\+Monitor (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{log\+\_\+dir}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{classLogMonitor}{Log\+Monitor}. 
+
+Initializes the \doxylink{classLogMonitor}{Log\+Monitor} with the directory to monitor for Zeek logs.
+
+
+\begin{DoxyParams}{Parameters}
+{\em log\+\_\+dir} & The path to the directory containing the Zeek log files. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classLogMonitor_a457807b7ece78c43bddb00d2a370d337}\index{LogMonitor@{LogMonitor}!````~LogMonitor@{\texorpdfstring{$\sim$}{\string~}LogMonitor}}
+\index{````~LogMonitor@{\texorpdfstring{$\sim$}{\string~}LogMonitor}!LogMonitor@{LogMonitor}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LogMonitor()}{\string~LogMonitor()}}
+{\footnotesize\ttfamily \label{classLogMonitor_a457807b7ece78c43bddb00d2a370d337} 
+Log\+Monitor\+::\texorpdfstring{$\sim$}{\string~}\+Log\+Monitor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{classLogMonitor}{Log\+Monitor}. 
+
+Stops the monitor thread and joins it to ensure proper cleanup. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classLogMonitor_a06798e36d1f46ba50036cdf4e511464a}\index{LogMonitor@{LogMonitor}!start@{start}}
+\index{start@{start}!LogMonitor@{LogMonitor}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily \label{classLogMonitor_a06798e36d1f46ba50036cdf4e511464a} 
+void Log\+Monitor\+::start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the log monitoring process in a separate thread. 
+
+This method starts the monitor thread, which will continuously check for new log files and process them. \Hypertarget{classLogMonitor_af306da2a690908fb9a9369946791cafb}\index{LogMonitor@{LogMonitor}!stop@{stop}}
+\index{stop@{stop}!LogMonitor@{LogMonitor}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{classLogMonitor_af306da2a690908fb9a9369946791cafb} 
+void Log\+Monitor\+::stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the log monitoring process. 
+
+This method sets the {\ttfamily running} flag to false, signaling the monitor thread to stop, and then joins the thread to wait for it to finish. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{LogMonitor_8h}{Log\+Monitor.\+h}}\item 
+\mbox{\hyperlink{LogMonitor_8cpp}{Log\+Monitor.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,134 @@
+\doxysection{Zeek\+Log\+Parser Class Reference}
+\hypertarget{classZeekLogParser}{}\label{classZeekLogParser}\index{ZeekLogParser@{ZeekLogParser}}
+
+
+Class responsible for parsing Zeek log files.  
+
+
+
+
+{\ttfamily \#include $<$Zeek\+Log\+Parser.\+h$>$}
+
+
+
+Collaboration diagram for Zeek\+Log\+Parser\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=227pt]{classZeekLogParser__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classZeekLogParser_ac14af41e221d8102cebb6f73ab750f20}{Zeek\+Log\+Parser}} (const std\+::string \&log\+\_\+dir)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{classZeekLogParser}{Zeek\+Log\+Parser}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classZeekLogParser_af922e185b33640058001015a136545a3}{monitor\+\_\+logs}} ()
+\begin{DoxyCompactList}\small\item\em Monitors the log directory for new or updated log files. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classZeekLogParser_afc2dc1c7ef6b3d99d96c17156b565bff}{process\+\_\+new\+\_\+file}} (const \mbox{\hyperlink{structFileState}{File\+State}} \&file)
+\begin{DoxyCompactList}\small\item\em Processes a new log file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classZeekLogParser_ab40d5d847d4254335368a0231bca696d}{process\+\_\+appended\+\_\+data}} (const std\+::string \&path, off\+\_\+t old\+\_\+size, off\+\_\+t new\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Processes appended data in a log file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classZeekLogParser_a5a5dee5a6d6c6daf5fb1a517f848961e}{process\+\_\+content}} (const std\+::string \&path, const std\+::string \&content)
+\begin{DoxyCompactList}\small\item\em Processes the content of a log file or a portion of it. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for parsing Zeek log files. 
+
+The {\ttfamily \doxylink{classZeekLogParser}{Zeek\+Log\+Parser}} class monitors a directory for Zeek log files, parses the log entries, and extracts relevant information. It handles different Zeek log formats and keeps track of file state to process updates efficiently. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classZeekLogParser_ac14af41e221d8102cebb6f73ab750f20}\index{ZeekLogParser@{ZeekLogParser}!ZeekLogParser@{ZeekLogParser}}
+\index{ZeekLogParser@{ZeekLogParser}!ZeekLogParser@{ZeekLogParser}}
+\doxysubsubsection{\texorpdfstring{ZeekLogParser()}{ZeekLogParser()}}
+{\footnotesize\ttfamily \label{classZeekLogParser_ac14af41e221d8102cebb6f73ab750f20} 
+Zeek\+Log\+Parser\+::\+Zeek\+Log\+Parser (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{log\+\_\+dir}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor for \doxylink{classZeekLogParser}{Zeek\+Log\+Parser}. 
+
+Initializes the parser with the directory containing the Zeek log files.
+
+
+\begin{DoxyParams}{Parameters}
+{\em log\+\_\+dir} & The path to the directory containing the Zeek log files. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classZeekLogParser_af922e185b33640058001015a136545a3}\index{ZeekLogParser@{ZeekLogParser}!monitor\_logs@{monitor\_logs}}
+\index{monitor\_logs@{monitor\_logs}!ZeekLogParser@{ZeekLogParser}}
+\doxysubsubsection{\texorpdfstring{monitor\_logs()}{monitor\_logs()}}
+{\footnotesize\ttfamily \label{classZeekLogParser_af922e185b33640058001015a136545a3} 
+void Zeek\+Log\+Parser\+::monitor\+\_\+logs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Monitors the log directory for new or updated log files. 
+
+This method continuously checks the log directory for new files or changes to existing files and processes them accordingly. \Hypertarget{classZeekLogParser_ab40d5d847d4254335368a0231bca696d}\index{ZeekLogParser@{ZeekLogParser}!process\_appended\_data@{process\_appended\_data}}
+\index{process\_appended\_data@{process\_appended\_data}!ZeekLogParser@{ZeekLogParser}}
+\doxysubsubsection{\texorpdfstring{process\_appended\_data()}{process\_appended\_data()}}
+{\footnotesize\ttfamily \label{classZeekLogParser_ab40d5d847d4254335368a0231bca696d} 
+void Zeek\+Log\+Parser\+::process\+\_\+appended\+\_\+data (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{off\+\_\+t}]{old\+\_\+size}{, }\item[{off\+\_\+t}]{new\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Processes appended data in a log file. 
+
+This method is called when an existing log file has been appended with new data. It reads and processes only the new data in the file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the log file. \\
+\hline
+{\em old\+\_\+size} & The previous size of the log file. \\
+\hline
+{\em new\+\_\+size} & The current size of the log file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classZeekLogParser_a5a5dee5a6d6c6daf5fb1a517f848961e}\index{ZeekLogParser@{ZeekLogParser}!process\_content@{process\_content}}
+\index{process\_content@{process\_content}!ZeekLogParser@{ZeekLogParser}}
+\doxysubsubsection{\texorpdfstring{process\_content()}{process\_content()}}
+{\footnotesize\ttfamily \label{classZeekLogParser_a5a5dee5a6d6c6daf5fb1a517f848961e} 
+void Zeek\+Log\+Parser\+::process\+\_\+content (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{content}{}\end{DoxyParamCaption})}
+
+
+
+Processes the content of a log file or a portion of it. 
+
+This method parses the given content of a log file and extracts relevant information from individual log entries.
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the log file. \\
+\hline
+{\em content} & The content to process. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classZeekLogParser_afc2dc1c7ef6b3d99d96c17156b565bff}\index{ZeekLogParser@{ZeekLogParser}!process\_new\_file@{process\_new\_file}}
+\index{process\_new\_file@{process\_new\_file}!ZeekLogParser@{ZeekLogParser}}
+\doxysubsubsection{\texorpdfstring{process\_new\_file()}{process\_new\_file()}}
+{\footnotesize\ttfamily \label{classZeekLogParser_afc2dc1c7ef6b3d99d96c17156b565bff} 
+void Zeek\+Log\+Parser\+::process\+\_\+new\+\_\+file (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFileState}{File\+State}} \&}]{file}{}\end{DoxyParamCaption})}
+
+
+
+Processes a new log file. 
+
+This method is called when a new log file is detected. It parses the entire file and extracts relevant information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em file} & The \doxylink{structFileState}{File\+State} object representing the new log file. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{ZeekLogParser_8h}{Zeek\+Log\+Parser.\+h}}\item 
+\mbox{\hyperlink{ZeekLogParser_8cpp}{Zeek\+Log\+Parser.\+cpp}}\end{DoxyCompactItemize}

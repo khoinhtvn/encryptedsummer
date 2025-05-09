@@ -1,0 +1,152 @@
+\doxysection{File\+State Struct Reference}
+\hypertarget{structFileState}{}\label{structFileState}\index{FileState@{FileState}}
+
+
+Represents the state of a monitored file.  
+
+
+
+
+{\ttfamily \#include $<$Zeek\+Log\+Parser.\+h$>$}
+
+
+
+Collaboration diagram for File\+State\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=257pt]{structFileState__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structFileState_a29ca2864c94e4eca416d81007058eb4f}{File\+State}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{structFileState}{File\+State}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structFileState_ae6c916efcf345fedb2a4165b5c637aba}{File\+State}} (const std\+::string \&p)
+\begin{DoxyCompactList}\small\item\em Constructor for \doxylink{structFileState}{File\+State}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structFileState_a8a334d569b2977c7ccc221d6d01ada41}{update}} ()
+\begin{DoxyCompactList}\small\item\em Updates the file\textquotesingle{}s inode and size. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{structFileState_ac6b4ee72d0eac3bd51186f1d84af950b}{operator==}} (const \mbox{\hyperlink{structFileState}{File\+State}} \&other) const
+\begin{DoxyCompactList}\small\item\em Equality operator for \doxylink{structFileState}{File\+State}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+ino\+\_\+t \mbox{\hyperlink{structFileState_ae010c4938bde94f555a4589146fa7b39}{inode}}
+\begin{DoxyCompactList}\small\item\em Unique identifier of the file (inode). \end{DoxyCompactList}\item 
+off\+\_\+t \mbox{\hyperlink{structFileState_acb4eeb0f402fe2ff73624f40fd8b6183}{last\+\_\+size}}
+\begin{DoxyCompactList}\small\item\em Last known size of the file in bytes. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structFileState_aa54fe5f4df7f270814dd53db110bb7d5}{path}}
+\begin{DoxyCompactList}\small\item\em Full path to the file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the state of a monitored file. 
+
+This struct stores information about a file, including its inode, last known size, and path. It is used to track changes to log files over time. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structFileState_a29ca2864c94e4eca416d81007058eb4f}\index{FileState@{FileState}!FileState@{FileState}}
+\index{FileState@{FileState}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{FileState()}{FileState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{structFileState_a29ca2864c94e4eca416d81007058eb4f} 
+File\+State\+::\+File\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor for \doxylink{structFileState}{File\+State}. 
+
+\Hypertarget{structFileState_ae6c916efcf345fedb2a4165b5c637aba}\index{FileState@{FileState}!FileState@{FileState}}
+\index{FileState@{FileState}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{FileState()}{FileState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{structFileState_ae6c916efcf345fedb2a4165b5c637aba} 
+File\+State\+::\+File\+State (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{p}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor for \doxylink{structFileState}{File\+State}. 
+
+Initializes the \doxylink{structFileState}{File\+State} with the file\textquotesingle{}s path and updates its inode and size.
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The path to the file. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structFileState_ac6b4ee72d0eac3bd51186f1d84af950b}\index{FileState@{FileState}!operator==@{operator==}}
+\index{operator==@{operator==}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{structFileState_ac6b4ee72d0eac3bd51186f1d84af950b} 
+bool File\+State\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structFileState}{File\+State}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Equality operator for \doxylink{structFileState}{File\+State}. 
+
+Compares two \doxylink{structFileState}{File\+State} objects for equality based on their members
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The \doxylink{structFileState}{File\+State} object to compare with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the two objects are equal, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{structFileState_a8a334d569b2977c7ccc221d6d01ada41}\index{FileState@{FileState}!update@{update}}
+\index{update@{update}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily \label{structFileState_a8a334d569b2977c7ccc221d6d01ada41} 
+bool File\+State\+::update (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the file\textquotesingle{}s inode and size. 
+
+Retrieves the current inode and size of the file and updates the corresponding members of the \doxylink{structFileState}{File\+State} object.
+
+\begin{DoxyReturn}{Returns}
+true if the update was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structFileState_ae010c4938bde94f555a4589146fa7b39}\index{FileState@{FileState}!inode@{inode}}
+\index{inode@{inode}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{inode}{inode}}
+{\footnotesize\ttfamily \label{structFileState_ae010c4938bde94f555a4589146fa7b39} 
+ino\+\_\+t File\+State\+::inode}
+
+
+
+Unique identifier of the file (inode). 
+
+\Hypertarget{structFileState_acb4eeb0f402fe2ff73624f40fd8b6183}\index{FileState@{FileState}!last\_size@{last\_size}}
+\index{last\_size@{last\_size}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{last\_size}{last\_size}}
+{\footnotesize\ttfamily \label{structFileState_acb4eeb0f402fe2ff73624f40fd8b6183} 
+off\+\_\+t File\+State\+::last\+\_\+size}
+
+
+
+Last known size of the file in bytes. 
+
+\Hypertarget{structFileState_aa54fe5f4df7f270814dd53db110bb7d5}\index{FileState@{FileState}!path@{path}}
+\index{path@{path}!FileState@{FileState}}
+\doxysubsubsection{\texorpdfstring{path}{path}}
+{\footnotesize\ttfamily \label{structFileState_aa54fe5f4df7f270814dd53db110bb7d5} 
+std\+::string File\+State\+::path}
+
+
+
+Full path to the file. 
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{ZeekLogParser_8h}{Zeek\+Log\+Parser.\+h}}\item 
+\mbox{\hyperlink{ZeekLogParser_8cpp}{Zeek\+Log\+Parser.\+cpp}}\end{DoxyCompactItemize}

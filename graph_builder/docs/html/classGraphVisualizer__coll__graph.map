@@ -1,0 +1,3 @@
+<map id="GraphVisualizer" name="GraphVisualizer">
+<area shape="rect" id="Node000001" title="Class responsible for visualizing the network traffic graph using Graphviz." alt="" coords="5,5,159,111"/>
+</map>

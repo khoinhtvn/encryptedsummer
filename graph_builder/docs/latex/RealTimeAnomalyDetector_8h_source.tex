@@ -1,0 +1,31 @@
+\doxysection{Real\+Time\+Anomaly\+Detector.\+h}
+\hypertarget{RealTimeAnomalyDetector_8h_source}{}\label{RealTimeAnomalyDetector_8h_source}\index{includes/RealTimeAnomalyDetector.h@{includes/RealTimeAnomalyDetector.h}}
+\mbox{\hyperlink{RealTimeAnomalyDetector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 4/28/25.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ REALTIMEANOMALYDETECTOR\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ REALTIMEANOMALYDETECTOR\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphBuilder_8h}{GraphBuilder.h}}"{}}\ \textcolor{comment}{//\ Include\ the\ header\ for\ GraphBuilder}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classRealTimeAnomalyDetector}{RealTimeAnomalyDetector}}\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore}{AnomalyScore}}\ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore_af78f3e437b8b9b0988f9334ff378d240}{score}};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structRealTimeAnomalyDetector_1_1AnomalyScore_acd217a71de0895b7e2880adefac0d493}{contributing\_factors}};}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00057\ \ \ \ \ std::unordered\_map<std::string,\ AnomalyScore>\ \mbox{\hyperlink{classRealTimeAnomalyDetector_a3493eb650d0e6f9b541f959a00596d11}{detect}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph);}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ REALTIMEANOMALYDETECTOR\_H}}
+
+\end{DoxyCode}

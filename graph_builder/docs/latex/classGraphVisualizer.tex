@@ -1,0 +1,89 @@
+\doxysection{Graph\+Visualizer Class Reference}
+\hypertarget{classGraphVisualizer}{}\label{classGraphVisualizer}\index{GraphVisualizer@{GraphVisualizer}}
+
+
+Class responsible for visualizing the network traffic graph using Graphviz.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Visualizer.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Visualizer\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=195pt]{classGraphVisualizer__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classGraphVisualizer_a287b703bc034030724527683912c298b}{Graph\+Visualizer}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphVisualizer}{Graph\+Visualizer}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classGraphVisualizer_a6d1a5753d06a04ae602c9ac77a39da7f}{\texorpdfstring{$\sim$}{\string~}\+Graph\+Visualizer}} ()
+\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classGraphVisualizer}{Graph\+Visualizer}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphVisualizer_a957fb958f7dbe05e5554f8751e71aff9}{visualize}} (const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&graph, const std\+::string \&output\+\_\+file="{}graph.\+png"{}, bool open\+\_\+image=true, bool export\+\_\+cond=true)
+\begin{DoxyCompactList}\small\item\em Visualizes the given traffic graph and saves it to a file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class responsible for visualizing the network traffic graph using Graphviz. 
+
+The {\ttfamily \doxylink{classGraphVisualizer}{Graph\+Visualizer}} class takes a {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} object and renders it as a visual representation, typically saving it as a PNG image. It utilizes the Graphviz library for graph layout and rendering. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classGraphVisualizer_a287b703bc034030724527683912c298b}\index{GraphVisualizer@{GraphVisualizer}!GraphVisualizer@{GraphVisualizer}}
+\index{GraphVisualizer@{GraphVisualizer}!GraphVisualizer@{GraphVisualizer}}
+\doxysubsubsection{\texorpdfstring{GraphVisualizer()}{GraphVisualizer()}}
+{\footnotesize\ttfamily \label{classGraphVisualizer_a287b703bc034030724527683912c298b} 
+Graph\+Visualizer\+::\+Graph\+Visualizer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{classGraphVisualizer}{Graph\+Visualizer}. 
+
+Initializes the Graphviz context ({\ttfamily GVC\+\_\+t}). \Hypertarget{classGraphVisualizer_a6d1a5753d06a04ae602c9ac77a39da7f}\index{GraphVisualizer@{GraphVisualizer}!````~GraphVisualizer@{\texorpdfstring{$\sim$}{\string~}GraphVisualizer}}
+\index{````~GraphVisualizer@{\texorpdfstring{$\sim$}{\string~}GraphVisualizer}!GraphVisualizer@{GraphVisualizer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}GraphVisualizer()}{\string~GraphVisualizer()}}
+{\footnotesize\ttfamily \label{classGraphVisualizer_a6d1a5753d06a04ae602c9ac77a39da7f} 
+Graph\+Visualizer\+::\texorpdfstring{$\sim$}{\string~}\+Graph\+Visualizer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor for the \doxylink{classGraphVisualizer}{Graph\+Visualizer}. 
+
+Releases the Graphviz context to free allocated resources. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGraphVisualizer_a957fb958f7dbe05e5554f8751e71aff9}\index{GraphVisualizer@{GraphVisualizer}!visualize@{visualize}}
+\index{visualize@{visualize}!GraphVisualizer@{GraphVisualizer}}
+\doxysubsubsection{\texorpdfstring{visualize()}{visualize()}}
+{\footnotesize\ttfamily \label{classGraphVisualizer_a957fb958f7dbe05e5554f8751e71aff9} 
+void Graph\+Visualizer\+::visualize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&}]{graph}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}graph.png"{}}, }\item[{bool}]{open\+\_\+image}{ = {\ttfamily true}, }\item[{bool}]{export\+\_\+cond}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Visualizes the given traffic graph and saves it to a file. 
+
+This method takes a {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}}, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to "{}graph.\+png"{}). It can also optionally open the generated image and control whether the export should proceed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} object to visualize. \\
+\hline
+{\em output\+\_\+file} & The name of the output image file (default\+: "{}graph.\+png"{}). \\
+\hline
+{\em open\+\_\+image} & A boolean indicating whether to attempt to open the generated image (default\+: true). \\
+\hline
+{\em export\+\_\+cond} & A boolean controlling whether the export process should proceed (default\+: true). \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphVisualizer_8h}{Graph\+Visualizer.\+h}}\item 
+\mbox{\hyperlink{GraphVisualizer_8cpp}{Graph\+Visualizer.\+cpp}}\end{DoxyCompactItemize}

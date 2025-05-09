@@ -1,0 +1,26 @@
+\doxysection{Graph\+Edge.\+h}
+\hypertarget{GraphEdge_8h_source}{}\label{GraphEdge_8h_source}\index{includes/GraphEdge.h@{includes/GraphEdge.h}}
+\mbox{\hyperlink{GraphEdge_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 5/7/25.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GRAPHEDGE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GRAPHEDGE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{GraphEdge}}\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}};}
+\DoxyCodeLine{00024\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}};}
+\DoxyCodeLine{00028\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}};}
+\DoxyCodeLine{00032\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}{attributes}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{GraphEdge}}(\textcolor{keyword}{const}\ std::string\ \&src,\ \textcolor{keyword}{const}\ std::string\ \&tgt,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&rel)}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}}(src),\ \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}}(tgt),\ \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}}(rel)\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHEDGE\_H}}
+
+\end{DoxyCode}

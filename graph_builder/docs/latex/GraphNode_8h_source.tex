@@ -1,0 +1,59 @@
+\doxysection{Graph\+Node.\+h}
+\hypertarget{GraphNode_8h_source}{}\label{GraphNode_8h_source}\index{includes/GraphNode.h@{includes/GraphNode.h}}
+\mbox{\hyperlink{GraphNode_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 5/7/25.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GRAPHNODE\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GRAPHNODE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{GraphNode}}\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}};}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}};}
+\DoxyCodeLine{00031\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classGraphNode_a2c594b99d6a85cd46b105fba519da025}{attributes}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a670878b3732a867f03d647293ff8c999}{degree}}\{0\};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a801dee56f15b6fbd0c467b5bf16902b4}{in\_degree}}\{0\};}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a08b422a344b59db81fa9b24752a6dd46}{out\_degree}}\{0\};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ std::map<std::string,\ int>\ \mbox{\hyperlink{classGraphNode_a90ac84a35374b57bf0eee149a1be810c}{protocol\_counts}};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::atomic<double>\ \mbox{\hyperlink{classGraphNode_a703ca88ecc4d49629d8978b2768f4d9c}{activity\_score}}\{0.0\};}
+\DoxyCodeLine{00058\ \ \ \ \ \}\ \mbox{\hyperlink{classGraphNode_a639d48f16977a8df7a06064719a55096}{features}};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a164b7d24668bfd11140684f8e1588fcd}{connections\_last\_minute}}\{0\};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a76b6d95dfe863ad77a818d2b36f450b9}{connections\_last\_hour}}\{0\};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classGraphNode_a8168b02a72ea169890faff00696f52a8}{monitoring\_start}};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a8ddd1cab02cd802a3a9544511d94856c}{total\_connections}}\{0\};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ std::vector<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classGraphNode_ab677cd2fc13c49b7771adb3c7e7da2b9}{recent\_connections}};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ std::queue<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classGraphNode_a7442585422a9af484aa4ee1cbb8701ae}{minute\_window}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::queue<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classGraphNode_a963ae60d35fec246688469f2f47be491}{hour\_window}};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classGraphNode_af5c627d7ac20f7c90598ca7c3abfaf0a}{window\_mutex}};}
+\DoxyCodeLine{00096\ \ \ \ \ \}\ \mbox{\hyperlink{classGraphNode_a1e915cfefcf770cc1ceb007593b03511}{temporal}};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{GraphNode}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}})}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}}(\mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}}),\ \mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}}(\mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}})\ \{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classGraphNode_a1e915cfefcf770cc1ceb007593b03511}{temporal}}.monitoring\_start\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_aec41bf6dc8c079924a0076c6388b8de6}{update\_connection\_features}}(\textcolor{keyword}{const}\ std::string\ \&protocol,\ \textcolor{keywordtype}{bool}\ is\_outgoing);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_a9f6e0e9f78b21d99d3c858928762f983}{cleanup\_old\_connections}}();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classGraphNode_a92cd7727c4e791176e9e255b929b9603}{calculate\_anomaly\_score}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb}{cleanup\_time\_windows}}();}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classGraphNode_aac8f32f0478ee7262d5db9c6ea4ee1c5}{get\_connections\_last\_minute}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classGraphNode_ab197cc5d8d2abda61c831cae073cb140}{get\_connections\_last\_hour}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00152\ \};}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHNODE\_H}}
+
+\end{DoxyCode}
