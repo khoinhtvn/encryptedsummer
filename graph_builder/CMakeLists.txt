@@ -19,7 +19,9 @@ add_executable(graph_builder main.cpp
         includes/GraphEdge.h
         includes/TrafficGraph.h
         GraphNode.cpp
-        TrafficGraph.cpp)
+        TrafficGraph.cpp
+        FeatureEncoder.cpp
+        includes/FeatureEncoder.h)
 
 
 # Manually specify the Graphviz libraries

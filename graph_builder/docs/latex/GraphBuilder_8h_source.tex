@@ -17,60 +17,64 @@
 \DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <mutex>}}
 \DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <vector>}}
 \DoxyCodeLine{00022\ }
-\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphUpdateQueue_8h}{GraphUpdateQueue.h}}"{}}}
-\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TrafficGraph_8h}{TrafficGraph.h}}"{}}}
-\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{FeatureEncoder_8h}{FeatureEncoder.h}}"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphUpdateQueue_8h}{GraphUpdateQueue.h}}"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{TrafficGraph_8h}{TrafficGraph.h}}"{}}}
 \DoxyCodeLine{00026\ }
-\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }GraphBuilder\ \{}
-\DoxyCodeLine{00036\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<GraphBuilder>\ instance;}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ instance\_mutex;}
-\DoxyCodeLine{00045\ }
-\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ graph;}
-\DoxyCodeLine{00050\ }
-\DoxyCodeLine{00054\ \ \ \ \ GraphBuilder()\ =\ \textcolor{keywordflow}{default};}
-\DoxyCodeLine{00055\ }
-\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classGraphUpdateQueue}{GraphUpdateQueue}}\ update\_queue;}
-\DoxyCodeLine{00060\ }
-\DoxyCodeLine{00061\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00062\ \ \ \ \ std::atomic<bool>\ save\_pending\{\textcolor{keyword}{false}\};}
-\DoxyCodeLine{00063\ }
-\DoxyCodeLine{00064\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classGraphBuilder_a3af3213174c72b1eda8f3a0e21bba54b}{GraphBuilder}}(\textcolor{keyword}{const}\ GraphBuilder\ \&)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00069\ }
-\DoxyCodeLine{00074\ \ \ \ \ GraphBuilder\ \&\mbox{\hyperlink{classGraphBuilder_acbd5f45fa3be1fa61975e8fefedd3278}{operator=}}(\textcolor{keyword}{const}\ GraphBuilder\ \&)\ =\ \textcolor{keyword}{delete};}
-\DoxyCodeLine{00075\ }
-\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{static}\ GraphBuilder\ \&\mbox{\hyperlink{classGraphBuilder_adbe9d786ed3fbcd471f83e3ec9ac9efa}{get\_instance}}()\ \{}
-\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(instance\_mutex);}
-\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!instance)\ \{}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ instance\ =\ std::unique\_ptr<GraphBuilder>(\textcolor{keyword}{new}\ GraphBuilder());}
-\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \}}
-\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *instance;}
-\DoxyCodeLine{00090\ \ \ \ \ \}}
-\DoxyCodeLine{00091\ }
-\DoxyCodeLine{00099\ \ \ \ \ std::vector<GraphUpdate>\ \mbox{\hyperlink{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c}{get\_last\_updates}}()\ \{}
-\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::move(update\_queue.popAll());}
-\DoxyCodeLine{00101\ \ \ \ \ \}}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}{add\_connection}}(\textcolor{keyword}{const}\ std::string\ \&src\_ip,\ \textcolor{keyword}{const}\ std::string\ \&dst\_ip,}
-\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&proto,\ \textcolor{keyword}{const}\ std::string\ \&timestamp,}
-\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ src\_port,\ \textcolor{keywordtype}{int}\ dst\_port,\ \textcolor{keyword}{const}\ std::string\ \&method\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&host\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&uri\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&version\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&user\_agent\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ request\_body\_len\ =\ 0,}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ response\_body\_len\ =\ 0,}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ status\_code\ =\ 0,}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&status\_msg\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&tags\ =\ \{\},}
-\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&resp\_fuids\ =\ \{\},}
-\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&resp\_mime\_types\ =\ \{\});}
-\DoxyCodeLine{00143\ }
-\DoxyCodeLine{00151\ \ \ \ \ TrafficGraph\ \&\mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\_graph}}();}
-\DoxyCodeLine{00152\ \};}
-\DoxyCodeLine{00153\ }
-\DoxyCodeLine{00154\ }
-\DoxyCodeLine{00155\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHBUILDER\_H}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }GraphBuilder\ \{}
+\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<GraphBuilder>\ instance;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ instance\_mutex;}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ graph;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ GraphBuilder()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classGraphUpdateQueue}{GraphUpdateQueue}}\ update\_queue;}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classFeatureEncoder}{FeatureEncoder}}\ feature\_encoder;}
+\DoxyCodeLine{00065\ \ \ \ \ std::atomic<bool>\ save\_pending\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classGraphBuilder_a3af3213174c72b1eda8f3a0e21bba54b}{GraphBuilder}}(\textcolor{keyword}{const}\ GraphBuilder\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ GraphBuilder\ \&\mbox{\hyperlink{classGraphBuilder_acbd5f45fa3be1fa61975e8fefedd3278}{operator=}}(\textcolor{keyword}{const}\ GraphBuilder\ \&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ GraphBuilder\ \&\mbox{\hyperlink{classGraphBuilder_adbe9d786ed3fbcd471f83e3ec9ac9efa}{get\_instance}}()\ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::lock\_guard\ lock(instance\_mutex);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!instance)\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ instance\ =\ std::unique\_ptr<GraphBuilder>(\textcolor{keyword}{new}\ GraphBuilder());}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *instance;}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00102\ \ \ \ \ std::vector<GraphUpdate>\ \mbox{\hyperlink{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c}{get\_last\_updates}}()\ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::move(update\_queue.popAll());}
+\DoxyCodeLine{00104\ \ \ \ \ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}{add\_connection}}(\textcolor{keyword}{const}\ std::string\ \&src\_ip,\ \textcolor{keyword}{const}\ std::string\ \&dst\_ip,}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&proto,\ \textcolor{keyword}{const}\ std::string\ \&timestamp,}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ src\_port,\ \textcolor{keywordtype}{int}\ dst\_port,\ \textcolor{keyword}{const}\ std::string\ \&method\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&host\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&uri\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&version\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&user\_agent\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ request\_body\_len\ =\ 0,}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ response\_body\_len\ =\ 0,}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ status\_code\ =\ 0,}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&status\_msg\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&tags\ =\ \{\},}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&resp\_fuids\ =\ \{\},}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\ \&resp\_mime\_types\ =\ \{\});}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00154\ \ \ \ \ TrafficGraph\ \&\mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\_graph}}();}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\_feature\_dimension}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ should\ match\ your\ encoder's\ output\ size}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ feature\_encoder.get\_feature\_dimension();}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHBUILDER\_H}}
 
 \end{DoxyCode}

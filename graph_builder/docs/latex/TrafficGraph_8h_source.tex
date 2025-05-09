@@ -53,26 +53,26 @@
 \DoxyCodeLine{00097\ }
 \DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classTrafficGraph_ae29bbb7c163056228cb8fa23fcb12795}{add\_node}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&type);}
 \DoxyCodeLine{00107\ }
-\DoxyCodeLine{00119\ \ \ \ \ std::weak\_ptr<GraphEdge>\ \mbox{\hyperlink{classTrafficGraph_a3280806b85e7a6a1b534551c5d1340d1}{add\_edge}}(\textcolor{keyword}{const}\ std::string\ \&src,\ \textcolor{keyword}{const}\ std::string\ \&tgt,}
-\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&rel,}
-\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\ \&attrs\ =\ \{\});}
-\DoxyCodeLine{00122\ }
-\DoxyCodeLine{00134\ \ \ \ \ std::pair<GraphNode\ \&,\ bool>\ \mbox{\hyperlink{classTrafficGraph_a4fe8bf82ebe5a118c488142e2a0a0711}{get\_or\_create\_node}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&type);}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00142\ \ \ \ \ std::weak\_ptr<GraphNode>\ \mbox{\hyperlink{classTrafficGraph_a050fc4ccd24adf28afb04769841bd738}{get\_node\_reference}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id});}
-\DoxyCodeLine{00143\ }
-\DoxyCodeLine{00151\ \ \ \ \ std::vector<std::shared\_ptr<GraphNode>\ >\ \mbox{\hyperlink{classTrafficGraph_a503a7eb165f5df6b3099b10e71774735}{get\_nodes}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00152\ }
-\DoxyCodeLine{00160\ \ \ \ \ std::vector<std::shared\_ptr<GraphEdge>\ >\ \mbox{\hyperlink{classTrafficGraph_a9537afb96e766b4d910038a7b503af7f}{get\_edges}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00161\ }
-\DoxyCodeLine{00171\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classTrafficGraph_aff5c1921c0c1614230fa3c43b215b320}{find\_connected\_components}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00172\ }
-\DoxyCodeLine{00181\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classTrafficGraph_a1d46ea0525b6507283b5806a6abffe3f}{detect\_anomalies}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00182\ }
-\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTrafficGraph_ae485051f1b4e6f8cbb91ad7d89dc89b1}{is\_empty}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00188\ }
-\DoxyCodeLine{00189\ \ \ \ \ \textcolor{comment}{//\ Add\ more\ analysis\ methods\ as\ needed}}
-\DoxyCodeLine{00190\ \};}
-\DoxyCodeLine{00191\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TRAFFICGRAPH\_H}}
+\DoxyCodeLine{00120\ \ \ \ \ std::weak\_ptr<GraphEdge>\ \mbox{\hyperlink{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153}{add\_edge}}(\textcolor{keyword}{const}\ std::string\ \&src,\ \textcolor{keyword}{const}\ std::string\ \&tgt,}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&rel,}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\ \&attrs\ =\ \{\},\ std::vector<float>\ encoded\_features\ =\ \{\});}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00135\ \ \ \ \ std::pair<GraphNode\ \&,\ bool>\ \mbox{\hyperlink{classTrafficGraph_a4fe8bf82ebe5a118c488142e2a0a0711}{get\_or\_create\_node}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&type);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \ \ \ \ std::weak\_ptr<GraphNode>\ \mbox{\hyperlink{classTrafficGraph_a050fc4ccd24adf28afb04769841bd738}{get\_node\_reference}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00152\ \ \ \ \ std::vector<std::shared\_ptr<GraphNode>\ >\ \mbox{\hyperlink{classTrafficGraph_a503a7eb165f5df6b3099b10e71774735}{get\_nodes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00161\ \ \ \ \ std::vector<std::shared\_ptr<GraphEdge>\ >\ \mbox{\hyperlink{classTrafficGraph_a9537afb96e766b4d910038a7b503af7f}{get\_edges}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00172\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classTrafficGraph_aff5c1921c0c1614230fa3c43b215b320}{find\_connected\_components}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00182\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classTrafficGraph_a1d46ea0525b6507283b5806a6abffe3f}{detect\_anomalies}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classTrafficGraph_ae485051f1b4e6f8cbb91ad7d89dc89b1}{is\_empty}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{comment}{//\ Add\ more\ analysis\ methods\ as\ needed}}
+\DoxyCodeLine{00191\ \};}
+\DoxyCodeLine{00192\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//TRAFFICGRAPH\_H}}
 
 \end{DoxyCode}

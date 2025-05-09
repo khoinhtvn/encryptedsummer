@@ -2,7 +2,7 @@ var searchData=
 [
   ['activity_5fscore_0',['activity_score',['../classGraphNode.html#a703ca88ecc4d49629d8978b2768f4d9c',1,'GraphNode']]],
   ['add_5fconnection_1',['add_connection',['../classGraphBuilder.html#a493a2fd26390adb3f4426e130d14160c',1,'GraphBuilder']]],
-  ['add_5fedge_2',['add_edge',['../classTrafficGraph.html#a3280806b85e7a6a1b534551c5d1340d1',1,'TrafficGraph']]],
+  ['add_5fedge_2',['add_edge',['../classTrafficGraph.html#a99df0f5fa9c14af4bc276659336de153',1,'TrafficGraph']]],
   ['add_5fnode_3',['add_node',['../classTrafficGraph.html#ae29bbb7c163056228cb8fa23fcb12795',1,'TrafficGraph']]],
   ['analysis_4',['Basic Analysis',['../md_README.html#autotoc_md8',1,'']]],
   ['analyzer_5',['Zeek Traffic Graph Analyzer',['../md_README.html',1,'']]],

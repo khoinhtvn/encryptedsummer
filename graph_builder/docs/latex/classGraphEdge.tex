@@ -15,7 +15,7 @@ Collaboration diagram for Graph\+Edge\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=250pt]{classGraphEdge__coll__graph}
+\includegraphics[width=350pt]{classGraphEdge__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -33,7 +33,9 @@ std\+::string \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}
 std\+::string \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}}
 \begin{DoxyCompactList}\small\item\em Type of relationship between the source and target nodes (e.\+g., "{}connects\+\_\+to"{}, "{}sends\+\_\+data\+\_\+to"{}). \end{DoxyCompactList}\item 
 std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}{attributes}}
-\begin{DoxyCompactList}\small\item\em Additional attributes associated with the edge. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Additional attributes associated with the edge. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{classGraphEdge_a6b6bacb716fb79e52b6b184f1c33b2cc}{encoded\+\_\+features}}
+\begin{DoxyCompactList}\small\item\em Encoded features, to feed to GAT. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -73,6 +75,16 @@ std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ Graph\+Edge\+::attri
 
 
 Additional attributes associated with the edge. 
+
+\Hypertarget{classGraphEdge_a6b6bacb716fb79e52b6b184f1c33b2cc}\index{GraphEdge@{GraphEdge}!encoded\_features@{encoded\_features}}
+\index{encoded\_features@{encoded\_features}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{encoded\_features}{encoded\_features}}
+{\footnotesize\ttfamily \label{classGraphEdge_a6b6bacb716fb79e52b6b184f1c33b2cc} 
+std\+::vector$<$float$>$ Graph\+Edge\+::encoded\+\_\+features}
+
+
+
+Encoded features, to feed to GAT. 
 
 \Hypertarget{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}\index{GraphEdge@{GraphEdge}!relationship@{relationship}}
 \index{relationship@{relationship}!GraphEdge@{GraphEdge}}

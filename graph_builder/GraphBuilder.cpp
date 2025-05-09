@@ -70,6 +70,7 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
         {"status_code", std::to_string(status_code)},
         {"status_msg", status_msg}
     };
+    std::vector<float> features = feature_encoder.encode_features(attrs);
     // Handle vector attributes by joining them with commas
     if (!tags.empty()) {
         std::string tags_str;
@@ -97,7 +98,8 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
         }
         attrs["resp_mime_types"] = mime_str;
     }
-    auto edge = graph.add_edge(src_ip, dst_ip, proto + "_connection", attrs);
+
+    auto edge = graph.add_edge(src_ip, dst_ip, proto, attrs, features);
     update_queue.push({
         GraphUpdate::Type::EDGE_CREATE,
         std::weak_ptr<GraphNode>(),

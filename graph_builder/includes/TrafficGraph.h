@@ -114,11 +114,12 @@ public:
      * @param tgt The identifier of the target node.
      * @param rel The type of relationship between the nodes.
      * @param attrs Optional attributes to associate with the edge. Defaults to an empty map.
+     * @param attrs Optional encoded featrures to associate with the edge. Defaults to an empty vector.
      * @return A weak reference to the GraphEdge. Useful for incremental updates.
      */
     std::weak_ptr<GraphEdge> add_edge(const std::string &src, const std::string &tgt,
                                       const std::string &rel,
-                                      const std::unordered_map<std::string, std::string> &attrs = {});
+                                      const std::unordered_map<std::string, std::string> &attrs = {}, std::vector<float> encoded_features = {});
 
     /**
      * @brief Retrieves an existing node or creates a new one if it doesn't exist.

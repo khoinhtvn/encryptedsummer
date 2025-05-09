@@ -15,7 +15,7 @@ Collaboration diagram for Graph\+Builder\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=192pt]{classGraphBuilder__coll__graph}
+\includegraphics[width=222pt]{classGraphBuilder__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -30,7 +30,9 @@ std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ \mbox{\
 void \mbox{\hyperlink{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}{add\+\_\+connection}} (const std\+::string \&src\+\_\+ip, const std\+::string \&dst\+\_\+ip, const std\+::string \&proto, const std\+::string \&timestamp, int src\+\_\+port, int dst\+\_\+port, const std\+::string \&method="{}"{}, const std\+::string \&host="{}"{}, const std\+::string \&uri="{}"{}, const std\+::string \&version="{}"{}, const std\+::string \&user\+\_\+agent="{}"{}, int request\+\_\+body\+\_\+len=0, int response\+\_\+body\+\_\+len=0, int status\+\_\+code=0, const std\+::string \&status\+\_\+msg="{}"{}, const std\+::vector$<$ std\+::string $>$ \&tags=\{\}, const std\+::vector$<$ std\+::string $>$ \&resp\+\_\+fuids=\{\}, const std\+::vector$<$ std\+::string $>$ \&resp\+\_\+mime\+\_\+types=\{\})
 \begin{DoxyCompactList}\small\item\em Processes a network connection event and adds the corresponding nodes and edges to the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \& \mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\+\_\+graph}} ()
-\begin{DoxyCompactList}\small\item\em Gets a reference to the underlying \doxylink{classTrafficGraph}{Traffic\+Graph} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets a reference to the underlying \doxylink{classTrafficGraph}{Traffic\+Graph} object. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\+\_\+feature\+\_\+dimension}} () const
+\begin{DoxyCompactList}\small\item\em Gets the dimension of the encoded feature vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
@@ -108,6 +110,19 @@ This method takes details of a network connection (e.\+g., source and destinatio
 {\em resp\+\_\+mime\+\_\+types} & A vector of MIME types from the responder. Defaults to \{\}. \\
 \hline
 \end{DoxyParams}
+\Hypertarget{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}\index{GraphBuilder@{GraphBuilder}!get\_feature\_dimension@{get\_feature\_dimension}}
+\index{get\_feature\_dimension@{get\_feature\_dimension}!GraphBuilder@{GraphBuilder}}
+\doxysubsubsection{\texorpdfstring{get\_feature\_dimension()}{get\_feature\_dimension()}}
+{\footnotesize\ttfamily \label{classGraphBuilder_a5bd30a82778691790ebf82f364494a41} 
+size\+\_\+t Graph\+Builder\+::get\+\_\+feature\+\_\+dimension (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the dimension of the encoded feature vector. 
+
+\begin{DoxyReturn}{Returns}
+Size of feature vector produced by the encoder 
+\end{DoxyReturn}
 \Hypertarget{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}\index{GraphBuilder@{GraphBuilder}!get\_graph@{get\_graph}}
 \index{get\_graph@{get\_graph}!GraphBuilder@{GraphBuilder}}
 \doxysubsubsection{\texorpdfstring{get\_graph()}{get\_graph()}}

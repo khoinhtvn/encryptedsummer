@@ -21,7 +21,7 @@ GraphExporter::~GraphExporter() {
     gvFreeContext(gvc);
 }
 
-void GraphExporter::export_full_graph(const TrafficGraph &graph,
+void GraphExporter::export_full_graph_human_readable(const TrafficGraph &graph,
                                       const std::string &output_file,
                                       const bool open_image, const bool export_cond) {
     if (!graph.is_empty()) {
@@ -66,7 +66,7 @@ void GraphExporter::export_full_graph(const TrafficGraph &graph,
     }
 }
 
-void GraphExporter::export_incremental_update(std::vector<GraphUpdate> updates, const std::string &output_file) {
+void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> updates, const std::string &output_file) {
     if (!updates.empty()) {
         std::ofstream ofs(output_file);
         if (!ofs.is_open()) {
@@ -85,7 +85,15 @@ void GraphExporter::export_incremental_update(std::vector<GraphUpdate> updates, 
                     break;
                 case GraphUpdate::Type::EDGE_CREATE:
                     if (auto edge = update.edge.lock()) {
-                        write_edge_to_file(edge, ofs);
+                        // Write edge with encoded features
+                        ofs << "  \"" << edge->source << "\" -> \"" << edge->target << "\" [";
+
+                        for (size_t i = 0; i < edge->encoded_features.size(); ++i) {
+                            if (i != 0 && i != edge->encoded_features.size() ) ofs << ",";
+                            ofs << FeatureEncoder::get_feature_name(i) << "="
+                                << edge->encoded_features[i];
+                        }
+                        ofs << "  ];\n";
                     }
                     break;
                 case GraphUpdate::Type::NODE_UPDATE:
@@ -101,6 +109,7 @@ void GraphExporter::export_incremental_update(std::vector<GraphUpdate> updates, 
         // End DOT format
         ofs << "}\n";
         ofs.close();
+        std::cout << "File " << output_file << " written" << std::endl;
     }else {
         std::cout << "Empty updates vector!" << std::endl;
     }
@@ -259,7 +268,7 @@ void GraphExporter::export_to_dot(const TrafficGraph &graph, const std::string &
 
     dot_file << "}\n";
     dot_file.close();
-    std::cout << "File" << filename << " written" << std::endl;
+    std::cout << "File " << filename << " written" << std::endl;
 }
 
 // Funzione di utilità per fare l'escape di caratteri speciali nelle stringhe DOT

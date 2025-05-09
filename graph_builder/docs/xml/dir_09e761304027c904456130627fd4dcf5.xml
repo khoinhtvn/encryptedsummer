@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
   <compounddef id="dir_09e761304027c904456130627fd4dcf5" kind="dir">
     <compoundname>includes</compoundname>
+    <innerfile refid="FeatureEncoder_8h">FeatureEncoder.h</innerfile>
     <innerfile refid="GraphBuilder_8h">GraphBuilder.h</innerfile>
     <innerfile refid="GraphEdge_8h">GraphEdge.h</innerfile>
     <innerfile refid="GraphExporter_8h">GraphExporter.h</innerfile>

@@ -119,11 +119,13 @@ Collaboration diagram for GraphEdge:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphEdge__coll__graph.png" border="0" usemap="#aGraphEdge_coll__map" alt="Collaboration graph"/></div>
 <map name="aGraphEdge_coll__map" id="aGraphEdge_coll__map">
-<area shape="rect" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="39,177,148,243"/>
+<area shape="rect" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="101,177,211,243"/>
 <area shape="rect" title=" " alt="" coords="5,13,56,78"/>
-<area shape="poly" title=" " alt="" coords="28,79,27,115,36,152,42,163,38,166,31,154,22,116,23,78"/>
+<area shape="poly" title=" " alt="" coords="35,78,42,116,49,135,59,152,89,178,85,182,55,155,44,137,37,117,29,79"/>
 <area shape="rect" title=" " alt="" coords="81,5,231,85"/>
-<area shape="poly" title=" " alt="" coords="151,86,129,154,124,164,120,162,124,152,145,85"/>
+<area shape="poly" title=" " alt="" coords="159,85,159,161,153,161,153,85"/>
+<area shape="rect" title=" " alt="" coords="256,13,371,78"/>
+<area shape="poly" title=" " alt="" coords="298,80,274,118,242,155,226,169,222,165,238,151,269,114,294,77"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -147,6 +149,9 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a7a0dcb05bfdb31ed7735a746b13be8d6" id="r_a7a0dcb05bfdb31ed7735a746b13be8d6"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a0dcb05bfdb31ed7735a746b13be8d6">attributes</a></td></tr>
 <tr class="memdesc:a7a0dcb05bfdb31ed7735a746b13be8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Additional attributes associated with the edge.  <br /></td></tr>
 <tr class="separator:a7a0dcb05bfdb31ed7735a746b13be8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6b6bacb716fb79e52b6b184f1c33b2cc" id="r_a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b6bacb716fb79e52b6b184f1c33b2cc">encoded_features</a></td></tr>
+<tr class="memdesc:a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoded features, to feed to GAT.  <br /></td></tr>
+<tr class="separator:a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents an edge in the network traffic graph, connecting two GraphNodes. </p>
@@ -210,6 +215,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Additional attributes associated with the edge. </p>
+
+</div>
+</div>
+<a id="a6b6bacb716fb79e52b6b184f1c33b2cc" name="a6b6bacb716fb79e52b6b184f1c33b2cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6b6bacb716fb79e52b6b184f1c33b2cc">&#9670;&#160;</a></span>encoded_features</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt;float&gt; GraphEdge::encoded_features</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Encoded features, to feed to GAT. </p>
 
 </div>
 </div>

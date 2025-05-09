@@ -77,9 +77,9 @@ int main(int argc, char *argv[]) {
              * @param false Flag indicating whether to clear the graph before visualization.
              * @param true Flag indicating whether to include labels on the nodes.
              */
-            exporter.export_full_graph(graph, "./nw_graph_" + std::to_string(UTC), false, true);
+            exporter.export_full_graph_human_readable(graph, "./nw_graph_" + std::to_string(UTC), false, true);
 
-            exporter.export_incremental_update(GraphBuilder::get_instance().get_last_updates(), "./nw_graph_" + std::to_string(UTC));
+            exporter.export_incremental_update_encoded(GraphBuilder::get_instance().get_last_updates(), "./nw_graph_encoded_" + std::to_string(UTC) + ".dot");
             /**
              * @brief Detects anomalies in the current network graph, based on basic .
              *

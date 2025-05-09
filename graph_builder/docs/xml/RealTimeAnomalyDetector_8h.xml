@@ -10,6 +10,24 @@
     <includedby refid="RealTimeAnomalyDetector_8cpp" local="yes">RealTimeAnomalyDetector.cpp</includedby>
     <includedby refid="main_8cpp" local="yes">main.cpp</includedby>
     <incdepgraph>
+      <node id="8">
+        <label>FeatureEncoder.h</label>
+        <link refid="FeatureEncoder_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
       <node id="5">
         <label>GraphBuilder.h</label>
         <link refid="GraphBuilder_8h"/>
@@ -21,43 +39,45 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="16">
         <label>GraphEdge.h</label>
         <link refid="GraphEdge_8h"/>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="17">
         <label>GraphNode.h</label>
         <link refid="GraphNode_8h"/>
-        <childnode refid="13" relation="include">
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="13">
         <label>GraphUpdateQueue.h</label>
         <link refid="GraphUpdateQueue_8h"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -72,31 +92,40 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="20">
         <label>TrafficGraph.h</label>
         <link refid="TrafficGraph_8h"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="9">
+        <label>algorithm</label>
+      </node>
+      <node id="18">
         <label>atomic</label>
       </node>
       <node id="10">
+        <label>cmath</label>
+      </node>
+      <node id="15">
         <label>condition_variable</label>
       </node>
-      <node id="14">
+      <node id="11">
+        <label>ctime</label>
+      </node>
+      <node id="19">
         <label>map</label>
       </node>
       <node id="6">
@@ -105,16 +134,19 @@
       <node id="7">
         <label>mutex</label>
       </node>
-      <node id="9">
+      <node id="14">
         <label>queue</label>
       </node>
-      <node id="16">
+      <node id="21">
         <label>shared_mutex</label>
+      </node>
+      <node id="12">
+        <label>stdexcept</label>
       </node>
       <node id="2">
         <label>string</label>
       </node>
-      <node id="17">
+      <node id="22">
         <label>thread</label>
       </node>
       <node id="4">

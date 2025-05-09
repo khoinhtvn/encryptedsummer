@@ -9,6 +9,24 @@
     <includes refid="LogMonitor_8h" local="yes">includes/LogMonitor.h</includes>
     <includes refid="RealTimeAnomalyDetector_8h" local="yes">includes/RealTimeAnomalyDetector.h</includes>
     <incdepgraph>
+      <node id="8">
+        <label>FeatureEncoder.h</label>
+        <link refid="FeatureEncoder_8h"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
       <node id="4">
         <label>includes/GraphBuilder.h</label>
         <link refid="GraphBuilder_8h"/>
@@ -20,105 +38,107 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-      </node>
-      <node id="11">
-        <label>GraphEdge.h</label>
-        <link refid="GraphEdge_8h"/>
-        <childnode refid="12" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="18">
+        <label>GraphEdge.h</label>
+        <link refid="GraphEdge_8h"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="24">
         <label>includes/GraphExporter.h</label>
         <link refid="GraphExporter_8h"/>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="13">
+      <node id="19">
         <label>GraphNode.h</label>
         <link refid="GraphNode_8h"/>
-        <childnode refid="14" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
-      <node id="8">
+      <node id="15">
         <label>GraphUpdateQueue.h</label>
         <link refid="GraphUpdateQueue_8h"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>includes/LogMonitor.h</label>
+        <link refid="LogMonitor_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>includes/RealTimeAnomalyDetector.h</label>
+        <link refid="RealTimeAnomalyDetector_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>TrafficGraph.h</label>
+        <link refid="TrafficGraph_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
-      <node id="21">
-        <label>includes/LogMonitor.h</label>
-        <link refid="LogMonitor_8h"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>includes/RealTimeAnomalyDetector.h</label>
-        <link refid="RealTimeAnomalyDetector_8h"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>TrafficGraph.h</label>
-        <link refid="TrafficGraph_8h"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-      </node>
-      <node id="22">
+      <node id="27">
         <label>ZeekLogParser.h</label>
         <link refid="ZeekLogParser_8h"/>
-        <childnode refid="20" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -130,29 +150,38 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="24" relation="include">
         </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
-      <node id="14">
+      <node id="11">
+        <label>algorithm</label>
+      </node>
+      <node id="20">
         <label>atomic</label>
       </node>
-      <node id="10">
+      <node id="12">
+        <label>cmath</label>
+      </node>
+      <node id="17">
         <label>condition_variable</label>
       </node>
-      <node id="23">
+      <node id="13">
+        <label>ctime</label>
+      </node>
+      <node id="28">
         <label>filesystem</label>
       </node>
-      <node id="19">
+      <node id="25">
         <label>graphviz/gvc.h</label>
       </node>
       <node id="2">
         <label>iostream</label>
       </node>
-      <node id="15">
+      <node id="21">
         <label>map</label>
       </node>
       <node id="5">
@@ -161,19 +190,22 @@
       <node id="6">
         <label>mutex</label>
       </node>
-      <node id="9">
+      <node id="16">
         <label>queue</label>
       </node>
-      <node id="17">
+      <node id="23">
         <label>shared_mutex</label>
       </node>
-      <node id="20">
+      <node id="14">
+        <label>stdexcept</label>
+      </node>
+      <node id="9">
         <label>string</label>
       </node>
       <node id="3">
         <label>thread</label>
       </node>
-      <node id="12">
+      <node id="10">
         <label>unordered_map</label>
       </node>
       <node id="7">
@@ -317,9 +349,9 @@ Iterates through the detected anomalies and prints alerts for high-scoring ones.
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>now<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>UTC<sp/>=<sp/>std::chrono::duration_cast&lt;std::chrono::seconds&gt;(now.time_since_epoch()).count();</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;graph<sp/>=<sp/><ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().<ref refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kindref="member">get_graph</ref>();</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1a87081ce287618fcb2dd12d1ed08b2c52" kindref="member">export_full_graph</ref>(graph,<sp/></highlight><highlight class="stringliteral">&quot;./nw_graph_&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(UTC),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1a6569907146d179c526617405392a9746" kindref="member">export_full_graph_human_readable</ref>(graph,<sp/></highlight><highlight class="stringliteral">&quot;./nw_graph_&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(UTC),<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">,<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight></codeline>
-<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1aa7f00e63a59e4a1739bc5742578bf63e" kindref="member">export_incremental_update</ref>(<ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().get_last_updates(),<sp/></highlight><highlight class="stringliteral">&quot;./nw_graph_&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(UTC));</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1a031f8793193715ee2018a2e28a8005db" kindref="member">export_incremental_update_encoded</ref>(<ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().get_last_updates(),<sp/></highlight><highlight class="stringliteral">&quot;./nw_graph_encoded_&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(UTC)<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;.dot&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>anomalies<sp/>=<sp/>detector.<ref refid="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" kindref="member">detect</ref>(graph);</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;[node,<sp/>score]:<sp/>anomalies)<sp/>{</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(score.score<sp/>&gt;<sp/>0.8)<sp/>{</highlight></codeline>

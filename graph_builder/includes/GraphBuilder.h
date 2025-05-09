@@ -20,6 +20,7 @@
 #include <mutex>
 #include <vector>
 
+#include "FeatureEncoder.h"
 #include "GraphUpdateQueue.h"
 #include "TrafficGraph.h"
 
@@ -57,8 +58,10 @@ private:
  * @brief Queue of incremental updates. Useful for passing just new graph features when needed.
  */
     GraphUpdateQueue update_queue;
-
-private:
+    /**
+* @brief Feature encoder. Useful for passing data to GAT.
+*/
+    FeatureEncoder feature_encoder;
     std::atomic<bool> save_pending{false};
 
 public:
@@ -149,6 +152,14 @@ public:
      * @return A reference to the TrafficGraph object.
      */
     TrafficGraph &get_graph();
+    /**
+ * @brief Gets the dimension of the encoded feature vector
+ * @return Size of feature vector produced by the encoder
+ */
+    size_t get_feature_dimension() const {
+        // This should match your encoder's output size
+        return feature_encoder.get_feature_dimension();
+    }
 };
 
 

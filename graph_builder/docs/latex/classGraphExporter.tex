@@ -15,7 +15,7 @@ Collaboration diagram for Graph\+Exporter\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=197pt]{classGraphExporter__coll__graph}
+\includegraphics[width=226pt]{classGraphExporter__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
@@ -25,9 +25,9 @@ Collaboration diagram for Graph\+Exporter\+:\nopagebreak
 \begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphExporter}{Graph\+Exporter}. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classGraphExporter_af8456887e192d89491c058fb1eb09e97}{\texorpdfstring{$\sim$}{\string~}\+Graph\+Exporter}} ()
 \begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classGraphExporter}{Graph\+Exporter}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGraphExporter_a87081ce287618fcb2dd12d1ed08b2c52}{export\+\_\+full\+\_\+graph}} (const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&graph, const std\+::string \&output\+\_\+file="{}graph.\+png"{}, bool open\+\_\+image=true, bool export\+\_\+cond=true)
+void \mbox{\hyperlink{classGraphExporter_a6569907146d179c526617405392a9746}{export\+\_\+full\+\_\+graph\+\_\+human\+\_\+readable}} (const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&graph, const std\+::string \&output\+\_\+file="{}graph.\+png"{}, bool open\+\_\+image=true, bool export\+\_\+cond=true)
 \begin{DoxyCompactList}\small\item\em Visualizes the given traffic graph and saves it to a file. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGraphExporter_aa7f00e63a59e4a1739bc5742578bf63e}{export\+\_\+incremental\+\_\+update}} (std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ updates, const std\+::string \&output\+\_\+file="{}update.\+dot"{})
+void \mbox{\hyperlink{classGraphExporter_a031f8793193715ee2018a2e28a8005db}{export\+\_\+incremental\+\_\+update\+\_\+encoded}} (std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ updates, const std\+::string \&output\+\_\+file="{}update.\+dot"{})
 \end{DoxyCompactItemize}
 
 
@@ -60,11 +60,11 @@ Destructor for the \doxylink{classGraphExporter}{Graph\+Exporter}.
 Releases the Graphviz context to free allocated resources. 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classGraphExporter_a87081ce287618fcb2dd12d1ed08b2c52}\index{GraphExporter@{GraphExporter}!export\_full\_graph@{export\_full\_graph}}
-\index{export\_full\_graph@{export\_full\_graph}!GraphExporter@{GraphExporter}}
-\doxysubsubsection{\texorpdfstring{export\_full\_graph()}{export\_full\_graph()}}
-{\footnotesize\ttfamily \label{classGraphExporter_a87081ce287618fcb2dd12d1ed08b2c52} 
-void Graph\+Exporter\+::export\+\_\+full\+\_\+graph (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&}]{graph}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}graph.png"{}}, }\item[{bool}]{open\+\_\+image}{ = {\ttfamily true}, }\item[{bool}]{export\+\_\+cond}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+\Hypertarget{classGraphExporter_a6569907146d179c526617405392a9746}\index{GraphExporter@{GraphExporter}!export\_full\_graph\_human\_readable@{export\_full\_graph\_human\_readable}}
+\index{export\_full\_graph\_human\_readable@{export\_full\_graph\_human\_readable}!GraphExporter@{GraphExporter}}
+\doxysubsubsection{\texorpdfstring{export\_full\_graph\_human\_readable()}{export\_full\_graph\_human\_readable()}}
+{\footnotesize\ttfamily \label{classGraphExporter_a6569907146d179c526617405392a9746} 
+void Graph\+Exporter\+::export\+\_\+full\+\_\+graph\+\_\+human\+\_\+readable (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&}]{graph}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}graph.png"{}}, }\item[{bool}]{open\+\_\+image}{ = {\ttfamily true}, }\item[{bool}]{export\+\_\+cond}{ = {\ttfamily true}}\end{DoxyParamCaption})}
 
 
 
@@ -83,11 +83,11 @@ This method takes a {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}}, ge
 {\em export\+\_\+cond} & A boolean controlling whether the export process should proceed (default\+: true). \\
 \hline
 \end{DoxyParams}
-\Hypertarget{classGraphExporter_aa7f00e63a59e4a1739bc5742578bf63e}\index{GraphExporter@{GraphExporter}!export\_incremental\_update@{export\_incremental\_update}}
-\index{export\_incremental\_update@{export\_incremental\_update}!GraphExporter@{GraphExporter}}
-\doxysubsubsection{\texorpdfstring{export\_incremental\_update()}{export\_incremental\_update()}}
-{\footnotesize\ttfamily \label{classGraphExporter_aa7f00e63a59e4a1739bc5742578bf63e} 
-void Graph\+Exporter\+::export\+\_\+incremental\+\_\+update (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$}]{updates}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}update.dot"{}}}\end{DoxyParamCaption})}
+\Hypertarget{classGraphExporter_a031f8793193715ee2018a2e28a8005db}\index{GraphExporter@{GraphExporter}!export\_incremental\_update\_encoded@{export\_incremental\_update\_encoded}}
+\index{export\_incremental\_update\_encoded@{export\_incremental\_update\_encoded}!GraphExporter@{GraphExporter}}
+\doxysubsubsection{\texorpdfstring{export\_incremental\_update\_encoded()}{export\_incremental\_update\_encoded()}}
+{\footnotesize\ttfamily \label{classGraphExporter_a031f8793193715ee2018a2e28a8005db} 
+void Graph\+Exporter\+::export\+\_\+incremental\+\_\+update\+\_\+encoded (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$}]{updates}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}update.dot"{}}}\end{DoxyParamCaption})}
 
 
 

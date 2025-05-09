@@ -1,7 +1,9 @@
 <map id="GraphEdge" name="GraphEdge">
-<area shape="rect" id="Node000001" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="39,177,148,243"/>
+<area shape="rect" id="Node000001" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="101,177,211,243"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,13,56,78"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="28,79,27,115,36,152,42,163,38,166,31,154,22,116,23,78"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="35,78,42,116,49,135,59,152,89,178,85,182,55,155,44,137,37,117,29,79"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="81,5,231,85"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="151,86,129,154,124,164,120,162,124,152,145,85"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="159,85,159,161,153,161,153,85"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="256,13,371,78"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="298,80,274,118,242,155,226,169,222,165,238,151,269,114,294,77"/>
 </map>

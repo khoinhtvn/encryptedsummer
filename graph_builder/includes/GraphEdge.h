@@ -30,6 +30,10 @@ public:
      * @brief Additional attributes associated with the edge.
      */
     std::unordered_map<std::string, std::string> attributes;
+    /**
+     * @brief Encoded features, to feed to GAT.
+     */
+    std::vector<float> encoded_features;
 
     /**
      * @brief Constructor for the GraphEdge.

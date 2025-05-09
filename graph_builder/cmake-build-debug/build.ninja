@@ -97,6 +97,12 @@ build CMakeFiles/graph_builder.dir/TrafficGraph.cpp.o: CXX_COMPILER__graph_build
   OBJECT_DIR = CMakeFiles/graph_builder.dir
   OBJECT_FILE_DIR = CMakeFiles/graph_builder.dir
 
+build CMakeFiles/graph_builder.dir/FeatureEncoder.cpp.o: CXX_COMPILER__graph_builder_unscanned_Debug /home/lu/Documents/encryptedsummer/graph_builder/FeatureEncoder.cpp || cmake_object_order_depends_target_graph_builder
+  DEP_FILE = CMakeFiles/graph_builder.dir/FeatureEncoder.cpp.o.d
+  FLAGS = -g -std=gnu++20 -fdiagnostics-color=always
+  OBJECT_DIR = CMakeFiles/graph_builder.dir
+  OBJECT_FILE_DIR = CMakeFiles/graph_builder.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target graph_builder
@@ -105,7 +111,7 @@ build CMakeFiles/graph_builder.dir/TrafficGraph.cpp.o: CXX_COMPILER__graph_build
 #############################################
 # Link the executable graph_builder
 
-build graph_builder: CXX_EXECUTABLE_LINKER__graph_builder_Debug CMakeFiles/graph_builder.dir/main.cpp.o CMakeFiles/graph_builder.dir/ZeekLogParser.cpp.o CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o CMakeFiles/graph_builder.dir/LogMonitor.cpp.o CMakeFiles/graph_builder.dir/GraphExporter.cpp.o CMakeFiles/graph_builder.dir/RealTimeAnomalyDetector.cpp.o CMakeFiles/graph_builder.dir/GraphNode.cpp.o CMakeFiles/graph_builder.dir/TrafficGraph.cpp.o | /usr/lib/x86_64-linux-gnu/libgvc.so /usr/lib/x86_64-linux-gnu/libcgraph.so
+build graph_builder: CXX_EXECUTABLE_LINKER__graph_builder_Debug CMakeFiles/graph_builder.dir/main.cpp.o CMakeFiles/graph_builder.dir/ZeekLogParser.cpp.o CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o CMakeFiles/graph_builder.dir/LogMonitor.cpp.o CMakeFiles/graph_builder.dir/GraphExporter.cpp.o CMakeFiles/graph_builder.dir/RealTimeAnomalyDetector.cpp.o CMakeFiles/graph_builder.dir/GraphNode.cpp.o CMakeFiles/graph_builder.dir/TrafficGraph.cpp.o CMakeFiles/graph_builder.dir/FeatureEncoder.cpp.o | /usr/lib/x86_64-linux-gnu/libgvc.so /usr/lib/x86_64-linux-gnu/libcgraph.so
   DEP_FILE = CMakeFiles/graph_builder.dir/link.d
   FLAGS = -g
   LINK_FLAGS = -Wl,--dependency-file=CMakeFiles/graph_builder.dir/link.d

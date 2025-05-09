@@ -206,12 +206,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="106" column="10" bodyfile="TrafficGraph.cpp" bodystart="24" bodyend="29"/>
+        <location file="includes/TrafficGraph.h" line="106" column="10" bodyfile="TrafficGraph.cpp" bodystart="25" bodyend="30"/>
       </memberdef>
-      <memberdef kind="function" id="classTrafficGraph_1a3280806b85e7a6a1b534551c5d1340d1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classTrafficGraph_1a99df0f5fa9c14af4bc276659336de153" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::weak_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt;</type>
         <definition>std::weak_ptr&lt; GraphEdge &gt; TrafficGraph::add_edge</definition>
-        <argsstring>(const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={})</argsstring>
+        <argsstring>(const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={}, std::vector&lt; float &gt; encoded_features={})</argsstring>
         <name>add_edge</name>
         <qualifiedname>TrafficGraph::add_edge</qualifiedname>
         <param>
@@ -229,6 +229,11 @@
         <param>
           <type>const std::unordered_map&lt; std::string, std::string &gt; &amp;</type>
           <declname>attrs</declname>
+          <defval>{}</defval>
+        </param>
+        <param>
+          <type>std::vector&lt; float &gt;</type>
+          <declname>encoded_features</declname>
           <defval>{}</defval>
         </param>
         <briefdescription>
@@ -268,6 +273,14 @@
 <para>Optional attributes to associate with the edge. Defaults to an empty map. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>attrs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Optional encoded featrures to associate with the edge. Defaults to an empty vector. </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 <simplesect kind="return"><para>A weak reference to the <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref>. Useful for incremental updates. </para>
 </simplesect>
@@ -275,7 +288,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="119" column="19" bodyfile="TrafficGraph.cpp" bodystart="53" bodyend="62"/>
+        <location file="includes/TrafficGraph.h" line="120" column="19" bodyfile="TrafficGraph.cpp" bodystart="54" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1a4fe8bf82ebe5a118c488142e2a0a0711" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::pair&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &amp;, bool &gt;</type>
@@ -319,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="134" column="15" bodyfile="TrafficGraph.cpp" bodystart="31" bodyend="41"/>
+        <location file="includes/TrafficGraph.h" line="135" column="15" bodyfile="TrafficGraph.cpp" bodystart="32" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1a050fc4ccd24adf28afb04769841bd738" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::weak_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt;</type>
@@ -350,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="142" column="19" bodyfile="TrafficGraph.cpp" bodystart="43" bodyend="51"/>
+        <location file="includes/TrafficGraph.h" line="143" column="19" bodyfile="TrafficGraph.cpp" bodystart="44" bodyend="52"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1a503a7eb165f5df6b3099b10e71774735" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt; &gt;</type>
@@ -369,7 +382,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="151" column="17" bodyfile="TrafficGraph.cpp" bodystart="65" bodyend="72"/>
+        <location file="includes/TrafficGraph.h" line="152" column="17" bodyfile="TrafficGraph.cpp" bodystart="67" bodyend="74"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1a9537afb96e766b4d910038a7b503af7f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; std::shared_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt; &gt;</type>
@@ -388,7 +401,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="160" column="17" bodyfile="TrafficGraph.cpp" bodystart="74" bodyend="77"/>
+        <location file="includes/TrafficGraph.h" line="161" column="17" bodyfile="TrafficGraph.cpp" bodystart="76" bodyend="79"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1aff5c1921c0c1614230fa3c43b215b320" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; std::string &gt;</type>
@@ -407,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="171" column="17"/>
+        <location file="includes/TrafficGraph.h" line="172" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>std::vector&lt; std::string &gt;</type>
@@ -426,7 +439,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="181" column="17"/>
+        <location file="includes/TrafficGraph.h" line="182" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classTrafficGraph_1ae485051f1b4e6f8cbb91ad7d89dc89b1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -444,7 +457,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/TrafficGraph.h" line="187" column="10" bodyfile="TrafficGraph.cpp" bodystart="79" bodyend="82"/>
+        <location file="includes/TrafficGraph.h" line="188" column="10" bodyfile="TrafficGraph.cpp" bodystart="81" bodyend="84"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -459,9 +472,9 @@
         <link refid="classTrafficGraph"/>
       </node>
     </collaborationgraph>
-    <location file="includes/TrafficGraph.h" line="22" column="1" bodyfile="includes/TrafficGraph.h" bodystart="22" bodyend="190"/>
+    <location file="includes/TrafficGraph.h" line="22" column="1" bodyfile="includes/TrafficGraph.h" bodystart="22" bodyend="191"/>
     <listofallmembers>
-      <member refid="classTrafficGraph_1a3280806b85e7a6a1b534551c5d1340d1" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_edge</name></member>
+      <member refid="classTrafficGraph_1a99df0f5fa9c14af4bc276659336de153" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_edge</name></member>
       <member refid="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_node</name></member>
       <member refid="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>clean_all_time_windows</name></member>
       <member refid="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>detect_anomalies</name></member>

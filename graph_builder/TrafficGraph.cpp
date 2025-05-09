@@ -15,6 +15,7 @@
 #include <tuple>
 #include <tuple>
 #include <unordered_map>
+#include <utility>
 #include <vector>
 
 #include "includes/GraphBuilder.h"
@@ -52,11 +53,12 @@ std::weak_ptr<GraphNode> TrafficGraph::get_node_reference(const std::string &id)
 
 std::weak_ptr<GraphEdge> TrafficGraph::add_edge(const std::string &src, const std::string &tgt,
                                                 const std::string &rel,
-                                                const std::unordered_map<std::string, std::string> &attrs) {
+                                                const std::unordered_map<std::string, std::string> &attrs, std::vector<float> encoded_features) {
     //TODO: maybe in the future think about aggregating edges periodically. To reduce graph size and improve performance. Retain metadata such as connection_count, last_active, ports_used
     std::unique_lock lock(graph_mutex);
     auto edge = std::make_shared<GraphEdge>(src, tgt, rel);
     edge->attributes = attrs;
+    edge->encoded_features = std::move(encoded_features);
     edges.push_back(edge);
     return std::weak_ptr(edge);
 }

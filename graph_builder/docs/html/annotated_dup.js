@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "FeatureEncoder", "classFeatureEncoder.html", "classFeatureEncoder" ],
     [ "FileState", "structFileState.html", "structFileState" ],
     [ "GraphBuilder", "classGraphBuilder.html", "classGraphBuilder" ],
     [ "GraphEdge", "classGraphEdge.html", "classGraphEdge" ],
