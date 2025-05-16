@@ -134,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a88d61bc652bfa5a60a8cd1aa8509d27c" id="r_a88d61bc652bfa5a60a8cd1aa8509d27c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structGraphUpdate.html">GraphUpdate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88d61bc652bfa5a60a8cd1aa8509d27c">get_last_updates</a> ()</td></tr>
 <tr class="memdesc:a88d61bc652bfa5a60a8cd1aa8509d27c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the update list for the graph.  <br /></td></tr>
 <tr class="separator:a88d61bc652bfa5a60a8cd1aa8509d27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a493a2fd26390adb3f4426e130d14160c" id="r_a493a2fd26390adb3f4426e130d14160c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a493a2fd26390adb3f4426e130d14160c">add_connection</a> (const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;timestamp, int src_port, int dst_port, const std::string &amp;method=&quot;&quot;, const std::string &amp;host=&quot;&quot;, const std::string &amp;uri=&quot;&quot;, const std::string &amp;version=&quot;&quot;, const std::string &amp;user_agent=&quot;&quot;, int request_body_len=0, int response_body_len=0, int status_code=0, const std::string &amp;status_msg=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;tags={}, const std::vector&lt; std::string &gt; &amp;resp_fuids={}, const std::vector&lt; std::string &gt; &amp;resp_mime_types={})</td></tr>
-<tr class="memdesc:a493a2fd26390adb3f4426e130d14160c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a network connection event and adds the corresponding nodes and edges to the graph.  <br /></td></tr>
-<tr class="separator:a493a2fd26390adb3f4426e130d14160c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a434c06a59cbe6b93e7731769b8b244dd" id="r_a434c06a59cbe6b93e7731769b8b244dd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a434c06a59cbe6b93e7731769b8b244dd">add_connection</a> (const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;service, const std::string &amp;timestamp, const int src_port, const int dst_port, const int orig_bytes, const int resp_bytes, const std::string &amp;conn_state, const bool local_orig, const bool local_resp, const std::string &amp;history, const int orig_pkts, const int resp_pkts, const int orig_ip_bytes, const int resp_ip_bytes)</td></tr>
+<tr class="memdesc:a434c06a59cbe6b93e7731769b8b244dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a network connection event and adds the corresponding nodes and edges to the graph.  <br /></td></tr>
+<tr class="separator:a434c06a59cbe6b93e7731769b8b244dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a791f0173bacd48ce1071e6d87cd8bfaf" id="r_a791f0173bacd48ce1071e6d87cd8bfaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a791f0173bacd48ce1071e6d87cd8bfaf">get_graph</a> ()</td></tr>
 <tr class="memdesc:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to the underlying <a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a> object.  <br /></td></tr>
 <tr class="separator:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,8 +182,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a493a2fd26390adb3f4426e130d14160c" name="a493a2fd26390adb3f4426e130d14160c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a493a2fd26390adb3f4426e130d14160c">&#9670;&#160;</a></span>add_connection()</h2>
+<a id="a434c06a59cbe6b93e7731769b8b244dd" name="a434c06a59cbe6b93e7731769b8b244dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a434c06a59cbe6b93e7731769b8b244dd">&#9670;&#160;</a></span>add_connection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -206,77 +206,72 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>service</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>timestamp</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>src_port</em></span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>src_port</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>dst_port</em></span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>dst_port</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>method</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>orig_bytes</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>host</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>resp_bytes</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>uri</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>conn_state</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>version</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>local_orig</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>user_agent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>local_resp</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>request_body_len</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>history</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>response_body_len</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>orig_pkts</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int</td>          <td class="paramname"><span class="paramname"><em>status_code</em></span><span class="paramdefsep"> = </span><span class="paramdefval">0</span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>resp_pkts</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>status_msg</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>orig_ip_bytes</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>tags</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>resp_fuids</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>resp_mime_types</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>resp_ip_bytes</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -288,21 +283,20 @@ Static Public Member Functions</h2></td></tr>
     <tr><td class="paramname">src_ip</td><td>Source IP address of the connection. </td></tr>
     <tr><td class="paramname">dst_ip</td><td>Destination IP address of the connection. </td></tr>
     <tr><td class="paramname">proto</td><td>Protocol of the connection (e.g., "tcp", "udp"). </td></tr>
+    <tr><td class="paramname">service</td><td>Service from a list of known services. </td></tr>
     <tr><td class="paramname">timestamp</td><td>Timestamp of the connection event. </td></tr>
     <tr><td class="paramname">src_port</td><td>Source port of the connection. </td></tr>
     <tr><td class="paramname">dst_port</td><td>Destination port of the connection. </td></tr>
-    <tr><td class="paramname">method</td><td>HTTP request method (if applicable). Defaults to "". </td></tr>
-    <tr><td class="paramname">host</td><td>HTTP host header (if applicable). Defaults to "". </td></tr>
-    <tr><td class="paramname">uri</td><td>HTTP request URI (if applicable). Defaults to "". </td></tr>
-    <tr><td class="paramname">version</td><td>HTTP version (if applicable). Defaults to "". </td></tr>
-    <tr><td class="paramname">user_agent</td><td>HTTP user agent string (if applicable). Defaults to "". </td></tr>
-    <tr><td class="paramname">request_body_len</td><td>Length of the HTTP request body (if applicable). Defaults to 0. </td></tr>
-    <tr><td class="paramname">response_body_len</td><td>Length of the HTTP response body (if applicable). Defaults to 0. </td></tr>
-    <tr><td class="paramname">status_code</td><td>HTTP status code (if applicable). Defaults to 0. </td></tr>
-    <tr><td class="paramname">status_msg</td><td>HTTP status message (if applicable). Defaults to "". </td></tr>
-    <tr><td class="paramname">tags</td><td>A vector of tags associated with the connection. Defaults to {}. </td></tr>
-    <tr><td class="paramname">resp_fuids</td><td>A vector of file unique identifiers from the responder. Defaults to {}. </td></tr>
-    <tr><td class="paramname">resp_mime_types</td><td>A vector of MIME types from the responder. Defaults to {}. </td></tr>
+    <tr><td class="paramname">orig_bytes</td><td>Number of bytes sent by the originator. </td></tr>
+    <tr><td class="paramname">resp_bytes</td><td>Number of bytes sent by the responder. </td></tr>
+    <tr><td class="paramname">conn_state</td><td>Connection state (e.g., "REJ", "SF"). </td></tr>
+    <tr><td class="paramname">local_orig</td><td>Whether the originator is local. </td></tr>
+    <tr><td class="paramname">local_resp</td><td>Whether the responder is local. </td></tr>
+    <tr><td class="paramname">history</td><td>History of the connection (e.g., packet states). </td></tr>
+    <tr><td class="paramname">orig_pkts</td><td>Number of packets sent by the originator. </td></tr>
+    <tr><td class="paramname">resp_pkts</td><td>Number of packets sent by the responder. </td></tr>
+    <tr><td class="paramname">orig_ip_bytes</td><td>Number of IP bytes sent by the originator. </td></tr>
+    <tr><td class="paramname">resp_ip_bytes</td><td>Number of IP bytes sent by the responder. </td></tr>
   </table>
   </dd>
 </dl>

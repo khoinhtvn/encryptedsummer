@@ -113,7 +113,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="63" column="10" bodyfile="ZeekLogParser.cpp" bodystart="22" bodyend="31"/>
+        <location file="includes/ZeekLogParser.h" line="63" column="10" bodyfile="ZeekLogParser.cpp" bodystart="21" bodyend="30"/>
       </memberdef>
       <memberdef kind="function" id="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>bool</type>
@@ -145,7 +145,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="73" column="10" bodyfile="ZeekLogParser.cpp" bodystart="33" bodyend="35"/>
+        <location file="includes/ZeekLogParser.h" line="73" column="10" bodyfile="ZeekLogParser.cpp" bodystart="32" bodyend="34"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

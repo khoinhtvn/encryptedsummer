@@ -6,6 +6,9 @@
   </compound>
   <compound refid="classFeatureEncoder" kind="class"><name>FeatureEncoder</name>
     <member refid="classFeatureEncoder_1abcd8f527f2c836c519287b6b999d68cf" kind="variable"><name>protocol_map</name></member>
+    <member refid="classFeatureEncoder_1a21438731d8a3773569af79776bf1acb6" kind="variable"><name>conn_state_map</name></member>
+    <member refid="classFeatureEncoder_1a5408bfac0709d29e3b5aec87e816da35" kind="variable"><name>NUM_CONN_STATE_CATEGORIES</name></member>
+    <member refid="classFeatureEncoder_1aee70662ca987d3655885ce74c1316367" kind="variable"><name>service_map</name></member>
     <member refid="classFeatureEncoder_1ae2a9b669719f077c4ca7d5a1aeb2a5f0" kind="variable"><name>method_map</name></member>
     <member refid="classFeatureEncoder_1a3d9a66feaff85c726af1fa2d84161fc1" kind="variable"><name>user_agent_map</name></member>
     <member refid="classFeatureEncoder_1abc6b1ebaa040ac445754300a9dfc11c0" kind="variable"><name>status_msg_map</name></member>
@@ -20,6 +23,7 @@
     <member refid="classFeatureEncoder_1aaa0f0429b65ebe905ec9ae3eaa2a8019" kind="function"><name>encode_string_length</name></member>
     <member refid="classFeatureEncoder_1a1985536abfbf2862f5a5c947a3bdb84d" kind="function"><name>encode_body_length</name></member>
     <member refid="classFeatureEncoder_1a23cb581a17c627f630fec7f6d98d0757" kind="function"><name>encode_status_code</name></member>
+    <member refid="classFeatureEncoder_1a701695d03b52990d684ac02989a271ec" kind="function"><name>normalize_size</name></member>
     <member refid="classFeatureEncoder_1aaa3ef6109c0b8e2d4b00f98e146d3830" kind="function"><name>encode_features</name></member>
     <member refid="classFeatureEncoder_1aa0b2aa06a5804327c59d4f0badeffcaf" kind="function"><name>get_feature_names</name></member>
     <member refid="classFeatureEncoder_1a008c4d5bd3f08b5a7b7ce907ea0af9ea" kind="function"><name>get_feature_name</name></member>
@@ -44,7 +48,7 @@
     <member refid="classGraphBuilder_1a3af3213174c72b1eda8f3a0e21bba54b" kind="function"><name>GraphBuilder</name></member>
     <member refid="classGraphBuilder_1acbd5f45fa3be1fa61975e8fefedd3278" kind="function"><name>operator=</name></member>
     <member refid="classGraphBuilder_1a88d61bc652bfa5a60a8cd1aa8509d27c" kind="function"><name>get_last_updates</name></member>
-    <member refid="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" kind="function"><name>add_connection</name></member>
+    <member refid="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" kind="function"><name>add_connection</name></member>
     <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kind="function"><name>get_graph</name></member>
     <member refid="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" kind="function"><name>get_feature_dimension</name></member>
     <member refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kind="function"><name>get_instance</name></member>
@@ -249,7 +253,6 @@
   <compound refid="TrafficGraph_8cpp" kind="file"><name>TrafficGraph.cpp</name>
   </compound>
   <compound refid="ZeekLogParser_8cpp" kind="file"><name>ZeekLogParser.cpp</name>
-    <member refid="ZeekLogParser_8cpp_1ab701e3ac61a85b337ec5c1abaad6742d" kind="typedef"><name>json</name></member>
   </compound>
   <compound refid="md_README" kind="page"><name>md_README</name>
   </compound>

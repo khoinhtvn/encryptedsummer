@@ -22,8 +22,8 @@ GraphExporter::~GraphExporter() {
 }
 
 void GraphExporter::export_full_graph_human_readable(const TrafficGraph &graph,
-                                      const std::string &output_file,
-                                      const bool open_image, const bool export_cond) {
+                                                     const std::string &output_file,
+                                                     const bool open_image, const bool export_cond) {
     if (!graph.is_empty()) {
         // Crea un nuovo grafo
         Agraph_t *g = agopen(const_cast<char *>("NWTraffic"), Agdirected, nullptr);
@@ -66,7 +66,8 @@ void GraphExporter::export_full_graph_human_readable(const TrafficGraph &graph,
     }
 }
 
-void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> updates, const std::string &output_file) {
+void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> updates,
+                                                      const std::string &output_file) {
     if (!updates.empty()) {
         std::ofstream ofs(output_file);
         if (!ofs.is_open()) {
@@ -76,7 +77,7 @@ void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> u
         // Write DOT format header
         ofs << "digraph NWTraffic_update {\n";
         //TODO: divide node updates and creation in output file
-        for (const auto &update : updates) {
+        for (const auto &update: updates) {
             switch (update.type) {
                 case GraphUpdate::Type::NODE_CREATE:
                     if (auto node = update.node.lock()) {
@@ -89,9 +90,9 @@ void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> u
                         ofs << "  \"" << edge->source << "\" -> \"" << edge->target << "\" [";
 
                         for (size_t i = 0; i < edge->encoded_features.size(); ++i) {
-                            if (i != 0 && i != edge->encoded_features.size() ) ofs << ",";
+                            if (i != 0 && i != edge->encoded_features.size()) ofs << ",";
                             ofs << FeatureEncoder::get_feature_name(i) << "="
-                                << edge->encoded_features[i];
+                                    << edge->encoded_features[i];
                         }
                         ofs << "  ];\n";
                     }
@@ -110,7 +111,7 @@ void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> u
         ofs << "}\n";
         ofs.close();
         std::cout << "File " << output_file << " written" << std::endl;
-    }else {
+    } else {
         std::cout << "Empty updates vector!" << std::endl;
     }
 }
@@ -231,7 +232,7 @@ void GraphExporter::write_node_to_file(const std::shared_ptr<GraphNode> &node, s
 
 void GraphExporter::write_edge_to_file(const std::shared_ptr<GraphEdge> &edge, std::ofstream &dot_file) {
     dot_file << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) <<
-        "\" [";
+            "\" [";
 
     // Aggiungi l'attributo 'label' se presente, altrimenti usa la relazione
     if (edge->attributes.count("label")) {
@@ -263,7 +264,7 @@ void GraphExporter::export_to_dot(const TrafficGraph &graph, const std::string &
 
     // Aggiungi archi con attributi
     for (const auto &edge: graph.get_edges()) {
-        write_edge_to_file(edge,dot_file);
+        write_edge_to_file(edge, dot_file);
     }
 
     dot_file << "}\n";

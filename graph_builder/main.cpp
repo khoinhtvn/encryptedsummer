@@ -1,5 +1,5 @@
 /**
- * @file main.cpp
+* @file main.cpp
  * @brief Main entry point for the Zeek log analysis and anomaly detection application.
  *
  * This application monitors Zeek logs from a specified directory, builds a graph
@@ -8,6 +8,7 @@
  */
 #include <iostream>
 #include <thread>
+#include <filesystem>
 
 #include "includes/GraphBuilder.h"
 #include "includes/GraphExporter.h"
@@ -23,15 +24,26 @@
  *
  * @param argc Number of command-line arguments.
  * @param argv Array of command-line arguments. The first argument should be the
- * path to the Zeek log directory.
+ * path to the Zeek log directory. An optional --export-path argument specifies the export directory.
  * @return 0 if the application runs successfully, 1 otherwise.
  */
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <zeek_log_directory>" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <zeek_log_directory> [--export-path <export_path>]" << std::endl;
         return 1;
     }
 
+    std::string export_path = "./";
+    for (int i = 2; i < argc; ++i) {
+        if (std::string(argv[i]) == "--export-path" && i + 1 < argc) {
+            export_path = argv[i + 1];
+            break;
+        }
+    }
+    // Ensure the export path exists
+    if (!std::filesystem::exists(export_path)) {
+        std::filesystem::create_directories(export_path);
+    }
     /**
      * @brief Instance of the real-time anomaly detector.
      */
@@ -65,7 +77,7 @@ int main(int argc, char *argv[]) {
              */
             auto &graph = GraphBuilder::get_instance().get_graph();
             /**
-             * @brief Visualizes the current network graph and saves it as a PNG file.
+             * @brief Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
              *
              * The filename includes the current UTC timestamp. The 'false' argument
              * likely controls whether to clear the graph before visualizing (in this
@@ -77,9 +89,27 @@ int main(int argc, char *argv[]) {
              * @param false Flag indicating whether to clear the graph before visualization.
              * @param true Flag indicating whether to include labels on the nodes.
              */
-            exporter.export_full_graph_human_readable(graph, "./nw_graph_" + std::to_string(UTC), false, true);
-
-            exporter.export_incremental_update_encoded(GraphBuilder::get_instance().get_last_updates(), "./nw_graph_encoded_" + std::to_string(UTC) + ".dot");
+            exporter.export_full_graph_human_readable(
+                graph, export_path + std::filesystem::path::preferred_separator + "nw_graph_" + std::to_string(UTC),
+                false,
+                true);
+            /**
+             * @brief Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
+             *
+             * The filename includes the current UTC timestamp. The 'false' argument
+             * likely controls whether to clear the graph before visualizing (in this
+             * context, it's probably not clearing), and 'true' might indicate
+             * whether to include labels on the nodes.
+             *
+             * @param graph The graph to visualize.
+             * @param "./zeek_graph_" + std::to_string(UTC) The base filename for the output PNG.
+             * @param false Flag indicating whether to clear the graph before visualization.
+             * @param true Flag indicating whether to include labels on the nodes.
+             */
+            exporter.export_incremental_update_encoded(GraphBuilder::get_instance().get_last_updates(),
+                                                       export_path + std::filesystem::path::preferred_separator +
+                                                       "nw_graph_encoded_" + std::to_string(UTC) +
+                                                       ".dot");
             /**
              * @brief Detects anomalies in the current network graph, based on basic .
              *

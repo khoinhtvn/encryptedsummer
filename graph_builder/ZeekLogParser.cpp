@@ -17,26 +17,26 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <iomanip>
-#include "includes/json.hpp" // Include the nlohmann/json library
 
-    bool FileState::update() {
-        struct stat file_stat;
-        if (stat(path.c_str(), &file_stat) != 0) {
-            return false;
-        }
-
-        inode = file_stat.st_ino;
-        last_size = file_stat.st_size;
-        return true;
+bool FileState::update() {
+    struct stat file_stat;
+    if (stat(path.c_str(), &file_stat) != 0) {
+        return false;
     }
 
-    bool FileState::operator==(const FileState& other) const {
-        return inode == other.inode;
-    }
+    inode = file_stat.st_ino;
+    last_size = file_stat.st_size;
+    return true;
+}
+
+bool FileState::operator==(const FileState &other) const {
+    return inode == other.inode;
+}
+
 namespace fs = std::filesystem;
 
 void ZeekLogParser::monitor_logs() {
-    for (const auto& entry : fs::directory_iterator(log_directory)) {
+    for (const auto &entry: fs::directory_iterator(log_directory)) {
         if (entry.path().extension() != ".log") continue;
 
         std::string path = entry.path().string();
@@ -73,23 +73,23 @@ void ZeekLogParser::monitor_logs() {
     }
 }
 
-void ZeekLogParser::process_new_file(const FileState& file) {
+void ZeekLogParser::process_new_file(const FileState &file) {
     std::ifstream in(file.path, std::ios::binary);
     if (!in) return;
 
     std::string content((std::istreambuf_iterator<char>(in)),
-                 std::istreambuf_iterator<char>());
+                        std::istreambuf_iterator<char>());
 
     // Processa tutto il contenuto
     process_content(file.path, content);
     partial_lines[file.path].clear();
 }
 
-void ZeekLogParser::process_appended_data(const std::string& path, off_t old_size, off_t new_size) {
+void ZeekLogParser::process_appended_data(const std::string &path, off_t old_size, off_t new_size) {
     std::ifstream in(path, std::ios::binary);
     if (!in) return;
 
-    in.seekg(old_size);  // Posiziona alla fine del contenuto precedente
+    in.seekg(old_size); // Posiziona alla fine del contenuto precedente
     std::string new_content;
     new_content.resize(new_size - old_size);
     in.read(&new_content[0], new_size - old_size);
@@ -97,8 +97,8 @@ void ZeekLogParser::process_appended_data(const std::string& path, off_t old_siz
     process_content(path, new_content);
 }
 
-void ZeekLogParser::process_content(const std::string& path, const std::string& content) {
-    std::string& buffer = partial_lines[path];
+void ZeekLogParser::process_content(const std::string &path, const std::string &content) {
+    std::string &buffer = partial_lines[path];
     buffer += content;
 
     size_t start = 0;
@@ -120,13 +120,79 @@ void ZeekLogParser::process_content(const std::string& path, const std::string& 
         buffer.clear();
     }
 }
-void  ZeekLogParser::process_log_entry(const std::string& log_type, const std::string& entry) {
+
+void ZeekLogParser::process_log_entry(const std::string &log_type, const std::string &entry) {
     // Parse different log types
     if (log_type == "conn.log") {
         process_conn_entry(entry);
     }
     // Add other log types as needed
 }
+
+void ZeekLogParser::process_conn_entry(const std::string &entry) {
+    try {
+        // Split the tab-separated line
+        std::vector<std::string> fields;
+        std::string field;
+        std::istringstream stream(entry);
+
+        while (std::getline(stream, field, '\t')) {
+            fields.push_back(field);
+        }
+
+        // Ensure there are enough fields (21 fields expected)
+        if (fields.size() < 21) {
+            std::cerr << "Error: Incomplete log entry: " << entry << std::endl;
+            return;
+        }
+
+        // Extract fields safely
+        double ts = std::stod(fields[0]);
+        std::string uid = fields[1];
+        std::string orig_h = fields[2];
+        int orig_p = std::stoi(fields[3]);
+        std::string resp_h = fields[4];
+        int resp_p = std::stoi(fields[5]);
+        std::string protocol = fields[6];
+        std::string service = fields[7];
+        double duration = fields[8] == "-" ? 0.0 : std::stod(fields[8]);
+        int orig_bytes = fields[9] == "-" ? 0.0 : std::stoi(fields[9]);
+        int resp_bytes = fields[10] == "-" ? 0.0 : std::stoi(fields[10]);
+        std::string conn_state = fields[11];
+        bool local_orig = fields[12] == "T";
+        bool local_resp = fields[13] == "T";
+        int missed_bytes = fields[14] == "-" ? 0.0 : std::stoi(fields[14]);
+        std::string history = fields[15];
+        int orig_pkts = fields[16] == "-" ? 0.0 : std::stoi(fields[16]);
+        int orig_ip_bytes = fields[17] == "-" ? 0.0 : std::stoi(fields[17]);
+        int resp_pkts = fields[18] == "-" ? 0.0 : std::stoi(fields[18]);
+        int resp_ip_bytes = fields[19] == "-" ? 0.0 : std::stoi(fields[19]);
+
+        // Call GraphBuilder
+        GraphBuilder::get_instance().add_connection(
+            orig_h, // src_ip
+            resp_h, // dst_ip
+            protocol, // proto
+            service, // service
+            std::to_string(ts), // timestamp as string
+            orig_p, // src_port
+            resp_p, // dst_port
+            orig_bytes, // orig_bytes
+            resp_bytes, // resp_bytes
+            conn_state, // conn_state
+            local_orig, // local_orig
+            local_resp, // local_resp
+            history, // history
+            orig_pkts, // orig_pkts
+            resp_pkts, // resp_pkts
+            orig_ip_bytes, // orig_ip_bytes
+            resp_ip_bytes // resp_ip_bytes
+        );
+    } catch (const std::exception &e) {
+        std::cerr << "Error processing log entry: " << e.what() << " - Entry: " << entry << std::endl;
+    }
+}
+
 /*
 void  ZeekLogParser::process_conn_entry(const std::string& entry) {
     // Parse conn.log entry (TSV format)
@@ -164,7 +230,7 @@ void  ZeekLogParser::process_conn_entry(const std::string& entry) {
 }
 
 */
-
+/*
 using json = nlohmann::json;
 
 void ZeekLogParser::process_conn_entry(const std::string& entry) {
@@ -231,3 +297,4 @@ void ZeekLogParser::process_conn_entry(const std::string& entry) {
     }
 }
 
+*/

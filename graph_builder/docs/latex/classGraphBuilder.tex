@@ -27,7 +27,7 @@ Collaboration diagram for Graph\+Builder\+:\nopagebreak
 \begin{DoxyCompactList}\small\item\em Deleted assignment operator to prevent assignment of the singleton instance. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ \mbox{\hyperlink{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c}{get\+\_\+last\+\_\+updates}} ()
 \begin{DoxyCompactList}\small\item\em Gets the update list for the graph. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}{add\+\_\+connection}} (const std\+::string \&src\+\_\+ip, const std\+::string \&dst\+\_\+ip, const std\+::string \&proto, const std\+::string \&timestamp, int src\+\_\+port, int dst\+\_\+port, const std\+::string \&method="{}"{}, const std\+::string \&host="{}"{}, const std\+::string \&uri="{}"{}, const std\+::string \&version="{}"{}, const std\+::string \&user\+\_\+agent="{}"{}, int request\+\_\+body\+\_\+len=0, int response\+\_\+body\+\_\+len=0, int status\+\_\+code=0, const std\+::string \&status\+\_\+msg="{}"{}, const std\+::vector$<$ std\+::string $>$ \&tags=\{\}, const std\+::vector$<$ std\+::string $>$ \&resp\+\_\+fuids=\{\}, const std\+::vector$<$ std\+::string $>$ \&resp\+\_\+mime\+\_\+types=\{\})
+void \mbox{\hyperlink{classGraphBuilder_a434c06a59cbe6b93e7731769b8b244dd}{add\+\_\+connection}} (const std\+::string \&src\+\_\+ip, const std\+::string \&dst\+\_\+ip, const std\+::string \&proto, const std\+::string \&service, const std\+::string \&timestamp, const int src\+\_\+port, const int dst\+\_\+port, const int orig\+\_\+bytes, const int resp\+\_\+bytes, const std\+::string \&conn\+\_\+state, const bool local\+\_\+orig, const bool local\+\_\+resp, const std\+::string \&history, const int orig\+\_\+pkts, const int resp\+\_\+pkts, const int orig\+\_\+ip\+\_\+bytes, const int resp\+\_\+ip\+\_\+bytes)
 \begin{DoxyCompactList}\small\item\em Processes a network connection event and adds the corresponding nodes and edges to the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \& \mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\+\_\+graph}} ()
 \begin{DoxyCompactList}\small\item\em Gets a reference to the underlying \doxylink{classTrafficGraph}{Traffic\+Graph} object. \end{DoxyCompactList}\item 
@@ -59,11 +59,11 @@ Deleted copy constructor to prevent copying of the singleton instance.
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c}\index{GraphBuilder@{GraphBuilder}!add\_connection@{add\_connection}}
+\Hypertarget{classGraphBuilder_a434c06a59cbe6b93e7731769b8b244dd}\index{GraphBuilder@{GraphBuilder}!add\_connection@{add\_connection}}
 \index{add\_connection@{add\_connection}!GraphBuilder@{GraphBuilder}}
 \doxysubsubsection{\texorpdfstring{add\_connection()}{add\_connection()}}
-{\footnotesize\ttfamily \label{classGraphBuilder_a493a2fd26390adb3f4426e130d14160c} 
-void Graph\+Builder\+::add\+\_\+connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src\+\_\+ip}{, }\item[{const std\+::string \&}]{dst\+\_\+ip}{, }\item[{const std\+::string \&}]{proto}{, }\item[{const std\+::string \&}]{timestamp}{, }\item[{int}]{src\+\_\+port}{, }\item[{int}]{dst\+\_\+port}{, }\item[{const std\+::string \&}]{method}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{host}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{uri}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{version}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{user\+\_\+agent}{ = {\ttfamily "{}"{}}, }\item[{int}]{request\+\_\+body\+\_\+len}{ = {\ttfamily 0}, }\item[{int}]{response\+\_\+body\+\_\+len}{ = {\ttfamily 0}, }\item[{int}]{status\+\_\+code}{ = {\ttfamily 0}, }\item[{const std\+::string \&}]{status\+\_\+msg}{ = {\ttfamily "{}"{}}, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{tags}{ = {\ttfamily \{\}}, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{resp\+\_\+fuids}{ = {\ttfamily \{\}}, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{resp\+\_\+mime\+\_\+types}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classGraphBuilder_a434c06a59cbe6b93e7731769b8b244dd} 
+void Graph\+Builder\+::add\+\_\+connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src\+\_\+ip}{, }\item[{const std\+::string \&}]{dst\+\_\+ip}{, }\item[{const std\+::string \&}]{proto}{, }\item[{const std\+::string \&}]{service}{, }\item[{const std\+::string \&}]{timestamp}{, }\item[{const int}]{src\+\_\+port}{, }\item[{const int}]{dst\+\_\+port}{, }\item[{const int}]{orig\+\_\+bytes}{, }\item[{const int}]{resp\+\_\+bytes}{, }\item[{const std\+::string \&}]{conn\+\_\+state}{, }\item[{const bool}]{local\+\_\+orig}{, }\item[{const bool}]{local\+\_\+resp}{, }\item[{const std\+::string \&}]{history}{, }\item[{const int}]{orig\+\_\+pkts}{, }\item[{const int}]{resp\+\_\+pkts}{, }\item[{const int}]{orig\+\_\+ip\+\_\+bytes}{, }\item[{const int}]{resp\+\_\+ip\+\_\+bytes}{}\end{DoxyParamCaption})}
 
 
 
@@ -79,35 +79,33 @@ This method takes details of a network connection (e.\+g., source and destinatio
 \hline
 {\em proto} & Protocol of the connection (e.\+g., "{}tcp"{}, "{}udp"{}). \\
 \hline
+{\em service} & Service from a list of known services. \\
+\hline
 {\em timestamp} & Timestamp of the connection event. \\
 \hline
 {\em src\+\_\+port} & Source port of the connection. \\
 \hline
 {\em dst\+\_\+port} & Destination port of the connection. \\
 \hline
-{\em method} & HTTP request method (if applicable). Defaults to "{}"{}. \\
+{\em orig\+\_\+bytes} & Number of bytes sent by the originator. \\
 \hline
-{\em host} & HTTP host header (if applicable). Defaults to "{}"{}. \\
+{\em resp\+\_\+bytes} & Number of bytes sent by the responder. \\
 \hline
-{\em uri} & HTTP request URI (if applicable). Defaults to "{}"{}. \\
+{\em conn\+\_\+state} & Connection state (e.\+g., "{}\+REJ"{}, "{}\+SF"{}). \\
 \hline
-{\em version} & HTTP version (if applicable). Defaults to "{}"{}. \\
+{\em local\+\_\+orig} & Whether the originator is local. \\
 \hline
-{\em user\+\_\+agent} & HTTP user agent string (if applicable). Defaults to "{}"{}. \\
+{\em local\+\_\+resp} & Whether the responder is local. \\
 \hline
-{\em request\+\_\+body\+\_\+len} & Length of the HTTP request body (if applicable). Defaults to 0. \\
+{\em history} & History of the connection (e.\+g., packet states). \\
 \hline
-{\em response\+\_\+body\+\_\+len} & Length of the HTTP response body (if applicable). Defaults to 0. \\
+{\em orig\+\_\+pkts} & Number of packets sent by the originator. \\
 \hline
-{\em status\+\_\+code} & HTTP status code (if applicable). Defaults to 0. \\
+{\em resp\+\_\+pkts} & Number of packets sent by the responder. \\
 \hline
-{\em status\+\_\+msg} & HTTP status message (if applicable). Defaults to "{}"{}. \\
+{\em orig\+\_\+ip\+\_\+bytes} & Number of IP bytes sent by the originator. \\
 \hline
-{\em tags} & A vector of tags associated with the connection. Defaults to \{\}. \\
-\hline
-{\em resp\+\_\+fuids} & A vector of file unique identifiers from the responder. Defaults to \{\}. \\
-\hline
-{\em resp\+\_\+mime\+\_\+types} & A vector of MIME types from the responder. Defaults to \{\}. \\
+{\em resp\+\_\+ip\+\_\+bytes} & Number of IP bytes sent by the responder. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}\index{GraphBuilder@{GraphBuilder}!get\_feature\_dimension@{get\_feature\_dimension}}

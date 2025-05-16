@@ -50,7 +50,61 @@ private:
      * The "UNKNOWN" protocol is included to handle unrecognized protocols.
      */
     std::unordered_map<std::string, int> protocol_map = {
-        {"HTTP", 0}, {"HTTPS", 1}, {"FTP", 2}, {"SSH", 3}, {"DNS", 4}, {"UNKNOWN", 5}
+        {"unknown_transport", 0}, {"tcp", 1}, {"udp", 2}, {"icmp", 3}
+    };
+
+    /**
+ * @brief Encodes network connection attributes into a vector of float features.
+ *
+ * This method takes a map of connection attributes (e.g., protocol, timestamp, ports, bytes) and
+ * transforms them into a standardized vector of float features for machine learning models.
+ *
+ * @param attrs A map of connection attributes, where each key is a string representing the attribute name
+ *               (e.g., "protocol", "timestamp", "src_port", "conn_state") and each value is the attribute value as a string.
+ * @return A vector of float values representing the encoded features.
+ */
+    std::unordered_map<std::string, int> conn_state_map = {
+        // Successful connections
+        {"SF", 0},   // Normal establishment and termination
+        {"S1", 0},   // Established but not terminated
+
+        // Rejected/Reset connections
+        {"REJ", 1},  // Connection attempt rejected
+        {"RSTO", 1}, // Originator aborted
+        {"RSTR", 1}, // Responder sent RST
+        {"RSTOS0", 1}, // SYN followed by RST
+        {"RSTRH", 1}, // SYN ACK followed by RST
+
+        // Partial connections
+        {"S0", 2},   // Attempt seen, no reply
+        {"S2", 2},   // Established, originator close attempt
+        {"S3", 2},   // Established, responder close attempt
+
+        // Suspicious patterns
+        {"SH", 3},   // SYN followed by FIN
+        {"SHR", 3},  // SYN ACK followed by FIN
+
+        // Other
+        {"OTH", 4},  // No SYN seen
+        {"UNKNOWN", 4} // Unknown
+    };
+
+    const int NUM_CONN_STATE_CATEGORIES = 5;
+    // Then use one-hot encoding for these 5 categories instead of 14
+    /**
+ * @brief Maps network service names to integer codes for feature encoding.
+ *
+ * This map assigns a unique integer ID to known network services (e.g., HTTP, FTP, SSH).
+ * It is used during feature encoding to one-hot encode the "service" attribute
+ * of a network connection. The "UNKNOWN" key is used as a fallback for services
+ * not explicitly listed in the map.
+ */
+    std::unordered_map<std::string, int> service_map = {
+        {"http", 0},
+        {"ftp", 1},
+        {"ssh", 2},
+        {"dns", 3},
+        {"UNKNOWN", 4}
     };
 
     /**
@@ -92,19 +146,15 @@ public:
     FeatureEncoder() {
         // Calculate fixed output dimension:
         feature_dimension =
-            protocol_map.size() +  // protocol one-hot
-            1 +                    // timestamp
-            1 +                    // src_port
-            1 +                    // dst_port
-            method_map.size() +    // method one-hot
-            1 +                    // host length
-            1 +                    // uri length
-            1 +                    // version
-            user_agent_map.size() +  // user_agent one-hot
-            1 +                    // request_body_len
-            1 +                    // response_body_len
-            4 +                    // status_code (4 categories)
-            status_msg_map.size();  // status_msg one-hot
+                protocol_map.size() + // protocol one-hot
+                2 + // timestamp (sin, cos)
+                1 + // src_port
+                1 + // dst_port
+                NUM_CONN_STATE_CATEGORIES + // connection state one-hot
+                2 + // local_orig and local_resp (binary)
+                1 + // history length
+                6 + // byte and packet features
+                service_map.size(); // service one-hot
     }
 
     /**
@@ -144,14 +194,14 @@ public:
         return encoding;
     }
 
-     /**
-      * @brief Encodes a timestamp into cyclic features (sin and cos) to capture seasonality.
-      *
-      * @param timestamp The timestamp string to encode.
-      * @return A vector containing the sine and cosine encodings of the timestamp.
-      * Returns {0.0f, 1.0f} on error.
-      */
-    std::vector<float> encode_timestamp_cyclic(const std::string& timestamp) {
+    /**
+     * @brief Encodes a timestamp into cyclic features (sin and cos) to capture seasonality.
+     *
+     * @param timestamp The timestamp string to encode.
+     * @return A vector containing the sine and cosine encodings of the timestamp.
+     * Returns {0.0f, 1.0f} on error.
+     */
+    std::vector<float> encode_timestamp_cyclic(const std::string &timestamp) {
         try {
             double ts = std::stod(timestamp);
             const double seconds_per_day = 86400;
@@ -172,16 +222,16 @@ public:
      * @param timestamp The timestamp string.
      * @return A vector of floats representing the hour, day of week, day of month, and month.
      */
-    std::vector<float> encode_timestamp_features(const std::string& timestamp) {
+    std::vector<float> encode_timestamp_features(const std::string &timestamp) {
         try {
             time_t ts = static_cast<time_t>(std::stod(timestamp));
-            struct tm* timeinfo = std::gmtime(&ts);
+            struct tm *timeinfo = std::gmtime(&ts);
 
             return {
-                normalize(timeinfo->tm_hour, 0, 23),    // Hour of day
-                normalize(timeinfo->tm_wday, 0, 6),     // Day of week
-                normalize(timeinfo->tm_mday, 1, 31),    // Day of month
-                normalize(timeinfo->tm_mon, 0, 11)      // Month
+                normalize(timeinfo->tm_hour, 0, 23), // Hour of day
+                normalize(timeinfo->tm_wday, 0, 6), // Day of week
+                normalize(timeinfo->tm_mday, 1, 31), // Day of month
+                normalize(timeinfo->tm_mon, 0, 11) // Month
             };
         } catch (...) {
             return {0.5f, 0.5f, 0.5f, 0.5f}; // Default
@@ -196,9 +246,9 @@ public:
      */
     float encode_port(int port) {
         // Well-known ports: 0-1023, registered: 1024-49151, dynamic: 49152-65535
-        if (port <= 1023) return 0.0f;  // Well-known
+        if (port <= 1023) return 0.0f; // Well-known
         if (port <= 49151) return 0.5f; // Registered
-        return 1.0f;                   // Dynamic
+        return 1.0f; // Dynamic
     }
 
     /**
@@ -207,7 +257,7 @@ public:
      * @param s The string.
      * @return The normalized string length (0-1000).
      */
-    float encode_string_length(const std::string& s) {
+    float encode_string_length(const std::string &s) {
         return normalize(s.length(), 0, 1000);
     }
 
@@ -221,22 +271,37 @@ public:
         return normalize(len, 0, 10 * 1024 * 1024);
     }
 
-     /**
-      * @brief Encodes an HTTP status code into a category.
-      *
-      * @param code The HTTP status code.
-      * @return A vector representing the status code category:
-      * {1,0,0,0} for Success (200s), {0,1,0,0} for Redirection (300s),
-      * {0,0,1,0} for Client Error (400s), {0,0,0,1} for Server Error (500s),
-      * or {0,0,0,0} for Unknown.
-      */
+    /**
+     * @brief Encodes an HTTP status code into a category.
+     *
+     * @param code The HTTP status code.
+     * @return A vector representing the status code category:
+     * {1,0,0,0} for Success (200s), {0,1,0,0} for Redirection (300s),
+     * {0,0,1,0} for Client Error (400s), {0,0,0,1} for Server Error (500s),
+     * or {0,0,0,0} for Unknown.
+     */
     std::vector<float> encode_status_code(int code) {
         // Categorize HTTP status codes
         if (code >= 200 && code < 300) return {1.0f, 0.0f, 0.0f, 0.0f}; // Success
         if (code >= 300 && code < 400) return {0.0f, 1.0f, 0.0f, 0.0f}; // Redirection
         if (code >= 400 && code < 500) return {0.0f, 0.0f, 1.0f, 0.0f}; // Client error
-        if (code >= 500) return {0.0f, 0.0f, 0.0f, 1.0f};            // Server error
-        return {0.0f, 0.0f, 0.0f, 0.0f};                        // Unknown
+        if (code >= 500) return {0.0f, 0.0f, 0.0f, 1.0f}; // Server error
+        return {0.0f, 0.0f, 0.0f, 0.0f}; // Unknown
+    }
+
+    /**
+     * @brief Normalizes a size value (e.g., bytes or packets) to a range of 0 to 1.
+     *
+     * This function takes a size value (e.g., bytes or packet count) and scales it to a range
+     * of 0 to 1 using a logarithmic scale. This approach effectively handles a wide range of sizes,
+     * preventing extremely large values from skewing the data distribution.
+     *
+     * @param size The size value to be normalized.
+     * @return A float value representing the normalized size between 0 and 1.
+     */
+    float normalize_size(size_t size) {
+        // Use logarithmic scaling to handle a wide range of sizes
+        return std::log1p(static_cast<float>(size)) / std::log1p(1e6f); // Assuming 1MB as upper bound
     }
 
     /**
@@ -245,12 +310,14 @@ public:
      * @param attrs A map of attribute names and their corresponding string values.
      * @return A vector of floats representing the encoded features.
      */
-    std::vector<float> encode_features(const std::unordered_map<std::string, std::string>& attrs) {
+    std::vector<float> encode_features(const std::unordered_map<std::string, std::string> &attrs) {
         std::vector<float> features;
 
         // Protocol (one-hot encoded)
         auto protocol_it = protocol_map.find(attrs.at("protocol"));
-        int protocol_code = (protocol_it != protocol_map.end()) ? protocol_it->second : protocol_map["UNKNOWN"];
+        int protocol_code = (protocol_it != protocol_map.end())
+                                ? protocol_it->second
+                                : protocol_map["unknown_transport"];
         auto protocol_encoding = one_hot(protocol_code, protocol_map.size());
         features.insert(features.end(), protocol_encoding.begin(), protocol_encoding.end());
 
@@ -258,80 +325,53 @@ public:
         auto ts_encoding = encode_timestamp_cyclic(attrs.at("timestamp"));
         features.insert(features.end(), ts_encoding.begin(), ts_encoding.end());
 
-        // Source port (categorized)
-        int src_port = std::stoi(attrs.at("src_port"));
-        features.push_back(encode_port(src_port));
+        // Source and Destination Ports (categorized)
+        features.push_back(encode_port(std::stoi(attrs.at("src_port"))));
+        features.push_back(encode_port(std::stoi(attrs.at("dst_port"))));
 
-        // Destination port (categorized)
-        int dst_port = std::stoi(attrs.at("dst_port"));
-        features.push_back(encode_port(dst_port));
+        // Connection State (one-hot encoded)
+        auto conn_state_it = conn_state_map.find(attrs.at("conn_state"));
+        int conn_state_code = (conn_state_it != conn_state_map.end())
+                                  ? conn_state_it->second
+                                  : NUM_CONN_STATE_CATEGORIES - 1;
+        auto conn_state_encoding = one_hot(conn_state_code, NUM_CONN_STATE_CATEGORIES);
+        features.insert(features.end(), conn_state_encoding.begin(), conn_state_encoding.end());
 
-        // Method (one-hot encoded)
-        auto method_it = method_map.find(attrs.at("method"));
-        int method_code = (method_it != method_map.end()) ? method_it->second : method_map["UNKNOWN"];
-        auto method_encoding = one_hot(method_code, method_map.size());
-        features.insert(features.end(), method_encoding.begin(), method_encoding.end());
+        // Local Origin and Response (binary)
+        features.push_back(attrs.at("local_orig") == "true" ? 1.0f : 0.0f);
+        features.push_back(attrs.at("local_resp") == "true" ? 1.0f : 0.0f);
 
-        // Host (length normalized)
-        features.push_back(encode_string_length(attrs.at("host")));
+        // History (length normalized)
+        features.push_back(static_cast<float>(attrs.at("history").length()) / 10.0f);
 
-        // URI (length normalized)
-        features.push_back(encode_string_length(attrs.at("uri")));
+        // Bytes and Packets (normalized)
+        features.push_back(normalize_size(std::stoul(attrs.at("orig_bytes"))));
+        features.push_back(normalize_size(std::stoul(attrs.at("resp_bytes"))));
+        features.push_back(normalize_size(std::stoul(attrs.at("orig_pkts"))));
+        features.push_back(normalize_size(std::stoul(attrs.at("resp_pkts"))));
+        features.push_back(normalize_size(std::stoul(attrs.at("orig_ip_bytes"))));
+        features.push_back(normalize_size(std::stoul(attrs.at("resp_ip_bytes"))));
 
-        // Version (extract HTTP version number)
-        float http_version = 1.0f;
-        if (attrs.at("version").find("1.1") != std::string::npos) http_version = 1.1f;
-        else if (attrs.at("version").find("2.0") != std::string::npos) http_version = 2.0f;
-        features.push_back(http_version);
-
-        // User agent (categorized)
-        std::string ua = attrs.at("user_agent");
-        int ua_code = user_agent_map["Unknown"];
-        for (const auto& [key, val] : user_agent_map) {
-            if (ua.find(key) != std::string::npos) {
-                ua_code = val;
-                break;
-            }
-        }
-        auto ua_encoding = one_hot(ua_code, user_agent_map.size());
-        features.insert(features.end(), ua_encoding.begin(), ua_encoding.end());
-
-        // Request body length (normalized)
-        size_t req_len = std::stoul(attrs.at("request_body_len"));
-        features.push_back(encode_body_length(req_len));
-
-        // Response body length (normalized)
-        size_t res_len = std::stoul(attrs.at("response_body_len"));
-        features.push_back(encode_body_length(res_len));
-
-        // Status code (categorized)
-        int status_code = std::stoi(attrs.at("status_code"));
-        auto status_code_encoding = encode_status_code(status_code);
-        features.insert(features.end(), status_code_encoding.begin(), status_code_encoding.end());
-
-        // Status message (categorized)
-        std::string status_msg = attrs.at("status_msg");
-        int status_msg_code = status_msg_map["Other"];
-        for (const auto& [key, val] : status_msg_map) {
-            if (status_msg.find(key) != std::string::npos) {
-                status_msg_code = val;
-                break;
-            }
-        }
-        auto status_msg_encoding = one_hot(status_msg_code, status_msg_map.size());
-        features.insert(features.end(), status_msg_encoding.begin(), status_msg_encoding.end());
-
+        // Service (one-hot encoded)
+        auto service_it = service_map.find(attrs.at("service"));
+        int service_code = (service_it != service_map.end()) ? service_it->second : service_map["UNKNOWN"];
+        auto service_encoding = one_hot(service_code, service_map.size());
+        features.insert(features.end(), service_encoding.begin(), service_encoding.end());
         return features;
     }
-      /**
-     * @brief Get the names of all encoded features in order
-     * @return Vector of feature names corresponding to the encoded features
+
+    /**
+     * @brief Returns the names of the features used in the encoded feature vector.
+     *
+     * These feature names correspond to the features encoded in the encode_features method,
+     * and their order must match the encoded vector.
+     *
+     * @return A vector of strings representing the names of the encoded features.
      */
     static std::vector<std::string> get_feature_names() {
         return {
             // Protocol features
-            "protocol_HTTP", "protocol_HTTPS", "protocol_FTP",
-            "protocol_SSH", "protocol_DNS", "protocol_UNKNOWN",
+            "protocol_UNKNOWN", "protocol_TCP", "protocol_UDP", "protocol_ICMP",
 
             // Timestamp features
             "timestamp_sin", "timestamp_cos",
@@ -339,31 +379,26 @@ public:
             // Port features
             "src_port_type", "dst_port_type",
 
-            // Method features
-            "method_GET", "method_POST", "method_PUT",
-            "method_DELETE", "method_HEAD", "method_OPTIONS", "method_UNKNOWN",
+            // Connection state features
+            "conn_state_successful",
+            "conn_state_rejected_reset",
+            "conn_state_partial",
+            "conn_state_suspicious",
+            "conn_state_other",
+            // Local origin and response (binary)
+            "local_orig", "local_resp",
 
-            // String length features
-            "host_length", "uri_length",
+            // History feature
+            "history_length",
 
-            // Version feature
-            "http_version",
+            // Byte and packet features
+            "orig_bytes", "resp_bytes",
+            "orig_pkts", "resp_pkts",
+            "orig_ip_bytes", "resp_ip_bytes",
 
-            // User agent features
-            "ua_Chrome", "ua_Firefox", "ua_Safari",
-            "ua_Edge", "ua_Opera", "ua_Bot", "ua_Unknown",
-
-            // Body length features
-            "request_body_len", "response_body_len",
-
-            // Status features
-            "status_success", "status_redirection",
-            "status_client_error", "status_server_error",
-
-            // Status message features
-            "statusmsg_OK", "statusmsg_Created", "statusmsg_Accepted",
-            "statusmsg_Not_Found", "statusmsg_Forbidden",
-            "statusmsg_Server_Error", "statusmsg_Other"
+            // Service features
+            "service_HTTP", "service_FTP", "service_SSH",
+            "service_DNS", "service_UNKNOWN"
         };
     }
 

@@ -10,5 +10,5 @@ var files_dup =
     [ "main.cpp", "main_8cpp.html", "main_8cpp" ],
     [ "RealTimeAnomalyDetector.cpp", "RealTimeAnomalyDetector_8cpp.html", null ],
     [ "TrafficGraph.cpp", "TrafficGraph_8cpp.html", null ],
-    [ "ZeekLogParser.cpp", "ZeekLogParser_8cpp.html", "ZeekLogParser_8cpp" ]
+    [ "ZeekLogParser.cpp", "ZeekLogParser_8cpp.html", null ]
 ];

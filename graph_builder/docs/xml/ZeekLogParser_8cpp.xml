@@ -15,7 +15,6 @@
     <includes local="no">sys/stat.h</includes>
     <includes local="no">unistd.h</includes>
     <includes local="no">iomanip</includes>
-    <includes local="yes">includes/json.hpp</includes>
     <incdepgraph>
       <node id="1">
         <label>ZeekLogParser.cpp</label>
@@ -45,8 +44,6 @@
         <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
-        </childnode>
-        <childnode refid="31" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -171,9 +168,6 @@
       <node id="7">
         <label>fstream</label>
       </node>
-      <node id="31">
-        <label>includes/json.hpp</label>
-      </node>
       <node id="30">
         <label>iomanip</label>
       </node>
@@ -217,21 +211,6 @@
         <label>vector</label>
       </node>
     </incdepgraph>
-    <sectiondef kind="typedef">
-      <memberdef kind="typedef" id="ZeekLogParser_8cpp_1ab701e3ac61a85b337ec5c1abaad6742d" prot="public" static="no">
-        <type>nlohmann::json</type>
-        <definition>using json =  nlohmann::json</definition>
-        <argsstring></argsstring>
-        <name>json</name>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="ZeekLogParser.cpp" line="168" column="1" bodyfile="ZeekLogParser.cpp" bodystart="168" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -256,26 +235,26 @@
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;sys/stat.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unistd.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iomanip&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;includes/json.hpp&quot;</highlight><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>Include<sp/>the<sp/>nlohmann/json<sp/>library</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kindref="member">FileState::update</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">stat<sp/>file_stat;</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stat(<ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>.c_str(),<sp/>&amp;file_stat)<sp/>!=<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="27"><highlight class="normal"></highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref><sp/>=<sp/>file_stat.st_ino;</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kindref="member">last_size</ref><sp/>=<sp/>file_stat.st_size;</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" kindref="member">FileState::operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structFileState" kindref="compound">FileState</ref>&amp;<sp/>other)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref><sp/>==<sp/>other.<ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref>;</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kindref="member">FileState::update</ref>()<sp/>{</highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">stat<sp/>file_stat;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(stat(<ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>.c_str(),<sp/>&amp;file_stat)<sp/>!=<sp/>0)<sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref><sp/>=<sp/>file_stat.st_ino;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kindref="member">last_size</ref><sp/>=<sp/>file_stat.st_size;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" kindref="member">FileState::operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structFileState" kindref="compound">FileState</ref><sp/>&amp;other)</highlight><highlight class="keyword"><sp/>const<sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref><sp/>==<sp/>other.<ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref>;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">fs<sp/>=<sp/>std::filesystem;</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"></highlight></codeline>
 <codeline lineno="38"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1af922e185b33640058001015a136545a3" kindref="member">ZeekLogParser::monitor_logs</ref>()<sp/>{</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>entry<sp/>:<sp/>fs::directory_iterator(log_directory))<sp/>{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;entry:<sp/>fs::directory_iterator(log_directory))<sp/>{</highlight></codeline>
 <codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(entry.path().extension()<sp/>!=<sp/></highlight><highlight class="stringliteral">&quot;.log&quot;</highlight><highlight class="normal">)<sp/></highlight><highlight class="keywordflow">continue</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="41"><highlight class="normal"></highlight></codeline>
 <codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>path<sp/>=<sp/>entry.path().string();</highlight></codeline>
@@ -312,23 +291,23 @@
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="74"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" kindref="member">ZeekLogParser::process_new_file</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structFileState" kindref="compound">FileState</ref>&amp;<sp/>file)<sp/>{</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" kindref="member">ZeekLogParser::process_new_file</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structFileState" kindref="compound">FileState</ref><sp/>&amp;file)<sp/>{</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ifstream<sp/>in(file.<ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>,<sp/>std::ios::binary);</highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!in)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
 <codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>content((std::istreambuf_iterator&lt;char&gt;(in)),</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::istreambuf_iterator&lt;char&gt;());</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::istreambuf_iterator&lt;char&gt;());</highlight></codeline>
 <codeline lineno="82"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Processa<sp/>tutto<sp/>il<sp/>contenuto</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kindref="member">process_content</ref>(file.<ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>,<sp/>content);</highlight></codeline>
 <codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/>partial_lines[file.<ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>].clear();</highlight></codeline>
 <codeline lineno="86"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"></highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" kindref="member">ZeekLogParser::process_appended_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/>off_t<sp/>old_size,<sp/>off_t<sp/>new_size)<sp/>{</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" kindref="member">ZeekLogParser::process_appended_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;path,<sp/>off_t<sp/>old_size,<sp/>off_t<sp/>new_size)<sp/>{</highlight></codeline>
 <codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>std::ifstream<sp/>in(path,<sp/>std::ios::binary);</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!in)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"></highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>in.seekg(old_size);<sp/><sp/></highlight><highlight class="comment">//<sp/>Posiziona<sp/>alla<sp/>fine<sp/>del<sp/>contenuto<sp/>precedente</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>in.seekg(old_size);<sp/></highlight><highlight class="comment">//<sp/>Posiziona<sp/>alla<sp/>fine<sp/>del<sp/>contenuto<sp/>precedente</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>new_content;</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/>new_content.resize(new_size<sp/>-<sp/>old_size);</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>in.read(&amp;new_content[0],<sp/>new_size<sp/>-<sp/>old_size);</highlight></codeline>
@@ -336,8 +315,8 @@
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kindref="member">process_content</ref>(path,<sp/>new_content);</highlight></codeline>
 <codeline lineno="98"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kindref="member">ZeekLogParser::process_content</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>content)<sp/>{</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string&amp;<sp/>buffer<sp/>=<sp/>partial_lines[path];</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kindref="member">ZeekLogParser::process_content</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;content)<sp/>{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>&amp;buffer<sp/>=<sp/>partial_lines[path];</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>buffer<sp/>+=<sp/>content;</highlight></codeline>
 <codeline lineno="103"><highlight class="normal"></highlight></codeline>
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">size_t</highlight><highlight class="normal"><sp/>start<sp/>=<sp/>0;</highlight></codeline>
@@ -359,117 +338,184 @@
 <codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>buffer.clear();</highlight></codeline>
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="122"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/>ZeekLogParser::process_log_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>log_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>entry)<sp/>{</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Parse<sp/>different<sp/>log<sp/>types</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(log_type<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;conn.log&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>process_conn_entry(entry);</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>other<sp/>log<sp/>types<sp/>as<sp/>needed</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
-<codeline lineno="131"><highlight class="comment">void<sp/><sp/>ZeekLogParser::process_conn_entry(const<sp/>std::string&amp;<sp/>entry)<sp/>{</highlight></codeline>
-<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>Parse<sp/>conn.log<sp/>entry<sp/>(TSV<sp/>format)</highlight></codeline>
-<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>fields;</highlight></codeline>
-<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/>size_t<sp/>start<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="135"><highlight class="comment"><sp/><sp/><sp/><sp/>size_t<sp/>end<sp/>=<sp/>entry.find(&apos;\t&apos;);</highlight></codeline>
-<codeline lineno="136"><highlight class="comment"></highlight></codeline>
-<codeline lineno="137"><highlight class="comment"><sp/><sp/><sp/><sp/>while<sp/>(end<sp/>!=<sp/>std::string::npos)<sp/>{</highlight></codeline>
-<codeline lineno="138"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fields.push_back(entry.substr(start,<sp/>end<sp/>-<sp/>start));</highlight></codeline>
-<codeline lineno="139"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start<sp/>=<sp/>end<sp/>+<sp/>1;</highlight></codeline>
-<codeline lineno="140"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end<sp/>=<sp/>entry.find(&apos;\t&apos;,<sp/>start);</highlight></codeline>
-<codeline lineno="141"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="142"><highlight class="comment"><sp/><sp/><sp/><sp/>fields.push_back(entry.substr(start));</highlight></codeline>
-<codeline lineno="143"><highlight class="comment"></highlight></codeline>
-<codeline lineno="144"><highlight class="comment"><sp/><sp/><sp/><sp/>if<sp/>(fields.size()<sp/>&lt;<sp/>10)<sp/>return;<sp/>//<sp/>Basic<sp/>validation</highlight></codeline>
-<codeline lineno="145"><highlight class="comment"></highlight></codeline>
-<codeline lineno="146"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>Extract<sp/>relevant<sp/>fields</highlight></codeline>
-<codeline lineno="147"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>timestamp<sp/>=<sp/>fields[0];</highlight></codeline>
-<codeline lineno="148"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>uid<sp/>=<sp/>fields[1];</highlight></codeline>
-<codeline lineno="149"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>src_ip<sp/>=<sp/>fields[2];</highlight></codeline>
-<codeline lineno="150"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>src_port<sp/>=<sp/>fields[3];</highlight></codeline>
-<codeline lineno="151"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>dst_ip<sp/>=<sp/>fields[4];</highlight></codeline>
-<codeline lineno="152"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>dst_port<sp/>=<sp/>fields[5];</highlight></codeline>
-<codeline lineno="153"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>proto<sp/>=<sp/>fields[6];</highlight></codeline>
-<codeline lineno="154"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>duration<sp/>=<sp/>fields[7];</highlight></codeline>
-<codeline lineno="155"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>orig_bytes<sp/>=<sp/>fields[8];</highlight></codeline>
-<codeline lineno="156"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>resp_bytes<sp/>=<sp/>fields[9];</highlight></codeline>
-<codeline lineno="157"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>conn_state<sp/>=<sp/>fields[10];</highlight></codeline>
-<codeline lineno="158"><highlight class="comment"></highlight></codeline>
-<codeline lineno="159"><highlight class="comment"></highlight></codeline>
-<codeline lineno="160"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>to<sp/>graph<sp/>builder</highlight></codeline>
-<codeline lineno="161"><highlight class="comment"><sp/><sp/><sp/><sp/>GraphBuilder::get_instance().add_connection(</highlight></codeline>
-<codeline lineno="162"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>src_ip,<sp/>dst_ip,<sp/>proto,<sp/>timestamp,<sp/>std::stoi(src_port),<sp/>std::stoi(dst_port)</highlight></codeline>
-<codeline lineno="163"><highlight class="comment"><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="164"><highlight class="comment">}</highlight></codeline>
-<codeline lineno="165"><highlight class="comment"></highlight></codeline>
-<codeline lineno="166"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="ZeekLogParser_8cpp_1ab701e3ac61a85b337ec5c1abaad6742d" kindref="member">json</ref><sp/>=<sp/>nlohmann::json;</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ZeekLogParser::process_conn_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>entry)<sp/>{</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="ZeekLogParser_8cpp_1ab701e3ac61a85b337ec5c1abaad6742d" kindref="member">json</ref><sp/>j<sp/>=<sp/>json::parse(entry);</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Extract<sp/>fields<sp/>-<sp/>Safely<sp/>access<sp/>and<sp/>handle<sp/>potential<sp/>missing<sp/>fields</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>ts<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;ts&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;ts&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0.0;<sp/></highlight><highlight class="comment">//<sp/>Or<sp/>a<sp/>default<sp/>value</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>uid<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;uid&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;uid&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>orig_h<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;id.orig_h&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;id.orig_h&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>orig_p<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;id.orig_p&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;id.orig_p&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>resp_h<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;id.resp_h&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;id.resp_h&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>resp_p<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;id.resp_p&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;id.resp_p&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>trans_depth<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;trans_depth&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;trans_depth&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>method<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;method&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;method&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>host<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;host&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;host&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>uri<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;uri&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;uri&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>version<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;version&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;version&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>user_agent<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;user_agent&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;user_agent&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>request_body_len<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;request_body_len&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;request_body_len&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>response_body_len<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;response_body_len&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;response_body_len&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>status_code<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;status_code&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;status_code&quot;</highlight><highlight class="normal">].get&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&gt;()<sp/>:<sp/>0;</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>status_msg<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;status_msg&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;status_msg&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;()<sp/>:<sp/></highlight><highlight class="stringliteral">&quot;&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>tags<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;tags&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;tags&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;std::string&gt;&gt;()<sp/>:<sp/>std::vector&lt;std::string&gt;();</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>resp_fuids<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;resp_fuids&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;resp_fuids&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;std::string&gt;&gt;()<sp/>:<sp/>std::vector&lt;std::string&gt;();</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>resp_mime_types<sp/>=<sp/>j.contains(</highlight><highlight class="stringliteral">&quot;resp_mime_types&quot;</highlight><highlight class="normal">)<sp/>?<sp/>j[</highlight><highlight class="stringliteral">&quot;resp_mime_types&quot;</highlight><highlight class="normal">].get&lt;std::vector&lt;std::string&gt;&gt;()<sp/>:<sp/>std::vector&lt;std::string&gt;();</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>protocol<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;tcp&quot;</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>Default</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(j.contains(</highlight><highlight class="stringliteral">&quot;proto&quot;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol<sp/>=<sp/>j[</highlight><highlight class="stringliteral">&quot;proto&quot;</highlight><highlight class="normal">].get&lt;std::string&gt;();</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>if<sp/>(!method.empty())<sp/>{</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;http&quot;</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//<sp/>If<sp/>there&apos;s<sp/>an<sp/>HTTP<sp/>method,<sp/>assume<sp/>HTTP</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"></highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().<ref refid="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" kindref="member">add_connection</ref>(</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_h,</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_h,</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol,<sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>Use<sp/>determined<sp/>protocol<sp/>instead<sp/>of<sp/>hardcoded<sp/>&quot;tcp&quot;<sp/>or<sp/>&quot;http&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(ts),</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_p,</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_p,</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>method,</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host,</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uri,</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>version,</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>user_agent,</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>request_body_len,</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>response_body_len,</highlight></codeline>
-<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>status_code,</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>status_msg,</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tags,</highlight></codeline>
-<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_fuids,</highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_mime_types</highlight></codeline>
-<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
-<codeline lineno="222"><highlight class="normal"></highlight></codeline>
-<codeline lineno="223"><highlight class="normal"></highlight></codeline>
-<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>json::parse_error&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Error<sp/>parsing<sp/>log<sp/>entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>-<sp/>Entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Handle<sp/>the<sp/>error<sp/>appropriately<sp/>(e.g.,<sp/>log<sp/>it,<sp/>skip<sp/>the<sp/>entry,<sp/>etc.)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>json::type_error&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Error<sp/>extracting<sp/>data:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>-<sp/>Entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::exception&amp;<sp/>e)<sp/>{</highlight></codeline>
-<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;General<sp/>error<sp/>processing<sp/>log<sp/>entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>-<sp/>Entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="232"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ZeekLogParser::process_log_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;log_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;entry)<sp/>{</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Parse<sp/>different<sp/>log<sp/>types</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(log_type<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;conn.log&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>process_conn_entry(entry);</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Add<sp/>other<sp/>log<sp/>types<sp/>as<sp/>needed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>ZeekLogParser::process_conn_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;entry)<sp/>{</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">try</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Split<sp/>the<sp/>tab-separated<sp/>line</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>fields;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>field;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::istringstream<sp/>stream(entry);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(std::getline(stream,<sp/>field,<sp/></highlight><highlight class="charliteral">&apos;\t&apos;</highlight><highlight class="normal">))<sp/>{</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fields.push_back(field);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Ensure<sp/>there<sp/>are<sp/>enough<sp/>fields<sp/>(21<sp/>fields<sp/>expected)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(fields.size()<sp/>&lt;<sp/>21)<sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Error:<sp/>Incomplete<sp/>log<sp/>entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Extract<sp/>fields<sp/>safely</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>ts<sp/>=<sp/>std::stod(fields[0]);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>uid<sp/>=<sp/>fields[1];</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>orig_h<sp/>=<sp/>fields[2];</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>orig_p<sp/>=<sp/>std::stoi(fields[3]);</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>resp_h<sp/>=<sp/>fields[4];</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>resp_p<sp/>=<sp/>std::stoi(fields[5]);</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>protocol<sp/>=<sp/>fields[6];</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>service<sp/>=<sp/>fields[7];</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>duration<sp/>=<sp/>fields[8]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stod(fields[8]);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>orig_bytes<sp/>=<sp/>fields[9]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[9]);</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>resp_bytes<sp/>=<sp/>fields[10]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[10]);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>conn_state<sp/>=<sp/>fields[11];</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>local_orig<sp/>=<sp/>fields[12]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;T&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>local_resp<sp/>=<sp/>fields[13]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;T&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>missed_bytes<sp/>=<sp/>fields[14]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[14]);</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>history<sp/>=<sp/>fields[15];</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>orig_pkts<sp/>=<sp/>fields[16]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[16]);</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>orig_ip_bytes<sp/>=<sp/>fields[17]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[17]);</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>resp_pkts<sp/>=<sp/>fields[18]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[18]);</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>resp_ip_bytes<sp/>=<sp/>fields[19]<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;-&quot;</highlight><highlight class="normal"><sp/>?<sp/>0.0<sp/>:<sp/>std::stoi(fields[19]);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Call<sp/>GraphBuilder</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().<ref refid="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" kindref="member">add_connection</ref>(</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_h,<sp/></highlight><highlight class="comment">//<sp/>src_ip</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_h,<sp/></highlight><highlight class="comment">//<sp/>dst_ip</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol,<sp/></highlight><highlight class="comment">//<sp/>proto</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>service,<sp/></highlight><highlight class="comment">//<sp/>service</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(ts),<sp/></highlight><highlight class="comment">//<sp/>timestamp<sp/>as<sp/>string</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_p,<sp/></highlight><highlight class="comment">//<sp/>src_port</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_p,<sp/></highlight><highlight class="comment">//<sp/>dst_port</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_bytes,<sp/></highlight><highlight class="comment">//<sp/>orig_bytes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_bytes,<sp/></highlight><highlight class="comment">//<sp/>resp_bytes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>conn_state,<sp/></highlight><highlight class="comment">//<sp/>conn_state</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_orig,<sp/></highlight><highlight class="comment">//<sp/>local_orig</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>local_resp,<sp/></highlight><highlight class="comment">//<sp/>local_resp</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>history,<sp/></highlight><highlight class="comment">//<sp/>history</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_pkts,<sp/></highlight><highlight class="comment">//<sp/>orig_pkts</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_pkts,<sp/></highlight><highlight class="comment">//<sp/>resp_pkts</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_ip_bytes,<sp/></highlight><highlight class="comment">//<sp/>orig_ip_bytes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_ip_bytes<sp/></highlight><highlight class="comment">//<sp/>resp_ip_bytes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">catch</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::exception<sp/>&amp;e)<sp/>{</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Error<sp/>processing<sp/>log<sp/>entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>-<sp/>Entry:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="194"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="197"><highlight class="comment">void<sp/><sp/>ZeekLogParser::process_conn_entry(const<sp/>std::string&amp;<sp/>entry)<sp/>{</highlight></codeline>
+<codeline lineno="198"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>Parse<sp/>conn.log<sp/>entry<sp/>(TSV<sp/>format)</highlight></codeline>
+<codeline lineno="199"><highlight class="comment"><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>fields;</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/><sp/><sp/><sp/>size_t<sp/>start<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/><sp/><sp/><sp/>size_t<sp/>end<sp/>=<sp/>entry.find(&apos;\t&apos;);</highlight></codeline>
+<codeline lineno="202"><highlight class="comment"></highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/><sp/><sp/><sp/>while<sp/>(end<sp/>!=<sp/>std::string::npos)<sp/>{</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>fields.push_back(entry.substr(start,<sp/>end<sp/>-<sp/>start));</highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start<sp/>=<sp/>end<sp/>+<sp/>1;</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end<sp/>=<sp/>entry.find(&apos;\t&apos;,<sp/>start);</highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/><sp/><sp/><sp/>fields.push_back(entry.substr(start));</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"></highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/><sp/><sp/><sp/>if<sp/>(fields.size()<sp/>&lt;<sp/>10)<sp/>return;<sp/>//<sp/>Basic<sp/>validation</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"></highlight></codeline>
+<codeline lineno="212"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>Extract<sp/>relevant<sp/>fields</highlight></codeline>
+<codeline lineno="213"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>timestamp<sp/>=<sp/>fields[0];</highlight></codeline>
+<codeline lineno="214"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>uid<sp/>=<sp/>fields[1];</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>src_ip<sp/>=<sp/>fields[2];</highlight></codeline>
+<codeline lineno="216"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>src_port<sp/>=<sp/>fields[3];</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>dst_ip<sp/>=<sp/>fields[4];</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>dst_port<sp/>=<sp/>fields[5];</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>proto<sp/>=<sp/>fields[6];</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>duration<sp/>=<sp/>fields[7];</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>orig_bytes<sp/>=<sp/>fields[8];</highlight></codeline>
+<codeline lineno="222"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>resp_bytes<sp/>=<sp/>fields[9];</highlight></codeline>
+<codeline lineno="223"><highlight class="comment"><sp/><sp/><sp/><sp/>std::string<sp/>conn_state<sp/>=<sp/>fields[10];</highlight></codeline>
+<codeline lineno="224"><highlight class="comment"></highlight></codeline>
+<codeline lineno="225"><highlight class="comment"></highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/><sp/><sp/><sp/>//<sp/>Add<sp/>to<sp/>graph<sp/>builder</highlight></codeline>
+<codeline lineno="227"><highlight class="comment"><sp/><sp/><sp/><sp/>GraphBuilder::get_instance().add_connection(</highlight></codeline>
+<codeline lineno="228"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>src_ip,<sp/>dst_ip,<sp/>proto,<sp/>timestamp,<sp/>std::stoi(src_port),<sp/>std::stoi(dst_port)</highlight></codeline>
+<codeline lineno="229"><highlight class="comment"><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="230"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="231"><highlight class="comment"></highlight></codeline>
+<codeline lineno="232"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="234"><highlight class="comment">using<sp/>json<sp/>=<sp/>nlohmann::json;</highlight></codeline>
+<codeline lineno="235"><highlight class="comment"></highlight></codeline>
+<codeline lineno="236"><highlight class="comment">void<sp/>ZeekLogParser::process_conn_entry(const<sp/>std::string&amp;<sp/>entry)<sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="comment"><sp/><sp/><sp/><sp/>try<sp/>{</highlight></codeline>
+<codeline lineno="238"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>json<sp/>j<sp/>=<sp/>json::parse(entry);</highlight></codeline>
+<codeline lineno="239"><highlight class="comment"></highlight></codeline>
+<codeline lineno="240"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Extract<sp/>fields<sp/>-<sp/>Safely<sp/>access<sp/>and<sp/>handle<sp/>potential<sp/>missing<sp/>fields</highlight></codeline>
+<codeline lineno="241"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>double<sp/>ts<sp/>=<sp/>j.contains(&quot;ts&quot;)<sp/>?<sp/>j[&quot;ts&quot;].get&lt;double&gt;()<sp/>:<sp/>0.0;<sp/>//<sp/>Or<sp/>a<sp/>default<sp/>value</highlight></codeline>
+<codeline lineno="242"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>uid<sp/>=<sp/>j.contains(&quot;uid&quot;)<sp/>?<sp/>j[&quot;uid&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="243"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>orig_h<sp/>=<sp/>j.contains(&quot;id.orig_h&quot;)<sp/>?<sp/>j[&quot;id.orig_h&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="244"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>orig_p<sp/>=<sp/>j.contains(&quot;id.orig_p&quot;)<sp/>?<sp/>j[&quot;id.orig_p&quot;].get&lt;int&gt;()<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="245"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>resp_h<sp/>=<sp/>j.contains(&quot;id.resp_h&quot;)<sp/>?<sp/>j[&quot;id.resp_h&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="246"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>resp_p<sp/>=<sp/>j.contains(&quot;id.resp_p&quot;)<sp/>?<sp/>j[&quot;id.resp_p&quot;].get&lt;int&gt;()<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="247"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>trans_depth<sp/>=<sp/>j.contains(&quot;trans_depth&quot;)<sp/>?<sp/>j[&quot;trans_depth&quot;].get&lt;int&gt;()<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="248"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>method<sp/>=<sp/>j.contains(&quot;method&quot;)<sp/>?<sp/>j[&quot;method&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="249"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>host<sp/>=<sp/>j.contains(&quot;host&quot;)<sp/>?<sp/>j[&quot;host&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="250"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>uri<sp/>=<sp/>j.contains(&quot;uri&quot;)<sp/>?<sp/>j[&quot;uri&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="251"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>version<sp/>=<sp/>j.contains(&quot;version&quot;)<sp/>?<sp/>j[&quot;version&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="252"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>user_agent<sp/>=<sp/>j.contains(&quot;user_agent&quot;)<sp/>?<sp/>j[&quot;user_agent&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="253"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>request_body_len<sp/>=<sp/>j.contains(&quot;request_body_len&quot;)<sp/>?<sp/>j[&quot;request_body_len&quot;].get&lt;int&gt;()<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="254"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>response_body_len<sp/>=<sp/>j.contains(&quot;response_body_len&quot;)<sp/>?<sp/>j[&quot;response_body_len&quot;].get&lt;int&gt;()<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="255"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>status_code<sp/>=<sp/>j.contains(&quot;status_code&quot;)<sp/>?<sp/>j[&quot;status_code&quot;].get&lt;int&gt;()<sp/>:<sp/>0;</highlight></codeline>
+<codeline lineno="256"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>status_msg<sp/>=<sp/>j.contains(&quot;status_msg&quot;)<sp/>?<sp/>j[&quot;status_msg&quot;].get&lt;std::string&gt;()<sp/>:<sp/>&quot;&quot;;</highlight></codeline>
+<codeline lineno="257"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>tags<sp/>=<sp/>j.contains(&quot;tags&quot;)<sp/>?<sp/>j[&quot;tags&quot;].get&lt;std::vector&lt;std::string&gt;&gt;()<sp/>:<sp/>std::vector&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="258"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>resp_fuids<sp/>=<sp/>j.contains(&quot;resp_fuids&quot;)<sp/>?<sp/>j[&quot;resp_fuids&quot;].get&lt;std::vector&lt;std::string&gt;&gt;()<sp/>:<sp/>std::vector&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="259"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;std::string&gt;<sp/>resp_mime_types<sp/>=<sp/>j.contains(&quot;resp_mime_types&quot;)<sp/>?<sp/>j[&quot;resp_mime_types&quot;].get&lt;std::vector&lt;std::string&gt;&gt;()<sp/>:<sp/>std::vector&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="260"><highlight class="comment"></highlight></codeline>
+<codeline lineno="261"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/>protocol<sp/>=<sp/>&quot;tcp&quot;;<sp/>//<sp/>Default</highlight></codeline>
+<codeline lineno="262"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>if<sp/>(j.contains(&quot;proto&quot;))<sp/>{</highlight></codeline>
+<codeline lineno="263"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol<sp/>=<sp/>j[&quot;proto&quot;].get&lt;std::string&gt;();</highlight></codeline>
+<codeline lineno="264"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>else<sp/>if<sp/>(!method.empty())<sp/>{</highlight></codeline>
+<codeline lineno="265"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol<sp/>=<sp/>&quot;http&quot;;<sp/>//<sp/>If<sp/>there&apos;s<sp/>an<sp/>HTTP<sp/>method,<sp/>assume<sp/>HTTP</highlight></codeline>
+<codeline lineno="266"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="267"><highlight class="comment"></highlight></codeline>
+<codeline lineno="268"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GraphBuilder::get_instance().add_connection(</highlight></codeline>
+<codeline lineno="269"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_h,</highlight></codeline>
+<codeline lineno="270"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_h,</highlight></codeline>
+<codeline lineno="271"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>protocol,<sp/>//<sp/>TODO:<sp/>Use<sp/>determined<sp/>protocol<sp/>instead<sp/>of<sp/>hardcoded<sp/>&quot;tcp&quot;<sp/>or<sp/>&quot;http&quot;</highlight></codeline>
+<codeline lineno="272"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::to_string(ts),</highlight></codeline>
+<codeline lineno="273"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>orig_p,</highlight></codeline>
+<codeline lineno="274"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_p,</highlight></codeline>
+<codeline lineno="275"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>method,</highlight></codeline>
+<codeline lineno="276"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host,</highlight></codeline>
+<codeline lineno="277"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uri,</highlight></codeline>
+<codeline lineno="278"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>version,</highlight></codeline>
+<codeline lineno="279"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>user_agent,</highlight></codeline>
+<codeline lineno="280"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>request_body_len,</highlight></codeline>
+<codeline lineno="281"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>response_body_len,</highlight></codeline>
+<codeline lineno="282"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>status_code,</highlight></codeline>
+<codeline lineno="283"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>status_msg,</highlight></codeline>
+<codeline lineno="284"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tags,</highlight></codeline>
+<codeline lineno="285"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_fuids,</highlight></codeline>
+<codeline lineno="286"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>resp_mime_types</highlight></codeline>
+<codeline lineno="287"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>);</highlight></codeline>
+<codeline lineno="288"><highlight class="comment"></highlight></codeline>
+<codeline lineno="289"><highlight class="comment"></highlight></codeline>
+<codeline lineno="290"><highlight class="comment"><sp/><sp/><sp/><sp/>}<sp/>catch<sp/>(const<sp/>json::parse_error&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="291"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/>&quot;Error<sp/>parsing<sp/>log<sp/>entry:<sp/>&quot;<sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/>&quot;<sp/>-<sp/>Entry:<sp/>&quot;<sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="292"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>Handle<sp/>the<sp/>error<sp/>appropriately<sp/>(e.g.,<sp/>log<sp/>it,<sp/>skip<sp/>the<sp/>entry,<sp/>etc.)</highlight></codeline>
+<codeline lineno="293"><highlight class="comment"><sp/><sp/><sp/><sp/>}<sp/><sp/>catch<sp/>(const<sp/>json::type_error&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="294"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/>&quot;Error<sp/>extracting<sp/>data:<sp/>&quot;<sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/>&quot;<sp/>-<sp/>Entry:<sp/>&quot;<sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="295"><highlight class="comment"><sp/><sp/><sp/><sp/>}<sp/>catch<sp/>(const<sp/>std::exception&amp;<sp/>e)<sp/>{</highlight></codeline>
+<codeline lineno="296"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/>&quot;General<sp/>error<sp/>processing<sp/>log<sp/>entry:<sp/>&quot;<sp/>&lt;&lt;<sp/>e.what()<sp/>&lt;&lt;<sp/>&quot;<sp/>-<sp/>Entry:<sp/>&quot;<sp/>&lt;&lt;<sp/>entry<sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
+<codeline lineno="297"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="298"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="299"><highlight class="comment"></highlight></codeline>
+<codeline lineno="300"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="ZeekLogParser.cpp"/>
   </compounddef>

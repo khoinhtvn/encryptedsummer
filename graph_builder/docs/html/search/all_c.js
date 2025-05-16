@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['main_0',['main',['../CMakeCCompilerId_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCCompilerId.c'],['../CMakeCXXCompilerId_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../main_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;main.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['maxos_2',['Linux/maxOS',['../md_README.html#autotoc_md5',1,'']]],
-  ['minute_5fwindow_3',['minute_window',['../classGraphNode.html#a7442585422a9af484aa4ee1cbb8701ae',1,'GraphNode']]],
-  ['monitor_5flogs_4',['monitor_logs',['../classZeekLogParser.html#af922e185b33640058001015a136545a3',1,'ZeekLogParser']]],
-  ['monitoring_5fstart_5',['monitoring_start',['../classGraphNode.html#a8168b02a72ea169890faff00696f52a8',1,'GraphNode']]]
+  ['node_0',['node',['../structGraphUpdate.html#a47890c709372ac8f0c65d819390fab47',1,'GraphUpdate']]],
+  ['node_5fcreate_1',['NODE_CREATE',['../structGraphUpdate.html#a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad',1,'GraphUpdate']]],
+  ['node_5fupdate_2',['NODE_UPDATE',['../structGraphUpdate.html#a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7',1,'GraphUpdate']]],
+  ['normalize_3',['normalize',['../classFeatureEncoder.html#ac06441a7c77e33594e3581bbc1ca1237',1,'FeatureEncoder']]],
+  ['normalize_5fsize_4',['normalize_size',['../classFeatureEncoder.html#a701695d03b52990d684ac02989a271ec',1,'FeatureEncoder']]]
 ];

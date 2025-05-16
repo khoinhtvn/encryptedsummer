@@ -112,6 +112,7 @@ $(function(){initNavTree('main_8cpp.html',''); initResizable(true); });
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;iostream&gt;</code><br />
 <code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;filesystem&gt;</code><br />
 <code>#include &quot;<a class="el" href="GraphBuilder_8h_source.html">includes/GraphBuilder.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GraphExporter_8h_source.html">includes/GraphExporter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="LogMonitor_8h_source.html">includes/LogMonitor.h</a>&quot;</code><br />
@@ -121,22 +122,24 @@ Include dependency graph for main.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="main_8cpp__incl.png" border="0" usemap="#amain_8cpp" alt=""/></div>
 <map name="amain_8cpp" id="amain_8cpp">
-<area shape="rect" title="Main entry point for the Zeek log analysis and anomaly detection application." alt="" coords="261,5,344,31"/>
+<area shape="rect" title="Main entry point for the Zeek log analysis and anomaly detection application." alt="" coords="316,5,399,31"/>
 <area shape="rect" title=" " alt="" coords="5,86,85,111"/>
-<area shape="poly" title=" " alt="" coords="265,33,105,81,94,84,93,79,103,76,263,28"/>
-<area shape="rect" title=" " alt="" coords="151,167,215,192"/>
-<area shape="poly" title=" " alt="" coords="262,25,232,31,201,41,173,57,150,80,144,98,147,117,155,137,166,154,162,157,150,139,141,119,139,97,146,77,170,53,199,36,231,26,261,20"/>
-<area shape="rect" href="GraphBuilder_8h.html" title="Header file for the GraphBuilder class, responsible for constructing the network traffic graph." alt="" coords="405,167,581,192"/>
-<area shape="poly" title=" " alt="" coords="313,29,344,70,390,117,423,140,456,158,454,163,420,144,386,121,340,74,308,33"/>
-<area shape="rect" href="GraphExporter_8h.html" title="Header file for the GraphExporter class, responsible for visualizing the network traffic graph." alt="" coords="401,86,586,111"/>
-<area shape="poly" title=" " alt="" coords="331,28,454,78,452,83,329,33"/>
-<area shape="rect" href="LogMonitor_8h.html" title="Header file for the LogMonitor class, responsible for monitoring Zeek log files." alt="" coords="161,86,325,111"/>
-<area shape="poly" title=" " alt="" coords="296,32,262,76,258,73,292,29"/>
-<area shape="rect" href="RealTimeAnomalyDetector_8h.html" title="Header file for the RealTimeAnomalyDetector class, responsible for detecting anomalies in network tra..." alt="" coords="611,79,811,119"/>
-<area shape="poly" title=" " alt="" coords="345,25,600,73,599,79,344,30"/>
-<area shape="poly" title=" " alt="" coords="496,112,496,153,491,153,491,112"/>
-<area shape="poly" title=" " alt="" coords="236,113,202,157,198,154,232,110"/>
-<area shape="poly" title=" " alt="" coords="660,121,539,164,537,159,658,116"/>
+<area shape="poly" title=" " alt="" coords="316,31,105,81,93,84,92,79,103,76,315,25"/>
+<area shape="rect" title=" " alt="" coords="208,167,272,192"/>
+<area shape="poly" title=" " alt="" coords="316,28,219,48,176,63,150,80,143,98,150,117,171,141,197,159,194,163,167,145,146,120,138,98,146,77,174,58,218,43,315,23"/>
+<area shape="rect" title=" " alt="" coords="160,86,251,111"/>
+<area shape="poly" title=" " alt="" coords="336,33,241,82,239,77,334,28"/>
+<area shape="rect" href="GraphBuilder_8h.html" title="Header file for the GraphBuilder class, responsible for constructing the network traffic graph." alt="" coords="520,167,696,192"/>
+<area shape="poly" title=" " alt="" coords="378,28,452,76,504,116,575,158,572,162,501,121,449,81,375,33"/>
+<area shape="rect" href="GraphExporter_8h.html" title="Header file for the GraphExporter class, responsible for visualizing the network traffic graph." alt="" coords="515,86,701,111"/>
+<area shape="poly" title=" " alt="" coords="395,28,559,79,558,84,393,33"/>
+<area shape="rect" href="LogMonitor_8h.html" title="Header file for the LogMonitor class, responsible for monitoring Zeek log files." alt="" coords="275,86,439,111"/>
+<area shape="poly" title=" " alt="" coords="360,31,360,72,355,72,355,31"/>
+<area shape="rect" href="RealTimeAnomalyDetector_8h.html" title="Header file for the RealTimeAnomalyDetector class, responsible for detecting anomalies in network tra..." alt="" coords="725,79,925,119"/>
+<area shape="poly" title=" " alt="" coords="399,24,712,76,712,81,398,29"/>
+<area shape="poly" title=" " alt="" coords="611,112,611,153,605,153,605,112"/>
+<area shape="poly" title=" " alt="" coords="341,114,270,161,267,157,339,109"/>
+<area shape="poly" title=" " alt="" coords="774,121,654,164,652,159,772,116"/>
 </map>
 </div>
 </div><table class="memberdecls">
@@ -174,7 +177,7 @@ Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">argc</td><td>Number of command-line arguments. </td></tr>
-    <tr><td class="paramname">argv</td><td>Array of command-line arguments. The first argument should be the path to the Zeek log directory. </td></tr>
+    <tr><td class="paramname">argv</td><td>Array of command-line arguments. The first argument should be the path to the Zeek log directory. An optional &ndash;export-path argument specifies the export directory. </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,7 +188,18 @@ Functions</h2></td></tr>
 <p>The monitor is initialized with the directory containing the Zeek log files provided as a command-line argument.</p>
 <p>Starts the log monitoring process in a separate thread.</p>
 <p>Retrieves the singleton instance of the <a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a> and gets the current graph.</p>
-<p>Visualizes the current network graph and saves it as a PNG file.</p>
+<p>Visualizes the current network graph and saves it as a PNG file, as well as DOT file.</p>
+<p>The filename includes the current UTC timestamp. The 'false' argument likely controls whether to clear the graph before visualizing (in this context, it's probably not clearing), and 'true' might indicate whether to include labels on the nodes.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">graph</td><td>The graph to visualize. </td></tr>
+    <tr><td class="paramname">./zeek_graph_</td><td>+ std::to_string(UTC) The base filename for the output PNG. </td></tr>
+    <tr><td class="paramname">false</td><td>Flag indicating whether to clear the graph before visualization. </td></tr>
+    <tr><td class="paramname">true</td><td>Flag indicating whether to include labels on the nodes.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Visualizes the current network graph and saves it as a PNG file, as well as DOT file.</p>
 <p>The filename includes the current UTC timestamp. The 'false' argument likely controls whether to clear the graph before visualizing (in this context, it's probably not clearing), and 'true' might indicate whether to include labels on the nodes.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">

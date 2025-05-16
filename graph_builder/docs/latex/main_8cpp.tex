@@ -7,6 +7,7 @@ Main entry point for the Zeek log analysis and anomaly detection application.
 
 {\ttfamily \#include $<$iostream$>$}\newline
 {\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$filesystem$>$}\newline
 {\ttfamily \#include "{}includes/\+Graph\+Builder.\+h"{}}\newline
 {\ttfamily \#include "{}includes/\+Graph\+Exporter.\+h"{}}\newline
 {\ttfamily \#include "{}includes/\+Log\+Monitor.\+h"{}}\newline
@@ -47,7 +48,7 @@ This function parses command-\/line arguments, initializes the log monitor, anom
 \begin{DoxyParams}{Parameters}
 {\em argc} & Number of command-\/line arguments. \\
 \hline
-{\em argv} & Array of command-\/line arguments. The first argument should be the path to the Zeek log directory. \\
+{\em argv} & Array of command-\/line arguments. The first argument should be the path to the Zeek log directory. An optional --export-\/path argument specifies the export directory. \\
 \hline
 \end{DoxyParams}
 \begin{DoxyReturn}{Returns}
@@ -65,7 +66,22 @@ Starts the log monitoring process in a separate thread.
 
 Retrieves the singleton instance of the \doxylink{classGraphBuilder}{Graph\+Builder} and gets the current graph.
 
-Visualizes the current network graph and saves it as a PNG file.
+Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
+
+The filename includes the current UTC timestamp. The \textquotesingle{}false\textquotesingle{} argument likely controls whether to clear the graph before visualizing (in this context, it\textquotesingle{}s probably not clearing), and \textquotesingle{}true\textquotesingle{} might indicate whether to include labels on the nodes.
+
+
+\begin{DoxyParams}{Parameters}
+{\em graph} & The graph to visualize. \\
+\hline
+{\em ./zeek\+\_\+graph\+\_\+} & + std\+::to\+\_\+string(\+UTC) The base filename for the output PNG. \\
+\hline
+{\em false} & Flag indicating whether to clear the graph before visualization. \\
+\hline
+{\em true} & Flag indicating whether to include labels on the nodes.\\
+\hline
+\end{DoxyParams}
+Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
 
 The filename includes the current UTC timestamp. The \textquotesingle{}false\textquotesingle{} argument likely controls whether to clear the graph before visualizing (in this context, it\textquotesingle{}s probably not clearing), and \textquotesingle{}true\textquotesingle{} might indicate whether to include labels on the nodes.
 

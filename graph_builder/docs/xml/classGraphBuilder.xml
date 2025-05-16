@@ -174,10 +174,10 @@
         </inbodydescription>
         <location file="includes/GraphBuilder.h" line="102" column="17" bodyfile="includes/GraphBuilder.h" bodystart="102" bodyend="104"/>
       </memberdef>
-      <memberdef kind="function" id="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void GraphBuilder::add_connection</definition>
-        <argsstring>(const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;timestamp, int src_port, int dst_port, const std::string &amp;method=&quot;&quot;, const std::string &amp;host=&quot;&quot;, const std::string &amp;uri=&quot;&quot;, const std::string &amp;version=&quot;&quot;, const std::string &amp;user_agent=&quot;&quot;, int request_body_len=0, int response_body_len=0, int status_code=0, const std::string &amp;status_msg=&quot;&quot;, const std::vector&lt; std::string &gt; &amp;tags={}, const std::vector&lt; std::string &gt; &amp;resp_fuids={}, const std::vector&lt; std::string &gt; &amp;resp_mime_types={})</argsstring>
+        <argsstring>(const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;service, const std::string &amp;timestamp, const int src_port, const int dst_port, const int orig_bytes, const int resp_bytes, const std::string &amp;conn_state, const bool local_orig, const bool local_resp, const std::string &amp;history, const int orig_pkts, const int resp_pkts, const int orig_ip_bytes, const int resp_ip_bytes)</argsstring>
         <name>add_connection</name>
         <qualifiedname>GraphBuilder::add_connection</qualifiedname>
         <param>
@@ -194,75 +194,59 @@
         </param>
         <param>
           <type>const std::string &amp;</type>
+          <declname>service</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
           <declname>timestamp</declname>
         </param>
         <param>
-          <type>int</type>
+          <type>const int</type>
           <declname>src_port</declname>
         </param>
         <param>
-          <type>int</type>
+          <type>const int</type>
           <declname>dst_port</declname>
         </param>
         <param>
-          <type>const std::string &amp;</type>
-          <declname>method</declname>
-          <defval>&quot;&quot;</defval>
+          <type>const int</type>
+          <declname>orig_bytes</declname>
+        </param>
+        <param>
+          <type>const int</type>
+          <declname>resp_bytes</declname>
         </param>
         <param>
           <type>const std::string &amp;</type>
-          <declname>host</declname>
-          <defval>&quot;&quot;</defval>
+          <declname>conn_state</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>local_orig</declname>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>local_resp</declname>
         </param>
         <param>
           <type>const std::string &amp;</type>
-          <declname>uri</declname>
-          <defval>&quot;&quot;</defval>
+          <declname>history</declname>
         </param>
         <param>
-          <type>const std::string &amp;</type>
-          <declname>version</declname>
-          <defval>&quot;&quot;</defval>
+          <type>const int</type>
+          <declname>orig_pkts</declname>
         </param>
         <param>
-          <type>const std::string &amp;</type>
-          <declname>user_agent</declname>
-          <defval>&quot;&quot;</defval>
+          <type>const int</type>
+          <declname>resp_pkts</declname>
         </param>
         <param>
-          <type>int</type>
-          <declname>request_body_len</declname>
-          <defval>0</defval>
+          <type>const int</type>
+          <declname>orig_ip_bytes</declname>
         </param>
         <param>
-          <type>int</type>
-          <declname>response_body_len</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>int</type>
-          <declname>status_code</declname>
-          <defval>0</defval>
-        </param>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>status_msg</declname>
-          <defval>&quot;&quot;</defval>
-        </param>
-        <param>
-          <type>const std::vector&lt; std::string &gt; &amp;</type>
-          <declname>tags</declname>
-          <defval>{}</defval>
-        </param>
-        <param>
-          <type>const std::vector&lt; std::string &gt; &amp;</type>
-          <declname>resp_fuids</declname>
-          <defval>{}</defval>
-        </param>
-        <param>
-          <type>const std::vector&lt; std::string &gt; &amp;</type>
-          <declname>resp_mime_types</declname>
-          <defval>{}</defval>
+          <type>const int</type>
+          <declname>resp_ip_bytes</declname>
         </param>
         <briefdescription>
 <para>Processes a network connection event and adds the corresponding nodes and edges to the graph. </para>
@@ -295,6 +279,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername>service</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Service from a list of known services. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername>timestamp</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -319,98 +311,82 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>method</parametername>
+<parametername>orig_bytes</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP request method (if applicable). Defaults to &quot;&quot;. </para>
+<para>Number of bytes sent by the originator. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>host</parametername>
+<parametername>resp_bytes</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP host header (if applicable). Defaults to &quot;&quot;. </para>
+<para>Number of bytes sent by the responder. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>uri</parametername>
+<parametername>conn_state</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP request URI (if applicable). Defaults to &quot;&quot;. </para>
+<para>Connection state (e.g., &quot;REJ&quot;, &quot;SF&quot;). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>version</parametername>
+<parametername>local_orig</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP version (if applicable). Defaults to &quot;&quot;. </para>
+<para>Whether the originator is local. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>user_agent</parametername>
+<parametername>local_resp</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP user agent string (if applicable). Defaults to &quot;&quot;. </para>
+<para>Whether the responder is local. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>request_body_len</parametername>
+<parametername>history</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Length of the HTTP request body (if applicable). Defaults to 0. </para>
+<para>History of the connection (e.g., packet states). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>response_body_len</parametername>
+<parametername>orig_pkts</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Length of the HTTP response body (if applicable). Defaults to 0. </para>
+<para>Number of packets sent by the originator. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>status_code</parametername>
+<parametername>resp_pkts</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP status code (if applicable). Defaults to 0. </para>
+<para>Number of packets sent by the responder. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>status_msg</parametername>
+<parametername>orig_ip_bytes</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>HTTP status message (if applicable). Defaults to &quot;&quot;. </para>
+<para>Number of IP bytes sent by the originator. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>tags</parametername>
+<parametername>resp_ip_bytes</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A vector of tags associated with the connection. Defaults to {}. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>resp_fuids</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A vector of file unique identifiers from the responder. Defaults to {}. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>resp_mime_types</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A vector of MIME types from the responder. Defaults to {}. </para>
+<para>Number of IP bytes sent by the responder. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -418,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="132" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="108"/>
+        <location file="includes/GraphBuilder.h" line="131" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
@@ -437,7 +413,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="154" column="18" bodyfile="GraphBuilder.cpp" bodystart="109" bodyend="111"/>
+        <location file="includes/GraphBuilder.h" line="148" column="18" bodyfile="GraphBuilder.cpp" bodystart="79" bodyend="81"/>
       </memberdef>
       <memberdef kind="function" id="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>size_t</type>
@@ -455,7 +431,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="159" column="12" bodyfile="includes/GraphBuilder.h" bodystart="159" bodyend="162"/>
+        <location file="includes/GraphBuilder.h" line="154" column="12" bodyfile="includes/GraphBuilder.h" bodystart="154" bodyend="157"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -491,9 +467,9 @@
         <link refid="classGraphBuilder"/>
       </node>
     </collaborationgraph>
-    <location file="includes/GraphBuilder.h" line="36" column="1" bodyfile="includes/GraphBuilder.h" bodystart="36" bodyend="163"/>
+    <location file="includes/GraphBuilder.h" line="36" column="1" bodyfile="includes/GraphBuilder.h" bodystart="36" bodyend="158"/>
     <listofallmembers>
-      <member refid="classGraphBuilder_1a493a2fd26390adb3f4426e130d14160c" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>add_connection</name></member>
+      <member refid="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>add_connection</name></member>
       <member refid="classGraphBuilder_1ad5aa5478a79929b7e923bfe08c6d9b9e" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>feature_encoder</name></member>
       <member refid="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_feature_dimension</name></member>
       <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_graph</name></member>

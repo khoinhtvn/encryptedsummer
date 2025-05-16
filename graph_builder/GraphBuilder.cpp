@@ -15,23 +15,17 @@ std::unique_ptr<GraphBuilder> GraphBuilder::instance = nullptr;
 std::mutex GraphBuilder::instance_mutex;
 
 void GraphBuilder::add_connection(const std::string &src_ip, const std::string &dst_ip,
-                                  const std::string &proto, const std::string &timestamp,
+                                  const std::string &proto, const std::string &service, const std::string &timestamp,
                                   const int src_port, const int dst_port,
-                                  const std::string &method,
-                                  const std::string &host,
-                                  const std::string &uri,
-                                  const std::string &version,
-                                  const std::string &user_agent,
-                                  const int request_body_len,
-                                  const int response_body_len,
-                                  const int status_code,
-                                  const std::string &status_msg,
-                                  const std::vector<std::string> &tags,
-                                  const std::vector<std::string> &resp_fuids,
-                                  const std::vector<std::string> &resp_mime_types) {
+                                  const int orig_bytes, const int resp_bytes,
+                                  const std::string &conn_state,
+                                  const bool local_orig, const bool local_resp,
+                                  const std::string &history,
+                                  const int orig_pkts, const int resp_pkts,
+                                  const int orig_ip_bytes, const int resp_ip_bytes) {
     // Get or create nodes
-    auto create_src = graph.get_or_create_node(src_ip, host);
-    auto create_dst = graph.get_or_create_node(dst_ip, host);
+    auto create_src = graph.get_or_create_node(src_ip, "");
+    auto create_dst = graph.get_or_create_node(dst_ip, "");
     auto &src_node = create_src.first;
     auto &dst_node = create_dst.first;
     const bool src_created = create_src.second;
@@ -53,51 +47,26 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
     src_node.update_connection_features(proto, true); // Outgoing connection
     dst_node.update_connection_features(proto, false); // Incoming connection
 
-
-    // Add edge
+    // Add edge with updated attributes
     std::unordered_map<std::string, std::string> attrs = {
         {"protocol", proto},
         {"timestamp", timestamp},
         {"src_port", std::to_string(src_port)},
         {"dst_port", std::to_string(dst_port)},
-        {"method", method},
-        {"host", host},
-        {"uri", uri},
-        {"version", version},
-        {"user_agent", user_agent},
-        {"request_body_len", std::to_string(request_body_len)},
-        {"response_body_len", std::to_string(response_body_len)},
-        {"status_code", std::to_string(status_code)},
-        {"status_msg", status_msg}
+            {"service", service},
+        {"conn_state", conn_state},
+        {"local_orig", local_orig ? "true" : "false"},
+        {"local_resp", local_resp ? "true" : "false"},
+        {"history", history},
+        {"orig_bytes", std::to_string(orig_bytes)},
+        {"resp_bytes", std::to_string(resp_bytes)},
+        {"orig_pkts", std::to_string(orig_pkts)},
+        {"resp_pkts", std::to_string(resp_pkts)},
+        {"orig_ip_bytes", std::to_string(orig_ip_bytes)},
+        {"resp_ip_bytes", std::to_string(resp_ip_bytes)}
     };
+
     std::vector<float> features = feature_encoder.encode_features(attrs);
-    // Handle vector attributes by joining them with commas
-    if (!tags.empty()) {
-        std::string tags_str;
-        for (const auto &tag: tags) {
-            if (!tags_str.empty()) tags_str += ",";
-            tags_str += tag;
-        }
-        attrs["tags"] = tags_str;
-    }
-
-    if (!resp_fuids.empty()) {
-        std::string fuids_str;
-        for (const auto &fuid: resp_fuids) {
-            if (!fuids_str.empty()) fuids_str += ",";
-            fuids_str += fuid;
-        }
-        attrs["resp_fuids"] = fuids_str;
-    }
-
-    if (!resp_mime_types.empty()) {
-        std::string mime_str;
-        for (const auto &mime: resp_mime_types) {
-            if (!mime_str.empty()) mime_str += ",";
-            mime_str += mime;
-        }
-        attrs["resp_mime_types"] = mime_str;
-    }
 
     auto edge = graph.add_edge(src_ip, dst_ip, proto, attrs, features);
     update_queue.push({
@@ -106,6 +75,7 @@ void GraphBuilder::add_connection(const std::string &src_ip, const std::string &
         edge
     });
 }
+
 TrafficGraph &GraphBuilder::get_graph() {
     return graph;
 }

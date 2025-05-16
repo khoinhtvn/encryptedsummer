@@ -113,36 +113,30 @@ public:
      * @param src_ip Source IP address of the connection.
      * @param dst_ip Destination IP address of the connection.
      * @param proto Protocol of the connection (e.g., "tcp", "udp").
+     * @param service Service from a list of known services.
      * @param timestamp Timestamp of the connection event.
      * @param src_port Source port of the connection.
      * @param dst_port Destination port of the connection.
-     * @param method HTTP request method (if applicable). Defaults to "".
-     * @param host HTTP host header (if applicable). Defaults to "".
-     * @param uri HTTP request URI (if applicable). Defaults to "".
-     * @param version HTTP version (if applicable). Defaults to "".
-     * @param user_agent HTTP user agent string (if applicable). Defaults to "".
-     * @param request_body_len Length of the HTTP request body (if applicable). Defaults to 0.
-     * @param response_body_len Length of the HTTP response body (if applicable). Defaults to 0.
-     * @param status_code HTTP status code (if applicable). Defaults to 0.
-     * @param status_msg HTTP status message (if applicable). Defaults to "".
-     * @param tags A vector of tags associated with the connection. Defaults to {}.
-     * @param resp_fuids A vector of file unique identifiers from the responder. Defaults to {}.
-     * @param resp_mime_types A vector of MIME types from the responder. Defaults to {}.
+     * @param orig_bytes Number of bytes sent by the originator.
+     * @param resp_bytes Number of bytes sent by the responder.
+     * @param conn_state Connection state (e.g., "REJ", "SF").
+     * @param local_orig Whether the originator is local.
+     * @param local_resp Whether the responder is local.
+     * @param history History of the connection (e.g., packet states).
+     * @param orig_pkts Number of packets sent by the originator.
+     * @param resp_pkts Number of packets sent by the responder.
+     * @param orig_ip_bytes Number of IP bytes sent by the originator.
+     * @param resp_ip_bytes Number of IP bytes sent by the responder.
      */
     void add_connection(const std::string &src_ip, const std::string &dst_ip,
-                        const std::string &proto, const std::string &timestamp,
-                        int src_port, int dst_port, const std::string &method = "",
-                        const std::string &host = "",
-                        const std::string &uri = "",
-                        const std::string &version = "",
-                        const std::string &user_agent = "",
-                        int request_body_len = 0,
-                        int response_body_len = 0,
-                        int status_code = 0,
-                        const std::string &status_msg = "",
-                        const std::vector<std::string> &tags = {},
-                        const std::vector<std::string> &resp_fuids = {},
-                        const std::vector<std::string> &resp_mime_types = {});
+                        const std::string &proto, const std::string &service, const std::string &timestamp,
+                        const int src_port, const int dst_port,
+                        const int orig_bytes, const int resp_bytes,
+                        const std::string &conn_state,
+                        const bool local_orig, const bool local_resp,
+                        const std::string &history,
+                        const int orig_pkts, const int resp_pkts,
+                        const int orig_ip_bytes, const int resp_ip_bytes);
 
     /**
      * @brief Gets a reference to the underlying TrafficGraph object.
@@ -152,6 +146,7 @@ public:
      * @return A reference to the TrafficGraph object.
      */
     TrafficGraph &get_graph();
+
     /**
  * @brief Gets the dimension of the encoded feature vector
  * @return Size of feature vector produced by the encoder

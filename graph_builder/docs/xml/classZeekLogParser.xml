@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="172" column="10" bodyfile="ZeekLogParser.cpp" bodystart="123" bodyend="129"/>
+        <location file="includes/ZeekLogParser.h" line="172" column="10" bodyfile="ZeekLogParser.cpp" bodystart="124" bodyend="130"/>
       </memberdef>
       <memberdef kind="function" id="classZeekLogParser_1a849d1765b0cab7cafc056c8465341a32" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -326,7 +326,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="181" column="10" bodyfile="ZeekLogParser.cpp" bodystart="170" bodyend="232"/>
+        <location file="includes/ZeekLogParser.h" line="181" column="10" bodyfile="ZeekLogParser.cpp" bodystart="132" bodyend="194"/>
       </memberdef>
       <memberdef kind="function" id="classZeekLogParser_1aab815de3963d42eb72aec94fb1c7e2f2" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
