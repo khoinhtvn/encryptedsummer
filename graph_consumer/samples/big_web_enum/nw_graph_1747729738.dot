@@ -1,8 +1,0 @@
-digraph ZeekTraffic {
-  "54.171.230.55" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
-  "151.101.130.49" [degree=2, in_degree=2, out_degree=0, activity_score=0.19, total_connections=2];
-  "192.168.239.101" [degree=3, in_degree=0, out_degree=3, activity_score=0.27, total_connections=3];
-  "192.168.239.101" -> "151.101.130.49" [label="tcp", resp_ip_bytes="8195", orig_ip_bytes="1632", protocol="tcp", orig_pkts="21", timestamp="1747729700.168650", local_resp="false", src_port="39742", service="ssl", dst_port="443", conn_state="SF", resp_bytes="7351", local_orig="true", history="ShADadFfR", orig_bytes="772", resp_pkts="21"];
-  "192.168.239.101" -> "151.101.130.49" [label="tcp", resp_ip_bytes="917779", orig_ip_bytes="17798", protocol="tcp", orig_pkts="425", timestamp="1747729700.764960", local_resp="false", src_port="39754", service="ssl", dst_port="443", conn_state="SF", resp_bytes="890615", local_orig="true", history="ShADadFfR", orig_bytes="778", resp_pkts="679"];
-  "192.168.239.101" -> "54.171.230.55" [label="tcp", resp_ip_bytes="4307", orig_ip_bytes="1297", protocol="tcp", orig_pkts="12", timestamp="1747729704.876009", local_resp="false", src_port="58126", service="ssl", dst_port="443", conn_state="SF", resp_bytes="3863", local_orig="true", history="ShADadFfR", orig_bytes="797", resp_pkts="11"];
-}
