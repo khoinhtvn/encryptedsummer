@@ -1,0 +1,16 @@
+digraph ZeekTraffic {
+  "91.189.91.81" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
+  "103.245.249.90" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
+  "91.189.91.46" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
+  "34.243.160.129" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
+  "54.171.230.55" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
+  "151.101.130.49" [degree=2, in_degree=2, out_degree=0, activity_score=0.19, total_connections=2];
+  "192.168.239.101" [degree=7, in_degree=0, out_degree=7, activity_score=0.52, total_connections=7];
+  "192.168.239.101" -> "151.101.130.49" [label="tcp", resp_ip_bytes="8195", orig_ip_bytes="1632", protocol="tcp", orig_pkts="21", timestamp="1747729700.168650", local_resp="false", src_port="39742", service="ssl", dst_port="443", conn_state="SF", resp_bytes="7351", local_orig="true", history="ShADadFfR", orig_bytes="772", resp_pkts="21"];
+  "192.168.239.101" -> "151.101.130.49" [label="tcp", resp_ip_bytes="917779", orig_ip_bytes="17798", protocol="tcp", orig_pkts="425", timestamp="1747729700.764960", local_resp="false", src_port="39754", service="ssl", dst_port="443", conn_state="SF", resp_bytes="890615", local_orig="true", history="ShADadFfR", orig_bytes="778", resp_pkts="679"];
+  "192.168.239.101" -> "54.171.230.55" [label="tcp", resp_ip_bytes="4307", orig_ip_bytes="1297", protocol="tcp", orig_pkts="12", timestamp="1747729704.876009", local_resp="false", src_port="58126", service="ssl", dst_port="443", conn_state="SF", resp_bytes="3863", local_orig="true", history="ShADadFfR", orig_bytes="797", resp_pkts="11"];
+  "192.168.239.101" -> "34.243.160.129" [label="tcp", resp_ip_bytes="6935", orig_ip_bytes="1408", protocol="tcp", orig_pkts="14", timestamp="1747729729.490923", local_resp="false", src_port="52764", service="ssl", dst_port="443", conn_state="SF", resp_bytes="6371", local_orig="true", history="ShADadFfR", orig_bytes="828", resp_pkts="14"];
+  "192.168.239.101" -> "91.189.91.46" [label="tcp", resp_ip_bytes="20841", orig_ip_bytes="1817", protocol="tcp", orig_pkts="21", timestamp="1747729729.769316", local_resp="false", src_port="44370", service="ssl", dst_port="443", conn_state="SF", resp_bytes="19837", local_orig="true", history="ShADadFfR", orig_bytes="957", resp_pkts="25"];
+  "192.168.239.101" -> "103.245.249.90" [label="tcp", resp_ip_bytes="10808394", orig_ip_bytes="127348", protocol="tcp", orig_pkts="3132", timestamp="1747729729.625599", local_resp="false", src_port="51284", service="http", dst_port="80", conn_state="SF", resp_bytes="10504350", local_orig="true", history="ShADadFf", orig_bytes="2048", resp_pkts="7601"];
+  "192.168.239.101" -> "91.189.91.81" [label="tcp", resp_ip_bytes="9778871", orig_ip_bytes="136082", protocol="tcp", orig_pkts="3362", timestamp="1747729729.407799", local_resp="false", src_port="53306", service="http", dst_port="80", conn_state="SF", resp_bytes="9503267", local_orig="true", history="ShADadFf", orig_bytes="1582", resp_pkts="6890"];
+}

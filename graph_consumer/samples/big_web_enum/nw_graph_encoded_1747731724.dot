@@ -1,0 +1,5 @@
+digraph NWTraffic_update {
+  "192.168.27.10" [degree=106, in_degree=0, out_degree=106, activity_score=1.00, total_connections=106];
+  "142.251.175.95" [degree=3, in_degree=3, out_degree=0, activity_score=0.27, total_connections=3];
+  "192.168.27.10" -> "142.251.175.95" [protocol_UNKNOWN=0.00,protocol_TCP=1.00,protocol_UDP=0.00,protocol_ICMP=0.00,timestamp_sin=0.70,timestamp_cos=-0.71,src_port_type=0.50,dst_port_type=0.00,conn_state_successful=1.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=0.00,local_orig=1.00,local_resp=0.00,history_length=0.80,orig_bytes=0.59,resp_bytes=0.61,orig_pkts=0.20,resp_pkts=0.21,orig_ip_bytes=0.60,resp_ip_bytes=0.62,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
+}

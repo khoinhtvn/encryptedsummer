@@ -1,0 +1,5 @@
+digraph ZeekTraffic {
+  "151.101.130.49" [degree=1, in_degree=1, out_degree=0, activity_score=0.10, total_connections=1];
+  "192.168.239.101" [degree=1, in_degree=0, out_degree=1, activity_score=0.10, total_connections=1];
+  "192.168.239.101" -> "151.101.130.49" [label="tcp", resp_ip_bytes="8195", orig_ip_bytes="1632", protocol="tcp", orig_pkts="21", timestamp="1747729700.168650", local_resp="false", src_port="39742", service="ssl", dst_port="443", conn_state="SF", resp_bytes="7351", local_orig="true", history="ShADadFfR", orig_bytes="772", resp_pkts="21"];
+}
