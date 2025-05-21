@@ -341,7 +341,7 @@ def update_nx_graph(nx_graph, update_dot_file):
         else:
             # Add new node with attributes
             nx_graph.add_node(node_id, **update_graph.nodes[node_id])
-            logging.info(f"Added node: {node_id} with attributes {update_graph.nodes[node_id]}.")
+            logging.debug(f"Added node: {node_id} with attributes {update_graph.nodes[node_id]}.")
 
     # 2. Update or add edges
     logging.info("Processing edge updates/additions.")
@@ -362,8 +362,9 @@ def update_nx_graph(nx_graph, update_dot_file):
     nodes_to_delete = [node_id for node_id in nx_graph.nodes() if node_id not in update_graph.nodes()]
     for node_id in nodes_to_delete:
         nx_graph.remove_node(node_id)
-        logging.info(f"Deleted node: {node_id}.")
+        logging.debug(f"Deleted node: {node_id}.")
 
+    # TODO: Think about deletions!
     # Identify edges to delete (more complex because of keys)
     edges_to_delete = []
     for u, v, key in nx_graph.edges(keys=True):
@@ -372,7 +373,7 @@ def update_nx_graph(nx_graph, update_dot_file):
     for u, v, key in edges_to_delete:
         try:
             nx_graph.remove_edge(u, v, key=key)
-            logging.info(f"Deleted edge: '{u}' -> '{v}' with key={key}.")
+            logging.debug(f"Deleted edge: '{u}' -> '{v}' with key={key}.")
         except nx.NetworkXError as e:
             logging.warning(f"Error deleting edge '{u}' -> '{v}' with key={key}: {e}")
 

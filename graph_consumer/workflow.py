@@ -7,9 +7,6 @@ import os
 import re
 from datetime import datetime
 
-# Setup logging (ensure it's configured at the start of the script)
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 def extract_timestamp_from_epoch(filename):
     """
     Extracts a datetime object from a filename assuming the filename (or part of it)
