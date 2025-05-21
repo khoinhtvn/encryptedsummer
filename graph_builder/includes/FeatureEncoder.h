@@ -22,7 +22,7 @@
  */
 
 // Created by lu on 5/9/25.
-
+//TODO: remove normalization, keep one hot
 #ifndef FEATUREENCODER_H
 #define FEATUREENCODER_H
 
