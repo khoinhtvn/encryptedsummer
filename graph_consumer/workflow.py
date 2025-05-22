@@ -10,23 +10,11 @@ from graph_utils import *
 from neural_net import HybridGNNAnomalyDetector
 from visualization import *
 
-MODEL_SAVE_PATH = "model_checkpoints"
-STATS_SAVE_PATH = "stats"
-ANOMALY_LOG_PATH = "anomaly_logs"
-
-if not os.path.exists(ANOMALY_LOG_PATH):
-    os.makedirs(ANOMALY_LOG_PATH)
-if not os.path.exists(MODEL_SAVE_PATH):
-    os.makedirs(MODEL_SAVE_PATH)
-if not os.path.exists(STATS_SAVE_PATH):
-    os.makedirs(STATS_SAVE_PATH)
-
-
-def save_anomalies_to_file(main_data, anomalies, processed_files_count, nx_graph=None, timestamp=None):
-    """Saves detected anomalies to a JSON file with more details."""
+def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None, timestamp=None):
+    """Saves detected anomalies to a JSON file with more details, including IP addresses."""
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = os.path.join(ANOMALY_LOG_PATH, f"anomalies_{timestamp}_update_{processed_files_count}.json")
+    filename = os.path.join(anomaly_log_path, f"anomalies_{timestamp}_update_{processed_files_count}.json")
     anomaly_data = {
         "timestamp": timestamp,
         "update_count": processed_files_count,
@@ -35,33 +23,44 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, nx_graph
         "edge_anomalies": []
     }
 
-    if nx_graph is not None:
+    if nx_graph is not None and main_data is not None:
+        node_list = list(nx_graph.nodes()) # Get the list of node IPs from the NetworkX graph
+
         for idx in anomalies.get('node_anomalies', []):
-            node_id = idx.item()
-            node_info = {"node_id": node_id, "score": anomalies['node_scores'][idx].item()}
-            if node_id in nx_graph.nodes:
-                node_info['ip'] = node_id  # Assuming node_id IS the IP address
+            node_index = idx.item()
+            node_info = {"node_id": node_index, "score": anomalies['node_scores'][idx].item()}
+            if 0 <= node_index < len(node_list):
+                node_info['ip'] = str(node_list[node_index]) # Use the index to get the IP
             anomaly_data["node_anomalies"].append(node_info)
 
-        if main_data is not None and main_data.edge_index is not None:
-            for idx in anomalies.get('edge_anomalies', []):
-                src = main_data.edge_index[0][idx].item()
-                dst = main_data.edge_index[1][idx].item()
-                edge_info = {
-                    "source_node_id": src,
-                    "target_node_id": dst,
-                    "score": anomalies['edge_scores'][idx].item()
-                }
-                if src in nx_graph.nodes:
-                    edge_info['source_ip'] = src  # Assuming node_id IS the IP address
-                if dst in nx_graph.nodes:
-                    edge_info['target_ip'] = dst  # Assuming node_id IS the IP address
-                anomaly_data["edge_anomalies"].append(edge_info)
+        if nx_graph is not None and main_data is not None:
+            node_list = list(nx_graph.nodes())  # Get the list of node IPs
+
+            for idx in anomalies.get('node_anomalies', []):
+                node_index = idx.item()
+                node_info = {"node_id": node_index, "score": anomalies['node_scores'][idx].item()}
+                if 0 <= node_index < len(node_list):
+                    node_info['ip'] = str(node_list[node_index])
+                anomaly_data["node_anomalies"].append(node_info)
+
+            if main_data.edge_index is not None:
+                for idx in anomalies.get('edge_anomalies', []):
+                    src_index = main_data.edge_index[0][idx].item()
+                    dst_index = main_data.edge_index[1][idx].item()
+                    edge_info = {
+                        "source_node_id": src_index,
+                        "target_node_id": dst_index,
+                        "score": anomalies['edge_scores'][idx].item()
+                    }
+                    if 0 <= src_index < len(node_list):
+                        edge_info['source_ip'] = str(node_list[src_index])  # Source IP
+                    if 0 <= dst_index < len(node_list):
+                        edge_info['target_ip'] = str(node_list[dst_index])  # Target IP
+                    anomaly_data["edge_anomalies"].append(edge_info)
     else:
-        logging.warning("NetworkX graph not provided, cannot include IP addresses in anomaly details.")
+        logging.warning("NetworkX graph or main_data not provided, cannot include IP addresses in anomaly details.")
         for idx in anomalies.get('node_anomalies', []):
-            anomaly_data["node_anomalies"].append(
-                {"node_id": idx.item(), "score": anomalies['node_scores'][idx].item()})
+            anomaly_data["node_anomalies"].append({"node_id": idx.item(), "score": anomalies['node_scores'][idx].item()})
         if main_data is not None and main_data.edge_index is not None:
             for idx in anomalies.get('edge_anomalies', []):
                 anomaly_data["edge_anomalies"].append({
@@ -78,10 +77,10 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, nx_graph
         logging.error(f"Error saving anomalies to file: {e}")
 
 
-def save_checkpoint(model, optimizer, scheduler, epoch, processed_files_count, filename_prefix="checkpoint"):
+def save_checkpoint(model, optimizer, scheduler, epoch, processed_files_count, model_save_path, filename_prefix="checkpoint"):
     """Saves the model checkpoint with the processed files count."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    filename = os.path.join(MODEL_SAVE_PATH, f"{filename_prefix}_{timestamp}_update_{processed_files_count}.pth")
+    filename = os.path.join(model_save_path, f"{filename_prefix}_{timestamp}_update_{processed_files_count}.pth")
     obj = {
         'epoch': epoch,
         'model_state_dict': model.state_dict(),
@@ -91,13 +90,18 @@ def save_checkpoint(model, optimizer, scheduler, epoch, processed_files_count, f
         'edge_stats': model.edge_stats,
     }
     torch.save(obj, filename)
-    os.remove(os.path.join(MODEL_SAVE_PATH,"latest_checkpoint.pth"))
-    torch.save(obj, os.path.join(MODEL_SAVE_PATH,"latest_checkpoint.pth"))
+
+    try:
+        os.remove(os.path.join(model_save_path,"latest_checkpoint.pth"))
+    except OSError:
+        pass
+
+    torch.save(obj, os.path.join(model_save_path,"latest_checkpoint.pth"))
     logging.info(f"Checkpoint saved to {filename}")
 
 
-def load_checkpoint(model, optimizer, scheduler, filename="latest_checkpoint.pth"):
-    filepath = os.path.join(MODEL_SAVE_PATH, filename)
+def load_checkpoint(model, optimizer, scheduler, model_save_path, filename="latest_checkpoint.pth"):
+    filepath = os.path.join(model_save_path, filename)
     if os.path.exists(filepath):
         try:
             checkpoint = torch.load(filepath, weights_only=False)
@@ -124,15 +128,15 @@ def load_checkpoint(model, optimizer, scheduler, filename="latest_checkpoint.pth
         return 0
 
 
-def save_running_stats(node_stats, edge_stats, filename="running_stats.pkl"):
-    filepath = os.path.join(STATS_SAVE_PATH, filename)
+def save_running_stats(node_stats, edge_stats, stats_save_path, filename="running_stats.pkl"):
+    filepath = os.path.join(stats_save_path, filename)
     with open(filepath, 'wb') as f:
         pickle.dump({'node_stats': node_stats, 'edge_stats': edge_stats}, f)
     logging.info(f"Running statistics saved to {filepath}")
 
 
-def load_running_stats(model, filename="running_stats.pkl"):
-    filepath = os.path.join(STATS_SAVE_PATH, filename)
+def load_running_stats(model, stats_save_path, filename="running_stats.pkl"):
+    filepath = os.path.join(stats_save_path, filename)
     if os.path.exists(filepath):
         with open(filepath, 'rb') as f:
             stats = pickle.load(f)
@@ -168,7 +172,7 @@ def extract_timestamp_from_epoch(filename):
     return None
 
 
-def process_file(filepath, main_graph, main_data):
+def process_file(filepath, main_graph):
     """Processes a single file, parses graph updates, and updates the main graph."""
     logging.info(f"Processing file: {filepath}")
     if main_graph is None:
@@ -184,8 +188,7 @@ def process_file(filepath, main_graph, main_data):
             f"Updated main graph to {updated_graph.number_of_nodes()} nodes and {updated_graph.number_of_edges()} edges.")
         return updated_graph, pytorch_data
 
-
-def process_and_learn(directory, update_interval_seconds=60, visualize=False):
+def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_path, update_interval_seconds=60, visualize=False):
     """
     Monitors the directory for files, processes them, updates the graph,
     and triggers online learning at fixed intervals.
@@ -206,7 +209,7 @@ def process_and_learn(directory, update_interval_seconds=60, visualize=False):
 
     # Initialize a dummy model for loading running stats
     temp_model_for_stats = HybridGNNAnomalyDetector(1, 1)
-    load_running_stats(temp_model_for_stats)
+    load_running_stats(temp_model_for_stats, stats_save_path)
     del temp_model_for_stats
 
 
@@ -226,7 +229,7 @@ def process_and_learn(directory, update_interval_seconds=60, visualize=False):
         for timestamp_dt, filepath, filename in files_with_timestamps:
             if filename not in processed_files:
                 logging.info(f"Found new file: {filename} (Timestamp: {timestamp_dt})")
-                main_graph, main_data = process_file(filepath, main_graph, main_data)
+                main_graph, main_data = process_file(filepath, main_graph)
                 processed_files.add(filename)
                 processed_count += 1
 
@@ -245,9 +248,9 @@ def process_and_learn(directory, update_interval_seconds=60, visualize=False):
                     logging.info(f"Initialized Hybrid GNN (node_dim={node_feature_dim}, edge_dim={edge_feature_dim})")
 
                     # Load latest checkpoint if available AFTER model initialization
-                    start_epoch = load_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler)
+                    start_epoch = load_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, model_save_path)
                     logging.info(f"Starting or resuming training from epoch: {start_epoch}")
-                    load_running_stats(gnn_model)  # Load stats again for the actual model
+                    load_running_stats(gnn_model, stats_save_path)  # Load stats again for the actual model
                 else:
                     # Online update
                     logging.info("Performing online update...")
@@ -259,15 +262,15 @@ def process_and_learn(directory, update_interval_seconds=60, visualize=False):
                 anomalies = gnn_model.detect_anomalies(main_data)
 
                 # Save anomalies to file, providing the NetworkX graph
-                save_anomalies_to_file(main_data, anomalies, processed_count, main_graph)
+                save_anomalies_to_file(main_data, anomalies, processed_count,anomaly_log_path, nx_graph= main_graph)
 
                 # Save running statistics
                 if gnn_model:
-                    save_running_stats(gnn_model.node_stats, gnn_model.edge_stats)
+                    save_running_stats(gnn_model.node_stats, gnn_model.edge_stats, stats_save_path)
 
                 # Save checkpoint periodically
                 if gnn_model:
-                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count,
+                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count, model_save_path,
                                     processed_count)
 
                 # Report results
