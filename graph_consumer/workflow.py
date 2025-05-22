@@ -1,13 +1,14 @@
-import time
-from neural_net import HybridGNNAnomalyDetector
-from graph_utils import *
-from visualization import *
+import json
 import logging
 import os
-import re
-from datetime import datetime
 import pickle
-import json
+import re
+import time
+from datetime import datetime
+
+from graph_utils import *
+from neural_net import HybridGNNAnomalyDetector
+from visualization import *
 
 MODEL_SAVE_PATH = "model_checkpoints"
 STATS_SAVE_PATH = "stats"
@@ -20,8 +21,9 @@ if not os.path.exists(MODEL_SAVE_PATH):
 if not os.path.exists(STATS_SAVE_PATH):
     os.makedirs(STATS_SAVE_PATH)
 
-def save_anomalies_to_file(main_data, anomalies, processed_files_count, timestamp=None):
-    """Saves detected anomalies to a JSON file."""
+
+def save_anomalies_to_file(main_data, anomalies, processed_files_count, nx_graph=None, timestamp=None):
+    """Saves detected anomalies to a JSON file with more details."""
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = os.path.join(ANOMALY_LOG_PATH, f"anomalies_{timestamp}_update_{processed_files_count}.json")
@@ -29,17 +31,45 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, timestam
         "timestamp": timestamp,
         "update_count": processed_files_count,
         "global_anomaly_score": anomalies.get('global_anomaly', None),
-        "node_anomalies": [
-            {"node_id": idx.item(), "score": anomalies['node_scores'][idx].item()}
-            for idx in anomalies.get('node_anomalies', [])
-        ],
-        "edge_anomalies": [
-            {"source": main_data.edge_index[0][idx].item(),
-             "target": main_data.edge_index[1][idx].item(),
-             "score": anomalies['edge_scores'][idx].item()}
-            for idx in anomalies.get('edge_anomalies', []) if main_data is not None and main_data.edge_index is not None
-        ]
+        "node_anomalies": [],
+        "edge_anomalies": []
     }
+
+    if nx_graph is not None:
+        for idx in anomalies.get('node_anomalies', []):
+            node_id = idx.item()
+            node_info = {"node_id": node_id, "score": anomalies['node_scores'][idx].item()}
+            if node_id in nx_graph.nodes:
+                node_info['ip'] = node_id  # Assuming node_id IS the IP address
+            anomaly_data["node_anomalies"].append(node_info)
+
+        if main_data is not None and main_data.edge_index is not None:
+            for idx in anomalies.get('edge_anomalies', []):
+                src = main_data.edge_index[0][idx].item()
+                dst = main_data.edge_index[1][idx].item()
+                edge_info = {
+                    "source_node_id": src,
+                    "target_node_id": dst,
+                    "score": anomalies['edge_scores'][idx].item()
+                }
+                if src in nx_graph.nodes:
+                    edge_info['source_ip'] = src  # Assuming node_id IS the IP address
+                if dst in nx_graph.nodes:
+                    edge_info['target_ip'] = dst  # Assuming node_id IS the IP address
+                anomaly_data["edge_anomalies"].append(edge_info)
+    else:
+        logging.warning("NetworkX graph not provided, cannot include IP addresses in anomaly details.")
+        for idx in anomalies.get('node_anomalies', []):
+            anomaly_data["node_anomalies"].append(
+                {"node_id": idx.item(), "score": anomalies['node_scores'][idx].item()})
+        if main_data is not None and main_data.edge_index is not None:
+            for idx in anomalies.get('edge_anomalies', []):
+                anomaly_data["edge_anomalies"].append({
+                    "source_node_id": main_data.edge_index[0][idx].item(),
+                    "target_node_id": main_data.edge_index[1][idx].item(),
+                    "score": anomalies['edge_scores'][idx].item()
+                })
+
     try:
         with open(filename, 'w') as f:
             json.dump(anomaly_data, f, indent=4)
@@ -47,33 +77,52 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, timestam
     except Exception as e:
         logging.error(f"Error saving anomalies to file: {e}")
 
-def save_checkpoint(model, optimizer, scheduler, epoch, filename="latest_checkpoint.pth"):
-    filepath = os.path.join(MODEL_SAVE_PATH, filename)
-    torch.save({
+
+def save_checkpoint(model, optimizer, scheduler, epoch, processed_files_count, filename_prefix="checkpoint"):
+    """Saves the model checkpoint with the processed files count."""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = os.path.join(MODEL_SAVE_PATH, f"{filename_prefix}_{timestamp}_update_{processed_files_count}.pth")
+    obj = {
         'epoch': epoch,
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
         'scheduler_state_dict': scheduler.state_dict(),
         'node_stats': model.node_stats,
         'edge_stats': model.edge_stats,
-    }, filepath)
-    logging.info(f"Checkpoint saved to {filepath}")
+    }
+    torch.save(obj, filename)
+    os.remove(os.path.join(MODEL_SAVE_PATH,"latest_checkpoint.pth"))
+    torch.save(obj, os.path.join(MODEL_SAVE_PATH,"latest_checkpoint.pth"))
+    logging.info(f"Checkpoint saved to {filename}")
+
 
 def load_checkpoint(model, optimizer, scheduler, filename="latest_checkpoint.pth"):
     filepath = os.path.join(MODEL_SAVE_PATH, filename)
     if os.path.exists(filepath):
-        checkpoint = torch.load(filepath)
-        model.load_state_dict(checkpoint['model_state_dict'])
-        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-        scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
-        model.node_stats = checkpoint['node_stats']
-        model.edge_stats = checkpoint['edge_stats']
-        epoch = checkpoint['epoch']
-        logging.info(f"Checkpoint loaded from {filepath} at epoch {epoch}")
-        return epoch
+        try:
+            checkpoint = torch.load(filepath, weights_only=False)
+            if model is not None:
+                model.load_state_dict(checkpoint['model_state_dict'])
+                if optimizer is not None and 'optimizer_state_dict' in checkpoint:
+                    optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+                if scheduler is not None and 'scheduler_state_dict' in checkpoint:
+                    scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+
+                model.node_stats = checkpoint.get('node_stats', model.node_stats)
+                model.edge_stats = checkpoint.get('edge_stats', model.edge_stats)
+                epoch = checkpoint['epoch']
+                logging.info(f"Checkpoint loaded from {filepath} at epoch {epoch}")
+                return epoch
+            else:
+                logging.info(f"Checkpoint metadata loaded from {filepath}")
+            return checkpoint.get('epoch', 0)
+        except Exception as e:
+            logging.error(f"Error loading checkpoint: {e}")
+            return 0
     else:
         logging.info("No checkpoint found. Starting from scratch.")
         return 0
+
 
 def save_running_stats(node_stats, edge_stats, filename="running_stats.pkl"):
     filepath = os.path.join(STATS_SAVE_PATH, filename)
@@ -81,13 +130,14 @@ def save_running_stats(node_stats, edge_stats, filename="running_stats.pkl"):
         pickle.dump({'node_stats': node_stats, 'edge_stats': edge_stats}, f)
     logging.info(f"Running statistics saved to {filepath}")
 
+
 def load_running_stats(model, filename="running_stats.pkl"):
     filepath = os.path.join(STATS_SAVE_PATH, filename)
     if os.path.exists(filepath):
         with open(filepath, 'rb') as f:
             stats = pickle.load(f)
-            model.node_stats = stats['node_stats']
-            model.edge_stats = stats['edge_stats']
+            model.node_stats = stats.get('node_stats', model.node_stats)
+            model.edge_stats = stats.get('edge_stats', model.edge_stats)
         logging.info(f"Running statistics loaded from {filepath}")
     else:
         logging.info("No running statistics file found. Starting with new statistics.")
@@ -105,7 +155,7 @@ def extract_timestamp_from_epoch(filename):
         datetime or None: The extracted datetime object, or None if no match is found
                           or if the extracted value is not a valid integer.
     """
-    pattern = r"_(\d+)\."    # Matches digits between an underscore and a dot (e.g., file_1678886400.txt)
+    pattern = r"_(\d+)\."  # Matches digits between an underscore and a dot (e.g., file_1678886400.txt)
 
     match = re.search(pattern, filename)
     if match:
@@ -117,22 +167,25 @@ def extract_timestamp_from_epoch(filename):
             return None
     return None
 
+
 def process_file(filepath, main_graph, main_data):
     """Processes a single file, parses graph updates, and updates the main graph."""
     logging.info(f"Processing file: {filepath}")
     if main_graph is None:
         initial_graph = dot_to_nx(filepath)
         pytorch_data = nx_to_pyg(initial_graph, node_scaling='standard', edge_scaling='none')
-        logging.info(f"Initialized main graph with {initial_graph.number_of_nodes()} nodes and {initial_graph.number_of_edges()} edges.")
+        logging.info(
+            f"Initialized main graph with {initial_graph.number_of_nodes()} nodes and {initial_graph.number_of_edges()} edges.")
         return initial_graph, pytorch_data
     else:
         updated_graph = update_nx_graph(main_graph, filepath)
         pytorch_data = nx_to_pyg(updated_graph, node_scaling='standard', edge_scaling='none')
-        logging.info(f"Updated main graph to {updated_graph.number_of_nodes()} nodes and {updated_graph.number_of_edges()} edges.")
+        logging.info(
+            f"Updated main graph to {updated_graph.number_of_nodes()} nodes and {updated_graph.number_of_edges()} edges.")
         return updated_graph, pytorch_data
 
 
-def process_and_learn(directory, update_interval_seconds=60, visualize = False):
+def process_and_learn(directory, update_interval_seconds=60, visualize=False):
     """
     Monitors the directory for files, processes them, updates the graph,
     and triggers online learning at fixed intervals.
@@ -142,18 +195,20 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
     main_data = None
     last_update_time = time.time()
     gnn_model = None
+    processed_count = 0
 
     # Training parameters
     initial_training_epochs = 10  # Only for first training
-    online_update_steps = 5       # For subsequent updates
+    online_update_steps = 5  # For subsequent updates
 
-    logging.info(f"Starting process and learn in directory: {directory} with update interval: {update_interval_seconds} seconds.")
+    logging.info(
+        f"Starting process and learn in directory: {directory} with update interval: {update_interval_seconds} seconds.")
 
-    # Load checkpoint if available
-    start_epoch = load_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler)
+    # Initialize a dummy model for loading running stats
+    temp_model_for_stats = HybridGNNAnomalyDetector(1, 1)
+    load_running_stats(temp_model_for_stats)
+    del temp_model_for_stats
 
-    # Load running statistics if available
-    load_running_stats(gnn_model)
 
     while True:
         # Check for new files
@@ -173,11 +228,13 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
                 logging.info(f"Found new file: {filename} (Timestamp: {timestamp_dt})")
                 main_graph, main_data = process_file(filepath, main_graph, main_data)
                 processed_files.add(filename)
+                processed_count += 1
 
         # Periodic graph update and learning
         current_time = time.time()
         if current_time - last_update_time >= update_interval_seconds:
-            logging.info(f"\n--- Graph Update Cycle at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ---")
+            logging.info(
+                f"\n--- Graph Update Cycle at {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} (Processed {processed_count} files) ---")
 
             if main_data is not None:
                 # Initialize model if needed
@@ -187,23 +244,32 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
                     gnn_model = HybridGNNAnomalyDetector(node_feature_dim, edge_feature_dim)
                     logging.info(f"Initialized Hybrid GNN (node_dim={node_feature_dim}, edge_dim={edge_feature_dim})")
 
-                    # Initial training
-                    logging.info("Performing initial training...")
-                    for epoch in range(initial_training_epochs):
-                        loss = gnn_model.update_online(main_data, n_steps=5)
-                        logging.info(f"Epoch {epoch+1}/{initial_training_epochs}, Loss: {loss:.4f}")
+                    # Load latest checkpoint if available AFTER model initialization
+                    start_epoch = load_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler)
+                    logging.info(f"Starting or resuming training from epoch: {start_epoch}")
+                    load_running_stats(gnn_model)  # Load stats again for the actual model
                 else:
                     # Online update
                     logging.info("Performing online update...")
                     loss = gnn_model.update_online(main_data, n_steps=online_update_steps)
                     logging.info(f"Online update complete. Loss: {loss:.4f}")
 
-                # Detect and report anomalies
+                # Detect anomalies
                 logging.info("Running anomaly detection...")
                 anomalies = gnn_model.detect_anomalies(main_data)
 
-                # Save anomalies to file
-                save_anomalies_to_file(main_data, anomalies, processed_files)
+                # Save anomalies to file, providing the NetworkX graph
+                save_anomalies_to_file(main_data, anomalies, processed_count, main_graph)
+
+                # Save running statistics
+                if gnn_model:
+                    save_running_stats(gnn_model.node_stats, gnn_model.edge_stats)
+
+                # Save checkpoint periodically
+                if gnn_model:
+                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count,
+                                    processed_count)
+
                 # Report results
                 logging.info(f"\nGlobal anomaly score: {anomalies['global_anomaly']:.4f}")
 
@@ -211,7 +277,8 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
                 if len(anomalies['node_anomalies']) > 0:
                     logging.warning(f"Detected {len(anomalies['node_anomalies'])} anomalous nodes:")
                     for idx in anomalies['node_anomalies'][:5]:  # Show top 5
-                        logging.warning(f"  Node {idx}: score={anomalies['node_scores'][idx]:.4f}")
+                        logging.warning(
+                            f"  IP: {main_graph.nodes.get(idx.item(), {}).get('ip', 'N/A')}, Score: {anomalies['node_scores'][idx]:.4f}")
                 else:
                     logging.info("No significant node anomalies detected")
 
@@ -221,12 +288,14 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
                     for idx in anomalies['edge_anomalies'][:5]:  # Show top 5
                         src = main_data.edge_index[0][idx].item()
                         dst = main_data.edge_index[1][idx].item()
-                        logging.warning(f"  Edge {src}->{dst}: score={anomalies['edge_scores'][idx]:.4f}")
+                        logging.warning(
+                            f"  Source IP: {main_graph.nodes.get(src, {}).get('ip', 'N/A')}, Target IP: {main_graph.nodes.get(dst, {}).get('ip', 'N/A')}, Score: {anomalies['edge_scores'][idx]:.4f}")
                 else:
                     logging.info("No significant edge anomalies detected")
 
                 # Visualization (optional)
-                if visualize and (len(processed_files) % 5 == 0 and main_data.x is not None and main_data.edge_attr is not None):
+                if visualize and (
+                        len(processed_files) % 5 == 0 and main_data.x is not None and main_data.edge_attr is not None):
                     logging.info("Performing visualization of node and edge features.")
                     try:
                         visualize_node_features(main_data)
@@ -238,14 +307,8 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
                 elif main_data.edge_attr is None:
                     logging.warning("Skipping edge feature visualization: No edge features available.")
 
-                # Save checkpoint periodically
-                if len(processed_files) % 10 == 0:
-                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, len(processed_files))
-
-                # Save running statistics periodically or at the end
-                save_running_stats(gnn_model.node_stats, gnn_model.edge_stats)
             last_update_time = current_time
 
         # Wait before next check
-        sleep_time = min(5, update_interval_seconds/2)  # Check frequently but not too fast
+        sleep_time = min(5, update_interval_seconds / 2)  # Check frequently but not too fast
         time.sleep(sleep_time)

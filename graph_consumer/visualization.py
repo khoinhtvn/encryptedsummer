@@ -1,10 +1,12 @@
+import logging
+
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn as sns
 from sklearn.decomposition import PCA
 from torch_geometric.data import Data
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import pandas as pd
-import logging
+
 
 def visualize_node_features(data: Data, feature_names: list = None):
     """
@@ -202,7 +204,7 @@ def visualize_edge_features(data: Data, edge_feature_names: list = None, max_fea
     for stat in stats[:5] + stats[-5:]:
         logging.info(f"- {stat['name']}: {stat}")
     if num_features > 10:
-        logging.info(f"... omesse {num_features-10} features intermedie ...")
+        logging.info(f"... omesse {num_features - 10} features intermedie ...")
 
     # Creazione figura con layout ottimizzato per molte feature
     plt.figure(figsize=(20, 15))
@@ -278,7 +280,7 @@ def visualize_edge_features(data: Data, edge_feature_names: list = None, max_fea
         boxplot_data = edge_features[:, features_to_boxplot]
 
         sns.boxplot(data=pd.DataFrame(boxplot_data,
-                                     columns=[use_names[i] for i in features_to_boxplot]))
+                                      columns=[use_names[i] for i in features_to_boxplot]))
         plt.title(f'Boxplot Feature non Costanti\n(Prime {len(features_to_boxplot)})')
         plt.xticks(rotation=90)
         plt.ylabel('Valore')
@@ -314,9 +316,9 @@ def visualize_edge_features(data: Data, edge_feature_names: list = None, max_fea
         principal_components = pca.fit_transform(X)
 
         plt.scatter(principal_components[:, 0], principal_components[:, 1], alpha=0.5)
-        plt.title('Riduzione Dimensionalità (PCA)\nSpiegato: {:.1f}%'.format(100*pca.explained_variance_ratio_.sum()))
-        plt.xlabel('Prima Componente ({:.1f}%)'.format(100*pca.explained_variance_ratio_[0]))
-        plt.ylabel('Seconda Componente ({:.1f}%)'.format(100*pca.explained_variance_ratio_[1]))
+        plt.title('Riduzione Dimensionalità (PCA)\nSpiegato: {:.1f}%'.format(100 * pca.explained_variance_ratio_.sum()))
+        plt.xlabel('Prima Componente ({:.1f}%)'.format(100 * pca.explained_variance_ratio_[0]))
+        plt.ylabel('Seconda Componente ({:.1f}%)'.format(100 * pca.explained_variance_ratio_[1]))
         plt.grid(True, alpha=0.3)
         logging.debug("Applied PCA for dimensionality reduction of non-constant edge features.")
     else:

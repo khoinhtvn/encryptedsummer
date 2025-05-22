@@ -1,18 +1,21 @@
-import re
-import networkx as nx
-import traceback
-import matplotlib.pyplot as plt
-import os
-import torch
-from torch_geometric.data import Data
-from datetime import datetime
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
 import logging
+import os
+import re
+import traceback
+from datetime import datetime
+
+import matplotlib.pyplot as plt
+import networkx as nx
+import torch
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from torch_geometric.data import Data
+
 # Global variables
 node_scaler = None
 edge_scaler = None
 last_update_time = None
 update_interval = 3600  # seconds (e.g., 1 hour)
+
 
 def dot_to_nx(dot_file):
     """
@@ -94,7 +97,8 @@ def visualize_nx_graph(nx_graph, layout_algorithm='spring', output_path=None):
             Defaults to 'spring'.
         output_path (str, optional): Path to save the visualization.
     """
-    logging.info(f"Visualizing NetworkX graph with {len(nx_graph.nodes)} nodes and {nx_graph.number_of_edges()} edges using '{layout_algorithm}' layout.")
+    logging.info(
+        f"Visualizing NetworkX graph with {len(nx_graph.nodes)} nodes and {nx_graph.number_of_edges()} edges using '{layout_algorithm}' layout.")
     plt.figure(figsize=(12, 10))
 
     if layout_algorithm == 'spring':
@@ -150,6 +154,7 @@ def visualize_nx_graph(nx_graph, layout_algorithm='spring', output_path=None):
 
     plt.close()
 
+
 def save_nx_graph(nx_graph, output_path):
     """
     Saves a NetworkX graph to a file.  Uses a format that preserves multiple edges
@@ -167,6 +172,7 @@ def save_nx_graph(nx_graph, output_path):
     except Exception as e:
         logging.error(f"Error saving graph to '{output_path}': {e}")
         logging.error(traceback.format_exc())
+
 
 def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=True):
     """
@@ -215,7 +221,8 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
 
     # 3. Apply Node Feature Scaling
     if node_scaling == 'standard':
-        if fit_scaler or node_scaler is None or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+        if fit_scaler or node_scaler is None or (
+                last_update_time is not None and (current_time - last_update_time) > update_interval):
             node_scaler = StandardScaler()
             x = torch.tensor(node_scaler.fit_transform(x), dtype=torch.float)
             if fit_scaler:
@@ -229,7 +236,8 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
         else:
             logging.warning("No node scaler fitted. Skipping standard scaling.")
     elif node_scaling == 'minmax':
-        if fit_scaler or node_scaler is None or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+        if fit_scaler or node_scaler is None or (
+                last_update_time is not None and (current_time - last_update_time) > update_interval):
             node_scaler = MinMaxScaler()
             x = torch.tensor(node_scaler.fit_transform(x), dtype=torch.float)
             if fit_scaler:
@@ -281,7 +289,8 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
     # 4. Apply Edge Feature Scaling
     if edge_attr is not None:
         if edge_scaling == 'standard':
-            if fit_scaler or edge_scaler is None or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+            if fit_scaler or edge_scaler is None or (
+                    last_update_time is not None and (current_time - last_update_time) > update_interval):
                 edge_scaler = StandardScaler()
                 edge_attr = torch.tensor(edge_scaler.fit_transform(edge_attr), dtype=torch.float)
                 if fit_scaler:
@@ -294,7 +303,8 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
             else:
                 logging.warning("No edge scaler fitted. Skipping standard scaling for edges.")
         elif edge_scaling == 'minmax':
-            if fit_scaler or edge_scaler is None or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+            if fit_scaler or edge_scaler is None or (
+                    last_update_time is not None and (current_time - last_update_time) > update_interval):
                 edge_scaler = MinMaxScaler()
                 edge_attr = torch.tensor(edge_scaler.fit_transform(edge_attr), dtype=torch.float)
                 if fit_scaler:
@@ -316,6 +326,7 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
     logging.info("Successfully converted NetworkX graph to PyG Data object.")
     return data
 
+
 def update_nx_graph(nx_graph, update_dot_file):
     """
     Updates a NetworkX graph with the changes from an update .dot file.
@@ -328,7 +339,8 @@ def update_nx_graph(nx_graph, update_dot_file):
     """
     logging.info(f"Updating NetworkX graph from '{update_dot_file}'.")
     update_graph = dot_to_nx(update_dot_file)  # Use the existing dot_to_nx function
-    logging.debug(f"Parsed update graph with {len(update_graph.nodes)} nodes and {update_graph.number_of_edges()} edges.")
+    logging.debug(
+        f"Parsed update graph with {len(update_graph.nodes)} nodes and {update_graph.number_of_edges()} edges.")
 
     # 1. Update or add nodes
     logging.info("Processing node updates/additions.")

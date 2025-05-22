@@ -1,15 +1,17 @@
+import logging
+from collections import deque
+
+import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from torch_geometric.nn import GATConv, global_mean_pool
 from torch_geometric.data import Data, Batch
-from collections import deque
-import numpy as np
-import logging
+from torch_geometric.nn import GATConv, global_mean_pool
 
 
 class RunningStats:
     """Utility for tracking feature statistics"""
+
     def __init__(self):
         self.n = 0
         self.mean = None
@@ -50,14 +52,17 @@ class RunningStats:
         logging.debug(f"Calculated standard deviation: {std}")
         return std
 
+
 class HybridGNNAnomalyDetector(nn.Module):
     def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, heads=4):
         super(HybridGNNAnomalyDetector, self).__init__()
-        logging.info(f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, heads={heads}")
+        logging.info(
+            f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, heads={heads}")
         # Graph Attention Network layers
         self.conv1 = GATConv(node_feature_dim, hidden_dim, heads=heads, edge_dim=edge_feature_dim)
         self.conv2 = GATConv(hidden_dim * heads, hidden_dim, heads=1, edge_dim=edge_feature_dim)
-        logging.debug(f"GATConv layers initialized: conv1 out_channels={hidden_dim * heads}, conv2 out_channels={hidden_dim}")
+        logging.debug(
+            f"GATConv layers initialized: conv1 out_channels={hidden_dim * heads}, conv2 out_channels={hidden_dim}")
 
         # Anomaly scoring heads
         self.node_mlp = nn.Sequential(
@@ -99,7 +104,8 @@ class HybridGNNAnomalyDetector(nn.Module):
     def forward(self, data):
         # Process graph through GAT layers
         x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr
-        logging.debug(f"Forward pass: node_features shape={x.shape}, edge_index shape={edge_index.shape}, edge_attr shape={edge_attr.shape}")
+        logging.debug(
+            f"Forward pass: node_features shape={x.shape}, edge_index shape={edge_index.shape}, edge_attr shape={edge_attr.shape}")
         x = F.relu(self.conv1(x, edge_index, edge_attr))
         x = F.relu(self.conv2(x, edge_index, edge_attr))
         logging.debug(f"GAT layers output shape: {x.shape}")
@@ -115,7 +121,8 @@ class HybridGNNAnomalyDetector(nn.Module):
         logging.debug(f"Edge features shape: {edge_features.shape}, edge scores shape: {edge_scores.shape}")
 
         # Global anomaly score
-        global_score = self.global_mlp(global_mean_pool(x, batch=torch.zeros(x.size(0), dtype=torch.long, device=x.device)))
+        global_score = self.global_mlp(
+            global_mean_pool(x, batch=torch.zeros(x.size(0), dtype=torch.long, device=x.device)))
         logging.debug(f"Global score: {global_score.item()}")
 
         return node_scores, edge_scores, global_score
@@ -169,7 +176,8 @@ class HybridGNNAnomalyDetector(nn.Module):
         if valid_steps > 0:
             avg_loss = total_loss / valid_steps
             self.scheduler.step(avg_loss)
-            logging.info(f"Online update finished. Average loss: {avg_loss}, Learning rate: {self.optimizer.param_groups[0]['lr']}")
+            logging.info(
+                f"Online update finished. Average loss: {avg_loss}, Learning rate: {self.optimizer.param_groups[0]['lr']}")
         else:
             avg_loss = 0.0
             logging.warning("No valid steps during online update.")
@@ -199,12 +207,14 @@ class HybridGNNAnomalyDetector(nn.Module):
         """Statistical drift detection"""
         current_node_mean = data.x.mean(dim=0)
         current_edge_mean = data.edge_attr.mean(dim=0)
-        logging.debug(f"Current node mean: {current_node_mean.cpu().numpy()}, current edge mean: {current_edge_mean.cpu().numpy()}")
+        logging.debug(
+            f"Current node mean: {current_node_mean.cpu().numpy()}, current edge mean: {current_edge_mean.cpu().numpy()}")
 
         if self.feature_mean is not None:
             node_diff = (current_node_mean - self.feature_mean[0]).abs() / (self.feature_std[0] + 1e-6)
             edge_diff = (current_edge_mean - self.feature_mean[1]).abs() / (self.feature_std[1] + 1e-6)
-            logging.debug(f"Node drift difference: {node_diff.max().item()}, Edge drift difference: {edge_diff.max().item()}")
+            logging.debug(
+                f"Node drift difference: {node_diff.max().item()}, Edge drift difference: {edge_diff.max().item()}")
 
             if node_diff.max() > self.drift_threshold or edge_diff.max() > self.drift_threshold:
                 self.consecutive_drifts += 1
@@ -218,8 +228,10 @@ class HybridGNNAnomalyDetector(nn.Module):
         # Update reference statistics
         self.feature_mean = (current_node_mean, current_edge_mean)
         self.feature_std = (data.x.std(dim=0), data.edge_attr.std(dim=0))
-        logging.debug(f"Updated reference mean: node={self.feature_mean[0].cpu().numpy()}, edge={self.feature_mean[1].cpu().numpy()}")
-        logging.debug(f"Updated reference std: node={self.feature_std[0].cpu().numpy()}, edge={self.feature_std[1].cpu().numpy()}")
+        logging.debug(
+            f"Updated reference mean: node={self.feature_mean[0].cpu().numpy()}, edge={self.feature_mean[1].cpu().numpy()}")
+        logging.debug(
+            f"Updated reference std: node={self.feature_std[0].cpu().numpy()}, edge={self.feature_std[1].cpu().numpy()}")
 
     def _adaptive_reset(self):
         """Partial model reset for major behavior changes"""
@@ -265,7 +277,8 @@ class HybridGNNAnomalyDetector(nn.Module):
             subgraph_node_map = {orig_idx.item(): new_idx for new_idx, orig_idx in enumerate(unique_nodes_subgraph)}
 
             # Remap edge indices
-            remapped_edge_index = torch.tensor([[subgraph_node_map[i.item()] for i in row] for row in subgraph_edge_index], dtype=torch.long)
+            remapped_edge_index = torch.tensor(
+                [[subgraph_node_map[i.item()] for i in row] for row in subgraph_edge_index], dtype=torch.long)
 
             subgraph = Data(
                 x=data.x[unique_nodes_subgraph],
@@ -281,7 +294,6 @@ class HybridGNNAnomalyDetector(nn.Module):
             logging.debug(f"Added node-only subgraph to replay buffer: {subgraph}")
         else:
             logging.debug("Skipped adding to replay buffer: no nodes in data.")
-
 
     def _sample_from_replay_buffer(self):
         """Sample a batch from replay buffer"""
@@ -303,7 +315,8 @@ class HybridGNNAnomalyDetector(nn.Module):
             node_probs = torch.sigmoid(node_scores).squeeze()
             edge_probs = torch.sigmoid(edge_scores).squeeze()
             global_prob = torch.sigmoid(global_score).item()
-            logging.debug(f"Node probabilities: {node_probs.cpu().numpy()}, Edge probabilities: {edge_probs.cpu().numpy()}, Global probability: {global_prob}")
+            logging.debug(
+                f"Node probabilities: {node_probs.cpu().numpy()}, Edge probabilities: {edge_probs.cpu().numpy()}, Global probability: {global_prob}")
 
             # Get statistically significant anomalies
             node_mean = node_probs.mean()

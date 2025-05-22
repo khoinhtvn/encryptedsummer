@@ -1,7 +1,9 @@
-import os
 import argparse
-from workflow import process_and_learn
 import logging
+import os
+
+from workflow import process_and_learn
+
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(
