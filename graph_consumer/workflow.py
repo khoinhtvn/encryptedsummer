@@ -77,12 +77,11 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_
         logging.error(f"Error saving anomalies to file: {e}")
 
 
-def save_checkpoint(model, optimizer, scheduler, epoch, processed_files_count, model_save_path, filename_prefix="checkpoint"):
+def save_checkpoint(model, optimizer, scheduler, processed_files_count, model_save_path, filename_prefix="checkpoint"):
     """Saves the model checkpoint with the processed files count."""
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     filename = os.path.join(model_save_path, f"{filename_prefix}_{timestamp}_update_{processed_files_count}.pth")
     obj = {
-        'epoch': epoch,
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
         'scheduler_state_dict': scheduler.state_dict(),
@@ -270,8 +269,7 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
 
                 # Save checkpoint periodically
                 if gnn_model:
-                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count, model_save_path,
-                                    processed_count)
+                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count, model_save_path)
 
                 # Report results
                 logging.info(f"\nGlobal anomaly score: {anomalies['global_anomaly']:.4f}")
