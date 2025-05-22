@@ -6,6 +6,62 @@ import logging
 import os
 import re
 from datetime import datetime
+import pickle
+
+MODEL_SAVE_PATH = "model_checkpoints"
+STATS_SAVE_PATH = "stats"
+
+if not os.path.exists(MODEL_SAVE_PATH):
+    os.makedirs(MODEL_SAVE_PATH)
+
+if not os.path.exists(STATS_SAVE_PATH):
+    os.makedirs(STATS_SAVE_PATH)
+
+def save_checkpoint(model, optimizer, scheduler, epoch, filename="latest_checkpoint.pth"):
+    filepath = os.path.join(MODEL_SAVE_PATH, filename)
+    torch.save({
+        'epoch': epoch,
+        'model_state_dict': model.state_dict(),
+        'optimizer_state_dict': optimizer.state_dict(),
+        'scheduler_state_dict': scheduler.state_dict(),
+        'node_stats': model.node_stats,
+        'edge_stats': model.edge_stats,
+    }, filepath)
+    logging.info(f"Checkpoint saved to {filepath}")
+
+def load_checkpoint(model, optimizer, scheduler, filename="latest_checkpoint.pth"):
+    filepath = os.path.join(MODEL_SAVE_PATH, filename)
+    if os.path.exists(filepath):
+        checkpoint = torch.load(filepath)
+        model.load_state_dict(checkpoint['model_state_dict'])
+        optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+        scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
+        model.node_stats = checkpoint['node_stats']
+        model.edge_stats = checkpoint['edge_stats']
+        epoch = checkpoint['epoch']
+        logging.info(f"Checkpoint loaded from {filepath} at epoch {epoch}")
+        return epoch
+    else:
+        logging.info("No checkpoint found. Starting from scratch.")
+        return 0
+
+def save_running_stats(node_stats, edge_stats, filename="running_stats.pkl"):
+    filepath = os.path.join(STATS_SAVE_PATH, filename)
+    with open(filepath, 'wb') as f:
+        pickle.dump({'node_stats': node_stats, 'edge_stats': edge_stats}, f)
+    logging.info(f"Running statistics saved to {filepath}")
+
+def load_running_stats(model, filename="running_stats.pkl"):
+    filepath = os.path.join(STATS_SAVE_PATH, filename)
+    if os.path.exists(filepath):
+        with open(filepath, 'rb') as f:
+            stats = pickle.load(f)
+            model.node_stats = stats['node_stats']
+            model.edge_stats = stats['edge_stats']
+        logging.info(f"Running statistics loaded from {filepath}")
+    else:
+        logging.info("No running statistics file found. Starting with new statistics.")
+
 
 def extract_timestamp_from_epoch(filename):
     """
@@ -46,7 +102,7 @@ def process_file(filepath, main_graph, main_data):
         return updated_graph, pytorch_data
 
 
-def process_and_learn(directory, update_interval_seconds=60):
+def process_and_learn(directory, update_interval_seconds=60, visualize = False):
     """
     Monitors the directory for files, processes them, updates the graph,
     and triggers online learning at fixed intervals.
@@ -62,6 +118,12 @@ def process_and_learn(directory, update_interval_seconds=60):
     online_update_steps = 5       # For subsequent updates
 
     logging.info(f"Starting process and learn in directory: {directory} with update interval: {update_interval_seconds} seconds.")
+
+    # Load checkpoint if available
+    start_epoch = load_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler)
+
+    # Load running statistics if available
+    load_running_stats(gnn_model)
 
     while True:
         # Check for new files
@@ -132,7 +194,7 @@ def process_and_learn(directory, update_interval_seconds=60):
                     logging.info("No significant edge anomalies detected")
 
                 # Visualization (optional)
-                if len(processed_files) % 5 == 0 and main_data.x is not None and main_data.edge_attr is not None:
+                if visualize and (len(processed_files) % 5 == 0 and main_data.x is not None and main_data.edge_attr is not None):
                     logging.info("Performing visualization of node and edge features.")
                     try:
                         visualize_node_features(main_data)
@@ -144,6 +206,12 @@ def process_and_learn(directory, update_interval_seconds=60):
                 elif main_data.edge_attr is None:
                     logging.warning("Skipping edge feature visualization: No edge features available.")
 
+                # Save checkpoint periodically
+                if len(processed_files) % 10 == 0:
+                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, len(processed_files))
+
+                # Save running statistics periodically or at the end
+                save_running_stats(gnn_model.node_stats, gnn_model.edge_stats)
             last_update_time = current_time
 
         # Wait before next check
