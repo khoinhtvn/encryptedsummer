@@ -7,15 +7,45 @@ import os
 import re
 from datetime import datetime
 import pickle
+import json
 
 MODEL_SAVE_PATH = "model_checkpoints"
 STATS_SAVE_PATH = "stats"
+ANOMALY_LOG_PATH = "anomaly_logs"
 
+if not os.path.exists(ANOMALY_LOG_PATH):
+    os.makedirs(ANOMALY_LOG_PATH)
 if not os.path.exists(MODEL_SAVE_PATH):
     os.makedirs(MODEL_SAVE_PATH)
-
 if not os.path.exists(STATS_SAVE_PATH):
     os.makedirs(STATS_SAVE_PATH)
+
+def save_anomalies_to_file(main_data, anomalies, processed_files_count, timestamp=None):
+    """Saves detected anomalies to a JSON file."""
+    if timestamp is None:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = os.path.join(ANOMALY_LOG_PATH, f"anomalies_{timestamp}_update_{processed_files_count}.json")
+    anomaly_data = {
+        "timestamp": timestamp,
+        "update_count": processed_files_count,
+        "global_anomaly_score": anomalies.get('global_anomaly', None),
+        "node_anomalies": [
+            {"node_id": idx.item(), "score": anomalies['node_scores'][idx].item()}
+            for idx in anomalies.get('node_anomalies', [])
+        ],
+        "edge_anomalies": [
+            {"source": main_data.edge_index[0][idx].item(),
+             "target": main_data.edge_index[1][idx].item(),
+             "score": anomalies['edge_scores'][idx].item()}
+            for idx in anomalies.get('edge_anomalies', []) if main_data is not None and main_data.edge_index is not None
+        ]
+    }
+    try:
+        with open(filename, 'w') as f:
+            json.dump(anomaly_data, f, indent=4)
+        logging.info(f"Anomalies saved to: {filename}")
+    except Exception as e:
+        logging.error(f"Error saving anomalies to file: {e}")
 
 def save_checkpoint(model, optimizer, scheduler, epoch, filename="latest_checkpoint.pth"):
     filepath = os.path.join(MODEL_SAVE_PATH, filename)
@@ -172,6 +202,8 @@ def process_and_learn(directory, update_interval_seconds=60, visualize = False):
                 logging.info("Running anomaly detection...")
                 anomalies = gnn_model.detect_anomalies(main_data)
 
+                # Save anomalies to file
+                save_anomalies_to_file(main_data, anomalies, processed_files)
                 # Report results
                 logging.info(f"\nGlobal anomaly score: {anomalies['global_anomaly']:.4f}")
 
