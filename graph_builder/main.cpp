@@ -89,10 +89,10 @@ int main(int argc, char *argv[]) {
              * @param false Flag indicating whether to clear the graph before visualization.
              * @param true Flag indicating whether to include labels on the nodes.
              */
-            exporter.export_full_graph_human_readable(
-                graph, export_path + std::filesystem::path::preferred_separator + "nw_graph_" + std::to_string(UTC),
-                false,
-                true);
+            //exporter.export_full_graph_human_readable(
+            //    graph, export_path + std::filesystem::path::preferred_separator + "nw_graph_" + std::to_string(UTC),
+            //    false,
+           //     true);
             /**
              * @brief Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
              *
