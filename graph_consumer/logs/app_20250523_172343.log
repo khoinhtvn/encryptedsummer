@@ -1,0 +1,21 @@
+2025-05-23 17:23:43,516 - INFO - Application logging to file: logs/app_20250523_172343.log
+2025-05-23 17:23:43,516 - INFO - Starting to monitor directory: /home/lu/Desktop/output with log level: DEBUG
+2025-05-23 17:23:43,516 - INFO - Starting process and learn in directory: /home/lu/Desktop/output with update interval: 30 seconds, embedding export every 10 updates.
+2025-05-23 17:23:43,516 - INFO - Initializing HybridGNNAnomalyDetector with node_dim=1, edge_dim=1, hidden_dim=64, embedding_dim=32, heads=4
+2025-05-23 17:23:43,516 - INFO - Initializing GraphAutoencoder with node_dim=1, edge_dim=1, hidden_dim=64, embedding_dim=32
+2025-05-23 17:23:43,550 - DEBUG - Encoder GATConv layers initialized: conv1 out_channels=256, conv2 out_channels=32
+2025-05-23 17:23:43,550 - DEBUG - Decoder MLP layers initialized.
+2025-05-23 17:23:43,551 - DEBUG - Anomaly scoring MLPs initialized.
+2025-05-23 17:23:43,551 - INFO - Optimizer and scheduler initialized.
+2025-05-23 17:23:43,551 - INFO - Replay buffer initialized with maxlen=1000, batch_size=32
+2025-05-23 17:23:43,551 - INFO - RunningStats initialized.
+2025-05-23 17:23:43,551 - INFO - RunningStats initialized.
+2025-05-23 17:23:43,551 - INFO - Statistical controls initialized: drift_threshold=0.15
+2025-05-23 17:23:43,551 - INFO - Embedding export will occur every 5 updates, saving to embeddings
+2025-05-23 17:23:43,551 - INFO - No running statistics file found. Starting with new statistics.
+2025-05-23 17:24:13,553 - INFO - 
+--- Graph Update Cycle at 2025-05-23 17:24:13 (Processed 0 files) ---
+2025-05-23 17:24:43,555 - INFO - 
+--- Graph Update Cycle at 2025-05-23 17:24:43 (Processed 0 files) ---
+2025-05-23 17:25:13,557 - INFO - 
+--- Graph Update Cycle at 2025-05-23 17:25:13 (Processed 0 files) ---

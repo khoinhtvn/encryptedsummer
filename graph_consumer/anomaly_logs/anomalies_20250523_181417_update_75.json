@@ -1,0 +1,14 @@
+{
+    "timestamp": "20250523_181417",
+    "update_count": 75,
+    "global_anomaly_score": 0.6730561256408691,
+    "node_anomalies": [
+        {
+            "node_id": 1,
+            "recon_error": 9.354144096374512,
+            "mlp_score": 0.24389569461345673,
+            "ip": "188.65.124.59"
+        }
+    ],
+    "edge_anomalies": []
+}
