@@ -317,7 +317,8 @@ class HybridGNNAnomalyDetector(nn.Module):
             global_prob = torch.sigmoid(global_score).item()
             logging.debug(
                 f"Node probabilities: {node_probs.cpu().numpy()}, Edge probabilities: {edge_probs.cpu().numpy()}, Global probability: {global_prob}")
-
+            logging.debug(
+                f"Node scores: {node_scores.cpu().numpy()}, Edge scores: {edge_scores.cpu().numpy()}")
             # Get statistically significant anomalies
             node_mean = node_probs.mean()
             node_std = node_probs.std()
