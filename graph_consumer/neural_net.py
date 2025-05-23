@@ -53,34 +53,77 @@ class RunningStats:
         return std
 
 
+class GraphAutoencoder(nn.Module):
+    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32):
+        super(GraphAutoencoder, self).__init__()
+        logging.info(
+            f"Initializing GraphAutoencoder with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}")
+
+        # Encoder GAT layers
+        self.conv1 = GATConv(node_feature_dim, hidden_dim, heads=4, edge_dim=edge_feature_dim)
+        self.conv2 = GATConv(hidden_dim * 4, embedding_dim, heads=1, edge_dim=edge_feature_dim)
+        logging.debug(
+            f"Encoder GATConv layers initialized: conv1 out_channels={hidden_dim * 4}, conv2 out_channels={embedding_dim}")
+
+        # Decoder MLPs for node and edge reconstruction (using embeddings)
+        self.node_decoder = nn.Sequential(
+            nn.Linear(embedding_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, node_feature_dim)
+        )
+        self.edge_decoder = nn.Sequential(
+            nn.Linear(embedding_dim * 2 + edge_feature_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, 1)  # Output a score for edge existence/anomaly
+        )
+        logging.debug("Decoder MLP layers initialized.")
+
+    def encode(self, x, edge_index, edge_attr):
+        x = F.relu(self.conv1(x, edge_index, edge_attr))
+        embedding = F.relu(self.conv2(x, edge_index, edge_attr))
+        return embedding
+
+    def decode_node(self, z):
+        return self.node_decoder(z)
+
+    def decode_edge(self, z, edge_index, edge_attr):
+        src, dst = edge_index[0], edge_index[1]
+        edge_features = torch.cat([z[src], z[dst], edge_attr], dim=1)
+        return torch.sigmoid(self.edge_decoder(edge_features)).squeeze() # Sigmoid for probability
+
+    def forward(self, data):
+        x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr
+        embedding = self.encode(x, edge_index, edge_attr)
+        node_recon = self.decode_node(embedding)
+        edge_recon = self.decode_edge(embedding, edge_index, edge_attr)
+        return embedding, node_recon, edge_recon
+
+
 class HybridGNNAnomalyDetector(nn.Module):
-    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, heads=4):
+    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4):
         super(HybridGNNAnomalyDetector, self).__init__()
         logging.info(
-            f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, heads={heads}")
-        # Graph Attention Network layers
-        self.conv1 = GATConv(node_feature_dim, hidden_dim, heads=heads, edge_dim=edge_feature_dim)
-        self.conv2 = GATConv(hidden_dim * heads, hidden_dim, heads=1, edge_dim=edge_feature_dim)
-        logging.debug(
-            f"GATConv layers initialized: conv1 out_channels={hidden_dim * heads}, conv2 out_channels={hidden_dim}")
+            f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}, heads={heads}")
 
-        # Anomaly scoring heads
-        self.node_mlp = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
+        self.autoencoder = GraphAutoencoder(node_feature_dim, edge_feature_dim, hidden_dim, embedding_dim)
+
+        # Anomaly scoring MLPs on the embeddings
+        self.node_anomaly_mlp = nn.Sequential(
+            nn.Linear(embedding_dim, hidden_dim // 2),
             nn.ReLU(),
-            nn.Linear(hidden_dim, 1)
+            nn.Linear(hidden_dim // 2, 1)
         )
-        self.edge_mlp = nn.Sequential(
-            nn.Linear(hidden_dim * 2 + edge_feature_dim, hidden_dim),
+        self.edge_anomaly_mlp = nn.Sequential(
+            nn.Linear(embedding_dim * 2 + edge_feature_dim, hidden_dim // 2),
             nn.ReLU(),
-            nn.Linear(hidden_dim, 1)
+            nn.Linear(hidden_dim // 2, 1)
         )
-        self.global_mlp = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
+        self.global_anomaly_mlp = nn.Sequential(
+            nn.Linear(embedding_dim, hidden_dim // 2),
             nn.ReLU(),
-            nn.Linear(hidden_dim, 1)
+            nn.Linear(hidden_dim // 2, 1)
         )
-        logging.debug("MLP layers for anomaly scoring initialized.")
+        logging.debug("Anomaly scoring MLPs initialized.")
 
         # Online learning components
         self.optimizer = torch.optim.Adam(self.parameters(), lr=0.001)
@@ -102,33 +145,24 @@ class HybridGNNAnomalyDetector(nn.Module):
         logging.info(f"Statistical controls initialized: drift_threshold={self.drift_threshold}")
 
     def forward(self, data):
-        # Process graph through GAT layers
-        x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr
-        logging.debug(
-            f"Forward pass: node_features shape={x.shape}, edge_index shape={edge_index.shape}, edge_attr shape={edge_attr.shape}")
-        x = F.relu(self.conv1(x, edge_index, edge_attr))
-        x = F.relu(self.conv2(x, edge_index, edge_attr))
-        logging.debug(f"GAT layers output shape: {x.shape}")
+        embedding, node_recon, edge_recon = self.autoencoder(data)
 
-        # Node-level anomaly scores
-        node_scores = self.node_mlp(x)
-        logging.debug(f"Node scores shape: {node_scores.shape}")
+        # Node-level anomaly scores based on embeddings
+        node_scores = self.node_anomaly_mlp(embedding)
 
-        # Edge-level anomaly scores
-        src, dst = edge_index[0], edge_index[1]
-        edge_features = torch.cat([x[src], x[dst], edge_attr], dim=1)
-        edge_scores = self.edge_mlp(edge_features)
-        logging.debug(f"Edge features shape: {edge_features.shape}, edge scores shape: {edge_scores.shape}")
+        # Edge-level anomaly scores based on embeddings and edge features
+        src, dst = data.edge_index[0], data.edge_index[1]
+        edge_features = torch.cat([embedding[src], embedding[dst], data.edge_attr], dim=1)
+        edge_scores = self.edge_anomaly_mlp(edge_features)
 
-        # Global anomaly score
-        global_score = self.global_mlp(
-            global_mean_pool(x, batch=torch.zeros(x.size(0), dtype=torch.long, device=x.device)))
-        logging.debug(f"Global score: {global_score.item()}")
+        # Global anomaly score based on global mean pooled embedding
+        global_score = self.global_anomaly_mlp(
+            global_mean_pool(embedding, batch=torch.zeros(embedding.size(0), dtype=torch.long, device=embedding.device)))
 
-        return node_scores, edge_scores, global_score
+        return node_scores, edge_scores, global_score, node_recon, edge_recon, embedding
 
-    def update_online(self, data, n_steps=5):
-        """Hybrid online update with statistical controls"""
+    def update_online(self, data, n_steps=5, recon_weight=0.8, anomaly_weight=0.2):
+        """Hybrid online update with reconstruction loss and statistical controls"""
         self.train()
         logging.info(f"Starting online update for {n_steps} steps.")
 
@@ -161,13 +195,22 @@ class HybridGNNAnomalyDetector(nn.Module):
 
             self.optimizer.zero_grad()
             try:
-                node_scores, edge_scores, _ = self(batch)
-                loss = self._compute_loss(node_scores, edge_scores)
+                node_scores, edge_scores, _, node_recon, edge_recon, _ = self(batch)
+
+                # Reconstruction loss
+                recon_loss_node = F.mse_loss(node_recon, batch.x)
+                recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, torch.ones_like(edge_recon) * 0.5) # Target could be refined
+
+                # Anomaly scoring loss (still using the magnitude minimization for unsupervised)
+                anomaly_loss = (node_scores.abs().mean() + edge_scores.abs().mean()) / 2
+
+                loss = recon_weight * (recon_loss_node + recon_loss_edge) + anomaly_weight * anomaly_loss
+
                 loss.backward()
                 self.optimizer.step()
                 total_loss += loss.item()
                 valid_steps += 1
-                logging.debug(f"Step {step + 1}: loss={loss.item()}")
+                logging.debug(f"Step {step + 1}: loss={loss.item()}, Recon Node: {recon_loss_node.item()}, Recon Edge: {recon_loss_edge.item()}, Anomaly: {anomaly_loss.item()}")
             except AttributeError as e:
                 logging.error(f"Error during forward pass: {e}")
                 continue
@@ -188,20 +231,8 @@ class HybridGNNAnomalyDetector(nn.Module):
         return avg_loss
 
     def _compute_loss(self, node_scores, edge_scores):
-        """Enhanced loss with statistical regularization"""
-        base_loss = (node_scores.abs().mean() + edge_scores.abs().mean()) / 2
-        logging.debug(f"Base loss: {base_loss.item()}")
-
-        # Add regularization based on running statistics
-        if self.node_stats.n > 10 and self.edge_stats.n > 10:
-            node_std = torch.tensor(self.node_stats.get_std(), device=node_scores.device)
-            edge_std = torch.tensor(self.edge_stats.get_std(), device=edge_scores.device)
-            reg_loss = (node_scores.pow(2) / (node_std + 1e-6).pow(2)).mean() + \
-                       (edge_scores.pow(2) / (edge_std + 1e-6).pow(2)).mean()
-            loss = 0.7 * base_loss + 0.3 * reg_loss
-            logging.debug(f"Regularization loss: {reg_loss.item()}, Total loss: {loss.item()}")
-            return loss
-        return base_loss
+        """No longer directly used in the reconstruction-based approach"""
+        raise NotImplementedError("Loss computation is now within update_online")
 
     def detect_feature_drift(self, data):
         """Statistical drift detection"""
@@ -237,9 +268,9 @@ class HybridGNNAnomalyDetector(nn.Module):
         """Partial model reset for major behavior changes"""
         logging.warning("Major behavior change detected - performing adaptive reset of scoring heads.")
 
-        # Reset only the anomaly scoring heads
+        # Reset only the anomaly scoring heads and the autoencoder's decoder
         for name, module in self.named_modules():
-            if name.endswith('mlp'):
+            if name.endswith('mlp') or name.endswith('decoder'):
                 logging.info(f"Resetting parameters of module: {name}")
                 module.apply(self._reset_weights)
 
@@ -291,47 +322,4 @@ class HybridGNNAnomalyDetector(nn.Module):
             # If no edges are left after sampling, add a node-only subgraph
             subgraph = Data(x=data.x[sampled_nodes_indices])
             self.replay_buffer.append(subgraph)
-            logging.debug(f"Added node-only subgraph to replay buffer: {subgraph}")
-        else:
-            logging.debug("Skipped adding to replay buffer: no nodes in data.")
-
-    def _sample_from_replay_buffer(self):
-        """Sample a batch from replay buffer"""
-        if len(self.replay_buffer) < self.batch_size:
-            return None
-        indices = np.random.choice(len(self.replay_buffer), self.batch_size, replace=False)
-        batch = Batch.from_data_list([self.replay_buffer[i] for i in indices])
-        logging.debug(f"Sampled batch from replay buffer: {batch}")
-        return batch
-
-    def detect_anomalies(self, data, threshold=2.5):
-        """Detect anomalies with statistical normalization"""
-        self.eval()
-        logging.info("Starting anomaly detection.")
-        with torch.no_grad():
-            node_scores, edge_scores, global_score = self(data)
-
-            # Convert to probabilities
-            node_probs = torch.sigmoid(node_scores).squeeze()
-            edge_probs = torch.sigmoid(edge_scores).squeeze()
-            global_prob = torch.sigmoid(global_score).item()
-            logging.debug(
-                f"Node probabilities: {node_probs.cpu().numpy()}, Edge probabilities: {edge_probs.cpu().numpy()}, Global probability: {global_prob}")
-            logging.debug(
-                f"Node scores: {node_scores.cpu().numpy()}, Edge scores: {edge_scores.cpu().numpy()}")
-            # Get statistically significant anomalies
-            node_mean = node_probs.mean()
-            node_std = node_probs.std()
-            edge_mean = edge_probs.mean()
-            edge_std = edge_probs.std()
-
-            anomalous_nodes = (node_probs > node_mean + threshold * node_std).nonzero(as_tuple=True)[0]
-            anomalous_edges = (edge_probs > edge_mean + threshold * edge_std).nonzero(as_tuple=True)[0]
-
-            return {
-                'node_anomalies': anomalous_nodes,
-                'edge_anomalies': anomalous_edges,
-                'global_anomaly': global_prob,
-                'node_scores': node_probs,
-                'edge_scores': edge_probs
-            }
+            logging.debug(f"Added node-only subgraph
