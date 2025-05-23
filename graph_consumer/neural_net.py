@@ -1,4 +1,5 @@
 import logging
+import os
 from collections import deque
 
 import numpy as np
@@ -7,6 +8,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.data import Data, Batch
 from torch_geometric.nn import GATConv, global_mean_pool
+import matplotlib.pyplot as plt
+from sklearn.manifold import TSNE
+import seaborn as sns
 
 
 class RunningStats:
@@ -100,7 +104,7 @@ class GraphAutoencoder(nn.Module):
 
 
 class HybridGNNAnomalyDetector(nn.Module):
-    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4):
+    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=100):
         super(HybridGNNAnomalyDetector, self).__init__()
         logging.info(
             f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}, heads={heads}")
@@ -144,22 +148,32 @@ class HybridGNNAnomalyDetector(nn.Module):
         self.consecutive_drifts = 0
         logging.info(f"Statistical controls initialized: drift_threshold={self.drift_threshold}")
 
+        # Embedding export parameters
+        self.export_period = export_period
+        self.update_count = 0
+        self.export_dir = "embeddings"  # Initialize export_dir here
+        os.makedirs(self.export_dir, exist_ok=True)
+        logging.info(f"Embedding export will occur every {self.export_period} updates, saving to {self.export_dir}")
+
     def forward(self, data):
         embedding, node_recon, edge_recon = self.autoencoder(data)
 
         # Node-level anomaly scores based on embeddings
         node_scores = self.node_anomaly_mlp(embedding)
+        logging.debug(f"Node anomaly scores shape: {node_scores.shape}")
 
         # Edge-level anomaly scores based on embeddings and edge features
         src, dst = data.edge_index[0], data.edge_index[1]
         edge_features = torch.cat([embedding[src], embedding[dst], data.edge_attr], dim=1)
         edge_scores = self.edge_anomaly_mlp(edge_features)
+        logging.debug(f"Edge anomaly scores shape: {edge_scores.shape}")
 
         # Global anomaly score based on global mean pooled embedding
-        global_score = self.global_anomaly_mlp(
-            global_mean_pool(embedding, batch=torch.zeros(embedding.size(0), dtype=torch.long, device=embedding.device)))
+        global_embedding = global_mean_pool(embedding, batch=torch.zeros(embedding.size(0), dtype=torch.long, device=embedding.device))
+        global_score = self.global_anomaly_mlp(global_embedding)
+        logging.debug(f"Global anomaly score shape: {global_score.shape}")
 
-        return node_scores, edge_scores, global_score, node_recon, edge_recon, embedding
+        return node_scores, edge_scores, global_score, node_recon, edge_recon, embedding, global_embedding
 
     def update_online(self, data, n_steps=5, recon_weight=0.8, anomaly_weight=0.2):
         """Hybrid online update with reconstruction loss and statistical controls"""
@@ -184,10 +198,10 @@ class HybridGNNAnomalyDetector(nn.Module):
             logging.debug(f"Online update step: {step + 1}/{n_steps}")
             if len(self.replay_buffer) >= self.batch_size:
                 batch = self._sample_from_replay_buffer()
-                logging.debug("Sampled batch from replay buffer.")
+                logging.debug(f"Sampled batch from replay buffer (size: {batch.num_graphs} graphs).")
             else:
                 batch = data  # fallback: usa data direttamente se la buffer è vuota
-                logging.debug("Replay buffer too small, using current data.")
+                logging.debug(f"Replay buffer too small (size: {len(self.replay_buffer)}), using current data.")
 
             if batch is None:
                 logging.warning("No batch available. Skipping this step.")
@@ -195,11 +209,14 @@ class HybridGNNAnomalyDetector(nn.Module):
 
             self.optimizer.zero_grad()
             try:
-                node_scores, edge_scores, _, node_recon, edge_recon, _ = self(batch)
+                node_scores, edge_scores, _, node_recon, edge_recon, embedding, _ = self(batch)
 
                 # Reconstruction loss
                 recon_loss_node = F.mse_loss(node_recon, batch.x)
-                recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, torch.ones_like(edge_recon) * 0.5) # Target could be refined
+                # Consider using a different target for edge reconstruction if the graph structure doesn't change much
+                # E.g., predicting edge attributes if they exist. If predicting edge existence, you might need edge labels.
+                edge_recon_target = torch.ones_like(edge_recon) * 0.5
+                recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, edge_recon_target)
 
                 # Anomaly scoring loss (still using the magnitude minimization for unsupervised)
                 anomaly_loss = (node_scores.abs().mean() + edge_scores.abs().mean()) / 2
@@ -210,7 +227,7 @@ class HybridGNNAnomalyDetector(nn.Module):
                 self.optimizer.step()
                 total_loss += loss.item()
                 valid_steps += 1
-                logging.debug(f"Step {step + 1}: loss={loss.item()}, Recon Node: {recon_loss_node.item()}, Recon Edge: {recon_loss_edge.item()}, Anomaly: {anomaly_loss.item()}")
+                logging.debug(f"Step {step + 1}: loss={loss.item():.4f}, Recon Node: {recon_loss_node.item():.4f}, Recon Edge: {recon_loss_edge.item():.4f}, Anomaly: {anomaly_loss.item():.4f}")
             except AttributeError as e:
                 logging.error(f"Error during forward pass: {e}")
                 continue
@@ -220,7 +237,7 @@ class HybridGNNAnomalyDetector(nn.Module):
             avg_loss = total_loss / valid_steps
             self.scheduler.step(avg_loss)
             logging.info(
-                f"Online update finished. Average loss: {avg_loss}, Learning rate: {self.optimizer.param_groups[0]['lr']}")
+                f"Online update finished. Average loss: {avg_loss:.4f}, Learning rate: {self.optimizer.param_groups[0]['lr']:.6f}")
         else:
             avg_loss = 0.0
             logging.warning("No valid steps during online update.")
@@ -229,10 +246,6 @@ class HybridGNNAnomalyDetector(nn.Module):
         self.detect_feature_drift(data)
 
         return avg_loss
-
-    def _compute_loss(self, node_scores, edge_scores):
-        """No longer directly used in the reconstruction-based approach"""
-        raise NotImplementedError("Loss computation is now within update_online")
 
     def detect_feature_drift(self, data):
         """Statistical drift detection"""
@@ -245,7 +258,7 @@ class HybridGNNAnomalyDetector(nn.Module):
             node_diff = (current_node_mean - self.feature_mean[0]).abs() / (self.feature_std[0] + 1e-6)
             edge_diff = (current_edge_mean - self.feature_mean[1]).abs() / (self.feature_std[1] + 1e-6)
             logging.debug(
-                f"Node drift difference: {node_diff.max().item()}, Edge drift difference: {edge_diff.max().item()}")
+                f"Node drift difference: {node_diff.max().item():.4f}, Edge drift difference: {edge_diff.max().item():.4f}")
 
             if node_diff.max() > self.drift_threshold or edge_diff.max() > self.drift_threshold:
                 self.consecutive_drifts += 1
@@ -266,11 +279,11 @@ class HybridGNNAnomalyDetector(nn.Module):
 
     def _adaptive_reset(self):
         """Partial model reset for major behavior changes"""
-        logging.warning("Major behavior change detected - performing adaptive reset of scoring heads.")
+        logging.warning("Major behavior change detected - performing adaptive reset of scoring heads and decoder.")
 
         # Reset only the anomaly scoring heads and the autoencoder's decoder
         for name, module in self.named_modules():
-            if name.endswith('mlp') or name.endswith('decoder'):
+            if name.endswith('mlp') or 'decoder' in name:
                 logging.info(f"Resetting parameters of module: {name}")
                 module.apply(self._reset_weights)
 
@@ -322,4 +335,89 @@ class HybridGNNAnomalyDetector(nn.Module):
             # If no edges are left after sampling, add a node-only subgraph
             subgraph = Data(x=data.x[sampled_nodes_indices])
             self.replay_buffer.append(subgraph)
-            logging.debug(f"Added node-only subgraph
+            logging.debug(f"Added node-only subgraph to replay buffer: {subgraph}")
+        else:
+            logging.debug("Skipped adding to replay buffer: no nodes in data.")
+
+    def _sample_from_replay_buffer(self):
+        """Sample a batch from replay buffer"""
+        if len(self.replay_buffer) < self.batch_size:
+            return None
+        indices = np.random.choice(len(self.replay_buffer), self.batch_size, replace=False)
+        batch = Batch.from_data_list([self.replay_buffer[i] for i in indices])
+        logging.debug(f"Sampled batch from replay buffer: {batch}")
+        return batch
+
+    def detect_anomalies(self, data, threshold=2.5):
+        """Detect anomalies with statistical normalization on reconstruction error"""
+        self.eval()
+        logging.info("Starting anomaly detection.")
+        with torch.no_grad():
+            embedding, node_recon, edge_recon = self.autoencoder(data)
+
+            # Reconstruction errors
+            node_recon_error = F.mse_loss(node_recon, data.x, reduction='none').mean(dim=1)
+            if data.edge_attr is not None and data.edge_attr.numel() > 0:
+                edge_recon_target_mean = data.edge_attr.mean(dim=1, keepdim=True)
+                edge_recon_error = torch.abs(edge_recon - edge_recon_target_mean.squeeze())
+            else:
+                edge_recon_error = torch.abs(edge_recon - 0.5)
+
+            logging.debug(f"Node reconstruction errors: {node_recon_error.cpu().numpy()}")
+            logging.debug(f"Edge reconstruction errors: {edge_recon_error.cpu().numpy()}")
+
+            # Statistical normalization of reconstruction errors
+            node_mean_recon = node_recon_error.mean()
+            node_std_recon = node_recon_error.std()
+            edge_mean_recon = edge_recon_error.mean()
+            edge_std_recon = edge_recon_error.std()
+
+            anomalous_nodes = (node_recon_error > node_mean_recon + threshold * node_std_recon).nonzero(as_tuple=True)[
+                0]
+            anomalous_edges = (edge_recon_error > edge_mean_recon + threshold * edge_std_recon).nonzero(as_tuple=True)[
+                0]
+
+            # Also get anomaly scores from the dedicated MLPs (you might want to combine these)
+            node_scores_mlp = torch.sigmoid(self.node_anomaly_mlp(embedding)).squeeze()
+            edge_scores_mlp = torch.sigmoid(self.edge_anomaly_mlp(
+                torch.cat([embedding[data.edge_index[0]], embedding[data.edge_index[1]], data.edge_attr],
+                          dim=1))).squeeze()
+            global_score_mlp = torch.sigmoid(self.global_anomaly_mlp(global_mean_pool(embedding, batch=torch.zeros(
+                embedding.size(0), dtype=torch.long, device=embedding.device)))).item()
+
+            return {
+                'node_anomalies_recon': anomalous_nodes,
+                'edge_anomalies_recon': anomalous_edges,
+                'node_recon_errors': node_recon_error,
+                'edge_recon_errors': edge_recon_error,
+                'node_scores_mlp': node_scores_mlp,
+                'edge_scores_mlp': edge_scores_mlp,
+                'global_anomaly_mlp': global_score_mlp,
+                'embedding': embedding.cpu().numpy()
+            }
+
+    def export_embeddings(self, data, filename="embeddings.png", n_components=2, perplexity=30, n_iter=300):
+        self.eval()
+        with torch.no_grad():
+            embedding, _, _ = self.autoencoder(data)
+            embedding_np = embedding.cpu().numpy()
+
+            n_samples = embedding_np.shape[0]
+            safe_perplexity = min(perplexity, max(5, n_samples - 1))  # Ensure it's within bounds
+
+            if safe_perplexity < 1:
+                logging.error(
+                    f"Error during embedding export: n_samples ({n_samples}) is too small for meaningful t-SNE.")
+                return
+
+            tsne = TSNE(n_components=n_components, random_state=42, perplexity=safe_perplexity, n_iter=n_iter)
+            reduced_embeddings = tsne.fit_transform(embedding_np)
+
+            plt.figure(figsize=(8, 8))
+            plt.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1])
+            plt.title(f"Node Embeddings Visualization (t-SNE, Perplexity={safe_perplexity})")
+            plt.xlabel("t-SNE Dimension 1")
+            plt.ylabel("t-SNE Dimension 2")
+            plt.savefig(filename)
+            plt.close()
+            logging.info(f"Embeddings visualization saved to {filename}")

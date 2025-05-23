@@ -108,4 +108,4 @@ if __name__ == '__main__':
     else:
         logging.info(f"Starting to monitor directory: {target_directory} with log level: {args.log_level}")
         # Call the process_and_learn function with the paths
-        process_and_learn(target_directory, model_save_path, stats_save_path, anomaly_log_path)
+        process_and_learn(target_directory, model_save_path, stats_save_path, anomaly_log_path, update_interval_seconds=30)

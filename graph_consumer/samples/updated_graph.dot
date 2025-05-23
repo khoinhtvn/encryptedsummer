@@ -1,5 +1,0 @@
-digraph NWTraffic_update {
-  "54.39.128.230" [degree=4, in_degree=4, out_degree=0, activity_score=0.34, total_connections=4];
-  "192.168.209.128" [degree=494, in_degree=0, out_degree=494, activity_score=1.00, total_connections=494];
-  "192.168.209.128" -> "54.39.128.230" [label="http_connection", status_msg="Found", status_code="302", response_body_len="0", version="1.1", user_agent="Debian APT-HTTP/1.3 (2.9.28)", uri="/kali/pool/main/f/finalrecon/finalrecon_1.1.7-0kali2_all.deb", host="http.kali.org", method="GET", request_body_len="0", dst_port="80", src_port="60496", timestamp="1746112536.352110", protocol="http"];
- }
