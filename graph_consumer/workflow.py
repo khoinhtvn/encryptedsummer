@@ -193,8 +193,8 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
     embedding_export_counter = 0
 
     # Training parameters
-    initial_training_epochs = 10  # Only for first training
-    online_update_steps = 5  # For subsequent updates
+    initial_training_epochs = 50  # Only for first training
+    online_update_steps = 25  # For subsequent updates
 
     logging.info(
         f"Starting process and learn in directory: {directory} with update interval: {update_interval_seconds} seconds, "

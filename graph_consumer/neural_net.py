@@ -104,7 +104,7 @@ class GraphAutoencoder(nn.Module):
 
 
 class HybridGNNAnomalyDetector(nn.Module):
-    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=100):
+    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5):
         super(HybridGNNAnomalyDetector, self).__init__()
         logging.info(
             f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}, heads={heads}")
@@ -175,8 +175,8 @@ class HybridGNNAnomalyDetector(nn.Module):
 
         return node_scores, edge_scores, global_score, node_recon, edge_recon, embedding, global_embedding
 
-    def update_online(self, data, n_steps=5, recon_weight=0.8, anomaly_weight=0.2):
-        """Hybrid online update with reconstruction loss and statistical controls"""
+    def update_online(self, data, n_steps=15, recon_weight=0.8, anomaly_weight=0.2):
+        """Hybrid online update with reconstruction and anomaly scoring loss."""
         self.train()
         logging.info(f"Starting online update for {n_steps} steps.")
 
@@ -185,67 +185,94 @@ class HybridGNNAnomalyDetector(nn.Module):
             return 0.0
 
         # Update running statistics
-        self.node_stats.update(data.x)
-        self.edge_stats.update(data.edge_attr)
+        if data.x is not None and data.x.numel() > 0:
+            self._update_running_stats(self.node_stats, data.x)
+        if data.edge_attr is not None and data.edge_attr.numel() > 0:
+            self._update_running_stats(self.edge_stats, data.edge_attr)
 
         # Add current data to replay buffer
         self._add_to_replay_buffer(data)
 
         total_loss = 0.0
-        valid_steps = 0
+        successful_steps = 0
 
         for step in range(n_steps):
             logging.debug(f"Online update step: {step + 1}/{n_steps}")
-            if len(self.replay_buffer) >= self.batch_size:
-                batch = self._sample_from_replay_buffer()
-                logging.debug(f"Sampled batch from replay buffer (size: {batch.num_graphs} graphs).")
-            else:
-                batch = data  # fallback: usa data direttamente se la buffer è vuota
-                logging.debug(f"Replay buffer too small (size: {len(self.replay_buffer)}), using current data.")
-
+            batch = self._get_training_batch(data)
             if batch is None:
-                logging.warning("No batch available. Skipping this step.")
+                logging.warning("No training batch available. Skipping this step.")
                 continue
 
             self.optimizer.zero_grad()
-            try:
-                node_scores, edge_scores, _, node_recon, edge_recon, embedding, _ = self(batch)
+            loss = self._calculate_online_loss(batch, recon_weight, anomaly_weight)
 
-                # Reconstruction loss
-                recon_loss_node = F.mse_loss(node_recon, batch.x)
-                # Consider using a different target for edge reconstruction if the graph structure doesn't change much
-                # E.g., predicting edge attributes if they exist. If predicting edge existence, you might need edge labels.
-                edge_recon_target = torch.ones_like(edge_recon) * 0.5
-                recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, edge_recon_target)
-
-                # Anomaly scoring loss (still using the magnitude minimization for unsupervised)
-                anomaly_loss = (node_scores.abs().mean() + edge_scores.abs().mean()) / 2
-
-                loss = recon_weight * (recon_loss_node + recon_loss_edge) + anomaly_weight * anomaly_loss
-
+            if loss is not None:
                 loss.backward()
                 self.optimizer.step()
                 total_loss += loss.item()
-                valid_steps += 1
-                logging.debug(f"Step {step + 1}: loss={loss.item():.4f}, Recon Node: {recon_loss_node.item():.4f}, Recon Edge: {recon_loss_edge.item():.4f}, Anomaly: {anomaly_loss.item():.4f}")
-            except AttributeError as e:
-                logging.error(f"Error during forward pass: {e}")
-                continue
+                successful_steps += 1
+                logging.debug(f"Step {step + 1}: Loss={loss.item():.4f}")
 
-        # Update learning rate solo se almeno un passo è valido
-        if valid_steps > 0:
-            avg_loss = total_loss / valid_steps
+        avg_loss = total_loss / successful_steps if successful_steps > 0 else 0.0
+        if successful_steps > 0:
             self.scheduler.step(avg_loss)
             logging.info(
                 f"Online update finished. Average loss: {avg_loss:.4f}, Learning rate: {self.optimizer.param_groups[0]['lr']:.6f}")
         else:
-            avg_loss = 0.0
-            logging.warning("No valid steps during online update.")
+            logging.warning("No successful steps during online update.")
 
         # Drift detection
         self.detect_feature_drift(data)
 
         return avg_loss
+
+    def _update_running_stats(self, running_stats, current_data, alpha=0.1):
+        """Updates the running mean and std of the features."""
+        if current_data is not None and current_data.numel() > 0:
+            mean = current_data.mean(dim=0)
+            std = current_data.std(dim=0)
+            running_stats.update(mean.detach().cpu().numpy())
+            running_stats.update(std.detach().cpu().numpy())
+
+    def _get_training_batch(self, current_data):
+        """Retrieves a training batch from the replay buffer or uses current data."""
+        if len(self.replay_buffer) >= self.batch_size:
+            batch = self._sample_from_replay_buffer()
+            logging.debug(f"Sampled batch from replay buffer (size: {batch.num_graphs} graphs).")
+            return batch
+        elif current_data is not None:
+            logging.debug(f"Replay buffer too small (size: {len(self.replay_buffer)}), using current data.")
+            return current_data
+        else:
+            logging.warning("No data available for training batch.")
+            return None
+
+    def _calculate_online_loss(self, batch, recon_weight, anomaly_weight):
+        """Calculates the combined reconstruction and anomaly loss."""
+        try:
+            node_scores, edge_scores, _, node_recon, edge_recon, _, _ = self(batch)
+
+            recon_loss_node = F.mse_loss(node_recon,
+                                         batch.x) if batch.x is not None and batch.x.numel() > 0 else torch.tensor(0.0,
+                                                                                                                   device=self.device)
+            edge_recon_target = torch.ones_like(
+                edge_recon) * 0.5 if edge_recon is not None and edge_recon.numel() > 0 else torch.tensor(0.0,
+                                                                                                         device=self.device)
+            recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon,
+                                                                 edge_recon_target) if edge_recon is not None and edge_recon.numel() > 0 else torch.tensor(
+                0.0, device=self.device)
+
+            anomaly_loss_node = node_scores.abs().mean() if node_scores is not None and node_scores.numel() > 0 else torch.tensor(
+                0.0, device=self.device)
+            anomaly_loss_edge = edge_scores.abs().mean() if edge_scores is not None and edge_scores.numel() > 0 else torch.tensor(
+                0.0, device=self.device)
+            anomaly_loss = (anomaly_loss_node + anomaly_loss_edge) / 2
+
+            loss = recon_weight * (recon_loss_node + recon_loss_edge) + anomaly_weight * anomaly_loss
+            return loss
+        except AttributeError as e:
+            logging.error(f"Error during forward pass: {e}")
+            return None
 
     def detect_feature_drift(self, data):
         """Statistical drift detection"""
