@@ -47,7 +47,7 @@ python3 main.py \
 ### Step 2: Start the C++ Log2Graph Parser
 
 ```bash
-./graph_builder \
+./Log2Graph \
   <zeek_logs_directory> \
   --export-path <graph_output_directory>
 ```
