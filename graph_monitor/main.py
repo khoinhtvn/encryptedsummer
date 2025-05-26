@@ -6,7 +6,7 @@ import time
 from logging.handlers import RotatingFileHandler
 
 # Import the workflow functions
-from workflow import process_and_learn # Import the function
+from workflow import process_and_learn  # Import the function
 
 # Define default paths here, can be overridden by arguments
 DEFAULT_MODEL_SAVE_PATH = "model_checkpoints"
@@ -88,6 +88,7 @@ if __name__ == '__main__':
         default=30,
         help="Number of update intervals for exporting visualization. Default is 30"
     )
+
     args = parser.parse_args()
     log_level = getattr(logging, args.log_level.upper(), logging.INFO)
     target_directory = args.path
@@ -102,7 +103,8 @@ if __name__ == '__main__':
     if args.visualization_path:
         os.makedirs(args.visualization_path, exist_ok=True)
 
-    # Configure logging (same as before)
+    # Configure logging
+    logging.getLogger('matplotlib.font_manager').setLevel(logging.WARNING) # Avoid matplot lib font logs
     log_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
     logger = logging.getLogger()
     logger.setLevel(log_level)
@@ -127,4 +129,7 @@ if __name__ == '__main__':
     else:
         logging.info(f"Starting to monitor directory: {target_directory} with log level: {args.log_level}")
         # Call the process_and_learn function with the paths
-        process_and_learn(target_directory, model_save_path, stats_save_path, anomaly_log_path, export_period_updates=args.export_period_updates,update_interval_seconds=args.update_interval_seconds, visualization_path=args.visualization_path)
+        process_and_learn(target_directory, model_save_path, stats_save_path, anomaly_log_path,
+                          export_period_updates=args.export_period_updates,
+                          update_interval_seconds=args.update_interval_seconds,
+                          visualization_path=args.visualization_path)

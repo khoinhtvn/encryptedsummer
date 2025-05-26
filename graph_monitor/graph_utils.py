@@ -173,12 +173,14 @@ def save_nx_graph(nx_graph, output_path):
         logging.error(f"Error saving graph to '{output_path}': {e}")
         logging.error(traceback.format_exc())
 
+
 def get_sorted_node_features(nx_graph):
     all_node_attr_keys = set()
     for node in nx_graph.nodes():
         all_node_attr_keys.update(nx_graph.nodes[node].keys())
     sorted_node_attr_keys = sorted(list(all_node_attr_keys))
     return sorted_node_attr_keys
+
 
 def get_sorted_edge_features(nx_graph):
     # Edge attributes
@@ -187,6 +189,7 @@ def get_sorted_edge_features(nx_graph):
         edge_attr_keys.update(data.keys())
     sorted_edge_attr_keys = sorted(list(edge_attr_keys))
     return sorted_edge_attr_keys
+
 
 def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=True):
     """

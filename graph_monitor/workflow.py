@@ -1,16 +1,16 @@
 import json
-import logging
-import os
 import pickle
-import re
 import time
-from datetime import datetime
+
 import torch.nn.functional as F
+
 from graph_utils import *
 from neural_net import HybridGNNAnomalyDetector
 from visualization import *
 
-def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None, timestamp=None):
+
+def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None,
+                           timestamp=None):
     """Saves detected anomalies to a JSON file with more details, including IP addresses."""
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -28,7 +28,8 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_
 
         for idx in anomalies.get('node_anomalies_recon', []):  # Use reconstruction-based anomalies
             node_index = idx.item()
-            node_info = {"node_id": node_index, "recon_error": anomalies.get('node_recon_errors', [])[idx].item(), "mlp_score": anomalies.get('node_scores_mlp', [])[idx].item()}
+            node_info = {"node_id": node_index, "recon_error": anomalies.get('node_recon_errors', [])[idx].item(),
+                         "mlp_score": anomalies.get('node_scores_mlp', [])[idx].item()}
             if 0 <= node_index < len(node_list):
                 node_info['ip'] = str(node_list[node_index])  # Use the index to get the IP
             anomaly_data["node_anomalies"].append(node_info)
@@ -51,7 +52,9 @@ def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_
     else:
         logging.warning("NetworkX graph or main_data not provided, cannot include IP addresses in anomaly details.")
         for idx in anomalies.get('node_anomalies_recon', []):
-            anomaly_data["node_anomalies"].append({"node_id": idx.item(), "recon_error": anomalies.get('node_recon_errors', [])[idx].item(), "mlp_score": anomalies.get('node_scores_mlp', [])[idx].item()})
+            anomaly_data["node_anomalies"].append(
+                {"node_id": idx.item(), "recon_error": anomalies.get('node_recon_errors', [])[idx].item(),
+                 "mlp_score": anomalies.get('node_scores_mlp', [])[idx].item()})
         if main_data is not None and main_data.edge_index is not None:
             for idx in anomalies.get('edge_anomalies_recon', []):
                 anomaly_data["edge_anomalies"].append({
@@ -84,12 +87,13 @@ def save_checkpoint(model, optimizer, scheduler, processed_files_count, model_sa
     torch.save(obj, filename)
 
     try:
-        os.remove(os.path.join(model_save_path,"latest_checkpoint.pth"))
+        os.remove(os.path.join(model_save_path, "latest_checkpoint.pth"))
     except OSError:
         pass
 
-    torch.save(obj, os.path.join(model_save_path,"latest_checkpoint.pth"))
+    torch.save(obj, os.path.join(model_save_path, "latest_checkpoint.pth"))
     logging.info(f"Checkpoint saved to {filename}")
+
 
 def load_checkpoint(model, optimizer, scheduler, model_save_path, filename="latest_checkpoint.pth"):
     filepath = os.path.join(model_save_path, filename)
@@ -179,7 +183,9 @@ def process_file(filepath, main_graph):
             f"Updated main graph to {updated_graph.number_of_nodes()} nodes and {updated_graph.number_of_edges()} edges.")
         return updated_graph, pytorch_data
 
-def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_path, update_interval_seconds=60, export_period_updates=50, visualization_path=None):
+
+def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_path, update_interval_seconds=60,
+                      export_period_updates=50, visualization_path=None):
     """
     Monitors the directory for files, processes them, updates the graph,
     triggers online learning at fixed intervals, and exports embeddings periodically.
@@ -199,11 +205,6 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
     logging.info(
         f"Starting process and learn in directory: {directory} with update interval: {update_interval_seconds} seconds, "
         f"visualization every {export_period_updates} updates.")
-
-    # Initialize a dummy model for loading running stats
-    temp_model_for_stats = HybridGNNAnomalyDetector(1, 1)
-    load_running_stats(temp_model_for_stats, stats_save_path)
-    del temp_model_for_stats
 
     while True:
         # Check for new files
@@ -236,7 +237,8 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
                 if gnn_model is None:
                     node_feature_dim = main_data.x.size(1)
                     edge_feature_dim = main_data.edge_attr.size(1) if main_data.edge_attr is not None else 0
-                    gnn_model = HybridGNNAnomalyDetector(node_feature_dim, edge_feature_dim,export_dir=visualization_path)
+                    gnn_model = HybridGNNAnomalyDetector(node_feature_dim, edge_feature_dim,
+                                                         export_dir=visualization_path)
                     logging.info(f"Initialized Hybrid GNN (node_dim={node_feature_dim}, edge_dim={edge_feature_dim})")
 
                     # Initial training (optional, can be removed if purely online)
@@ -252,7 +254,7 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
                         loss = 0.8 * (recon_loss_node + recon_loss_edge) + 0.2 * anomaly_loss
                         loss.backward()
                         optimizer.step()
-                        logging.info(f"Epoch {epoch+1}/{initial_training_epochs}, Loss: {loss.item():.4f}")
+                        logging.info(f"Epoch {epoch + 1}/{initial_training_epochs}, Loss: {loss.item():.4f}")
                     logging.info("Initial training complete.")
 
                     # Load latest checkpoint if available AFTER initial training
@@ -278,14 +280,16 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
 
                 # Save checkpoint periodically
                 if gnn_model:
-                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count, model_save_path)
+                    save_checkpoint(gnn_model, gnn_model.optimizer, gnn_model.scheduler, processed_count,
+                                    model_save_path)
 
                 # Report results
                 logging.info(f"\nGlobal anomaly score: {anomalies['global_anomaly_mlp']:.4f}")
 
                 # Node anomalies
                 if len(anomalies['node_anomalies_recon']) > 0:
-                    logging.warning(f"Detected {len(anomalies['node_anomalies_recon'])} anomalous nodes (reconstruction-based):")
+                    logging.warning(
+                        f"Detected {len(anomalies['node_anomalies_recon'])} anomalous nodes (reconstruction-based):")
                     for idx in anomalies['node_anomalies_recon'][:5]:  # Show top 5
                         logging.warning(
                             f"  IP: {main_graph.nodes.get(idx.item(), {}).get('ip', 'N/A')}, Recon Error: {anomalies['node_recon_errors'][idx]:.4f}, MLP Score: {anomalies['node_scores_mlp'][idx]:.4f}")
@@ -294,7 +298,8 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
 
                 # Edge anomalies
                 if len(anomalies['edge_anomalies_recon']) > 0:
-                    logging.warning(f"Detected {len(anomalies['edge_anomalies_recon'])} anomalous edges (reconstruction-based):")
+                    logging.warning(
+                        f"Detected {len(anomalies['edge_anomalies_recon'])} anomalous edges (reconstruction-based):")
                     for idx in anomalies['edge_anomalies_recon'][:5]:  # Show top 5
                         src = main_data.edge_index[0][idx].item()
                         dst = main_data.edge_index[1][idx].item()
@@ -308,7 +313,7 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
                     logging.info("No significant edge anomalies detected (reconstruction-based)")
 
                 # Visualization (optional)
-                if visualization_path is not None :
+                if visualization_path is not None:
                     # Periodic Embedding Export
                     if gnn_model and export_period_updates > 0:
                         if export_counter % export_period_updates == 0:
@@ -319,22 +324,22 @@ def process_and_learn(directory, model_save_path, stats_save_path, anomaly_log_p
                                 gnn_model.export_embeddings(main_data, filename=filename)
                             except Exception as e:
                                 logging.error(f"Error during periodic embedding export: {e}")
-                        if main_data.x is not None and main_data.edge_attr is not None:
-                            logging.info("Performing visualization of node and edge features.")
-                            try:
-                                visualize_node_features(main_data, save_path=visualization_path,
-                                                        feature_names=get_sorted_node_features(main_graph))
-                                visualize_edge_features(main_data, save_path=visualization_path,
-                                                        edge_feature_names=get_sorted_edge_features(main_graph))
-                                visualize_all_edge_features(main_data, save_path=visualization_path, edge_feature_names=get_sorted_edge_features(main_graph))
-                            except Exception as e:
-                                logging.error(f"Error during visualization: {e}")
-                        elif main_data.x is None:
-                            logging.warning("Skipping node feature visualization: No node features available.")
-                        elif main_data.edge_attr is None:
-                            logging.warning("Skipping edge feature visualization: No edge features available.")
+                            if main_data.x is not None and main_data.edge_attr is not None:
+                                logging.info("Performing visualization of node and edge features.")
+                                try:
+                                    visualize_node_features(main_data, save_path=visualization_path,
+                                                            feature_names=get_sorted_node_features(main_graph))
+                                    visualize_edge_features(main_data, save_path=visualization_path,
+                                                            edge_feature_names=get_sorted_edge_features(main_graph))
+                                    visualize_all_edge_features(main_data, save_path=visualization_path,
+                                                                edge_feature_names=get_sorted_edge_features(main_graph))
+                                except Exception as e:
+                                    logging.error(f"Error during visualization: {e}")
+                            elif main_data.x is None:
+                                logging.warning("Skipping node feature visualization: No node features available.")
+                            elif main_data.edge_attr is None:
+                                logging.warning("Skipping edge feature visualization: No edge features available.")
                         export_counter += 1
-
 
             last_update_time = current_time
 

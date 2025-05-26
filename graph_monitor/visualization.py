@@ -1,4 +1,6 @@
 import logging
+import os
+from datetime import datetime
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -7,9 +9,9 @@ import seaborn as sns
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 from torch_geometric.data import Data
-from datetime import datetime
-import os
-def visualize_node_features(data: Data, feature_names: list = None,save_path: str = None):
+
+
+def visualize_node_features(data: Data, feature_names: list = None, save_path: str = None):
     """
     Visualizes node features with appropriate scales and optimized layout
 
@@ -166,7 +168,9 @@ def visualize_node_features(data: Data, feature_names: list = None,save_path: st
         for i, val in enumerate(corrs_with_activity):
             logging.info(f"  {use_names[degree_features[i]]}: {val:.2f}")
 
-def visualize_edge_features(data: Data, edge_feature_names: list = None, max_features_to_plot=12, save_path: str = None):
+
+def visualize_edge_features(data: Data, edge_feature_names: list = None, max_features_to_plot=12,
+                            save_path: str = None):
     """
     Visualizes edge features with techniques to handle many features
 
@@ -350,7 +354,8 @@ def visualize_edge_features(data: Data, edge_feature_names: list = None, max_fea
         if max_corr_val > 0.8:
             feature1_name = use_names[non_constant_indices[max_corr_idx[0]]]
             feature2_name = use_names[non_constant_indices[max_corr_idx[1]]]
-            logging.info(f"- Highest correlation ({max_corr_val:.2f}) between features: '{feature1_name}' and '{feature2_name}'.")
+            logging.info(
+                f"- Highest correlation ({max_corr_val:.2f}) between features: '{feature1_name}' and '{feature2_name}'.")
         else:
             logging.info(f"- Maximum correlation between different non-constant edge features: {max_corr_val:.2f}.")
     else:
@@ -402,7 +407,7 @@ def visualize_all_edge_features(data: Data, edge_feature_names: list = None, sav
     })
     stats_df_melted = stats_df.melt(id_vars='Feature', var_name='Statistic', value_name='Value')
     sns.barplot(data=stats_df_melted, x='Feature', y='Value', hue='Statistic')
-    plt.xticks([]) # Remove x-axis labels if too many features
+    plt.xticks([])  # Remove x-axis labels if too many features
     plt.title('Summary Statistics of All Edge Features')
     plt.ylabel('Value / Sparsity (%)')
     plt.tight_layout()

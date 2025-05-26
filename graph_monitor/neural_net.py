@@ -2,15 +2,14 @@ import logging
 import os
 from collections import deque
 
+import matplotlib.pyplot as plt
 import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from sklearn.manifold import TSNE
 from torch_geometric.data import Data, Batch
 from torch_geometric.nn import GATConv, global_mean_pool
-import matplotlib.pyplot as plt
-from sklearn.manifold import TSNE
-import seaborn as sns
 
 
 class RunningStats:
@@ -93,7 +92,7 @@ class GraphAutoencoder(nn.Module):
     def decode_edge(self, z, edge_index, edge_attr):
         src, dst = edge_index[0], edge_index[1]
         edge_features = torch.cat([z[src], z[dst], edge_attr], dim=1)
-        return torch.sigmoid(self.edge_decoder(edge_features)).squeeze() # Sigmoid for probability
+        return torch.sigmoid(self.edge_decoder(edge_features)).squeeze()  # Sigmoid for probability
 
     def forward(self, data):
         x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr
@@ -104,7 +103,8 @@ class GraphAutoencoder(nn.Module):
 
 
 class HybridGNNAnomalyDetector(nn.Module):
-    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5, export_dir = None):
+    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5,
+                 export_dir=None):
         super(HybridGNNAnomalyDetector, self).__init__()
         logging.info(
             f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}, heads={heads}")
@@ -170,7 +170,8 @@ class HybridGNNAnomalyDetector(nn.Module):
         logging.debug(f"Edge anomaly scores shape: {edge_scores.shape}")
 
         # Global anomaly score based on global mean pooled embedding
-        global_embedding = global_mean_pool(embedding, batch=torch.zeros(embedding.size(0), dtype=torch.long, device=embedding.device))
+        global_embedding = global_mean_pool(embedding, batch=torch.zeros(embedding.size(0), dtype=torch.long,
+                                                                         device=embedding.device))
         global_score = self.global_anomaly_mlp(global_embedding)
         logging.debug(f"Global anomaly score shape: {global_score.shape}")
 
