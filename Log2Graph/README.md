@@ -50,7 +50,7 @@ Usage
 
 ```bash
 git clone https://github.com/khoinhtvn/encryptedsummer
-cd encryptedsummer/graph_builder
+cd encryptedsummer/Log2Graph
 mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
@@ -70,5 +70,5 @@ cmake --build . --config Release
 The program checks for files in the specified path. It just processes files with known names (conn.log).
 
 ```bash
-./graph_builder /path/to/zeek/logs
+./Log2Graph /path/to/zeek/logs
 ```

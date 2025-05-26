@@ -1,3 +1,0 @@
-/home/lu/Documents/encryptedsummer/graph_builder/cmake-build-debug/CMakeFiles/graph_builder.dir
-/home/lu/Documents/encryptedsummer/graph_builder/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lu/Documents/encryptedsummer/graph_builder/cmake-build-debug/CMakeFiles/rebuild_cache.dir
