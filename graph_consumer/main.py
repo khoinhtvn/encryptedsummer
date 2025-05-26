@@ -70,7 +70,24 @@ if __name__ == '__main__':
         default=DEFAULT_ANOMALY_LOG_PATH,
         help=f"Path to save anomaly logs (default: {DEFAULT_ANOMALY_LOG_PATH})"
     )
-
+    parser.add_argument(
+        "--visualization_path",
+        type=str,
+        default=None,
+        help="Optional path to export node/edge visualizations and embeddings."
+    )
+    parser.add_argument(
+        "--update_interval_seconds",
+        type=int,
+        default=30,
+        help="Interval (in seconds) between graph updates and online learning steps. Default is 30."
+    )
+    parser.add_argument(
+        "--export_period_updates",
+        type=int,
+        default=30,
+        help="Number of update intervals for exporting visualization. Default is 30"
+    )
     args = parser.parse_args()
     log_level = getattr(logging, args.log_level.upper(), logging.INFO)
     target_directory = args.path
@@ -82,6 +99,8 @@ if __name__ == '__main__':
     os.makedirs(anomaly_log_path, exist_ok=True)
     os.makedirs(model_save_path, exist_ok=True)
     os.makedirs(stats_save_path, exist_ok=True)
+    if args.visualization_path:
+        os.makedirs(args.visualization_path, exist_ok=True)
 
     # Configure logging (same as before)
     log_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -108,4 +127,4 @@ if __name__ == '__main__':
     else:
         logging.info(f"Starting to monitor directory: {target_directory} with log level: {args.log_level}")
         # Call the process_and_learn function with the paths
-        process_and_learn(target_directory, model_save_path, stats_save_path, anomaly_log_path, update_interval_seconds=30)
+        process_and_learn(target_directory, model_save_path, stats_save_path, anomaly_log_path, export_period_updates=args.export_period_updates,update_interval_seconds=args.update_interval_seconds, visualization_path=args.visualization_path)

@@ -173,6 +173,20 @@ def save_nx_graph(nx_graph, output_path):
         logging.error(f"Error saving graph to '{output_path}': {e}")
         logging.error(traceback.format_exc())
 
+def get_sorted_node_features(nx_graph):
+    all_node_attr_keys = set()
+    for node in nx_graph.nodes():
+        all_node_attr_keys.update(nx_graph.nodes[node].keys())
+    sorted_node_attr_keys = sorted(list(all_node_attr_keys))
+    return sorted_node_attr_keys
+
+def get_sorted_edge_features(nx_graph):
+    # Edge attributes
+    edge_attr_keys = set()
+    for u, v, data in nx_graph.edges(data=True):
+        edge_attr_keys.update(data.keys())
+    sorted_edge_attr_keys = sorted(list(edge_attr_keys))
+    return sorted_edge_attr_keys
 
 def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=True):
     """
@@ -197,10 +211,7 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
     logging.info("Starting NetworkX to PyG conversion.")
 
     # 1. Determine the complete set of node attributes.
-    all_node_attr_keys = set()
-    for node in nx_graph.nodes():
-        all_node_attr_keys.update(nx_graph.nodes[node].keys())
-    sorted_node_attr_keys = sorted(list(all_node_attr_keys))
+    sorted_node_attr_keys = get_sorted_node_features(nx_graph)
     logging.debug(f"Sorted node attribute keys: {sorted_node_attr_keys}")
 
     # 2.  Create node features
@@ -263,13 +274,11 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
     ).t().contiguous()
     logging.debug(f"Edge index tensor shape: {edge_index.shape}")
 
-    # Edge attributes
     edge_features = []
-    edge_attr_keys = set()
-    for u, v, data in nx_graph.edges(data=True):
-        edge_attr_keys.update(data.keys())
-    sorted_edge_attr_keys = sorted(list(edge_attr_keys))
+
+    sorted_edge_attr_keys = get_sorted_edge_features(nx_graph)
     logging.debug(f"Sorted edge attribute keys: {sorted_edge_attr_keys}")
+
     for u, v, data in nx_graph.edges(data=True):
         edge_feature_list = []
         for key in sorted_edge_attr_keys:

@@ -104,7 +104,7 @@ class GraphAutoencoder(nn.Module):
 
 
 class HybridGNNAnomalyDetector(nn.Module):
-    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5):
+    def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5, export_dir = None):
         super(HybridGNNAnomalyDetector, self).__init__()
         logging.info(
             f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}, heads={heads}")
@@ -151,9 +151,10 @@ class HybridGNNAnomalyDetector(nn.Module):
         # Embedding export parameters
         self.export_period = export_period
         self.update_count = 0
-        self.export_dir = "embeddings"  # Initialize export_dir here
-        os.makedirs(self.export_dir, exist_ok=True)
-        logging.info(f"Embedding export will occur every {self.export_period} updates, saving to {self.export_dir}")
+        self.export_dir = export_dir  # Initialize export_dir here
+        if export_dir is not None:
+            os.makedirs(self.export_dir, exist_ok=True)
+            logging.info(f"Embedding export will occur every {self.export_period} updates, saving to {self.export_dir}")
 
     def forward(self, data):
         embedding, node_recon, edge_recon = self.autoencoder(data)
