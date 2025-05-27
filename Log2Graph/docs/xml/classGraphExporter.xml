@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="132" column="10" bodyfile="GraphExporter.cpp" bodystart="208" bodyend="231"/>
+        <location file="includes/GraphExporter.h" line="132" column="10" bodyfile="GraphExporter.cpp" bodystart="208" bodyend="217"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1aa1a6dd4e12a4732aab0631f8b1f62f69" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -356,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="134" column="10" bodyfile="GraphExporter.cpp" bodystart="233" bodyend="253"/>
+        <location file="includes/GraphExporter.h" line="134" column="10" bodyfile="GraphExporter.cpp" bodystart="219" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -398,7 +398,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="145" column="10" bodyfile="GraphExporter.cpp" bodystart="255" bodyend="273"/>
+        <location file="includes/GraphExporter.h" line="145" column="10" bodyfile="GraphExporter.cpp" bodystart="241" bodyend="259"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -416,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="147" column="17" bodyfile="GraphExporter.cpp" bodystart="276" bodyend="288"/>
+        <location file="includes/GraphExporter.h" line="147" column="17" bodyfile="GraphExporter.cpp" bodystart="262" bodyend="274"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

@@ -213,20 +213,6 @@ void GraphExporter::write_node_to_file(const std::shared_ptr<GraphNode> &node, s
     dot_file << ", out_degree=" << node->features.out_degree;
     dot_file << ", activity_score=" << std::fixed << std::setprecision(2) << node->features.activity_score.load();
     dot_file << ", total_connections=" << node->temporal.total_connections;
-
-    // Aggiungi la distribuzione dei protocolli come un singolo attributo (potrebbe essere lungo)
-    /*
-
-    std::string protocol_str = "{";
-    for (const auto &pair : node->features.protocol_counts) {
-        if (!protocol_str.empty() && protocol_str != "{") {
-            protocol_str += ",";
-        }
-        protocol_str += escape_dot_string(pair.first) + ":" + std::to_string(pair.second);
-    }
-    protocol_str += "}";
-    dot_file << ", protocols=\"" << protocol_str << "\"";
-    */
     dot_file << "];\n";
 }
 
