@@ -4,14 +4,9 @@
 6	1674	1748265902490922709	CMakeFiles/graph_builder.dir/GraphNode.cpp.o	f5100041cc2d60c3
 3	2581	1748265902487922698	CMakeFiles/graph_builder.dir/GraphBuilder.cpp.o	6c85550001ed5035
 6	2500	1748265902490922709	CMakeFiles/graph_builder.dir/TrafficGraph.cpp.o	b3747e8b5597dac6
-1	38	1748265954835118764	build.ninja	e673d940f2f20de2
-2163	2304	1747842081148525232	graph_builder	805d101eb00b7ce3
+1	53	1748335089080065203	build.ninja	e673d940f2f20de2
+2088	2256	1748265956933126646	graph_builder	805d101eb00b7ce3
 8	1270	1748265902492922717	CMakeFiles/graph_builder.dir/FeatureEncoder.cpp.o	c8dcf6fc456d3f0b
-2	2921	1748265902486922694	CMakeFiles/graph_builder.dir/main.cpp.o	8d95be27c245b0fa
-12	1371	1747842078997515433	CMakeFiles/graph_builder.dir/RealTimeAnomalyDetector.cpp.o	36531cc8b2833241
-12	1457	1747842078997515433	CMakeFiles/graph_builder.dir/GraphExporter.cpp.o	d39b5fa53f0f6514
-1	53	1748265954835118764	build.ninja	e673d940f2f20de2
+1	2087	1748265954846118805	CMakeFiles/graph_builder.dir/main.cpp.o	8d95be27c245b0fa
 2	1642	1748265954847118809	CMakeFiles/graph_builder.dir/RealTimeAnomalyDetector.cpp.o	8024ca2f88ebc8b9
 2	1793	1748265954847118809	CMakeFiles/graph_builder.dir/GraphExporter.cpp.o	1bb76c7df79f0a14
-1	2087	1748265954846118805	CMakeFiles/graph_builder.dir/main.cpp.o	8d95be27c245b0fa
-2088	2256	1748265956933126646	graph_builder	805d101eb00b7ce3
