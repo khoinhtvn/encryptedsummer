@@ -199,26 +199,6 @@ Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>Visualizes the current network graph and saves it as a PNG file, as well as DOT file.</p>
-<p>The filename includes the current UTC timestamp. The 'false' argument likely controls whether to clear the graph before visualizing (in this context, it's probably not clearing), and 'true' might indicate whether to include labels on the nodes.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>The graph to visualize. </td></tr>
-    <tr><td class="paramname">./zeek_graph_</td><td>+ std::to_string(UTC) The base filename for the output PNG. </td></tr>
-    <tr><td class="paramname">false</td><td>Flag indicating whether to clear the graph before visualization. </td></tr>
-    <tr><td class="paramname">true</td><td>Flag indicating whether to include labels on the nodes.</td></tr>
-  </table>
-  </dd>
-</dl>
-<p>Detects anomalies in the current network graph, based on basic .</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>The graph to analyze for anomalies. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A map where the keys are the nodes identified as anomalous and the values are their corresponding anomaly scores and contributing factors.</dd></dl>
-<p>Iterates through the detected anomalies and prints alerts for high-scoring ones.</p>
 <p>Stops the log monitoring process.</p>
 
 </div>

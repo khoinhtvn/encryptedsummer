@@ -1,10 +1,9 @@
 /**
-* @file main.cpp
+ * @file main.cpp
  * @brief Main entry point for the Zeek log analysis and anomaly detection application.
  *
  * This application monitors Zeek logs from a specified directory, builds a graph
- * representation of the network traffic, visualizes the graph periodically,
- * and detects real-time anomalies.
+ * representation of the network traffic and visualizes the graph periodically.
  */
 #include <iostream>
 #include <thread>
@@ -45,109 +44,64 @@ int main(int argc, char *argv[]) {
         std::filesystem::create_directories(export_path);
     }
     /**
-     * @brief Instance of the real-time anomaly detector.
-     */
-    RealTimeAnomalyDetector detector;
-    /**
      * @brief Instance of the graph exporter.
+     *
+     * This object is responsible for exporting the graph data in various formats,
+     * such as DOT files for visualization.
      */
     GraphExporter exporter;
     /**
      * @brief Instance of the log monitor, responsible for reading and processing Zeek logs.
      *
      * The monitor is initialized with the directory containing the Zeek log files
-     * provided as a command-line argument.
+     * provided as a command-line argument. It continuously reads new log entries
+     * and makes them available for graph building.
      */
     LogMonitor monitor(argv[1]);
     /**
      * @brief Starts the log monitoring process in a separate thread.
+     *
+     * This allows the application to process logs in the background without
+     * blocking the main execution thread, enabling continuous monitoring.
      */
     monitor.start();
 
-    // Main loop (could be replaced with a REST API or other interface)
     while (true) {
         std::this_thread::sleep_for(std::chrono::seconds(10));
 
         static int counter = 0;
         if (++counter % 3 == 0) {
+            /**
+             * @brief Get the current UTC timestamp for filename generation.
+             */
             auto now = std::chrono::system_clock::now();
             auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+
             /**
-             * @brief Retrieves the singleton instance of the GraphBuilder and gets the current graph.
+             * @brief Get a reference to the singleton instance of the GraphBuilder and its current graph.
              */
             auto &graph = GraphBuilder::get_instance().get_graph();
+
             /**
-             * @brief Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
+             * @brief Export the encoded incremental updates of the network graph to a DOT file.
              *
-             * The filename includes the current UTC timestamp. The 'false' argument
-             * likely controls whether to clear the graph before visualizing (in this
-             * context, it's probably not clearing), and 'true' might indicate
-             * whether to include labels on the nodes.
-             *
-             * @param graph The graph to visualize.
-             * @param "./zeek_graph_" + std::to_string(UTC) The base filename for the output PNG.
-             * @param false Flag indicating whether to clear the graph before visualization.
-             * @param true Flag indicating whether to include labels on the nodes.
-             */
-            //exporter.export_full_graph_human_readable(
-            //    graph, export_path + std::filesystem::path::preferred_separator + "nw_graph_" + std::to_string(UTC),
-            //    false,
-           //     true);
-            /**
-             * @brief Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
-             *
-             * The filename includes the current UTC timestamp. The 'false' argument
-             * likely controls whether to clear the graph before visualizing (in this
-             * context, it's probably not clearing), and 'true' might indicate
-             * whether to include labels on the nodes.
-             *
-             * @param graph The graph to visualize.
-             * @param "./zeek_graph_" + std::to_string(UTC) The base filename for the output PNG.
-             * @param false Flag indicating whether to clear the graph before visualization.
-             * @param true Flag indicating whether to include labels on the nodes.
+             * This call retrieves the latest changes to the graph since the last export
+             * and saves them in an encoded format to a DOT file. The filename includes
+             * the UTC timestamp to differentiate between exports. The output file is
+             * created in the specified `export_path`.
              */
             exporter.export_incremental_update_encoded(GraphBuilder::get_instance().get_last_updates(),
-                                                       export_path + std::filesystem::path::preferred_separator +
-                                                       "nw_graph_encoded_" + std::to_string(UTC) +
-                                                       ".dot");
-            /**
-             * @brief Detects anomalies in the current network graph, based on basic .
-             *
-             * @param graph The graph to analyze for anomalies.
-             * @return A map where the keys are the nodes identified as anomalous and the values
-             * are their corresponding anomaly scores and contributing factors.
-             */
-            auto anomalies = detector.detect(graph);
-            /**
-             * @brief Iterates through the detected anomalies and prints alerts for high-scoring ones.
-             */
-            for (const auto &[node, score]: anomalies) {
-                if (score.score > 0.8) {
-                    std::cout << "ALERT: " << node << " anomaly score " << score.score
-                            << " (factors: ";
-                    for (const auto &factor: score.contributing_factors) {
-                        std::cout << factor << " ";
-                    }
-                    std::cout << ")\n";
-                }
-            }
+                                                        export_path + std::filesystem::path::preferred_separator +
+                                                        "nw_graph_encoded_" + std::to_string(UTC) +
+                                                        ".dot");
         }
-
-        // Perform periodic analysis
-        /*
-        auto& graph = GraphBuilder::get_instance().get_graph();
-        auto anomalies = TrafficAnalyzer::detect_suspicious_activity(graph);
-
-        if (!anomalies.empty()) {
-            std::cout << "Detected anomalies:" << std::endl;
-            for (const auto& anomaly : anomalies) {
-                std::cout << " - " << anomaly << std::endl;
-            }
-        }*/
     }
 
     /**
      * @brief Stops the log monitoring process.
+     *
+     * This ensures that the log monitoring thread is properly terminated before
+     * the application exits, releasing any resources it might be holding.
      */
     monitor.stop();
     return 0;
