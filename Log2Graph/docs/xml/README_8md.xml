@@ -59,7 +59,7 @@
 <codeline></codeline>
 <codeline><highlight class="normal">```bash</highlight></codeline>
 <codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/khoinhtvn/encryptedsummer</highlight></codeline>
-<codeline><highlight class="normal">cd<sp/>encryptedsummer/graph_builder</highlight></codeline>
+<codeline><highlight class="normal">cd<sp/>encryptedsummer/Log2Graph</highlight></codeline>
 <codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
 <codeline><highlight class="normal">cmake<sp/>..<sp/>-DCMAKE_BUILD_TYPE=Release</highlight></codeline>
 <codeline><highlight class="normal">make<sp/>-j$(nproc)</highlight></codeline>
@@ -79,7 +79,7 @@
 <codeline><highlight class="normal">The<sp/>program<sp/>checks<sp/>for<sp/>files<sp/>in<sp/>the<sp/>specified<sp/>path.<sp/>It<sp/>just<sp/>processes<sp/>files<sp/>with<sp/>known<sp/>names<sp/>(conn.log).</highlight></codeline>
 <codeline></codeline>
 <codeline><highlight class="normal">```bash</highlight></codeline>
-<codeline><highlight class="normal">./graph_builder<sp/>/path/to/zeek/logs</highlight></codeline>
+<codeline><highlight class="normal">./Log2Graph<sp/>/path/to/zeek/logs</highlight></codeline>
 <codeline><highlight class="normal">```</highlight></codeline>
     </programlisting>
     <location file="README.md"/>

@@ -65,7 +65,7 @@
 <sect1 id="md_README_1autotoc_md4">
 <title>Installation</title><sect2 id="md_README_1autotoc_md5">
 <title>Linux/maxOS</title><para><programlisting filename=".bash"><codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/khoinhtvn/encryptedsummer</highlight></codeline>
-<codeline><highlight class="normal">cd<sp/>encryptedsummer/graph_builder</highlight></codeline>
+<codeline><highlight class="normal">cd<sp/>encryptedsummer/Log2Graph</highlight></codeline>
 <codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
 <codeline><highlight class="normal">cmake<sp/>..<sp/>-DCMAKE_BUILD_TYPE=Release</highlight></codeline>
 <codeline><highlight class="normal">make<sp/>-j$(nproc)</highlight></codeline>
@@ -80,7 +80,7 @@
 <sect1 id="md_README_1autotoc_md7">
 <title>Usage</title><sect2 id="md_README_1autotoc_md8">
 <title>Basic Analysis</title><para>The program checks for files in the specified path. It just processes files with known names (conn.log).</para>
-<para><programlisting filename=".bash"><codeline><highlight class="normal">./graph_builder<sp/>/path/to/zeek/logs</highlight></codeline>
+<para><programlisting filename=".bash"><codeline><highlight class="normal">./Log2Graph<sp/>/path/to/zeek/logs</highlight></codeline>
 </programlisting> </para>
 </sect2>
 </sect1>

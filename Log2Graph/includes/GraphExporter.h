@@ -59,7 +59,22 @@ public:
                            const std::string &output_file = "graph.png",
                            bool open_image = true, bool export_cond = true);
 
-
+    /**
+     * @brief Exports the encoded incremental updates of the graph to a DOT file.
+     *
+     * This method retrieves the latest incremental updates from the GraphBuilder,
+     * encodes them, and then saves the encoded representation to a specified
+     * DOT file. The filename includes a timestamp (UTC) to ensure uniqueness
+     * for each incremental update export.
+     *
+     * @param updates A vector of `GraphUpdate` objects representing the incremental changes
+     * to the graph. This is typically obtained from the GraphBuilder.
+     * @param output_file The full path and filename for the output DOT file.
+     * It defaults to "update.dot" if no path is provided. The
+     * function call constructs a more specific path including
+     * the base `export_path`, a separator, the prefix
+     * "nw_graph_encoded_", a UTC timestamp, and the ".dot" extension.
+     */
     void export_incremental_update_encoded(std::vector<GraphUpdate> updates,
                                    const std::string &output_file = "update.dot");
 
