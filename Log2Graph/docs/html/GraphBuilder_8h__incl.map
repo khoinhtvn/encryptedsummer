@@ -10,12 +10,12 @@
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="295,28,471,73,470,78,294,33"/>
 <area shape="rect" id="Node000012" href="$GraphUpdateQueue_8h.html" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates." alt="" coords="88,79,251,104"/>
 <area shape="poly" id="edge6_Node000001_Node000012" title=" " alt="" coords="238,33,194,72,191,68,235,29"/>
-<area shape="rect" id="Node000019" href="$TrafficGraph_8h.html" title=" " alt="" coords="275,79,387,104"/>
-<area shape="poly" id="edge10_Node000001_Node000019" title=" " alt="" coords="264,29,309,68,305,72,261,33"/>
+<area shape="rect" id="Node000020" href="$TrafficGraph_8h.html" title=" " alt="" coords="275,79,387,104"/>
+<area shape="poly" id="edge10_Node000001_Node000020" title=" " alt="" coords="264,29,309,68,305,72,261,33"/>
 <area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="506,106,415,149,413,144,504,102"/>
 <area shape="poly" id="edge9_Node000012_Node000002" title=" " alt="" coords="172,104,172,138,167,138,167,104"/>
 <area shape="poly" id="edge7_Node000012_Node000003" title=" " alt="" coords="149,106,72,148,70,143,147,102"/>
 <area shape="poly" id="edge8_Node000012_Node000004" title=" " alt="" coords="204,101,334,146,332,151,202,107"/>
-<area shape="poly" id="edge11_Node000019_Node000002" title=" " alt="" coords="306,106,209,149,207,144,304,102"/>
-<area shape="poly" id="edge12_Node000019_Node000004" title=" " alt="" coords="341,103,364,139,360,142,336,106"/>
+<area shape="poly" id="edge11_Node000020_Node000002" title=" " alt="" coords="306,106,209,149,207,144,304,102"/>
+<area shape="poly" id="edge12_Node000020_Node000004" title=" " alt="" coords="341,103,364,139,360,142,336,106"/>
 </map>

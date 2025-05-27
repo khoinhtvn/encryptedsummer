@@ -28,7 +28,7 @@ Collaboration diagram for Graph\+Exporter\+:\nopagebreak
 void \mbox{\hyperlink{classGraphExporter_a6569907146d179c526617405392a9746}{export\+\_\+full\+\_\+graph\+\_\+human\+\_\+readable}} (const \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \&graph, const std\+::string \&output\+\_\+file="{}graph.\+png"{}, bool open\+\_\+image=true, bool export\+\_\+cond=true)
 \begin{DoxyCompactList}\small\item\em Visualizes the given traffic graph and saves it to a file. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classGraphExporter_a031f8793193715ee2018a2e28a8005db}{export\+\_\+incremental\+\_\+update\+\_\+encoded}} (std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ updates, const std\+::string \&output\+\_\+file="{}update.\+dot"{})
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Exports the encoded incremental updates of the graph to a DOT file. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -89,6 +89,19 @@ This method takes a {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}}, ge
 {\footnotesize\ttfamily \label{classGraphExporter_a031f8793193715ee2018a2e28a8005db} 
 void Graph\+Exporter\+::export\+\_\+incremental\+\_\+update\+\_\+encoded (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$}]{updates}{, }\item[{const std\+::string \&}]{output\+\_\+file}{ = {\ttfamily "{}update.dot"{}}}\end{DoxyParamCaption})}
 
+
+
+Exports the encoded incremental updates of the graph to a DOT file. 
+
+This method retrieves the latest incremental updates from the \doxylink{classGraphBuilder}{Graph\+Builder}, encodes them, and then saves the encoded representation to a specified DOT file. The filename includes a timestamp (UTC) to ensure uniqueness for each incremental update export.
+
+
+\begin{DoxyParams}{Parameters}
+{\em updates} & A vector of {\ttfamily \doxylink{structGraphUpdate}{Graph\+Update}} objects representing the incremental changes to the graph. This is typically obtained from the \doxylink{classGraphBuilder}{Graph\+Builder}. \\
+\hline
+{\em output\+\_\+file} & The full path and filename for the output DOT file. It defaults to "{}update.\+dot"{} if no path is provided. The function call constructs a more specific path including the base {\ttfamily export\+\_\+path}, a separator, the prefix "{}nw\+\_\+graph\+\_\+encoded\+\_\+"{}, a UTC timestamp, and the "{}.\+dot"{} extension. \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

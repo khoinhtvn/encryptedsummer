@@ -1,20 +1,27 @@
 /**
  * @file ZeekLogParser.h
- * @brief Header file for the ZeekLogParser class, responsible for parsing Zeek log files.
+ * @brief Header file for the ZeekLogParser class, responsible for parsing Zeek log files in parallel.
  *
- * This file defines the `ZeekLogParser` class, which parses Zeek log files to extract
- * network traffic information. It also defines the `FileState` struct to track the
- * state of monitored log files.
+ * This file defines the `ZeekLogParser` class, which monitors a directory for Zeek log files,
+ * and uses multiple threads to parse them in parallel. It also defines the `FileState` struct
+ * to track the state of monitored log files and the `LogEntry` struct to hold parsed data.
  */
 
 // Created by lu on 4/25/25.
-//
+// Modified for parallel processing.
 
 #ifndef ZEEKLOGPARSER_H
 #define ZEEKLOGPARSER_H
+
 #include <string>
 #include <unordered_map>
 #include <filesystem>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <queue>
+#include <map>
+#include <set>
 
 /**
  * @brief Represents the state of a monitored file.
@@ -63,131 +70,279 @@ struct FileState {
     bool update();
 
     /**
-      * @brief Equality operator for FileState
-      *
-      * Compares two FileState objects for equality based on their members
-      *
-      * @param other The FileState object to compare with
-      * @return true if the two objects are equal, false otherwise
-      */
+     * @brief Equality operator for FileState
+     *
+     * Compares two FileState objects for equality based on their members
+     *
+     * @param other The FileState object to compare with
+     * @return true if the two objects are equal, false otherwise
+     */
     bool operator==(const FileState& other) const;
 };
 
 /**
- * @brief Class responsible for parsing Zeek log files.
+ * @brief Represents a parsed log entry.
+ */
+struct LogEntry {
+    std::string log_type;
+    std::map<std::string, std::string> data;
+    std::map<std::string, std::vector<std::string>> list_data; // For vector types
+    std::map<std::string, std::set<std::string>> set_data;    // For set types
+};
+
+/**
+ * @brief A thread-safe queue for passing parsed log entries.
+ */
+class SafeQueue {
+public:
+    void enqueue(LogEntry entry);
+    LogEntry dequeue();
+    void stop();
+    bool is_running() const;
+private:
+    std::queue<LogEntry> queue_;
+    mutable std::mutex mutex_;
+    std::condition_variable condition_;
+    bool running_ = true;
+};
+
+/**
+ * @brief Class responsible for parsing Zeek log files in parallel.
  *
- * The `ZeekLogParser` class monitors a directory for Zeek log files, parses the log
- * entries, and extracts relevant information.  It handles different Zeek log formats
- * and keeps track of file state to process updates efficiently.
+ * The `ZeekLogParser` class monitors a directory for Zeek log files, and uses a pool
+ * of worker threads to parse the log entries and enqueue them for further processing.
  */
 class ZeekLogParser {
 public:
     /**
      * @brief Constructor for ZeekLogParser.
      *
-     * Initializes the parser with the directory containing the Zeek log files.
+     * Initializes the parser with the directory containing the Zeek log files and starts
+     * the monitoring and processing threads.
      *
      * @param log_dir The path to the directory containing the Zeek log files.
      */
-    explicit ZeekLogParser(const std::string& log_dir) : log_directory(log_dir) {}
+    explicit ZeekLogParser(const std::string& log_dir);
 
     /**
-     * @brief Monitors the log directory for new or updated log files.
+     * @brief Destructor for ZeekLogParser.
      *
-     * This method continuously checks the log directory for new files or changes
-     * to existing files and processes them accordingly.
+     * Stops all worker threads.
      */
-    void monitor_logs();
+    ~ZeekLogParser();
 
     /**
-     * @brief Processes a new log file.
-     *
-     * This method is called when a new log file is detected.  It parses the entire
-     * file and extracts relevant information.
-     *
-     * @param file The FileState object representing the new log file.
+     * @brief Starts monitoring the log directory and processing files.
      */
-    void process_new_file(const FileState &file);
+    void start_monitoring();
 
     /**
-     * @brief Processes appended data in a log file.
-     *
-     * This method is called when an existing log file has been appended with new data.
-     * It reads and processes only the new data in the file.
-     *
-     * @param path The path to the log file.
-     * @param old_size The previous size of the log file.
-     * @param new_size The current size of the log file.
+     * @brief Stops the log monitoring and processing.
      */
-    void process_appended_data(const std::string &path, off_t old_size, off_t new_size);
-
-    /**
-     * @brief Processes the content of a log file or a portion of it.
-     *
-     * This method parses the given content of a log file and extracts relevant
-     * information from individual log entries.
-     *
-     * @param path The path to the log file.
-     * @param content The content to process.
-     */
-    void process_content(const std::string &path, const std::string &content);
+    void stop_monitoring();
 
 private:
     /**
      * @brief Map of file paths to FileState objects, used to track monitored files.
      */
-    std::unordered_map<std::string, FileState> tracked_files;
+    std::unordered_map<std::string, FileState> tracked_files_;
     /**
      * @brief The directory where Zeek log files are located.
      */
-    std::string log_directory;
+    std::string log_directory_;
+    /**
+     * @brief A thread-safe queue for passing log entries to processing threads.
+     */
+    SafeQueue entry_queue_;
+    /**
+     * @brief Vector of threads responsible for monitoring log files.
+     */
+    std::vector<std::thread> monitor_threads_;
+    /**
+     * @brief Number of worker threads for processing log entries.
+     */
+    static const int num_worker_threads_ = 4;
+    /**
+     * @brief Vector of threads responsible for processing log entries.
+     */
+    std::vector<std::thread> worker_threads_;
+    /**
+     * @brief Mutex to protect access to tracked_files_.
+     */
+    std::mutex tracked_files_mutex_;
+    /**
+     * @brief Map to buffer incomplete log lines for each file.
+     */
+    std::unordered_map<std::string, std::string> partial_lines_;
+    /**
+     * @brief Mutex to protect access to partial_lines_.
+     */
+    std::mutex partial_lines_mutex_;
+    /**
+     * @brief Flag to indicate if monitoring is running.
+     */
+    bool running_ = false;
 
     /**
-     * @brief Map to buffer incomplete log lines.
+     * @brief Stores the data from different log entries, keyed by their unique identifier (UID).
      *
-     * Stores partial log lines, using the file path as the key, until a complete
-     * line is received.
+     * This unordered map holds a temporary aggregation of log data for each UID encountered.
+     * The outer key is the UID string. The value is another map where the key is the
+     * log type (e.g., "conn", "ssl", "http"), and the value is a map of field names
+     * to their corresponding string values from that log entry. This structure allows
+     * the system to collect information from different log files related to the same
+     * network connection before building the graph representation.
+     *
+     * Structure:
+     * {
+     * "some_unique_id": {
+     * "conn": { "ts": "...", "id.orig_h": "...", ... },
+     * "ssl":  { "version": "...", "cipher": "...", ... },
+     * "http": { "method": "...", "host": "...", ... }
+     * },
+     * "another_uid": { ... }
+     * ...
+     * }
      */
-    std::unordered_map<std::string, std::string> partial_lines;
+    std::unordered_map<std::string, std::map<std::string, std::map<std::string, std::string>>> uid_data_;
+
+    /**
+     * @brief Mutex to protect access to the uid_data_ map in a multi-threaded environment.
+     *
+     * Because multiple worker threads can be processing log entries concurrently and
+     * potentially accessing or modifying the uid_data_ map (when adding new log entry
+     * data or when attempting to build a graph node), this mutex ensures thread-safe
+     * operations on the shared uid_data_ structure, preventing race conditions and
+     * data corruption.
+     */
+    std::mutex uid_data_mutex_;
+
+    /**
+     * @brief Monitors the log directory for new or updated log files.
+     */
+    void monitor_directory();
+
+    /**
+     * @brief Monitors a single log file for changes.
+     *
+     * @param file_path The path to the log file.
+     */
+    void monitor_single_file(const std::string& file_path);
 
     /**
      * @brief Processes a single log file.
      *
-     * This method reads the log file and calls the appropriate processing
-     * functions for each log entry.
+     * Reads the log file and enqueues individual log entries for processing.
      *
      * @param file_path The path to the log file.
      */
-    void process_log_file(const std::filesystem::path& file_path);
+    void process_log_file(const std::string& file_path);
 
     /**
-     * @brief Processes a single log entry.
+     * @brief Processes the content of a log file or a portion of it.
      *
-     * This method determines the type of log entry and calls the corresponding
-     * processing function.
+     * Parses the given content and enqueues individual log entries.
      *
-     * @param log_type The type of the log entry (e.g., "conn", "http").
-     * @param entry The log entry string.
+     * @param path The path to the log file.
+     * @param content The content to process.
      */
-    void process_log_entry(const std::string& log_type, const std::string& entry);
+    void process_content(const std::string& path, const std::string& content);
 
     /**
-     * @brief Processes a connection log entry.
+     * @brief Processes a single log entry from the queue.
      *
-     * This method extracts information from a connection log entry.
+     * This method is executed by worker threads.
      *
-     * @param entry The connection log entry string.
+     * @param entry The log entry to process.
      */
-    void process_conn_entry(const std::string& entry);
+    void process_entry(const LogEntry& entry);
 
     /**
-     * @brief Processes an HTTP log entry.
+     * @brief Attempts to build a graph node for a given UID after all related log entries
+     * have been processed and stored in uid_data_.
      *
-     * This method extracts information from an HTTP log entry.
+     * This method retrieves all accumulated log data for a specific UID from uid_data_,
+     * and if data exists, it calls build_graph_node to create the corresponding
+     * node and edge in the graph. It also removes the processed UID's data from
+     * uid_data_ to ensure that the graph node is built only once per UID within a
+     * certain processing window.
      *
-     * @param entry The HTTP log entry string.
+     * @param uid The unique identifier of the connection for which to build the graph node.
      */
-    void process_http_entry(const std::string& entry);
+    void attempt_build_graph_node(const std::string& uid);
+
+    /**
+     * @brief Builds a graph node and its associated edge using the combined data from
+     * different log files for a given UID.
+     *
+     * This method takes the UID and a map containing data from different log types
+     * (e.g., "conn", "ssl", "http") associated with that UID. It extracts relevant
+     * information from each log type's data and calls the GraphBuilder to add a
+     * connection (node and edge) to the graph. The information extracted depends
+     * on the availability of data for each log type in the combined_data.
+     *
+     * @param uid The unique identifier of the connection.
+     * @param combined_data A map where the key is the log type (e.g., "conn", "ssl")
+     * and the value is another map containing the fields and
+     * their values from that log entry.
+     */
+    void build_graph_node(const std::string& uid, const std::map<std::string, std::map<std::string, std::string>>& combined_data);
+
+
+
+    /**
+     * @brief Parses a single log entry string into a LogEntry struct.
+     *
+     * @param log_type The type of the log entry (e.g., "conn", "ssl").
+     * @param entry The raw log entry string.
+     * @return The parsed LogEntry struct.
+     */
+    LogEntry parse_log_entry(const std::string& log_type, const std::string& entry);
+
+    /**
+     * @brief Parses a connection log entry.
+     *
+     * @param fields Vector of fields from the log entry.
+     * @return A map containing the parsed fields.
+     */
+    std::map<std::string, std::string> parse_conn_entry(const std::vector<std::string>& fields);
+
+    /**
+     * @brief Parses an SSL log entry.
+     *
+     * @param fields Vector of fields from the log entry.
+     * @return A map containing the parsed fields.
+     */
+    std::map<std::string, std::string> parse_ssl_entry(const std::vector<std::string>& fields);
+
+    /**
+     * @brief Parses an HTTP log entry.
+     *
+     * @param fields Vector of fields from the log entry.
+     * @return A map containing the parsed fields.
+     */
+    std::map<std::string, std::string> parse_http_entry(const std::vector<std::string>& fields, LogEntry& log_entry);
+
+
+    /**
+     * @brief Processes a new log file.
+     *
+     * Reads the entire file and processes its content.
+     *
+     * @param file_path The path to the new log file.
+     */
+    void handle_new_file(const std::string& file_path);
+
+    /**
+     * @brief Processes appended data in a log file.
+     *
+     * Reads and processes only the new data in the file.
+     *
+     * @param file_path The path to the log file.
+     * @param old_size The previous size of the log file.
+     * @param new_size The current size of the log file.
+     */
+    void handle_appended_data(const std::string& file_path, off_t old_size, off_t new_size);
 };
 
 #endif // ZEEKLOGPARSER_H

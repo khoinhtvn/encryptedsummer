@@ -1,5 +1,5 @@
 <map id="includes/ZeekLogParser.h" name="includes/ZeekLogParser.h">
-<area shape="rect" id="Node000001" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files." alt="" coords="5,5,192,31"/>
+<area shape="rect" id="Node000001" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files in parallel." alt="" coords="5,5,192,31"/>
 <area shape="rect" id="Node000002" href="$LogMonitor_8cpp.html" title=" " alt="" coords="73,152,194,177"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="61,39,39,53,22,68,13,85,17,103,30,119,47,132,85,149,83,154,44,136,26,123,12,105,8,84,18,65,36,48,58,35"/>
 <area shape="rect" id="Node000003" href="$ZeekLogParser_8cpp.html" title=" " alt="" coords="27,79,171,104"/>

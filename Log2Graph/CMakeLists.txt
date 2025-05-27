@@ -3,6 +3,12 @@ project(Log2Graph)
 
 set(CMAKE_CXX_STANDARD 20)
 
+# Enable AddressSanitizer (ASan) for debug builds
+if (CMAKE_BUILD_TYPE MATCHES Debug)
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -fsanitize=address")
+    set(CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} -fsanitize=address")
+endif()
+
 add_executable(Log2Graph main.cpp
         ZeekLogParser.cpp
         includes/ZeekLogParser.h

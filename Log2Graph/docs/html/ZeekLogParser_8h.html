@@ -108,23 +108,41 @@ $(function(){initNavTree('ZeekLogParser_8h.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 
-<p>Header file for the <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files.">ZeekLogParser</a> class, responsible for parsing Zeek log files.  
+<p>Header file for the <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a> class, responsible for parsing Zeek log files in parallel.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;string&gt;</code><br />
 <code>#include &lt;unordered_map&gt;</code><br />
 <code>#include &lt;filesystem&gt;</code><br />
+<code>#include &lt;thread&gt;</code><br />
+<code>#include &lt;mutex&gt;</code><br />
+<code>#include &lt;condition_variable&gt;</code><br />
+<code>#include &lt;queue&gt;</code><br />
+<code>#include &lt;map&gt;</code><br />
+<code>#include &lt;set&gt;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ZeekLogParser.h:</div>
 <div class="dyncontent">
 <div class="center"><img src="ZeekLogParser_8h__incl.png" border="0" usemap="#aincludes_2ZeekLogParser_8h" alt=""/></div>
 <map name="aincludes_2ZeekLogParser_8h" id="aincludes_2ZeekLogParser_8h">
-<area shape="rect" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files." alt="" coords="57,5,244,31"/>
+<area shape="rect" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files in parallel." alt="" coords="379,5,565,31"/>
 <area shape="rect" title=" " alt="" coords="5,79,64,104"/>
-<area shape="poly" title=" " alt="" coords="133,33,67,74,64,69,131,28"/>
+<area shape="poly" title=" " alt="" coords="379,33,241,52,78,81,77,76,240,47,378,27"/>
 <area shape="rect" title=" " alt="" coords="89,79,213,104"/>
-<area shape="poly" title=" " alt="" coords="153,31,153,65,148,65,148,31"/>
+<area shape="poly" title=" " alt="" coords="421,33,216,78,215,73,420,28"/>
 <area shape="rect" title=" " alt="" coords="237,79,328,104"/>
-<area shape="poly" title=" " alt="" coords="173,28,250,70,248,74,171,33"/>
+<area shape="poly" title=" " alt="" coords="443,33,327,76,326,71,441,28"/>
+<area shape="rect" title=" " alt="" coords="352,79,416,104"/>
+<area shape="poly" title=" " alt="" coords="460,33,411,72,407,68,456,29"/>
+<area shape="rect" title=" " alt="" coords="440,79,504,104"/>
+<area shape="poly" title=" " alt="" coords="475,31,475,65,469,65,469,31"/>
+<area shape="rect" title=" " alt="" coords="529,79,671,104"/>
+<area shape="poly" title=" " alt="" coords="494,28,568,69,566,74,491,33"/>
+<area shape="rect" title=" " alt="" coords="695,79,758,104"/>
+<area shape="poly" title=" " alt="" coords="514,28,683,75,681,80,512,33"/>
+<area shape="rect" title=" " alt="" coords="783,79,833,104"/>
+<area shape="poly" title=" " alt="" coords="540,28,644,48,770,76,769,81,643,53,539,33"/>
+<area shape="rect" title=" " alt="" coords="857,79,900,104"/>
+<area shape="poly" title=" " alt="" coords="566,27,695,46,845,76,844,82,694,51,565,32"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -132,7 +150,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="ZeekLogParser_8h__dep__incl.png" border="0" usemap="#aincludes_2ZeekLogParser_8hdep" alt=""/></div>
 <map name="aincludes_2ZeekLogParser_8hdep" id="aincludes_2ZeekLogParser_8hdep">
-<area shape="rect" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files." alt="" coords="5,5,192,31"/>
+<area shape="rect" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files in parallel." alt="" coords="5,5,192,31"/>
 <area shape="rect" href="LogMonitor_8cpp.html" title=" " alt="" coords="73,152,194,177"/>
 <area shape="poly" title=" " alt="" coords="61,39,39,53,22,68,13,85,17,103,30,119,47,132,85,149,83,154,44,136,26,123,12,105,8,84,18,65,36,48,58,35"/>
 <area shape="rect" href="ZeekLogParser_8cpp.html" title=" " alt="" coords="27,79,171,104"/>
@@ -150,13 +168,19 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structFileState.html">FileState</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the state of a monitored file.  <a href="structFileState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structLogEntry.html">LogEntry</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a parsed log entry.  <a href="structLogEntry.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSafeQueue.html">SafeQueue</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A thread-safe queue for passing parsed log entries.  <a href="classSafeQueue.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classZeekLogParser.html">ZeekLogParser</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class responsible for parsing Zeek log files.  <a href="classZeekLogParser.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Class responsible for parsing Zeek log files in parallel.  <a href="classZeekLogParser.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Header file for the <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files.">ZeekLogParser</a> class, responsible for parsing Zeek log files. </p>
-<p>This file defines the <code><a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files.">ZeekLogParser</a></code> class, which parses Zeek log files to extract network traffic information. It also defines the <code><a class="el" href="structFileState.html" title="Represents the state of a monitored file.">FileState</a></code> struct to track the state of monitored log files. </p>
+<div class="textblock"><p>Header file for the <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a> class, responsible for parsing Zeek log files in parallel. </p>
+<p>This file defines the <code><a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a></code> class, which monitors a directory for Zeek log files, and uses multiple threads to parse them in parallel. It also defines the <code><a class="el" href="structFileState.html" title="Represents the state of a monitored file.">FileState</a></code> struct to track the state of monitored log files and the <code><a class="el" href="structLogEntry.html" title="Represents a parsed log entry.">LogEntry</a></code> struct to hold parsed data. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

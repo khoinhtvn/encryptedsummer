@@ -8,8 +8,10 @@ var annotated_dup =
     [ "GraphNode", "classGraphNode.html", "classGraphNode" ],
     [ "GraphUpdate", "structGraphUpdate.html", "structGraphUpdate" ],
     [ "GraphUpdateQueue", "classGraphUpdateQueue.html", "classGraphUpdateQueue" ],
+    [ "LogEntry", "structLogEntry.html", "structLogEntry" ],
     [ "LogMonitor", "classLogMonitor.html", "classLogMonitor" ],
     [ "RealTimeAnomalyDetector", "classRealTimeAnomalyDetector.html", "classRealTimeAnomalyDetector" ],
+    [ "SafeQueue", "classSafeQueue.html", "classSafeQueue" ],
     [ "TrafficGraph", "classTrafficGraph.html", "classTrafficGraph" ],
     [ "ZeekLogParser", "classZeekLogParser.html", "classZeekLogParser" ]
 ];

@@ -8,52 +8,61 @@
 \DoxyCodeLine{00004\ }
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GRAPHNODE\_H}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GRAPHNODE\_H}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
-\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <map>}}
-\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <queue>}}
-\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
-\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{GraphNode}}\ \{}
-\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00023\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}};}
-\DoxyCodeLine{00027\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}};}
-\DoxyCodeLine{00031\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classGraphNode_a2c594b99d6a85cd46b105fba519da025}{attributes}};}
-\DoxyCodeLine{00032\ }
-\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a670878b3732a867f03d647293ff8c999}{degree}}\{0\};}
-\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a801dee56f15b6fbd0c467b5bf16902b4}{in\_degree}}\{0\};}
-\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a08b422a344b59db81fa9b24752a6dd46}{out\_degree}}\{0\};}
-\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ std::map<std::string,\ int>\ \mbox{\hyperlink{classGraphNode_a90ac84a35374b57bf0eee149a1be810c}{protocol\_counts}};}
-\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ std::atomic<double>\ \mbox{\hyperlink{classGraphNode_a703ca88ecc4d49629d8978b2768f4d9c}{activity\_score}}\{0.0\};}
-\DoxyCodeLine{00058\ \ \ \ \ \}\ \mbox{\hyperlink{classGraphNode_a639d48f16977a8df7a06064719a55096}{features}};}
-\DoxyCodeLine{00059\ }
-\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{struct\ }\{}
-\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a164b7d24668bfd11140684f8e1588fcd}{connections\_last\_minute}}\{0\};}
-\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a76b6d95dfe863ad77a818d2b36f450b9}{connections\_last\_hour}}\{0\};}
-\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classGraphNode_a8168b02a72ea169890faff00696f52a8}{monitoring\_start}};}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{classGraphNode_a8ddd1cab02cd802a3a9544511d94856c}{total\_connections}}\{0\};}
-\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ std::vector<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classGraphNode_ab677cd2fc13c49b7771adb3c7e7da2b9}{recent\_connections}};}
-\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ std::queue<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classGraphNode_a7442585422a9af484aa4ee1cbb8701ae}{minute\_window}};}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::queue<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classGraphNode_a963ae60d35fec246688469f2f47be491}{hour\_window}};}
-\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classGraphNode_af5c627d7ac20f7c90598ca7c3abfaf0a}{window\_mutex}};}
-\DoxyCodeLine{00096\ \ \ \ \ \}\ \mbox{\hyperlink{classGraphNode_a1e915cfefcf770cc1ceb007593b03511}{temporal}};}
-\DoxyCodeLine{00097\ }
-\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{GraphNode}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}})}
-\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}}(\mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}}),\ \mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}}(\mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}})\ \{}
-\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classGraphNode_a1e915cfefcf770cc1ceb007593b03511}{temporal}}.monitoring\_start\ =\ std::chrono::system\_clock::now();}
-\DoxyCodeLine{00106\ \ \ \ \ \}}
-\DoxyCodeLine{00107\ }
-\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_aec41bf6dc8c079924a0076c6388b8de6}{update\_connection\_features}}(\textcolor{keyword}{const}\ std::string\ \&protocol,\ \textcolor{keywordtype}{bool}\ is\_outgoing);}
-\DoxyCodeLine{00118\ }
-\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_a9f6e0e9f78b21d99d3c858928762f983}{cleanup\_old\_connections}}();}
-\DoxyCodeLine{00126\ }
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classGraphNode_a92cd7727c4e791176e9e255b929b9603}{calculate\_anomaly\_score}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00132\ }
-\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb}{cleanup\_time\_windows}}();}
-\DoxyCodeLine{00140\ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classGraphNode_aac8f32f0478ee7262d5db9c6ea4ee1c5}{get\_connections\_last\_minute}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00146\ }
-\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classGraphNode_ab197cc5d8d2abda61c831cae073cb140}{get\_connections\_last\_hour}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00152\ \};}
-\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHNODE\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{GraphNode}}\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGraphNode_1_1NodeFeatures}{NodeFeatures}}\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ std::atomic<uint32\_t>\ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a9f7df6cb5a7e14294490091ad520e436}{degree}}\{0\};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::atomic<uint32\_t>\ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_af50ed2cd80fe6812b472d5494c16cbdb}{in\_degree}}\{0\};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ std::atomic<uint32\_t>\ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ada3c8f493b6af8d82a39eb6c9278495b}{out\_degree}}\{0\};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ std::map<std::string,\ int>\ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ac96d6a3c89949a9f1531f9acf0f7d442}{protocol\_counts}};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::atomic<double>\ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a0ca519c1fe6bb06725bcd02a7f4ce2ba}{activity\_score}}\{0.0\};}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structGraphNode_1_1TemporalFeatures}{TemporalFeatures}}\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a95afafcadf9b27a7ffcb40c164c9b995}{connections\_last\_minute}}\{0\};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a8cabf3e9d0a57829d244c8d48caaccd0}{connections\_last\_hour}}\{0\};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_ac4e93bc8950c5592e9331203428ddaf5}{monitoring\_start}};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::atomic<int>\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a68f7f0b74f4720077047b80694ba6877}{total\_connections}}\{0\};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ std::vector<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_ac03202456940c6753cd0f0e482ba7f7d}{recent\_connections}};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ std::queue<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a3008fccab8347d3bf113a61b4b373124}{minute\_window}};}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ std::queue<std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_aaa043e6af8a3bc7bd751241c13515369}{hour\_window}};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_ad969bda057f83e5426d05709c322dfd0}{window\_mutex}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a681583ce94ee45bbea9bc37db4776434}{recent\_connections\_mutex}};}
+\DoxyCodeLine{00092\ \ \ \ \ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00097\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}};}
+\DoxyCodeLine{00101\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}};}
+\DoxyCodeLine{00105\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classGraphNode_a2c594b99d6a85cd46b105fba519da025}{attributes}};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures}{NodeFeatures}}\ \mbox{\hyperlink{classGraphNode_a96d791f3b4c82348ba2f6dd63dc1275d}{features}};}
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures}{TemporalFeatures}}\ \mbox{\hyperlink{classGraphNode_a2e621d85ff7e85c26a2fe12e1604e64d}{temporal}};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{GraphNode}}(\textcolor{keyword}{const}\ std::string\ \&\textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ std::string\ \&\mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}});}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_aec41bf6dc8c079924a0076c6388b8de6}{update\_connection\_features}}(\textcolor{keyword}{const}\ std::string\ \&protocol,\ \textcolor{keywordtype}{bool}\ is\_outgoing);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_a9f6e0e9f78b21d99d3c858928762f983}{cleanup\_old\_connections}}();}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classGraphNode_a92cd7727c4e791176e9e255b929b9603}{calculate\_anomaly\_score}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb}{cleanup\_time\_windows}}();}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classGraphNode_aac8f32f0478ee7262d5db9c6ea4ee1c5}{get\_connections\_last\_minute}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classGraphNode_ab197cc5d8d2abda61c831cae073cb140}{get\_connections\_last\_hour}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00166\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphNode_a5cfa8c4a54c8dd7280b9d8a53f938e92}{get\_id}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}};\ \}}
+\DoxyCodeLine{00167\ \};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPHNODE\_H}}
 
 \end{DoxyCode}

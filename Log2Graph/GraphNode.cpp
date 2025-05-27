@@ -1,12 +1,15 @@
 //
 // Created by lu on 5/7/25.
 //
-#include <algorithm>
-#include <memory>
-#include <mutex>
-#include <shared_mutex>
-#include <vector>
+
 #include "includes/GraphNode.h"
+#include <algorithm>
+#include <chrono>
+
+GraphNode::GraphNode(const std::string &id, const std::string &type)
+    : id(id), type(type) {
+    temporal.monitoring_start = std::chrono::system_clock::now();
+}
 
 void GraphNode::update_connection_features(const std::string &protocol, bool is_outgoing) {
     // Update degree counts
@@ -22,8 +25,12 @@ void GraphNode::update_connection_features(const std::string &protocol, bool is_
 
     // Update temporal features
     auto now = std::chrono::system_clock::now();
-    temporal.recent_connections.push_back(now);
-    ++temporal.total_connections; {
+    {
+        std::lock_guard<std::mutex> lock(temporal.recent_connections_mutex);
+        temporal.recent_connections.push_back(now);
+    }
+    ++temporal.total_connections;
+    {
         std::lock_guard<std::mutex> lock(temporal.window_mutex);
         temporal.minute_window.push(now);
         temporal.hour_window.push(now);
@@ -43,64 +50,53 @@ void GraphNode::update_connection_features(const std::string &protocol, bool is_
 
 void GraphNode::cleanup_old_connections() {
     auto now = std::chrono::system_clock::now();
+    auto cutoff = now - std::chrono::seconds(60); // Example: keep connections from the last 60 seconds
 
-    // Remove connections older than 1 hour
-    auto hour_ago = now - std::chrono::hours(1);
+    std::lock_guard<std::mutex> lock(temporal.recent_connections_mutex);
     temporal.recent_connections.erase(
-        std::remove_if(temporal.recent_connections.begin(),
-                       temporal.recent_connections.end(),
-                       [hour_ago](const auto &time) {
-                           return time < hour_ago;
-                       }),
-        temporal.recent_connections.end()
-    );
+        std::remove_if(temporal.recent_connections.begin(), temporal.recent_connections.end(),
+                         [&](const auto& time) { return time < cutoff; }),
+        temporal.recent_connections.end());
 }
 
 double GraphNode::calculate_anomaly_score() const {
-    double last_min = get_connections_last_minute();
-    double last_hour = get_connections_last_hour();
-    double monitoring_minutes = std::chrono::duration<double>(
-                                    std::chrono::system_clock::now() - temporal.monitoring_start).count() / 60.0;
-
-    // Normalize hour count to per-minute rate
-    double hour_rate = last_hour / std::min(60.0, monitoring_minutes);
-
-    // Only calculate score if we have sufficient data
-    if (monitoring_minutes < 1.0) return 0.0;
-
-    // Calculate deviation from baseline
-    if (hour_rate < 0.1) hour_rate = 0.1; // Minimum baseline
-    double deviation = (last_min - hour_rate) / hour_rate;
-
-    return std::min(1.0, std::max(0.0, 0.5 + deviation / 2.0));
+    // Placeholder for anomaly score calculation based on features
+    // This is a simplified example and should be replaced with your actual logic
+    double score = 0.0;
+    score += features.degree.load() * 0.1;
+    score += features.in_degree.load() * 0.05;
+    score += features.out_degree.load() * 0.05;
+    score += features.protocol_counts.size() * 0.02;
+    score += features.activity_score.load() * 0.2;
+    score += get_connections_last_minute() * 0.15;
+    score += get_connections_last_hour() * 0.1;
+    return score;
 }
 
 void GraphNode::cleanup_time_windows() {
     auto now = std::chrono::system_clock::now();
-    auto minute_ago = now - std::chrono::minutes(1);
-    auto hour_ago = now - std::chrono::hours(1); {
-        std::lock_guard<std::mutex> lock(temporal.window_mutex);
+    auto minute_cutoff = now - std::chrono::seconds(60);
+    auto hour_cutoff = now - std::chrono::hours(1);
 
-        // Clean minute window
-        while (!temporal.minute_window.empty() &&
-               temporal.minute_window.front() < minute_ago) {
+    {
+        std::lock_guard<std::mutex> lock(temporal.window_mutex);
+        while (!temporal.minute_window.empty() && temporal.minute_window.front() < minute_cutoff) {
             temporal.minute_window.pop();
         }
-
-        // Clean hour window
-        while (!temporal.hour_window.empty() &&
-               temporal.hour_window.front() < hour_ago) {
+        while (!temporal.hour_window.empty() && temporal.hour_window.front() < hour_cutoff) {
             temporal.hour_window.pop();
         }
     }
+
+    // Update atomic counters based on the window sizes (optional, can be done in get methods)
+    temporal.connections_last_minute.store(temporal.minute_window.size());
+    temporal.connections_last_hour.store(temporal.hour_window.size());
 }
 
 int GraphNode::get_connections_last_minute() const {
-    std::lock_guard<std::mutex> lock(temporal.window_mutex);
-    return temporal.minute_window.size();
+    return temporal.connections_last_minute.load();
 }
 
 int GraphNode::get_connections_last_hour() const {
-    std::lock_guard<std::mutex> lock(temporal.window_mutex);
-    return temporal.hour_window.size();
+    return temporal.connections_last_hour.load();
 }

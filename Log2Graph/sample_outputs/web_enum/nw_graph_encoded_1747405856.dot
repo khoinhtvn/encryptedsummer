@@ -1,5 +1,5 @@
 digraph NWTraffic_update {
-  "fe80::bc67:c5ff:fecc:13cb" [degree=3, in_degree=0, out_degree=3, activity_score=0.27, total_connections=3];
-  "ff02::2" [degree=3, in_degree=3, out_degree=0, activity_score=0.27, total_connections=3];
-  "fe80::bc67:c5ff:fecc:13cb" -> "ff02::2" [protocol_UNKNOWN=0.00,protocol_TCP=0.00,protocol_UDP=0.00,protocol_ICMP=1.00,timestamp_sin=-0.61,timestamp_cos=-0.79,src_port_type=0.00,dst_port_type=0.00,conn_state_successful=0.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=1.00,local_orig=1.00,local_resp=0.00,history_length=0.10,orig_bytes=0.00,resp_bytes=0.00,orig_pkts=0.05,resp_pkts=0.00,orig_ip_bytes=0.29,resp_ip_bytes=0.00,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
+    "fe80::bc67:c5ff:fecc:13cb" [degree = 3, in_degree = 0, out_degree = 3, activity_score = 0.27, total_connections = 3];
+    "ff02::2" [degree = 3, in_degree = 3, out_degree = 0, activity_score = 0.27, total_connections = 3];
+    "fe80::bc67:c5ff:fecc:13cb" -> "ff02::2" [protocol_UNKNOWN = 0.00,protocol_TCP = 0.00,protocol_UDP = 0.00,protocol_ICMP = 1.00,timestamp_sin = -0.61,timestamp_cos = -0.79,src_port_type = 0.00,dst_port_type = 0.00,conn_state_successful = 0.00,conn_state_rejected_reset = 0.00,conn_state_partial = 0.00,conn_state_suspicious = 0.00,conn_state_other = 1.00,local_orig = 1.00,local_resp = 0.00,history_length = 0.10,orig_bytes = 0.00,resp_bytes = 0.00,orig_pkts = 0.05,resp_pkts = 0.00,orig_ip_bytes = 0.29,resp_ip_bytes = 0.00,service_HTTP = 0.00,service_FTP = 0.00,service_SSH = 0.00,service_DNS = 0.00,service_UNKNOWN = 1.00];
 }

@@ -151,7 +151,7 @@ Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Main entry point for the Zeek log analysis and anomaly detection application. </p>
-<p>This application monitors Zeek logs from a specified directory, builds a graph representation of the network traffic, visualizes the graph periodically, and detects real-time anomalies. </p>
+<p>This application monitors Zeek logs from a specified directory, builds a graph representation of the network traffic and visualizes the graph periodically. </p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
@@ -182,24 +182,18 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>0 if the application runs successfully, 1 otherwise. </dd></dl>
-<p>Instance of the real-time anomaly detector.</p>
 <p>Instance of the graph exporter.</p>
+<p>This object is responsible for exporting the graph data in various formats, such as DOT files for visualization.</p>
 <p>Instance of the log monitor, responsible for reading and processing Zeek logs.</p>
-<p>The monitor is initialized with the directory containing the Zeek log files provided as a command-line argument.</p>
+<p>The monitor is initialized with the directory containing the Zeek log files provided as a command-line argument. It continuously reads new log entries and makes them available for graph building.</p>
 <p>Starts the log monitoring process in a separate thread.</p>
-<p>Retrieves the singleton instance of the <a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a> and gets the current graph.</p>
-<p>Visualizes the current network graph and saves it as a PNG file, as well as DOT file.</p>
-<p>The filename includes the current UTC timestamp. The 'false' argument likely controls whether to clear the graph before visualizing (in this context, it's probably not clearing), and 'true' might indicate whether to include labels on the nodes.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">graph</td><td>The graph to visualize. </td></tr>
-    <tr><td class="paramname">./zeek_graph_</td><td>+ std::to_string(UTC) The base filename for the output PNG. </td></tr>
-    <tr><td class="paramname">false</td><td>Flag indicating whether to clear the graph before visualization. </td></tr>
-    <tr><td class="paramname">true</td><td>Flag indicating whether to include labels on the nodes.</td></tr>
-  </table>
-  </dd>
-</dl>
+<p>This allows the application to process logs in the background without blocking the main execution thread, enabling continuous monitoring.</p>
+<p>Get the current UTC timestamp for filename generation.</p>
+<p>Get a reference to the singleton instance of the <a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a> and its current graph.</p>
+<p>Export the encoded incremental updates of the network graph to a DOT file.</p>
+<p>This call retrieves the latest changes to the graph since the last export and saves them in an encoded format to a DOT file. The filename includes the UTC timestamp to differentiate between exports. The output file is created in the specified <code>export_path</code>.</p>
 <p>Stops the log monitoring process.</p>
+<p>This ensures that the log monitoring thread is properly terminated before the application exits, releasing any resources it might be holding.</p>
 
 </div>
 </div>

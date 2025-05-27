@@ -109,7 +109,7 @@ $(function(){initNavTree('classZeekLogParser.html',''); initResizable(true); });
 </div><!--header-->
 <div class="contents">
 
-<p>Class responsible for parsing Zeek log files.  
+<p>Class responsible for parsing Zeek log files in parallel.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="ZeekLogParser_8h_source.html">ZeekLogParser.h</a>&gt;</code></p>
@@ -118,31 +118,28 @@ Collaboration diagram for ZeekLogParser:</div>
 <div class="dyncontent">
 <div class="center"><img src="classZeekLogParser__coll__graph.png" border="0" usemap="#aZeekLogParser_coll__map" alt="Collaboration graph"/></div>
 <map name="aZeekLogParser_coll__map" id="aZeekLogParser_coll__map">
-<area shape="rect" title="Class responsible for parsing Zeek log files." alt="" coords="5,5,201,151"/>
+<area shape="rect" title="Class responsible for parsing Zeek log files in parallel." alt="" coords="5,5,152,131"/>
 </map>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ac14af41e221d8102cebb6f73ab750f20" id="r_ac14af41e221d8102cebb6f73ab750f20"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac14af41e221d8102cebb6f73ab750f20">ZeekLogParser</a> (const std::string &amp;log_dir)</td></tr>
-<tr class="memdesc:ac14af41e221d8102cebb6f73ab750f20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files.">ZeekLogParser</a>.  <br /></td></tr>
+<tr class="memdesc:ac14af41e221d8102cebb6f73ab750f20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a>.  <br /></td></tr>
 <tr class="separator:ac14af41e221d8102cebb6f73ab750f20"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af922e185b33640058001015a136545a3" id="r_af922e185b33640058001015a136545a3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af922e185b33640058001015a136545a3">monitor_logs</a> ()</td></tr>
-<tr class="memdesc:af922e185b33640058001015a136545a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Monitors the log directory for new or updated log files.  <br /></td></tr>
-<tr class="separator:af922e185b33640058001015a136545a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc2dc1c7ef6b3d99d96c17156b565bff" id="r_afc2dc1c7ef6b3d99d96c17156b565bff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc2dc1c7ef6b3d99d96c17156b565bff">process_new_file</a> (const <a class="el" href="structFileState.html">FileState</a> &amp;file)</td></tr>
-<tr class="memdesc:afc2dc1c7ef6b3d99d96c17156b565bff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a new log file.  <br /></td></tr>
-<tr class="separator:afc2dc1c7ef6b3d99d96c17156b565bff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab40d5d847d4254335368a0231bca696d" id="r_ab40d5d847d4254335368a0231bca696d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab40d5d847d4254335368a0231bca696d">process_appended_data</a> (const std::string &amp;path, off_t old_size, off_t new_size)</td></tr>
-<tr class="memdesc:ab40d5d847d4254335368a0231bca696d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes appended data in a log file.  <br /></td></tr>
-<tr class="separator:ab40d5d847d4254335368a0231bca696d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5a5dee5a6d6c6daf5fb1a517f848961e" id="r_a5a5dee5a6d6c6daf5fb1a517f848961e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a5dee5a6d6c6daf5fb1a517f848961e">process_content</a> (const std::string &amp;path, const std::string &amp;content)</td></tr>
-<tr class="memdesc:a5a5dee5a6d6c6daf5fb1a517f848961e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes the content of a log file or a portion of it.  <br /></td></tr>
-<tr class="separator:a5a5dee5a6d6c6daf5fb1a517f848961e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acbb5b48110832629419912fe2f1e8146" id="r_acbb5b48110832629419912fe2f1e8146"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acbb5b48110832629419912fe2f1e8146">~ZeekLogParser</a> ()</td></tr>
+<tr class="memdesc:acbb5b48110832629419912fe2f1e8146"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a>.  <br /></td></tr>
+<tr class="separator:acbb5b48110832629419912fe2f1e8146"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af492bde7c2057f7f3da6f370d03db5f0" id="r_af492bde7c2057f7f3da6f370d03db5f0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af492bde7c2057f7f3da6f370d03db5f0">start_monitoring</a> ()</td></tr>
+<tr class="memdesc:af492bde7c2057f7f3da6f370d03db5f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts monitoring the log directory and processing files.  <br /></td></tr>
+<tr class="separator:af492bde7c2057f7f3da6f370d03db5f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7e8fe3cca283db041126fcaa393a301d" id="r_a7e8fe3cca283db041126fcaa393a301d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7e8fe3cca283db041126fcaa393a301d">stop_monitoring</a> ()</td></tr>
+<tr class="memdesc:a7e8fe3cca283db041126fcaa393a301d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stops the log monitoring and processing.  <br /></td></tr>
+<tr class="separator:a7e8fe3cca283db041126fcaa393a301d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class responsible for parsing Zeek log files. </p>
-<p>The <code><a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files.">ZeekLogParser</a></code> class monitors a directory for Zeek log files, parses the log entries, and extracts relevant information. It handles different Zeek log formats and keeps track of file state to process updates efficiently. </p>
+<div class="textblock"><p>Class responsible for parsing Zeek log files in parallel. </p>
+<p>The <code><a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a></code> class monitors a directory for Zeek log files, and uses a pool of worker threads to parse the log entries and enqueue them for further processing. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ac14af41e221d8102cebb6f73ab750f20" name="ac14af41e221d8102cebb6f73ab750f20"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac14af41e221d8102cebb6f73ab750f20">&#9670;&#160;</a></span>ZeekLogParser()</h2>
@@ -162,13 +159,13 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+<span class="mlabels"><span class="mlabel explicit">explicit</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructor for <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files.">ZeekLogParser</a>. </p>
-<p>Initializes the parser with the directory containing the Zeek log files.</p>
+<p>Constructor for <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a>. </p>
+<p>Initializes the parser with the directory containing the Zeek log files and starts the monitoring and processing threads.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">log_dir</td><td>The path to the directory containing the Zeek log files. </td></tr>
@@ -178,15 +175,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="af922e185b33640058001015a136545a3" name="af922e185b33640058001015a136545a3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af922e185b33640058001015a136545a3">&#9670;&#160;</a></span>monitor_logs()</h2>
+<a id="acbb5b48110832629419912fe2f1e8146" name="acbb5b48110832629419912fe2f1e8146"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbb5b48110832629419912fe2f1e8146">&#9670;&#160;</a></span>~ZeekLogParser()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ZeekLogParser::monitor_logs </td>
+          <td class="memname">ZeekLogParser::~ZeekLogParser </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -194,102 +190,47 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Monitors the log directory for new or updated log files. </p>
-<p>This method continuously checks the log directory for new files or changes to existing files and processes them accordingly. </p>
+<p>Destructor for <a class="el" href="classZeekLogParser.html" title="Class responsible for parsing Zeek log files in parallel.">ZeekLogParser</a>. </p>
+<p>Stops all worker threads. </p>
 
 </div>
 </div>
-<a id="ab40d5d847d4254335368a0231bca696d" name="ab40d5d847d4254335368a0231bca696d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab40d5d847d4254335368a0231bca696d">&#9670;&#160;</a></span>process_appended_data()</h2>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="af492bde7c2057f7f3da6f370d03db5f0" name="af492bde7c2057f7f3da6f370d03db5f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af492bde7c2057f7f3da6f370d03db5f0">&#9670;&#160;</a></span>start_monitoring()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ZeekLogParser::process_appended_data </td>
+          <td class="memname">void ZeekLogParser::start_monitoring </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
-          <td class="paramtype">off_t</td>          <td class="paramname"><span class="paramname"><em>old_size</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">off_t</td>          <td class="paramname"><span class="paramname"><em>new_size</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Processes appended data in a log file. </p>
-<p>This method is called when an existing log file has been appended with new data. It reads and processes only the new data in the file.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path</td><td>The path to the log file. </td></tr>
-    <tr><td class="paramname">old_size</td><td>The previous size of the log file. </td></tr>
-    <tr><td class="paramname">new_size</td><td>The current size of the log file. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Starts monitoring the log directory and processing files. </p>
 
 </div>
 </div>
-<a id="a5a5dee5a6d6c6daf5fb1a517f848961e" name="a5a5dee5a6d6c6daf5fb1a517f848961e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a5dee5a6d6c6daf5fb1a517f848961e">&#9670;&#160;</a></span>process_content()</h2>
+<a id="a7e8fe3cca283db041126fcaa393a301d" name="a7e8fe3cca283db041126fcaa393a301d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7e8fe3cca283db041126fcaa393a301d">&#9670;&#160;</a></span>stop_monitoring()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void ZeekLogParser::process_content </td>
+          <td class="memname">void ZeekLogParser::stop_monitoring </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>path</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>content</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Processes the content of a log file or a portion of it. </p>
-<p>This method parses the given content of a log file and extracts relevant information from individual log entries.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">path</td><td>The path to the log file. </td></tr>
-    <tr><td class="paramname">content</td><td>The content to process. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<a id="afc2dc1c7ef6b3d99d96c17156b565bff" name="afc2dc1c7ef6b3d99d96c17156b565bff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc2dc1c7ef6b3d99d96c17156b565bff">&#9670;&#160;</a></span>process_new_file()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void ZeekLogParser::process_new_file </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structFileState.html">FileState</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>file</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Processes a new log file. </p>
-<p>This method is called when a new log file is detected. It parses the entire file and extracts relevant information.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">file</td><td>The <a class="el" href="structFileState.html" title="Represents the state of a monitored file.">FileState</a> object representing the new log file. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Stops the log monitoring and processing. </p>
 
 </div>
 </div>

@@ -4,6 +4,9 @@
 {\ttfamily \#include $<$map$>$}\newline
 {\ttfamily \#include $<$queue$>$}\newline
 {\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
 Include dependency graph for Graph\+Node.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -22,4 +25,8 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classGraphNode}{Graph\+Node}}
-\begin{DoxyCompactList}\small\item\em Represents a node in the network traffic graph. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Represents a node in the network traffic graph. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGraphNode_1_1NodeFeatures}{Graph\+Node\+::\+Node\+Features}}
+\begin{DoxyCompactList}\small\item\em Structure to hold various statistical features of the node. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures}{Graph\+Node\+::\+Temporal\+Features}}
+\begin{DoxyCompactList}\small\item\em Structure to hold temporal features related to the node\textquotesingle{}s connections over time. \end{DoxyCompactList}\end{DoxyCompactItemize}

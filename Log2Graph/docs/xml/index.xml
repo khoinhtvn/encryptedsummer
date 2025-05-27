@@ -48,7 +48,7 @@
     <member refid="classGraphBuilder_1a3af3213174c72b1eda8f3a0e21bba54b" kind="function"><name>GraphBuilder</name></member>
     <member refid="classGraphBuilder_1acbd5f45fa3be1fa61975e8fefedd3278" kind="function"><name>operator=</name></member>
     <member refid="classGraphBuilder_1a88d61bc652bfa5a60a8cd1aa8509d27c" kind="function"><name>get_last_updates</name></member>
-    <member refid="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" kind="function"><name>add_connection</name></member>
+    <member refid="classGraphBuilder_1a022b58b16ad42721ed0a55c4e5ee2ea1" kind="function"><name>add_connection</name></member>
     <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kind="function"><name>get_graph</name></member>
     <member refid="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" kind="function"><name>get_feature_dimension</name></member>
     <member refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kind="function"><name>get_instance</name></member>
@@ -80,21 +80,8 @@
     <member refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" kind="variable"><name>id</name></member>
     <member refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kind="variable"><name>type</name></member>
     <member refid="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" kind="variable"><name>attributes</name></member>
-    <member refid="classGraphNode_1a670878b3732a867f03d647293ff8c999" kind="variable"><name>degree</name></member>
-    <member refid="classGraphNode_1a801dee56f15b6fbd0c467b5bf16902b4" kind="variable"><name>in_degree</name></member>
-    <member refid="classGraphNode_1a08b422a344b59db81fa9b24752a6dd46" kind="variable"><name>out_degree</name></member>
-    <member refid="classGraphNode_1a90ac84a35374b57bf0eee149a1be810c" kind="variable"><name>protocol_counts</name></member>
-    <member refid="classGraphNode_1a703ca88ecc4d49629d8978b2768f4d9c" kind="variable"><name>activity_score</name></member>
-    <member refid="classGraphNode_1a639d48f16977a8df7a06064719a55096" kind="variable"><name>features</name></member>
-    <member refid="classGraphNode_1a164b7d24668bfd11140684f8e1588fcd" kind="variable"><name>connections_last_minute</name></member>
-    <member refid="classGraphNode_1a76b6d95dfe863ad77a818d2b36f450b9" kind="variable"><name>connections_last_hour</name></member>
-    <member refid="classGraphNode_1a8168b02a72ea169890faff00696f52a8" kind="variable"><name>monitoring_start</name></member>
-    <member refid="classGraphNode_1a8ddd1cab02cd802a3a9544511d94856c" kind="variable"><name>total_connections</name></member>
-    <member refid="classGraphNode_1ab677cd2fc13c49b7771adb3c7e7da2b9" kind="variable"><name>recent_connections</name></member>
-    <member refid="classGraphNode_1a7442585422a9af484aa4ee1cbb8701ae" kind="variable"><name>minute_window</name></member>
-    <member refid="classGraphNode_1a963ae60d35fec246688469f2f47be491" kind="variable"><name>hour_window</name></member>
-    <member refid="classGraphNode_1af5c627d7ac20f7c90598ca7c3abfaf0a" kind="variable"><name>window_mutex</name></member>
-    <member refid="classGraphNode_1a1e915cfefcf770cc1ceb007593b03511" kind="variable"><name>temporal</name></member>
+    <member refid="classGraphNode_1a96d791f3b4c82348ba2f6dd63dc1275d" kind="variable"><name>features</name></member>
+    <member refid="classGraphNode_1a2e621d85ff7e85c26a2fe12e1604e64d" kind="variable"><name>temporal</name></member>
     <member refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" kind="function"><name>GraphNode</name></member>
     <member refid="classGraphNode_1aec41bf6dc8c079924a0076c6388b8de6" kind="function"><name>update_connection_features</name></member>
     <member refid="classGraphNode_1a9f6e0e9f78b21d99d3c858928762f983" kind="function"><name>cleanup_old_connections</name></member>
@@ -102,6 +89,7 @@
     <member refid="classGraphNode_1a02be43aa36aa04eb5f47095fde4f95eb" kind="function"><name>cleanup_time_windows</name></member>
     <member refid="classGraphNode_1aac8f32f0478ee7262d5db9c6ea4ee1c5" kind="function"><name>get_connections_last_minute</name></member>
     <member refid="classGraphNode_1ab197cc5d8d2abda61c831cae073cb140" kind="function"><name>get_connections_last_hour</name></member>
+    <member refid="classGraphNode_1a5cfa8c4a54c8dd7280b9d8a53f938e92" kind="function"><name>get_id</name></member>
   </compound>
   <compound refid="structGraphUpdate" kind="struct"><name>GraphUpdate</name>
     <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" kind="enum"><name>Type</name></member>
@@ -122,6 +110,12 @@
     <member refid="classGraphUpdateQueue_1a878ff033814bd6228f09c74260fefe44" kind="function"><name>popAll</name></member>
     <member refid="classGraphUpdateQueue_1a7867ed8e468ee74d679b01172991ce05" kind="function"><name>shutdown</name></member>
   </compound>
+  <compound refid="structLogEntry" kind="struct"><name>LogEntry</name>
+    <member refid="structLogEntry_1a8d0edc412501a60ec6d9a21548f04528" kind="variable"><name>log_type</name></member>
+    <member refid="structLogEntry_1ac8d4448ecf2ad0845d6c1c6c611e946a" kind="variable"><name>data</name></member>
+    <member refid="structLogEntry_1ae9f734f9dab615e36a3861964ff49a34" kind="variable"><name>list_data</name></member>
+    <member refid="structLogEntry_1a42700d8758ee45a0e45ede3b94d1aa45" kind="variable"><name>set_data</name></member>
+  </compound>
   <compound refid="classLogMonitor" kind="class"><name>LogMonitor</name>
     <member refid="classLogMonitor_1a6dc3d433f8b192938592dbe40de9a360" kind="variable"><name>running</name></member>
     <member refid="classLogMonitor_1a2a98b0f60af7779ac8a793cd31ba77fa" kind="variable"><name>monitor_thread</name></member>
@@ -131,8 +125,36 @@
     <member refid="classLogMonitor_1a06798e36d1f46ba50036cdf4e511464a" kind="function"><name>start</name></member>
     <member refid="classLogMonitor_1af306da2a690908fb9a9369946791cafb" kind="function"><name>stop</name></member>
   </compound>
+  <compound refid="structGraphNode_1_1NodeFeatures" kind="struct"><name>GraphNode::NodeFeatures</name>
+    <member refid="structGraphNode_1_1NodeFeatures_1a9f7df6cb5a7e14294490091ad520e436" kind="variable"><name>degree</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1af50ed2cd80fe6812b472d5494c16cbdb" kind="variable"><name>in_degree</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ada3c8f493b6af8d82a39eb6c9278495b" kind="variable"><name>out_degree</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ac96d6a3c89949a9f1531f9acf0f7d442" kind="variable"><name>protocol_counts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a0ca519c1fe6bb06725bcd02a7f4ce2ba" kind="variable"><name>activity_score</name></member>
+  </compound>
   <compound refid="classRealTimeAnomalyDetector" kind="class"><name>RealTimeAnomalyDetector</name>
     <member refid="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" kind="function"><name>detect</name></member>
+  </compound>
+  <compound refid="classSafeQueue" kind="class"><name>SafeQueue</name>
+    <member refid="classSafeQueue_1aa5fa7276b07a5201398f63734ed3003e" kind="variable"><name>queue_</name></member>
+    <member refid="classSafeQueue_1abeb939317e4d40581d9f753024a08823" kind="variable"><name>mutex_</name></member>
+    <member refid="classSafeQueue_1aab3b907dd0a0ed5eb2cf73d4ba3c48c6" kind="variable"><name>condition_</name></member>
+    <member refid="classSafeQueue_1aee8078aa0fec15a2308e18c87f5cb3a4" kind="variable"><name>running_</name></member>
+    <member refid="classSafeQueue_1aa28b85e7ca2625feecb4c6674fd64bb4" kind="function"><name>enqueue</name></member>
+    <member refid="classSafeQueue_1ac6d7f1830ee1b751beb3739d5636f454" kind="function"><name>dequeue</name></member>
+    <member refid="classSafeQueue_1a2fa92b97d343534fdc61c6a737b7cd9d" kind="function"><name>stop</name></member>
+    <member refid="classSafeQueue_1a02cacf8f629f6967bec1a714dd72cb17" kind="function"><name>is_running</name></member>
+  </compound>
+  <compound refid="structGraphNode_1_1TemporalFeatures" kind="struct"><name>GraphNode::TemporalFeatures</name>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a95afafcadf9b27a7ffcb40c164c9b995" kind="variable"><name>connections_last_minute</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a8cabf3e9d0a57829d244c8d48caaccd0" kind="variable"><name>connections_last_hour</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1ac4e93bc8950c5592e9331203428ddaf5" kind="variable"><name>monitoring_start</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a68f7f0b74f4720077047b80694ba6877" kind="variable"><name>total_connections</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1ac03202456940c6753cd0f0e482ba7f7d" kind="variable"><name>recent_connections</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a3008fccab8347d3bf113a61b4b373124" kind="variable"><name>minute_window</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1aaa043e6af8a3bc7bd751241c13515369" kind="variable"><name>hour_window</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1ad969bda057f83e5426d05709c322dfd0" kind="variable"><name>window_mutex</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a681583ce94ee45bbea9bc37db4776434" kind="variable"><name>recent_connections_mutex</name></member>
   </compound>
   <compound refid="classTrafficGraph" kind="class"><name>TrafficGraph</name>
     <member refid="classTrafficGraph_1a1134b1f485145d7ba90b1075ec058533" kind="friend"><name>RealTimeAnomalyDetector</name></member>
@@ -156,18 +178,35 @@
     <member refid="classTrafficGraph_1ae485051f1b4e6f8cbb91ad7d89dc89b1" kind="function"><name>is_empty</name></member>
   </compound>
   <compound refid="classZeekLogParser" kind="class"><name>ZeekLogParser</name>
-    <member refid="classZeekLogParser_1a5ca203e4d6e28420823f7e9f5760fa85" kind="variable"><name>tracked_files</name></member>
-    <member refid="classZeekLogParser_1af3d423cd8c73ef0b371b7eea714aa8cb" kind="variable"><name>log_directory</name></member>
-    <member refid="classZeekLogParser_1a87f78baa9d273f261b81e9d778d53267" kind="variable"><name>partial_lines</name></member>
+    <member refid="classZeekLogParser_1a099473727c45fcbef2015b15e09f2703" kind="variable"><name>tracked_files_</name></member>
+    <member refid="classZeekLogParser_1af94fcd50f8ad97934c7dde73573b5d29" kind="variable"><name>log_directory_</name></member>
+    <member refid="classZeekLogParser_1a9dfcd7422b5f009474c24f47592d46a2" kind="variable"><name>entry_queue_</name></member>
+    <member refid="classZeekLogParser_1ad44948b304d5d3f511ef0397ebc8a93b" kind="variable"><name>monitor_threads_</name></member>
+    <member refid="classZeekLogParser_1a0b55071b3748f4fc0bd197dff69d0867" kind="variable"><name>worker_threads_</name></member>
+    <member refid="classZeekLogParser_1a9b7f0df0a3f53b1a7df01458590c8946" kind="variable"><name>tracked_files_mutex_</name></member>
+    <member refid="classZeekLogParser_1ad61e52892a5a735d0d3a6e4e77be6483" kind="variable"><name>partial_lines_</name></member>
+    <member refid="classZeekLogParser_1aaaf3fabd10ee0b40a9b686f5c679cb6f" kind="variable"><name>partial_lines_mutex_</name></member>
+    <member refid="classZeekLogParser_1aa2ebd83e888e9c72c3deaf8d4ec8b91d" kind="variable"><name>running_</name></member>
+    <member refid="classZeekLogParser_1a228c289f46047302a6742de630d43ab2" kind="variable"><name>uid_data_</name></member>
+    <member refid="classZeekLogParser_1a330148de750e4ed903e08d8cfd7d0de4" kind="variable"><name>uid_data_mutex_</name></member>
+    <member refid="classZeekLogParser_1a8e14fdc2961c4a77c2a91a759bd6caf5" kind="variable"><name>num_worker_threads_</name></member>
     <member refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" kind="function"><name>ZeekLogParser</name></member>
-    <member refid="classZeekLogParser_1af922e185b33640058001015a136545a3" kind="function"><name>monitor_logs</name></member>
-    <member refid="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" kind="function"><name>process_new_file</name></member>
-    <member refid="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" kind="function"><name>process_appended_data</name></member>
+    <member refid="classZeekLogParser_1acbb5b48110832629419912fe2f1e8146" kind="function"><name>~ZeekLogParser</name></member>
+    <member refid="classZeekLogParser_1af492bde7c2057f7f3da6f370d03db5f0" kind="function"><name>start_monitoring</name></member>
+    <member refid="classZeekLogParser_1a7e8fe3cca283db041126fcaa393a301d" kind="function"><name>stop_monitoring</name></member>
+    <member refid="classZeekLogParser_1a42566f3b16cbfd8cc5d71fb47b64d0e6" kind="function"><name>monitor_directory</name></member>
+    <member refid="classZeekLogParser_1adc0ffeff79a5acf733979f03d1354b37" kind="function"><name>monitor_single_file</name></member>
+    <member refid="classZeekLogParser_1ae2008c3e6d9aa5191107a28168e8d0e2" kind="function"><name>process_log_file</name></member>
     <member refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kind="function"><name>process_content</name></member>
-    <member refid="classZeekLogParser_1ae465ab2585645bd649f2c20cd6ef5bb7" kind="function"><name>process_log_file</name></member>
-    <member refid="classZeekLogParser_1aa6f4a83226256c9d9375d9e704a410f9" kind="function"><name>process_log_entry</name></member>
-    <member refid="classZeekLogParser_1a849d1765b0cab7cafc056c8465341a32" kind="function"><name>process_conn_entry</name></member>
-    <member refid="classZeekLogParser_1aab815de3963d42eb72aec94fb1c7e2f2" kind="function"><name>process_http_entry</name></member>
+    <member refid="classZeekLogParser_1a0e9659d367451c4af4274903536d7b04" kind="function"><name>process_entry</name></member>
+    <member refid="classZeekLogParser_1a46cabdc446042f5ca62022f541511dcb" kind="function"><name>attempt_build_graph_node</name></member>
+    <member refid="classZeekLogParser_1a9e73097922b7d6447cba8d6d16b7aef2" kind="function"><name>build_graph_node</name></member>
+    <member refid="classZeekLogParser_1a8902342e05b2b40e0b31b666ec84f434" kind="function"><name>parse_log_entry</name></member>
+    <member refid="classZeekLogParser_1acf7810bb114d539631b00544e5ccd89a" kind="function"><name>parse_conn_entry</name></member>
+    <member refid="classZeekLogParser_1adc20a6921662886e5cffbd3973043442" kind="function"><name>parse_ssl_entry</name></member>
+    <member refid="classZeekLogParser_1a33a748a899b0ee3cc5d3b758eb9c3f2c" kind="function"><name>parse_http_entry</name></member>
+    <member refid="classZeekLogParser_1a0f7ccb442cfa1c5c3e9e0d1b562b3053" kind="function"><name>handle_new_file</name></member>
+    <member refid="classZeekLogParser_1a4124fec51093d5fb78559cc047e54c87" kind="function"><name>handle_appended_data</name></member>
   </compound>
   <compound refid="CMakeCCompilerId_8c" kind="file"><name>CMakeCCompilerId.c</name>
     <member refid="CMakeCCompilerId_8c_1ae5510d82e4946f1656f4969911c54736" kind="define"><name>__has_include</name></member>

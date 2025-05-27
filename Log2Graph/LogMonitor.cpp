@@ -25,7 +25,7 @@ LogMonitor::LogMonitor(const std::string& log_dir) : parser(log_dir) {}
         running = true;
         monitor_thread = std::thread([this]() {
             while (running) {
-                parser.monitor_logs();
+                parser.start_monitoring();
                 std::this_thread::sleep_for(std::chrono::seconds(1));
             }
         });

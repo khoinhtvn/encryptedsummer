@@ -50,7 +50,7 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -69,6 +69,12 @@
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
       <node id="14">
@@ -101,14 +107,14 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="22">
         <label>TrafficGraph.h</label>
         <link refid="TrafficGraph_8h"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
         <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
@@ -124,6 +130,9 @@
       </node>
       <node id="19">
         <label>atomic</label>
+      </node>
+      <node id="21">
+        <label>chrono</label>
       </node>
       <node id="11">
         <label>cmath</label>
@@ -146,7 +155,7 @@
       <node id="15">
         <label>queue</label>
       </node>
-      <node id="22">
+      <node id="23">
         <label>shared_mutex</label>
       </node>
       <node id="13">
@@ -155,7 +164,7 @@
       <node id="3">
         <label>string</label>
       </node>
-      <node id="23">
+      <node id="24">
         <label>thread</label>
       </node>
       <node id="5">

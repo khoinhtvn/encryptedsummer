@@ -2,17 +2,23 @@
 \hypertarget{ZeekLogParser_8h}{}\label{ZeekLogParser_8h}\index{includes/ZeekLogParser.h@{includes/ZeekLogParser.h}}
 
 
-Header file for the \doxylink{classZeekLogParser}{Zeek\+Log\+Parser} class, responsible for parsing Zeek log files.  
+Header file for the \doxylink{classZeekLogParser}{Zeek\+Log\+Parser} class, responsible for parsing Zeek log files in parallel.  
 
 
 {\ttfamily \#include $<$string$>$}\newline
 {\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
 {\ttfamily \#include $<$filesystem$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include $<$queue$>$}\newline
+{\ttfamily \#include $<$map$>$}\newline
+{\ttfamily \#include $<$set$>$}\newline
 Include dependency graph for Zeek\+Log\+Parser.\+h\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=322pt]{ZeekLogParser_8h__incl}
+\includegraphics[width=350pt]{ZeekLogParser_8h__incl}
 \end{center}
 \end{figure}
 This graph shows which files directly or indirectly include this file\+:\nopagebreak
@@ -27,11 +33,15 @@ This graph shows which files directly or indirectly include this file\+:\nopageb
 \item 
 struct \mbox{\hyperlink{structFileState}{File\+State}}
 \begin{DoxyCompactList}\small\item\em Represents the state of a monitored file. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structLogEntry}{Log\+Entry}}
+\begin{DoxyCompactList}\small\item\em Represents a parsed log entry. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classSafeQueue}{Safe\+Queue}}
+\begin{DoxyCompactList}\small\item\em A thread-\/safe queue for passing parsed log entries. \end{DoxyCompactList}\item 
 class \mbox{\hyperlink{classZeekLogParser}{Zeek\+Log\+Parser}}
-\begin{DoxyCompactList}\small\item\em Class responsible for parsing Zeek log files. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Class responsible for parsing Zeek log files in parallel. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
-Header file for the \doxylink{classZeekLogParser}{Zeek\+Log\+Parser} class, responsible for parsing Zeek log files. 
+Header file for the \doxylink{classZeekLogParser}{Zeek\+Log\+Parser} class, responsible for parsing Zeek log files in parallel. 
 
-This file defines the {\ttfamily \doxylink{classZeekLogParser}{Zeek\+Log\+Parser}} class, which parses Zeek log files to extract network traffic information. It also defines the {\ttfamily \doxylink{structFileState}{File\+State}} struct to track the state of monitored log files. 
+This file defines the {\ttfamily \doxylink{classZeekLogParser}{Zeek\+Log\+Parser}} class, which monitors a directory for Zeek log files, and uses multiple threads to parse them in parallel. It also defines the {\ttfamily \doxylink{structFileState}{File\+State}} struct to track the state of monitored log files and the {\ttfamily \doxylink{structLogEntry}{Log\+Entry}} struct to hold parsed data. 

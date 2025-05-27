@@ -174,10 +174,10 @@
         </inbodydescription>
         <location file="includes/GraphBuilder.h" line="102" column="17" bodyfile="includes/GraphBuilder.h" bodystart="102" bodyend="104"/>
       </memberdef>
-      <memberdef kind="function" id="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classGraphBuilder_1a022b58b16ad42721ed0a55c4e5ee2ea1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void GraphBuilder::add_connection</definition>
-        <argsstring>(const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;service, const std::string &amp;timestamp, const int src_port, const int dst_port, const int orig_bytes, const int resp_bytes, const std::string &amp;conn_state, const bool local_orig, const bool local_resp, const std::string &amp;history, const int orig_pkts, const int resp_pkts, const int orig_ip_bytes, const int resp_ip_bytes)</argsstring>
+        <argsstring>(const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;service, const std::string &amp;timestamp, const int src_port, const int dst_port, const int orig_bytes, const int resp_bytes, const std::string &amp;conn_state, const bool local_orig, const bool local_resp, const std::string &amp;history, const int orig_pkts, const int resp_pkts, const int orig_ip_bytes, const int resp_ip_bytes, const std::string &amp;version=&quot;&quot;, const std::string &amp;cipher=&quot;&quot;, const std::string &amp;curve=&quot;&quot;, const std::string &amp;server_name=&quot;&quot;, const bool resumed=false, const std::string &amp;last_alert=&quot;&quot;, const std::string &amp;next_protocol=&quot;&quot;, const bool established=false, const std::string &amp;ssl_history=&quot;&quot;, const std::string &amp;cert_chain_fps=&quot;&quot;, const std::string &amp;client_cert_chain_fps=&quot;&quot;, const bool sni_matches_cert=false, const std::string &amp;http_method=&quot;&quot;, const std::string &amp;http_host=&quot;&quot;, const std::string &amp;http_uri=&quot;&quot;, const std::string &amp;http_referrer=&quot;&quot;, const std::string &amp;http_version=&quot;&quot;, const std::string &amp;http_user_agent=&quot;&quot;, const std::string &amp;http_origin=&quot;&quot;, const std::string &amp;http_status_code=&quot;&quot;, const std::string &amp;http_username=&quot;&quot;)</argsstring>
         <name>add_connection</name>
         <qualifiedname>GraphBuilder::add_connection</qualifiedname>
         <param>
@@ -248,11 +248,116 @@
           <type>const int</type>
           <declname>resp_ip_bytes</declname>
         </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>version</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>cipher</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>curve</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>server_name</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>resumed</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>last_alert</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>next_protocol</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>established</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>ssl_history</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>cert_chain_fps</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>client_cert_chain_fps</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const bool</type>
+          <declname>sni_matches_cert</declname>
+          <defval>false</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_method</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_host</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_uri</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_referrer</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_version</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_user_agent</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_origin</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_status_code</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>http_username</declname>
+          <defval>&quot;&quot;</defval>
+        </param>
         <briefdescription>
-<para>Processes a network connection event and adds the corresponding nodes and edges to the graph. </para>
+<para>Processes a network connection event and adds the corresponding nodes and edges to the graph, including SSL and HTTP related information if available. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method takes details of a network connection (e.g., source and destination IPs, ports, protocol) and updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes.</para>
+<para>This method takes details of a network connection (e.g., source and destination IPs, ports, protocol) and updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes and includes SSL-specific details such as version, cipher, and certificates, and HTTP-specific details such as method, URI, and status code if provided.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>src_ip</parametername>
@@ -389,12 +494,180 @@
 <para>Number of IP bytes sent by the responder. </para>
 </parameterdescription>
 </parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>version</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL/TLS version (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cipher</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL/TLS cipher suite (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>curve</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Elliptic curve used for key exchange (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>server_name</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Server Name Indication (SNI) (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resumed</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the SSL/TLS session was resumed (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>last_alert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The last SSL/TLS alert sent or received (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>next_protocol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The next protocol negotiated via ALPN (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>established</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the SSL/TLS connection was established (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ssl_history</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>SSL/TLS state history (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>cert_chain_fps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fingerprints of the server&apos;s certificate chain (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>client_cert_chain_fps</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Fingerprints of the client&apos;s certificate chain (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>sni_matches_cert</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Whether the SNI matched the presented certificate (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_method</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP request method (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_host</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP host header (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_uri</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP request URI (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_referrer</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP referrer header (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_version</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP version (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_user_agent</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP user-agent header (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_origin</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP origin header (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_status_code</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP response status code (if applicable). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>http_username</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>HTTP username (if applicable). </para>
+</parameterdescription>
+</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="131" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="77"/>
+        <location file="includes/GraphBuilder.h" line="155" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="128"/>
       </memberdef>
       <memberdef kind="function" id="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
@@ -413,7 +686,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="148" column="18" bodyfile="GraphBuilder.cpp" bodystart="79" bodyend="81"/>
+        <location file="includes/GraphBuilder.h" line="193" column="18" bodyfile="GraphBuilder.cpp" bodystart="130" bodyend="132"/>
       </memberdef>
       <memberdef kind="function" id="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>size_t</type>
@@ -431,7 +704,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="154" column="12" bodyfile="includes/GraphBuilder.h" bodystart="154" bodyend="157"/>
+        <location file="includes/GraphBuilder.h" line="199" column="12" bodyfile="includes/GraphBuilder.h" bodystart="199" bodyend="202"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -467,9 +740,9 @@
         <link refid="classGraphBuilder"/>
       </node>
     </collaborationgraph>
-    <location file="includes/GraphBuilder.h" line="36" column="1" bodyfile="includes/GraphBuilder.h" bodystart="36" bodyend="158"/>
+    <location file="includes/GraphBuilder.h" line="36" column="1" bodyfile="includes/GraphBuilder.h" bodystart="36" bodyend="203"/>
     <listofallmembers>
-      <member refid="classGraphBuilder_1a434c06a59cbe6b93e7731769b8b244dd" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>add_connection</name></member>
+      <member refid="classGraphBuilder_1a022b58b16ad42721ed0a55c4e5ee2ea1" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>add_connection</name></member>
       <member refid="classGraphBuilder_1ad5aa5478a79929b7e923bfe08c6d9b9e" prot="private" virt="non-virtual"><scope>GraphBuilder</scope><name>feature_encoder</name></member>
       <member refid="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_feature_dimension</name></member>
       <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" virt="non-virtual"><scope>GraphBuilder</scope><name>get_graph</name></member>

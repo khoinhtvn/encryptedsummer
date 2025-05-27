@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['zeeklogparser_0',['ZeekLogParser',['../classZeekLogParser.html',1,'']]]
+  ['safequeue_0',['SafeQueue',['../classSafeQueue.html',1,'']]]
 ];

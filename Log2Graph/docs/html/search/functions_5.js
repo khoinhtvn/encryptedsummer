@@ -7,13 +7,14 @@ var searchData=
   ['get_5ffeature_5fname_4',['get_feature_name',['../classFeatureEncoder.html#a008c4d5bd3f08b5a7b7ce907ea0af9ea',1,'FeatureEncoder']]],
   ['get_5ffeature_5fnames_5',['get_feature_names',['../classFeatureEncoder.html#aa0b2aa06a5804327c59d4f0badeffcaf',1,'FeatureEncoder']]],
   ['get_5fgraph_6',['get_graph',['../classGraphBuilder.html#a791f0173bacd48ce1071e6d87cd8bfaf',1,'GraphBuilder']]],
-  ['get_5finstance_7',['get_instance',['../classGraphBuilder.html#adbe9d786ed3fbcd471f83e3ec9ac9efa',1,'GraphBuilder']]],
-  ['get_5flast_5fupdates_8',['get_last_updates',['../classGraphBuilder.html#a88d61bc652bfa5a60a8cd1aa8509d27c',1,'GraphBuilder']]],
-  ['get_5fnode_5freference_9',['get_node_reference',['../classTrafficGraph.html#a050fc4ccd24adf28afb04769841bd738',1,'TrafficGraph']]],
-  ['get_5fnodes_10',['get_nodes',['../classTrafficGraph.html#a503a7eb165f5df6b3099b10e71774735',1,'TrafficGraph']]],
-  ['get_5for_5fcreate_5fnode_11',['get_or_create_node',['../classTrafficGraph.html#a4fe8bf82ebe5a118c488142e2a0a0711',1,'TrafficGraph']]],
-  ['graphbuilder_12',['GraphBuilder',['../classGraphBuilder.html#a3af3213174c72b1eda8f3a0e21bba54b',1,'GraphBuilder']]],
-  ['graphedge_13',['GraphEdge',['../classGraphEdge.html#a3cb272137fcf01bf7985e6ab17e71def',1,'GraphEdge']]],
-  ['graphexporter_14',['GraphExporter',['../classGraphExporter.html#ad6ec946fe1111d8543118747b9883895',1,'GraphExporter']]],
-  ['graphnode_15',['GraphNode',['../classGraphNode.html#a8ef4f31129e46a8d33a1b2674731e53f',1,'GraphNode']]]
+  ['get_5fid_7',['get_id',['../classGraphNode.html#a5cfa8c4a54c8dd7280b9d8a53f938e92',1,'GraphNode']]],
+  ['get_5finstance_8',['get_instance',['../classGraphBuilder.html#adbe9d786ed3fbcd471f83e3ec9ac9efa',1,'GraphBuilder']]],
+  ['get_5flast_5fupdates_9',['get_last_updates',['../classGraphBuilder.html#a88d61bc652bfa5a60a8cd1aa8509d27c',1,'GraphBuilder']]],
+  ['get_5fnode_5freference_10',['get_node_reference',['../classTrafficGraph.html#a050fc4ccd24adf28afb04769841bd738',1,'TrafficGraph']]],
+  ['get_5fnodes_11',['get_nodes',['../classTrafficGraph.html#a503a7eb165f5df6b3099b10e71774735',1,'TrafficGraph']]],
+  ['get_5for_5fcreate_5fnode_12',['get_or_create_node',['../classTrafficGraph.html#a4fe8bf82ebe5a118c488142e2a0a0711',1,'TrafficGraph']]],
+  ['graphbuilder_13',['GraphBuilder',['../classGraphBuilder.html#a3af3213174c72b1eda8f3a0e21bba54b',1,'GraphBuilder']]],
+  ['graphedge_14',['GraphEdge',['../classGraphEdge.html#a3cb272137fcf01bf7985e6ab17e71def',1,'GraphEdge']]],
+  ['graphexporter_15',['GraphExporter',['../classGraphExporter.html#ad6ec946fe1111d8543118747b9883895',1,'GraphExporter']]],
+  ['graphnode_16',['GraphNode',['../classGraphNode.html#a8ef4f31129e46a8d33a1b2674731e53f',1,'GraphNode']]]
 ];

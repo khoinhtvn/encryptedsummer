@@ -4,10 +4,15 @@
 
 #ifndef GRAPHNODE_H
 #define GRAPHNODE_H
+
 #include <atomic>
 #include <map>
 #include <queue>
 #include <unordered_map>
+#include <vector>
+#include <chrono>
+#include <mutex>
+
 /**
  * @brief Represents a node in the network traffic graph.
  *
@@ -18,49 +23,36 @@
 class GraphNode {
 public:
     /**
-     * @brief Unique identifier for the node.
-     */
-    std::string id;
-    /**
-     * @brief Type of the node (e.g., "host", "service", "domain").
-     */
-    std::string type;
-    /**
-     * @brief Additional attributes associated with the node.
-     */
-    std::unordered_map<std::string, std::string> attributes;
-
-    /**
      * @brief Structure to hold various statistical features of the node.
      */
-    struct {
+    struct NodeFeatures {
         /**
          * @brief Total degree of the node (number of connected edges).
          */
-        std::atomic<int> degree{0};
+        std::atomic<uint32_t> degree{0};
         /**
          * @brief In-degree of the node (number of incoming edges).
          */
-        std::atomic<int> in_degree{0};
+        std::atomic<uint32_t> in_degree{0};
         /**
          * @brief Out-degree of the node (number of outgoing edges).
          */
-        std::atomic<int> out_degree{0};
+        std::atomic<uint32_t> out_degree{0};
         /**
-          * @brief Counts of different protocols associated with the node's connections.
-          * The key is the protocol name, and the value is the count.
-          */
+         * @brief Counts of different protocols associated with the node's connections.
+         * The key is the protocol name, and the value is the count.
+         */
         std::map<std::string, int> protocol_counts;
         /**
          * @brief Score indicating the level of activity of the node.
          */
         std::atomic<double> activity_score{0.0};
-    } features;
+    };
 
     /**
      * @brief Structure to hold temporal features related to the node's connections over time.
      */
-    struct {
+    struct TemporalFeatures {
         /**
          * @brief Number of connections initiated or received by the node in the last minute.
          */
@@ -93,17 +85,34 @@ public:
          * @brief Mutex to protect access to the `minute_window` and `hour_window` queues, ensuring thread safety.
          */
         mutable std::mutex window_mutex;
-    } temporal;
+        /**
+         * @brief Mutex to protect access to the `recent_connections` vector, ensuring thread safety.
+         */
+        mutable std::mutex recent_connections_mutex;
+    };
+
+    /**
+     * @brief Unique identifier for the node.
+     */
+    std::string id;
+    /**
+     * @brief Type of the node (e.g., "host", "service", "domain").
+     */
+    std::string type;
+    /**
+     * @brief Additional attributes associated with the node.
+     */
+    std::unordered_map<std::string, std::string> attributes;
+
+    NodeFeatures features;
+    TemporalFeatures temporal;
 
     /**
      * @brief Constructor for the GraphNode.
      * @param id The unique identifier of the node.
      * @param type The type of the node (e.g., "host", "service").
      */
-    GraphNode(const std::string &id, const std::string &type)
-        : id(id), type(type) {
-        temporal.monitoring_start = std::chrono::system_clock::now();
-    }
+    GraphNode(const std::string &id, const std::string &type);
 
     /**
      * @brief Updates the connection-related features of the node.
@@ -149,5 +158,12 @@ public:
      * @return The number of connections in the last hour.
      */
     int get_connections_last_hour() const;
+
+    /**
+     * @brief Gets the unique identifier of the node.
+     * @return The node's ID.
+     */
+    std::string get_id() const { return id; }
 };
-#endif //GRAPHNODE_H
+
+#endif // GRAPHNODE_H

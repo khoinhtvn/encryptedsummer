@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['realtimeanomalydetector_0',['RealTimeAnomalyDetector',['../classRealTimeAnomalyDetector.html',1,'']]]
+  ['nodefeatures_0',['NodeFeatures',['../structGraphNode_1_1NodeFeatures.html',1,'GraphNode']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['trafficgraph_0',['TrafficGraph',['../classTrafficGraph.html',1,'']]]
+  ['realtimeanomalydetector_0',['RealTimeAnomalyDetector',['../classRealTimeAnomalyDetector.html',1,'']]]
 ];
