@@ -3,26 +3,9 @@
  * @brief Defines the FeatureEncoder class, which encodes network traffic features into a numerical vector.
  *
  * This class is designed for use in network traffic analysis or intrusion detection systems.
- * It handles various data types commonly found in network traffic, including:
- * - Protocol (TCP, UDP, ICMP)
- * - Timestamp of the connection
- * - Source and Destination Port numbers
- * - Connection State (e.g., established, rejected)
- * - Flags indicating local origin/response
- * - Length of the connection history string
- * - Number of original and response bytes and packets
- * - Network Service (e.g., HTTP, FTP, SSH)
- * - SSL/TLS related features (version, cipher, server name, etc.)
- * - HTTP related features (method, host, URI, user agent, status code, etc.)
- *
+ * It encodes a selected set of edge attributes for graph representation.
  * The encoding process involves:
- * - One-hot encoding for categorical features (protocol, connection state, service, HTTP method, user agent, SSL version, SSL cipher).
- * - Cyclic encoding for timestamps to capture temporal patterns.
- * - Categorization for port numbers (well-known, registered, dynamic).
- * - Normalization (logarithmic) for continuous numerical features (bytes, packets).
- * - Binary encoding for boolean flags (local origin/response, SSL resumed/established, SNI matches cert).
- * - Direct inclusion or simple normalization for other features (history length, HTTP version, status code).
- * - Categorical encoding for SSL related strings (cipher, version).
+ * - One-hot encoding for categorical features (protocol, connection state, SSL version, user agent).
  */
 
 // Created by lu on 5/9/25.
@@ -39,30 +22,18 @@ class FeatureEncoder {
 private:
     // --- Encoding Maps for Categorical Features ---
     std::unordered_map<std::string, int> protocol_map;
+    const int NUM_PROTOCOL_CATEGORIES = protocol_map.size();
     std::unordered_map<std::string, int> conn_state_map;
     const int NUM_CONN_STATE_CATEGORIES;
-    std::unordered_map<std::string, int> service_map;
-    std::unordered_map<std::string, int> method_map;
-    std::unordered_map<std::string, int> user_agent_map;
     std::unordered_map<std::string, int> ssl_version_map;
-    std::unordered_map<std::string, int> ssl_cipher_map;
+    const int NUM_SSL_VERSION_CATEGORIES;
+    std::unordered_map<std::string, int> user_agent_map;
+    const int NUM_USER_AGENT_CATEGORIES;
 
     size_t feature_dimension; ///< The total number of features in the encoded vector.
 
     // --- Utility Encoding Functions ---
-    float normalize(float value, float min_val, float max_val);
-
     std::vector<float> one_hot(int value, int num_classes);
-
-    std::vector<float> encode_timestamp_cyclic(const std::string &timestamp);
-
-    float encode_port(int port);
-
-    float normalize_size(size_t size);
-
-    float encode_http_version(const std::string &version);
-
-    float encode_http_status_code(const std::string &code_str);
 
 public:
     /**
@@ -82,7 +53,7 @@ public:
     /**
      * @brief Encodes a set of network connection attributes into a numerical feature vector.
      *
-     * @param attrs A map of connection attributes (e.g., protocol, timestamp, ports, bytes, etc.).
+     * @param attrs A map of connection attributes.
      * @return A vector of float values representing the encoded features.
      */
     std::vector<float> encode_features(const std::unordered_map<std::string, std::string> &attrs);

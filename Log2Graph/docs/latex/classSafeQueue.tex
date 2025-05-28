@@ -1,0 +1,67 @@
+\doxysection{Safe\+Queue Class Reference}
+\hypertarget{classSafeQueue}{}\label{classSafeQueue}\index{SafeQueue@{SafeQueue}}
+
+
+A thread-\/safe queue for passing parsed log entries.  
+
+
+
+
+{\ttfamily \#include $<$Zeek\+Log\+Parser.\+h$>$}
+
+
+
+Collaboration diagram for Safe\+Queue\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=159pt]{classSafeQueue__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classSafeQueue_aa28b85e7ca2625feecb4c6674fd64bb4}{enqueue}} (\mbox{\hyperlink{structLogEntry}{Log\+Entry}} entry)
+\item 
+\mbox{\hyperlink{structLogEntry}{Log\+Entry}} \mbox{\hyperlink{classSafeQueue_ac6d7f1830ee1b751beb3739d5636f454}{dequeue}} ()
+\item 
+void \mbox{\hyperlink{classSafeQueue_a2fa92b97d343534fdc61c6a737b7cd9d}{stop}} ()
+\item 
+bool \mbox{\hyperlink{classSafeQueue_a02cacf8f629f6967bec1a714dd72cb17}{is\+\_\+running}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A thread-\/safe queue for passing parsed log entries. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classSafeQueue_ac6d7f1830ee1b751beb3739d5636f454}\index{SafeQueue@{SafeQueue}!dequeue@{dequeue}}
+\index{dequeue@{dequeue}!SafeQueue@{SafeQueue}}
+\doxysubsubsection{\texorpdfstring{dequeue()}{dequeue()}}
+{\footnotesize\ttfamily \label{classSafeQueue_ac6d7f1830ee1b751beb3739d5636f454} 
+\mbox{\hyperlink{structLogEntry}{Log\+Entry}} Safe\+Queue\+::dequeue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classSafeQueue_aa28b85e7ca2625feecb4c6674fd64bb4}\index{SafeQueue@{SafeQueue}!enqueue@{enqueue}}
+\index{enqueue@{enqueue}!SafeQueue@{SafeQueue}}
+\doxysubsubsection{\texorpdfstring{enqueue()}{enqueue()}}
+{\footnotesize\ttfamily \label{classSafeQueue_aa28b85e7ca2625feecb4c6674fd64bb4} 
+void Safe\+Queue\+::enqueue (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structLogEntry}{Log\+Entry}}}]{entry}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classSafeQueue_a02cacf8f629f6967bec1a714dd72cb17}\index{SafeQueue@{SafeQueue}!is\_running@{is\_running}}
+\index{is\_running@{is\_running}!SafeQueue@{SafeQueue}}
+\doxysubsubsection{\texorpdfstring{is\_running()}{is\_running()}}
+{\footnotesize\ttfamily \label{classSafeQueue_a02cacf8f629f6967bec1a714dd72cb17} 
+bool Safe\+Queue\+::is\+\_\+running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classSafeQueue_a2fa92b97d343534fdc61c6a737b7cd9d}\index{SafeQueue@{SafeQueue}!stop@{stop}}
+\index{stop@{stop}!SafeQueue@{SafeQueue}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily \label{classSafeQueue_a2fa92b97d343534fdc61c6a737b7cd9d} 
+void Safe\+Queue\+::stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{ZeekLogParser_8h}{Zeek\+Log\+Parser.\+h}}\item 
+\mbox{\hyperlink{ZeekLogParser_8cpp}{Zeek\+Log\+Parser.\+cpp}}\end{DoxyCompactItemize}

@@ -104,6 +104,7 @@ $(function(){initNavTree('classGraphEdge.html',''); initResizable(true); });
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classGraphEdge-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">GraphEdge Class Reference</div></div>
@@ -119,13 +120,15 @@ Collaboration diagram for GraphEdge:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphEdge__coll__graph.png" border="0" usemap="#aGraphEdge_coll__map" alt="Collaboration graph"/></div>
 <map name="aGraphEdge_coll__map" id="aGraphEdge_coll__map">
-<area shape="rect" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="101,177,211,243"/>
+<area shape="rect" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="145,177,303,283"/>
 <area shape="rect" title=" " alt="" coords="5,13,56,78"/>
-<area shape="poly" title=" " alt="" coords="35,78,42,116,49,135,59,152,89,178,85,182,55,155,44,137,37,117,29,79"/>
+<area shape="poly" title=" " alt="" coords="39,78,52,116,74,152,101,175,132,194,129,198,98,179,70,155,47,118,34,79"/>
 <area shape="rect" title=" " alt="" coords="81,5,231,85"/>
-<area shape="poly" title=" " alt="" coords="159,85,159,161,153,161,153,85"/>
+<area shape="poly" title=" " alt="" coords="167,85,188,152,191,161,187,163,183,154,162,87"/>
 <area shape="rect" title=" " alt="" coords="256,13,371,78"/>
-<area shape="poly" title=" " alt="" coords="298,80,274,118,242,155,226,169,222,165,238,151,269,114,294,77"/>
+<area shape="poly" title=" " alt="" coords="302,79,266,154,262,164,257,161,262,152,297,77"/>
+<area shape="rect" title=" " alt="" coords="414,13,498,78"/>
+<area shape="poly" title=" " alt="" coords="456,79,445,118,436,138,423,155,401,175,375,191,320,213,318,208,372,186,397,171,419,152,432,135,440,116,450,78"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -134,6 +137,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3cb272137fcf01bf7985e6ab17e71def" id="r_a3cb272137fcf01bf7985e6ab17e71def"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cb272137fcf01bf7985e6ab17e71def">GraphEdge</a> (const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel)</td></tr>
 <tr class="memdesc:a3cb272137fcf01bf7985e6ab17e71def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classGraphEdge.html" title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a>.  <br /></td></tr>
 <tr class="separator:a3cb272137fcf01bf7985e6ab17e71def"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0bb6c037458bc73a448aa771621df019" id="r_a0bb6c037458bc73a448aa771621df019"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0bb6c037458bc73a448aa771621df019">to_dot_string</a> () const</td></tr>
+<tr class="memdesc:a0bb6c037458bc73a448aa771621df019"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a DOT format string representation of the edge, including its attributes and encoded features.  <br /></td></tr>
+<tr class="separator:a0bb6c037458bc73a448aa771621df019"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+Static Public Member Functions</h2></td></tr>
+<tr class="memitem:a66cb15ff27f3bed9df1809a614cb43f6" id="r_a66cb15ff27f3bed9df1809a614cb43f6"><td class="memItemLeft" align="right" valign="top">static std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a66cb15ff27f3bed9df1809a614cb43f6">escape_dot_string</a> (const std::string &amp;str)</td></tr>
+<tr class="memdesc:a66cb15ff27f3bed9df1809a614cb43f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Escapes special characters in a string for DOT format.  <br /></td></tr>
+<tr class="separator:a66cb15ff27f3bed9df1809a614cb43f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -152,6 +164,8 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6b6bacb716fb79e52b6b184f1c33b2cc" id="r_a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b6bacb716fb79e52b6b184f1c33b2cc">encoded_features</a></td></tr>
 <tr class="memdesc:a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoded features, to feed to GAT.  <br /></td></tr>
 <tr class="separator:a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9cb0c4a71deae507aa42d738bd5a3b7f" id="r_a9cb0c4a71deae507aa42d738bd5a3b7f"><td class="memItemLeft" align="right" valign="top">std::chrono::system_clock::time_point&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9cb0c4a71deae507aa42d738bd5a3b7f">last_seen</a></td></tr>
+<tr class="separator:a9cb0c4a71deae507aa42d738bd5a3b7f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents an edge in the network traffic graph, connecting two GraphNodes. </p>
@@ -201,6 +215,61 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a66cb15ff27f3bed9df1809a614cb43f6" name="a66cb15ff27f3bed9df1809a614cb43f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a66cb15ff27f3bed9df1809a614cb43f6">&#9670;&#160;</a></span>escape_dot_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GraphEdge::escape_dot_string </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>str</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel static">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Escapes special characters in a string for DOT format. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">str</td><td>The input string to escape. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The escaped string. </dd></dl>
+
+</div>
+</div>
+<a id="a0bb6c037458bc73a448aa771621df019" name="a0bb6c037458bc73a448aa771621df019"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb6c037458bc73a448aa771621df019">&#9670;&#160;</a></span>to_dot_string()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string GraphEdge::to_dot_string </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generates a DOT format string representation of the edge, including its attributes and encoded features. </p>
+<p>/** </p><dl class="section return"><dt>Returns</dt><dd>A string in DOT format representing the edge. </dd></dl>
+
+</div>
+</div>
 <h2 class="groupheader">Member Data Documentation</h2>
 <a id="a7a0dcb05bfdb31ed7735a746b13be8d6" name="a7a0dcb05bfdb31ed7735a746b13be8d6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7a0dcb05bfdb31ed7735a746b13be8d6">&#9670;&#160;</a></span>attributes</h2>
@@ -231,6 +300,20 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Encoded features, to feed to GAT. </p>
+
+</div>
+</div>
+<a id="a9cb0c4a71deae507aa42d738bd5a3b7f" name="a9cb0c4a71deae507aa42d738bd5a3b7f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9cb0c4a71deae507aa42d738bd5a3b7f">&#9670;&#160;</a></span>last_seen</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::system_clock::time_point GraphEdge::last_seen</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -282,8 +365,9 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following file:<ul>
+<hr/>The documentation for this class was generated from the following files:<ul>
 <li>includes/<a class="el" href="GraphEdge_8h_source.html">GraphEdge.h</a></li>
+<li><a class="el" href="GraphEdge_8cpp.html">GraphEdge.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

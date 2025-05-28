@@ -139,7 +139,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class responsible for visualizing the network traffic graph using Graphviz. </p>
-<p>The <code><a class="el" href="classGraphExporter.html" title="Class responsible for visualizing the network traffic graph using Graphviz.">GraphExporter</a></code> class takes a <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code> object and renders it as a visual representation, typically saving it as a PNG image. It utilizes the Graphviz library for graph layout and rendering. </p>
+<p>The <code><a class="el" href="classGraphExporter.html" title="Class responsible for visualizing the network traffic graph using Graphviz.">GraphExporter</a></code> class takes a <code><a class="el" href="classTrafficGraph.html">TrafficGraph</a></code> object and renders it as a visual representation, typically saving it as a PNG image. It utilizes the Graphviz library for graph layout and rendering. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="ad6ec946fe1111d8543118747b9883895" name="ad6ec946fe1111d8543118747b9883895"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad6ec946fe1111d8543118747b9883895">&#9670;&#160;</a></span>GraphExporter()</h2>
@@ -212,10 +212,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Visualizes the given traffic graph and saves it to a file in a separate thread. </p>
-<p>This method takes a <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to "graph.png") in a separate thread, allowing the program to continue execution. It can also optionally open the generated image and control whether the export should proceed.</p>
+<p>This method takes a <code><a class="el" href="classTrafficGraph.html">TrafficGraph</a></code>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to "graph.png") in a separate thread, allowing the program to continue execution. It can also optionally open the generated image and control whether the export should proceed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graph</td><td>The <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code> object to visualize. </td></tr>
+    <tr><td class="paramname">graph</td><td>The <code><a class="el" href="classTrafficGraph.html">TrafficGraph</a></code> object to visualize. </td></tr>
     <tr><td class="paramname">output_file</td><td>The name of the output image file (default: "graph.png"). </td></tr>
     <tr><td class="paramname">open_image</td><td>A boolean indicating whether to attempt to open the generated image (default: true). </td></tr>
     <tr><td class="paramname">export_cond</td><td>A boolean controlling whether the export process should proceed (default: true). </td></tr>

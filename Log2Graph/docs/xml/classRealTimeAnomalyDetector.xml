@@ -5,9 +5,9 @@
     <includes refid="RealTimeAnomalyDetector_8h" local="no">RealTimeAnomalyDetector.h</includes>
     <innerclass refid="structRealTimeAnomalyDetector_1_1AnomalyScore" prot="public">RealTimeAnomalyDetector::AnomalyScore</innerclass>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classRealTimeAnomalyDetector_1a92cf1a7775b63a09b3aa27fdeb23c2a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::unordered_map&lt; std::string, <ref refid="structRealTimeAnomalyDetector_1_1AnomalyScore" kindref="compound">AnomalyScore</ref> &gt;</type>
-        <definition>std::unordered_map&lt; std::string, RealTimeAnomalyDetector::AnomalyScore &gt; RealTimeAnomalyDetector::detect</definition>
+        <definition>std::unordered_map&lt; std::string, AnomalyScore &gt; RealTimeAnomalyDetector::detect</definition>
         <argsstring>(const TrafficGraph &amp;graph)</argsstring>
         <name>detect</name>
         <qualifiedname>RealTimeAnomalyDetector::detect</qualifiedname>
@@ -35,7 +35,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/RealTimeAnomalyDetector.h" line="57" column="24" bodyfile="RealTimeAnomalyDetector.cpp" bodystart="17" bodyend="60"/>
+        <location file="includes/RealTimeAnomalyDetector.h" line="57" column="24"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -52,7 +52,7 @@
     </collaborationgraph>
     <location file="includes/RealTimeAnomalyDetector.h" line="28" column="1" bodyfile="includes/RealTimeAnomalyDetector.h" bodystart="28" bodyend="58"/>
     <listofallmembers>
-      <member refid="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" prot="public" virt="non-virtual"><scope>RealTimeAnomalyDetector</scope><name>detect</name></member>
+      <member refid="classRealTimeAnomalyDetector_1a92cf1a7775b63a09b3aa27fdeb23c2a5" prot="public" virt="non-virtual"><scope>RealTimeAnomalyDetector</scope><name>detect</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

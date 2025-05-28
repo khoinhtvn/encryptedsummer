@@ -1,0 +1,120 @@
+\doxysection{Feature\+Encoder Class Reference}
+\hypertarget{classFeatureEncoder}{}\label{classFeatureEncoder}\index{FeatureEncoder@{FeatureEncoder}}
+
+
+{\ttfamily \#include $<$Feature\+Encoder.\+h$>$}
+
+
+
+Collaboration diagram for Feature\+Encoder\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=222pt]{classFeatureEncoder__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classFeatureEncoder_afaf2be970998ea6430e5d17ea95d80a7}{Feature\+Encoder}} ()
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classFeatureEncoder}{Feature\+Encoder} class. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classFeatureEncoder_a60fa681a32d45d2326c87167d6b1a049}{get\+\_\+feature\+\_\+dimension}} () const
+\begin{DoxyCompactList}\small\item\em Gets the dimension of the encoded feature vector. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \mbox{\hyperlink{classFeatureEncoder_aaa3ef6109c0b8e2d4b00f98e146d3830}{encode\+\_\+features}} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&attrs)
+\begin{DoxyCompactList}\small\item\em Encodes a set of network connection attributes into a numerical feature vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classFeatureEncoder_a92aadd6c0de44aac9ed1f854048e82bb}{get\+\_\+feature\+\_\+names}} ()
+\begin{DoxyCompactList}\small\item\em Returns the names of the features used in the encoded feature vector. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classFeatureEncoder_a28d3e22e320c0a37824c6b0762f7ba35}{get\+\_\+feature\+\_\+name}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Get the name for a specific feature index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classFeatureEncoder_afaf2be970998ea6430e5d17ea95d80a7}\index{FeatureEncoder@{FeatureEncoder}!FeatureEncoder@{FeatureEncoder}}
+\index{FeatureEncoder@{FeatureEncoder}!FeatureEncoder@{FeatureEncoder}}
+\doxysubsubsection{\texorpdfstring{FeatureEncoder()}{FeatureEncoder()}}
+{\footnotesize\ttfamily \label{classFeatureEncoder_afaf2be970998ea6430e5d17ea95d80a7} 
+Feature\+Encoder\+::\+Feature\+Encoder (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the \doxylink{classFeatureEncoder}{Feature\+Encoder} class. 
+
+Initializes the encoding maps and calculates the total feature dimension. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classFeatureEncoder_aaa3ef6109c0b8e2d4b00f98e146d3830}\index{FeatureEncoder@{FeatureEncoder}!encode\_features@{encode\_features}}
+\index{encode\_features@{encode\_features}!FeatureEncoder@{FeatureEncoder}}
+\doxysubsubsection{\texorpdfstring{encode\_features()}{encode\_features()}}
+{\footnotesize\ttfamily \label{classFeatureEncoder_aaa3ef6109c0b8e2d4b00f98e146d3830} 
+std\+::vector$<$ float $>$ Feature\+Encoder\+::encode\+\_\+features (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{attrs}{}\end{DoxyParamCaption})}
+
+
+
+Encodes a set of network connection attributes into a numerical feature vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attrs} & A map of connection attributes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of float values representing the encoded features. 
+\end{DoxyReturn}
+\Hypertarget{classFeatureEncoder_a60fa681a32d45d2326c87167d6b1a049}\index{FeatureEncoder@{FeatureEncoder}!get\_feature\_dimension@{get\_feature\_dimension}}
+\index{get\_feature\_dimension@{get\_feature\_dimension}!FeatureEncoder@{FeatureEncoder}}
+\doxysubsubsection{\texorpdfstring{get\_feature\_dimension()}{get\_feature\_dimension()}}
+{\footnotesize\ttfamily \label{classFeatureEncoder_a60fa681a32d45d2326c87167d6b1a049} 
+size\+\_\+t Feature\+Encoder\+::get\+\_\+feature\+\_\+dimension (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the dimension of the encoded feature vector. 
+
+\begin{DoxyReturn}{Returns}
+The total number of features. 
+\end{DoxyReturn}
+\Hypertarget{classFeatureEncoder_a28d3e22e320c0a37824c6b0762f7ba35}\index{FeatureEncoder@{FeatureEncoder}!get\_feature\_name@{get\_feature\_name}}
+\index{get\_feature\_name@{get\_feature\_name}!FeatureEncoder@{FeatureEncoder}}
+\doxysubsubsection{\texorpdfstring{get\_feature\_name()}{get\_feature\_name()}}
+{\footnotesize\ttfamily \label{classFeatureEncoder_a28d3e22e320c0a37824c6b0762f7ba35} 
+std\+::string Feature\+Encoder\+::get\+\_\+feature\+\_\+name (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the name for a specific feature index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The feature index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Name of the feature at that index. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classFeatureEncoder_a92aadd6c0de44aac9ed1f854048e82bb}\index{FeatureEncoder@{FeatureEncoder}!get\_feature\_names@{get\_feature\_names}}
+\index{get\_feature\_names@{get\_feature\_names}!FeatureEncoder@{FeatureEncoder}}
+\doxysubsubsection{\texorpdfstring{get\_feature\_names()}{get\_feature\_names()}}
+{\footnotesize\ttfamily \label{classFeatureEncoder_a92aadd6c0de44aac9ed1f854048e82bb} 
+std\+::vector$<$ std\+::string $>$ Feature\+Encoder\+::get\+\_\+feature\+\_\+names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Returns the names of the features used in the encoded feature vector. 
+
+The order of names corresponds to the order of features in the encoded vector. \begin{DoxyReturn}{Returns}
+A vector of strings representing the names of the encoded features. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{FeatureEncoder_8h}{Feature\+Encoder.\+h}}\item 
+\mbox{\hyperlink{FeatureEncoder_8cpp}{Feature\+Encoder.\+cpp}}\end{DoxyCompactItemize}

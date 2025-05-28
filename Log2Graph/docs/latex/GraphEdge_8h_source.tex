@@ -8,20 +8,35 @@
 \DoxyCodeLine{00004\ }
 \DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GRAPHEDGE\_H}}
 \DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GRAPHEDGE\_H}}
-\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
-\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{GraphEdge}}\ \{}
-\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00020\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}};}
-\DoxyCodeLine{00024\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}};}
-\DoxyCodeLine{00028\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}};}
-\DoxyCodeLine{00032\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}{attributes}};}
-\DoxyCodeLine{00036\ \ \ \ \ std::vector<float>\ \mbox{\hyperlink{classGraphEdge_a6b6bacb716fb79e52b6b184f1c33b2cc}{encoded\_features}};}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{GraphEdge}}(\textcolor{keyword}{const}\ std::string\ \&src,\ \textcolor{keyword}{const}\ std::string\ \&tgt,}
-\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&rel)}
-\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}}(src),\ \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}}(tgt),\ \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}}(rel)\ \{}
-\DoxyCodeLine{00047\ \ \ \ \ \}}
-\DoxyCodeLine{00048\ \};}
-\DoxyCodeLine{00049\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHEDGE\_H}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{FeatureEncoder_8h}{FeatureEncoder.h}}"{}}\ \textcolor{comment}{//\ Include\ FeatureEncoder\ for\ feature\ names}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <iomanip>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{GraphEdge}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}};}
+\DoxyCodeLine{00031\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}};}
+\DoxyCodeLine{00035\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}};}
+\DoxyCodeLine{00039\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}{attributes}};}
+\DoxyCodeLine{00043\ \ \ \ \ std::vector<float>\ \mbox{\hyperlink{classGraphEdge_a6b6bacb716fb79e52b6b184f1c33b2cc}{encoded\_features}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classGraphEdge_a9cb0c4a71deae507aa42d738bd5a3b7f}{last\_seen}};}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{GraphEdge}}(\textcolor{keyword}{const}\ std::string\ \&src,\ \textcolor{keyword}{const}\ std::string\ \&tgt,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&rel)}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classGraphEdge_a15bf6a4cc4dae4f0368ef9112273ab80}{source}}(src),\ \mbox{\hyperlink{classGraphEdge_a96de026803e8fceda55bf716e7416303}{target}}(tgt),\ \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}{relationship}}(rel),}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classGraphEdge_a9cb0c4a71deae507aa42d738bd5a3b7f}{last\_seen}}(std::chrono::system\_clock::now())}
+\DoxyCodeLine{00056\ \ \ \ \ \{\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classGraphEdge_a66cb15ff27f3bed9df1809a614cb43f6}{escape\_dot\_string}}(\textcolor{keyword}{const}\ std::string\ \&str)\ ;}
+\DoxyCodeLine{00071\ \ \ \ \ std::string\ \mbox{\hyperlink{classGraphEdge_a0bb6c037458bc73a448aa771621df019}{to\_dot\_string}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHEDGE\_H}}
 
 \end{DoxyCode}

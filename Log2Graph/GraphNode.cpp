@@ -1,76 +1,166 @@
 //
-// Created by lu on 5/7/25.
+// Created by lu on 5/28/25.
 //
 
 #include "includes/GraphNode.h"
 #include <algorithm>
 #include <chrono>
+#include <limits>
+#include <ctime>
+#include <sstream>
+#include <iomanip>
 
 GraphNode::GraphNode(const std::string &id, const std::string &type)
-    : id(id), type(type) {
+    : id(id), type(type), last_connection_time(std::chrono::system_clock::now()) {
     temporal.monitoring_start = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(temporal.monitoring_start);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&now_c), "%Y-%m-%d %H:%M:%S");
+    temporal.first_seen = ss.str();
+    temporal.last_seen = ss.str();
 }
 
-void GraphNode::update_connection_features(const std::string &protocol, bool is_outgoing) {
-    // Update degree counts
+void GraphNode::update_connection_features(bool is_outgoing,
+                                            const std::unordered_map<std::string, std::string>& connection_attributes) {
+    std::lock_guard<std::mutex> lock(node_mutex);
     ++features.degree;
     if (is_outgoing) {
         ++features.out_degree;
+        features.total_connections_initiated++;
     } else {
         ++features.in_degree;
+        features.total_connections_received++;
     }
 
-    // Update protocol distribution
-    features.protocol_counts[protocol]++;
+    if (connection_attributes.count("protocol")) {
+        const std::string& protocol = connection_attributes.at("protocol");
+        features.protocol_counts[protocol]++;
+        features.protocols_used.insert(protocol);
+    }
 
-    // Update temporal features
+    if (is_outgoing) {
+        if (connection_attributes.count("id.resp_p")) {
+            features.remote_ports_connected_to.insert(connection_attributes.at("id.resp_p"));
+        }
+        if (connection_attributes.count("id.orig_p")) {
+            features.local_ports_used.insert(connection_attributes.at("id.orig_p"));
+        }
+    } else {
+        if (connection_attributes.count("id.orig_p")) {
+            features.remote_ports_connected_from.insert(connection_attributes.at("id.orig_p"));
+        }
+        if (connection_attributes.count("id.resp_p")) {
+            features.local_ports_listening_on.insert(connection_attributes.at("id.resp_p"));
+        }
+    }
+
+    if (connection_attributes.count("conn_state")) {
+        features.connection_state_counts[connection_attributes.at("conn_state")]++;
+    }
+
+    if (connection_attributes.count("local_orig") && connection_attributes.at("local_orig") == "T") {
+        features.ever_local_originated.store(true);
+    }
+    if (connection_attributes.count("local_resp") && connection_attributes.at("local_resp") == "T") {
+        features.ever_local_responded.store(true);
+    }
+
+    long long current_orig_bytes = 0;
+    if (connection_attributes.count("orig_bytes")) {
+        try {
+            current_orig_bytes = std::stoll(connection_attributes.at("orig_bytes"));
+            features.total_orig_bytes += current_orig_bytes;
+        } catch (...) {}
+    }
+    long long current_resp_bytes = 0;
+    if (connection_attributes.count("resp_bytes")) {
+        try {
+            current_resp_bytes = std::stoll(connection_attributes.at("resp_bytes"));
+            features.total_resp_bytes += current_resp_bytes;
+        } catch (...) {}
+    }
+    if (connection_attributes.count("orig_pkts")) {
+        try {
+            features.total_orig_pkts += std::stoll(connection_attributes.at("orig_pkts"));
+        } catch (...) {}
+    }
+    if (connection_attributes.count("resp_pkts")) {
+        try {
+            features.total_resp_pkts += std::stoll(connection_attributes.at("resp_pkts"));
+        } catch (...) {}
+    }
+
+    if (features.total_orig_pkts > 0) {
+        features.avg_packet_size_sent.store(static_cast<double>(features.total_orig_bytes) / features.total_orig_pkts);
+    }
+    if (features.total_resp_pkts > 0) {
+        features.avg_packet_size_received.store(static_cast<double>(features.total_resp_bytes) / features.total_resp_pkts);
+    }
+
+    if (connection_attributes.count("service")) {
+        features.services_used.insert(connection_attributes.at("service"));
+    }
+
+    if (connection_attributes.count("http_user_agent")) {
+        features.http_user_agent_counts[connection_attributes.at("http_user_agent")]++;
+    }
+    if (connection_attributes.count("http_version")) {
+        features.http_versions_used.insert(connection_attributes.at("http_version"));
+    }
+    if (connection_attributes.count("http_status_code")) {
+        try {
+            features.http_status_code_counts[std::stoi(connection_attributes.at("http_status_code"))]++;
+        } catch (...) {}
+    }
+
+    if (connection_attributes.count("ssl.version")) {
+        features.ssl_versions_used.insert(connection_attributes.at("ssl.version"));
+    }
+    if (connection_attributes.count("ssl.cipher")) {
+        features.ssl_ciphers_used.insert(connection_attributes.at("ssl.cipher"));
+    }
+    if (connection_attributes.count("ssl.curve")) {
+        features.ever_ssl_curve_present.store(true);
+    }
+    if (connection_attributes.count("ssl.server_name")) {
+        features.ever_ssl_server_name_present.store(true);
+    }
+    if (connection_attributes.count("ssl.resumed") && connection_attributes.at("ssl.resumed") == "T") {
+        features.ssl_resumption_count++;
+    }
+    if (connection_attributes.count("ssl.last_alert")) {
+        features.ever_ssl_last_alert_present.store(true);
+    }
+    if (connection_attributes.count("ssl.next_protocol")) {
+        features.ssl_next_protocols_used.insert(connection_attributes.at("ssl.next_protocol"));
+    }
+    if (connection_attributes.count("ssl.established") && connection_attributes.at("ssl.established") == "T") {
+        features.ssl_established_count++;
+    }
+    if (connection_attributes.count("ssl.history")) {
+        features.ever_ssl_history_present.store(true);
+    }
+
     auto now = std::chrono::system_clock::now();
-    {
-        std::lock_guard<std::mutex> lock(temporal.recent_connections_mutex);
-        temporal.recent_connections.push_back(now);
-    }
-    ++temporal.total_connections;
     {
         std::lock_guard<std::mutex> lock(temporal.window_mutex);
         temporal.minute_window.push(now);
         temporal.hour_window.push(now);
     }
+    ++temporal.total_connections;
+    temporal.connections_last_minute.store(temporal.minute_window.size());
+    temporal.connections_last_hour.store(temporal.hour_window.size());
 
-    // Clean up old connections
-    cleanup_time_windows();
-    // Update activity score (weighted moving average)
-    double new_activity = 1.0; // Base weight for new connection
+    double new_activity = 1.0;
     features.activity_score = 0.9 * features.activity_score.load() + 0.1 * new_activity;
 
-    // Periodically clean old connections
-    if (temporal.recent_connections.size() % 10 == 0) {
-        cleanup_old_connections();
-    }
-}
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&now_c), "%Y-%m-%d %H:%M:%S");
+    temporal.last_seen = ss.str();
 
-void GraphNode::cleanup_old_connections() {
-    auto now = std::chrono::system_clock::now();
-    auto cutoff = now - std::chrono::seconds(60); // Example: keep connections from the last 60 seconds
-
-    std::lock_guard<std::mutex> lock(temporal.recent_connections_mutex);
-    temporal.recent_connections.erase(
-        std::remove_if(temporal.recent_connections.begin(), temporal.recent_connections.end(),
-                         [&](const auto& time) { return time < cutoff; }),
-        temporal.recent_connections.end());
-}
-
-double GraphNode::calculate_anomaly_score() const {
-    // Placeholder for anomaly score calculation based on features
-    // This is a simplified example and should be replaced with your actual logic
-    double score = 0.0;
-    score += features.degree.load() * 0.1;
-    score += features.in_degree.load() * 0.05;
-    score += features.out_degree.load() * 0.05;
-    score += features.protocol_counts.size() * 0.02;
-    score += features.activity_score.load() * 0.2;
-    score += get_connections_last_minute() * 0.15;
-    score += get_connections_last_hour() * 0.1;
-    return score;
+    last_connection_time = now;
+    connection_count++;
 }
 
 void GraphNode::cleanup_time_windows() {
@@ -87,8 +177,6 @@ void GraphNode::cleanup_time_windows() {
             temporal.hour_window.pop();
         }
     }
-
-    // Update atomic counters based on the window sizes (optional, can be done in get methods)
     temporal.connections_last_minute.store(temporal.minute_window.size());
     temporal.connections_last_hour.store(temporal.hour_window.size());
 }
@@ -99,4 +187,178 @@ int GraphNode::get_connections_last_minute() const {
 
 int GraphNode::get_connections_last_hour() const {
     return temporal.connections_last_hour.load();
+}
+
+double GraphNode::NodeFeatures::outgoing_connection_ratio() const {
+    int total = total_connections_initiated + total_connections_received;
+    if (total == 0) return 0.0;
+    return static_cast<double>(total_connections_initiated) / total;
+}
+
+double GraphNode::NodeFeatures::incoming_connection_ratio() const {
+    int total = total_connections_initiated + total_connections_received;
+    if (total == 0) return 0.0;
+    return static_cast<double>(total_connections_received) / total;
+}
+
+std::string GraphNode::NodeFeatures::most_frequent_protocol() const {
+    std::string most_frequent = "N/A";
+    int max_count = 0;
+    if (protocol_counts.empty()) return most_frequent;
+    for (const auto& pair : protocol_counts) {
+        if (pair.second > max_count) {
+            max_count = pair.second;
+            most_frequent = pair.first;
+        }
+    }
+    return most_frequent;
+}
+
+size_t GraphNode::NodeFeatures::unique_remote_ports_connected_to() const {
+    return remote_ports_connected_to.size();
+}
+
+size_t GraphNode::NodeFeatures::unique_local_ports_used() const {
+    return local_ports_used.size();
+}
+
+std::string GraphNode::NodeFeatures::most_frequent_connection_state() const {
+    std::string most_frequent = "N/A";
+    int max_count = 0;
+    if (connection_state_counts.empty()) return most_frequent;
+    for (const auto& pair : connection_state_counts) {
+        if (pair.second > max_count) {
+            max_count = pair.second;
+            most_frequent = pair.first;
+        }}
+    return most_frequent;
+}
+
+bool GraphNode::NodeFeatures::connected_to_privileged_port() const {
+    for (const auto& port_str : remote_ports_connected_to) {
+        try {
+            int port = std::stoi(port_str);
+            if (port > 0 && port <= 1023) {
+                return true;
+            }
+        } catch (...) {
+            // Ignore parsing errors
+        }
+    }
+    return false;
+}
+
+bool GraphNode::NodeFeatures::listened_on_privileged_port() const {
+    for (const auto& port_str : local_ports_listening_on) {
+        try {
+            int port = std::stoi(port_str);
+            if (port > 0 && port <= 1023) {
+                return true;
+            }
+        } catch (...) {
+            // Ignore parsing errors
+        }
+    }
+    return false;
+}
+
+bool GraphNode::NodeFeatures::used_ssl_tls() const {
+    return !ssl_versions_used.empty();
+}
+
+std::string GraphNode::escape_dot_string(const std::string &str) {
+    std::string result = "";
+    for (char c : str) {
+        if (c == '"') {
+            result += "\\\"";
+        } else if (c == '\\') {
+            result += "\\\\";
+        } else {
+            result += c;
+        }
+    }
+    return result;
+}
+
+std::string GraphNode::to_dot_string() const {
+    std::stringstream ss;
+    ss << "  \"" << escape_dot_string(id) << "\" [";
+    ss << "degree=" << features.degree;
+    ss << ", in_degree=" << features.in_degree;
+    ss << ", out_degree=" << features.out_degree;
+    ss << ", activity_score=" << std::fixed << std::setprecision(2) << features.activity_score.load();
+    ss << ", total_connections=" << temporal.total_connections;
+
+    ss << ", total_initiated=" << features.total_connections_initiated;
+    ss << ", total_received=" << features.total_connections_received;
+    ss << ", outgoing_ratio=" << std::fixed << std::setprecision(2) << features.outgoing_connection_ratio();
+    ss << ", incoming_ratio=" << std::fixed << std::setprecision(2) << features.incoming_connection_ratio();
+    ss << ", most_freq_proto=\"" << escape_dot_string(features.most_frequent_protocol()) << "\"";
+    ss << ", unique_remote_ports_to=" << features.unique_remote_ports_connected_to();
+    ss << ", unique_local_ports_used=" << features.unique_local_ports_used();
+    ss << ", most_freq_conn_state=\"" << escape_dot_string(features.most_frequent_connection_state()) << "\"";
+    ss << ", connected_to_priv_port=" << (features.connected_to_privileged_port() ? "true" : "false");
+    ss << ", listened_on_priv_port=" << (features.listened_on_privileged_port() ? "true" : "false");
+    ss << ", total_bytes_sent=" << features.total_bytes_sent();
+    ss << ", total_bytes_received=" << features.total_bytes_received();
+    ss << ", avg_pkt_size_sent=" << std::fixed << std::setprecision(2) << features.avg_packet_size_sent.load();
+    ss << ", avg_pkt_size_received=" << std::fixed << std::setprecision(2) << features.avg_packet_size_received.load();
+    ss << ", used_ssl_tls=" << (features.used_ssl_tls() ? "true" : "false");
+
+    std::vector<std::pair<std::string, int>> sorted_protocols;
+    for (const auto& pair : features.protocol_counts) {
+        sorted_protocols.emplace_back(pair.first, pair.second);
+    }
+    std::sort(sorted_protocols.begin(), sorted_protocols.end(), [](const auto& a, const auto& b) {
+        return a.second > b.second;
+    });
+    for (size_t i = 0; i < std::min((size_t)3, sorted_protocols.size()); ++i) {
+        ss << ", top_proto_" << i + 1 << "=\"" << escape_dot_string(sorted_protocols[i].first) << "\"";
+    }
+
+    int service_count = 0;
+    for (const auto& service : features.services_used) {
+        ss << ", service_" << service_count + 1 << "=\"" << escape_dot_string(service) << "\"";
+        if (++service_count >= 3) break;
+    }
+
+    std::vector<std::pair<std::string, int>> sorted_user_agents;
+    for (const auto& pair : features.http_user_agent_counts) {
+        sorted_user_agents.emplace_back(pair.first, pair.second);
+    }
+    std::sort(sorted_user_agents.begin(), sorted_user_agents.end(), [](const auto& a, const auto& b) {
+        return a.second > b.second;
+    });
+    for (size_t i = 0; i < std::min((size_t)3, sorted_user_agents.size()); ++i) {
+        ss << ", top_user_agent_" << i + 1 << "=\"" << escape_dot_string(sorted_user_agents[i].first) << "\"";
+    }
+
+    ss << ", first_seen=\"" << escape_dot_string(temporal.first_seen) << "\"";
+    ss << ", last_seen=\"" << escape_dot_string(temporal.last_seen) << "\"";
+
+    // Add historical features to the DOT string
+    ss << ", historical_total_bytes_sent=" << features.historical_total_orig_bytes.load();
+    ss << ", historical_total_bytes_received=" << features.historical_total_resp_bytes.load();
+    ss << ", historical_total_connections=" << features.historical_total_connections.load();
+    // Add top historical protocols (optional, can be more complex)
+    std::vector<std::pair<std::string, int>> sorted_historical_protocols;
+    for (const auto& pair : features.historical_protocol_counts) {
+        sorted_historical_protocols.emplace_back(pair.first, pair.second);
+    }
+    std::sort(sorted_historical_protocols.begin(), sorted_historical_protocols.end(), [](const auto& a, const auto& b) {
+        return a.second > b.second;
+    });
+    for (size_t i = 0; i < std::min((size_t)3, sorted_historical_protocols.size()); ++i) {
+        ss << ", hist_proto_" << i + 1 << "=\"" << escape_dot_string(sorted_historical_protocols[i].first) << "\"";
+    }
+
+    ss << "];\n";
+    return ss.str();
+}
+
+void GraphNode::aggregate_historical_data(long long orig_bytes, long long resp_bytes, const std::string& protocol) {
+    features.historical_total_orig_bytes += orig_bytes;
+    features.historical_total_resp_bytes += resp_bytes;
+    features.historical_protocol_counts[protocol]++;
+    features.historical_total_connections++;
 }

@@ -6,21 +6,15 @@
   </compound>
   <compound refid="classFeatureEncoder" kind="class"><name>FeatureEncoder</name>
     <member refid="classFeatureEncoder_1abcd8f527f2c836c519287b6b999d68cf" kind="variable"><name>protocol_map</name></member>
+    <member refid="classFeatureEncoder_1a467cf143f8c269649148b8c1ba36f2cf" kind="variable"><name>NUM_PROTOCOL_CATEGORIES</name></member>
     <member refid="classFeatureEncoder_1a21438731d8a3773569af79776bf1acb6" kind="variable"><name>conn_state_map</name></member>
     <member refid="classFeatureEncoder_1a5408bfac0709d29e3b5aec87e816da35" kind="variable"><name>NUM_CONN_STATE_CATEGORIES</name></member>
-    <member refid="classFeatureEncoder_1aee70662ca987d3655885ce74c1316367" kind="variable"><name>service_map</name></member>
-    <member refid="classFeatureEncoder_1ae2a9b669719f077c4ca7d5a1aeb2a5f0" kind="variable"><name>method_map</name></member>
-    <member refid="classFeatureEncoder_1a3d9a66feaff85c726af1fa2d84161fc1" kind="variable"><name>user_agent_map</name></member>
     <member refid="classFeatureEncoder_1afdb30a4ee39e26c2477d9e53307c8543" kind="variable"><name>ssl_version_map</name></member>
-    <member refid="classFeatureEncoder_1aec6e323f686eacede0cfaa49ff3b9aab" kind="variable"><name>ssl_cipher_map</name></member>
+    <member refid="classFeatureEncoder_1af9f62893e0a7b731dc8b2cda82eee140" kind="variable"><name>NUM_SSL_VERSION_CATEGORIES</name></member>
+    <member refid="classFeatureEncoder_1a3d9a66feaff85c726af1fa2d84161fc1" kind="variable"><name>user_agent_map</name></member>
+    <member refid="classFeatureEncoder_1a5052b734770e210f37ae34e180eb0dc3" kind="variable"><name>NUM_USER_AGENT_CATEGORIES</name></member>
     <member refid="classFeatureEncoder_1a796843aa28a1d3fbeb89816ca9617364" kind="variable"><name>feature_dimension</name></member>
-    <member refid="classFeatureEncoder_1ac06441a7c77e33594e3581bbc1ca1237" kind="function"><name>normalize</name></member>
     <member refid="classFeatureEncoder_1ad5c46bc20ebd688f51ea40e1e079a81f" kind="function"><name>one_hot</name></member>
-    <member refid="classFeatureEncoder_1a1938d78968874a7cc69d02abbe091591" kind="function"><name>encode_timestamp_cyclic</name></member>
-    <member refid="classFeatureEncoder_1abd26f511236cb760f8cf43b316487bd2" kind="function"><name>encode_port</name></member>
-    <member refid="classFeatureEncoder_1a701695d03b52990d684ac02989a271ec" kind="function"><name>normalize_size</name></member>
-    <member refid="classFeatureEncoder_1a60bbddf6480840f1e918fb57aaab5d3f" kind="function"><name>encode_http_version</name></member>
-    <member refid="classFeatureEncoder_1adc0f983156f142d13e0783f7922cbed2" kind="function"><name>encode_http_status_code</name></member>
     <member refid="classFeatureEncoder_1afaf2be970998ea6430e5d17ea95d80a7" kind="function"><name>FeatureEncoder</name></member>
     <member refid="classFeatureEncoder_1a60fa681a32d45d2326c87167d6b1a049" kind="function"><name>get_feature_dimension</name></member>
     <member refid="classFeatureEncoder_1aaa3ef6109c0b8e2d4b00f98e146d3830" kind="function"><name>encode_features</name></member>
@@ -58,7 +52,10 @@
     <member refid="classGraphEdge_1ad3ce59edfe79128ddd587bc3df2c3370" kind="variable"><name>relationship</name></member>
     <member refid="classGraphEdge_1a7a0dcb05bfdb31ed7735a746b13be8d6" kind="variable"><name>attributes</name></member>
     <member refid="classGraphEdge_1a6b6bacb716fb79e52b6b184f1c33b2cc" kind="variable"><name>encoded_features</name></member>
+    <member refid="classGraphEdge_1a9cb0c4a71deae507aa42d738bd5a3b7f" kind="variable"><name>last_seen</name></member>
     <member refid="classGraphEdge_1a3cb272137fcf01bf7985e6ab17e71def" kind="function"><name>GraphEdge</name></member>
+    <member refid="classGraphEdge_1a0bb6c037458bc73a448aa771621df019" kind="function"><name>to_dot_string</name></member>
+    <member refid="classGraphEdge_1a66cb15ff27f3bed9df1809a614cb43f6" kind="function"><name>escape_dot_string</name></member>
   </compound>
   <compound refid="classGraphExporter" kind="class"><name>GraphExporter</name>
     <member refid="classGraphExporter_1a360987d76ced636de129746c14536b5b" kind="variable"><name>gvc</name></member>
@@ -66,7 +63,7 @@
     <member refid="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" kind="function"><name>~GraphExporter</name></member>
     <member refid="classGraphExporter_1ab7a5103acd18ab33827bfff8e560037a" kind="function"><name>export_full_graph_human_readable_async</name></member>
     <member refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" kind="function"><name>export_incremental_update_encoded_async</name></member>
-    <member refid="classGraphExporter_1ad37df271c30df08fa904dc9a6df95aa4" kind="function"><name>export_full_graph_worker</name></member>
+    <member refid="classGraphExporter_1a75d55b1d4f1931ab0dfff8a280478a47" kind="function"><name>export_full_graph_worker</name></member>
     <member refid="classGraphExporter_1a0a0ec3980f9448262dbc8cb72d50384e" kind="function"><name>export_incremental_update_worker</name></member>
     <member refid="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" kind="function"><name>add_nodes</name></member>
     <member refid="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" kind="function"><name>add_edges</name></member>
@@ -80,17 +77,21 @@
   <compound refid="classGraphNode" kind="class"><name>GraphNode</name>
     <member refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" kind="variable"><name>id</name></member>
     <member refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" kind="variable"><name>type</name></member>
+    <member refid="classGraphNode_1a34525f218ddc1b803d8e165da600f32c" kind="variable"><name>node_mutex</name></member>
     <member refid="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" kind="variable"><name>attributes</name></member>
     <member refid="classGraphNode_1a96d791f3b4c82348ba2f6dd63dc1275d" kind="variable"><name>features</name></member>
     <member refid="classGraphNode_1a2e621d85ff7e85c26a2fe12e1604e64d" kind="variable"><name>temporal</name></member>
+    <member refid="classGraphNode_1a6295b6656ebe0b98e8f18b1565439e8a" kind="variable"><name>last_connection_time</name></member>
+    <member refid="classGraphNode_1ae1389a274c513139fc281e2e55fca289" kind="variable"><name>connection_count</name></member>
     <member refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" kind="function"><name>GraphNode</name></member>
-    <member refid="classGraphNode_1aec41bf6dc8c079924a0076c6388b8de6" kind="function"><name>update_connection_features</name></member>
-    <member refid="classGraphNode_1a9f6e0e9f78b21d99d3c858928762f983" kind="function"><name>cleanup_old_connections</name></member>
-    <member refid="classGraphNode_1a92cd7727c4e791176e9e255b929b9603" kind="function"><name>calculate_anomaly_score</name></member>
+    <member refid="classGraphNode_1a11eec9f6d02e2d60d9a6cc6764731baa" kind="function"><name>update_connection_features</name></member>
     <member refid="classGraphNode_1a02be43aa36aa04eb5f47095fde4f95eb" kind="function"><name>cleanup_time_windows</name></member>
     <member refid="classGraphNode_1aac8f32f0478ee7262d5db9c6ea4ee1c5" kind="function"><name>get_connections_last_minute</name></member>
     <member refid="classGraphNode_1ab197cc5d8d2abda61c831cae073cb140" kind="function"><name>get_connections_last_hour</name></member>
     <member refid="classGraphNode_1a5cfa8c4a54c8dd7280b9d8a53f938e92" kind="function"><name>get_id</name></member>
+    <member refid="classGraphNode_1a7875f51a4e04d2a46dab4f6dee2b2a2f" kind="function"><name>to_dot_string</name></member>
+    <member refid="classGraphNode_1ac20b11cafa2318105f197c269d8fa022" kind="function"><name>aggregate_historical_data</name></member>
+    <member refid="classGraphNode_1a7b390f385e08c0ee3587e265668a253b" kind="function"><name>escape_dot_string</name></member>
   </compound>
   <compound refid="structGraphUpdate" kind="struct"><name>GraphUpdate</name>
     <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" kind="enum"><name>Type</name></member>
@@ -132,9 +133,55 @@
     <member refid="structGraphNode_1_1NodeFeatures_1ada3c8f493b6af8d82a39eb6c9278495b" kind="variable"><name>out_degree</name></member>
     <member refid="structGraphNode_1_1NodeFeatures_1ac96d6a3c89949a9f1531f9acf0f7d442" kind="variable"><name>protocol_counts</name></member>
     <member refid="structGraphNode_1_1NodeFeatures_1a0ca519c1fe6bb06725bcd02a7f4ce2ba" kind="variable"><name>activity_score</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a3ebaaf8a27f1eb09a9a807490138fb6f" kind="variable"><name>total_connections_initiated</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a956142f8d2f2fa882b4d73c2c8bf7e59" kind="variable"><name>total_connections_received</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ab798173cfe4a902273eefb609ece63bb" kind="variable"><name>protocols_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a0903de3f4a05d95132091463dbdc124d" kind="variable"><name>remote_ports_connected_to</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1abd2fbfd27c82764b79b46c21c6e93742" kind="variable"><name>local_ports_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ae4abee02a900bee189c7c3ff4c8d18d7" kind="variable"><name>remote_ports_connected_from</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a2a8f5f8e69588c48907b937bc88002df" kind="variable"><name>local_ports_listening_on</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a03c34b70889a2c647c51f0d9ca7df22e" kind="variable"><name>connection_state_counts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1abcb4893bbb8e85d2317ce4c528c3df7f" kind="variable"><name>ever_local_originated</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a77a8f4c4e35297de72ac27773468a660" kind="variable"><name>ever_local_responded</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a149b5604830f6eb00ba8fb185bb8f7d0" kind="variable"><name>total_orig_bytes</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a42001ee4d942e18a58dbd2ce44892365" kind="variable"><name>total_resp_bytes</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a05db57c3e7e1eaa6925a3be96c126b39" kind="variable"><name>total_orig_pkts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a7c6d92589175b63da17ec8359a1a9e4e" kind="variable"><name>total_resp_pkts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ab2a04bf23f5cf67eea006eee910d56d3" kind="variable"><name>services_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ac5c6457600ee75d83ca602f48d4b4367" kind="variable"><name>http_user_agent_counts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1aa21518842161ff0b7c3cc8372e3e58a4" kind="variable"><name>http_versions_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1affba116eabe1c1edd8871120bfd16412" kind="variable"><name>http_status_code_counts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1aa610e8dfb31b64d6089bbb511feda417" kind="variable"><name>ssl_versions_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a9946a161ed7d2cab7d5e6a0d4f10e438" kind="variable"><name>ssl_ciphers_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a3d5461b4d051ab7c6f50a1f9b1764185" kind="variable"><name>ever_ssl_curve_present</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a1b0a5e08a3d6093af05341072fbbbe6e" kind="variable"><name>ever_ssl_server_name_present</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1aac9afcd3f6bb6ef7a9f17706027bed61" kind="variable"><name>ssl_resumption_count</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1adb5a262e71c360774a38427fc7116cee" kind="variable"><name>ever_ssl_last_alert_present</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a967b1a49334ea549f32909af1b79c82e" kind="variable"><name>ssl_next_protocols_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1aef451f7731b2fa8e67ab63f0812fc0fd" kind="variable"><name>ssl_established_count</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a2bce23b95434b3eb5f889309b7d6a474" kind="variable"><name>ever_ssl_history_present</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a1952d96277ea55e078706fc0d88cff8c" kind="variable"><name>avg_packet_size_sent</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a3c070876d6a70a11b02e313b7cdc5ef4" kind="variable"><name>avg_packet_size_received</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a524ebc33d5f6a4a6eb3e219d8ac06d63" kind="variable"><name>historical_total_orig_bytes</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a6d022986e7b7c2cb6d1379af59101c89" kind="variable"><name>historical_total_resp_bytes</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a3307c40b196c6e6a15d07f61d8da37bc" kind="variable"><name>historical_protocol_counts</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a7938c1b049f4a9eedee7a29a00156760" kind="variable"><name>historical_total_connections</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ae8f3a4eb872c73cd824a737ffa38e9a6" kind="function"><name>outgoing_connection_ratio</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1abf7190e454607a7473b00fbef1441f91" kind="function"><name>incoming_connection_ratio</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a0ecc6547e04fe6a11e3fdc4133ce1b0b" kind="function"><name>most_frequent_protocol</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a923b3588ab376aa69f7ee27b09856866" kind="function"><name>unique_remote_ports_connected_to</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a3a15da558bdd57a1893f195779600db2" kind="function"><name>unique_local_ports_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1aaa3b8264a7eb598781bf0ebefbb4d7a4" kind="function"><name>most_frequent_connection_state</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a4df47e914db9acf1968bf7a5fb854976" kind="function"><name>connected_to_privileged_port</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a0a31d9c6096b99797fad43296d049ee1" kind="function"><name>listened_on_privileged_port</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a9ae2b8d094bc8cc64d5bc0bea7134472" kind="function"><name>total_bytes_sent</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a3ffcbffc7f04690e79e79f7dd56b9bca" kind="function"><name>total_bytes_received</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1ab51eca1f2afbe9de2be9fa0657224d6f" kind="function"><name>used_ssl_tls</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a59cabf26e884d63210f2b61eb9223ee7" kind="function"><name>get_ssl_versions_used</name></member>
+    <member refid="structGraphNode_1_1NodeFeatures_1a0aaae3f089800ab196f2add3bd362694" kind="function"><name>get_http_user_agent_counts</name></member>
   </compound>
   <compound refid="classRealTimeAnomalyDetector" kind="class"><name>RealTimeAnomalyDetector</name>
-    <member refid="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" kind="function"><name>detect</name></member>
+    <member refid="classRealTimeAnomalyDetector_1a92cf1a7775b63a09b3aa27fdeb23c2a5" kind="function"><name>detect</name></member>
   </compound>
   <compound refid="classSafeQueue" kind="class"><name>SafeQueue</name>
     <member refid="classSafeQueue_1aa5fa7276b07a5201398f63734ed3003e" kind="variable"><name>queue_</name></member>
@@ -151,32 +198,29 @@
     <member refid="structGraphNode_1_1TemporalFeatures_1a8cabf3e9d0a57829d244c8d48caaccd0" kind="variable"><name>connections_last_hour</name></member>
     <member refid="structGraphNode_1_1TemporalFeatures_1ac4e93bc8950c5592e9331203428ddaf5" kind="variable"><name>monitoring_start</name></member>
     <member refid="structGraphNode_1_1TemporalFeatures_1a68f7f0b74f4720077047b80694ba6877" kind="variable"><name>total_connections</name></member>
-    <member refid="structGraphNode_1_1TemporalFeatures_1ac03202456940c6753cd0f0e482ba7f7d" kind="variable"><name>recent_connections</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1ad969bda057f83e5426d05709c322dfd0" kind="variable"><name>window_mutex</name></member>
     <member refid="structGraphNode_1_1TemporalFeatures_1a3008fccab8347d3bf113a61b4b373124" kind="variable"><name>minute_window</name></member>
     <member refid="structGraphNode_1_1TemporalFeatures_1aaa043e6af8a3bc7bd751241c13515369" kind="variable"><name>hour_window</name></member>
-    <member refid="structGraphNode_1_1TemporalFeatures_1ad969bda057f83e5426d05709c322dfd0" kind="variable"><name>window_mutex</name></member>
-    <member refid="structGraphNode_1_1TemporalFeatures_1a681583ce94ee45bbea9bc37db4776434" kind="variable"><name>recent_connections_mutex</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a57898bcb0394a8e60267f9b77b1df500" kind="variable"><name>first_seen</name></member>
+    <member refid="structGraphNode_1_1TemporalFeatures_1a907380cd5b111b7c037a5e142d16586f" kind="variable"><name>last_seen</name></member>
   </compound>
   <compound refid="classTrafficGraph" kind="class"><name>TrafficGraph</name>
-    <member refid="classTrafficGraph_1a1134b1f485145d7ba90b1075ec058533" kind="friend"><name>RealTimeAnomalyDetector</name></member>
-    <member refid="classTrafficGraph_1ad5331ff664bcdb1664c6acc6682dd57e" kind="variable"><name>nodes</name></member>
-    <member refid="classTrafficGraph_1a2e8a442b2b29889c8b7310b0fc72a6be" kind="variable"><name>edges</name></member>
-    <member refid="classTrafficGraph_1a491ba60f07d174bb8e3dc781df2eff15" kind="variable"><name>graph_mutex</name></member>
-    <member refid="classTrafficGraph_1a6eb9871391310c048bbeb608de0448dd" kind="variable"><name>maintenance_thread</name></member>
-    <member refid="classTrafficGraph_1a6938d0393ac1d31e070c688c3176e3e8" kind="variable"><name>running</name></member>
-    <member refid="classTrafficGraph_1a92dd4e1eb2b39f8512f45ab3b86ec3db" kind="variable"><name>update_counter</name></member>
+    <member refid="classTrafficGraph_1ad57e22e30b5e6ec71cecc9bd63045a20" kind="variable"><name>nodes_</name></member>
+    <member refid="classTrafficGraph_1a5f63c063c321fa61cb3d7dcfcbfff43e" kind="variable"><name>edges_</name></member>
+    <member refid="classTrafficGraph_1ab938e232437f667f0dcd01cfb9a30976" kind="variable"><name>graph_mutex_</name></member>
     <member refid="classTrafficGraph_1aa52225cd200774fe315bfcf344635fc9" kind="function"><name>TrafficGraph</name></member>
     <member refid="classTrafficGraph_1a0bbbfe4c14d9611db5060a1af21e3948" kind="function"><name>~TrafficGraph</name></member>
-    <member refid="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" kind="function"><name>clean_all_time_windows</name></member>
-    <member refid="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" kind="function"><name>add_node</name></member>
-    <member refid="classTrafficGraph_1a8de21c2e351ea32d277fc13b5f14e266" kind="function"><name>add_edge</name></member>
-    <member refid="classTrafficGraph_1a4fe8bf82ebe5a118c488142e2a0a0711" kind="function"><name>get_or_create_node</name></member>
-    <member refid="classTrafficGraph_1a050fc4ccd24adf28afb04769841bd738" kind="function"><name>get_node_reference</name></member>
+    <member refid="classTrafficGraph_1aaa78dc30cf3211a8b1ff008e6e821fda" kind="function"><name>get_or_create_node</name></member>
+    <member refid="classTrafficGraph_1a6103742580d1f6b65cad221f93dd5ac0" kind="function"><name>add_node</name></member>
+    <member refid="classTrafficGraph_1a10ccbf8d4890bf2a6f2673aa74a85641" kind="function"><name>add_edge</name></member>
+    <member refid="classTrafficGraph_1a58a9e792e9d07459b1e6fee1f08efb48" kind="function"><name>get_node</name></member>
     <member refid="classTrafficGraph_1a503a7eb165f5df6b3099b10e71774735" kind="function"><name>get_nodes</name></member>
     <member refid="classTrafficGraph_1a9537afb96e766b4d910038a7b503af7f" kind="function"><name>get_edges</name></member>
-    <member refid="classTrafficGraph_1aff5c1921c0c1614230fa3c43b215b320" kind="function"><name>find_connected_components</name></member>
-    <member refid="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" kind="function"><name>detect_anomalies</name></member>
+    <member refid="classTrafficGraph_1afe15319ddc0ebf3f9f03c80709c66e74" kind="function"><name>get_node_count</name></member>
+    <member refid="classTrafficGraph_1a8038d37fa4975dd955870c61143b5432" kind="function"><name>get_edge_count</name></member>
     <member refid="classTrafficGraph_1ae485051f1b4e6f8cbb91ad7d89dc89b1" kind="function"><name>is_empty</name></member>
+    <member refid="classTrafficGraph_1a7cbeed5458946820039e11f5d9665a37" kind="function"><name>aggregate_old_edges</name></member>
+    <member refid="classTrafficGraph_1a0be5a3e071e02e41e57f8c19fa67246a" kind="function"><name>recalculate_node_degrees</name></member>
   </compound>
   <compound refid="classZeekLogParser" kind="class"><name>ZeekLogParser</name>
     <member refid="classZeekLogParser_1a099473727c45fcbef2015b15e09f2703" kind="variable"><name>tracked_files_</name></member>
@@ -257,6 +301,8 @@
   </compound>
   <compound refid="GraphBuilder_8cpp" kind="file"><name>GraphBuilder.cpp</name>
   </compound>
+  <compound refid="GraphEdge_8cpp" kind="file"><name>GraphEdge.cpp</name>
+  </compound>
   <compound refid="GraphExporter_8cpp" kind="file"><name>GraphExporter.cpp</name>
   </compound>
   <compound refid="GraphNode_8cpp" kind="file"><name>GraphNode.cpp</name>
@@ -287,8 +333,6 @@
     <member refid="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kind="function"><name>main</name></member>
   </compound>
   <compound refid="README_8md" kind="file"><name>README.md</name>
-  </compound>
-  <compound refid="RealTimeAnomalyDetector_8cpp" kind="file"><name>RealTimeAnomalyDetector.cpp</name>
   </compound>
   <compound refid="TrafficGraph_8cpp" kind="file"><name>TrafficGraph.cpp</name>
   </compound>

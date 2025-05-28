@@ -138,7 +138,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:aceabeb2e29b01e4e02f1ea7e4f8310ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a network connection event and adds the corresponding nodes and edges to the graph.  <br /></td></tr>
 <tr class="separator:aceabeb2e29b01e4e02f1ea7e4f8310ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a791f0173bacd48ce1071e6d87cd8bfaf" id="r_a791f0173bacd48ce1071e6d87cd8bfaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a791f0173bacd48ce1071e6d87cd8bfaf">get_graph</a> ()</td></tr>
-<tr class="memdesc:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to the underlying <a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a> object.  <br /></td></tr>
+<tr class="memdesc:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to the underlying <a class="el" href="classTrafficGraph.html">TrafficGraph</a> object.  <br /></td></tr>
 <tr class="separator:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5bd30a82778691790ebf82f364494a41" id="r_a5bd30a82778691790ebf82f364494a41"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5bd30a82778691790ebf82f364494a41">get_feature_dimension</a> () const</td></tr>
 <tr class="memdesc:a5bd30a82778691790ebf82f364494a41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the dimension of the encoded feature vector.  <br /></td></tr>
@@ -152,7 +152,7 @@ Static Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Singleton class responsible for building and managing the network traffic graph. </p>
-<p>The <code><a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a></code> class provides a single point of access to the <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code> and offers methods to process raw network traffic data (e.g., from Zeek logs) and add corresponding nodes and edges to the graph. The singleton pattern ensures that only one instance of the graph builder exists throughout the application. </p>
+<p>The <code><a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a></code> class provides a single point of access to the <code><a class="el" href="classTrafficGraph.html">TrafficGraph</a></code> and offers methods to process raw network traffic data (e.g., from Zeek logs) and add corresponding nodes and edges to the graph. The singleton pattern ensures that only one instance of the graph builder exists throughout the application. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a3af3213174c72b1eda8f3a0e21bba54b" name="a3af3213174c72b1eda8f3a0e21bba54b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3af3213174c72b1eda8f3a0e21bba54b">&#9670;&#160;</a></span>GraphBuilder()</h2>
@@ -256,9 +256,9 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Gets a reference to the underlying <a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a> object. </p>
-<p>This method provides access to the <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code> object managed by the <code><a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a></code>.</p>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the <a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a> object. </dd></dl>
+<p>Gets a reference to the underlying <a class="el" href="classTrafficGraph.html">TrafficGraph</a> object. </p>
+<p>This method provides access to the <code><a class="el" href="classTrafficGraph.html">TrafficGraph</a></code> object managed by the <code><a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a></code>.</p>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the <a class="el" href="classTrafficGraph.html">TrafficGraph</a> object. </dd></dl>
 
 </div>
 </div>

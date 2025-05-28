@@ -4,7 +4,14 @@
 
 #ifndef GRAPHEDGE_H
 #define GRAPHEDGE_H
+#include <chrono>
 #include <unordered_map>
+#include <string>
+#include <vector>
+#include "FeatureEncoder.h" // Include FeatureEncoder for feature names
+#include <sstream>
+#include <iomanip>
+
 /**
  * @brief Represents an edge in the network traffic graph, connecting two GraphNodes.
  *
@@ -35,6 +42,7 @@ public:
      */
     std::vector<float> encoded_features;
 
+    std::chrono::system_clock::time_point last_seen;
     /**
      * @brief Constructor for the GraphEdge.
      * @param src The identifier of the source node.
@@ -43,7 +51,25 @@ public:
      */
     GraphEdge(const std::string &src, const std::string &tgt,
               const std::string &rel)
-        : source(src), target(tgt), relationship(rel) {
-    }
+        : source(src), target(tgt), relationship(rel),
+          last_seen(std::chrono::system_clock::now())
+    { }
+
+
+    /**
+ * @brief Escapes special characters in a string for DOT format.
+ * @param str The input string to escape.
+ * @return The escaped string.
+ */
+    static std::string escape_dot_string(const std::string &str) ;
+    /**
+
+    /**
+     * @brief Generates a DOT format string representation of the edge, including its attributes and encoded features.
+     * @return A string in DOT format representing the edge.
+     */
+    std::string to_dot_string() const;
+
+
 };
 #endif //GRAPHEDGE_H

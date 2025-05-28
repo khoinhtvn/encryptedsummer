@@ -1,0 +1,11 @@
+digraph NWTraffic_update {
+  "192.168.27.10" [degree=84, in_degree=0, out_degree=84, activity_score=1.00, total_connections=84];
+  "142.251.12.103" [degree=4, in_degree=4, out_degree=0, activity_score=0.34, total_connections=4];
+  "192.168.27.10" -> "142.251.12.103" [protocol_UNKNOWN=0.00,protocol_TCP=1.00,protocol_UDP=0.00,protocol_ICMP=0.00,timestamp_sin=0.79,timestamp_cos=-0.62,src_port_type=0.50,dst_port_type=0.00,conn_state_successful=1.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=0.00,local_orig=1.00,local_resp=0.00,history_length=0.80,orig_bytes=0.71,resp_bytes=0.87,orig_pkts=0.35,resp_pkts=0.38,orig_ip_bytes=0.73,resp_ip_bytes=0.87,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
+  "192.168.27.10" [degree=84, in_degree=0, out_degree=84, activity_score=1.00, total_connections=84];
+  "142.251.12.106" [degree=4, in_degree=4, out_degree=0, activity_score=0.34, total_connections=4];
+  "192.168.27.10" -> "142.251.12.106" [protocol_UNKNOWN=0.00,protocol_TCP=1.00,protocol_UDP=0.00,protocol_ICMP=0.00,timestamp_sin=0.79,timestamp_cos=-0.62,src_port_type=0.50,dst_port_type=0.00,conn_state_successful=1.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=0.00,local_orig=1.00,local_resp=0.00,history_length=0.80,orig_bytes=0.61,resp_bytes=0.70,orig_pkts=0.31,resp_pkts=0.32,orig_ip_bytes=0.65,resp_ip_bytes=0.71,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
+  "192.168.27.10" [degree=84, in_degree=0, out_degree=84, activity_score=1.00, total_connections=84];
+  "151.101.193.91" [degree=3, in_degree=3, out_degree=0, activity_score=0.27, total_connections=3];
+  "192.168.27.10" -> "151.101.193.91" [protocol_UNKNOWN=0.00,protocol_TCP=1.00,protocol_UDP=0.00,protocol_ICMP=0.00,timestamp_sin=0.78,timestamp_cos=-0.62,src_port_type=0.50,dst_port_type=0.00,conn_state_successful=1.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=0.00,local_orig=1.00,local_resp=0.00,history_length=0.90,orig_bytes=0.56,resp_bytes=0.63,orig_pkts=0.21,resp_pkts=0.22,orig_ip_bytes=0.58,resp_ip_bytes=0.63,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
+}

@@ -44,8 +44,7 @@ var NAVTREE =
         [ "All", "functions.html", null ],
         [ "Functions", "functions_func.html", null ],
         [ "Variables", "functions_vars.html", null ],
-        [ "Enumerations", "functions_enum.html", null ],
-        [ "Related Symbols", "functions_rela.html", null ]
+        [ "Enumerations", "functions_enum.html", null ]
       ] ]
     ] ],
     [ "Files", "files.html", [
@@ -62,7 +61,8 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"CMakeCCompilerId_8c.html"
+"CMakeCCompilerId_8c.html",
+"structGraphUpdate.html#a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

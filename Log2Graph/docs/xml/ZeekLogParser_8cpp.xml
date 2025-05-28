@@ -22,9 +22,9 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
         <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -32,11 +32,11 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
@@ -68,31 +68,51 @@
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="18">
         <label>GraphEdge.h</label>
         <link refid="GraphEdge_8h"/>
+        <childnode refid="19" relation="include">
+        </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-      </node>
-      <node id="19">
-        <label>GraphNode.h</label>
-        <link refid="GraphNode_8h"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
         <childnode refid="20" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+      </node>
+      <node id="22">
+        <label>GraphNode.h</label>
+        <link refid="GraphNode_8h"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
       </node>
       <node id="17">
@@ -110,25 +130,21 @@
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
-      <node id="22">
+      <node id="24">
         <label>TrafficGraph.h</label>
         <link refid="TrafficGraph_8h"/>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
       </node>
       <node id="2">
@@ -153,10 +169,10 @@
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="20">
+      <node id="23">
         <label>atomic</label>
       </node>
-      <node id="21">
+      <node id="19">
         <label>chrono</label>
       </node>
       <node id="16">
@@ -168,10 +184,13 @@
       <node id="5">
         <label>filesystem</label>
       </node>
-      <node id="25">
+      <node id="26">
         <label>fstream</label>
       </node>
-      <node id="24">
+      <node id="21">
+        <label>iomanip</label>
+      </node>
+      <node id="25">
         <label>iostream</label>
       </node>
       <node id="10">
@@ -189,10 +208,7 @@
       <node id="11">
         <label>set</label>
       </node>
-      <node id="23">
-        <label>shared_mutex</label>
-      </node>
-      <node id="26">
+      <node id="20">
         <label>sstream</label>
       </node>
       <node id="3">
@@ -438,7 +454,7 @@
 <codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uid_data_[uid]<sp/>=<sp/>{};</highlight></codeline>
 <codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uid_data_[uid][entry.<ref refid="structLogEntry_1a8d0edc412501a60ec6d9a21548f04528" kindref="member">log_type</ref>]<sp/>=<sp/>entry.<ref refid="structLogEntry_1ac8d4448ecf2ad0845d6c1c6c611e946a" kindref="member">data</ref>;</highlight></codeline>
-<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>For<sp/>multi-valued<sp/>types,<sp/>you<sp/>might<sp/>need<sp/>to<sp/>merge<sp/>instead<sp/>of<sp/>overwrite</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TODO:<sp/>check<sp/>support<sp/>for<sp/>multi<sp/>valued<sp/>fields</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(entry.<ref refid="structLogEntry_1a8d0edc412501a60ec6d9a21548f04528" kindref="member">log_type</ref><sp/>==<sp/></highlight><highlight class="stringliteral">&quot;http&quot;</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
 <codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>[key,<sp/>value_set]<sp/>:<sp/>entry.<ref refid="structLogEntry_1a42700d8758ee45a0e45ede3b94d1aa45" kindref="member">set_data</ref>)<sp/>{</highlight></codeline>
 <codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal">&amp;<sp/>item<sp/>:<sp/>value_set)<sp/>{</highlight></codeline>

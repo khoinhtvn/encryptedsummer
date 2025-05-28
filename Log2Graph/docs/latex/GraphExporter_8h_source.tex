@@ -31,30 +31,29 @@
 \DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
 \DoxyCodeLine{00080\ \ \ \ \ GVC\_t\ *gvc;}
 \DoxyCodeLine{00081\ }
-\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_full\_graph\_worker(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,}
-\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file,}
-\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ open\_image,\ \textcolor{keywordtype}{bool}\ export\_cond);}
-\DoxyCodeLine{00093\ }
-\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_incremental\_update\_worker(std::vector<GraphUpdate>\ updates,}
-\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file);}
-\DoxyCodeLine{00102\ }
-\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_nodes(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
-\DoxyCodeLine{00113\ }
-\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_edges(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
-\DoxyCodeLine{00124\ }
-\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ apply\_default\_styles(Agraph\_t\ *graph);}
-\DoxyCodeLine{00134\ }
-\DoxyCodeLine{00144\ \ \ \ \ std::string\ generate\_node\_id(\textcolor{keyword}{const}\ std::string\ \&original\_id);}
-\DoxyCodeLine{00145\ }
-\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_node\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphNode>\ \&\ node,\ std::ofstream\ \&\ ofstream);}
-\DoxyCodeLine{00147\ }
-\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_edge\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphEdge>\ \&\ edge,\ std::ofstream\ \&\ ofstream);}
-\DoxyCodeLine{00149\ }
-\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_to\_dot(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,\ \textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_full\_graph\_worker(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_incremental\_update\_worker(std::vector<GraphUpdate>\ updates,}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_nodes(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_edges(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ apply\_default\_styles(Agraph\_t\ *graph);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00141\ \ \ \ \ std::string\ generate\_node\_id(\textcolor{keyword}{const}\ std::string\ \&original\_id);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_node\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphNode>\ \&\ node,\ std::ofstream\ \&\ ofstream);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_edge\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphEdge>\ \&\ edge,\ std::ofstream\ \&\ ofstream);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_to\_dot(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,\ \textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ std::string\ escape\_dot\_string(\textcolor{keyword}{const}\ std::string\ \&str);}
+\DoxyCodeLine{00159\ \};}
 \DoxyCodeLine{00160\ }
-\DoxyCodeLine{00161\ \ \ \ \ std::string\ escape\_dot\_string(\textcolor{keyword}{const}\ std::string\ \&str);}
-\DoxyCodeLine{00162\ \};}
-\DoxyCodeLine{00163\ }
-\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPH\_EXPORTER\_H}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPH\_EXPORTER\_H}}
 
 \end{DoxyCode}

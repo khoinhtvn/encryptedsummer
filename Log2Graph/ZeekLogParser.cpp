@@ -217,7 +217,7 @@ void ZeekLogParser::process_entry(const LogEntry& entry) {
                 uid_data_[uid] = {};
             }
             uid_data_[uid][entry.log_type] = entry.data;
-            // For multi-valued types, you might need to merge instead of overwrite
+            // TODO: check support for multi valued fields
             if (entry.log_type == "http") {
                 for (const auto& [key, value_set] : entry.set_data) {
                     for (const auto& item : value_set) {

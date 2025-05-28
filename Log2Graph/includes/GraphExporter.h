@@ -84,12 +84,9 @@ private:
      *
      * @param graph The `TrafficGraph` object to visualize.
      * @param output_file The name of the output image file.
-     * @param open_image A boolean indicating whether to attempt to open the generated image.
-     * @param export_cond A boolean controlling whether the export process should proceed.
      */
     void export_full_graph_worker(const TrafficGraph &graph,
-                                  const std::string &output_file,
-                                  bool open_image, bool export_cond);
+                                  const std::string &output_file);
 
     /**
      * @brief Worker function to export incremental updates to a DOT file.

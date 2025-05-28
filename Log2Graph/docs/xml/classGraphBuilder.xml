@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="121" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="62"/>
+        <location file="includes/GraphBuilder.h" line="121" column="10" bodyfile="GraphBuilder.cpp" bodystart="17" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
@@ -233,7 +233,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphBuilder.h" line="134" column="18" bodyfile="GraphBuilder.cpp" bodystart="64" bodyend="66"/>
+        <location file="includes/GraphBuilder.h" line="134" column="18" bodyfile="GraphBuilder.cpp" bodystart="62" bodyend="64"/>
       </memberdef>
       <memberdef kind="function" id="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>size_t</type>

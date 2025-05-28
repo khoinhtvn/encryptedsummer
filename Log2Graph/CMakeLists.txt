@@ -20,8 +20,6 @@ add_executable(Log2Graph main.cpp
         includes/LogMonitor.h
         GraphExporter.cpp
         includes/GraphExporter.h
-        RealTimeAnomalyDetector.cpp
-        includes/RealTimeAnomalyDetector.h
         includes/GraphUpdateQueue.h
         includes/GraphNode.h
         includes/GraphEdge.h
@@ -29,15 +27,6 @@ add_executable(Log2Graph main.cpp
         GraphNode.cpp
         TrafficGraph.cpp
         FeatureEncoder.cpp
-        includes/FeatureEncoder.h)
+        includes/FeatureEncoder.h
+        GraphEdge.cpp)
 
-
-# Manually specify the Graphviz libraries
-find_library(GVC_LIB gvc)
-find_library(CGRC_LIB cgraph)
-
-if (GVC_LIB AND CGRC_LIB)
-    target_link_libraries(Log2Graph ${GVC_LIB} ${CGRC_LIB})
-else ()
-    message(FATAL_ERROR "Graphviz libraries not found. Make sure libgraphviz-dev is installed.")
-endif ()

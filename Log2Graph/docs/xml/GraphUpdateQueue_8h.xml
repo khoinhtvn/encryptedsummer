@@ -11,28 +11,60 @@
     <includes refid="GraphNode_8h" local="yes">GraphNode.h</includes>
     <includedby refid="GraphBuilder_8h" local="yes">includes/GraphBuilder.h</includedby>
     <incdepgraph>
+      <node id="11">
+        <label>FeatureEncoder.h</label>
+        <link refid="FeatureEncoder_8h"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
       <node id="7">
         <label>GraphEdge.h</label>
         <link refid="GraphEdge_8h"/>
         <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="9">
-        <label>GraphNode.h</label>
-        <link refid="GraphNode_8h"/>
+        <childnode refid="9" relation="include">
+        </childnode>
         <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>GraphNode.h</label>
+        <link refid="GraphNode_8h"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -50,19 +82,25 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="16">
         <label>atomic</label>
       </node>
-      <node id="12">
+      <node id="8">
         <label>chrono</label>
+      </node>
+      <node id="12">
+        <label>cmath</label>
       </node>
       <node id="4">
         <label>condition_variable</label>
       </node>
-      <node id="11">
+      <node id="14">
+        <label>iomanip</label>
+      </node>
+      <node id="17">
         <label>map</label>
       </node>
       <node id="6">
@@ -74,7 +112,16 @@
       <node id="2">
         <label>queue</label>
       </node>
-      <node id="8">
+      <node id="18">
+        <label>set</label>
+      </node>
+      <node id="13">
+        <label>sstream</label>
+      </node>
+      <node id="10">
+        <label>string</label>
+      </node>
+      <node id="9">
         <label>unordered_map</label>
       </node>
       <node id="5">
@@ -86,19 +133,11 @@
         <label>GraphBuilder.cpp</label>
         <link refid="GraphBuilder_8cpp"/>
       </node>
-      <node id="7">
+      <node id="6">
         <label>GraphExporter.cpp</label>
         <link refid="GraphExporter_8cpp"/>
       </node>
-      <node id="10">
-        <label>RealTimeAnomalyDetector.cpp</label>
-        <link refid="RealTimeAnomalyDetector_8cpp"/>
-      </node>
       <node id="4">
-        <label>TrafficGraph.cpp</label>
-        <link refid="TrafficGraph_8cpp"/>
-      </node>
-      <node id="5">
         <label>ZeekLogParser.cpp</label>
         <link refid="ZeekLogParser_8cpp"/>
       </node>
@@ -111,19 +150,17 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-      </node>
-      <node id="6">
-        <label>includes/GraphExporter.h</label>
-        <link refid="GraphExporter_8h"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+      </node>
+      <node id="5">
+        <label>includes/GraphExporter.h</label>
+        <link refid="GraphExporter_8h"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -132,17 +169,13 @@
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="8">
         <label>includes/RealTimeAnomalyDetector.h</label>
         <link refid="RealTimeAnomalyDetector_8h"/>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
       </node>
-      <node id="8">
+      <node id="7">
         <label>main.cpp</label>
         <link refid="main_8cpp"/>
       </node>

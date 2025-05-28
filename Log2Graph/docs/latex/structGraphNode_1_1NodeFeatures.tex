@@ -1,0 +1,601 @@
+\doxysection{Graph\+Node\+::Node\+Features Struct Reference}
+\hypertarget{structGraphNode_1_1NodeFeatures}{}\label{structGraphNode_1_1NodeFeatures}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+
+
+Structure to hold various features of the network node.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Node.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Node\+::Node\+Features\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structGraphNode_1_1NodeFeatures__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ae8f3a4eb872c73cd824a737ffa38e9a6}{outgoing\+\_\+connection\+\_\+ratio}} () const
+\item 
+double \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_abf7190e454607a7473b00fbef1441f91}{incoming\+\_\+connection\+\_\+ratio}} () const
+\item 
+std\+::string \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a0ecc6547e04fe6a11e3fdc4133ce1b0b}{most\+\_\+frequent\+\_\+protocol}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a923b3588ab376aa69f7ee27b09856866}{unique\+\_\+remote\+\_\+ports\+\_\+connected\+\_\+to}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a3a15da558bdd57a1893f195779600db2}{unique\+\_\+local\+\_\+ports\+\_\+used}} () const
+\item 
+std\+::string \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_aaa3b8264a7eb598781bf0ebefbb4d7a4}{most\+\_\+frequent\+\_\+connection\+\_\+state}} () const
+\item 
+bool \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a4df47e914db9acf1968bf7a5fb854976}{connected\+\_\+to\+\_\+privileged\+\_\+port}} () const
+\item 
+bool \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a0a31d9c6096b99797fad43296d049ee1}{listened\+\_\+on\+\_\+privileged\+\_\+port}} () const
+\item 
+long long \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a9ae2b8d094bc8cc64d5bc0bea7134472}{total\+\_\+bytes\+\_\+sent}} () const
+\item 
+long long \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a3ffcbffc7f04690e79e79f7dd56b9bca}{total\+\_\+bytes\+\_\+received}} () const
+\item 
+bool \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ab51eca1f2afbe9de2be9fa0657224d6f}{used\+\_\+ssl\+\_\+tls}} () const
+\item 
+const std\+::set$<$ std\+::string $>$ \& \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a59cabf26e884d63210f2b61eb9223ee7}{get\+\_\+ssl\+\_\+versions\+\_\+used}} () const
+\item 
+const std\+::map$<$ std\+::string, int $>$ \& \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a0aaae3f089800ab196f2add3bd362694}{get\+\_\+http\+\_\+user\+\_\+agent\+\_\+counts}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a9f7df6cb5a7e14294490091ad520e436}{degree}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of connections to/from this node. \end{DoxyCompactList}\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_af50ed2cd80fe6812b472d5494c16cbdb}{in\+\_\+degree}} \{0\}
+\begin{DoxyCompactList}\small\item\em Number of incoming connections. \end{DoxyCompactList}\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ada3c8f493b6af8d82a39eb6c9278495b}{out\+\_\+degree}} \{0\}
+\begin{DoxyCompactList}\small\item\em Number of outgoing connections. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ac96d6a3c89949a9f1531f9acf0f7d442}{protocol\+\_\+counts}}
+\begin{DoxyCompactList}\small\item\em Count of connections per protocol. \end{DoxyCompactList}\item 
+std\+::atomic$<$ double $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a0ca519c1fe6bb06725bcd02a7f4ce2ba}{activity\+\_\+score}} \{0.\+0\}
+\begin{DoxyCompactList}\small\item\em A score indicating the node\textquotesingle{}s activity level. \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a3ebaaf8a27f1eb09a9a807490138fb6f}{total\+\_\+connections\+\_\+initiated}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of connections initiated by this node. \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a956142f8d2f2fa882b4d73c2c8bf7e59}{total\+\_\+connections\+\_\+received}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of connections received by this node. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ab798173cfe4a902273eefb609ece63bb}{protocols\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique protocols used by this node. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a0903de3f4a05d95132091463dbdc124d}{remote\+\_\+ports\+\_\+connected\+\_\+to}}
+\begin{DoxyCompactList}\small\item\em Set of unique remote ports this node connected to. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_abd2fbfd27c82764b79b46c21c6e93742}{local\+\_\+ports\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique local ports used by this node. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ae4abee02a900bee189c7c3ff4c8d18d7}{remote\+\_\+ports\+\_\+connected\+\_\+from}}
+\begin{DoxyCompactList}\small\item\em Set of unique remote ports that connected to this node. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a2a8f5f8e69588c48907b937bc88002df}{local\+\_\+ports\+\_\+listening\+\_\+on}}
+\begin{DoxyCompactList}\small\item\em Set of unique local ports this node was listening on. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a03c34b70889a2c647c51f0d9ca7df22e}{connection\+\_\+state\+\_\+counts}}
+\begin{DoxyCompactList}\small\item\em Count of connections per connection state (e.\+g., ESTABLISHED). \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_abcb4893bbb8e85d2317ce4c528c3df7f}{ever\+\_\+local\+\_\+originated}} \{false\}
+\begin{DoxyCompactList}\small\item\em True if this node ever initiated a local connection. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a77a8f4c4e35297de72ac27773468a660}{ever\+\_\+local\+\_\+responded}} \{false\}
+\begin{DoxyCompactList}\small\item\em True if this node ever responded to a local connection. \end{DoxyCompactList}\item 
+std\+::atomic$<$ long long $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a149b5604830f6eb00ba8fb185bb8f7d0}{total\+\_\+orig\+\_\+bytes}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of bytes sent by this node. \end{DoxyCompactList}\item 
+std\+::atomic$<$ long long $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a42001ee4d942e18a58dbd2ce44892365}{total\+\_\+resp\+\_\+bytes}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of bytes received by this node. \end{DoxyCompactList}\item 
+std\+::atomic$<$ long long $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a05db57c3e7e1eaa6925a3be96c126b39}{total\+\_\+orig\+\_\+pkts}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of packets sent by this node. \end{DoxyCompactList}\item 
+std\+::atomic$<$ long long $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a7c6d92589175b63da17ec8359a1a9e4e}{total\+\_\+resp\+\_\+pkts}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of packets received by this node. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ab2a04bf23f5cf67eea006eee910d56d3}{services\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique services used by this node (e.\+g., http, dns). \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_ac5c6457600ee75d83ca602f48d4b4367}{http\+\_\+user\+\_\+agent\+\_\+counts}}
+\begin{DoxyCompactList}\small\item\em Count of connections per HTTP user agent. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_aa21518842161ff0b7c3cc8372e3e58a4}{http\+\_\+versions\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique HTTP versions used. \end{DoxyCompactList}\item 
+std\+::map$<$ int, int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_affba116eabe1c1edd8871120bfd16412}{http\+\_\+status\+\_\+code\+\_\+counts}}
+\begin{DoxyCompactList}\small\item\em Count of connections per HTTP status code. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_aa610e8dfb31b64d6089bbb511feda417}{ssl\+\_\+versions\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique SSL/\+TLS versions used. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a9946a161ed7d2cab7d5e6a0d4f10e438}{ssl\+\_\+ciphers\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique SSL/\+TLS ciphers used. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a3d5461b4d051ab7c6f50a1f9b1764185}{ever\+\_\+ssl\+\_\+curve\+\_\+present}} \{false\}
+\begin{DoxyCompactList}\small\item\em True if an SSL/\+TLS elliptic curve was ever present. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a1b0a5e08a3d6093af05341072fbbbe6e}{ever\+\_\+ssl\+\_\+server\+\_\+name\+\_\+present}} \{false\}
+\begin{DoxyCompactList}\small\item\em True if an SSL/\+TLS server name was ever present. \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_aac9afcd3f6bb6ef7a9f17706027bed61}{ssl\+\_\+resumption\+\_\+count}} \{0\}
+\begin{DoxyCompactList}\small\item\em Count of SSL/\+TLS session resumptions. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_adb5a262e71c360774a38427fc7116cee}{ever\+\_\+ssl\+\_\+last\+\_\+alert\+\_\+present}} \{false\}
+\begin{DoxyCompactList}\small\item\em True if an SSL/\+TLS alert was ever present. \end{DoxyCompactList}\item 
+std\+::set$<$ std\+::string $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a967b1a49334ea549f32909af1b79c82e}{ssl\+\_\+next\+\_\+protocols\+\_\+used}}
+\begin{DoxyCompactList}\small\item\em Set of unique SSL/\+TLS next protocols used (e.\+g., h2). \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_aef451f7731b2fa8e67ab63f0812fc0fd}{ssl\+\_\+established\+\_\+count}} \{0\}
+\begin{DoxyCompactList}\small\item\em Count of successful SSL/\+TLS handshakes. \end{DoxyCompactList}\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a2bce23b95434b3eb5f889309b7d6a474}{ever\+\_\+ssl\+\_\+history\+\_\+present}} \{false\}
+\begin{DoxyCompactList}\small\item\em True if SSL/\+TLS history was ever present. \end{DoxyCompactList}\item 
+std\+::atomic$<$ double $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a1952d96277ea55e078706fc0d88cff8c}{avg\+\_\+packet\+\_\+size\+\_\+sent}} \{0.\+0\}
+\begin{DoxyCompactList}\small\item\em Average size of packets sent. \end{DoxyCompactList}\item 
+std\+::atomic$<$ double $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a3c070876d6a70a11b02e313b7cdc5ef4}{avg\+\_\+packet\+\_\+size\+\_\+received}} \{0.\+0\}
+\begin{DoxyCompactList}\small\item\em Average size of packets received. \end{DoxyCompactList}\item 
+std\+::atomic$<$ long long $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a524ebc33d5f6a4a6eb3e219d8ac06d63}{historical\+\_\+total\+\_\+orig\+\_\+bytes}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total original bytes aggregated over time. \end{DoxyCompactList}\item 
+std\+::atomic$<$ long long $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a6d022986e7b7c2cb6d1379af59101c89}{historical\+\_\+total\+\_\+resp\+\_\+bytes}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total response bytes aggregated over time. \end{DoxyCompactList}\item 
+std\+::map$<$ std\+::string, int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a3307c40b196c6e6a15d07f61d8da37bc}{historical\+\_\+protocol\+\_\+counts}}
+\begin{DoxyCompactList}\small\item\em Aggregated counts of protocols over time. \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1NodeFeatures_a7938c1b049f4a9eedee7a29a00156760}{historical\+\_\+total\+\_\+connections}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of connections aggregated over time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure to hold various features of the network node. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structGraphNode_1_1NodeFeatures_a4df47e914db9acf1968bf7a5fb854976}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!connected\_to\_privileged\_port@{connected\_to\_privileged\_port}}
+\index{connected\_to\_privileged\_port@{connected\_to\_privileged\_port}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{connected\_to\_privileged\_port()}{connected\_to\_privileged\_port()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a4df47e914db9acf1968bf7a5fb854976} 
+bool Graph\+Node\+::\+Node\+Features\+::connected\+\_\+to\+\_\+privileged\+\_\+port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a0aaae3f089800ab196f2add3bd362694}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!get\_http\_user\_agent\_counts@{get\_http\_user\_agent\_counts}}
+\index{get\_http\_user\_agent\_counts@{get\_http\_user\_agent\_counts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{get\_http\_user\_agent\_counts()}{get\_http\_user\_agent\_counts()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a0aaae3f089800ab196f2add3bd362694} 
+const std\+::map$<$ std\+::string, int $>$ \& Graph\+Node\+::\+Node\+Features\+::get\+\_\+http\+\_\+user\+\_\+agent\+\_\+counts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a59cabf26e884d63210f2b61eb9223ee7}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!get\_ssl\_versions\_used@{get\_ssl\_versions\_used}}
+\index{get\_ssl\_versions\_used@{get\_ssl\_versions\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{get\_ssl\_versions\_used()}{get\_ssl\_versions\_used()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a59cabf26e884d63210f2b61eb9223ee7} 
+const std\+::set$<$ std\+::string $>$ \& Graph\+Node\+::\+Node\+Features\+::get\+\_\+ssl\+\_\+versions\+\_\+used (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_abf7190e454607a7473b00fbef1441f91}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!incoming\_connection\_ratio@{incoming\_connection\_ratio}}
+\index{incoming\_connection\_ratio@{incoming\_connection\_ratio}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{incoming\_connection\_ratio()}{incoming\_connection\_ratio()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_abf7190e454607a7473b00fbef1441f91} 
+double Graph\+Node\+::\+Node\+Features\+::incoming\+\_\+connection\+\_\+ratio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a0a31d9c6096b99797fad43296d049ee1}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!listened\_on\_privileged\_port@{listened\_on\_privileged\_port}}
+\index{listened\_on\_privileged\_port@{listened\_on\_privileged\_port}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{listened\_on\_privileged\_port()}{listened\_on\_privileged\_port()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a0a31d9c6096b99797fad43296d049ee1} 
+bool Graph\+Node\+::\+Node\+Features\+::listened\+\_\+on\+\_\+privileged\+\_\+port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_aaa3b8264a7eb598781bf0ebefbb4d7a4}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!most\_frequent\_connection\_state@{most\_frequent\_connection\_state}}
+\index{most\_frequent\_connection\_state@{most\_frequent\_connection\_state}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{most\_frequent\_connection\_state()}{most\_frequent\_connection\_state()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_aaa3b8264a7eb598781bf0ebefbb4d7a4} 
+std\+::string Graph\+Node\+::\+Node\+Features\+::most\+\_\+frequent\+\_\+connection\+\_\+state (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a0ecc6547e04fe6a11e3fdc4133ce1b0b}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!most\_frequent\_protocol@{most\_frequent\_protocol}}
+\index{most\_frequent\_protocol@{most\_frequent\_protocol}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{most\_frequent\_protocol()}{most\_frequent\_protocol()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a0ecc6547e04fe6a11e3fdc4133ce1b0b} 
+std\+::string Graph\+Node\+::\+Node\+Features\+::most\+\_\+frequent\+\_\+protocol (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ae8f3a4eb872c73cd824a737ffa38e9a6}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!outgoing\_connection\_ratio@{outgoing\_connection\_ratio}}
+\index{outgoing\_connection\_ratio@{outgoing\_connection\_ratio}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{outgoing\_connection\_ratio()}{outgoing\_connection\_ratio()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ae8f3a4eb872c73cd824a737ffa38e9a6} 
+double Graph\+Node\+::\+Node\+Features\+::outgoing\+\_\+connection\+\_\+ratio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a3ffcbffc7f04690e79e79f7dd56b9bca}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_bytes\_received@{total\_bytes\_received}}
+\index{total\_bytes\_received@{total\_bytes\_received}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_bytes\_received()}{total\_bytes\_received()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a3ffcbffc7f04690e79e79f7dd56b9bca} 
+long long Graph\+Node\+::\+Node\+Features\+::total\+\_\+bytes\+\_\+received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a9ae2b8d094bc8cc64d5bc0bea7134472}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_bytes\_sent@{total\_bytes\_sent}}
+\index{total\_bytes\_sent@{total\_bytes\_sent}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_bytes\_sent()}{total\_bytes\_sent()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a9ae2b8d094bc8cc64d5bc0bea7134472} 
+long long Graph\+Node\+::\+Node\+Features\+::total\+\_\+bytes\+\_\+sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a3a15da558bdd57a1893f195779600db2}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!unique\_local\_ports\_used@{unique\_local\_ports\_used}}
+\index{unique\_local\_ports\_used@{unique\_local\_ports\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{unique\_local\_ports\_used()}{unique\_local\_ports\_used()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a3a15da558bdd57a1893f195779600db2} 
+size\+\_\+t Graph\+Node\+::\+Node\+Features\+::unique\+\_\+local\+\_\+ports\+\_\+used (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a923b3588ab376aa69f7ee27b09856866}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!unique\_remote\_ports\_connected\_to@{unique\_remote\_ports\_connected\_to}}
+\index{unique\_remote\_ports\_connected\_to@{unique\_remote\_ports\_connected\_to}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{unique\_remote\_ports\_connected\_to()}{unique\_remote\_ports\_connected\_to()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a923b3588ab376aa69f7ee27b09856866} 
+size\+\_\+t Graph\+Node\+::\+Node\+Features\+::unique\+\_\+remote\+\_\+ports\+\_\+connected\+\_\+to (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ab51eca1f2afbe9de2be9fa0657224d6f}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!used\_ssl\_tls@{used\_ssl\_tls}}
+\index{used\_ssl\_tls@{used\_ssl\_tls}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{used\_ssl\_tls()}{used\_ssl\_tls()}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ab51eca1f2afbe9de2be9fa0657224d6f} 
+bool Graph\+Node\+::\+Node\+Features\+::used\+\_\+ssl\+\_\+tls (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGraphNode_1_1NodeFeatures_a0ca519c1fe6bb06725bcd02a7f4ce2ba}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!activity\_score@{activity\_score}}
+\index{activity\_score@{activity\_score}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{activity\_score}{activity\_score}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a0ca519c1fe6bb06725bcd02a7f4ce2ba} 
+std\+::atomic$<$double$>$ Graph\+Node\+::\+Node\+Features\+::activity\+\_\+score \{0.\+0\}}
+
+
+
+A score indicating the node\textquotesingle{}s activity level. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a3c070876d6a70a11b02e313b7cdc5ef4}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!avg\_packet\_size\_received@{avg\_packet\_size\_received}}
+\index{avg\_packet\_size\_received@{avg\_packet\_size\_received}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{avg\_packet\_size\_received}{avg\_packet\_size\_received}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a3c070876d6a70a11b02e313b7cdc5ef4} 
+std\+::atomic$<$double$>$ Graph\+Node\+::\+Node\+Features\+::avg\+\_\+packet\+\_\+size\+\_\+received \{0.\+0\}}
+
+
+
+Average size of packets received. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a1952d96277ea55e078706fc0d88cff8c}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!avg\_packet\_size\_sent@{avg\_packet\_size\_sent}}
+\index{avg\_packet\_size\_sent@{avg\_packet\_size\_sent}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{avg\_packet\_size\_sent}{avg\_packet\_size\_sent}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a1952d96277ea55e078706fc0d88cff8c} 
+std\+::atomic$<$double$>$ Graph\+Node\+::\+Node\+Features\+::avg\+\_\+packet\+\_\+size\+\_\+sent \{0.\+0\}}
+
+
+
+Average size of packets sent. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a03c34b70889a2c647c51f0d9ca7df22e}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!connection\_state\_counts@{connection\_state\_counts}}
+\index{connection\_state\_counts@{connection\_state\_counts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{connection\_state\_counts}{connection\_state\_counts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a03c34b70889a2c647c51f0d9ca7df22e} 
+std\+::map$<$std\+::string, int$>$ Graph\+Node\+::\+Node\+Features\+::connection\+\_\+state\+\_\+counts}
+
+
+
+Count of connections per connection state (e.\+g., ESTABLISHED). 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a9f7df6cb5a7e14294490091ad520e436}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!degree@{degree}}
+\index{degree@{degree}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{degree}{degree}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a9f7df6cb5a7e14294490091ad520e436} 
+std\+::atomic$<$uint32\+\_\+t$>$ Graph\+Node\+::\+Node\+Features\+::degree \{0\}}
+
+
+
+Total number of connections to/from this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_abcb4893bbb8e85d2317ce4c528c3df7f}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ever\_local\_originated@{ever\_local\_originated}}
+\index{ever\_local\_originated@{ever\_local\_originated}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ever\_local\_originated}{ever\_local\_originated}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_abcb4893bbb8e85d2317ce4c528c3df7f} 
+std\+::atomic$<$bool$>$ Graph\+Node\+::\+Node\+Features\+::ever\+\_\+local\+\_\+originated \{false\}}
+
+
+
+True if this node ever initiated a local connection. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a77a8f4c4e35297de72ac27773468a660}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ever\_local\_responded@{ever\_local\_responded}}
+\index{ever\_local\_responded@{ever\_local\_responded}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ever\_local\_responded}{ever\_local\_responded}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a77a8f4c4e35297de72ac27773468a660} 
+std\+::atomic$<$bool$>$ Graph\+Node\+::\+Node\+Features\+::ever\+\_\+local\+\_\+responded \{false\}}
+
+
+
+True if this node ever responded to a local connection. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a3d5461b4d051ab7c6f50a1f9b1764185}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ever\_ssl\_curve\_present@{ever\_ssl\_curve\_present}}
+\index{ever\_ssl\_curve\_present@{ever\_ssl\_curve\_present}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ever\_ssl\_curve\_present}{ever\_ssl\_curve\_present}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a3d5461b4d051ab7c6f50a1f9b1764185} 
+std\+::atomic$<$bool$>$ Graph\+Node\+::\+Node\+Features\+::ever\+\_\+ssl\+\_\+curve\+\_\+present \{false\}}
+
+
+
+True if an SSL/\+TLS elliptic curve was ever present. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a2bce23b95434b3eb5f889309b7d6a474}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ever\_ssl\_history\_present@{ever\_ssl\_history\_present}}
+\index{ever\_ssl\_history\_present@{ever\_ssl\_history\_present}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ever\_ssl\_history\_present}{ever\_ssl\_history\_present}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a2bce23b95434b3eb5f889309b7d6a474} 
+std\+::atomic$<$bool$>$ Graph\+Node\+::\+Node\+Features\+::ever\+\_\+ssl\+\_\+history\+\_\+present \{false\}}
+
+
+
+True if SSL/\+TLS history was ever present. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_adb5a262e71c360774a38427fc7116cee}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ever\_ssl\_last\_alert\_present@{ever\_ssl\_last\_alert\_present}}
+\index{ever\_ssl\_last\_alert\_present@{ever\_ssl\_last\_alert\_present}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ever\_ssl\_last\_alert\_present}{ever\_ssl\_last\_alert\_present}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_adb5a262e71c360774a38427fc7116cee} 
+std\+::atomic$<$bool$>$ Graph\+Node\+::\+Node\+Features\+::ever\+\_\+ssl\+\_\+last\+\_\+alert\+\_\+present \{false\}}
+
+
+
+True if an SSL/\+TLS alert was ever present. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a1b0a5e08a3d6093af05341072fbbbe6e}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ever\_ssl\_server\_name\_present@{ever\_ssl\_server\_name\_present}}
+\index{ever\_ssl\_server\_name\_present@{ever\_ssl\_server\_name\_present}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ever\_ssl\_server\_name\_present}{ever\_ssl\_server\_name\_present}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a1b0a5e08a3d6093af05341072fbbbe6e} 
+std\+::atomic$<$bool$>$ Graph\+Node\+::\+Node\+Features\+::ever\+\_\+ssl\+\_\+server\+\_\+name\+\_\+present \{false\}}
+
+
+
+True if an SSL/\+TLS server name was ever present. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a3307c40b196c6e6a15d07f61d8da37bc}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!historical\_protocol\_counts@{historical\_protocol\_counts}}
+\index{historical\_protocol\_counts@{historical\_protocol\_counts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{historical\_protocol\_counts}{historical\_protocol\_counts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a3307c40b196c6e6a15d07f61d8da37bc} 
+std\+::map$<$std\+::string, int$>$ Graph\+Node\+::\+Node\+Features\+::historical\+\_\+protocol\+\_\+counts}
+
+
+
+Aggregated counts of protocols over time. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a7938c1b049f4a9eedee7a29a00156760}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!historical\_total\_connections@{historical\_total\_connections}}
+\index{historical\_total\_connections@{historical\_total\_connections}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{historical\_total\_connections}{historical\_total\_connections}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a7938c1b049f4a9eedee7a29a00156760} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Node\+Features\+::historical\+\_\+total\+\_\+connections \{0\}}
+
+
+
+Total number of connections aggregated over time. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a524ebc33d5f6a4a6eb3e219d8ac06d63}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!historical\_total\_orig\_bytes@{historical\_total\_orig\_bytes}}
+\index{historical\_total\_orig\_bytes@{historical\_total\_orig\_bytes}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{historical\_total\_orig\_bytes}{historical\_total\_orig\_bytes}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a524ebc33d5f6a4a6eb3e219d8ac06d63} 
+std\+::atomic$<$long long$>$ Graph\+Node\+::\+Node\+Features\+::historical\+\_\+total\+\_\+orig\+\_\+bytes \{0\}}
+
+
+
+Total original bytes aggregated over time. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a6d022986e7b7c2cb6d1379af59101c89}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!historical\_total\_resp\_bytes@{historical\_total\_resp\_bytes}}
+\index{historical\_total\_resp\_bytes@{historical\_total\_resp\_bytes}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{historical\_total\_resp\_bytes}{historical\_total\_resp\_bytes}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a6d022986e7b7c2cb6d1379af59101c89} 
+std\+::atomic$<$long long$>$ Graph\+Node\+::\+Node\+Features\+::historical\+\_\+total\+\_\+resp\+\_\+bytes \{0\}}
+
+
+
+Total response bytes aggregated over time. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_affba116eabe1c1edd8871120bfd16412}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!http\_status\_code\_counts@{http\_status\_code\_counts}}
+\index{http\_status\_code\_counts@{http\_status\_code\_counts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{http\_status\_code\_counts}{http\_status\_code\_counts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_affba116eabe1c1edd8871120bfd16412} 
+std\+::map$<$int, int$>$ Graph\+Node\+::\+Node\+Features\+::http\+\_\+status\+\_\+code\+\_\+counts}
+
+
+
+Count of connections per HTTP status code. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ac5c6457600ee75d83ca602f48d4b4367}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!http\_user\_agent\_counts@{http\_user\_agent\_counts}}
+\index{http\_user\_agent\_counts@{http\_user\_agent\_counts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{http\_user\_agent\_counts}{http\_user\_agent\_counts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ac5c6457600ee75d83ca602f48d4b4367} 
+std\+::map$<$std\+::string, int$>$ Graph\+Node\+::\+Node\+Features\+::http\+\_\+user\+\_\+agent\+\_\+counts}
+
+
+
+Count of connections per HTTP user agent. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_aa21518842161ff0b7c3cc8372e3e58a4}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!http\_versions\_used@{http\_versions\_used}}
+\index{http\_versions\_used@{http\_versions\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{http\_versions\_used}{http\_versions\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_aa21518842161ff0b7c3cc8372e3e58a4} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::http\+\_\+versions\+\_\+used}
+
+
+
+Set of unique HTTP versions used. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_af50ed2cd80fe6812b472d5494c16cbdb}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!in\_degree@{in\_degree}}
+\index{in\_degree@{in\_degree}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{in\_degree}{in\_degree}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_af50ed2cd80fe6812b472d5494c16cbdb} 
+std\+::atomic$<$uint32\+\_\+t$>$ Graph\+Node\+::\+Node\+Features\+::in\+\_\+degree \{0\}}
+
+
+
+Number of incoming connections. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a2a8f5f8e69588c48907b937bc88002df}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!local\_ports\_listening\_on@{local\_ports\_listening\_on}}
+\index{local\_ports\_listening\_on@{local\_ports\_listening\_on}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{local\_ports\_listening\_on}{local\_ports\_listening\_on}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a2a8f5f8e69588c48907b937bc88002df} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::local\+\_\+ports\+\_\+listening\+\_\+on}
+
+
+
+Set of unique local ports this node was listening on. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_abd2fbfd27c82764b79b46c21c6e93742}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!local\_ports\_used@{local\_ports\_used}}
+\index{local\_ports\_used@{local\_ports\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{local\_ports\_used}{local\_ports\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_abd2fbfd27c82764b79b46c21c6e93742} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::local\+\_\+ports\+\_\+used}
+
+
+
+Set of unique local ports used by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ada3c8f493b6af8d82a39eb6c9278495b}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!out\_degree@{out\_degree}}
+\index{out\_degree@{out\_degree}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{out\_degree}{out\_degree}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ada3c8f493b6af8d82a39eb6c9278495b} 
+std\+::atomic$<$uint32\+\_\+t$>$ Graph\+Node\+::\+Node\+Features\+::out\+\_\+degree \{0\}}
+
+
+
+Number of outgoing connections. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ac96d6a3c89949a9f1531f9acf0f7d442}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!protocol\_counts@{protocol\_counts}}
+\index{protocol\_counts@{protocol\_counts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{protocol\_counts}{protocol\_counts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ac96d6a3c89949a9f1531f9acf0f7d442} 
+std\+::map$<$std\+::string, int$>$ Graph\+Node\+::\+Node\+Features\+::protocol\+\_\+counts}
+
+
+
+Count of connections per protocol. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ab798173cfe4a902273eefb609ece63bb}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!protocols\_used@{protocols\_used}}
+\index{protocols\_used@{protocols\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{protocols\_used}{protocols\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ab798173cfe4a902273eefb609ece63bb} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::protocols\+\_\+used}
+
+
+
+Set of unique protocols used by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ae4abee02a900bee189c7c3ff4c8d18d7}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!remote\_ports\_connected\_from@{remote\_ports\_connected\_from}}
+\index{remote\_ports\_connected\_from@{remote\_ports\_connected\_from}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{remote\_ports\_connected\_from}{remote\_ports\_connected\_from}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ae4abee02a900bee189c7c3ff4c8d18d7} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::remote\+\_\+ports\+\_\+connected\+\_\+from}
+
+
+
+Set of unique remote ports that connected to this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a0903de3f4a05d95132091463dbdc124d}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!remote\_ports\_connected\_to@{remote\_ports\_connected\_to}}
+\index{remote\_ports\_connected\_to@{remote\_ports\_connected\_to}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{remote\_ports\_connected\_to}{remote\_ports\_connected\_to}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a0903de3f4a05d95132091463dbdc124d} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::remote\+\_\+ports\+\_\+connected\+\_\+to}
+
+
+
+Set of unique remote ports this node connected to. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_ab2a04bf23f5cf67eea006eee910d56d3}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!services\_used@{services\_used}}
+\index{services\_used@{services\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{services\_used}{services\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_ab2a04bf23f5cf67eea006eee910d56d3} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::services\+\_\+used}
+
+
+
+Set of unique services used by this node (e.\+g., http, dns). 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a9946a161ed7d2cab7d5e6a0d4f10e438}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ssl\_ciphers\_used@{ssl\_ciphers\_used}}
+\index{ssl\_ciphers\_used@{ssl\_ciphers\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ssl\_ciphers\_used}{ssl\_ciphers\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a9946a161ed7d2cab7d5e6a0d4f10e438} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::ssl\+\_\+ciphers\+\_\+used}
+
+
+
+Set of unique SSL/\+TLS ciphers used. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_aef451f7731b2fa8e67ab63f0812fc0fd}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ssl\_established\_count@{ssl\_established\_count}}
+\index{ssl\_established\_count@{ssl\_established\_count}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ssl\_established\_count}{ssl\_established\_count}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_aef451f7731b2fa8e67ab63f0812fc0fd} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Node\+Features\+::ssl\+\_\+established\+\_\+count \{0\}}
+
+
+
+Count of successful SSL/\+TLS handshakes. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a967b1a49334ea549f32909af1b79c82e}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ssl\_next\_protocols\_used@{ssl\_next\_protocols\_used}}
+\index{ssl\_next\_protocols\_used@{ssl\_next\_protocols\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ssl\_next\_protocols\_used}{ssl\_next\_protocols\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a967b1a49334ea549f32909af1b79c82e} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::ssl\+\_\+next\+\_\+protocols\+\_\+used}
+
+
+
+Set of unique SSL/\+TLS next protocols used (e.\+g., h2). 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_aac9afcd3f6bb6ef7a9f17706027bed61}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ssl\_resumption\_count@{ssl\_resumption\_count}}
+\index{ssl\_resumption\_count@{ssl\_resumption\_count}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ssl\_resumption\_count}{ssl\_resumption\_count}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_aac9afcd3f6bb6ef7a9f17706027bed61} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Node\+Features\+::ssl\+\_\+resumption\+\_\+count \{0\}}
+
+
+
+Count of SSL/\+TLS session resumptions. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_aa610e8dfb31b64d6089bbb511feda417}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!ssl\_versions\_used@{ssl\_versions\_used}}
+\index{ssl\_versions\_used@{ssl\_versions\_used}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{ssl\_versions\_used}{ssl\_versions\_used}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_aa610e8dfb31b64d6089bbb511feda417} 
+std\+::set$<$std\+::string$>$ Graph\+Node\+::\+Node\+Features\+::ssl\+\_\+versions\+\_\+used}
+
+
+
+Set of unique SSL/\+TLS versions used. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a3ebaaf8a27f1eb09a9a807490138fb6f}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_connections\_initiated@{total\_connections\_initiated}}
+\index{total\_connections\_initiated@{total\_connections\_initiated}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_connections\_initiated}{total\_connections\_initiated}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a3ebaaf8a27f1eb09a9a807490138fb6f} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Node\+Features\+::total\+\_\+connections\+\_\+initiated \{0\}}
+
+
+
+Total number of connections initiated by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a956142f8d2f2fa882b4d73c2c8bf7e59}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_connections\_received@{total\_connections\_received}}
+\index{total\_connections\_received@{total\_connections\_received}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_connections\_received}{total\_connections\_received}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a956142f8d2f2fa882b4d73c2c8bf7e59} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Node\+Features\+::total\+\_\+connections\+\_\+received \{0\}}
+
+
+
+Total number of connections received by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a149b5604830f6eb00ba8fb185bb8f7d0}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_orig\_bytes@{total\_orig\_bytes}}
+\index{total\_orig\_bytes@{total\_orig\_bytes}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_orig\_bytes}{total\_orig\_bytes}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a149b5604830f6eb00ba8fb185bb8f7d0} 
+std\+::atomic$<$long long$>$ Graph\+Node\+::\+Node\+Features\+::total\+\_\+orig\+\_\+bytes \{0\}}
+
+
+
+Total number of bytes sent by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a05db57c3e7e1eaa6925a3be96c126b39}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_orig\_pkts@{total\_orig\_pkts}}
+\index{total\_orig\_pkts@{total\_orig\_pkts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_orig\_pkts}{total\_orig\_pkts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a05db57c3e7e1eaa6925a3be96c126b39} 
+std\+::atomic$<$long long$>$ Graph\+Node\+::\+Node\+Features\+::total\+\_\+orig\+\_\+pkts \{0\}}
+
+
+
+Total number of packets sent by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a42001ee4d942e18a58dbd2ce44892365}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_resp\_bytes@{total\_resp\_bytes}}
+\index{total\_resp\_bytes@{total\_resp\_bytes}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_resp\_bytes}{total\_resp\_bytes}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a42001ee4d942e18a58dbd2ce44892365} 
+std\+::atomic$<$long long$>$ Graph\+Node\+::\+Node\+Features\+::total\+\_\+resp\+\_\+bytes \{0\}}
+
+
+
+Total number of bytes received by this node. 
+
+\Hypertarget{structGraphNode_1_1NodeFeatures_a7c6d92589175b63da17ec8359a1a9e4e}\index{GraphNode::NodeFeatures@{GraphNode::NodeFeatures}!total\_resp\_pkts@{total\_resp\_pkts}}
+\index{total\_resp\_pkts@{total\_resp\_pkts}!GraphNode::NodeFeatures@{GraphNode::NodeFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_resp\_pkts}{total\_resp\_pkts}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1NodeFeatures_a7c6d92589175b63da17ec8359a1a9e4e} 
+std\+::atomic$<$long long$>$ Graph\+Node\+::\+Node\+Features\+::total\+\_\+resp\+\_\+pkts \{0\}}
+
+
+
+Total number of packets received by this node. 
+
+
+
+The documentation for this struct was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphNode_8h}{Graph\+Node.\+h}}\item 
+\mbox{\hyperlink{GraphNode_8cpp}{Graph\+Node.\+cpp}}\end{DoxyCompactItemize}

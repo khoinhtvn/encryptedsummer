@@ -13,7 +13,7 @@
         <name>id</name>
         <qualifiedname>GraphNode::id</qualifiedname>
         <briefdescription>
-<para>Unique identifier for the node. </para>
+<para>Unique identifier of the node (e.g., IP address). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -28,13 +28,28 @@
         <name>type</name>
         <qualifiedname>GraphNode::type</qualifiedname>
         <briefdescription>
-<para>Type of the node (e.g., &quot;host&quot;, &quot;service&quot;, &quot;domain&quot;). </para>
+<para>Type of the node (e.g., host, network). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="101" column="17" bodyfile="includes/GraphNode.h" bodystart="101" bodyend="-1"/>
+        <location file="includes/GraphNode.h" line="98" column="17" bodyfile="includes/GraphNode.h" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphNode_1a34525f218ddc1b803d8e165da600f32c" prot="public" static="no" mutable="no">
+        <type>std::mutex</type>
+        <definition>std::mutex GraphNode::node_mutex</definition>
+        <argsstring></argsstring>
+        <name>node_mutex</name>
+        <qualifiedname>GraphNode::node_mutex</qualifiedname>
+        <briefdescription>
+<para>Mutex to protect the entire <ref refid="classGraphNode" kindref="compound">GraphNode</ref> object for thread-safe access. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphNode.h" line="99" column="16" bodyfile="includes/GraphNode.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" prot="public" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, std::string &gt;</type>
@@ -43,13 +58,13 @@
         <name>attributes</name>
         <qualifiedname>GraphNode::attributes</qualifiedname>
         <briefdescription>
-<para>Additional attributes associated with the node. </para>
+<para>Additional attributes of the node. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="105" column="24" bodyfile="includes/GraphNode.h" bodystart="105" bodyend="-1"/>
+        <location file="includes/GraphNode.h" line="100" column="24" bodyfile="includes/GraphNode.h" bodystart="100" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGraphNode_1a96d791f3b4c82348ba2f6dd63dc1275d" prot="public" static="no" mutable="no">
         <type><ref refid="structGraphNode_1_1NodeFeatures" kindref="compound">NodeFeatures</ref></type>
@@ -58,12 +73,13 @@
         <name>features</name>
         <qualifiedname>GraphNode::features</qualifiedname>
         <briefdescription>
+<para>Statistical features of the node based on its traffic. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="107" column="18" bodyfile="includes/GraphNode.h" bodystart="107" bodyend="-1"/>
+        <location file="includes/GraphNode.h" line="101" column="18" bodyfile="includes/GraphNode.h" bodystart="101" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGraphNode_1a2e621d85ff7e85c26a2fe12e1604e64d" prot="public" static="no" mutable="no">
         <type><ref refid="structGraphNode_1_1TemporalFeatures" kindref="compound">TemporalFeatures</ref></type>
@@ -72,12 +88,44 @@
         <name>temporal</name>
         <qualifiedname>GraphNode::temporal</qualifiedname>
         <briefdescription>
+<para>Time-based features of the node. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="108" column="22" bodyfile="includes/GraphNode.h" bodystart="108" bodyend="-1"/>
+        <location file="includes/GraphNode.h" line="102" column="22" bodyfile="includes/GraphNode.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphNode_1a6295b6656ebe0b98e8f18b1565439e8a" prot="public" static="no" mutable="no">
+        <type>std::chrono::system_clock::time_point</type>
+        <definition>std::chrono::system_clock::time_point GraphNode::last_connection_time</definition>
+        <argsstring></argsstring>
+        <name>last_connection_time</name>
+        <qualifiedname>GraphNode::last_connection_time</qualifiedname>
+        <briefdescription>
+<para>Timestamp of the last connection involving this node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphNode.h" line="103" column="43" bodyfile="includes/GraphNode.h" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGraphNode_1ae1389a274c513139fc281e2e55fca289" prot="public" static="no" mutable="no">
+        <type>std::atomic&lt; uint64_t &gt;</type>
+        <definition>std::atomic&lt;uint64_t&gt; GraphNode::connection_count</definition>
+        <argsstring></argsstring>
+        <name>connection_count</name>
+        <qualifiedname>GraphNode::connection_count</qualifiedname>
+        <initializer>{0}</initializer>
+        <briefdescription>
+<para>Total number of connections associated with this node. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphNode.h" line="104" column="17" bodyfile="includes/GraphNode.h" bodystart="104" bodyend="104"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -112,7 +160,7 @@
 <parametername>type</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the node (e.g., &quot;host&quot;, &quot;service&quot;). </para>
+<para>The type of the node. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -120,41 +168,40 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="115" column="5" bodyfile="GraphNode.cpp" bodystart="9" bodyend="12"/>
+        <location file="includes/GraphNode.h" line="111" column="5" bodyfile="GraphNode.cpp" bodystart="13" bodyend="21"/>
       </memberdef>
-      <memberdef kind="function" id="classGraphNode_1aec41bf6dc8c079924a0076c6388b8de6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classGraphNode_1a11eec9f6d02e2d60d9a6cc6764731baa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void GraphNode::update_connection_features</definition>
-        <argsstring>(const std::string &amp;protocol, bool is_outgoing)</argsstring>
+        <argsstring>(bool is_outgoing, const std::unordered_map&lt; std::string, std::string &gt; &amp;connection_attributes)</argsstring>
         <name>update_connection_features</name>
         <qualifiedname>GraphNode::update_connection_features</qualifiedname>
-        <param>
-          <type>const std::string &amp;</type>
-          <declname>protocol</declname>
-        </param>
         <param>
           <type>bool</type>
           <declname>is_outgoing</declname>
         </param>
+        <param>
+          <type>const std::unordered_map&lt; std::string, std::string &gt; &amp;</type>
+          <declname>connection_attributes</declname>
+        </param>
         <briefdescription>
-<para>Updates the connection-related features of the node. </para>
+<para>Updates the features of the node based on a new connection. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method increments the degree counters and updates the protocol counts based on a new connection involving this node.</para>
 <para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>protocol</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The protocol of the connection (e.g., &quot;tcp&quot;, &quot;udp&quot;). </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
 <parameternamelist>
 <parametername>is_outgoing</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>True if the connection is outgoing from this node, false otherwise. </para>
+<para>True if the connection was initiated by this node, false otherwise. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>connection_attributes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Map of attributes associated with the connection. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -162,41 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="126" column="10" bodyfile="GraphNode.cpp" bodystart="14" bodyend="49"/>
-      </memberdef>
-      <memberdef kind="function" id="classGraphNode_1a9f6e0e9f78b21d99d3c858928762f983" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void GraphNode::cleanup_old_connections</definition>
-        <argsstring>()</argsstring>
-        <name>cleanup_old_connections</name>
-        <qualifiedname>GraphNode::cleanup_old_connections</qualifiedname>
-        <briefdescription>
-<para>Removes timestamps of old connections from the <computeroutput>recent_connections</computeroutput> vector. </para>
-        </briefdescription>
-        <detaileddescription>
-<para>This method helps to keep the <computeroutput>recent_connections</computeroutput> vector manageable and relevant for short-term analysis. </para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="134" column="10" bodyfile="GraphNode.cpp" bodystart="51" bodyend="60"/>
-      </memberdef>
-      <memberdef kind="function" id="classGraphNode_1a92cd7727c4e791176e9e255b929b9603" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>double</type>
-        <definition>double GraphNode::calculate_anomaly_score</definition>
-        <argsstring>() const</argsstring>
-        <name>calculate_anomaly_score</name>
-        <qualifiedname>GraphNode::calculate_anomaly_score</qualifiedname>
-        <briefdescription>
-<para>Calculates an anomaly score for the node based on its current features. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><simplesect kind="return"><para>A double representing the anomaly score. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="140" column="12" bodyfile="GraphNode.cpp" bodystart="62" bodyend="74"/>
+        <location file="includes/GraphNode.h" line="118" column="10" bodyfile="GraphNode.cpp" bodystart="23" bodyend="164"/>
       </memberdef>
       <memberdef kind="function" id="classGraphNode_1a02be43aa36aa04eb5f47095fde4f95eb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -205,14 +218,13 @@
         <name>cleanup_time_windows</name>
         <qualifiedname>GraphNode::cleanup_time_windows</qualifiedname>
         <briefdescription>
-<para>Removes outdated timestamps from the minute and hour time windows. </para>
+<para>Removes connection timestamps that are outside the current time windows. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method ensures that the connection counts for the last minute and last hour are accurate by discarding timestamps that fall outside these windows. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="148" column="10" bodyfile="GraphNode.cpp" bodystart="76" bodyend="94"/>
+        <location file="includes/GraphNode.h" line="124" column="10" bodyfile="GraphNode.cpp" bodystart="166" bodyend="182"/>
       </memberdef>
       <memberdef kind="function" id="classGraphNode_1aac8f32f0478ee7262d5db9c6ea4ee1c5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -221,16 +233,16 @@
         <name>get_connections_last_minute</name>
         <qualifiedname>GraphNode::get_connections_last_minute</qualifiedname>
         <briefdescription>
-<para>Gets the number of connections associated with this node in the last minute. </para>
+<para>Gets the number of connections seen in the last minute. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The number of connections in the last minute. </para>
+<para><simplesect kind="return"><para>The count of connections in the last minute. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="154" column="9" bodyfile="GraphNode.cpp" bodystart="96" bodyend="98"/>
+        <location file="includes/GraphNode.h" line="130" column="9" bodyfile="GraphNode.cpp" bodystart="184" bodyend="186"/>
       </memberdef>
       <memberdef kind="function" id="classGraphNode_1ab197cc5d8d2abda61c831cae073cb140" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>int</type>
@@ -239,16 +251,16 @@
         <name>get_connections_last_hour</name>
         <qualifiedname>GraphNode::get_connections_last_hour</qualifiedname>
         <briefdescription>
-<para>Gets the number of connections associated with this node in the last hour. </para>
+<para>Gets the number of connections seen in the last hour. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The number of connections in the last hour. </para>
+<para><simplesect kind="return"><para>The count of connections in the last hour. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="160" column="9" bodyfile="GraphNode.cpp" bodystart="100" bodyend="102"/>
+        <location file="includes/GraphNode.h" line="136" column="9" bodyfile="GraphNode.cpp" bodystart="188" bodyend="190"/>
       </memberdef>
       <memberdef kind="function" id="classGraphNode_1a5cfa8c4a54c8dd7280b9d8a53f938e92" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>std::string</type>
@@ -257,7 +269,7 @@
         <name>get_id</name>
         <qualifiedname>GraphNode::get_id</qualifiedname>
         <briefdescription>
-<para>Gets the unique identifier of the node. </para>
+<para>Gets the ID of the node. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="return"><para>The node&apos;s ID. </para>
@@ -266,14 +278,116 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="166" column="17" bodyfile="includes/GraphNode.h" bodystart="166" bodyend="166"/>
+        <location file="includes/GraphNode.h" line="142" column="17" bodyfile="includes/GraphNode.h" bodystart="142" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphNode_1a7875f51a4e04d2a46dab4f6dee2b2a2f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string GraphNode::to_dot_string</definition>
+        <argsstring>() const</argsstring>
+        <name>to_dot_string</name>
+        <qualifiedname>GraphNode::to_dot_string</qualifiedname>
+        <briefdescription>
+<para>Generates a DOT format string representation of the node, including its features. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A string in DOT format representing the node. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphNode.h" line="148" column="17" bodyfile="GraphNode.cpp" bodystart="283" bodyend="357"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphNode_1ac20b11cafa2318105f197c269d8fa022" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphNode::aggregate_historical_data</definition>
+        <argsstring>(long long orig_bytes, long long resp_bytes, const std::string &amp;protocol)</argsstring>
+        <name>aggregate_historical_data</name>
+        <qualifiedname>GraphNode::aggregate_historical_data</qualifiedname>
+        <param>
+          <type>long long</type>
+          <declname>orig_bytes</declname>
+        </param>
+        <param>
+          <type>long long</type>
+          <declname>resp_bytes</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>protocol</declname>
+        </param>
+        <briefdescription>
+<para>Aggregates historical connection data into the node&apos;s features. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>orig_bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of original bytes from the connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>resp_bytes</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of response bytes from the connection. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>protocol</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The protocol of the connection. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphNode.h" line="163" column="10" bodyfile="GraphNode.cpp" bodystart="359" bodyend="364"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classGraphNode_1a7b390f385e08c0ee3587e265668a253b" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::string</type>
+        <definition>std::string GraphNode::escape_dot_string</definition>
+        <argsstring>(const std::string &amp;str)</argsstring>
+        <name>escape_dot_string</name>
+        <qualifiedname>GraphNode::escape_dot_string</qualifiedname>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+<para>Escapes special characters in a string for DOT format. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>str</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The string to escape. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The escaped string. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphNode.h" line="155" column="24" bodyfile="GraphNode.cpp" bodystart="269" bodyend="281"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Represents a node in the network traffic graph. </para>
     </briefdescription>
     <detaileddescription>
-<para>Each <computeroutput><ref refid="classGraphNode" kindref="compound">GraphNode</ref></computeroutput> corresponds to an entity in the network, such as a host, service, or domain. It stores information about the node&apos;s identity, type, attributes, and various statistical features derived from the network traffic. </para>
     </detaileddescription>
     <collaborationgraph>
       <node id="1">
@@ -284,31 +398,84 @@
           <edgelabel>+type</edgelabel>
         </childnode>
         <childnode refid="3" relation="usage">
-          <edgelabel>+attributes</edgelabel>
+          <edgelabel>+node_mutex</edgelabel>
         </childnode>
         <childnode refid="4" relation="usage">
+          <edgelabel>+attributes</edgelabel>
+        </childnode>
+        <childnode refid="5" relation="usage">
           <edgelabel>+features</edgelabel>
         </childnode>
-        <childnode refid="8" relation="usage">
+        <childnode refid="14" relation="usage">
           <edgelabel>+temporal</edgelabel>
         </childnode>
+        <childnode refid="15" relation="usage">
+          <edgelabel>+last_connection_time</edgelabel>
+        </childnode>
+        <childnode refid="17" relation="usage">
+          <edgelabel>+connection_count</edgelabel>
+        </childnode>
       </node>
-      <node id="4">
+      <node id="5">
         <label>GraphNode::NodeFeatures</label>
         <link refid="structGraphNode_1_1NodeFeatures"/>
-        <childnode refid="5" relation="usage">
+        <childnode refid="6" relation="usage">
           <edgelabel>+degree</edgelabel>
           <edgelabel>+in_degree</edgelabel>
           <edgelabel>+out_degree</edgelabel>
         </childnode>
-        <childnode refid="6" relation="usage">
+        <childnode refid="7" relation="usage">
+          <edgelabel>+connection_state_counts</edgelabel>
+          <edgelabel>+historical_protocol_counts</edgelabel>
+          <edgelabel>+http_user_agent_counts</edgelabel>
           <edgelabel>+protocol_counts</edgelabel>
         </childnode>
-        <childnode refid="7" relation="usage">
+        <childnode refid="8" relation="usage">
           <edgelabel>+activity_score</edgelabel>
+          <edgelabel>+avg_packet_size_received</edgelabel>
+          <edgelabel>+avg_packet_size_sent</edgelabel>
+        </childnode>
+        <childnode refid="9" relation="usage">
+          <edgelabel>+historical_total_connections</edgelabel>
+          <edgelabel>+ssl_established_count</edgelabel>
+          <edgelabel>+ssl_resumption_count</edgelabel>
+          <edgelabel>+total_connections_initiated</edgelabel>
+          <edgelabel>+total_connections_received</edgelabel>
+        </childnode>
+        <childnode refid="10" relation="usage">
+          <edgelabel>+http_versions_used</edgelabel>
+          <edgelabel>+local_ports_listening_on</edgelabel>
+          <edgelabel>+local_ports_used</edgelabel>
+          <edgelabel>+protocols_used</edgelabel>
+          <edgelabel>+remote_ports_connected_from</edgelabel>
+          <edgelabel>+remote_ports_connected_to</edgelabel>
+          <edgelabel>+services_used</edgelabel>
+          <edgelabel>+ssl_ciphers_used</edgelabel>
+          <edgelabel>+ssl_next_protocols_used</edgelabel>
+          <edgelabel>+ssl_versions_used</edgelabel>
+          <edgelabel>...</edgelabel>
+        </childnode>
+        <childnode refid="11" relation="usage">
+          <edgelabel>+ever_local_originated</edgelabel>
+          <edgelabel>+ever_local_responded</edgelabel>
+          <edgelabel>+ever_ssl_curve_present</edgelabel>
+          <edgelabel>+ever_ssl_history_present</edgelabel>
+          <edgelabel>+ever_ssl_last_alert_present</edgelabel>
+          <edgelabel>+ever_ssl_server_name_present</edgelabel>
+        </childnode>
+        <childnode refid="12" relation="usage">
+          <edgelabel>+historical_total_orig_bytes</edgelabel>
+          <edgelabel>+historical_total_resp_bytes</edgelabel>
+          <edgelabel>+total_orig_bytes</edgelabel>
+          <edgelabel>+total_orig_pkts</edgelabel>
+          <edgelabel>+total_resp_bytes</edgelabel>
+          <edgelabel>+total_resp_pkts</edgelabel>
+        </childnode>
+        <childnode refid="13" relation="usage">
+          <edgelabel>+http_status_code_counts</edgelabel>
         </childnode>
       </node>
-      <node id="8">
+      <node id="14">
         <label>GraphNode::TemporalFeatures</label>
         <link refid="structGraphNode_1_1TemporalFeatures"/>
         <childnode refid="9" relation="usage">
@@ -316,67 +483,83 @@
           <edgelabel>+connections_last_minute</edgelabel>
           <edgelabel>+total_connections</edgelabel>
         </childnode>
-        <childnode refid="10" relation="usage">
+        <childnode refid="15" relation="usage">
           <edgelabel>+monitoring_start</edgelabel>
         </childnode>
-        <childnode refid="11" relation="usage">
-          <edgelabel>+recent_connections</edgelabel>
+        <childnode refid="3" relation="usage">
+          <edgelabel>+window_mutex</edgelabel>
         </childnode>
-        <childnode refid="12" relation="usage">
+        <childnode refid="16" relation="usage">
           <edgelabel>+hour_window</edgelabel>
           <edgelabel>+minute_window</edgelabel>
         </childnode>
-        <childnode refid="13" relation="usage">
-          <edgelabel>+recent_connections_mutex</edgelabel>
-          <edgelabel>+window_mutex</edgelabel>
+        <childnode refid="2" relation="usage">
+          <edgelabel>+first_seen</edgelabel>
+          <edgelabel>+last_seen</edgelabel>
         </childnode>
       </node>
-      <node id="7">
+      <node id="11">
+        <label>atomic&lt; bool &gt;</label>
+      </node>
+      <node id="8">
         <label>atomic&lt; double &gt;</label>
       </node>
       <node id="9">
         <label>atomic&lt; int &gt;</label>
       </node>
-      <node id="5">
-        <label>atomic&lt; uint32_t &gt;</label>
-      </node>
-      <node id="10">
-        <label>time_point</label>
+      <node id="12">
+        <label>atomic&lt; long long &gt;</label>
       </node>
       <node id="6">
-        <label>map&lt; std::string, int &gt;</label>
+        <label>atomic&lt; uint32_t &gt;</label>
+      </node>
+      <node id="17">
+        <label>atomic&lt; uint64_t &gt;</label>
+      </node>
+      <node id="15">
+        <label>time_point</label>
       </node>
       <node id="13">
+        <label>map&lt; int, int &gt;</label>
+      </node>
+      <node id="7">
+        <label>map&lt; std::string, int &gt;</label>
+      </node>
+      <node id="3">
         <label>mutex</label>
       </node>
-      <node id="12">
+      <node id="16">
         <label>queue&lt; std::chrono::system_clock::time_point &gt;</label>
+      </node>
+      <node id="10">
+        <label>set&lt; std::string &gt;</label>
       </node>
       <node id="2">
         <label>string</label>
       </node>
-      <node id="3">
+      <node id="4">
         <label>unordered_map&lt; std::string, std::string &gt;</label>
       </node>
-      <node id="11">
-        <label>vector&lt; std::chrono::system_clock::time_point &gt;</label>
-      </node>
     </collaborationgraph>
-    <location file="includes/GraphNode.h" line="23" column="1" bodyfile="includes/GraphNode.h" bodystart="23" bodyend="167"/>
+    <location file="includes/GraphNode.h" line="20" column="1" bodyfile="includes/GraphNode.h" bodystart="20" bodyend="164"/>
     <listofallmembers>
+      <member refid="classGraphNode_1ac20b11cafa2318105f197c269d8fa022" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>aggregate_historical_data</name></member>
       <member refid="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>attributes</name></member>
-      <member refid="classGraphNode_1a92cd7727c4e791176e9e255b929b9603" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>calculate_anomaly_score</name></member>
-      <member refid="classGraphNode_1a9f6e0e9f78b21d99d3c858928762f983" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>cleanup_old_connections</name></member>
       <member refid="classGraphNode_1a02be43aa36aa04eb5f47095fde4f95eb" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>cleanup_time_windows</name></member>
+      <member refid="classGraphNode_1ae1389a274c513139fc281e2e55fca289" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>connection_count</name></member>
+      <member refid="classGraphNode_1a7b390f385e08c0ee3587e265668a253b" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>escape_dot_string</name></member>
       <member refid="classGraphNode_1a96d791f3b4c82348ba2f6dd63dc1275d" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>features</name></member>
       <member refid="classGraphNode_1ab197cc5d8d2abda61c831cae073cb140" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>get_connections_last_hour</name></member>
       <member refid="classGraphNode_1aac8f32f0478ee7262d5db9c6ea4ee1c5" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>get_connections_last_minute</name></member>
       <member refid="classGraphNode_1a5cfa8c4a54c8dd7280b9d8a53f938e92" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>get_id</name></member>
       <member refid="classGraphNode_1a8ef4f31129e46a8d33a1b2674731e53f" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>GraphNode</name></member>
       <member refid="classGraphNode_1a9ec8352ce6fc02929d03791bad1b949d" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>id</name></member>
+      <member refid="classGraphNode_1a6295b6656ebe0b98e8f18b1565439e8a" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>last_connection_time</name></member>
+      <member refid="classGraphNode_1a34525f218ddc1b803d8e165da600f32c" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>node_mutex</name></member>
       <member refid="classGraphNode_1a2e621d85ff7e85c26a2fe12e1604e64d" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>temporal</name></member>
+      <member refid="classGraphNode_1a7875f51a4e04d2a46dab4f6dee2b2a2f" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>to_dot_string</name></member>
       <member refid="classGraphNode_1a6cbb744b50fd5621356036ffac4a534a" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>type</name></member>
-      <member refid="classGraphNode_1aec41bf6dc8c079924a0076c6388b8de6" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>update_connection_features</name></member>
+      <member refid="classGraphNode_1a11eec9f6d02e2d60d9a6cc6764731baa" prot="public" virt="non-virtual"><scope>GraphNode</scope><name>update_connection_features</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

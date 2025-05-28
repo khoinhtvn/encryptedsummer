@@ -131,22 +131,22 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a3493eb650d0e6f9b541f959a00596d11" id="r_a3493eb650d0e6f9b541f959a00596d11"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="structRealTimeAnomalyDetector_1_1AnomalyScore.html">AnomalyScore</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3493eb650d0e6f9b541f959a00596d11">detect</a> (const <a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;graph)</td></tr>
-<tr class="memdesc:a3493eb650d0e6f9b541f959a00596d11"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects anomalies in the given network traffic graph.  <br /></td></tr>
-<tr class="separator:a3493eb650d0e6f9b541f959a00596d11"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92cf1a7775b63a09b3aa27fdeb23c2a5" id="r_a92cf1a7775b63a09b3aa27fdeb23c2a5"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, <a class="el" href="structRealTimeAnomalyDetector_1_1AnomalyScore.html">AnomalyScore</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a92cf1a7775b63a09b3aa27fdeb23c2a5">detect</a> (const <a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;graph)</td></tr>
+<tr class="memdesc:a92cf1a7775b63a09b3aa27fdeb23c2a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Detects anomalies in the given network traffic graph.  <br /></td></tr>
+<tr class="separator:a92cf1a7775b63a09b3aa27fdeb23c2a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class for detecting real-time anomalies in network traffic. </p>
 <p>The <code><a class="el" href="classRealTimeAnomalyDetector.html" title="Class for detecting real-time anomalies in network traffic.">RealTimeAnomalyDetector</a></code> class analyzes the network traffic graph constructed by the <code><a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a></code> to identify nodes that exhibit unusual behavior. It calculates an anomaly score for each node and provides information about the factors contributing to the score. </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="a3493eb650d0e6f9b541f959a00596d11" name="a3493eb650d0e6f9b541f959a00596d11"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3493eb650d0e6f9b541f959a00596d11">&#9670;&#160;</a></span>detect()</h2>
+<a id="a92cf1a7775b63a09b3aa27fdeb23c2a5" name="a92cf1a7775b63a09b3aa27fdeb23c2a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92cf1a7775b63a09b3aa27fdeb23c2a5">&#9670;&#160;</a></span>detect()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::unordered_map&lt; std::string, <a class="el" href="structRealTimeAnomalyDetector_1_1AnomalyScore.html">RealTimeAnomalyDetector::AnomalyScore</a> &gt; RealTimeAnomalyDetector::detect </td>
+          <td class="memname">std::unordered_map&lt; std::string, <a class="el" href="structRealTimeAnomalyDetector_1_1AnomalyScore.html">AnomalyScore</a> &gt; RealTimeAnomalyDetector::detect </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>graph</em></span></td><td>)</td>
           <td></td>
@@ -158,7 +158,7 @@ Public Member Functions</h2></td></tr>
 <p>This method analyzes the nodes in the graph to identify those with anomalous behavior. It calculates an anomaly score for each node based on its connection patterns, protocol usage, and other relevant features.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">graph</td><td>A const reference to the <a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a> object representing the network traffic. The method does not modify the graph. </td></tr>
+    <tr><td class="paramname">graph</td><td>A const reference to the <a class="el" href="classTrafficGraph.html">TrafficGraph</a> object representing the network traffic. The method does not modify the graph. </td></tr>
   </table>
   </dd>
 </dl>
@@ -166,9 +166,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<hr/>The documentation for this class was generated from the following files:<ul>
+<hr/>The documentation for this class was generated from the following file:<ul>
 <li>includes/<a class="el" href="RealTimeAnomalyDetector_8h_source.html">RealTimeAnomalyDetector.h</a></li>
-<li><a class="el" href="RealTimeAnomalyDetector_8cpp.html">RealTimeAnomalyDetector.cpp</a></li>
 </ul>
 </div><!-- contents -->
 </div><!-- doc-content -->

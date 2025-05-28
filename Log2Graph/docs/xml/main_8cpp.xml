@@ -35,45 +35,65 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
       <node id="16">
         <label>GraphEdge.h</label>
         <link refid="GraphEdge_8h"/>
+        <childnode refid="17" relation="include">
+        </childnode>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
-      <node id="23">
+      <node id="25">
         <label>includes/GraphExporter.h</label>
         <link refid="GraphExporter_8h"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="20">
         <label>GraphNode.h</label>
         <link refid="GraphNode_8h"/>
-        <childnode refid="18" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
         </childnode>
       </node>
       <node id="13">
@@ -91,20 +111,20 @@
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="28">
         <label>includes/LogMonitor.h</label>
         <link refid="LogMonitor_8h"/>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>includes/RealTimeAnomalyDetector.h</label>
         <link refid="RealTimeAnomalyDetector_8h"/>
         <childnode refid="10" relation="include">
@@ -116,25 +136,21 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="21">
+      <node id="24">
         <label>TrafficGraph.h</label>
         <link refid="TrafficGraph_8h"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
       </node>
-      <node id="27">
+      <node id="29">
         <label>ZeekLogParser.h</label>
         <link refid="ZeekLogParser_8h"/>
         <childnode refid="10" relation="include">
@@ -151,9 +167,9 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="23" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -167,17 +183,17 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="18">
+      <node id="21">
         <label>atomic</label>
       </node>
-      <node id="20">
+      <node id="17">
         <label>chrono</label>
       </node>
       <node id="12">
@@ -189,16 +205,19 @@
       <node id="4">
         <label>filesystem</label>
       </node>
-      <node id="25">
+      <node id="27">
         <label>future</label>
       </node>
-      <node id="24">
+      <node id="26">
         <label>graphviz/gvc.h</label>
+      </node>
+      <node id="19">
+        <label>iomanip</label>
       </node>
       <node id="2">
         <label>iostream</label>
       </node>
-      <node id="19">
+      <node id="22">
         <label>map</label>
       </node>
       <node id="6">
@@ -210,11 +229,11 @@
       <node id="14">
         <label>queue</label>
       </node>
-      <node id="28">
+      <node id="23">
         <label>set</label>
       </node>
-      <node id="22">
-        <label>shared_mutex</label>
+      <node id="18">
+        <label>sstream</label>
       </node>
       <node id="10">
         <label>string</label>

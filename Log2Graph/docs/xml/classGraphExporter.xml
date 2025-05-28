@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="28" column="5" bodyfile="GraphExporter.cpp" bodystart="16" bodyend="18"/>
+        <location file="includes/GraphExporter.h" line="28" column="5" bodyfile="GraphExporter.cpp" bodystart="14" bodyend="14"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="35" column="5" bodyfile="GraphExporter.cpp" bodystart="20" bodyend="22"/>
+        <location file="includes/GraphExporter.h" line="35" column="5" bodyfile="GraphExporter.cpp" bodystart="16" bodyend="16"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1ab7a5103acd18ab33827bfff8e560037a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -121,7 +121,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="51" column="10" bodyfile="GraphExporter.cpp" bodystart="24" bodyend="29"/>
+        <location file="includes/GraphExporter.h" line="51" column="10" bodyfile="GraphExporter.cpp" bodystart="18" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -164,14 +164,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="71" column="10" bodyfile="GraphExporter.cpp" bodystart="31" bodyend="35"/>
+        <location file="includes/GraphExporter.h" line="71" column="10" bodyfile="GraphExporter.cpp" bodystart="25" bodyend="29"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classGraphExporter_1ad37df271c30df08fa904dc9a6df95aa4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classGraphExporter_1a75d55b1d4f1931ab0dfff8a280478a47" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void GraphExporter::export_full_graph_worker</definition>
-        <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;output_file, bool open_image, bool export_cond)</argsstring>
+        <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;output_file)</argsstring>
         <name>export_full_graph_worker</name>
         <qualifiedname>GraphExporter::export_full_graph_worker</qualifiedname>
         <param>
@@ -181,14 +181,6 @@
         <param>
           <type>const std::string &amp;</type>
           <declname>output_file</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>open_image</declname>
-        </param>
-        <param>
-          <type>bool</type>
-          <declname>export_cond</declname>
         </param>
         <briefdescription>
 <para>Worker function to perform the Graphviz export. </para>
@@ -210,28 +202,12 @@
 <para>The name of the output image file. </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>open_image</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A boolean indicating whether to attempt to open the generated image. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>export_cond</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A boolean controlling whether the export process should proceed. </para>
-</parameterdescription>
-</parameteritem>
 </parameterlist>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="90" column="10" bodyfile="GraphExporter.cpp" bodystart="37" bodyend="80"/>
+        <location file="includes/GraphExporter.h" line="88" column="10" bodyfile="GraphExporter.cpp" bodystart="31" bodyend="38"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a0a0ec3980f9448262dbc8cb72d50384e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -272,7 +248,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="100" column="10" bodyfile="GraphExporter.cpp" bodystart="82" bodyend="130"/>
+        <location file="includes/GraphExporter.h" line="97" column="10" bodyfile="GraphExporter.cpp" bodystart="40" bodyend="83"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -314,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="112" column="10" bodyfile="GraphExporter.cpp" bodystart="132" bodyend="166"/>
+        <location file="includes/GraphExporter.h" line="109" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -356,7 +332,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="123" column="10" bodyfile="GraphExporter.cpp" bodystart="168" bodyend="197"/>
+        <location file="includes/GraphExporter.h" line="120" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -386,7 +362,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="133" column="10" bodyfile="GraphExporter.cpp" bodystart="199" bodyend="206"/>
+        <location file="includes/GraphExporter.h" line="130" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1ae8e782903a09b03895db658af8b1863e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -418,7 +394,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="144" column="17" bodyfile="GraphExporter.cpp" bodystart="208" bodyend="214"/>
+        <location file="includes/GraphExporter.h" line="141" column="17"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a3e0a34f0682f1aa34915ca87449f2499" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -440,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="146" column="10" bodyfile="GraphExporter.cpp" bodystart="216" bodyend="225"/>
+        <location file="includes/GraphExporter.h" line="143" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1aa1a6dd4e12a4732aab0631f8b1f62f69" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -462,7 +438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="148" column="10" bodyfile="GraphExporter.cpp" bodystart="227" bodyend="247"/>
+        <location file="includes/GraphExporter.h" line="145" column="10"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -504,7 +480,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="159" column="10" bodyfile="GraphExporter.cpp" bodystart="249" bodyend="267"/>
+        <location file="includes/GraphExporter.h" line="156" column="10" bodyfile="GraphExporter.cpp" bodystart="85" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -522,7 +498,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="161" column="17" bodyfile="GraphExporter.cpp" bodystart="270" bodyend="282"/>
+        <location file="includes/GraphExporter.h" line="158" column="17"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -537,14 +513,14 @@
         <link refid="classGraphExporter"/>
       </node>
     </collaborationgraph>
-    <location file="includes/GraphExporter.h" line="21" column="1" bodyfile="includes/GraphExporter.h" bodystart="21" bodyend="162"/>
+    <location file="includes/GraphExporter.h" line="21" column="1" bodyfile="includes/GraphExporter.h" bodystart="21" bodyend="159"/>
     <listofallmembers>
       <member refid="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>add_edges</name></member>
       <member refid="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>add_nodes</name></member>
       <member refid="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>apply_default_styles</name></member>
       <member refid="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>escape_dot_string</name></member>
       <member refid="classGraphExporter_1ab7a5103acd18ab33827bfff8e560037a" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph_human_readable_async</name></member>
-      <member refid="classGraphExporter_1ad37df271c30df08fa904dc9a6df95aa4" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph_worker</name></member>
+      <member refid="classGraphExporter_1a75d55b1d4f1931ab0dfff8a280478a47" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph_worker</name></member>
       <member refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_incremental_update_encoded_async</name></member>
       <member refid="classGraphExporter_1a0a0ec3980f9448262dbc8cb72d50384e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_incremental_update_worker</name></member>
       <member refid="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_to_dot</name></member>

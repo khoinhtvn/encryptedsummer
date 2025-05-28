@@ -2,11 +2,6 @@
 \hypertarget{classGraphNode}{}\label{classGraphNode}\index{GraphNode@{GraphNode}}
 
 
-Represents a node in the network traffic graph.  
-
-
-
-
 {\ttfamily \#include $<$Graph\+Node.\+h$>$}
 
 
@@ -22,47 +17,53 @@ Collaboration diagram for Graph\+Node\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 struct \mbox{\hyperlink{structGraphNode_1_1NodeFeatures}{Node\+Features}}
-\begin{DoxyCompactList}\small\item\em Structure to hold various statistical features of the node. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Structure to hold various features of the network node. \end{DoxyCompactList}\item 
 struct \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures}{Temporal\+Features}}
-\begin{DoxyCompactList}\small\item\em Structure to hold temporal features related to the node\textquotesingle{}s connections over time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Structure to hold temporal features of the network node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}{Graph\+Node}} (const std\+::string \&\mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}}, const std\+::string \&\mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}})
 \begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphNode}{Graph\+Node}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGraphNode_aec41bf6dc8c079924a0076c6388b8de6}{update\+\_\+connection\+\_\+features}} (const std\+::string \&protocol, bool is\+\_\+outgoing)
-\begin{DoxyCompactList}\small\item\em Updates the connection-\/related features of the node. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGraphNode_a9f6e0e9f78b21d99d3c858928762f983}{cleanup\+\_\+old\+\_\+connections}} ()
-\begin{DoxyCompactList}\small\item\em Removes timestamps of old connections from the {\ttfamily recent\+\_\+connections} vector. \end{DoxyCompactList}\item 
-double \mbox{\hyperlink{classGraphNode_a92cd7727c4e791176e9e255b929b9603}{calculate\+\_\+anomaly\+\_\+score}} () const
-\begin{DoxyCompactList}\small\item\em Calculates an anomaly score for the node based on its current features. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphNode_a11eec9f6d02e2d60d9a6cc6764731baa}{update\+\_\+connection\+\_\+features}} (bool is\+\_\+outgoing, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&connection\+\_\+attributes)
+\begin{DoxyCompactList}\small\item\em Updates the features of the node based on a new connection. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb}{cleanup\+\_\+time\+\_\+windows}} ()
-\begin{DoxyCompactList}\small\item\em Removes outdated timestamps from the minute and hour time windows. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Removes connection timestamps that are outside the current time windows. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classGraphNode_aac8f32f0478ee7262d5db9c6ea4ee1c5}{get\+\_\+connections\+\_\+last\+\_\+minute}} () const
-\begin{DoxyCompactList}\small\item\em Gets the number of connections associated with this node in the last minute. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Gets the number of connections seen in the last minute. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{classGraphNode_ab197cc5d8d2abda61c831cae073cb140}{get\+\_\+connections\+\_\+last\+\_\+hour}} () const
-\begin{DoxyCompactList}\small\item\em Gets the number of connections associated with this node in the last hour. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Gets the number of connections seen in the last hour. \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classGraphNode_a5cfa8c4a54c8dd7280b9d8a53f938e92}{get\+\_\+id}} () const
-\begin{DoxyCompactList}\small\item\em Gets the unique identifier of the node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets the ID of the node. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classGraphNode_a7875f51a4e04d2a46dab4f6dee2b2a2f}{to\+\_\+dot\+\_\+string}} () const
+\begin{DoxyCompactList}\small\item\em Generates a DOT format string representation of the node, including its features. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphNode_ac20b11cafa2318105f197c269d8fa022}{aggregate\+\_\+historical\+\_\+data}} (long long orig\+\_\+bytes, long long resp\+\_\+bytes, const std\+::string \&protocol)
+\begin{DoxyCompactList}\small\item\em Aggregates historical connection data into the node\textquotesingle{}s features. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classGraphNode_a7b390f385e08c0ee3587e265668a253b}{escape\+\_\+dot\+\_\+string}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Escapes special characters in a string for DOT format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 std\+::string \mbox{\hyperlink{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}{id}}
-\begin{DoxyCompactList}\small\item\em Unique identifier for the node. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Unique identifier of the node (e.\+g., IP address). \end{DoxyCompactList}\item 
 std\+::string \mbox{\hyperlink{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}{type}}
-\begin{DoxyCompactList}\small\item\em Type of the node (e.\+g., "{}host"{}, "{}service"{}, "{}domain"{}). \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Type of the node (e.\+g., host, network). \end{DoxyCompactList}\item 
+std\+::mutex \mbox{\hyperlink{classGraphNode_a34525f218ddc1b803d8e165da600f32c}{node\+\_\+mutex}}
+\begin{DoxyCompactList}\small\item\em Mutex to protect the entire \doxylink{classGraphNode}{Graph\+Node} object for thread-\/safe access. \end{DoxyCompactList}\item 
 std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classGraphNode_a2c594b99d6a85cd46b105fba519da025}{attributes}}
-\begin{DoxyCompactList}\small\item\em Additional attributes associated with the node. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Additional attributes of the node. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structGraphNode_1_1NodeFeatures}{Node\+Features}} \mbox{\hyperlink{classGraphNode_a96d791f3b4c82348ba2f6dd63dc1275d}{features}}
-\item 
+\begin{DoxyCompactList}\small\item\em Statistical features of the node based on its traffic. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures}{Temporal\+Features}} \mbox{\hyperlink{classGraphNode_a2e621d85ff7e85c26a2fe12e1604e64d}{temporal}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Time-\/based features of the node. \end{DoxyCompactList}\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classGraphNode_a6295b6656ebe0b98e8f18b1565439e8a}{last\+\_\+connection\+\_\+time}}
+\begin{DoxyCompactList}\small\item\em Timestamp of the last connection involving this node. \end{DoxyCompactList}\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classGraphNode_ae1389a274c513139fc281e2e55fca289}{connection\+\_\+count}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of connections associated with this node. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
-
-\doxysubsection{Detailed Description}
-Represents a node in the network traffic graph. 
-
-Each {\ttfamily \doxylink{classGraphNode}{Graph\+Node}} corresponds to an entity in the network, such as a host, service, or domain. It stores information about the node\textquotesingle{}s identity, type, attributes, and various statistical features derived from the network traffic. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classGraphNode_a8ef4f31129e46a8d33a1b2674731e53f}\index{GraphNode@{GraphNode}!GraphNode@{GraphNode}}
@@ -79,36 +80,32 @@ Constructor for the \doxylink{classGraphNode}{Graph\+Node}.
 \begin{DoxyParams}{Parameters}
 {\em id} & The unique identifier of the node. \\
 \hline
-{\em type} & The type of the node (e.\+g., "{}host"{}, "{}service"{}). \\
+{\em type} & The type of the node. \\
 \hline
 \end{DoxyParams}
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classGraphNode_a92cd7727c4e791176e9e255b929b9603}\index{GraphNode@{GraphNode}!calculate\_anomaly\_score@{calculate\_anomaly\_score}}
-\index{calculate\_anomaly\_score@{calculate\_anomaly\_score}!GraphNode@{GraphNode}}
-\doxysubsubsection{\texorpdfstring{calculate\_anomaly\_score()}{calculate\_anomaly\_score()}}
-{\footnotesize\ttfamily \label{classGraphNode_a92cd7727c4e791176e9e255b929b9603} 
-double Graph\+Node\+::calculate\+\_\+anomaly\+\_\+score (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+\Hypertarget{classGraphNode_ac20b11cafa2318105f197c269d8fa022}\index{GraphNode@{GraphNode}!aggregate\_historical\_data@{aggregate\_historical\_data}}
+\index{aggregate\_historical\_data@{aggregate\_historical\_data}!GraphNode@{GraphNode}}
+\doxysubsubsection{\texorpdfstring{aggregate\_historical\_data()}{aggregate\_historical\_data()}}
+{\footnotesize\ttfamily \label{classGraphNode_ac20b11cafa2318105f197c269d8fa022} 
+void Graph\+Node\+::aggregate\+\_\+historical\+\_\+data (\begin{DoxyParamCaption}\item[{long long}]{orig\+\_\+bytes}{, }\item[{long long}]{resp\+\_\+bytes}{, }\item[{const std\+::string \&}]{protocol}{}\end{DoxyParamCaption})}
 
 
 
-Calculates an anomaly score for the node based on its current features. 
-
-\begin{DoxyReturn}{Returns}
-A double representing the anomaly score. 
-\end{DoxyReturn}
-\Hypertarget{classGraphNode_a9f6e0e9f78b21d99d3c858928762f983}\index{GraphNode@{GraphNode}!cleanup\_old\_connections@{cleanup\_old\_connections}}
-\index{cleanup\_old\_connections@{cleanup\_old\_connections}!GraphNode@{GraphNode}}
-\doxysubsubsection{\texorpdfstring{cleanup\_old\_connections()}{cleanup\_old\_connections()}}
-{\footnotesize\ttfamily \label{classGraphNode_a9f6e0e9f78b21d99d3c858928762f983} 
-void Graph\+Node\+::cleanup\+\_\+old\+\_\+connections (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+Aggregates historical connection data into the node\textquotesingle{}s features. 
 
 
-
-Removes timestamps of old connections from the {\ttfamily recent\+\_\+connections} vector. 
-
-This method helps to keep the {\ttfamily recent\+\_\+connections} vector manageable and relevant for short-\/term analysis. \Hypertarget{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb}\index{GraphNode@{GraphNode}!cleanup\_time\_windows@{cleanup\_time\_windows}}
+\begin{DoxyParams}{Parameters}
+{\em orig\+\_\+bytes} & Number of original bytes from the connection. \\
+\hline
+{\em resp\+\_\+bytes} & Number of response bytes from the connection. \\
+\hline
+{\em protocol} & The protocol of the connection. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb}\index{GraphNode@{GraphNode}!cleanup\_time\_windows@{cleanup\_time\_windows}}
 \index{cleanup\_time\_windows@{cleanup\_time\_windows}!GraphNode@{GraphNode}}
 \doxysubsubsection{\texorpdfstring{cleanup\_time\_windows()}{cleanup\_time\_windows()}}
 {\footnotesize\ttfamily \label{classGraphNode_a02be43aa36aa04eb5f47095fde4f95eb} 
@@ -116,9 +113,27 @@ void Graph\+Node\+::cleanup\+\_\+time\+\_\+windows (\begin{DoxyParamCaption}{}{}
 
 
 
-Removes outdated timestamps from the minute and hour time windows. 
+Removes connection timestamps that are outside the current time windows. 
 
-This method ensures that the connection counts for the last minute and last hour are accurate by discarding timestamps that fall outside these windows. \Hypertarget{classGraphNode_ab197cc5d8d2abda61c831cae073cb140}\index{GraphNode@{GraphNode}!get\_connections\_last\_hour@{get\_connections\_last\_hour}}
+\Hypertarget{classGraphNode_a7b390f385e08c0ee3587e265668a253b}\index{GraphNode@{GraphNode}!escape\_dot\_string@{escape\_dot\_string}}
+\index{escape\_dot\_string@{escape\_dot\_string}!GraphNode@{GraphNode}}
+\doxysubsubsection{\texorpdfstring{escape\_dot\_string()}{escape\_dot\_string()}}
+{\footnotesize\ttfamily \label{classGraphNode_a7b390f385e08c0ee3587e265668a253b} 
+std\+::string Graph\+Node\+::escape\+\_\+dot\+\_\+string (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Escapes special characters in a string for DOT format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The string to escape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The escaped string. 
+\end{DoxyReturn}
+\Hypertarget{classGraphNode_ab197cc5d8d2abda61c831cae073cb140}\index{GraphNode@{GraphNode}!get\_connections\_last\_hour@{get\_connections\_last\_hour}}
 \index{get\_connections\_last\_hour@{get\_connections\_last\_hour}!GraphNode@{GraphNode}}
 \doxysubsubsection{\texorpdfstring{get\_connections\_last\_hour()}{get\_connections\_last\_hour()}}
 {\footnotesize\ttfamily \label{classGraphNode_ab197cc5d8d2abda61c831cae073cb140} 
@@ -126,10 +141,10 @@ int Graph\+Node\+::get\+\_\+connections\+\_\+last\+\_\+hour (\begin{DoxyParamCap
 
 
 
-Gets the number of connections associated with this node in the last hour. 
+Gets the number of connections seen in the last hour. 
 
 \begin{DoxyReturn}{Returns}
-The number of connections in the last hour. 
+The count of connections in the last hour. 
 \end{DoxyReturn}
 \Hypertarget{classGraphNode_aac8f32f0478ee7262d5db9c6ea4ee1c5}\index{GraphNode@{GraphNode}!get\_connections\_last\_minute@{get\_connections\_last\_minute}}
 \index{get\_connections\_last\_minute@{get\_connections\_last\_minute}!GraphNode@{GraphNode}}
@@ -139,10 +154,10 @@ int Graph\+Node\+::get\+\_\+connections\+\_\+last\+\_\+minute (\begin{DoxyParamC
 
 
 
-Gets the number of connections associated with this node in the last minute. 
+Gets the number of connections seen in the last minute. 
 
 \begin{DoxyReturn}{Returns}
-The number of connections in the last minute. 
+The count of connections in the last minute. 
 \end{DoxyReturn}
 \Hypertarget{classGraphNode_a5cfa8c4a54c8dd7280b9d8a53f938e92}\index{GraphNode@{GraphNode}!get\_id@{get\_id}}
 \index{get\_id@{get\_id}!GraphNode@{GraphNode}}
@@ -152,28 +167,39 @@ std\+::string Graph\+Node\+::get\+\_\+id (\begin{DoxyParamCaption}{}{}\end{DoxyP
 
 
 
-Gets the unique identifier of the node. 
+Gets the ID of the node. 
 
 \begin{DoxyReturn}{Returns}
 The node\textquotesingle{}s ID. 
 \end{DoxyReturn}
-\Hypertarget{classGraphNode_aec41bf6dc8c079924a0076c6388b8de6}\index{GraphNode@{GraphNode}!update\_connection\_features@{update\_connection\_features}}
+\Hypertarget{classGraphNode_a7875f51a4e04d2a46dab4f6dee2b2a2f}\index{GraphNode@{GraphNode}!to\_dot\_string@{to\_dot\_string}}
+\index{to\_dot\_string@{to\_dot\_string}!GraphNode@{GraphNode}}
+\doxysubsubsection{\texorpdfstring{to\_dot\_string()}{to\_dot\_string()}}
+{\footnotesize\ttfamily \label{classGraphNode_a7875f51a4e04d2a46dab4f6dee2b2a2f} 
+std\+::string Graph\+Node\+::to\+\_\+dot\+\_\+string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Generates a DOT format string representation of the node, including its features. 
+
+\begin{DoxyReturn}{Returns}
+A string in DOT format representing the node. 
+\end{DoxyReturn}
+\Hypertarget{classGraphNode_a11eec9f6d02e2d60d9a6cc6764731baa}\index{GraphNode@{GraphNode}!update\_connection\_features@{update\_connection\_features}}
 \index{update\_connection\_features@{update\_connection\_features}!GraphNode@{GraphNode}}
 \doxysubsubsection{\texorpdfstring{update\_connection\_features()}{update\_connection\_features()}}
-{\footnotesize\ttfamily \label{classGraphNode_aec41bf6dc8c079924a0076c6388b8de6} 
-void Graph\+Node\+::update\+\_\+connection\+\_\+features (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{protocol}{, }\item[{bool}]{is\+\_\+outgoing}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classGraphNode_a11eec9f6d02e2d60d9a6cc6764731baa} 
+void Graph\+Node\+::update\+\_\+connection\+\_\+features (\begin{DoxyParamCaption}\item[{bool}]{is\+\_\+outgoing}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{connection\+\_\+attributes}{}\end{DoxyParamCaption})}
 
 
 
-Updates the connection-\/related features of the node. 
-
-This method increments the degree counters and updates the protocol counts based on a new connection involving this node.
+Updates the features of the node based on a new connection. 
 
 
 \begin{DoxyParams}{Parameters}
-{\em protocol} & The protocol of the connection (e.\+g., "{}tcp"{}, "{}udp"{}). \\
+{\em is\+\_\+outgoing} & True if the connection was initiated by this node, false otherwise. \\
 \hline
-{\em is\+\_\+outgoing} & True if the connection is outgoing from this node, false otherwise. \\
+{\em connection\+\_\+attributes} & Map of attributes associated with the connection. \\
 \hline
 \end{DoxyParams}
 
@@ -187,13 +213,27 @@ std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ Graph\+Node\+::attri
 
 
 
-Additional attributes associated with the node. 
+Additional attributes of the node. 
+
+\Hypertarget{classGraphNode_ae1389a274c513139fc281e2e55fca289}\index{GraphNode@{GraphNode}!connection\_count@{connection\_count}}
+\index{connection\_count@{connection\_count}!GraphNode@{GraphNode}}
+\doxysubsubsection{\texorpdfstring{connection\_count}{connection\_count}}
+{\footnotesize\ttfamily \label{classGraphNode_ae1389a274c513139fc281e2e55fca289} 
+std\+::atomic$<$uint64\+\_\+t$>$ Graph\+Node\+::connection\+\_\+count \{0\}}
+
+
+
+Total number of connections associated with this node. 
 
 \Hypertarget{classGraphNode_a96d791f3b4c82348ba2f6dd63dc1275d}\index{GraphNode@{GraphNode}!features@{features}}
 \index{features@{features}!GraphNode@{GraphNode}}
 \doxysubsubsection{\texorpdfstring{features}{features}}
 {\footnotesize\ttfamily \label{classGraphNode_a96d791f3b4c82348ba2f6dd63dc1275d} 
 \mbox{\hyperlink{structGraphNode_1_1NodeFeatures}{Node\+Features}} Graph\+Node\+::features}
+
+
+
+Statistical features of the node based on its traffic. 
 
 \Hypertarget{classGraphNode_a9ec8352ce6fc02929d03791bad1b949d}\index{GraphNode@{GraphNode}!id@{id}}
 \index{id@{id}!GraphNode@{GraphNode}}
@@ -203,13 +243,37 @@ std\+::string Graph\+Node\+::id}
 
 
 
-Unique identifier for the node. 
+Unique identifier of the node (e.\+g., IP address). 
+
+\Hypertarget{classGraphNode_a6295b6656ebe0b98e8f18b1565439e8a}\index{GraphNode@{GraphNode}!last\_connection\_time@{last\_connection\_time}}
+\index{last\_connection\_time@{last\_connection\_time}!GraphNode@{GraphNode}}
+\doxysubsubsection{\texorpdfstring{last\_connection\_time}{last\_connection\_time}}
+{\footnotesize\ttfamily \label{classGraphNode_a6295b6656ebe0b98e8f18b1565439e8a} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point Graph\+Node\+::last\+\_\+connection\+\_\+time}
+
+
+
+Timestamp of the last connection involving this node. 
+
+\Hypertarget{classGraphNode_a34525f218ddc1b803d8e165da600f32c}\index{GraphNode@{GraphNode}!node\_mutex@{node\_mutex}}
+\index{node\_mutex@{node\_mutex}!GraphNode@{GraphNode}}
+\doxysubsubsection{\texorpdfstring{node\_mutex}{node\_mutex}}
+{\footnotesize\ttfamily \label{classGraphNode_a34525f218ddc1b803d8e165da600f32c} 
+std\+::mutex Graph\+Node\+::node\+\_\+mutex}
+
+
+
+Mutex to protect the entire \doxylink{classGraphNode}{Graph\+Node} object for thread-\/safe access. 
 
 \Hypertarget{classGraphNode_a2e621d85ff7e85c26a2fe12e1604e64d}\index{GraphNode@{GraphNode}!temporal@{temporal}}
 \index{temporal@{temporal}!GraphNode@{GraphNode}}
 \doxysubsubsection{\texorpdfstring{temporal}{temporal}}
 {\footnotesize\ttfamily \label{classGraphNode_a2e621d85ff7e85c26a2fe12e1604e64d} 
 \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures}{Temporal\+Features}} Graph\+Node\+::temporal}
+
+
+
+Time-\/based features of the node. 
 
 \Hypertarget{classGraphNode_a6cbb744b50fd5621356036ffac4a534a}\index{GraphNode@{GraphNode}!type@{type}}
 \index{type@{type}!GraphNode@{GraphNode}}
@@ -219,7 +283,7 @@ std\+::string Graph\+Node\+::type}
 
 
 
-Type of the node (e.\+g., "{}host"{}, "{}service"{}, "{}domain"{}). 
+Type of the node (e.\+g., host, network). 
 
 
 
