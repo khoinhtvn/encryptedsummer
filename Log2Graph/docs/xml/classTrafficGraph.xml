@@ -208,10 +208,10 @@
         </inbodydescription>
         <location file="includes/TrafficGraph.h" line="106" column="10" bodyfile="TrafficGraph.cpp" bodystart="25" bodyend="30"/>
       </memberdef>
-      <memberdef kind="function" id="classTrafficGraph_1a99df0f5fa9c14af4bc276659336de153" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classTrafficGraph_1a8de21c2e351ea32d277fc13b5f14e266" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::weak_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt;</type>
         <definition>std::weak_ptr&lt; GraphEdge &gt; TrafficGraph::add_edge</definition>
-        <argsstring>(const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={}, std::vector&lt; float &gt; encoded_features={})</argsstring>
+        <argsstring>(const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={}, const std::vector&lt; float &gt; &amp;encoded_features={})</argsstring>
         <name>add_edge</name>
         <qualifiedname>TrafficGraph::add_edge</qualifiedname>
         <param>
@@ -232,7 +232,7 @@
           <defval>{}</defval>
         </param>
         <param>
-          <type>std::vector&lt; float &gt;</type>
+          <type>const std::vector&lt; float &gt; &amp;</type>
           <declname>encoded_features</declname>
           <defval>{}</defval>
         </param>
@@ -474,7 +474,7 @@
     </collaborationgraph>
     <location file="includes/TrafficGraph.h" line="22" column="1" bodyfile="includes/TrafficGraph.h" bodystart="22" bodyend="191"/>
     <listofallmembers>
-      <member refid="classTrafficGraph_1a99df0f5fa9c14af4bc276659336de153" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_edge</name></member>
+      <member refid="classTrafficGraph_1a8de21c2e351ea32d277fc13b5f14e266" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_edge</name></member>
       <member refid="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>add_node</name></member>
       <member refid="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>clean_all_time_windows</name></member>
       <member refid="classTrafficGraph_1a1d46ea0525b6507283b5806a6abffe3f" prot="public" virt="non-virtual"><scope>TrafficGraph</scope><name>detect_anomalies</name></member>

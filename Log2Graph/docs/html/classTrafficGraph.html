@@ -137,9 +137,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ae29bbb7c163056228cb8fa23fcb12795" id="r_ae29bbb7c163056228cb8fa23fcb12795"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae29bbb7c163056228cb8fa23fcb12795">add_node</a> (const std::string &amp;id, const std::string &amp;type)</td></tr>
 <tr class="memdesc:ae29bbb7c163056228cb8fa23fcb12795"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new node to the graph.  <br /></td></tr>
 <tr class="separator:ae29bbb7c163056228cb8fa23fcb12795"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a99df0f5fa9c14af4bc276659336de153" id="r_a99df0f5fa9c14af4bc276659336de153"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="classGraphEdge.html">GraphEdge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a99df0f5fa9c14af4bc276659336de153">add_edge</a> (const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={}, std::vector&lt; float &gt; encoded_features={})</td></tr>
-<tr class="memdesc:a99df0f5fa9c14af4bc276659336de153"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new edge to the graph.  <br /></td></tr>
-<tr class="separator:a99df0f5fa9c14af4bc276659336de153"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8de21c2e351ea32d277fc13b5f14e266" id="r_a8de21c2e351ea32d277fc13b5f14e266"><td class="memItemLeft" align="right" valign="top">std::weak_ptr&lt; <a class="el" href="classGraphEdge.html">GraphEdge</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8de21c2e351ea32d277fc13b5f14e266">add_edge</a> (const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel, const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs={}, const std::vector&lt; float &gt; &amp;encoded_features={})</td></tr>
+<tr class="memdesc:a8de21c2e351ea32d277fc13b5f14e266"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds a new edge to the graph.  <br /></td></tr>
+<tr class="separator:a8de21c2e351ea32d277fc13b5f14e266"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4fe8bf82ebe5a118c488142e2a0a0711" id="r_a4fe8bf82ebe5a118c488142e2a0a0711"><td class="memItemLeft" align="right" valign="top">std::pair&lt; <a class="el" href="classGraphNode.html">GraphNode</a> &amp;, bool &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4fe8bf82ebe5a118c488142e2a0a0711">get_or_create_node</a> (const std::string &amp;id, const std::string &amp;type)</td></tr>
 <tr class="memdesc:a4fe8bf82ebe5a118c488142e2a0a0711"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves an existing node or creates a new one if it doesn't exist.  <br /></td></tr>
 <tr class="separator:a4fe8bf82ebe5a118c488142e2a0a0711"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -229,8 +229,8 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a99df0f5fa9c14af4bc276659336de153" name="a99df0f5fa9c14af4bc276659336de153"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a99df0f5fa9c14af4bc276659336de153">&#9670;&#160;</a></span>add_edge()</h2>
+<a id="a8de21c2e351ea32d277fc13b5f14e266" name="a8de21c2e351ea32d277fc13b5f14e266"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8de21c2e351ea32d277fc13b5f14e266">&#9670;&#160;</a></span>add_edge()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -258,7 +258,7 @@ Friends</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">std::vector&lt; float &gt;</td>          <td class="paramname"><span class="paramname"><em>encoded_features</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
+          <td class="paramtype">const std::vector&lt; float &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>encoded_features</em></span><span class="paramdefsep"> = </span><span class="paramdefval">{}</span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">

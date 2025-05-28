@@ -29,7 +29,7 @@ void \mbox{\hyperlink{classTrafficGraph_af58889777778f47f1d1692b03ab190c8}{clean
 \begin{DoxyCompactList}\small\item\em Cleans up the minute and hour time windows for all nodes in the graph. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{classTrafficGraph_ae29bbb7c163056228cb8fa23fcb12795}{add\+\_\+node}} (const std\+::string \&id, const std\+::string \&type)
 \begin{DoxyCompactList}\small\item\em Adds a new node to the graph. \end{DoxyCompactList}\item 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ \mbox{\hyperlink{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153}{add\+\_\+edge}} (const std\+::string \&src, const std\+::string \&tgt, const std\+::string \&rel, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&attrs=\{\}, std\+::vector$<$ float $>$ encoded\+\_\+features=\{\})
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ \mbox{\hyperlink{classTrafficGraph_a8de21c2e351ea32d277fc13b5f14e266}{add\+\_\+edge}} (const std\+::string \&src, const std\+::string \&tgt, const std\+::string \&rel, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&attrs=\{\}, const std\+::vector$<$ float $>$ \&encoded\+\_\+features=\{\})
 \begin{DoxyCompactList}\small\item\em Adds a new edge to the graph. \end{DoxyCompactList}\item 
 std\+::pair$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} \&, bool $>$ \mbox{\hyperlink{classTrafficGraph_a4fe8bf82ebe5a118c488142e2a0a0711}{get\+\_\+or\+\_\+create\+\_\+node}} (const std\+::string \&id, const std\+::string \&type)
 \begin{DoxyCompactList}\small\item\em Retrieves an existing node or creates a new one if it doesn\textquotesingle{}t exist. \end{DoxyCompactList}\item 
@@ -81,11 +81,11 @@ Destructor for the \doxylink{classTrafficGraph}{Traffic\+Graph}.
 Stops the maintenance thread gracefully by setting the {\ttfamily running} flag to false and joining the thread. 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153}\index{TrafficGraph@{TrafficGraph}!add\_edge@{add\_edge}}
+\Hypertarget{classTrafficGraph_a8de21c2e351ea32d277fc13b5f14e266}\index{TrafficGraph@{TrafficGraph}!add\_edge@{add\_edge}}
 \index{add\_edge@{add\_edge}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{add\_edge()}{add\_edge()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153} 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ Traffic\+Graph\+::add\+\_\+edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src}{, }\item[{const std\+::string \&}]{tgt}{, }\item[{const std\+::string \&}]{rel}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{attrs}{ = {\ttfamily \{\}}, }\item[{std\+::vector$<$ float $>$}]{encoded\+\_\+features}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classTrafficGraph_a8de21c2e351ea32d277fc13b5f14e266} 
+std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ Traffic\+Graph\+::add\+\_\+edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src}{, }\item[{const std\+::string \&}]{tgt}{, }\item[{const std\+::string \&}]{rel}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{attrs}{ = {\ttfamily \{\}}, }\item[{const std\+::vector$<$ float $>$ \&}]{encoded\+\_\+features}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
 
 
 

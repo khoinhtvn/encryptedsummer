@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['normalize_0',['normalize',['../classFeatureEncoder.html#ac06441a7c77e33594e3581bbc1ca1237',1,'FeatureEncoder']]],
-  ['normalize_5fsize_1',['normalize_size',['../classFeatureEncoder.html#a701695d03b52990d684ac02989a271ec',1,'FeatureEncoder']]]
+  ['operator_3d_0',['operator=',['../classGraphBuilder.html#acbd5f45fa3be1fa61975e8fefedd3278',1,'GraphBuilder']]],
+  ['operator_3d_3d_1',['operator==',['../structFileState.html#ac6b4ee72d0eac3bd51186f1d84af950b',1,'FileState']]]
 ];

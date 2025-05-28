@@ -119,7 +119,7 @@ public:
      */
     std::weak_ptr<GraphEdge> add_edge(const std::string &src, const std::string &tgt,
                                       const std::string &rel,
-                                      const std::unordered_map<std::string, std::string> &attrs = {}, std::vector<float> encoded_features = {});
+                                      const std::unordered_map<std::string, std::string> &attrs = {}, const std::vector<float> &encoded_features = {});
 
     /**
      * @brief Retrieves an existing node or creates a new one if it doesn't exist.

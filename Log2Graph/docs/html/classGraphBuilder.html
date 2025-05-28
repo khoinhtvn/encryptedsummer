@@ -134,9 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a88d61bc652bfa5a60a8cd1aa8509d27c" id="r_a88d61bc652bfa5a60a8cd1aa8509d27c"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="structGraphUpdate.html">GraphUpdate</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a88d61bc652bfa5a60a8cd1aa8509d27c">get_last_updates</a> ()</td></tr>
 <tr class="memdesc:a88d61bc652bfa5a60a8cd1aa8509d27c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the update list for the graph.  <br /></td></tr>
 <tr class="separator:a88d61bc652bfa5a60a8cd1aa8509d27c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a022b58b16ad42721ed0a55c4e5ee2ea1" id="r_a022b58b16ad42721ed0a55c4e5ee2ea1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a022b58b16ad42721ed0a55c4e5ee2ea1">add_connection</a> (const std::string &amp;src_ip, const std::string &amp;dst_ip, const std::string &amp;proto, const std::string &amp;service, const std::string &amp;timestamp, const int src_port, const int dst_port, const int orig_bytes, const int resp_bytes, const std::string &amp;conn_state, const bool local_orig, const bool local_resp, const std::string &amp;history, const int orig_pkts, const int resp_pkts, const int orig_ip_bytes, const int resp_ip_bytes, const std::string &amp;version=&quot;&quot;, const std::string &amp;cipher=&quot;&quot;, const std::string &amp;curve=&quot;&quot;, const std::string &amp;server_name=&quot;&quot;, const bool resumed=false, const std::string &amp;last_alert=&quot;&quot;, const std::string &amp;next_protocol=&quot;&quot;, const bool established=false, const std::string &amp;ssl_history=&quot;&quot;, const std::string &amp;cert_chain_fps=&quot;&quot;, const std::string &amp;client_cert_chain_fps=&quot;&quot;, const bool sni_matches_cert=false, const std::string &amp;http_method=&quot;&quot;, const std::string &amp;http_host=&quot;&quot;, const std::string &amp;http_uri=&quot;&quot;, const std::string &amp;http_referrer=&quot;&quot;, const std::string &amp;http_version=&quot;&quot;, const std::string &amp;http_user_agent=&quot;&quot;, const std::string &amp;http_origin=&quot;&quot;, const std::string &amp;http_status_code=&quot;&quot;, const std::string &amp;http_username=&quot;&quot;)</td></tr>
-<tr class="memdesc:a022b58b16ad42721ed0a55c4e5ee2ea1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a network connection event and adds the corresponding nodes and edges to the graph, including SSL and HTTP related information if available.  <br /></td></tr>
-<tr class="separator:a022b58b16ad42721ed0a55c4e5ee2ea1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aceabeb2e29b01e4e02f1ea7e4f8310ae" id="r_aceabeb2e29b01e4e02f1ea7e4f8310ae"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aceabeb2e29b01e4e02f1ea7e4f8310ae">add_connection</a> (const std::unordered_map&lt; std::string, std::string &gt; &amp;raw_feature_map, std::vector&lt; float &gt; &amp;encoded_features)</td></tr>
+<tr class="memdesc:aceabeb2e29b01e4e02f1ea7e4f8310ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Processes a network connection event and adds the corresponding nodes and edges to the graph.  <br /></td></tr>
+<tr class="separator:aceabeb2e29b01e4e02f1ea7e4f8310ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a791f0173bacd48ce1071e6d87cd8bfaf" id="r_a791f0173bacd48ce1071e6d87cd8bfaf"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a791f0173bacd48ce1071e6d87cd8bfaf">get_graph</a> ()</td></tr>
 <tr class="memdesc:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a reference to the underlying <a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a> object.  <br /></td></tr>
 <tr class="separator:a791f0173bacd48ce1071e6d87cd8bfaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,8 +182,8 @@ Static Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a022b58b16ad42721ed0a55c4e5ee2ea1" name="a022b58b16ad42721ed0a55c4e5ee2ea1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a022b58b16ad42721ed0a55c4e5ee2ea1">&#9670;&#160;</a></span>add_connection()</h2>
+<a id="aceabeb2e29b01e4e02f1ea7e4f8310ae" name="aceabeb2e29b01e4e02f1ea7e4f8310ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aceabeb2e29b01e4e02f1ea7e4f8310ae">&#9670;&#160;</a></span>add_connection()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,238 +191,22 @@ Static Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void GraphBuilder::add_connection </td>
           <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>src_ip</em></span>, </td>
+          <td class="paramtype">const std::unordered_map&lt; std::string, std::string &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>raw_feature_map</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>dst_ip</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>proto</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>service</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>timestamp</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>src_port</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>dst_port</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>orig_bytes</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>resp_bytes</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>conn_state</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>local_orig</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>local_resp</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>history</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>orig_pkts</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>resp_pkts</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>orig_ip_bytes</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int</td>          <td class="paramname"><span class="paramname"><em>resp_ip_bytes</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>version</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>cipher</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>curve</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>server_name</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>resumed</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>last_alert</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>next_protocol</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>established</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>ssl_history</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>cert_chain_fps</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>client_cert_chain_fps</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const bool</td>          <td class="paramname"><span class="paramname"><em>sni_matches_cert</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_method</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_host</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_uri</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_referrer</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_version</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_user_agent</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_origin</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_status_code</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>http_username</em></span><span class="paramdefsep"> = </span><span class="paramdefval">&quot;&quot;</span>&#160;)</td>
+          <td class="paramtype">std::vector&lt; float &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>encoded_features</em></span>&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Processes a network connection event and adds the corresponding nodes and edges to the graph, including SSL and HTTP related information if available. </p>
-<p>This method takes details of a network connection (e.g., source and destination IPs, ports, protocol) and updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes and includes SSL-specific details such as version, cipher, and certificates, and HTTP-specific details such as method, URI, and status code if provided.</p>
+<p>Processes a network connection event and adds the corresponding nodes and edges to the graph. </p>
+<p>This method takes the raw connection attributes (as a feature map) and the already encoded feature vector for the connection. It updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">src_ip</td><td>Source IP address of the connection. </td></tr>
-    <tr><td class="paramname">dst_ip</td><td>Destination IP address of the connection. </td></tr>
-    <tr><td class="paramname">proto</td><td>Protocol of the connection (e.g., "tcp", "udp"). </td></tr>
-    <tr><td class="paramname">service</td><td>Service from a list of known services. </td></tr>
-    <tr><td class="paramname">timestamp</td><td>Timestamp of the connection event. </td></tr>
-    <tr><td class="paramname">src_port</td><td>Source port of the connection. </td></tr>
-    <tr><td class="paramname">dst_port</td><td>Destination port of the connection. </td></tr>
-    <tr><td class="paramname">orig_bytes</td><td>Number of bytes sent by the originator. </td></tr>
-    <tr><td class="paramname">resp_bytes</td><td>Number of bytes sent by the responder. </td></tr>
-    <tr><td class="paramname">conn_state</td><td>Connection state (e.g., "REJ", "SF"). </td></tr>
-    <tr><td class="paramname">local_orig</td><td>Whether the originator is local. </td></tr>
-    <tr><td class="paramname">local_resp</td><td>Whether the responder is local. </td></tr>
-    <tr><td class="paramname">history</td><td>History of the connection (e.g., packet states). </td></tr>
-    <tr><td class="paramname">orig_pkts</td><td>Number of packets sent by the originator. </td></tr>
-    <tr><td class="paramname">resp_pkts</td><td>Number of packets sent by the responder. </td></tr>
-    <tr><td class="paramname">orig_ip_bytes</td><td>Number of IP bytes sent by the originator. </td></tr>
-    <tr><td class="paramname">resp_ip_bytes</td><td>Number of IP bytes sent by the responder. </td></tr>
-    <tr><td class="paramname">version</td><td>SSL/TLS version (if applicable). </td></tr>
-    <tr><td class="paramname">cipher</td><td>SSL/TLS cipher suite (if applicable). </td></tr>
-    <tr><td class="paramname">curve</td><td>Elliptic curve used for key exchange (if applicable). </td></tr>
-    <tr><td class="paramname">server_name</td><td>Server Name Indication (SNI) (if applicable). </td></tr>
-    <tr><td class="paramname">resumed</td><td>Whether the SSL/TLS session was resumed (if applicable). </td></tr>
-    <tr><td class="paramname">last_alert</td><td>The last SSL/TLS alert sent or received (if applicable). </td></tr>
-    <tr><td class="paramname">next_protocol</td><td>The next protocol negotiated via ALPN (if applicable). </td></tr>
-    <tr><td class="paramname">established</td><td>Whether the SSL/TLS connection was established (if applicable). </td></tr>
-    <tr><td class="paramname">ssl_history</td><td>SSL/TLS state history (if applicable). </td></tr>
-    <tr><td class="paramname">cert_chain_fps</td><td>Fingerprints of the server's certificate chain (if applicable). </td></tr>
-    <tr><td class="paramname">client_cert_chain_fps</td><td>Fingerprints of the client's certificate chain (if applicable). </td></tr>
-    <tr><td class="paramname">sni_matches_cert</td><td>Whether the SNI matched the presented certificate (if applicable). </td></tr>
-    <tr><td class="paramname">http_method</td><td>HTTP request method (if applicable). </td></tr>
-    <tr><td class="paramname">http_host</td><td>HTTP host header (if applicable). </td></tr>
-    <tr><td class="paramname">http_uri</td><td>HTTP request URI (if applicable). </td></tr>
-    <tr><td class="paramname">http_referrer</td><td>HTTP referrer header (if applicable). </td></tr>
-    <tr><td class="paramname">http_version</td><td>HTTP version (if applicable). </td></tr>
-    <tr><td class="paramname">http_user_agent</td><td>HTTP user-agent header (if applicable). </td></tr>
-    <tr><td class="paramname">http_origin</td><td>HTTP origin header (if applicable). </td></tr>
-    <tr><td class="paramname">http_status_code</td><td>HTTP response status code (if applicable). </td></tr>
-    <tr><td class="paramname">http_username</td><td>HTTP username (if applicable). </td></tr>
+    <tr><td class="paramname">raw_feature_map</td><td>A map containing the raw string attributes of the network connection. This is used to extract specific raw values like src_ip, dst_ip, protocol, and other details needed for graph structure and node updates. </td></tr>
+    <tr><td class="paramname">encoded_features</td><td>A vector of floats representing the already encoded numerical features of this connection, generated by the <a class="el" href="classFeatureEncoder.html">FeatureEncoder</a>. This vector will be directly associated with the created edge. </td></tr>
   </table>
   </dd>
 </dl>

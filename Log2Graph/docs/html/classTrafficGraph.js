@@ -2,7 +2,7 @@ var classTrafficGraph =
 [
     [ "TrafficGraph", "classTrafficGraph.html#aa52225cd200774fe315bfcf344635fc9", null ],
     [ "~TrafficGraph", "classTrafficGraph.html#a0bbbfe4c14d9611db5060a1af21e3948", null ],
-    [ "add_edge", "classTrafficGraph.html#a99df0f5fa9c14af4bc276659336de153", null ],
+    [ "add_edge", "classTrafficGraph.html#a8de21c2e351ea32d277fc13b5f14e266", null ],
     [ "add_node", "classTrafficGraph.html#ae29bbb7c163056228cb8fa23fcb12795", null ],
     [ "clean_all_time_windows", "classTrafficGraph.html#af58889777778f47f1d1692b03ab190c8", null ],
     [ "detect_anomalies", "classTrafficGraph.html#a1d46ea0525b6507283b5806a6abffe3f", null ],

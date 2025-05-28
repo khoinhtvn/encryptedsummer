@@ -112,10 +112,9 @@ void ZeekLogParser::monitor_directory() {
                     tracked_files_[file_path] = FileState(file_path);
                     monitor_threads_.emplace_back(&ZeekLogParser::monitor_single_file, this, file_path);
                 } else {
-                    // Check if the file has been modified (size change for simplicity in this parallel version)
+                    // Check if the file has been modified (size change)
                     FileState current_state(file_path);
                     if (current_state.update() && current_state.last_size != tracked_files_[file_path].last_size) {
-                        // In a more robust system, you might need finer-grained change detection
                         monitor_threads_.emplace_back(&ZeekLogParser::monitor_single_file, this, file_path);
                         tracked_files_[file_path] = current_state;
                     }
@@ -254,85 +253,106 @@ void ZeekLogParser::attempt_build_graph_node(const std::string& uid) {
 }
 
 void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std::string, std::map<std::string, std::string>>& combined_data) {
-    std::string src_ip = "", dst_ip = "", proto = "tcp", service = "", timestamp = "", conn_state = "", history = "";
-    int src_port = 0, dst_port = 0, orig_bytes = 0, resp_bytes = 0, orig_pkts = 0, resp_pkts = 0, orig_ip_bytes = 0, resp_ip_bytes = 0;
-    double ts = 0.0;
-    bool local_orig = false, local_resp = false;
-
-    // SSL Specific Fields
-    std::string version = "", cipher = "", curve = "", server_name = "", last_alert = "", next_protocol = "", ssl_history = "", cert_chain_fps = "", client_cert_chain_fps = "";
-    bool resumed = false, established = false, sni_matches_cert = false;
-
-    // HTTP Specific Fields
-    std::string method = "", host = "", uri = "", referrer = "", http_version = "", user_agent = "", origin = "", status_code = "", username = "";
+    std::unordered_map<std::string, std::string> feature_map;
+    // Initialize with default values (optional, but good practice)
+    feature_map["timestamp"] = "0.0";
+    feature_map["src_ip"] = "";
+    feature_map["src_port"] = "0";
+    feature_map["dst_ip"] = "";
+    feature_map["dst_port"] = "0";
+    feature_map["protocol"] = "tcp";
+    feature_map["service"] = "UNKNOWN";
+    feature_map["orig_bytes"] = "0";
+    feature_map["resp_bytes"] = "0";
+    feature_map["conn_state"] = "UNKNOWN";
+    feature_map["local_orig"] = "false";
+    feature_map["local_resp"] = "false";
+    feature_map["history"] = "";
+    feature_map["orig_pkts"] = "0";
+    feature_map["resp_pkts"] = "0";
+    feature_map["orig_ip_bytes"] = "0";
+    feature_map["resp_ip_bytes"] = "0";
+    feature_map["ssl_version"] = "";
+    feature_map["ssl_cipher"] = "";
+    feature_map["ssl_curve"] = "";
+    feature_map["ssl_server_name"] = "";
+    feature_map["ssl_resumed"] = "false";
+    feature_map["ssl_last_alert"] = "";
+    feature_map["ssl_next_protocol"] = "";
+    feature_map["ssl_established"] = "false";
+    feature_map["ssl_history"] = "";
+    feature_map["ssl_cert_chain_fps"] = "";
+    feature_map["ssl_client_cert_chain_fps"] = "";
+    feature_map["ssl_sni_matches_cert"] = "false";
+    feature_map["http_method"] = "UNKNOWN";
+    feature_map["host"] = "";
+    feature_map["uri"] = "";
+    feature_map["referrer"] = "";
+    feature_map["http_version"] = "";
+    feature_map["http_user_agent"] = "Unknown";
+    feature_map["origin"] = "";
+    feature_map["http_status_code"] = "";
+    feature_map["username"] = "";
 
     if (combined_data.count("conn")) {
         const auto& conn_data = combined_data.at("conn");
         try {
-            ts = conn_data.count("ts") ? std::stod(conn_data.at("ts")) : 0.0;
-            src_ip = conn_data.count("id.orig_h") ? conn_data.at("id.orig_h") : "";
-            src_port = conn_data.count("id.orig_p") ? std::stoi(conn_data.at("id.orig_p")) : 0;
-            dst_ip = conn_data.count("id.resp_h") ? conn_data.at("id.resp_h") : "";
-            dst_port = conn_data.count("id.resp_p") ? std::stoi(conn_data.at("id.resp_p")) : 0;
-            proto = conn_data.count("proto") ? conn_data.at("proto") : "tcp";
-            service = conn_data.count("service") ? conn_data.at("service") : "";
-            orig_bytes = conn_data.count("orig_bytes") && conn_data.at("orig_bytes") != "-" ? std::stoi(conn_data.at("orig_bytes")) : 0;
-            resp_bytes = conn_data.count("resp_bytes") && conn_data.at("resp_bytes") != "-" ? std::stoi(conn_data.at("resp_bytes")) : 0;
-            conn_state = conn_data.count("conn_state") ? conn_data.at("conn_state") : "";
-            local_orig = conn_data.count("local_orig") ? (conn_data.at("local_orig") == "T") : false;
-            local_resp = conn_data.count("local_resp") ? (conn_data.at("local_resp") == "T") : false;
-            history = conn_data.count("history") ? conn_data.at("history") : "";
-            orig_pkts = conn_data.count("orig_pkts") && conn_data.at("orig_pkts") != "-" ? std::stoi(conn_data.at("orig_pkts")) : 0;
-            resp_pkts = conn_data.count("resp_pkts") && conn_data.at("resp_pkts") != "-" ? std::stoi(conn_data.at("resp_pkts")) : 0;
-            orig_ip_bytes = conn_data.count("orig_ip_bytes") && conn_data.at("orig_ip_bytes") != "-" ? std::stoi(conn_data.at("orig_ip_bytes")) : 0;
-            resp_ip_bytes = conn_data.count("resp_ip_bytes") && conn_data.at("resp_ip_bytes") != "-" ? std::stoi(conn_data.at("resp_ip_bytes")) : 0;
+            feature_map["timestamp"] = conn_data.count("ts") ? conn_data.at("ts") : "0.0";
+            feature_map["src_ip"] = conn_data.count("id.orig_h") ? conn_data.at("id.orig_h") : "";
+            feature_map["src_port"] = conn_data.count("id.orig_p") ? conn_data.at("id.orig_p") : "0";
+            feature_map["dst_ip"] = conn_data.count("id.resp_h") ? conn_data.at("id.resp_h") : "";
+            feature_map["dst_port"] = conn_data.count("id.resp_p") ? conn_data.at("id.resp_p") : "0";
+            feature_map["protocol"] = conn_data.count("proto") ? conn_data.at("proto") : "tcp";
+            feature_map["service"] = conn_data.count("service") ? conn_data.at("service") : "";
+            feature_map["orig_bytes"] = conn_data.count("orig_bytes") && conn_data.at("orig_bytes") != "-" ? conn_data.at("orig_bytes") : "0";
+            feature_map["resp_bytes"] = conn_data.count("resp_bytes") && conn_data.at("resp_bytes") != "-" ? conn_data.at("resp_bytes") : "0";
+            feature_map["conn_state"] = conn_data.count("conn_state") ? conn_data.at("conn_state") : "";
+            feature_map["local_orig"] = conn_data.count("local_orig") ? (conn_data.at("local_orig") == "T" ? "true" : "false") : "false";
+            feature_map["local_resp"] = conn_data.count("local_resp") ? (conn_data.at("local_resp") == "T" ? "true" : "false") : "false";
+            feature_map["history"] = conn_data.count("history") ? conn_data.at("history") : "";
+            feature_map["orig_pkts"] = conn_data.count("orig_pkts") && conn_data.at("orig_pkts") != "-" ? conn_data.at("orig_pkts") : "0";
+            feature_map["resp_pkts"] = conn_data.count("resp_pkts") && conn_data.at("resp_pkts") != "-" ? conn_data.at("resp_pkts") : "0";
+            feature_map["orig_ip_bytes"] = conn_data.count("orig_ip_bytes") && conn_data.at("orig_ip_bytes") != "-" ? conn_data.at("orig_ip_bytes") : "0";
+            feature_map["resp_ip_bytes"] = conn_data.count("resp_ip_bytes") && conn_data.at("resp_ip_bytes") != "-" ? conn_data.at("resp_ip_bytes") : "0";
         } catch (const std::exception& e) {
-            std::cerr << "[GraphBuilder] Error parsing conn data for UID: " << uid << " - " << e.what() << std::endl;
+            std::cerr << "[ZeekLogParser] Error parsing conn data for UID: " << uid << " - " << e.what() << std::endl;
+            return; // Skip this entry if parsing fails
         }
     }
 
     if (combined_data.count("ssl")) {
         const auto& ssl_data = combined_data.at("ssl");
-        version = ssl_data.count("version") ? ssl_data.at("version") : "";
-        cipher = ssl_data.count("cipher") ? ssl_data.at("cipher") : "";
-        curve = ssl_data.count("curve") ? ssl_data.at("curve") : "";
-        server_name = ssl_data.count("server_name") ? ssl_data.at("server_name") : "";
-        resumed = ssl_data.count("resumed") ? (ssl_data.at("resumed") == "T") : false;
-        last_alert = ssl_data.count("last_alert") ? ssl_data.at("last_alert") : "";
-        next_protocol = ssl_data.count("next_protocol") ? ssl_data.at("next_protocol") : "";
-        established = ssl_data.count("established") ? (ssl_data.at("established") == "T") : false;
-        ssl_history = ssl_data.count("ssl_history") ? ssl_data.at("ssl_history") : "";
-        cert_chain_fps = ssl_data.count("cert_chain_fps") ? ssl_data.at("cert_chain_fps") : "";
-        client_cert_chain_fps = ssl_data.count("client_cert_chain_fps") ? ssl_data.at("client_cert_chain_fps") : "";
-        sni_matches_cert = ssl_data.count("sni_matches_cert") ? (ssl_data.at("sni_matches_cert") == "T") : false;
+        feature_map["ssl_version"] = ssl_data.count("version") ? ssl_data.at("version") : "";
+        feature_map["ssl_cipher"] = ssl_data.count("cipher") ? ssl_data.at("cipher") : "";
+        feature_map["ssl_curve"] = ssl_data.count("curve") ? ssl_data.at("curve") : "";
+        feature_map["ssl_server_name"] = ssl_data.count("server_name") ? ssl_data.at("server_name") : "";
+        feature_map["ssl_resumed"] = ssl_data.count("resumed") ? (ssl_data.at("resumed") == "T" ? "true" : "false") : "false";
+        feature_map["ssl_last_alert"] = ssl_data.count("last_alert") ? ssl_data.at("last_alert") : "";
+        feature_map["ssl_next_protocol"] = ssl_data.count("next_protocol") ? ssl_data.at("next_protocol") : "";
+        feature_map["ssl_established"] = ssl_data.count("established") ? (ssl_data.at("established") == "T" ? "true" : "false") : "false";
+        feature_map["ssl_history"] = ssl_data.count("ssl_history") ? ssl_data.at("ssl_history") : "";
+        feature_map["ssl_cert_chain_fps"] = ssl_data.count("cert_chain_fps") ? ssl_data.at("cert_chain_fps") : "";
+        feature_map["ssl_client_cert_chain_fps"] = ssl_data.count("client_cert_chain_fps") ? ssl_data.at("client_cert_chain_fps") : "";
+        feature_map["ssl_sni_matches_cert"] = ssl_data.count("sni_matches_cert") ? (ssl_data.at("sni_matches_cert") == "T" ? "true" : "false") : "false";
     }
 
     if (combined_data.count("http")) {
         const auto& http_data = combined_data.at("http");
-        method = http_data.count("method") ? http_data.at("method") : "";
-        host = http_data.count("host") ? http_data.at("host") : "";
-        uri = http_data.count("uri") ? http_data.at("uri") : "";
-        referrer = http_data.count("referrer") ? http_data.at("referrer") : "";
-        http_version = http_data.count("version") ? http_data.at("version") : "";
-        user_agent = http_data.count("user_agent") ? http_data.at("user_agent") : "";
-        origin = http_data.count("origin") ? http_data.at("origin") : "";
-        status_code = http_data.count("status_code") ? http_data.at("status_code") : "";
-        username = http_data.count("username") ? http_data.at("username") : "";
-        // Handle set and list data if needed for the main connection info (optional)
+        feature_map["http_method"] = http_data.count("method") ? http_data.at("method") : "";
+        feature_map["host"] = http_data.count("host") ? http_data.at("host") : "";
+        feature_map["uri"] = http_data.count("uri") ? http_data.at("uri") : "";
+        feature_map["referrer"] = http_data.count("referrer") ? http_data.at("referrer") : "";
+        feature_map["http_version"] = http_data.count("version") ? http_data.at("version") : "";
+        feature_map["http_user_agent"] = http_data.count("user_agent") ? http_data.at("user_agent") : "";
+        feature_map["origin"] = http_data.count("origin") ? http_data.at("origin") : "";
+        feature_map["http_status_code"] = http_data.count("status_code") ? http_data.at("status_code") : "";
+        feature_map["username"] = http_data.count("username") ? http_data.at("username") : "";
     }
 
-    if (!src_ip.empty() && !dst_ip.empty()) {
-        GraphBuilder::get_instance().add_connection(
-            src_ip, dst_ip, proto, service, std::to_string(ts),
-            src_port, dst_port, orig_bytes, resp_bytes, conn_state,
-            local_orig, local_resp, history, orig_pkts, resp_pkts,
-            orig_ip_bytes, resp_ip_bytes,
-            version, cipher, curve, server_name, resumed, last_alert,
-            next_protocol, established, ssl_history, cert_chain_fps,
-            client_cert_chain_fps, sni_matches_cert,
-            method, host, uri, referrer, http_version, user_agent, origin,
-            status_code, username
-        );
+    if (!feature_map["src_ip"].empty() && !feature_map["dst_ip"].empty()) {
+        FeatureEncoder encoder;
+        std::vector<float> encoded_features = encoder.encode_features(feature_map);
+        GraphBuilder::get_instance().add_connection(feature_map, encoded_features);
     }
 }
 
@@ -430,22 +450,25 @@ std::map<std::string, std::string> ZeekLogParser::parse_http_entry(const std::ve
     data["info_code"] = fields[18];
     data["resp_mime_types"] = fields[19];
 
-
-
+/*
     // Handle set type: tags, proxied
-    std::istringstream tags_ss(fields[20]);
-    std::string tag;
-    while (std::getline(tags_ss, tag, ',')) {
-        if (!tag.empty()) {
-            log_entry.set_data["tags"].insert(tag);
+    if (fields.size() > 20) {
+        std::istringstream tags_ss(fields[20]);
+        std::string tag;
+        while (std::getline(tags_ss, tag, ',')) {
+            if (!tag.empty()) {
+                log_entry.set_data["tags"].insert(tag);
+            }
         }
     }
 
-    std::istringstream proxied_ss(fields[23]);
-    std::string proxied_item;
-    while (std::getline(proxied_ss, proxied_item, ',')) {
-        if (!proxied_item.empty()) {
-            log_entry.set_data["proxied"].insert(proxied_item);
+    if (fields.size() > 23) {
+        std::istringstream proxied_ss(fields[23]);
+        std::string proxied_item;
+        while (std::getline(proxied_ss, proxied_item, ',')) {
+            if (!proxied_item.empty()) {
+                log_entry.set_data["proxied"].insert(proxied_item);
+            }
         }
     }
 
@@ -462,13 +485,13 @@ std::map<std::string, std::string> ZeekLogParser::parse_http_entry(const std::ve
         return result;
     };
 
-    log_entry.list_data["orig_fuids"] = parse_vector_field(fields[24]);
-    log_entry.list_data["orig_filenames"] = parse_vector_field(fields[25]);
-    log_entry.list_data["orig_mime_types"] = parse_vector_field(fields[26]);
-    log_entry.list_data["resp_fuids"] = parse_vector_field(fields[27]);
-    log_entry.list_data["resp_filenames"] = parse_vector_field(fields[28]);
-    log_entry.list_data["resp_mime_types"] = parse_vector_field(fields[29]);
-
+    if (fields.size() > 24) log_entry.list_data["orig_fuids"] = parse_vector_field(fields[24]);
+    if (fields.size() > 25) log_entry.list_data["orig_filenames"] = parse_vector_field(fields[25]);
+    if (fields.size() > 26) log_entry.list_data["orig_mime_types"] = parse_vector_field(fields[26]);
+    if (fields.size() > 27) log_entry.list_data["resp_fuids"] = parse_vector_field(fields[27]);
+    if (fields.size() > 28) log_entry.list_data["resp_filenames"] = parse_vector_field(fields[28]);
+    if (fields.size() > 29) log_entry.list_data["resp_mime_types"] = parse_vector_field(fields[29]);
+*/
     return data;
 }
 void ZeekLogParser::handle_appended_data(const std::string& file_path, off_t old_size, off_t new_size) {

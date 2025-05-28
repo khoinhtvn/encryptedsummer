@@ -87,7 +87,7 @@ struct LogEntry {
     std::string log_type;
     std::map<std::string, std::string> data;
     std::map<std::string, std::vector<std::string>> list_data; // For vector types
-    std::map<std::string, std::set<std::string>> set_data;    // For set types
+    std::map<std::string, std::set<std::string>> set_data;     // For set types
 };
 
 /**
@@ -319,6 +319,7 @@ private:
      * @brief Parses an HTTP log entry.
      *
      * @param fields Vector of fields from the log entry.
+     * @param log_entry The LogEntry struct to populate with set and list data.
      * @return A map containing the parsed fields.
      */
     std::map<std::string, std::string> parse_http_entry(const std::vector<std::string>& fields, LogEntry& log_entry);

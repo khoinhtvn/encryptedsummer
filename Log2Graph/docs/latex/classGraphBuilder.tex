@@ -27,8 +27,8 @@ Collaboration diagram for Graph\+Builder\+:\nopagebreak
 \begin{DoxyCompactList}\small\item\em Deleted assignment operator to prevent assignment of the singleton instance. \end{DoxyCompactList}\item 
 std\+::vector$<$ \mbox{\hyperlink{structGraphUpdate}{Graph\+Update}} $>$ \mbox{\hyperlink{classGraphBuilder_a88d61bc652bfa5a60a8cd1aa8509d27c}{get\+\_\+last\+\_\+updates}} ()
 \begin{DoxyCompactList}\small\item\em Gets the update list for the graph. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classGraphBuilder_a022b58b16ad42721ed0a55c4e5ee2ea1}{add\+\_\+connection}} (const std\+::string \&src\+\_\+ip, const std\+::string \&dst\+\_\+ip, const std\+::string \&proto, const std\+::string \&service, const std\+::string \&timestamp, const int src\+\_\+port, const int dst\+\_\+port, const int orig\+\_\+bytes, const int resp\+\_\+bytes, const std\+::string \&conn\+\_\+state, const bool local\+\_\+orig, const bool local\+\_\+resp, const std\+::string \&history, const int orig\+\_\+pkts, const int resp\+\_\+pkts, const int orig\+\_\+ip\+\_\+bytes, const int resp\+\_\+ip\+\_\+bytes, const std\+::string \&version="{}"{}, const std\+::string \&cipher="{}"{}, const std\+::string \&curve="{}"{}, const std\+::string \&server\+\_\+name="{}"{}, const bool resumed=false, const std\+::string \&last\+\_\+alert="{}"{}, const std\+::string \&next\+\_\+protocol="{}"{}, const bool established=false, const std\+::string \&ssl\+\_\+history="{}"{}, const std\+::string \&cert\+\_\+chain\+\_\+fps="{}"{}, const std\+::string \&client\+\_\+cert\+\_\+chain\+\_\+fps="{}"{}, const bool sni\+\_\+matches\+\_\+cert=false, const std\+::string \&http\+\_\+method="{}"{}, const std\+::string \&http\+\_\+host="{}"{}, const std\+::string \&http\+\_\+uri="{}"{}, const std\+::string \&http\+\_\+referrer="{}"{}, const std\+::string \&http\+\_\+version="{}"{}, const std\+::string \&http\+\_\+user\+\_\+agent="{}"{}, const std\+::string \&http\+\_\+origin="{}"{}, const std\+::string \&http\+\_\+status\+\_\+code="{}"{}, const std\+::string \&http\+\_\+username="{}"{})
-\begin{DoxyCompactList}\small\item\em Processes a network connection event and adds the corresponding nodes and edges to the graph, including SSL and HTTP related information if available. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classGraphBuilder_aceabeb2e29b01e4e02f1ea7e4f8310ae}{add\+\_\+connection}} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&raw\+\_\+feature\+\_\+map, std\+::vector$<$ float $>$ \&encoded\+\_\+features)
+\begin{DoxyCompactList}\small\item\em Processes a network connection event and adds the corresponding nodes and edges to the graph. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classTrafficGraph}{Traffic\+Graph}} \& \mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\+\_\+graph}} ()
 \begin{DoxyCompactList}\small\item\em Gets a reference to the underlying \doxylink{classTrafficGraph}{Traffic\+Graph} object. \end{DoxyCompactList}\item 
 size\+\_\+t \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\+\_\+feature\+\_\+dimension}} () const
@@ -59,95 +59,23 @@ Deleted copy constructor to prevent copying of the singleton instance.
 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classGraphBuilder_a022b58b16ad42721ed0a55c4e5ee2ea1}\index{GraphBuilder@{GraphBuilder}!add\_connection@{add\_connection}}
+\Hypertarget{classGraphBuilder_aceabeb2e29b01e4e02f1ea7e4f8310ae}\index{GraphBuilder@{GraphBuilder}!add\_connection@{add\_connection}}
 \index{add\_connection@{add\_connection}!GraphBuilder@{GraphBuilder}}
 \doxysubsubsection{\texorpdfstring{add\_connection()}{add\_connection()}}
-{\footnotesize\ttfamily \label{classGraphBuilder_a022b58b16ad42721ed0a55c4e5ee2ea1} 
-void Graph\+Builder\+::add\+\_\+connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src\+\_\+ip}{, }\item[{const std\+::string \&}]{dst\+\_\+ip}{, }\item[{const std\+::string \&}]{proto}{, }\item[{const std\+::string \&}]{service}{, }\item[{const std\+::string \&}]{timestamp}{, }\item[{const int}]{src\+\_\+port}{, }\item[{const int}]{dst\+\_\+port}{, }\item[{const int}]{orig\+\_\+bytes}{, }\item[{const int}]{resp\+\_\+bytes}{, }\item[{const std\+::string \&}]{conn\+\_\+state}{, }\item[{const bool}]{local\+\_\+orig}{, }\item[{const bool}]{local\+\_\+resp}{, }\item[{const std\+::string \&}]{history}{, }\item[{const int}]{orig\+\_\+pkts}{, }\item[{const int}]{resp\+\_\+pkts}{, }\item[{const int}]{orig\+\_\+ip\+\_\+bytes}{, }\item[{const int}]{resp\+\_\+ip\+\_\+bytes}{, }\item[{const std\+::string \&}]{version}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{cipher}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{curve}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{server\+\_\+name}{ = {\ttfamily "{}"{}}, }\item[{const bool}]{resumed}{ = {\ttfamily false}, }\item[{const std\+::string \&}]{last\+\_\+alert}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{next\+\_\+protocol}{ = {\ttfamily "{}"{}}, }\item[{const bool}]{established}{ = {\ttfamily false}, }\item[{const std\+::string \&}]{ssl\+\_\+history}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{cert\+\_\+chain\+\_\+fps}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{client\+\_\+cert\+\_\+chain\+\_\+fps}{ = {\ttfamily "{}"{}}, }\item[{const bool}]{sni\+\_\+matches\+\_\+cert}{ = {\ttfamily false}, }\item[{const std\+::string \&}]{http\+\_\+method}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+host}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+uri}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+referrer}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+version}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+user\+\_\+agent}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+origin}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+status\+\_\+code}{ = {\ttfamily "{}"{}}, }\item[{const std\+::string \&}]{http\+\_\+username}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classGraphBuilder_aceabeb2e29b01e4e02f1ea7e4f8310ae} 
+void Graph\+Builder\+::add\+\_\+connection (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{raw\+\_\+feature\+\_\+map}{, }\item[{std\+::vector$<$ float $>$ \&}]{encoded\+\_\+features}{}\end{DoxyParamCaption})}
 
 
 
-Processes a network connection event and adds the corresponding nodes and edges to the graph, including SSL and HTTP related information if available. 
+Processes a network connection event and adds the corresponding nodes and edges to the graph. 
 
-This method takes details of a network connection (e.\+g., source and destination IPs, ports, protocol) and updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes and includes SSL-\/specific details such as version, cipher, and certificates, and HTTP-\/specific details such as method, URI, and status code if provided.
+This method takes the raw connection attributes (as a feature map) and the already encoded feature vector for the connection. It updates the traffic graph by adding or retrieving the involved nodes and creating an edge representing the connection between them. It also updates the temporal features of the nodes.
 
 
 \begin{DoxyParams}{Parameters}
-{\em src\+\_\+ip} & Source IP address of the connection. \\
+{\em raw\+\_\+feature\+\_\+map} & A map containing the raw string attributes of the network connection. This is used to extract specific raw values like src\+\_\+ip, dst\+\_\+ip, protocol, and other details needed for graph structure and node updates. \\
 \hline
-{\em dst\+\_\+ip} & Destination IP address of the connection. \\
-\hline
-{\em proto} & Protocol of the connection (e.\+g., "{}tcp"{}, "{}udp"{}). \\
-\hline
-{\em service} & Service from a list of known services. \\
-\hline
-{\em timestamp} & Timestamp of the connection event. \\
-\hline
-{\em src\+\_\+port} & Source port of the connection. \\
-\hline
-{\em dst\+\_\+port} & Destination port of the connection. \\
-\hline
-{\em orig\+\_\+bytes} & Number of bytes sent by the originator. \\
-\hline
-{\em resp\+\_\+bytes} & Number of bytes sent by the responder. \\
-\hline
-{\em conn\+\_\+state} & Connection state (e.\+g., "{}\+REJ"{}, "{}\+SF"{}). \\
-\hline
-{\em local\+\_\+orig} & Whether the originator is local. \\
-\hline
-{\em local\+\_\+resp} & Whether the responder is local. \\
-\hline
-{\em history} & History of the connection (e.\+g., packet states). \\
-\hline
-{\em orig\+\_\+pkts} & Number of packets sent by the originator. \\
-\hline
-{\em resp\+\_\+pkts} & Number of packets sent by the responder. \\
-\hline
-{\em orig\+\_\+ip\+\_\+bytes} & Number of IP bytes sent by the originator. \\
-\hline
-{\em resp\+\_\+ip\+\_\+bytes} & Number of IP bytes sent by the responder. \\
-\hline
-{\em version} & SSL/\+TLS version (if applicable). \\
-\hline
-{\em cipher} & SSL/\+TLS cipher suite (if applicable). \\
-\hline
-{\em curve} & Elliptic curve used for key exchange (if applicable). \\
-\hline
-{\em server\+\_\+name} & Server Name Indication (SNI) (if applicable). \\
-\hline
-{\em resumed} & Whether the SSL/\+TLS session was resumed (if applicable). \\
-\hline
-{\em last\+\_\+alert} & The last SSL/\+TLS alert sent or received (if applicable). \\
-\hline
-{\em next\+\_\+protocol} & The next protocol negotiated via ALPN (if applicable). \\
-\hline
-{\em established} & Whether the SSL/\+TLS connection was established (if applicable). \\
-\hline
-{\em ssl\+\_\+history} & SSL/\+TLS state history (if applicable). \\
-\hline
-{\em cert\+\_\+chain\+\_\+fps} & Fingerprints of the server\textquotesingle{}s certificate chain (if applicable). \\
-\hline
-{\em client\+\_\+cert\+\_\+chain\+\_\+fps} & Fingerprints of the client\textquotesingle{}s certificate chain (if applicable). \\
-\hline
-{\em sni\+\_\+matches\+\_\+cert} & Whether the SNI matched the presented certificate (if applicable). \\
-\hline
-{\em http\+\_\+method} & HTTP request method (if applicable). \\
-\hline
-{\em http\+\_\+host} & HTTP host header (if applicable). \\
-\hline
-{\em http\+\_\+uri} & HTTP request URI (if applicable). \\
-\hline
-{\em http\+\_\+referrer} & HTTP referrer header (if applicable). \\
-\hline
-{\em http\+\_\+version} & HTTP version (if applicable). \\
-\hline
-{\em http\+\_\+user\+\_\+agent} & HTTP user-\/agent header (if applicable). \\
-\hline
-{\em http\+\_\+origin} & HTTP origin header (if applicable). \\
-\hline
-{\em http\+\_\+status\+\_\+code} & HTTP response status code (if applicable). \\
-\hline
-{\em http\+\_\+username} & HTTP username (if applicable). \\
+{\em encoded\+\_\+features} & A vector of floats representing the already encoded numerical features of this connection, generated by the \doxylink{classFeatureEncoder}{Feature\+Encoder}. This vector will be directly associated with the created edge. \\
 \hline
 \end{DoxyParams}
 \Hypertarget{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}\index{GraphBuilder@{GraphBuilder}!get\_feature\_dimension@{get\_feature\_dimension}}

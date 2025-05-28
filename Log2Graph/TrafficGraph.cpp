@@ -53,7 +53,7 @@ std::weak_ptr<GraphNode> TrafficGraph::get_node_reference(const std::string &id)
 
 std::weak_ptr<GraphEdge> TrafficGraph::add_edge(const std::string &src, const std::string &tgt,
                                                 const std::string &rel,
-                                                const std::unordered_map<std::string, std::string> &attrs, std::vector<float> encoded_features) {
+                                                const std::unordered_map<std::string, std::string> &attrs, const std::vector<float> &encoded_features) {
     //TODO: maybe in the future think about aggregating edges periodically. To reduce graph size and improve performance. Retain metadata such as connection_count, last_active, ports_used
     std::unique_lock lock(graph_mutex);
     auto edge = std::make_shared<GraphEdge>(src, tgt, rel);

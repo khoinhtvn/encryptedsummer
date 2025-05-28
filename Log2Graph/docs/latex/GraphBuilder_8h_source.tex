@@ -52,46 +52,21 @@
 \DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::move(update\_queue.popAll());}
 \DoxyCodeLine{00104\ \ \ \ \ \}}
 \DoxyCodeLine{00105\ }
-\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphBuilder_a022b58b16ad42721ed0a55c4e5ee2ea1}{add\_connection}}(\textcolor{keyword}{const}\ std::string\ \&src\_ip,\ \textcolor{keyword}{const}\ std::string\ \&dst\_ip,}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&proto,\ \textcolor{keyword}{const}\ std::string\ \&service,\ \textcolor{keyword}{const}\ std::string\ \&timestamp,}
-\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ src\_port,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ dst\_port,}
-\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ orig\_bytes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ resp\_bytes,}
-\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&conn\_state,}
-\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ local\_orig,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ local\_resp,}
-\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&history,}
-\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ orig\_pkts,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ resp\_pkts,}
-\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ orig\_ip\_bytes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ resp\_ip\_bytes,}
-\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&version\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&cipher\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&curve\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&server\_name\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ resumed\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&last\_alert\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&next\_protocol\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ established\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&ssl\_history\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&cert\_chain\_fps\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&client\_cert\_chain\_fps\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ sni\_matches\_cert\ =\ \textcolor{keyword}{false},}
-\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_method\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_host\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_uri\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_referrer\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_version\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_user\_agent\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_origin\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_status\_code\ =\ \textcolor{stringliteral}{"{}"{}},}
-\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&http\_username\ =\ \textcolor{stringliteral}{"{}"{}});}
-\DoxyCodeLine{00185\ }
-\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&\mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\_graph}}();}
-\DoxyCodeLine{00194\ }
-\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\_feature\_dimension}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ should\ match\ your\ encoder's\ output\ size}}
-\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ feature\_encoder.get\_feature\_dimension();}
-\DoxyCodeLine{00202\ \ \ \ \ \}}
-\DoxyCodeLine{00203\ \};}
-\DoxyCodeLine{00204\ }
-\DoxyCodeLine{00205\ }
-\DoxyCodeLine{00206\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHBUILDER\_H}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphBuilder_aceabeb2e29b01e4e02f1ea7e4f8310ae}{add\_connection}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\ \&raw\_feature\_map,}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<float>\ \&encoded\_features);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&\mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\_graph}}();}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\_feature\_dimension}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ should\ match\ your\ encoder's\ output\ size}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ feature\_encoder.get\_feature\_dimension();}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHBUILDER\_H}}
 
 \end{DoxyCode}

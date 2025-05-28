@@ -11,22 +11,21 @@
     <member refid="classFeatureEncoder_1aee70662ca987d3655885ce74c1316367" kind="variable"><name>service_map</name></member>
     <member refid="classFeatureEncoder_1ae2a9b669719f077c4ca7d5a1aeb2a5f0" kind="variable"><name>method_map</name></member>
     <member refid="classFeatureEncoder_1a3d9a66feaff85c726af1fa2d84161fc1" kind="variable"><name>user_agent_map</name></member>
-    <member refid="classFeatureEncoder_1abc6b1ebaa040ac445754300a9dfc11c0" kind="variable"><name>status_msg_map</name></member>
+    <member refid="classFeatureEncoder_1afdb30a4ee39e26c2477d9e53307c8543" kind="variable"><name>ssl_version_map</name></member>
+    <member refid="classFeatureEncoder_1aec6e323f686eacede0cfaa49ff3b9aab" kind="variable"><name>ssl_cipher_map</name></member>
     <member refid="classFeatureEncoder_1a796843aa28a1d3fbeb89816ca9617364" kind="variable"><name>feature_dimension</name></member>
-    <member refid="classFeatureEncoder_1afaf2be970998ea6430e5d17ea95d80a7" kind="function"><name>FeatureEncoder</name></member>
-    <member refid="classFeatureEncoder_1a60fa681a32d45d2326c87167d6b1a049" kind="function"><name>get_feature_dimension</name></member>
     <member refid="classFeatureEncoder_1ac06441a7c77e33594e3581bbc1ca1237" kind="function"><name>normalize</name></member>
     <member refid="classFeatureEncoder_1ad5c46bc20ebd688f51ea40e1e079a81f" kind="function"><name>one_hot</name></member>
     <member refid="classFeatureEncoder_1a1938d78968874a7cc69d02abbe091591" kind="function"><name>encode_timestamp_cyclic</name></member>
-    <member refid="classFeatureEncoder_1a7e94c8b62019fa88b5f68a10fe21022a" kind="function"><name>encode_timestamp_features</name></member>
     <member refid="classFeatureEncoder_1abd26f511236cb760f8cf43b316487bd2" kind="function"><name>encode_port</name></member>
-    <member refid="classFeatureEncoder_1aaa0f0429b65ebe905ec9ae3eaa2a8019" kind="function"><name>encode_string_length</name></member>
-    <member refid="classFeatureEncoder_1a1985536abfbf2862f5a5c947a3bdb84d" kind="function"><name>encode_body_length</name></member>
-    <member refid="classFeatureEncoder_1a23cb581a17c627f630fec7f6d98d0757" kind="function"><name>encode_status_code</name></member>
     <member refid="classFeatureEncoder_1a701695d03b52990d684ac02989a271ec" kind="function"><name>normalize_size</name></member>
+    <member refid="classFeatureEncoder_1a60bbddf6480840f1e918fb57aaab5d3f" kind="function"><name>encode_http_version</name></member>
+    <member refid="classFeatureEncoder_1adc0f983156f142d13e0783f7922cbed2" kind="function"><name>encode_http_status_code</name></member>
+    <member refid="classFeatureEncoder_1afaf2be970998ea6430e5d17ea95d80a7" kind="function"><name>FeatureEncoder</name></member>
+    <member refid="classFeatureEncoder_1a60fa681a32d45d2326c87167d6b1a049" kind="function"><name>get_feature_dimension</name></member>
     <member refid="classFeatureEncoder_1aaa3ef6109c0b8e2d4b00f98e146d3830" kind="function"><name>encode_features</name></member>
-    <member refid="classFeatureEncoder_1aa0b2aa06a5804327c59d4f0badeffcaf" kind="function"><name>get_feature_names</name></member>
-    <member refid="classFeatureEncoder_1a008c4d5bd3f08b5a7b7ce907ea0af9ea" kind="function"><name>get_feature_name</name></member>
+    <member refid="classFeatureEncoder_1a92aadd6c0de44aac9ed1f854048e82bb" kind="function"><name>get_feature_names</name></member>
+    <member refid="classFeatureEncoder_1a28d3e22e320c0a37824c6b0762f7ba35" kind="function"><name>get_feature_name</name></member>
   </compound>
   <compound refid="structFileState" kind="struct"><name>FileState</name>
     <member refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kind="variable"><name>inode</name></member>
@@ -48,7 +47,7 @@
     <member refid="classGraphBuilder_1a3af3213174c72b1eda8f3a0e21bba54b" kind="function"><name>GraphBuilder</name></member>
     <member refid="classGraphBuilder_1acbd5f45fa3be1fa61975e8fefedd3278" kind="function"><name>operator=</name></member>
     <member refid="classGraphBuilder_1a88d61bc652bfa5a60a8cd1aa8509d27c" kind="function"><name>get_last_updates</name></member>
-    <member refid="classGraphBuilder_1a022b58b16ad42721ed0a55c4e5ee2ea1" kind="function"><name>add_connection</name></member>
+    <member refid="classGraphBuilder_1aceabeb2e29b01e4e02f1ea7e4f8310ae" kind="function"><name>add_connection</name></member>
     <member refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kind="function"><name>get_graph</name></member>
     <member refid="classGraphBuilder_1a5bd30a82778691790ebf82f364494a41" kind="function"><name>get_feature_dimension</name></member>
     <member refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kind="function"><name>get_instance</name></member>
@@ -168,7 +167,7 @@
     <member refid="classTrafficGraph_1a0bbbfe4c14d9611db5060a1af21e3948" kind="function"><name>~TrafficGraph</name></member>
     <member refid="classTrafficGraph_1af58889777778f47f1d1692b03ab190c8" kind="function"><name>clean_all_time_windows</name></member>
     <member refid="classTrafficGraph_1ae29bbb7c163056228cb8fa23fcb12795" kind="function"><name>add_node</name></member>
-    <member refid="classTrafficGraph_1a99df0f5fa9c14af4bc276659336de153" kind="function"><name>add_edge</name></member>
+    <member refid="classTrafficGraph_1a8de21c2e351ea32d277fc13b5f14e266" kind="function"><name>add_edge</name></member>
     <member refid="classTrafficGraph_1a4fe8bf82ebe5a118c488142e2a0a0711" kind="function"><name>get_or_create_node</name></member>
     <member refid="classTrafficGraph_1a050fc4ccd24adf28afb04769841bd738" kind="function"><name>get_node_reference</name></member>
     <member refid="classTrafficGraph_1a503a7eb165f5df6b3099b10e71774735" kind="function"><name>get_nodes</name></member>
