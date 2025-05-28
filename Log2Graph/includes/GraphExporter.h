@@ -1,11 +1,4 @@
-/**
- * @file GraphExporter.h
- * @brief Header file for the GraphExporter class, responsible for visualizing the network traffic graph.
- *
- * This file defines the `GraphExporter` class, which uses the Graphviz library
- * to generate visual representations of the `TrafficGraph`.
- */
-
+//
 // Created by lu on 4/28/25.
 //
 
@@ -16,8 +9,7 @@
 #include <graphviz/gvc.h>
 #include <string>
 #include <memory>
-
-#include "GraphBuilder.h" // Self-include is unusual and likely unintentional. Remove in actual code.
+#include <future>
 
 /**
  * @brief Class responsible for visualizing the network traffic graph using Graphviz.
@@ -43,10 +35,11 @@ public:
     ~GraphExporter();
 
     /**
-     * @brief Visualizes the given traffic graph and saves it to a file.
+     * @brief Visualizes the given traffic graph and saves it to a file in a separate thread.
      *
      * This method takes a `TrafficGraph`, generates a visual representation using
-     * Graphviz, and saves it to the specified output file (defaulting to "graph.png").
+     * Graphviz, and saves it to the specified output file (defaulting to "graph.png")
+     * in a separate thread, allowing the program to continue execution.
      * It can also optionally open the generated image and control whether the export
      * should proceed.
      *
@@ -55,16 +48,16 @@ public:
      * @param open_image A boolean indicating whether to attempt to open the generated image (default: true).
      * @param export_cond A boolean controlling whether the export process should proceed (default: true).
      */
-    void export_full_graph_human_readable(const TrafficGraph &graph,
-                           const std::string &output_file = "graph.png",
-                           bool open_image = true, bool export_cond = true);
+    void export_full_graph_human_readable_async(const TrafficGraph &graph,
+                                               const std::string &output_file = "graph.png",
+                                               bool open_image = true, bool export_cond = true);
 
     /**
-     * @brief Exports the encoded incremental updates of the graph to a DOT file.
+     * @brief Exports the encoded incremental updates of the graph to a DOT file in a separate thread.
      *
      * This method retrieves the latest incremental updates from the GraphBuilder,
      * encodes them, and then saves the encoded representation to a specified
-     * DOT file. The filename includes a timestamp (UTC) to ensure uniqueness
+     * DOT file in a separate thread. The filename includes a timestamp (UTC) to ensure uniqueness
      * for each incremental update export.
      *
      * @param updates A vector of `GraphUpdate` objects representing the incremental changes
@@ -75,8 +68,8 @@ public:
      * the base `export_path`, a separator, the prefix
      * "nw_graph_encoded_", a UTC timestamp, and the ".dot" extension.
      */
-    void export_incremental_update_encoded(std::vector<GraphUpdate> updates,
-                                   const std::string &output_file = "update.dot");
+    void export_incremental_update_encoded_async(std::vector<GraphUpdate> updates,
+                                                 const std::string &output_file = "update.dot");
 
 private:
     /**
@@ -85,6 +78,27 @@ private:
      * This context is required for interacting with the Graphviz library.
      */
     GVC_t *gvc;
+
+    /**
+     * @brief Worker function to perform the Graphviz export.
+     *
+     * @param graph The `TrafficGraph` object to visualize.
+     * @param output_file The name of the output image file.
+     * @param open_image A boolean indicating whether to attempt to open the generated image.
+     * @param export_cond A boolean controlling whether the export process should proceed.
+     */
+    void export_full_graph_worker(const TrafficGraph &graph,
+                                  const std::string &output_file,
+                                  bool open_image, bool export_cond);
+
+    /**
+     * @brief Worker function to export incremental updates to a DOT file.
+     *
+     * @param updates A vector of `GraphUpdate` objects representing the incremental changes.
+     * @param output_file The full path and filename for the output DOT file.
+     */
+    void export_incremental_update_worker(std::vector<GraphUpdate> updates,
+                                           const std::string &output_file);
 
     /**
      * @brief Adds nodes from the `TrafficGraph` to the Graphviz graph.

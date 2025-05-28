@@ -18,7 +18,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="87" column="11" bodyfile="includes/GraphExporter.h" bodystart="87" bodyend="-1"/>
+        <location file="includes/GraphExporter.h" line="80" column="11" bodyfile="includes/GraphExporter.h" bodystart="80" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -36,7 +36,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="36" column="5" bodyfile="GraphExporter.cpp" bodystart="16" bodyend="18"/>
+        <location file="includes/GraphExporter.h" line="28" column="5" bodyfile="GraphExporter.cpp" bodystart="16" bodyend="18"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -52,14 +52,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="43" column="5" bodyfile="GraphExporter.cpp" bodystart="20" bodyend="22"/>
+        <location file="includes/GraphExporter.h" line="35" column="5" bodyfile="GraphExporter.cpp" bodystart="20" bodyend="22"/>
       </memberdef>
-      <memberdef kind="function" id="classGraphExporter_1a6569907146d179c526617405392a9746" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classGraphExporter_1ab7a5103acd18ab33827bfff8e560037a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void GraphExporter::export_full_graph_human_readable</definition>
+        <definition>void GraphExporter::export_full_graph_human_readable_async</definition>
         <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;output_file=&quot;graph.png&quot;, bool open_image=true, bool export_cond=true)</argsstring>
-        <name>export_full_graph_human_readable</name>
-        <qualifiedname>GraphExporter::export_full_graph_human_readable</qualifiedname>
+        <name>export_full_graph_human_readable_async</name>
+        <qualifiedname>GraphExporter::export_full_graph_human_readable_async</qualifiedname>
         <param>
           <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
           <declname>graph</declname>
@@ -80,10 +80,10 @@
           <defval>true</defval>
         </param>
         <briefdescription>
-<para>Visualizes the given traffic graph and saves it to a file. </para>
+<para>Visualizes the given traffic graph and saves it to a file in a separate thread. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method takes a <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to &quot;graph.png&quot;). It can also optionally open the generated image and control whether the export should proceed.</para>
+<para>This method takes a <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to &quot;graph.png&quot;) in a separate thread, allowing the program to continue execution. It can also optionally open the generated image and control whether the export should proceed.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>graph</parametername>
@@ -121,14 +121,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="58" column="10" bodyfile="GraphExporter.cpp" bodystart="24" bodyend="67"/>
+        <location file="includes/GraphExporter.h" line="51" column="10" bodyfile="GraphExporter.cpp" bodystart="24" bodyend="29"/>
       </memberdef>
-      <memberdef kind="function" id="classGraphExporter_1a031f8793193715ee2018a2e28a8005db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
-        <definition>void GraphExporter::export_incremental_update_encoded</definition>
+        <definition>void GraphExporter::export_incremental_update_encoded_async</definition>
         <argsstring>(std::vector&lt; GraphUpdate &gt; updates, const std::string &amp;output_file=&quot;update.dot&quot;)</argsstring>
-        <name>export_incremental_update_encoded</name>
-        <qualifiedname>GraphExporter::export_incremental_update_encoded</qualifiedname>
+        <name>export_incremental_update_encoded_async</name>
+        <qualifiedname>GraphExporter::export_incremental_update_encoded_async</qualifiedname>
         <param>
           <type>std::vector&lt; <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &gt;</type>
           <declname>updates</declname>
@@ -139,10 +139,10 @@
           <defval>&quot;update.dot&quot;</defval>
         </param>
         <briefdescription>
-<para>Exports the encoded incremental updates of the graph to a DOT file. </para>
+<para>Exports the encoded incremental updates of the graph to a DOT file in a separate thread. </para>
         </briefdescription>
         <detaileddescription>
-<para>This method retrieves the latest incremental updates from the <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref>, encodes them, and then saves the encoded representation to a specified DOT file. The filename includes a timestamp (UTC) to ensure uniqueness for each incremental update export.</para>
+<para>This method retrieves the latest incremental updates from the <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref>, encodes them, and then saves the encoded representation to a specified DOT file in a separate thread. The filename includes a timestamp (UTC) to ensure uniqueness for each incremental update export.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>updates</parametername>
@@ -164,10 +164,116 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="78" column="10" bodyfile="GraphExporter.cpp" bodystart="69" bodyend="117"/>
+        <location file="includes/GraphExporter.h" line="71" column="10" bodyfile="GraphExporter.cpp" bodystart="31" bodyend="35"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
+      <memberdef kind="function" id="classGraphExporter_1ad37df271c30df08fa904dc9a6df95aa4" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::export_full_graph_worker</definition>
+        <argsstring>(const TrafficGraph &amp;graph, const std::string &amp;output_file, bool open_image, bool export_cond)</argsstring>
+        <name>export_full_graph_worker</name>
+        <qualifiedname>GraphExporter::export_full_graph_worker</qualifiedname>
+        <param>
+          <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
+          <declname>graph</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_file</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>open_image</declname>
+        </param>
+        <param>
+          <type>bool</type>
+          <declname>export_cond</declname>
+        </param>
+        <briefdescription>
+<para>Worker function to perform the Graphviz export. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>graph</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <computeroutput><ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref></computeroutput> object to visualize. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The name of the output image file. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>open_image</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A boolean indicating whether to attempt to open the generated image. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>export_cond</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A boolean controlling whether the export process should proceed. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="90" column="10" bodyfile="GraphExporter.cpp" bodystart="37" bodyend="80"/>
+      </memberdef>
+      <memberdef kind="function" id="classGraphExporter_1a0a0ec3980f9448262dbc8cb72d50384e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void GraphExporter::export_incremental_update_worker</definition>
+        <argsstring>(std::vector&lt; GraphUpdate &gt; updates, const std::string &amp;output_file)</argsstring>
+        <name>export_incremental_update_worker</name>
+        <qualifiedname>GraphExporter::export_incremental_update_worker</qualifiedname>
+        <param>
+          <type>std::vector&lt; <ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref> &gt;</type>
+          <declname>updates</declname>
+        </param>
+        <param>
+          <type>const std::string &amp;</type>
+          <declname>output_file</declname>
+        </param>
+        <briefdescription>
+<para>Worker function to export incremental updates to a DOT file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>updates</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A vector of <computeroutput><ref refid="structGraphUpdate" kindref="compound">GraphUpdate</ref></computeroutput> objects representing the incremental changes. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>output_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The full path and filename for the output DOT file. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="includes/GraphExporter.h" line="100" column="10" bodyfile="GraphExporter.cpp" bodystart="82" bodyend="130"/>
+      </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void GraphExporter::add_nodes</definition>
@@ -208,7 +314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="98" column="10" bodyfile="GraphExporter.cpp" bodystart="119" bodyend="158"/>
+        <location file="includes/GraphExporter.h" line="112" column="10" bodyfile="GraphExporter.cpp" bodystart="132" bodyend="166"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -250,7 +356,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="109" column="10" bodyfile="GraphExporter.cpp" bodystart="160" bodyend="189"/>
+        <location file="includes/GraphExporter.h" line="123" column="10" bodyfile="GraphExporter.cpp" bodystart="168" bodyend="197"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -280,7 +386,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="119" column="10" bodyfile="GraphExporter.cpp" bodystart="191" bodyend="198"/>
+        <location file="includes/GraphExporter.h" line="133" column="10" bodyfile="GraphExporter.cpp" bodystart="199" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1ae8e782903a09b03895db658af8b1863e" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -312,7 +418,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="130" column="17" bodyfile="GraphExporter.cpp" bodystart="200" bodyend="206"/>
+        <location file="includes/GraphExporter.h" line="144" column="17" bodyfile="GraphExporter.cpp" bodystart="208" bodyend="214"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a3e0a34f0682f1aa34915ca87449f2499" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -334,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="132" column="10" bodyfile="GraphExporter.cpp" bodystart="208" bodyend="217"/>
+        <location file="includes/GraphExporter.h" line="146" column="10" bodyfile="GraphExporter.cpp" bodystart="216" bodyend="225"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1aa1a6dd4e12a4732aab0631f8b1f62f69" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -356,7 +462,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="134" column="10" bodyfile="GraphExporter.cpp" bodystart="219" bodyend="239"/>
+        <location file="includes/GraphExporter.h" line="148" column="10" bodyfile="GraphExporter.cpp" bodystart="227" bodyend="247"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -398,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="145" column="10" bodyfile="GraphExporter.cpp" bodystart="241" bodyend="259"/>
+        <location file="includes/GraphExporter.h" line="159" column="10" bodyfile="GraphExporter.cpp" bodystart="249" bodyend="267"/>
       </memberdef>
       <memberdef kind="function" id="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>std::string</type>
@@ -416,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphExporter.h" line="147" column="17" bodyfile="GraphExporter.cpp" bodystart="262" bodyend="274"/>
+        <location file="includes/GraphExporter.h" line="161" column="17" bodyfile="GraphExporter.cpp" bodystart="270" bodyend="282"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -431,14 +537,16 @@
         <link refid="classGraphExporter"/>
       </node>
     </collaborationgraph>
-    <location file="includes/GraphExporter.h" line="29" column="1" bodyfile="includes/GraphExporter.h" bodystart="29" bodyend="148"/>
+    <location file="includes/GraphExporter.h" line="21" column="1" bodyfile="includes/GraphExporter.h" bodystart="21" bodyend="162"/>
     <listofallmembers>
       <member refid="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>add_edges</name></member>
       <member refid="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>add_nodes</name></member>
       <member refid="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>apply_default_styles</name></member>
       <member refid="classGraphExporter_1a378b62d5916620db7cd89970b60fefb7" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>escape_dot_string</name></member>
-      <member refid="classGraphExporter_1a6569907146d179c526617405392a9746" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph_human_readable</name></member>
-      <member refid="classGraphExporter_1a031f8793193715ee2018a2e28a8005db" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_incremental_update_encoded</name></member>
+      <member refid="classGraphExporter_1ab7a5103acd18ab33827bfff8e560037a" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph_human_readable_async</name></member>
+      <member refid="classGraphExporter_1ad37df271c30df08fa904dc9a6df95aa4" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_full_graph_worker</name></member>
+      <member refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>export_incremental_update_encoded_async</name></member>
+      <member refid="classGraphExporter_1a0a0ec3980f9448262dbc8cb72d50384e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_incremental_update_worker</name></member>
       <member refid="classGraphExporter_1a2c74a9bfe469ec737b58edc7d19cec1c" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>export_to_dot</name></member>
       <member refid="classGraphExporter_1ae8e782903a09b03895db658af8b1863e" prot="private" virt="non-virtual"><scope>GraphExporter</scope><name>generate_node_id</name></member>
       <member refid="classGraphExporter_1ad6ec946fe1111d8543118747b9883895" prot="public" virt="non-virtual"><scope>GraphExporter</scope><name>GraphExporter</name></member>

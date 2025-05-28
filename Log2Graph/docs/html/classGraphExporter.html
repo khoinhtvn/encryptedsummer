@@ -118,7 +118,7 @@ Collaboration diagram for GraphExporter:</div>
 <div class="dyncontent">
 <div class="center"><img src="classGraphExporter__coll__graph.png" border="0" usemap="#aGraphExporter_coll__map" alt="Collaboration graph"/></div>
 <map name="aGraphExporter_coll__map" id="aGraphExporter_coll__map">
-<area shape="rect" title="Class responsible for visualizing the network traffic graph using Graphviz." alt="" coords="5,5,200,160"/>
+<area shape="rect" title="Class responsible for visualizing the network traffic graph using Graphviz." alt="" coords="5,5,203,160"/>
 </map>
 </div>
 <table class="memberdecls">
@@ -130,12 +130,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af8456887e192d89491c058fb1eb09e97" id="r_af8456887e192d89491c058fb1eb09e97"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af8456887e192d89491c058fb1eb09e97">~GraphExporter</a> ()</td></tr>
 <tr class="memdesc:af8456887e192d89491c058fb1eb09e97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor for the <a class="el" href="classGraphExporter.html" title="Class responsible for visualizing the network traffic graph using Graphviz.">GraphExporter</a>.  <br /></td></tr>
 <tr class="separator:af8456887e192d89491c058fb1eb09e97"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6569907146d179c526617405392a9746" id="r_a6569907146d179c526617405392a9746"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6569907146d179c526617405392a9746">export_full_graph_human_readable</a> (const <a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;graph, const std::string &amp;output_file=&quot;graph.png&quot;, bool open_image=true, bool export_cond=true)</td></tr>
-<tr class="memdesc:a6569907146d179c526617405392a9746"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visualizes the given traffic graph and saves it to a file.  <br /></td></tr>
-<tr class="separator:a6569907146d179c526617405392a9746"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a031f8793193715ee2018a2e28a8005db" id="r_a031f8793193715ee2018a2e28a8005db"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a031f8793193715ee2018a2e28a8005db">export_incremental_update_encoded</a> (std::vector&lt; <a class="el" href="structGraphUpdate.html">GraphUpdate</a> &gt; updates, const std::string &amp;output_file=&quot;update.dot&quot;)</td></tr>
-<tr class="memdesc:a031f8793193715ee2018a2e28a8005db"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports the encoded incremental updates of the graph to a DOT file.  <br /></td></tr>
-<tr class="separator:a031f8793193715ee2018a2e28a8005db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab7a5103acd18ab33827bfff8e560037a" id="r_ab7a5103acd18ab33827bfff8e560037a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab7a5103acd18ab33827bfff8e560037a">export_full_graph_human_readable_async</a> (const <a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;graph, const std::string &amp;output_file=&quot;graph.png&quot;, bool open_image=true, bool export_cond=true)</td></tr>
+<tr class="memdesc:ab7a5103acd18ab33827bfff8e560037a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Visualizes the given traffic graph and saves it to a file in a separate thread.  <br /></td></tr>
+<tr class="separator:ab7a5103acd18ab33827bfff8e560037a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac61130aae979af8b0ed875bcf036208d" id="r_ac61130aae979af8b0ed875bcf036208d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac61130aae979af8b0ed875bcf036208d">export_incremental_update_encoded_async</a> (std::vector&lt; <a class="el" href="structGraphUpdate.html">GraphUpdate</a> &gt; updates, const std::string &amp;output_file=&quot;update.dot&quot;)</td></tr>
+<tr class="memdesc:ac61130aae979af8b0ed875bcf036208d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Exports the encoded incremental updates of the graph to a DOT file in a separate thread.  <br /></td></tr>
+<tr class="separator:ac61130aae979af8b0ed875bcf036208d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class responsible for visualizing the network traffic graph using Graphviz. </p>
@@ -182,14 +182,14 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a6569907146d179c526617405392a9746" name="a6569907146d179c526617405392a9746"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6569907146d179c526617405392a9746">&#9670;&#160;</a></span>export_full_graph_human_readable()</h2>
+<a id="ab7a5103acd18ab33827bfff8e560037a" name="ab7a5103acd18ab33827bfff8e560037a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab7a5103acd18ab33827bfff8e560037a">&#9670;&#160;</a></span>export_full_graph_human_readable_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GraphExporter::export_full_graph_human_readable </td>
+          <td class="memname">void GraphExporter::export_full_graph_human_readable_async </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="classTrafficGraph.html">TrafficGraph</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>graph</em></span>, </td>
         </tr>
@@ -211,8 +211,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Visualizes the given traffic graph and saves it to a file. </p>
-<p>This method takes a <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to "graph.png"). It can also optionally open the generated image and control whether the export should proceed.</p>
+<p>Visualizes the given traffic graph and saves it to a file in a separate thread. </p>
+<p>This method takes a <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code>, generates a visual representation using Graphviz, and saves it to the specified output file (defaulting to "graph.png") in a separate thread, allowing the program to continue execution. It can also optionally open the generated image and control whether the export should proceed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">graph</td><td>The <code><a class="el" href="classTrafficGraph.html" title="Represents the entire network traffic graph.">TrafficGraph</a></code> object to visualize. </td></tr>
@@ -225,14 +225,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a031f8793193715ee2018a2e28a8005db" name="a031f8793193715ee2018a2e28a8005db"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a031f8793193715ee2018a2e28a8005db">&#9670;&#160;</a></span>export_incremental_update_encoded()</h2>
+<a id="ac61130aae979af8b0ed875bcf036208d" name="ac61130aae979af8b0ed875bcf036208d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac61130aae979af8b0ed875bcf036208d">&#9670;&#160;</a></span>export_incremental_update_encoded_async()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GraphExporter::export_incremental_update_encoded </td>
+          <td class="memname">void GraphExporter::export_incremental_update_encoded_async </td>
           <td>(</td>
           <td class="paramtype">std::vector&lt; <a class="el" href="structGraphUpdate.html">GraphUpdate</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>updates</em></span>, </td>
         </tr>
@@ -244,8 +244,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Exports the encoded incremental updates of the graph to a DOT file. </p>
-<p>This method retrieves the latest incremental updates from the <a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a>, encodes them, and then saves the encoded representation to a specified DOT file. The filename includes a timestamp (UTC) to ensure uniqueness for each incremental update export.</p>
+<p>Exports the encoded incremental updates of the graph to a DOT file in a separate thread. </p>
+<p>This method retrieves the latest incremental updates from the <a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a>, encodes them, and then saves the encoded representation to a specified DOT file in a separate thread. The filename includes a timestamp (UTC) to ensure uniqueness for each incremental update export.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">updates</td><td>A vector of <code><a class="el" href="structGraphUpdate.html" title="Represents an update to the network traffic graph.">GraphUpdate</a></code> objects representing the incremental changes to the graph. This is typically obtained from the <a class="el" href="classGraphBuilder.html" title="Singleton class responsible for building and managing the network traffic graph.">GraphBuilder</a>. </td></tr>

@@ -64,8 +64,10 @@
     <member refid="classGraphExporter_1a360987d76ced636de129746c14536b5b" kind="variable"><name>gvc</name></member>
     <member refid="classGraphExporter_1ad6ec946fe1111d8543118747b9883895" kind="function"><name>GraphExporter</name></member>
     <member refid="classGraphExporter_1af8456887e192d89491c058fb1eb09e97" kind="function"><name>~GraphExporter</name></member>
-    <member refid="classGraphExporter_1a6569907146d179c526617405392a9746" kind="function"><name>export_full_graph_human_readable</name></member>
-    <member refid="classGraphExporter_1a031f8793193715ee2018a2e28a8005db" kind="function"><name>export_incremental_update_encoded</name></member>
+    <member refid="classGraphExporter_1ab7a5103acd18ab33827bfff8e560037a" kind="function"><name>export_full_graph_human_readable_async</name></member>
+    <member refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" kind="function"><name>export_incremental_update_encoded_async</name></member>
+    <member refid="classGraphExporter_1ad37df271c30df08fa904dc9a6df95aa4" kind="function"><name>export_full_graph_worker</name></member>
+    <member refid="classGraphExporter_1a0a0ec3980f9448262dbc8cb72d50384e" kind="function"><name>export_incremental_update_worker</name></member>
     <member refid="classGraphExporter_1a9ce498a6fdf530ccca32731bc6491cad" kind="function"><name>add_nodes</name></member>
     <member refid="classGraphExporter_1a9b5d24b49985b124e3f48feb04ff9e4e" kind="function"><name>add_edges</name></member>
     <member refid="classGraphExporter_1a2e76328d5e0ce52f10860f8c4af6ff26" kind="function"><name>apply_default_styles</name></member>

@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
              * the UTC timestamp to differentiate between exports. The output file is
              * created in the specified `export_path`.
              */
-            exporter.export_incremental_update_encoded(GraphBuilder::get_instance().get_last_updates(),
+            exporter.export_incremental_update_encoded_async(GraphBuilder::get_instance().get_last_updates(),
                                                         export_path + std::filesystem::path::preferred_separator +
                                                         "nw_graph_encoded_" + std::to_string(UTC) +
                                                         ".dot");

@@ -21,9 +21,22 @@ GraphExporter::~GraphExporter() {
     gvFreeContext(gvc);
 }
 
-void GraphExporter::export_full_graph_human_readable(const TrafficGraph &graph,
-                                                     const std::string &output_file,
-                                                     const bool open_image, const bool export_cond) {
+void GraphExporter::export_full_graph_human_readable_async(const TrafficGraph &graph,
+                                                          const std::string &output_file,
+                                                          bool open_image, bool export_cond) {
+    std::thread t(&GraphExporter::export_full_graph_worker, this, std::ref(graph), output_file, open_image, export_cond);
+    t.detach(); // Detach the thread so it runs independently
+}
+
+void GraphExporter::export_incremental_update_encoded_async(std::vector<GraphUpdate> updates,
+                                                               const std::string &output_file) {
+    std::thread t(&GraphExporter::export_incremental_update_worker, this, updates, output_file);
+    t.detach(); // Detach the thread so it runs independently
+}
+
+void GraphExporter::export_full_graph_worker(const TrafficGraph &graph,
+                                             const std::string &output_file,
+                                             bool open_image, bool export_cond) {
     if (!graph.is_empty()) {
         // Crea un nuovo grafo
         Agraph_t *g = agopen(const_cast<char *>("NWTraffic"), Agdirected, nullptr);
@@ -66,8 +79,8 @@ void GraphExporter::export_full_graph_human_readable(const TrafficGraph &graph,
     }
 }
 
-void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> updates,
-                                                      const std::string &output_file) {
+void GraphExporter::export_incremental_update_worker(std::vector<GraphUpdate> updates,
+                                                     const std::string &output_file) {
     if (!updates.empty()) {
         std::ofstream ofs(output_file);
         if (!ofs.is_open()) {
@@ -90,9 +103,9 @@ void GraphExporter::export_incremental_update_encoded(std::vector<GraphUpdate> u
                         ofs << "  \"" << edge->source << "\" -> \"" << edge->target << "\" [";
 
                         for (size_t i = 0; i < edge->encoded_features.size(); ++i) {
-                            if (i != 0 && i != edge->encoded_features.size()) ofs << ",";
+                            if (i != 0) ofs << ",";
                             ofs << FeatureEncoder::get_feature_name(i) << "="
-                                    << edge->encoded_features[i];
+                                << edge->encoded_features[i];
                         }
                         ofs << "  ];\n";
                     }
@@ -142,17 +155,12 @@ void GraphExporter::add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph
         }
 
         // Tooltip with features
-        //std::string tooltip = "Connections: " + std::to_string(node->features.degree) +
-        //                    "\nLast min: " + std::to_string(node->temporal.connections_last_minute) +
-        //             "\nAnomaly: " + std::to_string(anomaly_score);
         auto monitoring_duration = now - node->temporal.monitoring_start;
         double monitoring_minutes = std::chrono::duration<double>(monitoring_duration).count() / 60.0;
 
         std::string tooltip = "Monitoring: " + std::to_string((int) monitoring_minutes) + " mins\n" +
                               "Connections: " + std::to_string(node->temporal.total_connections) +
                               "\nAnomaly: " + std::to_string(anomalies.at(node->id).score);
-        // std::string tooltip = "Last min: " + std::to_string(node->get_connections_last_minute()) +
-        //               "\nLast hour: " + std::to_string(node->get_connections_last_hour());
         agsafeset(n, "tooltip", const_cast<char *>(tooltip.c_str()), "");
     }
 }
@@ -165,9 +173,9 @@ void GraphExporter::add_edges(Agraph_t *graph, const TrafficGraph &traffic_graph
         std::string dst_id = generate_node_id(edge->target);
 
         Agedge_t *e = agedge(graph,
-                             agnode(graph, const_cast<char *>(src_id.c_str()), 0),
-                             agnode(graph, const_cast<char *>(dst_id.c_str()), 0),
-                             const_cast<char *>(""), 1);
+                            agnode(graph, const_cast<char *>(src_id.c_str()), 0),
+                            agnode(graph, const_cast<char *>(dst_id.c_str()), 0),
+                            const_cast<char *>(""), 1);
 
         // Imposta attributi dell'arco
         agsafeset(e, const_cast<char *>("label"), const_cast<char *>(edge->relationship.c_str()),
@@ -232,7 +240,7 @@ void GraphExporter::write_edge_to_file(const std::shared_ptr<GraphEdge> &edge, s
         if (attr_pair.first != "label") {
             // Evita di duplicare l'etichetta
             dot_file << ", " << escape_dot_string(attr_pair.first) << "=\"" << escape_dot_string(attr_pair.second)
-                    << "\"";
+                     << "\"";
         }
     }
     dot_file << "];\n";

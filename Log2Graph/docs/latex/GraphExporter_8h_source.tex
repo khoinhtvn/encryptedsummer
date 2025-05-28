@@ -2,54 +2,59 @@
 \hypertarget{GraphExporter_8h_source}{}\label{GraphExporter_8h_source}\index{includes/GraphExporter.h@{includes/GraphExporter.h}}
 \mbox{\hyperlink{GraphExporter_8h}{Go to the documentation of this file.}}
 \begin{DoxyCode}{0}
-\DoxyCodeLine{00001\ }
-\DoxyCodeLine{00008\ }
-\DoxyCodeLine{00009\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 4/28/25.}}
-\DoxyCodeLine{00010\ \textcolor{comment}{//}}
-\DoxyCodeLine{00011\ }
-\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ GRAPH\_EXPORTER\_H}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ GRAPH\_EXPORTER\_H}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphBuilder_8h}{GraphBuilder.h}}"{}}}
-\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <graphviz/gvc.h>}}
-\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <memory>}}
-\DoxyCodeLine{00019\ }
-\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphBuilder_8h}{GraphBuilder.h}}"{}}\ \textcolor{comment}{//\ Self-\/include\ is\ unusual\ and\ likely\ unintentional.\ Remove\ in\ actual\ code.}}
-\DoxyCodeLine{00021\ }
-\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphExporter_ad6ec946fe1111d8543118747b9883895}{GraphExporter}}\ \{}
-\DoxyCodeLine{00030\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classGraphExporter_ad6ec946fe1111d8543118747b9883895}{GraphExporter}}();}
-\DoxyCodeLine{00037\ }
-\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classGraphExporter_af8456887e192d89491c058fb1eb09e97}{\string~GraphExporter}}();}
-\DoxyCodeLine{00044\ }
-\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphExporter_a6569907146d179c526617405392a9746}{export\_full\_graph\_human\_readable}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,}
-\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file\ =\ \textcolor{stringliteral}{"{}graph.png"{}},}
-\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ open\_image\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ export\_cond\ =\ \textcolor{keyword}{true});}
-\DoxyCodeLine{00061\ }
-\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphExporter_a031f8793193715ee2018a2e28a8005db}{export\_incremental\_update\_encoded}}(std::vector<GraphUpdate>\ updates,}
-\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file\ =\ \textcolor{stringliteral}{"{}update.dot"{}});}
-\DoxyCodeLine{00080\ }
-\DoxyCodeLine{00081\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00087\ \ \ \ \ GVC\_t\ *gvc;}
-\DoxyCodeLine{00088\ }
-\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_nodes(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
-\DoxyCodeLine{00099\ }
-\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_edges(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
-\DoxyCodeLine{00110\ }
-\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ apply\_default\_styles(Agraph\_t\ *graph);}
-\DoxyCodeLine{00120\ }
-\DoxyCodeLine{00130\ \ \ \ \ std::string\ generate\_node\_id(\textcolor{keyword}{const}\ std::string\ \&original\_id);}
-\DoxyCodeLine{00131\ }
-\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_node\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphNode>\ \&\ node,\ std::ofstream\ \&\ ofstream);}
-\DoxyCodeLine{00133\ }
-\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_edge\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphEdge>\ \&\ edge,\ std::ofstream\ \&\ ofstream);}
-\DoxyCodeLine{00135\ }
-\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_to\_dot(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,\ \textcolor{keyword}{const}\ std::string\ \&filename);}
-\DoxyCodeLine{00146\ }
-\DoxyCodeLine{00147\ \ \ \ \ std::string\ escape\_dot\_string(\textcolor{keyword}{const}\ std::string\ \&str);}
-\DoxyCodeLine{00148\ \};}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 4/28/25.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ GRAPH\_EXPORTER\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ GRAPH\_EXPORTER\_H}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{GraphBuilder_8h}{GraphBuilder.h}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <graphviz/gvc.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <future>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classGraphExporter_ad6ec946fe1111d8543118747b9883895}{GraphExporter}}\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classGraphExporter_ad6ec946fe1111d8543118747b9883895}{GraphExporter}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classGraphExporter_af8456887e192d89491c058fb1eb09e97}{\string~GraphExporter}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphExporter_ab7a5103acd18ab33827bfff8e560037a}{export\_full\_graph\_human\_readable\_async}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file\ =\ \textcolor{stringliteral}{"{}graph.png"{}},}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ open\_image\ =\ \textcolor{keyword}{true},\ \textcolor{keywordtype}{bool}\ export\_cond\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphExporter_ac61130aae979af8b0ed875bcf036208d}{export\_incremental\_update\_encoded\_async}}(std::vector<GraphUpdate>\ updates,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file\ =\ \textcolor{stringliteral}{"{}update.dot"{}});}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ GVC\_t\ *gvc;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_full\_graph\_worker(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file,}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ open\_image,\ \textcolor{keywordtype}{bool}\ export\_cond);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_incremental\_update\_worker(std::vector<GraphUpdate>\ updates,}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&output\_file);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_nodes(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ add\_edges(Agraph\_t\ *graph,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&traffic\_graph);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ apply\_default\_styles(Agraph\_t\ *graph);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00144\ \ \ \ \ std::string\ generate\_node\_id(\textcolor{keyword}{const}\ std::string\ \&original\_id);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_node\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphNode>\ \&\ node,\ std::ofstream\ \&\ ofstream);}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ write\_edge\_to\_file(\textcolor{keyword}{const}\ std::shared\_ptr<GraphEdge>\ \&\ edge,\ std::ofstream\ \&\ ofstream);}
 \DoxyCodeLine{00149\ }
-\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPH\_EXPORTER\_H}}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ export\_to\_dot(\textcolor{keyword}{const}\ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&graph,\ \textcolor{keyword}{const}\ std::string\ \&filename);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ std::string\ escape\_dot\_string(\textcolor{keyword}{const}\ std::string\ \&str);}
+\DoxyCodeLine{00162\ \};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ GRAPH\_EXPORTER\_H}}
 
 \end{DoxyCode}

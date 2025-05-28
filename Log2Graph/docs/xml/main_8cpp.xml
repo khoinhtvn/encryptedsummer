@@ -55,6 +55,8 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
       </node>
       <node id="17">
         <label>GraphNode.h</label>
@@ -92,17 +94,17 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>includes/LogMonitor.h</label>
         <link refid="LogMonitor_8h"/>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>includes/RealTimeAnomalyDetector.h</label>
         <link refid="RealTimeAnomalyDetector_8h"/>
         <childnode refid="10" relation="include">
@@ -132,7 +134,7 @@
         <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>ZeekLogParser.h</label>
         <link refid="ZeekLogParser_8h"/>
         <childnode refid="10" relation="include">
@@ -151,7 +153,7 @@
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -167,9 +169,9 @@
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
-        <childnode refid="25" relation="include">
+        <childnode refid="26" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
       </node>
       <node id="18">
@@ -186,6 +188,9 @@
       </node>
       <node id="4">
         <label>filesystem</label>
+      </node>
+      <node id="25">
+        <label>future</label>
       </node>
       <node id="24">
         <label>graphviz/gvc.h</label>
@@ -205,7 +210,7 @@
       <node id="14">
         <label>queue</label>
       </node>
-      <node id="27">
+      <node id="28">
         <label>set</label>
       </node>
       <node id="22">
@@ -330,7 +335,7 @@
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
 <codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;graph<sp/>=<sp/><ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().<ref refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kindref="member">get_graph</ref>();</highlight></codeline>
 <codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1a031f8793193715ee2018a2e28a8005db" kindref="member">export_incremental_update_encoded</ref>(<ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().get_last_updates(),</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" kindref="member">export_incremental_update_encoded_async</ref>(<ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().get_last_updates(),</highlight></codeline>
 <codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>export_path<sp/>+<sp/>std::filesystem::path::preferred_separator<sp/>+</highlight></codeline>
 <codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;nw_graph_encoded_&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(UTC)<sp/>+</highlight></codeline>
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;.dot&quot;</highlight><highlight class="normal">);</highlight></codeline>
