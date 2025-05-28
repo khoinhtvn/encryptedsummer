@@ -164,7 +164,6 @@ void ZeekLogParser::monitor_single_file(const std::string& file_path) {
         if (local_tracked_state.count(file_path)) {
             const auto& old_state = local_tracked_state[file_path];
             if (!(old_state == new_state)) {
-                std::cout << "[Monitor] File changed (rotated/recreated): " << file_path << std::endl;
                 process_log_file(file_path);
                 local_tracked_state[file_path] = new_state;
                 local_partial_lines[file_path].clear();
