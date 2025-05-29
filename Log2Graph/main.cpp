@@ -70,7 +70,7 @@ int main(int argc, char *argv[]) {
         std::this_thread::sleep_for(std::chrono::seconds(10));
 
         static int counter = 0;
-        if (++counter % 3 == 0) {
+        if (++counter % 6 == 0) {
             /**
              * @brief Get the current UTC timestamp for filename generation.
              */

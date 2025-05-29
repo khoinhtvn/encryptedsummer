@@ -281,6 +281,7 @@ std::string GraphNode::escape_dot_string(const std::string &str) {
 }
 
 std::string GraphNode::to_dot_string() const {
+    std::lock_guard<std::mutex> lock(node_mutex);
     std::stringstream ss;
     ss << "  \"" << escape_dot_string(id) << "\" [";
     ss << "degree=" << features.degree;

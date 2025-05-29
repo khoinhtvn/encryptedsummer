@@ -1,8 +1,0 @@
-digraph NWTraffic_update {
-  "192.168.27.10" [degree=105, in_degree=0, out_degree=105, activity_score=1.00, total_connections=105];
-  "34.120.208.123" [degree=3, in_degree=3, out_degree=0, activity_score=0.27, total_connections=3];
-  "192.168.27.10" -> "34.120.208.123" [protocol_UNKNOWN=0.00,protocol_TCP=1.00,protocol_UDP=0.00,protocol_ICMP=0.00,timestamp_sin=0.71,timestamp_cos=-0.70,src_port_type=1.00,dst_port_type=0.00,conn_state_successful=1.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=0.00,local_orig=1.00,local_resp=0.00,history_length=0.80,orig_bytes=0.61,resp_bytes=0.55,orig_pkts=0.24,resp_pkts=0.24,orig_ip_bytes=0.63,resp_ip_bytes=0.58,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
-  "192.168.27.10" [degree=105, in_degree=0, out_degree=105, activity_score=1.00, total_connections=105];
-  "34.36.137.203" [degree=4, in_degree=4, out_degree=0, activity_score=0.34, total_connections=4];
-  "192.168.27.10" -> "34.36.137.203" [protocol_UNKNOWN=0.00,protocol_TCP=1.00,protocol_UDP=0.00,protocol_ICMP=0.00,timestamp_sin=0.71,timestamp_cos=-0.70,src_port_type=1.00,dst_port_type=0.00,conn_state_successful=1.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=0.00,local_orig=1.00,local_resp=0.00,history_length=0.80,orig_bytes=0.58,resp_bytes=0.50,orig_pkts=0.21,resp_pkts=0.21,orig_ip_bytes=0.59,resp_ip_bytes=0.54,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
-}

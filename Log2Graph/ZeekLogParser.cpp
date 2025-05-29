@@ -1,10 +1,11 @@
-//
-// Created by lu on 4/25/25.
-// Modified for parallel processing.
-//
+/**
+ * @file ZeekLogParser.cpp
+ * @brief Implementation file for the ZeekLogParser class.
+ */
 
 #include "includes/ZeekLogParser.h"
 #include "includes/GraphBuilder.h" // Assuming this exists
+#include "includes/FeatureEncoder.h" // Assuming this exists
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -15,6 +16,23 @@
 #include <sstream>
 #include <sys/stat.h>
 #include <unistd.h>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <algorithm>
+#include <unordered_set>
+
+// Define and initialize global constant strings
+const std::string DEFAULT_TIMESTAMP = "0.0";
+const std::string DEFAULT_EMPTY_STRING = "";
+const std::string DEFAULT_PORT = "0";
+const std::string DEFAULT_PROTOCOL = "tcp";
+const std::string DEFAULT_SERVICE = "UNKNOWN";
+const std::string DEFAULT_BYTES = "0";
+const std::string DEFAULT_CONN_STATE = "UNKNOWN";
+const std::string DEFAULT_FALSE = "false";
+const std::string DEFAULT_PKTS = "0";
+const std::string DEFAULT_USER_AGENT = "Unknown";
 
 namespace fs = std::filesystem;
 
@@ -27,7 +45,6 @@ bool FileState::update() {
     last_size = file_stat.st_size;
     return true;
 }
-
 bool FileState::operator==(const FileState &other) const {
     return inode == other.inode && last_size == other.last_size;
 }
@@ -67,7 +84,33 @@ ZeekLogParser::~ZeekLogParser() {
 }
 
 void ZeekLogParser::start_monitoring() {
-    running_ = true;
+    {
+        std::lock_guard<std::mutex> lock(running_mutex_);
+        running_ = true;
+    }
+
+    std::unordered_set<std::string> monitored_files; // Keep track of files already being monitored
+
+    // Discover interesting files and launch a monitoring thread for each unique file
+    for (const auto &entry : fs::directory_iterator(log_directory_)) {
+        if (entry.is_regular_file() && entry.path().extension() == ".log" && is_interesting_log_file(entry.path().string())) {
+            std::string file_path = entry.path().string();
+            std::lock_guard<std::mutex> lock(tracked_files_mutex_);
+            if (tracked_files_.find(file_path) == tracked_files_.end()) {
+                tracked_files_[file_path] = FileState(file_path);
+                tracked_files_[file_path].processed_size = fs::file_size(file_path);
+                {
+                    std::lock_guard<std::mutex> lock(monitor_threads_mutex_);
+                    monitor_threads_.emplace_back(&ZeekLogParser::monitor_file, this, file_path);
+                }
+                std::cout << "[Main Thread] Started monitoring for: " << file_path << std::endl;
+            } else {
+                std::cout << "[Main Thread] Already monitoring: " << file_path << std::endl;
+            }
+        }
+    }
+
+    // Start worker threads for processing enqueued log entries
     for (int i = 0; i < num_worker_threads_; ++i) {
         worker_threads_.emplace_back([this]() {
             while (running_ || !entry_queue_.is_running()) {
@@ -78,107 +121,112 @@ void ZeekLogParser::start_monitoring() {
             }
         });
     }
-    monitor_directory();
 }
 
 void ZeekLogParser::stop_monitoring() {
-    running_ = false;
-    entry_queue_.stop();
-    for (auto &thread : monitor_threads_) {
-        if (thread.joinable()) {
-            thread.join();
-        }
+    {
+        std::unique_lock<std::mutex> lock(running_mutex_);
+        running_ = false; // Signal all threads to stop
     }
+    running_cv_.notify_all(); // Notify monitoring threads waiting on condition variable
+    entry_queue_.stop();      // Signal the SafeQueue to stop and unblock worker threads
+
+    // Join all monitoring threads
+    {
+        std::lock_guard<std::mutex> lock(monitor_threads_mutex_);
+        for (auto &thread : monitor_threads_) {
+            if (thread.joinable()) {
+                thread.join();
+            }
+        }
+        monitor_threads_.clear();
+    }
+
+    // Join all worker threads
     for (auto &thread : worker_threads_) {
         if (thread.joinable()) {
             thread.join();
         }
     }
+    worker_threads_.clear();
 }
 
-void ZeekLogParser::monitor_directory() {
-    while (running_) {
-        std::vector<std::string> current_files;
-        for (const auto &entry : fs::directory_iterator(log_directory_)) {
-            if (entry.is_regular_file() && entry.path().extension() == ".log") {
-                current_files.push_back(entry.path().string());
-            }
-        }
+bool ZeekLogParser::is_interesting_log_file(const std::string& filename) const {
+    std::string stem = fs::path(filename).filename().stem().string();
+    return stem == "conn" || stem == "ssl" || stem == "http";
+}
 
+void ZeekLogParser::monitor_file(const std::string& file_path) {
+    std::cout << "[Monitor Thread] Starting monitoring for: " << file_path << std::endl;
+
+    // Loop continuously as long as the parser is running
+    while (true) {
         {
-            std::lock_guard<std::mutex> lock(tracked_files_mutex_);
-            for (const auto &file_path : current_files) {
+            std::unique_lock<std::mutex> lock(running_mutex_);
+            if (!running_) {
+                break; // Exit loop if parser is no longer running
+            }
+            // Wait for a short period or until signaled to stop
+            running_cv_.wait_for(lock, std::chrono::seconds(1), [this]{ return !running_; });
+            if (!running_) {
+                break; // Check again after waking up from wait
+            }
+        }
+
+        try {
+            off_t current_size = fs::file_size(file_path);
+            off_t last_processed_size;
+
+            {
+                std::lock_guard<std::mutex> lock(tracked_files_mutex_);
+                // Ensure the file is still tracked (it might have been removed if deleted)
                 if (tracked_files_.find(file_path) == tracked_files_.end()) {
-                    tracked_files_[file_path] = FileState(file_path);
-                    monitor_threads_.emplace_back(&ZeekLogParser::monitor_single_file, this, file_path);
-                } else {
-                    // Check if the file has been modified (size change)
-                    FileState current_state(file_path);
-                    if (current_state.update() && current_state.last_size != tracked_files_[file_path].last_size) {
-                        monitor_threads_.emplace_back(&ZeekLogParser::monitor_single_file, this, file_path);
-                        tracked_files_[file_path] = current_state;
-                    }
+                    std::cerr << "[Monitor Thread] File " << file_path << " no longer tracked. Exiting thread." << std::endl;
+                    break;
                 }
-            }
-            // Remove monitors for files that no longer exist (optional, for cleanup)
-            std::vector<std::string> to_remove;
-            for (const auto& pair : tracked_files_) {
-                bool found = false;
-                for (const auto& current_file : current_files) {
-                    if (pair.first == current_file) {
-                        found = true;
-                        break;
-                    }
-                }
-                if (!found) {
-                    to_remove.push_back(pair.first);
-                }
-            }
-            for (const auto& file_path : to_remove) {
-                tracked_files_.erase(file_path);
-                // Need to handle stopping the monitoring thread for this file if implemented
-            }
-        }
+                FileState& state = tracked_files_.at(file_path);
+                last_processed_size = state.processed_size;
 
-        std::this_thread::sleep_for(std::chrono::seconds(1));
+                if (current_size > last_processed_size) {
+
+                    std::ifstream in(file_path);
+                    if (in.is_open()) {
+                        in.seekg(last_processed_size); // Seek to the last processed position
+                        std::string new_content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
+                        in.close();
+
+                        process_content(file_path, new_content); // Process only the new content
+                        state.processed_size = current_size;    // Update processed size
+                    } else {
+                        std::cerr << "[Monitor Thread] Error opening file for reading appended data: " << file_path << std::endl;
+                    }
+                } else if (current_size < last_processed_size) {
+                    // File has been truncated or reset, re-process from beginning
+                    std::cout << "[Monitor Thread] File " << file_path << " truncated. Reprocessing from start." << std::endl;
+                    process_log_file(file_path); // Process the entire file
+                    state.processed_size = current_size; // Update processed size
+                }
+                // If current_size == last_processed_size, no new data, do nothing.
+            }
+        } catch (const fs::filesystem_error& e) {
+            std::cerr << "[Monitor Thread] Filesystem error for " << file_path << ": " << e.what() << std::endl;
+            // File might have been deleted or moved. Consider removing it from tracked_files_
+            std::lock_guard<std::mutex> lock(tracked_files_mutex_);
+            tracked_files_.erase(file_path);
+            break; // Exit thread if file no longer accessible
+        } catch (const std::exception& e) {
+            std::cerr << "[Monitor Thread] General error for " << file_path << ": " << e.what() << std::endl;
+        }
     }
+    std::cout << "[Monitor Thread] Exiting for file: " << file_path << std::endl;
 }
 
-void ZeekLogParser::monitor_single_file(const std::string& file_path) {
-    std::map<std::string, FileState> local_tracked_state;
-    std::map<std::string, std::string> local_partial_lines;
-    FileState current_state(file_path);
-    if (current_state.update()) {
-        local_tracked_state[file_path] = current_state;
-        process_log_file(file_path); // Process the entire file initially
-    }
 
-    while (running_) {
-        FileState new_state(file_path);
-        if (!new_state.update()) {
-            std::cerr << "[Monitor] Error accessing " << file_path << std::endl;
-            std::this_thread::sleep_for(std::chrono::seconds(1));
-            continue;
-        }
+// The `monitor_directory` and `monitor_single_file_once` from previous versions
+// are no longer needed as separate functions with the new `monitor_file` design.
+// Their previous logic is now integrated into `start_monitoring` and `monitor_file`.
+// Removed `handle_appended_data` as its logic is now within `monitor_file`.
 
-        if (local_tracked_state.count(file_path)) {
-            const auto& old_state = local_tracked_state[file_path];
-            if (!(old_state == new_state)) {
-                process_log_file(file_path);
-                local_tracked_state[file_path] = new_state;
-                local_partial_lines[file_path].clear();
-            } else if (new_state.last_size > old_state.last_size) {
-                handle_appended_data(file_path, old_state.last_size, new_state.last_size);
-                local_tracked_state[file_path] = new_state;
-            }
-        } else {
-            std::cout << "[Monitor] New file detected by single file monitor: " << file_path << std::endl;
-            process_log_file(file_path);
-            local_tracked_state[file_path] = new_state;
-        }
-        std::this_thread::sleep_for(std::chrono::seconds(1));
-    }
-}
 
 void ZeekLogParser::process_log_file(const std::string& file_path) {
     std::ifstream in(file_path);
@@ -253,66 +301,63 @@ void ZeekLogParser::attempt_build_graph_node(const std::string& uid) {
 
 void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std::string, std::map<std::string, std::string>>& combined_data) {
     std::unordered_map<std::string, std::string> feature_map;
-    // Initialize with default values (optional, but good practice)
-    feature_map["timestamp"] = "0.0";
-    feature_map["src_ip"] = "";
-    feature_map["src_port"] = "0";
-    feature_map["dst_ip"] = "";
-    feature_map["dst_port"] = "0";
-    feature_map["protocol"] = "tcp";
-    feature_map["service"] = "UNKNOWN";
-    feature_map["orig_bytes"] = "0";
-    feature_map["resp_bytes"] = "0";
-    feature_map["conn_state"] = "UNKNOWN";
-    feature_map["local_orig"] = "false";
-    feature_map["local_resp"] = "false";
-    feature_map["history"] = "";
-    feature_map["orig_pkts"] = "0";
-    feature_map["resp_pkts"] = "0";
-    feature_map["orig_ip_bytes"] = "0";
-    feature_map["resp_ip_bytes"] = "0";
-    feature_map["ssl_version"] = "";
-    feature_map["ssl_cipher"] = "";
-    feature_map["ssl_curve"] = "";
-    feature_map["ssl_server_name"] = "";
-    feature_map["ssl_resumed"] = "false";
-    feature_map["ssl_last_alert"] = "";
-    feature_map["ssl_next_protocol"] = "";
-    feature_map["ssl_established"] = "false";
-    feature_map["ssl_history"] = "";
-    feature_map["ssl_cert_chain_fps"] = "";
-    feature_map["ssl_client_cert_chain_fps"] = "";
-    feature_map["ssl_sni_matches_cert"] = "false";
-    feature_map["http_method"] = "UNKNOWN";
-    feature_map["host"] = "";
-    feature_map["uri"] = "";
-    feature_map["referrer"] = "";
-    feature_map["http_version"] = "";
-    feature_map["http_user_agent"] = "Unknown";
-    feature_map["origin"] = "";
-    feature_map["http_status_code"] = "";
-    feature_map["username"] = "";
+
+    feature_map["timestamp"] = DEFAULT_TIMESTAMP;
+    feature_map["src_ip"] = DEFAULT_EMPTY_STRING;
+    feature_map["src_port"] = DEFAULT_PORT;
+    feature_map["dst_ip"] = DEFAULT_EMPTY_STRING;
+    feature_map["dst_port"] = DEFAULT_PORT;
+    feature_map["protocol"] = DEFAULT_PROTOCOL;
+    feature_map["service"] = DEFAULT_SERVICE;
+    feature_map["orig_bytes"] = DEFAULT_BYTES;
+    feature_map["resp_bytes"] = DEFAULT_BYTES;
+    feature_map["conn_state"] = DEFAULT_CONN_STATE;
+    feature_map["local_orig"] = DEFAULT_FALSE;
+    feature_map["local_resp"] = DEFAULT_FALSE;
+    feature_map["history"] = DEFAULT_EMPTY_STRING;
+    feature_map["orig_pkts"] = DEFAULT_PKTS;
+    feature_map["resp_pkts"] = DEFAULT_PKTS;
+    feature_map["orig_ip_bytes"] = DEFAULT_PKTS;
+    feature_map["resp_ip_bytes"] = DEFAULT_PKTS;
+    feature_map["ssl_version"] = DEFAULT_EMPTY_STRING;
+    feature_map["ssl_cipher"] = DEFAULT_EMPTY_STRING;
+    feature_map["ssl_curve"] = DEFAULT_EMPTY_STRING;
+    feature_map["ssl_server_name"] = DEFAULT_EMPTY_STRING;
+    feature_map["ssl_resumed"] = DEFAULT_FALSE;
+    feature_map["ssl_last_alert"] = DEFAULT_EMPTY_STRING;
+    feature_map["ssl_next_protocol"] = DEFAULT_EMPTY_STRING;
+    feature_map["ssl_established"] = DEFAULT_FALSE;
+    feature_map["ssl_history"] = DEFAULT_EMPTY_STRING;
+    feature_map["http_method"] = DEFAULT_SERVICE;
+    feature_map["host"] = DEFAULT_EMPTY_STRING;
+    feature_map["uri"] = DEFAULT_EMPTY_STRING;
+    feature_map["referrer"] = DEFAULT_EMPTY_STRING;
+    feature_map["http_version"] = DEFAULT_EMPTY_STRING;
+    feature_map["http_user_agent"] = DEFAULT_USER_AGENT;
+    feature_map["origin"] = DEFAULT_EMPTY_STRING;
+    feature_map["http_status_code"] = DEFAULT_EMPTY_STRING;
+    feature_map["username"] = DEFAULT_EMPTY_STRING;
 
     if (combined_data.count("conn")) {
         const auto& conn_data = combined_data.at("conn");
         try {
-            feature_map["timestamp"] = conn_data.count("ts") ? conn_data.at("ts") : "0.0";
-            feature_map["src_ip"] = conn_data.count("id.orig_h") ? conn_data.at("id.orig_h") : "";
-            feature_map["src_port"] = conn_data.count("id.orig_p") ? conn_data.at("id.orig_p") : "0";
-            feature_map["dst_ip"] = conn_data.count("id.resp_h") ? conn_data.at("id.resp_h") : "";
-            feature_map["dst_port"] = conn_data.count("id.resp_p") ? conn_data.at("id.resp_p") : "0";
-            feature_map["protocol"] = conn_data.count("proto") ? conn_data.at("proto") : "tcp";
-            feature_map["service"] = conn_data.count("service") ? conn_data.at("service") : "";
-            feature_map["orig_bytes"] = conn_data.count("orig_bytes") && conn_data.at("orig_bytes") != "-" ? conn_data.at("orig_bytes") : "0";
-            feature_map["resp_bytes"] = conn_data.count("resp_bytes") && conn_data.at("resp_bytes") != "-" ? conn_data.at("resp_bytes") : "0";
-            feature_map["conn_state"] = conn_data.count("conn_state") ? conn_data.at("conn_state") : "";
-            feature_map["local_orig"] = conn_data.count("local_orig") ? (conn_data.at("local_orig") == "T" ? "true" : "false") : "false";
-            feature_map["local_resp"] = conn_data.count("local_resp") ? (conn_data.at("local_resp") == "T" ? "true" : "false") : "false";
-            feature_map["history"] = conn_data.count("history") ? conn_data.at("history") : "";
-            feature_map["orig_pkts"] = conn_data.count("orig_pkts") && conn_data.at("orig_pkts") != "-" ? conn_data.at("orig_pkts") : "0";
-            feature_map["resp_pkts"] = conn_data.count("resp_pkts") && conn_data.at("resp_pkts") != "-" ? conn_data.at("resp_pkts") : "0";
-            feature_map["orig_ip_bytes"] = conn_data.count("orig_ip_bytes") && conn_data.at("orig_ip_bytes") != "-" ? conn_data.at("orig_ip_bytes") : "0";
-            feature_map["resp_ip_bytes"] = conn_data.count("resp_ip_bytes") && conn_data.at("resp_ip_bytes") != "-" ? conn_data.at("resp_ip_bytes") : "0";
+            if (conn_data.count("ts")) feature_map["timestamp"] = conn_data.at("ts");
+            if (conn_data.count("id.orig_h")) feature_map["src_ip"] = conn_data.at("id.orig_h");
+            if (conn_data.count("id.orig_p")) feature_map["src_port"] = conn_data.at("id.orig_p");
+            if (conn_data.count("id.resp_h")) feature_map["dst_ip"] = conn_data.at("id.resp_h");
+            if (conn_data.count("id.resp_p")) feature_map["dst_port"] = conn_data.at("id.resp_p");
+            if (conn_data.count("proto")) feature_map["protocol"] = conn_data.at("proto");
+            if (conn_data.count("service")) feature_map["service"] = conn_data.at("service");
+            if (conn_data.count("orig_bytes") && conn_data.at("orig_bytes") != "-") feature_map["orig_bytes"] = conn_data.at("orig_bytes");
+            if (conn_data.count("resp_bytes") && conn_data.at("resp_bytes") != "-") feature_map["resp_bytes"] = conn_data.at("resp_bytes");
+            if (conn_data.count("conn_state")) feature_map["conn_state"] = conn_data.at("conn_state");
+            if (conn_data.count("local_orig")) feature_map["local_orig"] = (conn_data.at("local_orig") == "T" ? "true" : "false");
+            if (conn_data.count("local_resp")) feature_map["local_resp"] = (conn_data.at("local_resp") == "T" ? "true" : "false");
+            if (conn_data.count("history")) feature_map["history"] = conn_data.at("history");
+            if (conn_data.count("orig_pkts") && conn_data.at("orig_pkts") != "-") feature_map["orig_pkts"] = conn_data.at("orig_pkts");
+            if (conn_data.count("resp_pkts") && conn_data.at("resp_pkts") != "-") feature_map["resp_pkts"] = conn_data.at("resp_pkts");
+            if (conn_data.count("orig_ip_bytes") && conn_data.at("orig_ip_bytes") != "-") feature_map["orig_ip_bytes"] = conn_data.at("orig_ip_bytes");
+            if (conn_data.count("resp_ip_bytes") && conn_data.at("resp_ip_bytes") != "-") feature_map["resp_ip_bytes"] = conn_data.at("resp_ip_bytes");
         } catch (const std::exception& e) {
             std::cerr << "[ZeekLogParser] Error parsing conn data for UID: " << uid << " - " << e.what() << std::endl;
             return; // Skip this entry if parsing fails
@@ -321,31 +366,28 @@ void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std:
 
     if (combined_data.count("ssl")) {
         const auto& ssl_data = combined_data.at("ssl");
-        feature_map["ssl_version"] = ssl_data.count("version") ? ssl_data.at("version") : "";
-        feature_map["ssl_cipher"] = ssl_data.count("cipher") ? ssl_data.at("cipher") : "";
-        feature_map["ssl_curve"] = ssl_data.count("curve") ? ssl_data.at("curve") : "";
-        feature_map["ssl_server_name"] = ssl_data.count("server_name") ? ssl_data.at("server_name") : "";
-        feature_map["ssl_resumed"] = ssl_data.count("resumed") ? (ssl_data.at("resumed") == "T" ? "true" : "false") : "false";
-        feature_map["ssl_last_alert"] = ssl_data.count("last_alert") ? ssl_data.at("last_alert") : "";
-        feature_map["ssl_next_protocol"] = ssl_data.count("next_protocol") ? ssl_data.at("next_protocol") : "";
-        feature_map["ssl_established"] = ssl_data.count("established") ? (ssl_data.at("established") == "T" ? "true" : "false") : "false";
-        feature_map["ssl_history"] = ssl_data.count("ssl_history") ? ssl_data.at("ssl_history") : "";
-        feature_map["ssl_cert_chain_fps"] = ssl_data.count("cert_chain_fps") ? ssl_data.at("cert_chain_fps") : "";
-        feature_map["ssl_client_cert_chain_fps"] = ssl_data.count("client_cert_chain_fps") ? ssl_data.at("client_cert_chain_fps") : "";
-        feature_map["ssl_sni_matches_cert"] = ssl_data.count("sni_matches_cert") ? (ssl_data.at("sni_matches_cert") == "T" ? "true" : "false") : "false";
+        if (ssl_data.count("version")) feature_map["ssl_version"] = ssl_data.at("version");
+        if (ssl_data.count("cipher")) feature_map["ssl_cipher"] = ssl_data.at("cipher");
+        if (ssl_data.count("curve")) feature_map["ssl_curve"] = ssl_data.at("curve");
+        if (ssl_data.count("server_name")) feature_map["ssl_server_name"] = ssl_data.at("server_name");
+        if (ssl_data.count("resumed")) feature_map["ssl_resumed"] = (ssl_data.at("resumed") == "T" ? "true" : "false");
+        if (ssl_data.count("last_alert")) feature_map["ssl_last_alert"] = ssl_data.at("last_alert");
+        if (ssl_data.count("next_protocol")) feature_map["ssl_next_protocol"] = ssl_data.at("next_protocol");
+        if (ssl_data.count("established")) feature_map["ssl_established"] = (ssl_data.at("established") == "T" ? "true" : "false");
+        if (ssl_data.count("ssl_history")) feature_map["ssl_history"] = ssl_data.at("ssl_history");
     }
 
     if (combined_data.count("http")) {
         const auto& http_data = combined_data.at("http");
-        feature_map["http_method"] = http_data.count("method") ? http_data.at("method") : "";
-        feature_map["host"] = http_data.count("host") ? http_data.at("host") : "";
-        feature_map["uri"] = http_data.count("uri") ? http_data.at("uri") : "";
-        feature_map["referrer"] = http_data.count("referrer") ? http_data.at("referrer") : "";
-        feature_map["http_version"] = http_data.count("version") ? http_data.at("version") : "";
-        feature_map["http_user_agent"] = http_data.count("user_agent") ? http_data.at("user_agent") : "";
-        feature_map["origin"] = http_data.count("origin") ? http_data.at("origin") : "";
-        feature_map["http_status_code"] = http_data.count("status_code") ? http_data.at("status_code") : "";
-        feature_map["username"] = http_data.count("username") ? http_data.at("username") : "";
+        if (http_data.count("method")) feature_map["http_method"] = http_data.at("method");
+        if (http_data.count("host")) feature_map["host"] = http_data.at("host");
+        if (http_data.count("uri")) feature_map["uri"] = http_data.at("uri");
+        if (http_data.count("referrer")) feature_map["referrer"] = http_data.at("referrer");
+        if (http_data.count("version")) feature_map["http_version"] = http_data.at("version");
+        if (http_data.count("user_agent")) feature_map["http_user_agent"] = http_data.at("user_agent");
+        if (http_data.count("origin")) feature_map["origin"] = http_data.at("origin");
+        if (http_data.count("status_code")) feature_map["http_status_code"] = http_data.at("status_code");
+        if (http_data.count("username")) feature_map["username"] = http_data.at("username");
     }
 
     if (!feature_map["src_ip"].empty() && !feature_map["dst_ip"].empty()) {
@@ -372,7 +414,7 @@ LogEntry ZeekLogParser::parse_log_entry(const std::string& log_type, const std::
     }  else if (log_type == "http" && fields.size() >= 30) {
         log_entry.data = parse_http_entry(fields, log_entry);
     }
-    // Add parsing for other log types
+    // Add parsing for other log types if needed
     return log_entry;
 }
 
@@ -415,7 +457,7 @@ std::map<std::string, std::string> ZeekLogParser::parse_ssl_entry(const std::vec
     if (fields.size() > 8) data["curve"] = fields[8];
     if (fields.size() > 9) data["server_name"] = fields[9];
     if (fields.size() > 10) data["resumed"] = fields[10];
-    if (fields.size() > 11) data["last_alert"] = fields[11];
+  if (fields.size() > 11) data["last_alert"] = fields[11];
     if (fields.size() > 12) data["next_protocol"] = fields[12];
     if (fields.size() > 13) data["established"] = fields[13];
     if (fields.size() > 14) data["ssl_history"] = fields[14];
@@ -426,6 +468,7 @@ std::map<std::string, std::string> ZeekLogParser::parse_ssl_entry(const std::vec
     }
     return data;
 }
+
 std::map<std::string, std::string> ZeekLogParser::parse_http_entry(const std::vector<std::string>& fields, LogEntry& log_entry) {
     std::map<std::string, std::string> data;
     data["ts"] = fields[0];
@@ -449,7 +492,6 @@ std::map<std::string, std::string> ZeekLogParser::parse_http_entry(const std::ve
     data["info_code"] = fields[18];
     data["resp_mime_types"] = fields[19];
 
-/*
     // Handle set type: tags, proxied
     if (fields.size() > 20) {
         std::istringstream tags_ss(fields[20]);
@@ -490,9 +532,13 @@ std::map<std::string, std::string> ZeekLogParser::parse_http_entry(const std::ve
     if (fields.size() > 27) log_entry.list_data["resp_fuids"] = parse_vector_field(fields[27]);
     if (fields.size() > 28) log_entry.list_data["resp_filenames"] = parse_vector_field(fields[28]);
     if (fields.size() > 29) log_entry.list_data["resp_mime_types"] = parse_vector_field(fields[29]);
-*/
+
     return data;
 }
+/*
+// This method is no longer used with the new monitor_file logic,
+// as its functionality is integrated directly into monitor_file.
+// It's kept here for completeness but can be removed if not needed elsewhere.
 void ZeekLogParser::handle_appended_data(const std::string& file_path, off_t old_size, off_t new_size) {
     std::ifstream in(file_path);
     if (!in) {
@@ -502,4 +548,4 @@ void ZeekLogParser::handle_appended_data(const std::string& file_path, off_t old
     in.seekg(old_size);
     std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
     process_content(file_path, content);
-}
+}*/

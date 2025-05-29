@@ -36,7 +36,7 @@
         </inbodydescription>
         <location file="includes/GraphNode.h" line="98" column="17" bodyfile="includes/GraphNode.h" bodystart="98" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGraphNode_1a34525f218ddc1b803d8e165da600f32c" prot="public" static="no" mutable="no">
+      <memberdef kind="variable" id="classGraphNode_1a34525f218ddc1b803d8e165da600f32c" prot="public" static="no" mutable="yes">
         <type>std::mutex</type>
         <definition>std::mutex GraphNode::node_mutex</definition>
         <argsstring></argsstring>
@@ -49,7 +49,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="99" column="16" bodyfile="includes/GraphNode.h" bodystart="99" bodyend="-1"/>
+        <location file="includes/GraphNode.h" line="99" column="24" bodyfile="includes/GraphNode.h" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGraphNode_1a2c594b99d6a85cd46b105fba519da025" prot="public" static="no" mutable="no">
         <type>std::unordered_map&lt; std::string, std::string &gt;</type>
@@ -296,7 +296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="148" column="17" bodyfile="GraphNode.cpp" bodystart="283" bodyend="357"/>
+        <location file="includes/GraphNode.h" line="148" column="17" bodyfile="GraphNode.cpp" bodystart="283" bodyend="358"/>
       </memberdef>
       <memberdef kind="function" id="classGraphNode_1ac20b11cafa2318105f197c269d8fa022" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -349,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="includes/GraphNode.h" line="163" column="10" bodyfile="GraphNode.cpp" bodystart="359" bodyend="364"/>
+        <location file="includes/GraphNode.h" line="163" column="10" bodyfile="GraphNode.cpp" bodystart="360" bodyend="365"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">

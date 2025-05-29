@@ -96,7 +96,7 @@ public:
 
     std::string id;                                        ///< Unique identifier of the node (e.g., IP address).
     std::string type;                                      ///< Type of the node (e.g., host, network).
-    std::mutex node_mutex;                                ///< Mutex to protect the entire GraphNode object for thread-safe access.
+    std::mutex mutable node_mutex;                                ///< Mutex to protect the entire GraphNode object for thread-safe access.
     std::unordered_map<std::string, std::string> attributes; ///< Additional attributes of the node.
     NodeFeatures features;                                 ///< Statistical features of the node based on its traffic.
     TemporalFeatures temporal;                               ///< Time-based features of the node.

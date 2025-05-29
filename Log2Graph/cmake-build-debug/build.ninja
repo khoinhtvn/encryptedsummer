@@ -51,55 +51,55 @@ build cmake_object_order_depends_target_Log2Graph: phony || .
 
 build CMakeFiles/Log2Graph.dir/main.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/main.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/main.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/ZeekLogParser.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/ZeekLogParser.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/ZeekLogParser.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/GraphBuilder.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/GraphBuilder.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/GraphBuilder.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/LogMonitor.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/LogMonitor.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/LogMonitor.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/GraphExporter.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/GraphExporter.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/GraphExporter.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/GraphNode.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/GraphNode.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/GraphNode.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/TrafficGraph.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/TrafficGraph.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/TrafficGraph.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/FeatureEncoder.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/FeatureEncoder.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/FeatureEncoder.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
 build CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/GraphEdge.cpp || cmake_object_order_depends_target_Log2Graph
   DEP_FILE = CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o.d
-  FLAGS = -O0 -g -fsanitize=address -std=gnu++20 -fdiagnostics-color=always
+  FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
@@ -113,8 +113,8 @@ build CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o: CXX_COMPILER__Log2Graph_unscanne
 
 build Log2Graph: CXX_EXECUTABLE_LINKER__Log2Graph_Debug CMakeFiles/Log2Graph.dir/main.cpp.o CMakeFiles/Log2Graph.dir/ZeekLogParser.cpp.o CMakeFiles/Log2Graph.dir/GraphBuilder.cpp.o CMakeFiles/Log2Graph.dir/LogMonitor.cpp.o CMakeFiles/Log2Graph.dir/GraphExporter.cpp.o CMakeFiles/Log2Graph.dir/GraphNode.cpp.o CMakeFiles/Log2Graph.dir/TrafficGraph.cpp.o CMakeFiles/Log2Graph.dir/FeatureEncoder.cpp.o CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o
   DEP_FILE = CMakeFiles/Log2Graph.dir/link.d
-  FLAGS = -O0 -g -fsanitize=address
-  LINK_FLAGS = -fsanitize=address   -Wl,--dependency-file=CMakeFiles/Log2Graph.dir/link.d
+  FLAGS = -O0 -g  -static-libasan
+  LINK_FLAGS = -static-libasan   -Wl,--dependency-file=CMakeFiles/Log2Graph.dir/link.d
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   POST_BUILD = :
   PRE_LINK = :
