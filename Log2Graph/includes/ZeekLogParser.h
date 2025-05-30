@@ -24,6 +24,8 @@
 #include <set>
 #include <vector>
 #include <memory>
+#include <chrono> // Add for std::chrono
+#include <atomic> // Add for std::atomic
 
 // Global constant strings for default feature values
 extern const std::string DEFAULT_TIMESTAMP;
@@ -89,6 +91,8 @@ struct FileState {
      */
     bool update();
 
+    bool operator==(const FileState &other);
+
     /**
      * @brief Equality operator for FileState
      *
@@ -119,6 +123,7 @@ public:
     LogEntry dequeue();
     void stop();
     bool is_running() const;
+    bool is_empty() const; // New method
 private:
     std::queue<LogEntry> queue_;
     mutable std::mutex mutex_;
@@ -266,6 +271,14 @@ private:
      */
     std::mutex uid_data_mutex_;
 
+    // New members for time-based aggregation
+    std::unordered_map<std::string, std::chrono::steady_clock::time_point> uid_last_update_time_;
+    std::mutex uid_last_update_time_mutex_;
+    std::thread processing_thread_;
+    std::atomic<bool> processing_thread_running_;
+    std::condition_variable processing_cv_;
+
+
     /**
      * @brief Monitors a single log file continuously for appended content.
      *
@@ -368,6 +381,9 @@ private:
      * @return A map containing the parsed fields.
      */
     std::map<std::string, std::string> parse_http_entry(const std::vector<std::string>& fields, LogEntry& log_entry);
+
+    // New method for the processing thread
+    void processing_loop();
 };
 
 #endif // ZEEKLOGPARSER_H

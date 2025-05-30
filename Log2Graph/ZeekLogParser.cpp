@@ -1,5 +1,5 @@
 /**
- * @file ZeekLogParser.cpp
+* @file ZeekLogParser.cpp
  * @brief Implementation file for the ZeekLogParser class.
  */
 
@@ -45,7 +45,7 @@ bool FileState::update() {
     last_size = file_stat.st_size;
     return true;
 }
-bool FileState::operator==(const FileState &other) const {
+bool FileState::operator==(const FileState &other){
     return inode == other.inode && last_size == other.last_size;
 }
 
@@ -63,7 +63,7 @@ LogEntry SafeQueue::dequeue() {
         queue_.pop();
         return entry;
     }
-    return {};
+    return {}; // Return empty LogEntry if stopping and queue is empty
 }
 
 void SafeQueue::stop() {
@@ -77,7 +77,16 @@ bool SafeQueue::is_running() const {
     return running_;
 }
 
-ZeekLogParser::ZeekLogParser(const std::string &log_dir) : log_directory_(log_dir), running_(false) {}
+bool SafeQueue::is_empty() const { // New method implementation
+    std::lock_guard<std::mutex> lock(mutex_);
+    return queue_.empty();
+}
+
+
+ZeekLogParser::ZeekLogParser(const std::string &log_dir)
+    : log_directory_(log_dir),
+      running_(false),
+      processing_thread_running_(false) {} // Initialize new atomic flag
 
 ZeekLogParser::~ZeekLogParser() {
     stop_monitoring();
@@ -88,8 +97,6 @@ void ZeekLogParser::start_monitoring() {
         std::lock_guard<std::mutex> lock(running_mutex_);
         running_ = true;
     }
-
-    std::unordered_set<std::string> monitored_files; // Keep track of files already being monitored
 
     // Discover interesting files and launch a monitoring thread for each unique file
     for (const auto &entry : fs::directory_iterator(log_directory_)) {
@@ -113,14 +120,22 @@ void ZeekLogParser::start_monitoring() {
     // Start worker threads for processing enqueued log entries
     for (int i = 0; i < num_worker_threads_; ++i) {
         worker_threads_.emplace_back([this]() {
-            while (running_ || !entry_queue_.is_running()) {
+            while (running_ || !entry_queue_.is_empty()) { // Process while running or queue is not empty
                 LogEntry entry = entry_queue_.dequeue();
                 if (!entry.log_type.empty()) {
                     process_entry(entry);
+                } else if (!running_ && entry_queue_.is_empty()) { // If not running and queue is truly empty, break
+                    break;
                 }
             }
+            std::cout << "[Worker Thread] Exiting." << std::endl;
         });
     }
+
+    // Start the new processing thread
+    processing_thread_running_ = true;
+    processing_thread_ = std::thread(&ZeekLogParser::processing_loop, this);
+    std::cout << "[Main Thread] Started processing thread." << std::endl;
 }
 
 void ZeekLogParser::stop_monitoring() {
@@ -130,6 +145,14 @@ void ZeekLogParser::stop_monitoring() {
     }
     running_cv_.notify_all(); // Notify monitoring threads waiting on condition variable
     entry_queue_.stop();      // Signal the SafeQueue to stop and unblock worker threads
+
+    // Signal processing thread to stop and join
+    {
+        // Lock for processing_cv_ to ensure notification is not missed
+        std::lock_guard<std::mutex> lock(uid_last_update_time_mutex_);
+        processing_thread_running_ = false;
+    }
+    processing_cv_.notify_one(); // Notify processing thread to wake up and check its running state
 
     // Join all monitoring threads
     {
@@ -149,6 +172,12 @@ void ZeekLogParser::stop_monitoring() {
         }
     }
     worker_threads_.clear();
+
+    // Join the processing thread
+    if (processing_thread_.joinable()) {
+        processing_thread_.join();
+    }
+    std::cout << "[Main Thread] Processing thread joined." << std::endl;
 }
 
 bool ZeekLogParser::is_interesting_log_file(const std::string& filename) const {
@@ -159,17 +188,15 @@ bool ZeekLogParser::is_interesting_log_file(const std::string& filename) const {
 void ZeekLogParser::monitor_file(const std::string& file_path) {
     std::cout << "[Monitor Thread] Starting monitoring for: " << file_path << std::endl;
 
-    // Loop continuously as long as the parser is running
     while (true) {
         {
             std::unique_lock<std::mutex> lock(running_mutex_);
             if (!running_) {
-                break; // Exit loop if parser is no longer running
+                break;
             }
-            // Wait for a short period or until signaled to stop
             running_cv_.wait_for(lock, std::chrono::seconds(1), [this]{ return !running_; });
             if (!running_) {
-                break; // Check again after waking up from wait
+                break;
             }
         }
 
@@ -179,7 +206,6 @@ void ZeekLogParser::monitor_file(const std::string& file_path) {
 
             {
                 std::lock_guard<std::mutex> lock(tracked_files_mutex_);
-                // Ensure the file is still tracked (it might have been removed if deleted)
                 if (tracked_files_.find(file_path) == tracked_files_.end()) {
                     std::cerr << "[Monitor Thread] File " << file_path << " no longer tracked. Exiting thread." << std::endl;
                     break;
@@ -188,45 +214,34 @@ void ZeekLogParser::monitor_file(const std::string& file_path) {
                 last_processed_size = state.processed_size;
 
                 if (current_size > last_processed_size) {
-
                     std::ifstream in(file_path);
                     if (in.is_open()) {
-                        in.seekg(last_processed_size); // Seek to the last processed position
+                        in.seekg(last_processed_size);
                         std::string new_content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
                         in.close();
 
-                        process_content(file_path, new_content); // Process only the new content
-                        state.processed_size = current_size;    // Update processed size
+                        process_content(file_path, new_content);
+                        state.processed_size = current_size;
                     } else {
                         std::cerr << "[Monitor Thread] Error opening file for reading appended data: " << file_path << std::endl;
                     }
                 } else if (current_size < last_processed_size) {
-                    // File has been truncated or reset, re-process from beginning
                     std::cout << "[Monitor Thread] File " << file_path << " truncated. Reprocessing from start." << std::endl;
-                    process_log_file(file_path); // Process the entire file
-                    state.processed_size = current_size; // Update processed size
+                    process_log_file(file_path);
+                    state.processed_size = current_size;
                 }
-                // If current_size == last_processed_size, no new data, do nothing.
             }
         } catch (const fs::filesystem_error& e) {
             std::cerr << "[Monitor Thread] Filesystem error for " << file_path << ": " << e.what() << std::endl;
-            // File might have been deleted or moved. Consider removing it from tracked_files_
             std::lock_guard<std::mutex> lock(tracked_files_mutex_);
             tracked_files_.erase(file_path);
-            break; // Exit thread if file no longer accessible
+            break;
         } catch (const std::exception& e) {
             std::cerr << "[Monitor Thread] General error for " << file_path << ": " << e.what() << std::endl;
         }
     }
     std::cout << "[Monitor Thread] Exiting for file: " << file_path << std::endl;
 }
-
-
-// The `monitor_directory` and `monitor_single_file_once` from previous versions
-// are no longer needed as separate functions with the new `monitor_file` design.
-// Their previous logic is now integrated into `start_monitoring` and `monitor_file`.
-// Removed `handle_appended_data` as its logic is now within `monitor_file`.
-
 
 void ZeekLogParser::process_log_file(const std::string& file_path) {
     std::ifstream in(file_path);
@@ -279,8 +294,14 @@ void ZeekLogParser::process_entry(const LogEntry& entry) {
                     }
                 }
             }
+        } // uid_data_mutex_ unlocked
+
+        // Update last update time for this UID
+        {
+            std::lock_guard<std::mutex> lock(uid_last_update_time_mutex_);
+            uid_last_update_time_[uid] = std::chrono::steady_clock::now();
         }
-        attempt_build_graph_node(uid);
+        processing_cv_.notify_one(); // Signal the processing thread that there's new data
     }
 }
 
@@ -290,13 +311,48 @@ void ZeekLogParser::attempt_build_graph_node(const std::string& uid) {
         std::lock_guard<std::mutex> lock(uid_data_mutex_);
         if (uid_data_.count(uid)) {
             combined_data = uid_data_[uid];
-            // Optionally remove the data after processing if you don't need it further
+            // Remove the data after processing
             uid_data_.erase(uid);
         } else {
-            return;
+            return; // UID already processed or doesn't exist
         }
     }
     build_graph_node(uid, combined_data);
+}
+
+// New processing loop for time-based aggregation
+void ZeekLogParser::processing_loop() {
+    std::cout << "[Processing Thread] Starting." << std::endl;
+    const std::chrono::seconds PROCESSING_DELAY_SECONDS(5); // How long to wait for more data for a UID
+
+    while (processing_thread_running_) {
+        std::unique_lock<std::mutex> lock(uid_last_update_time_mutex_);
+        // Wait for new data or for a timeout to check for stale UIDs
+        processing_cv_.wait_for(lock, std::chrono::seconds(1), [this]{ return !processing_thread_running_; });
+
+        if (!processing_thread_running_) {
+            break; // Exit if signaled to stop
+        }
+
+        auto now = std::chrono::steady_clock::now();
+        std::vector<std::string> uids_to_process;
+
+        // Find UIDs that haven't been updated recently
+        for (auto it = uid_last_update_time_.begin(); it != uid_last_update_time_.end(); ) {
+            if (now - it->second > PROCESSING_DELAY_SECONDS) {
+                uids_to_process.push_back(it->first);
+                it = uid_last_update_time_.erase(it); // Remove from tracking
+            } else {
+                ++it;
+            }
+        }
+        lock.unlock(); // Unlock before calling build_graph_node to avoid deadlocks
+
+        for (const std::string& uid : uids_to_process) {
+            attempt_build_graph_node(uid);
+        }
+    }
+    std::cout << "[Processing Thread] Exiting." << std::endl;
 }
 
 void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std::string, std::map<std::string, std::string>>& combined_data) {
@@ -390,6 +446,8 @@ void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std:
         if (http_data.count("username")) feature_map["username"] = http_data.at("username");
     }
 
+    // Call the GraphBuilder to add the node and edge
+
     if (!feature_map["src_ip"].empty() && !feature_map["dst_ip"].empty()) {
         EdgeFeatureEncoder encoder;
         std::vector<float> encoded_features = encoder.encode_features(feature_map);
@@ -400,152 +458,117 @@ void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std:
 LogEntry ZeekLogParser::parse_log_entry(const std::string& log_type, const std::string& entry) {
     LogEntry log_entry;
     log_entry.log_type = log_type;
-    std::istringstream iss(entry);
-    std::string field;
     std::vector<std::string> fields;
-    while (std::getline(iss, field, '\t')) {
+    std::stringstream ss(entry);
+    std::string field;
+    while (std::getline(ss, field, '\t')) {
         fields.push_back(field);
     }
 
-    if (log_type == "conn" && fields.size() >= 21) {
+    if (log_type == "conn") {
         log_entry.data = parse_conn_entry(fields);
-    } else if (log_type == "ssl" && fields.size() >= 17) {
+    } else if (log_type == "ssl") {
         log_entry.data = parse_ssl_entry(fields);
-    }  else if (log_type == "http" && fields.size() >= 30) {
+    } else if (log_type == "http") {
         log_entry.data = parse_http_entry(fields, log_entry);
     }
-    // Add parsing for other log types if needed
     return log_entry;
 }
 
 std::map<std::string, std::string> ZeekLogParser::parse_conn_entry(const std::vector<std::string>& fields) {
     std::map<std::string, std::string> data;
-    data["ts"] = fields[0];
-    data["uid"] = fields[1];
-    data["id.orig_h"] = fields[2];
-    data["id.orig_p"] = fields[3];
-    data["id.resp_h"] = fields[4];
-    data["id.resp_p"] = fields[5];
-    data["proto"] = fields[6];
-    data["service"] = fields[7];
-    data["duration"] = fields[8];
-    data["orig_bytes"] = fields[9];
-    data["resp_bytes"] = fields[10];
-    data["conn_state"] = fields[11];
-    data["local_orig"] = fields[12];
-    data["local_resp"] = fields[13];
-    data["missed_bytes"] = fields[14];
-    data["history"] = fields[15];
-    data["orig_pkts"] = fields[16];
-    data["orig_ip_bytes"] = fields[17];
-    data["resp_pkts"] = fields[18];
-    data["resp_ip_bytes"] = fields[19];
-    data["tunnel_parents"] = fields[20];
+    if (fields.size() > 21) {
+        data["ts"] = fields[0];
+        data["uid"] = fields[1];
+        data["id.orig_h"] = fields[2];
+        data["id.orig_p"] = fields[3];
+        data["id.resp_h"] = fields[4];
+        data["id.resp_p"] = fields[5];
+        data["proto"] = fields[6];
+        data["service"] = fields[7];
+        data["duration"] = fields[8];
+        data["orig_bytes"] = fields[9];
+        data["resp_bytes"] = fields[10];
+        data["conn_state"] = fields[11];
+        data["local_orig"] = fields[12];
+        data["local_resp"] = fields[13];
+        data["missed_bytes"] = fields[14];
+        data["history"] = fields[15];
+        data["orig_pkts"] = fields[16];
+        data["orig_ip_bytes"] = fields[17];
+        data["resp_pkts"] = fields[18];
+        data["resp_ip_bytes"] = fields[19];
+        data["tunnel_parents"] = fields[20];
+        data["uid_orig"] = fields[21];
+    }
     return data;
 }
 
 std::map<std::string, std::string> ZeekLogParser::parse_ssl_entry(const std::vector<std::string>& fields) {
     std::map<std::string, std::string> data;
-    if (fields.size() > 0) data["ts"] = fields[0];
-    if (fields.size() > 1) data["uid"] = fields[1];
-    if (fields.size() > 2) data["id.orig_h"] = fields[2];
-    if (fields.size() > 3) data["id.orig_p"] = fields[3];
-    if (fields.size() > 4) data["id.resp_h"] = fields[4];
-    if (fields.size() > 5) data["id.resp_p"] = fields[5];
-    if (fields.size() > 6) data["version"] = fields[6];
-    if (fields.size() > 7) data["cipher"] = fields[7];
-    if (fields.size() > 8) data["curve"] = fields[8];
-    if (fields.size() > 9) data["server_name"] = fields[9];
-    if (fields.size() > 10) data["resumed"] = fields[10];
-  if (fields.size() > 11) data["last_alert"] = fields[11];
-    if (fields.size() > 12) data["next_protocol"] = fields[12];
-    if (fields.size() > 13) data["established"] = fields[13];
-    if (fields.size() > 14) data["ssl_history"] = fields[14];
-    if (fields.size() > 15) data["cert_chain_fps"] = fields[15];
-    if (fields.size() > 16) data["client_cert_chain_fps"] = fields[16];
-    if (fields.size() > 17) {
-        data["sni_matches_cert"] = fields[17];
+    if (fields.size() > 16) {
+        data["ts"] = fields[0];
+        data["uid"] = fields[1];
+        data["id.orig_h"] = fields[2];
+        data["id.orig_p"] = fields[3];
+        data["id.resp_h"] = fields[4];
+        data["id.resp_p"] = fields[5];
+        data["version"] = fields[6];
+        data["cipher"] = fields[7];
+        data["curve"] = fields[8];
+        data["server_name"] = fields[9];
+        data["resumed"] = fields[10];
+        data["last_alert"] = fields[11];
+        data["next_protocol"] = fields[12];
+        data["established"] = fields[13];
+        data["cert_chain_fuids"] = fields[14];
+        data["subject"] = fields[15];
+        data["issuer"] = fields[16];
     }
     return data;
 }
 
 std::map<std::string, std::string> ZeekLogParser::parse_http_entry(const std::vector<std::string>& fields, LogEntry& log_entry) {
     std::map<std::string, std::string> data;
-    data["ts"] = fields[0];
-    data["uid"] = fields[1];
-    data["id.orig_h"] = fields[2];
-    data["id.orig_p"] = fields[3];
-    data["id.resp_h"] = fields[4];
-    data["id.resp_p"] = fields[5];
-    data["trans_depth"] = fields[6];
-    data["method"] = fields[7];
-    data["host"] = fields[8];
-    data["uri"] = fields[9];
-    data["referrer"] = fields[10];
-    data["version"] = fields[11];
-    data["user_agent"] = fields[12];
-    data["origin"] = fields[13];
-    data["request_body_len"] = fields[14];
-    data["response_body_len"] = fields[15];
-    data["status_code"] = fields[16];
-    data["status_msg"] = fields[17];
-    data["info_code"] = fields[18];
-    data["resp_mime_types"] = fields[19];
+    if (fields.size() > 29) {
+        data["ts"] = fields[0];
+        data["uid"] = fields[1];
+        data["id.orig_h"] = fields[2];
+        data["id.orig_p"] = fields[3];
+        data["id.resp_h"] = fields[4];
+        data["id.resp_p"] = fields[5];
+        data["trans_depth"] = fields[6];
+        data["method"] = fields[7];
+        data["host"] = fields[8];
+        data["uri"] = fields[9];
+        data["referrer"] = fields[10];
+        data["version"] = fields[11];
+        data["user_agent"] = fields[12];
+        data["origin"] = fields[13];
+        data["request_body_len"] = fields[14];
+        data["response_body_len"] = fields[15];
+        data["status_code"] = fields[16];
+        data["status_msg"] = fields[17];
+        data["info_code"] = fields[18];
+        data["info_msg"] = fields[19];
+        data["tags"] = fields[20];
+        data["username"] = fields[21];
+        data["password"] = fields[22];
+        data["proxied"] = fields[23];
+        // The following fields are present in the provided format but not used in the original parse_http_entry
+        // data["orig_fuids"] = fields[24];
+        // data["orig_filenames"] = fields[25];
+        // data["orig_mime_types"] = fields[26];
+        // data["resp_fuids"] = fields[27];
+        // data["resp_filenames"] = fields[28];
+        // data["resp_mime_types"] = fields[29];
 
-    // Handle set type: tags, proxied
-    if (fields.size() > 20) {
-        std::istringstream tags_ss(fields[20]);
+        // Handle set type: tags
+        std::stringstream ss_tags(fields[20]);
         std::string tag;
-        while (std::getline(tags_ss, tag, ',')) {
-            if (!tag.empty()) {
-                log_entry.set_data["tags"].insert(tag);
-            }
+        while (std::getline(ss_tags, tag, ',')) {
+            log_entry.set_data["tags"].insert(tag);
         }
     }
-
-    if (fields.size() > 23) {
-        std::istringstream proxied_ss(fields[23]);
-        std::string proxied_item;
-        while (std::getline(proxied_ss, proxied_item, ',')) {
-            if (!proxied_item.empty()) {
-                log_entry.set_data["proxied"].insert(proxied_item);
-            }
-        }
-    }
-
-    // Handle vector types: orig_fuids, orig_filenames, orig_mime_types, resp_fuids, resp_filenames, resp_mime_types
-    auto parse_vector_field = [&](const std::string& raw_string) {
-        std::vector<std::string> result;
-        std::istringstream ss(raw_string);
-        std::string item;
-        while (std::getline(ss, item, ',')) {
-            if (!item.empty()) {
-                result.push_back(item);
-            }
-        }
-        return result;
-    };
-
-    if (fields.size() > 24) log_entry.list_data["orig_fuids"] = parse_vector_field(fields[24]);
-    if (fields.size() > 25) log_entry.list_data["orig_filenames"] = parse_vector_field(fields[25]);
-    if (fields.size() > 26) log_entry.list_data["orig_mime_types"] = parse_vector_field(fields[26]);
-    if (fields.size() > 27) log_entry.list_data["resp_fuids"] = parse_vector_field(fields[27]);
-    if (fields.size() > 28) log_entry.list_data["resp_filenames"] = parse_vector_field(fields[28]);
-    if (fields.size() > 29) log_entry.list_data["resp_mime_types"] = parse_vector_field(fields[29]);
-
     return data;
 }
-/*
-// This method is no longer used with the new monitor_file logic,
-// as its functionality is integrated directly into monitor_file.
-// It's kept here for completeness but can be removed if not needed elsewhere.
-void ZeekLogParser::handle_appended_data(const std::string& file_path, off_t old_size, off_t new_size) {
-    std::ifstream in(file_path);
-    if (!in) {
-        std::cerr << "[Parser] Error opening file for appended data: " << file_path << std::endl;
-        return;
-    }
-    in.seekg(old_size);
-    std::string content((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>());
-    process_content(file_path, content);
-}*/

@@ -6,34 +6,35 @@
 #include "includes/EdgeFeatureEncoder.h"
 #include <cmath>
 #include <ctime>
+#include <iostream>
 #include <stdexcept>
 #include <sstream>
 
 EdgeFeatureEncoder::EdgeFeatureEncoder() : protocol_map({{"unknown_transport", 0}, {"tcp", 1}, {"udp", 2}, {"icmp", 3}}),
-                                     conn_state_map({
-                                         {"SF", 0}, {"S1", 0}, // Successful/Established
-                                         {"REJ", 1}, {"RSTO", 1}, {"RSTR", 1}, {"RSTOS0", 1},
-                                         {"RSTRH", 1},           // Rejected/Reset
-                                         {"S0", 2}, {"S2", 2}, {"S3", 2}, {"SH", 2}, {"SHR", 2}, {"OTH", 2},
-                                         {"UNKNOWN", 2}          // Partial/Other/Unknown
-                                     }),
-                                     NUM_CONN_STATE_CATEGORIES(3),
-                                     ssl_version_map({
-                                         {"", 0}, {"TLSv10", 1}, {"TLSv11", 2}, {"TLSv12", 3}, {"TLSv13", 4},
-                                         {"SSLv3", 5}, {"UNKNOWN", 6}
-                                     }),
-                                     NUM_SSL_VERSION_CATEGORIES(ssl_version_map.size()),
-                                     user_agent_map({
-                                         {"Chrome", 0}, {"Firefox", 1}, {"Safari", 2}, {"Edge", 3}, {"Opera", 4},
-                                         {"Bot", 5}, {"Unknown", 6}
-                                     }),
-                                     NUM_USER_AGENT_CATEGORIES(user_agent_map.size()),
-                                     feature_dimension(
-                                         protocol_map.size() +       // protocol one-hot
-                                         NUM_CONN_STATE_CATEGORIES + // connection state one-hot (reduced)
-                                         NUM_SSL_VERSION_CATEGORIES + // ssl_version one-hot
-                                         NUM_USER_AGENT_CATEGORIES   // user_agent one-hot (simplified)
-                                     ) {}
+                                         conn_state_map({
+                                             {"SF", 0}, {"S1", 0}, // Successful/Established
+                                             {"REJ", 1}, {"RSTO", 1}, {"RSTR", 1}, {"RSTOS0", 1},
+                                             {"RSTRH", 1},             // Rejected/Reset
+                                             {"S0", 2}, {"S2", 2}, {"S3", 2}, {"SH", 2}, {"SHR", 2}, {"OTH", 2},
+                                             {"UNKNOWN", 2}             // Partial/Other/Unknown
+                                         }),
+                                         NUM_CONN_STATE_CATEGORIES(3),
+                                         ssl_version_map({
+                                             {"", 0}, {"TLSv10", 1}, {"TLSv11", 2}, {"TLSv12", 3}, {"TLSv13", 4},
+                                             {"SSLv3", 5}, {"UNKNOWN", 6}
+                                         }),
+                                         NUM_SSL_VERSION_CATEGORIES(ssl_version_map.size()),
+                                         user_agent_map({
+                                             {"Chrome", 0}, {"Firefox", 1}, {"Safari", 2}, {"Edge", 3}, {"Opera", 4},
+                                             {"Bot", 5}, {"Nmap", 6}, {"DebianAPT", 7}, {"Unknown", 8} // Added Nmap and DebianAPT
+                                         }),
+                                         NUM_USER_AGENT_CATEGORIES(user_agent_map.size()), // Updated count
+                                         feature_dimension(
+                                             protocol_map.size() +        // protocol one-hot
+                                             NUM_CONN_STATE_CATEGORIES + // connection state one-hot (reduced)
+                                             NUM_SSL_VERSION_CATEGORIES + // ssl_version one-hot
+                                             NUM_USER_AGENT_CATEGORIES     // user_agent one-hot (simplified) - Updated dimension
+                                         ) {}
 
 size_t EdgeFeatureEncoder::get_feature_dimension() const {
     return feature_dimension;
@@ -96,6 +97,8 @@ std::vector<float> EdgeFeatureEncoder::encode_features(const std::unordered_map<
         else if (user_agent.find("Edge") != std::string::npos) user_agent_category = "Edge";
         else if (user_agent.find("Opera") != std::string::npos) user_agent_category = "Opera";
         else if (user_agent.find("Bot") != std::string::npos) user_agent_category = "Bot";
+        else if (user_agent == "Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)") user_agent_category = "Nmap";
+        else if (user_agent == "Debian APT-HTTP/1.3 (2.0.9)") user_agent_category = "DebianAPT";
         auto user_agent_it = user_agent_map.find(user_agent_category);
         if (user_agent_it != user_agent_map.end()) {
             user_agent_code = user_agent_it->second;
@@ -133,6 +136,8 @@ std::vector<std::string> EdgeFeatureEncoder::get_feature_names() {
     names.push_back("user_agent_Edge");
     names.push_back("user_agent_Opera");
     names.push_back("user_agent_Bot");
+    names.push_back("user_agent_Nmap");
+    names.push_back("user_agent_DebianAPT");
     names.push_back("user_agent_Unknown");
     return names;
 }
