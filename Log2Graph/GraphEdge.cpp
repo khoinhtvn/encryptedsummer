@@ -8,6 +8,26 @@
 #include <sstream>
 #include <iomanip>
 
+std::string GraphEdge::to_dot_string_encoded() const {
+    std::stringstream ss;
+    ss << "  \"" << escape_dot_string(source) << "\" -> \"" << escape_dot_string(target) << "\" [";
+
+    std::vector<std::string> feature_names = EdgeFeatureEncoder::get_feature_names();
+    for (size_t i = 0; i < encoded_features.size(); ++i) {
+        if (i != 0) {
+            ss << ",";
+        }
+        if (i < feature_names.size()) {
+            ss << feature_names[i] << "=" << static_cast<int>(encoded_features[i]);
+        } else {
+            ss << "feature_" << i << "=" << static_cast<int>(encoded_features[i]);
+        }
+    }
+
+    ss << "];\n";
+    return ss.str();
+}
+
 std::string GraphEdge::to_dot_string() const {
     std::stringstream ss;
     ss << "  \"" << escape_dot_string(source) << "\" -> \"" << escape_dot_string(target) <<
@@ -26,8 +46,14 @@ std::string GraphEdge::to_dot_string() const {
         }
     }
 
+    std::vector<std::string> feature_names = EdgeFeatureEncoder::get_feature_names();
     for (size_t i = 0; i < encoded_features.size(); ++i) {
-        ss << ", " << EdgeFeatureEncoder::get_feature_name(i) << "=" << std::fixed << std::setprecision(6) << encoded_features[i];
+        if (i < feature_names.size()) {
+            ss << ", " << feature_names[i] << "=" << static_cast<int>(encoded_features[i]);
+        } else {
+            // Handle potential mismatch in size (shouldn't happen if encoder is consistent)
+            ss << ", feature_" << i << "=" << static_cast<int>(encoded_features[i]);
+        }
     }
 
     ss << "];\n";

@@ -1,3 +1,0 @@
-/home/lu/Documents/encryptedsummer/Log2Graph/cmake-build-debug/CMakeFiles/Log2Graph.dir
-/home/lu/Documents/encryptedsummer/Log2Graph/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/lu/Documents/encryptedsummer/Log2Graph/cmake-build-debug/CMakeFiles/rebuild_cache.dir

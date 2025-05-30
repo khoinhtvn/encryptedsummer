@@ -92,15 +92,9 @@ void GraphExporter::write_node_encoded_to_file(const std::shared_ptr<GraphNode> 
 
 void GraphExporter::write_edge_encoded_to_file(const std::shared_ptr<GraphEdge> &edge, std::ofstream &ofstream) {
     if (edge) {
-        ofstream << "  \"" << escape_dot_string(edge->source) << "\" -> \"" << escape_dot_string(edge->target) << "\" [";
-        for (size_t i = 0; i < edge->encoded_features.size(); ++i) {
-            if (i != 0) ofstream << ",";
-            ofstream << "feature_" << i << "=" << std::fixed << std::setprecision(6) << edge->encoded_features[i];
-        }
-        ofstream << "];\n";
+        ofstream << edge->to_dot_string_encoded();
     }
 }
-
 void GraphExporter::export_to_dot_encoded(const TrafficGraph &graph, const std::string &filename) {
     std::ofstream dot_file(filename);
     if (!dot_file.is_open()) {

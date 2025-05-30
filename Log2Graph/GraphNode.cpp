@@ -1,7 +1,7 @@
 //
 // Created by lu on 5/28/25.
 //
-
+#include "includes/NodeFeatureEncoder.h"
 #include "includes/GraphNode.h"
 #include <algorithm>
 #include <chrono>
@@ -9,10 +9,23 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
-#include "includes/NodeFeatureEncoder.h"
 
 // Initialize the static NodeFeatureEncoder instance
-const NodeFeatureEncoder GraphNode::node_feature_encoder;
+const NodeFeatureEncoder& GraphNode::get_node_feature_encoder() {
+    static const struct LocalEncoder {
+        const std::vector<std::string> PROTOCOLS = {"tcp", "udp", "icmp", "other"};
+        const std::vector<std::string> CONN_STATES = {"S0", "S1", "SF", "REJ", "RSTO", "RSTR", "OTH", "SH", "SHR", "RSTOS0", "RSTRH", "other"};
+        const std::vector<std::string> SERVICES = {"-", "http", "ssl", "dns", "ftp", "ssh", "rdp", "smb", "other"};
+        const std::vector<std::string> USER_AGENTS = {"Mozilla", "Chrome", "Safari", "Edge", "curl", "Wget", "Python", "Java", "Unknown"};
+        const std::vector<std::string> BOOLEANS = {"false", "true"};
+        const std::vector<std::string> HTTP_VERSIONS = {"HTTP/1.0", "HTTP/1.1", "HTTP/2", "other"};
+        const std::vector<std::string> SSL_VERSIONS = {"SSLv3", "TLSv10", "TLSv11", "TLSv12", "TLSv13", "other"};
+        NodeFeatureEncoder encoder;
+
+        LocalEncoder() : encoder() {} // Constructor of LocalEncoder will initialize the NodeFeatureEncoder
+    } local_encoder_instance;
+    return local_encoder_instance.encoder;
+}
 
 GraphNode::GraphNode(const std::string &id, const std::string &type)
     : id(id), type(type), last_connection_time(std::chrono::system_clock::now()) {
@@ -25,7 +38,7 @@ GraphNode::GraphNode(const std::string &id, const std::string &type)
 }
 
 void GraphNode::update_connection_features(bool is_outgoing,
-                                            const std::unordered_map<std::string, std::string>& connection_attributes) {
+                                             const std::unordered_map<std::string, std::string>& connection_attributes) {
     std::lock_guard<std::mutex> lock(node_mutex);
     ++features.degree;
     if (is_outgoing) {
@@ -110,6 +123,7 @@ void GraphNode::update_connection_features(bool is_outgoing,
     }
     if (connection_attributes.count("http_version")) {
         features.http_versions_used.insert(connection_attributes.at("http_version"));
+        features.http_version_counts[connection_attributes.at("http_version")]++;
     }
     if (connection_attributes.count("http_status_code")) {
         try {
@@ -119,6 +133,7 @@ void GraphNode::update_connection_features(bool is_outgoing,
 
     if (connection_attributes.count("ssl.version")) {
         features.ssl_versions_used.insert(connection_attributes.at("ssl.version"));
+        features.ssl_version_counts[connection_attributes.at("ssl.version")]++;
     }
     if (connection_attributes.count("ssl.cipher")) {
         features.ssl_ciphers_used.insert(connection_attributes.at("ssl.cipher"));
@@ -234,7 +249,8 @@ std::string GraphNode::NodeFeatures::most_frequent_connection_state() const {
         if (pair.second > max_count) {
             max_count = pair.second;
             most_frequent = pair.first;
-        }}
+        }
+    }
     return most_frequent;
 }
 
@@ -366,22 +382,100 @@ std::string GraphNode::to_dot_string_encoded() const {
     std::stringstream ss;
     ss << "  \"" << escape_dot_string(id) << "\" [";
 
-    std::vector<float> encoded_features_local = node_feature_encoder.encode_node_features(features);
-    std::vector<std::string> feature_names = node_feature_encoder.get_feature_names();
+    const NodeFeatureEncoder& encoder = get_node_feature_encoder();
+    std::vector<float> encoded_features_local = encoder.encode_node_features(features, temporal);
+    std::vector<std::string> feature_names = encoder.get_feature_names_base();
 
     if (!encoded_features_local.empty()) {
-        ss << "encoded_feature_count=" << encoded_features_local.size();
-        if (encoded_features_local.size() == feature_names.size()) {
-            for (size_t i = 0; i < encoded_features_local.size(); ++i) {
-                ss << ", " << feature_names[i] << "=" << std::fixed << std::setprecision(6) << encoded_features_local[i];
+        ss << "encoded_feature_count=" << feature_names.size();
+        size_t encoded_index = 0;
+        for (const auto& feature_name : feature_names) {
+            if (feature_name.find("proto") != std::string::npos) {
+                int hot_index = -1;
+                for (size_t i = 0; i < encoder.protocol_vec_size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
+                    }
+                }
+                ss << ", " << feature_name << "=" << hot_index;
+                encoded_index += encoder.protocol_vec_size();
+            } else if (feature_name.find("conn_state") != std::string::npos) {
+                int hot_index = -1;
+                for (size_t i = 0; i < encoder.conn_state_vec_size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
+                    }
+                }
+                ss << ", " << feature_name << "=" << hot_index;
+                encoded_index += encoder.conn_state_vec_size();
+            } else if (feature_name.find("service") != std::string::npos) {
+                int hot_index = -1;
+                for (size_t i = 0; i < encoder.service_vec_size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
+                    }
+                }
+                ss << ", " << feature_name << "=" << hot_index;
+                encoded_index += encoder.service_vec_size();
+            } else if (feature_name.find("user_agent") != std::string::npos) {
+                int hot_index = -1;
+                for (size_t i = 0; i < encoder.user_agent_vec_size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
+                    }
+                }
+                ss << ", " << feature_name << "=" << hot_index;
+                encoded_index += encoder.user_agent_vec_size();
+            } else if (feature_name.find("http_version") != std::string::npos) {
+                int hot_index = -1;
+                for (size_t i = 0; i < encoder.http_version_vec_size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
+                    }
+                }
+                ss << ", " << feature_name << "=" << hot_index;
+                encoded_index += encoder.http_version_vec_size();
+            } else if (feature_name.find("ssl_version") != std::string::npos) {
+                int hot_index = -1;
+                for (size_t i = 0; i < encoder.ssl_version_vec_size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
+                    }
+                }
+                ss << ", " << feature_name << "=" << hot_index;
+                encoded_index += encoder.ssl_version_vec_size();
+            } else if (feature_name == "first_seen_seconds" || feature_name == "last_seen_seconds" ||
+                       feature_name == "unique_remote_ports_connected_to" ||
+                       feature_name == "unique_local_ports_used" ||
+                       feature_name == "unique_remote_ports_connected_from" ||
+                       feature_name == "unique_local_ports_listening_on" ||
+                       feature_name == "unique_http_versions_used" ||
+                       feature_name == "unique_http_status_codes_seen" ||
+                       feature_name == "unique_ssl_versions_used" ||
+                       feature_name == "unique_ssl_ciphers_used") {
+                ss << ", " << feature_name << "=" << static_cast<int>(encoded_features_local[encoded_index]);
+                encoded_index += 1;
+            } else if (feature_name == "ever_connected_to_privileged_port" ||
+                       feature_name == "ever_listened_on_privileged_port" ||
+                       feature_name == "has_http_error_4xx" ||
+                       feature_name == "has_http_error_5xx" ||
+                       feature_name == "has_ssl_resumption" ||
+                       feature_name == "has_ssl_server_name" ||
+                       feature_name == "has_ssl_history") {
+                ss << ", " << feature_name << "=" << static_cast<int>(encoded_features_local[encoded_index]);
+                encoded_index += 1;
             }
-        } else {
-            // Handle the case where the number of encoded features doesn't match the number of names
-            ss << ", encoded_features=\"[";
-            for (size_t i = 0; i < encoded_features_local.size(); ++i) {
-                ss << (i > 0 ? ", " : "") << std::fixed << std::setprecision(6) << encoded_features_local[i];
+            else if (feature_name == "outgoing_connection_ratio" ||
+                     feature_name == "incoming_connection_ratio") {
+                ss << ", " << feature_name << "=" << std::fixed << std::setprecision(6) << encoded_features_local[encoded_index];
+                encoded_index += 1;
             }
-            ss << "]\"";
         }
     } else {
         ss << "encoded_features=\"[]\"";

@@ -75,6 +75,8 @@ public:
      */
     std::string get_destination_node_id() const { return target; }
 
+    std::string to_dot_string_encoded() const;
+
     /**
      * @brief Generates a DOT format string representation of the edge, including its attributes and encoded features.
      * @return A string in DOT format representing the edge.

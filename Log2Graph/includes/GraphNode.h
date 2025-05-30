@@ -5,17 +5,17 @@
 #ifndef GRAPHNODE_H
 #define GRAPHNODE_H
 
-#include <atomic>        // For atomic operations on primitive types
-#include <map>           // For ordered key-value pairs (e.g., protocol counts)
+#include <atomic>         // For atomic operations on primitive types
+#include <map>            // For ordered key-value pairs (e.g., protocol counts)
 #include <unordered_map> // For unordered key-value pairs (e.g., attributes)
-#include <vector>        // For dynamic arrays (not directly used in the node itself but might be in related structures)
-#include <chrono>        // For time-related functionalities (e.g., tracking first/last seen)
-#include <mutex>         // For synchronizing access to shared resources (prevents race conditions)
-#include <queue>         // For managing time windows of connections
-#include <set>           // For storing unique elements (e.g., protocols used)
-#include <string>        // For representing textual data (IDs, types, attributes)
-#include <sstream>       // For building strings (e.g., in to_dot_string)
-#include <iomanip>       // For formatting output (e.g., time)
+#include <vector>         // For dynamic arrays (not directly used in the node itself but might be in related structures)
+#include <chrono>         // For time-related functionalities (e.g., tracking first/last seen)
+#include <mutex>          // For synchronizing access to shared resources (prevents race conditions)
+#include <queue>          // For managing time windows of connections
+#include <set>            // For storing unique elements (e.g., protocols used)
+#include <string>         // For representing textual data (IDs, types, attributes)
+#include <sstream>        // For building strings (e.g., in to_dot_string)
+#include <iomanip>        // For formatting output (e.g., time)
 
 class NodeFeatureEncoder;
 
@@ -29,30 +29,30 @@ public:
         std::atomic<uint32_t> in_degree{0};                                  ///< Number of incoming connections.
         std::atomic<uint32_t> out_degree{0};                                 ///< Number of outgoing connections.
         std::map<std::string, int> protocol_counts;                          ///< Count of connections per protocol.
-        std::atomic<double> activity_score{0.0};                              ///< A score indicating the node's activity level.
-        std::atomic<int> total_connections_initiated{0};                     ///< Total number of connections initiated by this node.
+        std::atomic<double> activity_score{0.0};                             ///< A score indicating the node's activity level.
+        std::atomic<int> total_connections_initiated{0};                    ///< Total number of connections initiated by this node.
         std::atomic<int> total_connections_received{0};                     ///< Total number of connections received by this node.
         std::set<std::string> protocols_used;                                ///< Set of unique protocols used by this node.
         std::set<std::string> remote_ports_connected_to;                    ///< Set of unique remote ports this node connected to.
         std::set<std::string> local_ports_used;                             ///< Set of unique local ports used by this node.
         std::set<std::string> remote_ports_connected_from;                  ///< Set of unique remote ports that connected to this node.
-        std::set<std::string> local_ports_listening_on;                   ///< Set of unique local ports this node was listening on.
+        std::set<std::string> local_ports_listening_on;                     ///< Set of unique local ports this node was listening on.
         std::map<std::string, int> connection_state_counts;                  ///< Count of connections per connection state (e.g., ESTABLISHED).
         std::atomic<bool> ever_local_originated{false};                      ///< True if this node ever initiated a local connection.
-        std::atomic<bool> ever_local_responded{false};                     ///< True if this node ever responded to a local connection.
-        std::atomic<long long> total_orig_bytes{0};                           ///< Total number of bytes sent by this node.
-        std::atomic<long long> total_resp_bytes{0};                           ///< Total number of bytes received by this node.
-        std::atomic<long long> total_orig_pkts{0};                            ///< Total number of packets sent by this node.
-        std::atomic<long long> total_resp_pkts{0};                            ///< Total number of packets received by this node.
+        std::atomic<bool> ever_local_responded{false};                      ///< True if this node ever responded to a local connection.
+        std::atomic<long long> total_orig_bytes{0};                          ///< Total number of bytes sent by this node.
+        std::atomic<long long> total_resp_bytes{0};                          ///< Total number of bytes received by this node.
+        std::atomic<long long> total_orig_pkts{0};                           ///< Total number of packets sent by this node.
+        std::atomic<long long> total_resp_pkts{0};                           ///< Total number of packets received by this node.
         std::set<std::string> services_used;                                ///< Set of unique services used by this node (e.g., http, dns).
         std::map<std::string, int> http_user_agent_counts;                   ///< Count of connections per HTTP user agent.
-        std::set<std::string> http_versions_used;                             ///< Set of unique HTTP versions used.
+        std::set<std::string> http_versions_used;                            ///< Set of unique HTTP versions used.
         std::map<int, int> http_status_code_counts;                         ///< Count of connections per HTTP status code.
         std::set<std::string> ssl_versions_used;                             ///< Set of unique SSL/TLS versions used.
-        std::set<std::string> ssl_ciphers_used;                             ///< Set of unique SSL/TLS ciphers used.
+        std::set<std::string> ssl_ciphers_used;                              ///< Set of unique SSL/TLS ciphers used.
         std::atomic<bool> ever_ssl_curve_present{false};                     ///< True if an SSL/TLS elliptic curve was ever present.
         std::atomic<bool> ever_ssl_server_name_present{false};                ///< True if an SSL/TLS server name was ever present.
-        std::atomic<int> ssl_resumption_count{0};                           ///< Count of SSL/TLS session resumptions.
+        std::atomic<int> ssl_resumption_count{0};                            ///< Count of SSL/TLS session resumptions.
         std::atomic<bool> ever_ssl_last_alert_present{false};                ///< True if an SSL/TLS alert was ever present.
         std::set<std::string> ssl_next_protocols_used;                      ///< Set of unique SSL/TLS next protocols used (e.g., h2).
         std::atomic<int> ssl_established_count{0};                          ///< Count of successful SSL/TLS handshakes.
@@ -60,11 +60,15 @@ public:
         std::atomic<double> avg_packet_size_sent{0.0};                       ///< Average size of packets sent.
         std::atomic<double> avg_packet_size_received{0.0};                    ///< Average size of packets received.
 
+        // New Features
+        std::map<std::string, int> http_version_counts;                     ///< Count of connections per HTTP version.
+        std::map<std::string, int> ssl_version_counts;                      ///< Count of connections per SSL/TLS version.
+
         // Historical Aggregation Features
-        std::atomic<long long> historical_total_orig_bytes{0};              ///< Total original bytes aggregated over time.
-        std::atomic<long long> historical_total_resp_bytes{0};              ///< Total response bytes aggregated over time.
-        std::map<std::string, int> historical_protocol_counts;             ///< Aggregated counts of protocols over time.
-        std::atomic<int> historical_total_connections{0};                  ///< Total number of connections aggregated over time.
+        std::atomic<long long> historical_total_orig_bytes{0};               ///< Total original bytes aggregated over time.
+        std::atomic<long long> historical_total_resp_bytes{0};               ///< Total response bytes aggregated over time.
+        std::map<std::string, int> historical_protocol_counts;              ///< Aggregated counts of protocols over time.
+        std::atomic<int> historical_total_connections{0};                   ///< Total number of connections aggregated over time.
 
         double outgoing_connection_ratio() const;
         double incoming_connection_ratio() const;
@@ -86,29 +90,28 @@ public:
      */
     struct TemporalFeatures {
         std::atomic<int> connections_last_minute{0}; ///< Number of connections seen in the last minute.
-        std::atomic<int> connections_last_hour{0};   ///< Number of connections seen in the last hour.
+        std::atomic<int> connections_last_hour{0};  ///< Number of connections seen in the last hour.
         std::chrono::system_clock::time_point monitoring_start; ///< Time when monitoring of this node started.
-        std::atomic<int> total_connections{0};       ///< Total number of connections this node has been involved in.
-        mutable std::mutex window_mutex;             ///< Mutex to protect the minute_window and hour_window queues.
+        std::atomic<int> total_connections{0};      ///< Total number of connections this node has been involved in.
+        mutable std::mutex window_mutex;            ///< Mutex to protect the minute_window and hour_window queues.
         std::queue<std::chrono::system_clock::time_point> minute_window; ///< Queue to track connection times for the last minute.
         std::queue<std::chrono::system_clock::time_point> hour_window;   ///< Queue to track connection times for the last hour.
-        std::string first_seen;                      ///< Timestamp of when this node was first observed.
-        std::string last_seen;                       ///< Timestamp of when this node was last observed in a connection.
+        std::string first_seen;                    ///< Timestamp of when this node was first observed.
+        std::string last_seen;                     ///< Timestamp of when this node was last observed in a connection.
     };
 
     std::string id;                                                                 ///< Unique identifier of the node (e.g., IP address).
     std::string type;                                                               ///< Type of the node (e.g., host, network).
 private:
-    mutable std::mutex node_mutex;                                                  ///< Mutex to protect the entire GraphNode object for thread-safe access.
+    mutable std::mutex node_mutex;                                                 ///< Mutex to protect the entire GraphNode object for thread-safe access.
     std::unordered_map<std::string, std::string> attributes;                      ///< Additional attributes of the node.
-    NodeFeatures features;                                                          ///< Statistical features of the node based on its traffic.
-    TemporalFeatures temporal;                                                      ///< Time-based features of the node.
-    std::chrono::system_clock::time_point last_connection_time;                    ///< Timestamp of the last connection involving this node.
-    std::atomic<uint64_t> connection_count{0};                                      ///< Total number of connections associated with this node.
+    NodeFeatures features;                                                        ///< Statistical features of the node based on its traffic.
+    TemporalFeatures temporal;                                                    ///< Time-based features of the node.
+    std::chrono::system_clock::time_point last_connection_time;                   ///< Timestamp of the last connection involving this node.
+    std::atomic<uint64_t> connection_count{0};                                     ///< Total number of connections associated with this node.
 
     // Static instance of the NodeFeatureEncoder
-    static const NodeFeatureEncoder node_feature_encoder;
-
+    static const NodeFeatureEncoder& get_node_feature_encoder();
 public:
     /**
      * @brief Constructor for the GraphNode.
