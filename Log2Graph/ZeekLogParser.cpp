@@ -4,8 +4,8 @@
  */
 
 #include "includes/ZeekLogParser.h"
-#include "includes/GraphBuilder.h" // Assuming this exists
-#include "includes/FeatureEncoder.h" // Assuming this exists
+#include "includes/GraphBuilder.h"
+#include "includes/EdgeFeatureEncoder.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -391,7 +391,7 @@ void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std:
     }
 
     if (!feature_map["src_ip"].empty() && !feature_map["dst_ip"].empty()) {
-        FeatureEncoder encoder;
+        EdgeFeatureEncoder encoder;
         std::vector<float> encoded_features = encoder.encode_features(feature_map);
         GraphBuilder::get_instance().add_connection(feature_map, encoded_features);
     }

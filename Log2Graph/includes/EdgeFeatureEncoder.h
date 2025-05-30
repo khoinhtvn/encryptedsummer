@@ -1,6 +1,6 @@
 /**
- * @file FeatureEncoder.h
- * @brief Defines the FeatureEncoder class, which encodes network traffic features into a numerical vector.
+ * @file EdgeFeatureEncoder.h
+ * @brief Defines the EdgeFeatureEncoder class, which encodes network traffic features into a numerical vector.
  *
  * This class is designed for use in network traffic analysis or intrusion detection systems.
  * It encodes a selected set of edge attributes for graph representation.
@@ -10,15 +10,15 @@
 
 // Created by lu on 5/9/25.
 
-#ifndef FEATUREENCODER_H
-#define FEATUREENCODER_H
+#ifndef EdgeFeatureEncoder_H
+#define EdgeFeatureEncoder_H
 
 #include <vector>
 #include <string>
 #include <unordered_map>
 #include <cmath>
 
-class FeatureEncoder {
+class EdgeFeatureEncoder {
 private:
     // --- Encoding Maps for Categorical Features ---
     std::unordered_map<std::string, int> protocol_map;
@@ -37,11 +37,11 @@ private:
 
 public:
     /**
-     * @brief Constructor for the FeatureEncoder class.
+     * @brief Constructor for the EdgeFeatureEncoder class.
      *
      * Initializes the encoding maps and calculates the total feature dimension.
      */
-    FeatureEncoder();
+    EdgeFeatureEncoder();
 
     /**
      * @brief Gets the dimension of the encoded feature vector.
@@ -77,4 +77,4 @@ public:
 };
 
 
-#endif // FEATUREENCODER_H
+#endif // EdgeFeatureEncoder_H

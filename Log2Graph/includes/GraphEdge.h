@@ -8,7 +8,7 @@
 #include <unordered_map>
 #include <string>
 #include <vector>
-#include "FeatureEncoder.h" // Include FeatureEncoder for feature names
+#include "EdgeFeatureEncoder.h" // Include FeatureEncoder for feature names
 #include <sstream>
 #include <iomanip>
 
@@ -57,12 +57,23 @@ public:
 
 
     /**
- * @brief Escapes special characters in a string for DOT format.
- * @param str The input string to escape.
- * @return The escaped string.
- */
+     * @brief Escapes special characters in a string for DOT format.
+     * @param str The input string to escape.
+     * @return The escaped string.
+     */
     static std::string escape_dot_string(const std::string &str) ;
+
     /**
+     * @brief Gets the ID of the source node.
+     * @return The source node's ID.
+     */
+    std::string get_source_node_id() const { return source; }
+
+    /**
+     * @brief Gets the ID of the destination node.
+     * @return The destination node's ID.
+     */
+    std::string get_destination_node_id() const { return target; }
 
     /**
      * @brief Generates a DOT format string representation of the edge, including its attributes and encoded features.

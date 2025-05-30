@@ -1,15 +1,15 @@
 /**
- * @file FeatureEncoder.cpp
- * @brief Implementation of the FeatureEncoder class.
+ * @file EdgeFeatureEncoder.cpp
+ * @brief Implementation of the EdgeFeatureEncoder class.
  */
 
-#include "includes/FeatureEncoder.h"
+#include "includes/EdgeFeatureEncoder.h"
 #include <cmath>
 #include <ctime>
 #include <stdexcept>
 #include <sstream>
 
-FeatureEncoder::FeatureEncoder() : protocol_map({{"unknown_transport", 0}, {"tcp", 1}, {"udp", 2}, {"icmp", 3}}),
+EdgeFeatureEncoder::EdgeFeatureEncoder() : protocol_map({{"unknown_transport", 0}, {"tcp", 1}, {"udp", 2}, {"icmp", 3}}),
                                      conn_state_map({
                                          {"SF", 0}, {"S1", 0}, // Successful/Established
                                          {"REJ", 1}, {"RSTO", 1}, {"RSTR", 1}, {"RSTOS0", 1},
@@ -35,11 +35,11 @@ FeatureEncoder::FeatureEncoder() : protocol_map({{"unknown_transport", 0}, {"tcp
                                          NUM_USER_AGENT_CATEGORIES   // user_agent one-hot (simplified)
                                      ) {}
 
-size_t FeatureEncoder::get_feature_dimension() const {
+size_t EdgeFeatureEncoder::get_feature_dimension() const {
     return feature_dimension;
 }
 
-std::vector<float> FeatureEncoder::one_hot(int value, int num_classes) {
+std::vector<float> EdgeFeatureEncoder::one_hot(int value, int num_classes) {
     std::vector<float> encoding(num_classes, 0.0f);
     if (value >= 0 && value < num_classes) {
         encoding[value] = 1.0f;
@@ -47,7 +47,7 @@ std::vector<float> FeatureEncoder::one_hot(int value, int num_classes) {
     return encoding;
 }
 
-std::vector<float> FeatureEncoder::encode_features(const std::unordered_map<std::string, std::string> &attrs) {
+std::vector<float> EdgeFeatureEncoder::encode_features(const std::unordered_map<std::string, std::string> &attrs) {
     std::vector<float> features;
 
     // Protocol (one-hot)
@@ -107,7 +107,7 @@ std::vector<float> FeatureEncoder::encode_features(const std::unordered_map<std:
     return features;
 }
 
-std::vector<std::string> FeatureEncoder::get_feature_names() {
+std::vector<std::string> EdgeFeatureEncoder::get_feature_names() {
     std::vector<std::string> names;
     // Protocol features
     names.push_back("protocol_UNKNOWN");
@@ -137,7 +137,7 @@ std::vector<std::string> FeatureEncoder::get_feature_names() {
     return names;
 }
 
-std::string FeatureEncoder::get_feature_name(size_t index) {
+std::string EdgeFeatureEncoder::get_feature_name(size_t index) {
     auto names = get_feature_names();
     if (index >= names.size()) {
         throw std::out_of_range("Feature index out of range");

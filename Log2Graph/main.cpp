@@ -66,6 +66,7 @@ int main(int argc, char *argv[]) {
      */
     monitor.start();
 
+
     while (true) {
         std::this_thread::sleep_for(std::chrono::seconds(10));
 
@@ -83,19 +84,19 @@ int main(int argc, char *argv[]) {
             auto &graph = GraphBuilder::get_instance().get_graph();
 
             /**
-             * @brief Export the encoded incremental updates of the network graph to a DOT file.
-             *
-             * This call retrieves the latest changes to the graph since the last export
-             * and saves them in an encoded format to a DOT file. The filename includes
-             * the UTC timestamp to differentiate between exports. The output file is
-             * created in the specified `export_path`.
+             * @brief Export the encoded full network graph to a DOT file.
              */
-            exporter.export_incremental_update_encoded_async(GraphBuilder::get_instance().get_last_updates(),
-                                                        export_path + std::filesystem::path::preferred_separator +
-                                                        "nw_graph_encoded_" + std::to_string(UTC) +
-                                                        ".dot");
+            exporter.export_full_graph_encoded_async(graph, export_path + std::filesystem::path::preferred_separator +
+                                                            "nw_graph_encoded_" + std::to_string(UTC) +
+                                                            ".dot");
         }
-    }
+        /*
+        exporter.export_incremental_update_encoded_async(GraphBuilder::get_instance().get_last_updates(),
+                                                    export_path + std::filesystem::path::preferred_separator +
+                                                    "nw_graph_encoded_" + std::to_string(UTC) +
+                                                    ".dot");
+                                                    /*
+
 
     /**
      * @brief Stops the log monitoring process.
@@ -103,6 +104,7 @@ int main(int argc, char *argv[]) {
      * This ensures that the log monitoring thread is properly terminated before
      * the application exits, releasing any resources it might be holding.
      */
-    monitor.stop();
-    return 0;
+        monitor.stop();
+        return 0;
+    }
 }

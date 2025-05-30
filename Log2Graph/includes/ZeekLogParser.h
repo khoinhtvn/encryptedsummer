@@ -336,7 +336,6 @@ private:
      * their values from that log entry.
      */
     void build_graph_node(const std::string& uid, const std::map<std::string, std::map<std::string, std::string>>& combined_data);
-
     /**
      * @brief Parses a single log entry string into a `LogEntry` struct.
      *

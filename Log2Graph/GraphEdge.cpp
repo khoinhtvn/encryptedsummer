@@ -4,7 +4,7 @@
 //
 
 #include "includes/GraphEdge.h"
-#include "includes/FeatureEncoder.h"
+#include "includes/EdgeFeatureEncoder.h"
 #include <sstream>
 #include <iomanip>
 
@@ -27,7 +27,7 @@ std::string GraphEdge::to_dot_string() const {
     }
 
     for (size_t i = 0; i < encoded_features.size(); ++i) {
-        ss << ", " << FeatureEncoder::get_feature_name(i) << "=" << std::fixed << std::setprecision(6) << encoded_features[i];
+        ss << ", " << EdgeFeatureEncoder::get_feature_name(i) << "=" << std::fixed << std::setprecision(6) << encoded_features[i];
     }
 
     ss << "];\n";

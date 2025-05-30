@@ -9,6 +9,10 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include "includes/NodeFeatureEncoder.h"
+
+// Initialize the static NodeFeatureEncoder instance
+const NodeFeatureEncoder GraphNode::node_feature_encoder;
 
 GraphNode::GraphNode(const std::string &id, const std::string &type)
     : id(id), type(type), last_connection_time(std::chrono::system_clock::now()) {
@@ -357,9 +361,72 @@ std::string GraphNode::to_dot_string() const {
     return ss.str();
 }
 
+std::string GraphNode::to_dot_string_encoded() const {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    std::stringstream ss;
+    ss << "  \"" << escape_dot_string(id) << "\" [";
+
+    std::vector<float> encoded_features_local = node_feature_encoder.encode_node_features(features);
+
+    if (!encoded_features_local.empty()) {
+        ss << "encoded_feature_count=" << encoded_features_local.size();
+        for (size_t i = 0; i < encoded_features_local.size(); ++i) {
+            ss << ", encoded_feature_" << i << "=" << std::fixed << std::setprecision(6) << encoded_features_local[i];
+        }
+    } else {
+        ss << "encoded_features=\"[]\"";
+    }
+
+    ss << "];\n";
+    return ss.str();
+}
 void GraphNode::aggregate_historical_data(long long orig_bytes, long long resp_bytes, const std::string& protocol) {
     features.historical_total_orig_bytes += orig_bytes;
     features.historical_total_resp_bytes += resp_bytes;
     features.historical_protocol_counts[protocol]++;
     features.historical_total_connections++;
+}
+void GraphNode::increment_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.degree++;
+}
+
+void GraphNode::decrement_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.degree--;
+}
+
+void GraphNode::increment_in_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.in_degree++;
+}
+
+void GraphNode::decrement_in_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.in_degree--;
+}
+
+void GraphNode::increment_out_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.out_degree++;
+}
+
+void GraphNode::decrement_out_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.out_degree--;
+}
+
+void GraphNode::reset_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.degree.store(0);
+}
+
+void GraphNode::reset_in_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.in_degree.store(0);
+}
+
+void GraphNode::reset_out_degree() {
+    std::lock_guard<std::mutex> lock(node_mutex);
+    features.out_degree.store(0);
 }

@@ -31,7 +31,9 @@ add_executable(Log2Graph main.cpp
         includes/TrafficGraph.h
         GraphNode.cpp
         TrafficGraph.cpp
-        FeatureEncoder.cpp
-        includes/FeatureEncoder.h
-        GraphEdge.cpp)
+        EdgeFeatureEncoder.cpp
+        includes/EdgeFeatureEncoder.h
+        GraphEdge.cpp
+        includes/NodeFeatureEncoder.h
+        NodeFeatureEncoder.cpp)
 

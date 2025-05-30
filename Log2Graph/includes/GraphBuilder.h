@@ -20,7 +20,7 @@
 #include <mutex>
 #include <vector>
 
-#include "FeatureEncoder.h"
+#include "EdgeFeatureEncoder.h"
 #include "GraphUpdateQueue.h"
 #include "TrafficGraph.h"
 
@@ -61,7 +61,7 @@ private:
     /**
 * @brief Feature encoder. Useful for passing data to GAT.
 */
-    FeatureEncoder feature_encoder;
+    EdgeFeatureEncoder feature_encoder;
     std::atomic<bool> save_pending{false};
 
 public:

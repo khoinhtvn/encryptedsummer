@@ -4,6 +4,7 @@
 
 #include "includes/TrafficGraph.h"
 #include <algorithm>
+#include <iostream>
 
 TrafficGraph::TrafficGraph() {}
 
@@ -24,18 +25,16 @@ void TrafficGraph::add_node(std::shared_ptr<GraphNode> node) {
     nodes_[node->id] = node;
 }
 
+
 void TrafficGraph::add_edge(std::shared_ptr<GraphEdge> edge) {
-    std::lock_guard<std::mutex> lock(graph_mutex_);
     edges_.push_back(edge);
-    // Update node degrees
-    if (auto source_node = nodes_.find(edge->source); source_node != nodes_.end()) {
-        source_node->second->features.degree++;
-        source_node->second->features.out_degree++;
-    }
-    if (auto target_node = nodes_.find(edge->target); target_node != nodes_.end()) {
-        target_node->second->features.degree++;
-        target_node->second->features.in_degree++;
-    }
+    std::shared_ptr<GraphNode> source_node = nodes_[edge->get_source_node_id()];
+    std::shared_ptr<GraphNode> dest_node = nodes_[edge->get_destination_node_id()];
+
+    source_node->increment_out_degree();
+    source_node->increment_degree();
+    dest_node->increment_in_degree();
+    dest_node->increment_degree();
 }
 
 std::shared_ptr<GraphNode> TrafficGraph::get_node(const std::string &id) const {
@@ -115,19 +114,34 @@ void TrafficGraph::aggregate_old_edges(std::chrono::seconds age_threshold) {
 }
 
 void TrafficGraph::recalculate_node_degrees() {
+    // Reset all node degrees to 0 using public methods
     for (auto const& [node_id, node_ptr] : nodes_) {
-        node_ptr->features.degree.store(0);
-        node_ptr->features.in_degree.store(0);
-        node_ptr->features.out_degree.store(0);
+        node_ptr->reset_degree();
+        node_ptr->reset_in_degree();
+        node_ptr->reset_out_degree();
     }
+
+    // Recalculate degrees by iterating through all edges
     for (const auto& edge : edges_) {
-        if (auto source_node = nodes_.find(edge->source); source_node != nodes_.end()) {
-            source_node->second->features.degree++;
-            source_node->second->features.out_degree++;
+        std::string source_id = edge->get_source_node_id();
+        std::string target_id = edge->get_destination_node_id();
+
+        // Retrieve nodes using get_node to ensure existence and proper shared_ptr handling
+        std::shared_ptr<GraphNode> source_node = get_node(source_id);
+        std::shared_ptr<GraphNode> target_node = get_node(target_id);
+
+        if (source_node) {
+            source_node->increment_out_degree();
+            source_node->increment_degree();
+        } else {
+            std::cerr << "Warning: Source node '" << source_id << "' not found during recalculation." << std::endl;
         }
-        if (auto target_node = nodes_.find(edge->target); target_node != nodes_.end()) {
-            target_node->second->features.degree++;
-            target_node->second->features.in_degree++;
+
+        if (target_node) {
+            target_node->increment_in_degree();
+            target_node->increment_degree();
+        } else {
+            std::cerr << "Warning: Target node '" << target_id << "' not found during recalculation." << std::endl;
         }
     }
 }
