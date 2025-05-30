@@ -36,7 +36,6 @@ extern const std::string DEFAULT_CONN_STATE;
 extern const std::string DEFAULT_FALSE;
 extern const std::string DEFAULT_PKTS;
 extern const std::string DEFAULT_USER_AGENT;
-
 /**
  * @brief Represents the state of a monitored file.
  *

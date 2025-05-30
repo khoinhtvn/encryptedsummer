@@ -367,11 +367,21 @@ std::string GraphNode::to_dot_string_encoded() const {
     ss << "  \"" << escape_dot_string(id) << "\" [";
 
     std::vector<float> encoded_features_local = node_feature_encoder.encode_node_features(features);
+    std::vector<std::string> feature_names = node_feature_encoder.get_feature_names();
 
     if (!encoded_features_local.empty()) {
         ss << "encoded_feature_count=" << encoded_features_local.size();
-        for (size_t i = 0; i < encoded_features_local.size(); ++i) {
-            ss << ", encoded_feature_" << i << "=" << std::fixed << std::setprecision(6) << encoded_features_local[i];
+        if (encoded_features_local.size() == feature_names.size()) {
+            for (size_t i = 0; i < encoded_features_local.size(); ++i) {
+                ss << ", " << feature_names[i] << "=" << std::fixed << std::setprecision(6) << encoded_features_local[i];
+            }
+        } else {
+            // Handle the case where the number of encoded features doesn't match the number of names
+            ss << ", encoded_features=\"[";
+            for (size_t i = 0; i < encoded_features_local.size(); ++i) {
+                ss << (i > 0 ? ", " : "") << std::fixed << std::setprecision(6) << encoded_features_local[i];
+            }
+            ss << "]\"";
         }
     } else {
         ss << "encoded_features=\"[]\"";

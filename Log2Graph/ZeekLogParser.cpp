@@ -98,7 +98,7 @@ void ZeekLogParser::start_monitoring() {
             std::lock_guard<std::mutex> lock(tracked_files_mutex_);
             if (tracked_files_.find(file_path) == tracked_files_.end()) {
                 tracked_files_[file_path] = FileState(file_path);
-                tracked_files_[file_path].processed_size = fs::file_size(file_path);
+                tracked_files_[file_path].processed_size = 0;
                 {
                     std::lock_guard<std::mutex> lock(monitor_threads_mutex_);
                     monitor_threads_.emplace_back(&ZeekLogParser::monitor_file, this, file_path);

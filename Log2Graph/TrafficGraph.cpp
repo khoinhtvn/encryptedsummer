@@ -1,10 +1,7 @@
-//
-// Created by lu on 5/7/25.
-//
-
 #include "includes/TrafficGraph.h"
 #include <algorithm>
 #include <iostream>
+#include <mutex> // Include mutex here as well
 
 TrafficGraph::TrafficGraph() {}
 
@@ -27,9 +24,22 @@ void TrafficGraph::add_node(std::shared_ptr<GraphNode> node) {
 
 
 void TrafficGraph::add_edge(std::shared_ptr<GraphEdge> edge) {
+    std::lock_guard<std::mutex> lock(graph_mutex_);
     edges_.push_back(edge);
-    std::shared_ptr<GraphNode> source_node = nodes_[edge->get_source_node_id()];
-    std::shared_ptr<GraphNode> dest_node = nodes_[edge->get_destination_node_id()];
+    std::string src_id = edge->get_source_node_id();
+    std::string dest_id = edge->get_destination_node_id();
+
+    if (nodes_.find(src_id) == nodes_.end()) {
+        std::cerr << "Error: Source node with ID '" << src_id << "' not found." << std::endl;
+        return;
+    }
+    if (nodes_.find(dest_id) == nodes_.end()) {
+        std::cerr << "Error: Destination node with ID '" << dest_id << "' not found." << std::endl;
+        return;
+    }
+
+    std::shared_ptr<GraphNode> source_node = nodes_[src_id];
+    std::shared_ptr<GraphNode> dest_node = nodes_[dest_id];
 
     source_node->increment_out_degree();
     source_node->increment_degree();
@@ -114,6 +124,7 @@ void TrafficGraph::aggregate_old_edges(std::chrono::seconds age_threshold) {
 }
 
 void TrafficGraph::recalculate_node_degrees() {
+    std::lock_guard<std::mutex> lock(graph_mutex_);
     // Reset all node degrees to 0 using public methods
     for (auto const& [node_id, node_ptr] : nodes_) {
         node_ptr->reset_degree();

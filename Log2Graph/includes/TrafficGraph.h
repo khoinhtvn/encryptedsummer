@@ -9,7 +9,6 @@
 #ifndef TRAFFICGRAPH_H
 #define TRAFFICGRAPH_H
 
-
 class TrafficGraph {
 public:
     TrafficGraph();
@@ -32,4 +31,4 @@ private:
     mutable std::mutex graph_mutex_; // Make mutex mutable
     void recalculate_node_degrees();
 };
-#endif // TRAFFICGRAPH_H
+#endif // TRAFFICGRAPH_H/ TRAFFICGRAPH_H
