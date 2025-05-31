@@ -70,6 +70,8 @@ public:
         std::map<std::string, int> historical_protocol_counts;              ///< Aggregated counts of protocols over time.
         std::atomic<int> historical_total_connections{0};                   ///< Total number of connections aggregated over time.
 
+        NodeFeatures();
+
         double outgoing_connection_ratio() const;
         double incoming_connection_ratio() const;
         std::string most_frequent_protocol() const;
@@ -98,6 +100,7 @@ public:
         std::queue<std::chrono::system_clock::time_point> hour_window;   ///< Queue to track connection times for the last hour.
         std::string first_seen;                    ///< Timestamp of when this node was first observed.
         std::string last_seen;                     ///< Timestamp of when this node was last observed in a connection.
+        TemporalFeatures();
     };
 
     std::string id;                                                                 ///< Unique identifier of the node (e.g., IP address).
@@ -109,9 +112,7 @@ private:
     TemporalFeatures temporal;                                                    ///< Time-based features of the node.
     std::chrono::system_clock::time_point last_connection_time;                   ///< Timestamp of the last connection involving this node.
     std::atomic<uint64_t> connection_count{0};                                     ///< Total number of connections associated with this node.
-
-    // Static instance of the NodeFeatureEncoder
-    static const NodeFeatureEncoder& get_node_feature_encoder();
+    std::vector<float> encoded_features;
 public:
     /**
      * @brief Constructor for the GraphNode.
@@ -185,6 +186,8 @@ public:
     void reset_degree();
     void reset_in_degree();
     void reset_out_degree();
+
+    void encode_features(const NodeFeatureEncoder &encoder);
 };
 
 #endif // GRAPHNODE_H

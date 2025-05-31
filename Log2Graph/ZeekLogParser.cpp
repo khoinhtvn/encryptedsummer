@@ -440,7 +440,14 @@ void ZeekLogParser::build_graph_node(const std::string& uid, const std::map<std:
         if (http_data.count("uri")) feature_map["uri"] = http_data.at("uri");
         if (http_data.count("referrer")) feature_map["referrer"] = http_data.at("referrer");
         if (http_data.count("version")) feature_map["http_version"] = http_data.at("version");
-        if (http_data.count("user_agent")) feature_map["http_user_agent"] = http_data.at("user_agent");
+
+        // Apply categorization for http_user_agent for EDGE features
+        if (http_data.count("user_agent")) {
+            feature_map["http_user_agent"] = categorize_user_agent_string(http_data.at("user_agent"));
+        } else {
+            feature_map["http_user_agent"] = DEFAULT_USER_AGENT; // Ensure it's set to a category
+        }
+
         if (http_data.count("origin")) feature_map["origin"] = http_data.at("origin");
         if (http_data.count("status_code")) feature_map["http_status_code"] = http_data.at("status_code");
         if (http_data.count("username")) feature_map["username"] = http_data.at("username");
@@ -477,7 +484,7 @@ LogEntry ZeekLogParser::parse_log_entry(const std::string& log_type, const std::
 
 std::map<std::string, std::string> ZeekLogParser::parse_conn_entry(const std::vector<std::string>& fields) {
     std::map<std::string, std::string> data;
-    if (fields.size() > 21) {
+    if (fields.size() > 20) {
         data["ts"] = fields[0];
         data["uid"] = fields[1];
         data["id.orig_h"] = fields[2];
@@ -498,8 +505,6 @@ std::map<std::string, std::string> ZeekLogParser::parse_conn_entry(const std::ve
         data["orig_ip_bytes"] = fields[17];
         data["resp_pkts"] = fields[18];
         data["resp_ip_bytes"] = fields[19];
-        data["tunnel_parents"] = fields[20];
-        data["uid_orig"] = fields[21];
     }
     return data;
 }

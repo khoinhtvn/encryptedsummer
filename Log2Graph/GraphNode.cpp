@@ -9,24 +9,53 @@
 #include <ctime>
 #include <sstream>
 #include <iomanip>
+#include <iostream>
 
-// Initialize the static NodeFeatureEncoder instance
-const NodeFeatureEncoder& GraphNode::get_node_feature_encoder() {
-    static const struct LocalEncoder {
-        const std::vector<std::string> PROTOCOLS = {"tcp", "udp", "icmp", "other"};
-        const std::vector<std::string> CONN_STATES = {"S0", "S1", "SF", "REJ", "RSTO", "RSTR", "OTH", "SH", "SHR", "RSTOS0", "RSTRH", "other"};
-        const std::vector<std::string> SERVICES = {"-", "http", "ssl", "dns", "ftp", "ssh", "rdp", "smb", "other"};
-        const std::vector<std::string> USER_AGENTS = {"Mozilla", "Chrome", "Safari", "Edge", "curl", "Wget", "Python", "Java", "Unknown"};
-        const std::vector<std::string> BOOLEANS = {"false", "true"};
-        const std::vector<std::string> HTTP_VERSIONS = {"HTTP/1.0", "HTTP/1.1", "HTTP/2", "other"};
-        const std::vector<std::string> SSL_VERSIONS = {"SSLv3", "TLSv10", "TLSv11", "TLSv12", "TLSv13", "other"};
-        NodeFeatureEncoder encoder;
+#include "includes/EdgeFeatureEncoder.h"
 
-        LocalEncoder() : encoder() {} // Constructor of LocalEncoder will initialize the NodeFeatureEncoder
-    } local_encoder_instance;
-    return local_encoder_instance.encoder;
+GraphNode::TemporalFeatures::TemporalFeatures() :
+    connections_last_minute(0),
+    connections_last_hour(0),
+    monitoring_start(std::chrono::system_clock::now()),
+    total_connections(0)
+    // window_mutex does not need explicit initialization as it's a mutable mutex,
+    // its default constructor will initialize it.
+    // minute_window and hour_window are queues, their default constructors will initialize them as empty.
+    // first_seen and last_seen are strings, their default constructor will initialize them as empty.
+{
+    auto now = std::chrono::system_clock::now();
+    std::time_t now_c = std::chrono::system_clock::to_time_t(now);
+    std::stringstream ss;
+    ss << std::put_time(std::localtime(&now_c), "%Y-%m-%d %H:%M:%S");
+    first_seen = ss.str();
+    last_seen = first_seen;
 }
 
+GraphNode::NodeFeatures::NodeFeatures() :
+    degree(0),
+in_degree(0),
+out_degree(0),
+activity_score(0.0),
+total_connections_initiated(0),
+total_connections_received(0),
+ever_local_originated(false),
+ever_local_responded(false),
+total_orig_bytes(0),
+total_resp_bytes(0),
+total_orig_pkts(0),
+total_resp_pkts(0),
+avg_packet_size_sent(0.0),
+avg_packet_size_received(0.0),
+ever_ssl_curve_present(false),
+ever_ssl_server_name_present(false),
+ssl_resumption_count(0),
+ever_ssl_last_alert_present(false),
+ssl_established_count(0),
+ever_ssl_history_present(false),
+historical_total_orig_bytes(0),
+historical_total_resp_bytes(0),
+historical_total_connections(0)
+{}
 GraphNode::GraphNode(const std::string &id, const std::string &type)
     : id(id), type(type), last_connection_time(std::chrono::system_clock::now()) {
     temporal.monitoring_start = std::chrono::system_clock::now();
@@ -38,41 +67,58 @@ GraphNode::GraphNode(const std::string &id, const std::string &type)
 }
 
 void GraphNode::update_connection_features(bool is_outgoing,
-                                             const std::unordered_map<std::string, std::string>& connection_attributes) {
+                                            const std::unordered_map<std::string, std::string>& connection_attributes) {
     std::lock_guard<std::mutex> lock(node_mutex);
     ++features.degree;
     if (is_outgoing) {
         ++features.out_degree;
-        features.total_connections_initiated++;
+        ++features.total_connections_initiated;
     } else {
         ++features.in_degree;
-        features.total_connections_received++;
+        ++features.total_connections_received;
     }
 
     if (connection_attributes.count("protocol")) {
         const std::string& protocol = connection_attributes.at("protocol");
-        features.protocol_counts[protocol]++;
-        features.protocols_used.insert(protocol);
+        if (!protocol.empty()) {
+            features.protocol_counts[protocol]++;
+            features.protocols_used.insert(protocol);
+        }
     }
 
     if (is_outgoing) {
         if (connection_attributes.count("id.resp_p")) {
-            features.remote_ports_connected_to.insert(connection_attributes.at("id.resp_p"));
+            const std::string& remote_port = connection_attributes.at("id.resp_p");
+            if (!remote_port.empty()) {
+                features.remote_ports_connected_to.insert(remote_port);
+            }
         }
         if (connection_attributes.count("id.orig_p")) {
-            features.local_ports_used.insert(connection_attributes.at("id.orig_p"));
+            const std::string& local_port = connection_attributes.at("id.orig_p");
+            if (!local_port.empty()) {
+                features.local_ports_used.insert(local_port);
+            }
         }
     } else {
         if (connection_attributes.count("id.orig_p")) {
-            features.remote_ports_connected_from.insert(connection_attributes.at("id.orig_p"));
+            const std::string& remote_port = connection_attributes.at("id.orig_p");
+            if (!remote_port.empty()) {
+                features.remote_ports_connected_from.insert(remote_port);
+            }
         }
         if (connection_attributes.count("id.resp_p")) {
-            features.local_ports_listening_on.insert(connection_attributes.at("id.resp_p"));
+            const std::string& local_port = connection_attributes.at("id.resp_p");
+            if (!local_port.empty()) {
+                features.local_ports_listening_on.insert(local_port);
+            }
         }
     }
 
     if (connection_attributes.count("conn_state")) {
-        features.connection_state_counts[connection_attributes.at("conn_state")]++;
+        const std::string& conn_state = connection_attributes.at("conn_state");
+        if (!conn_state.empty()) {
+            features.connection_state_counts[conn_state]++;
+        }
     }
 
     if (connection_attributes.count("local_orig") && connection_attributes.at("local_orig") == "T") {
@@ -84,27 +130,39 @@ void GraphNode::update_connection_features(bool is_outgoing,
 
     long long current_orig_bytes = 0;
     if (connection_attributes.count("orig_bytes")) {
-        try {
-            current_orig_bytes = std::stoll(connection_attributes.at("orig_bytes"));
-            features.total_orig_bytes += current_orig_bytes;
-        } catch (...) {}
+        const std::string& orig_bytes_str = connection_attributes.at("orig_bytes");
+        if (!orig_bytes_str.empty()) {
+            try {
+                current_orig_bytes = std::stoll(orig_bytes_str);
+                features.total_orig_bytes += current_orig_bytes;
+            } catch (...) {}
+        }
     }
     long long current_resp_bytes = 0;
     if (connection_attributes.count("resp_bytes")) {
-        try {
-            current_resp_bytes = std::stoll(connection_attributes.at("resp_bytes"));
-            features.total_resp_bytes += current_resp_bytes;
-        } catch (...) {}
+        const std::string& resp_bytes_str = connection_attributes.at("resp_bytes");
+        if (!resp_bytes_str.empty()) {
+            try {
+                current_resp_bytes = std::stoll(resp_bytes_str);
+                features.total_resp_bytes += current_resp_bytes;
+            } catch (...) {}
+        }
     }
     if (connection_attributes.count("orig_pkts")) {
-        try {
-            features.total_orig_pkts += std::stoll(connection_attributes.at("orig_pkts"));
-        } catch (...) {}
+        const std::string& orig_pkts_str = connection_attributes.at("orig_pkts");
+        if (!orig_pkts_str.empty()) {
+            try {
+                features.total_orig_pkts += std::stoll(orig_pkts_str);
+            } catch (...) {}
+        }
     }
     if (connection_attributes.count("resp_pkts")) {
-        try {
-            features.total_resp_pkts += std::stoll(connection_attributes.at("resp_pkts"));
-        } catch (...) {}
+        const std::string& resp_pkts_str = connection_attributes.at("resp_pkts");
+        if (!resp_pkts_str.empty()) {
+            try {
+                features.total_resp_pkts += std::stoll(resp_pkts_str);
+            } catch (...) {}
+        }
     }
 
     if (features.total_orig_pkts > 0) {
@@ -115,49 +173,98 @@ void GraphNode::update_connection_features(bool is_outgoing,
     }
 
     if (connection_attributes.count("service")) {
-        features.services_used.insert(connection_attributes.at("service"));
+        const std::string& service_list = connection_attributes.at("service");
+        if (!service_list.empty()) {
+            std::stringstream ss(service_list);
+            std::string service;
+            while (std::getline(ss, service, ',')) {
+                size_t first = service.find_first_not_of(" \t\n\r");
+                if (std::string::npos == first) {
+                    continue;
+                }
+                size_t last = service.find_last_not_of(" \t\n\r");
+                features.services_used.insert(service.substr(first, (last - first + 1)));
+            }
+        }
     }
 
     if (connection_attributes.count("http_user_agent")) {
-        features.http_user_agent_counts[connection_attributes.at("http_user_agent")]++;
+        const std::string& user_agent = connection_attributes.at("http_user_agent");
+        if (!user_agent.empty()) {
+            std::string categorized_user_agent = categorize_user_agent_string(user_agent);
+            features.http_user_agent_counts[categorized_user_agent]++;
+        }
     }
     if (connection_attributes.count("http_version")) {
-        features.http_versions_used.insert(connection_attributes.at("http_version"));
-        features.http_version_counts[connection_attributes.at("http_version")]++;
+        const std::string& http_version = connection_attributes.at("http_version");
+        if (!http_version.empty()) {
+            features.http_versions_used.insert(http_version);
+            features.http_version_counts[http_version]++;
+        }
     }
     if (connection_attributes.count("http_status_code")) {
-        try {
-            features.http_status_code_counts[std::stoi(connection_attributes.at("http_status_code"))]++;
-        } catch (...) {}
+        const std::string& status_code_str = connection_attributes.at("http_status_code");
+        if (!status_code_str.empty()) {
+            try {
+                features.http_status_code_counts[std::stoi(status_code_str)]++;
+            } catch (...) {}
+        }
     }
 
-    if (connection_attributes.count("ssl.version")) {
-        features.ssl_versions_used.insert(connection_attributes.at("ssl.version"));
-        features.ssl_version_counts[connection_attributes.at("ssl.version")]++;
+    if (connection_attributes.count("ssl_version")) {
+        const std::string& ssl_version = connection_attributes.at("ssl_version");
+        if (!ssl_version.empty()) {
+            features.ssl_versions_used.insert(ssl_version);
+            features.ssl_version_counts[ssl_version]++;
+        }
     }
-    if (connection_attributes.count("ssl.cipher")) {
-        features.ssl_ciphers_used.insert(connection_attributes.at("ssl.cipher"));
+    if (connection_attributes.count("ssl_cipher")) {
+        const std::string& ssl_cipher = connection_attributes.at("ssl_cipher");
+        if (!ssl_cipher.empty()) {
+            features.ssl_ciphers_used.insert(ssl_cipher);
+        }
     }
-    if (connection_attributes.count("ssl.curve")) {
-        features.ever_ssl_curve_present.store(true);
+    if (connection_attributes.count("ssl_curve")) {
+        const std::string& ssl_curve = connection_attributes.at("ssl_curve");
+        if (!ssl_curve.empty()) {
+            features.ever_ssl_curve_present.store(true);
+        }
     }
-    if (connection_attributes.count("ssl.server_name")) {
-        features.ever_ssl_server_name_present.store(true);
+    if (connection_attributes.count("ssl_server_name")) {
+        const std::string& ssl_server_name = connection_attributes.at("ssl_server_name");
+        if (!ssl_server_name.empty()) {
+            features.ever_ssl_server_name_present.store(true);
+        }
     }
-    if (connection_attributes.count("ssl.resumed") && connection_attributes.at("ssl.resumed") == "T") {
-        features.ssl_resumption_count++;
+    if (connection_attributes.count("ssl_resumed")) {
+        const std::string& ssl_resumed = connection_attributes.at("ssl_resumed");
+        if (!ssl_resumed.empty() && ssl_resumed == "true") {
+            features.ssl_resumption_count++;
+        }
     }
-    if (connection_attributes.count("ssl.last_alert")) {
-        features.ever_ssl_last_alert_present.store(true);
+    if (connection_attributes.count("ssl_last_alert")) {
+        const std::string& ssl_last_alert = connection_attributes.at("ssl_last_alert");
+        if (!ssl_last_alert.empty()) {
+            features.ever_ssl_last_alert_present.store(true);
+        }
     }
-    if (connection_attributes.count("ssl.next_protocol")) {
-        features.ssl_next_protocols_used.insert(connection_attributes.at("ssl.next_protocol"));
+    if (connection_attributes.count("ssl_next_protocol")) {
+        const std::string& ssl_next_protocol = connection_attributes.at("ssl_next_protocol");
+        if (!ssl_next_protocol.empty()) {
+            features.ssl_next_protocols_used.insert(ssl_next_protocol);
+        }
     }
-    if (connection_attributes.count("ssl.established") && connection_attributes.at("ssl.established") == "T") {
-        features.ssl_established_count++;
+    if (connection_attributes.count("ssl_established")) {
+        const std::string& ssl_established = connection_attributes.at("ssl_established");
+        if (!ssl_established.empty() && ssl_established == "true") {
+            features.ssl_established_count++;
+        }
     }
-    if (connection_attributes.count("ssl.history")) {
-        features.ever_ssl_history_present.store(true);
+    if (connection_attributes.count("ssl_history")) {
+        const std::string& ssl_history = connection_attributes.at("ssl_history");
+        if (!ssl_history.empty()) {
+            features.ever_ssl_history_present.store(true);
+        }
     }
 
     auto now = std::chrono::system_clock::now();
@@ -382,98 +489,76 @@ std::string GraphNode::to_dot_string_encoded() const {
     std::stringstream ss;
     ss << "  \"" << escape_dot_string(id) << "\" [";
 
-    const NodeFeatureEncoder& encoder = get_node_feature_encoder();
-    std::vector<float> encoded_features_local = encoder.encode_node_features(features, temporal);
-    std::vector<std::string> feature_names = encoder.get_feature_names_base();
+    std::vector<float> encoded_features_local = encoded_features;
+    std::vector<std::string> feature_names = NodeFeatureEncoder::get_feature_names();
 
     if (!encoded_features_local.empty()) {
         ss << "encoded_feature_count=" << feature_names.size();
         size_t encoded_index = 0;
         for (const auto& feature_name : feature_names) {
-            if (feature_name.find("proto") != std::string::npos) {
+           ss << ", " << feature_name << "=";
+            if (feature_name == "most_freq_proto" || feature_name == "top_proto_1") {
                 int hot_index = -1;
-                for (size_t i = 0; i < encoder.protocol_vec_size(); ++i) {
+                for (size_t i = 0; i < NodeFeatureEncoder::PROTOCOLS.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
                         hot_index = static_cast<int>(i);
                         break;
                     }
                 }
-                ss << ", " << feature_name << "=" << hot_index;
-                encoded_index += encoder.protocol_vec_size();
-            } else if (feature_name.find("conn_state") != std::string::npos) {
+                ss << hot_index;
+                encoded_index += NodeFeatureEncoder::PROTOCOLS.size();
+            } else if (feature_name == "most_freq_conn_state") {
                 int hot_index = -1;
-                for (size_t i = 0; i < encoder.conn_state_vec_size(); ++i) {
+                for (size_t i = 0; i < NodeFeatureEncoder::CONN_STATES.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
                         hot_index = static_cast<int>(i);
                         break;
                     }
                 }
-                ss << ", " << feature_name << "=" << hot_index;
-                encoded_index += encoder.conn_state_vec_size();
+                ss << hot_index;
+                encoded_index += NodeFeatureEncoder::CONN_STATES.size();
             } else if (feature_name.find("service") != std::string::npos) {
                 int hot_index = -1;
-                for (size_t i = 0; i < encoder.service_vec_size(); ++i) {
+                for (size_t i = 0; i < NodeFeatureEncoder::SERVICES.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
                         hot_index = static_cast<int>(i);
                         break;
                     }
                 }
-                ss << ", " << feature_name << "=" << hot_index;
-                encoded_index += encoder.service_vec_size();
-            } else if (feature_name.find("user_agent") != std::string::npos) {
+                ss << hot_index;
+                encoded_index += NodeFeatureEncoder::SERVICES.size();
+            } else if (feature_name == "top_user_agent_1") {
                 int hot_index = -1;
-                for (size_t i = 0; i < encoder.user_agent_vec_size(); ++i) {
+                for (size_t i = 0; i < NodeFeatureEncoder::USER_AGENTS.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
                         hot_index = static_cast<int>(i);
                         break;
                     }
                 }
-                ss << ", " << feature_name << "=" << hot_index;
-                encoded_index += encoder.user_agent_vec_size();
-            } else if (feature_name.find("http_version") != std::string::npos) {
+                ss << hot_index;
+                encoded_index += NodeFeatureEncoder::USER_AGENTS.size();
+            } else if (feature_name == "most_freq_http_version") {
                 int hot_index = -1;
-                for (size_t i = 0; i < encoder.http_version_vec_size(); ++i) {
+                for (size_t i = 0; i < NodeFeatureEncoder::HTTP_VERSIONS.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
                         hot_index = static_cast<int>(i);
                         break;
                     }
                 }
-                ss << ", " << feature_name << "=" << hot_index;
-                encoded_index += encoder.http_version_vec_size();
-            } else if (feature_name.find("ssl_version") != std::string::npos) {
+                ss << hot_index;
+                encoded_index += NodeFeatureEncoder::HTTP_VERSIONS.size();
+            } else if (feature_name == "ssl_version") {
                 int hot_index = -1;
-                for (size_t i = 0; i < encoder.ssl_version_vec_size(); ++i) {
+                for (size_t i = 0; i < NodeFeatureEncoder::SSL_VERSIONS.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
                         hot_index = static_cast<int>(i);
                         break;
                     }
                 }
-                ss << ", " << feature_name << "=" << hot_index;
-                encoded_index += encoder.ssl_version_vec_size();
-            } else if (feature_name == "first_seen_seconds" || feature_name == "last_seen_seconds" ||
-                       feature_name == "unique_remote_ports_connected_to" ||
-                       feature_name == "unique_local_ports_used" ||
-                       feature_name == "unique_remote_ports_connected_from" ||
-                       feature_name == "unique_local_ports_listening_on" ||
-                       feature_name == "unique_http_versions_used" ||
-                       feature_name == "unique_http_status_codes_seen" ||
-                       feature_name == "unique_ssl_versions_used" ||
-                       feature_name == "unique_ssl_ciphers_used") {
-                ss << ", " << feature_name << "=" << static_cast<int>(encoded_features_local[encoded_index]);
-                encoded_index += 1;
-            } else if (feature_name == "ever_connected_to_privileged_port" ||
-                       feature_name == "ever_listened_on_privileged_port" ||
-                       feature_name == "has_http_error_4xx" ||
-                       feature_name == "has_http_error_5xx" ||
-                       feature_name == "has_ssl_resumption" ||
-                       feature_name == "has_ssl_server_name" ||
-                       feature_name == "has_ssl_history") {
-                ss << ", " << feature_name << "=" << static_cast<int>(encoded_features_local[encoded_index]);
-                encoded_index += 1;
-            }
-            else if (feature_name == "outgoing_connection_ratio" ||
-                     feature_name == "incoming_connection_ratio") {
-                ss << ", " << feature_name << "=" << std::fixed << std::setprecision(6) << encoded_features_local[encoded_index];
+                ss << hot_index;
+                encoded_index += NodeFeatureEncoder::SSL_VERSIONS.size();
+            } else { // Handle scalar features
+                ss << static_cast<int>(encoded_features_local[encoded_index]);
                 encoded_index += 1;
             }
         }
@@ -484,6 +569,8 @@ std::string GraphNode::to_dot_string_encoded() const {
     ss << "];\n";
     return ss.str();
 }
+
+
 void GraphNode::aggregate_historical_data(long long orig_bytes, long long resp_bytes, const std::string& protocol) {
     features.historical_total_orig_bytes += orig_bytes;
     features.historical_total_resp_bytes += resp_bytes;
@@ -533,4 +620,9 @@ void GraphNode::reset_in_degree() {
 void GraphNode::reset_out_degree() {
     std::lock_guard<std::mutex> lock(node_mutex);
     features.out_degree.store(0);
+}
+
+
+void GraphNode::encode_features(const NodeFeatureEncoder& encoder) {
+    encoded_features = encoder.encode_node_features(features, temporal);
 }

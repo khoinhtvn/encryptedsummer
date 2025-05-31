@@ -17,7 +17,7 @@
 #include <string>
 #include <unordered_map>
 #include <cmath>
-
+std::string categorize_user_agent_string(const std::string& user_agent_string);
 class EdgeFeatureEncoder {
 private:
     // --- Encoding Maps for Categorical Features ---

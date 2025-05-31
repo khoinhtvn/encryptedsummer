@@ -5,14 +5,19 @@
 #include <ctime>
 #include <chrono>
 #include <cmath>
+#include <iostream>
 
-const std::vector<std::string> PROTOCOLS = {"tcp", "udp", "icmp", "other"};
-const std::vector<std::string> CONN_STATES = {"S0", "S1", "SF", "REJ", "RSTO", "RSTR", "OTH", "SH", "SHR", "RSTOS0", "RSTRH", "other"};
-const std::vector<std::string> SERVICES = {"-", "http", "ssl", "dns", "ftp", "ssh", "rdp", "smb", "other"};
-const std::vector<std::string> USER_AGENTS = {"Mozilla", "Chrome", "Safari", "Edge", "curl", "Wget", "Python", "Java", "Unknown"};
-const std::vector<std::string> BOOLEANS = {"false", "true"};
-const std::vector<std::string> HTTP_VERSIONS = {"HTTP/1.0", "HTTP/1.1", "HTTP/2", "other"};
-const std::vector<std::string> SSL_VERSIONS = {"SSLv3", "TLSv10", "TLSv11", "TLSv12", "TLSv13", "other"};
+
+const std::vector<std::string> NodeFeatureEncoder::PROTOCOLS = {"tcp", "udp", "icmp", "other"};
+const std::vector<std::string> NodeFeatureEncoder::CONN_STATES = {"S0", "S1", "SF", "REJ", "RSTO", "RSTR", "OTH", "SH", "SHR", "RSTOS0", "RSTRH", "other"};
+const std::vector<std::string> NodeFeatureEncoder::SERVICES = {"-", "http", "ssl", "dns", "ftp", "ssh", "rdp", "smb", "other"};
+const std::vector<std::string> NodeFeatureEncoder::USER_AGENTS = {"Firefox", "Chrome", "Safari", "Edge", "curl", "Wget", "Python", "Java", "other"};
+const std::vector<std::string> NodeFeatureEncoder::BOOLEANS = {"false", "true"};
+const std::vector<std::string> NodeFeatureEncoder::HTTP_VERSIONS = {"1.0", "1.1", "2", "other"};
+const std::vector<std::string> NodeFeatureEncoder::SSL_VERSIONS = {"SSLv3", "TLSv10", "TLSv11", "TLSv12", "TLSv13", "other"};
+
+
+std::vector<std::string> NodeFeatureEncoder::feature_names_;
 
 NodeFeatureEncoder::NodeFeatureEncoder() {
     // Initialize protocol vocabulary
@@ -32,12 +37,20 @@ NodeFeatureEncoder::NodeFeatureEncoder() {
         service_vocab_[SERVICES[i]] = i;
     }
     service_vec_size_ = SERVICES.size();
+    std::cout << "[NodeFeatureEncoder] Service Vocabulary Size: " << service_vocab_.size() << std::endl;
+    for (const auto& pair : service_vocab_) {
+        std::cout << "[NodeFeatureEncoder]    Service: " << pair.first << " -> " << pair.second << std::endl;
+    }
 
     // Initialize user agent vocabulary (including "Unknown")
     for (size_t i = 0; i < USER_AGENTS.size(); ++i) {
         user_agent_vocab_[USER_AGENTS[i]] = i;
     }
     user_agent_vec_size_ = USER_AGENTS.size();
+    std::cout << "[NodeFeatureEncoder] User Agent Vocabulary Size: " << user_agent_vocab_.size() << std::endl;
+    for (const auto& pair : user_agent_vocab_) {
+        std::cout << "[NodeFeatureEncoder]    User Agent: " << pair.first << " -> " << pair.second << std::endl;
+    }
 
     // Initialize boolean vocabulary
     for (size_t i = 0; i < BOOLEANS.size(); ++i) {
@@ -50,12 +63,59 @@ NodeFeatureEncoder::NodeFeatureEncoder() {
         http_version_vocab_[HTTP_VERSIONS[i]] = i;
     }
     http_version_vec_size_ = HTTP_VERSIONS.size();
+    std::cout << "[NodeFeatureEncoder] HTTP Version Vocabulary Size: " << http_version_vocab_.size() << std::endl;
+    for (const auto& pair : http_version_vocab_) {
+        std::cout << "[NodeFeatureEncoder]    HTTP Version: " << pair.first << " -> " << pair.second << std::endl;
+    }
 
     // Initialize SSL/TLS version vocabulary
     for (size_t i = 0; i < SSL_VERSIONS.size(); ++i) {
         ssl_version_vocab_[SSL_VERSIONS[i]] = i;
     }
     ssl_version_vec_size_ = SSL_VERSIONS.size();
+    std::cout << "[NodeFeatureEncoder] SSL Version Vocabulary Size: " << ssl_version_vocab_.size() << std::endl;
+    for (const auto& pair : ssl_version_vocab_) {
+        std::cout << "[NodeFeatureEncoder]    SSL Version: " << pair.first << " -> " << pair.second << std::endl;
+    }
+    feature_names_ = {
+        "most_freq_proto",
+        "most_freq_conn_state",
+        "top_proto_1",
+        "service_1", "service_2", "service_3", // Assuming 3 service features
+        "top_user_agent_1",
+        "first_seen_seconds",
+        "last_seen_seconds",
+        "outgoing_connection_ratio",
+        "incoming_connection_ratio",
+        "unique_remote_ports_connected_to",
+        "unique_local_ports_used",
+        "unique_remote_ports_connected_from",
+        "unique_local_ports_listening_on",
+        "ever_connected_to_privileged_port",
+        "ever_listened_on_privileged_port",
+        "unique_http_versions_used",
+        "most_freq_http_version",
+        "unique_http_status_codes_seen",
+        "has_http_error_4xx",
+        "has_http_error_5xx",
+        "unique_ssl_versions_used",
+        "most_freq_ssl_version",
+        "unique_ssl_ciphers_used",
+        "has_ssl_resumption",
+        "has_ssl_server_name",
+        "has_ssl_history"
+    };
+}
+
+std::vector<std::string> NodeFeatureEncoder::get_feature_names() {
+    return feature_names_;
+}
+
+std::string NodeFeatureEncoder::get_feature_name(size_t index) {
+    if (index >= feature_names_.size()) {
+        throw std::out_of_range("Feature index out of range");
+    }
+    return feature_names_[index];
 }
 
 std::vector<float> NodeFeatureEncoder::one_hot_encode(const std::string& value,
@@ -65,6 +125,14 @@ std::vector<float> NodeFeatureEncoder::one_hot_encode(const std::string& value,
     auto it = vocabulary.find(value);
     if (it != vocabulary.end()) {
         encoded_vector[it->second] = 1.0f;
+    } else {
+         auto other_it = vocabulary.find("other");
+        if (other_it != vocabulary.end()) {
+            encoded_vector[other_it->second] = 1.0f;
+        } else {
+           std::cerr << "[ERROR - NodeFeatureEncoder] 'other' category not found in vocabulary for value: \"" << value << "\"" << std::endl;
+            // Handle this critical error appropriately, perhaps by returning the zero vector or throwing an exception.
+        }
     }
     return encoded_vector;
 }
@@ -104,14 +172,20 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
         service_count++;
     }
 
+
     // 7. top_user_agent_1
     std::vector<std::pair<std::string, int>> sorted_user_agents(features.http_user_agent_counts.begin(), features.http_user_agent_counts.end());
     std::sort(sorted_user_agents.begin(), sorted_user_agents.end(), [](const auto& a, const auto& b) {
         return a.second > b.second;
     });
-    std::string top_user_agent_1 = sorted_user_agents.empty() ? "Unknown" : sorted_user_agents[0].first;
-    temp_encoding = one_hot_encode(top_user_agent_1, user_agent_vocab_, user_agent_vec_size_);
+
+    // top_user_agent_1 will now already be a category string because http_user_agent_counts stores categories
+    std::string top_user_agent_category = sorted_user_agents.empty() ? "Unknown" : sorted_user_agents[0].first;
+
+
+    temp_encoding = one_hot_encode(top_user_agent_category, user_agent_vocab_, user_agent_vec_size_);
     encoded_features.insert(encoded_features.end(), temp_encoding.begin(), temp_encoding.end());
+
 
     // 8. first_seen (Convert to integer where possible)
     long long first_seen_int = 0;
@@ -183,9 +257,12 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
             most_freq_http_version = pair.first;
         }
     }
-    temp_encoding = one_hot_encode(most_freq_http_version, http_version_vocab_, http_version_vec_size_);
+    // Add this check:
+    if (features.http_version_counts.empty()) {
+        most_freq_http_version = "other";
+    }
+   temp_encoding = one_hot_encode(most_freq_http_version, http_version_vocab_, http_version_vec_size_);
     encoded_features.insert(encoded_features.end(), temp_encoding.begin(), temp_encoding.end());
-
     // 20. unique_http_status_codes_seen (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.http_status_code_counts.size()));
 
@@ -210,6 +287,7 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
     encoded_features.push_back(has_5xx ? 1.0f : 0.0f);
 
     // 23. unique_ssl_versions_used (Convert to integer)
+
     encoded_features.push_back(static_cast<float>(features.ssl_versions_used.size()));
 
     // 24. most_frequent_ssl_version
@@ -241,33 +319,33 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
 
 std::vector<std::string> NodeFeatureEncoder::get_feature_names_base() const {
     std::vector<std::string> names;
-    names.push_back("most_freq_proto");
-    names.push_back("most_freq_conn_state");
-    names.push_back("top_proto_1");
-    names.push_back("service_1");
-    names.push_back("service_2");
-    names.push_back("service_3");
-    names.push_back("top_user_agent_1");
-    names.push_back("first_seen_seconds");
-    names.push_back("last_seen_seconds");
-    names.push_back("outgoing_connection_ratio");
-    names.push_back("incoming_connection_ratio");
-    names.push_back("unique_remote_ports_connected_to");
-    names.push_back("unique_local_ports_used");
-    names.push_back("unique_remote_ports_connected_from");
-    names.push_back("unique_local_ports_listening_on");
-    names.push_back("ever_connected_to_privileged_port");
-    names.push_back("ever_listened_on_privileged_port");
-    names.push_back("unique_http_versions_used");
-    names.push_back("most_freq_http_version"); // Base name, will be expanded in to_dot_string
-    names.push_back("unique_http_status_codes_seen");
-    names.push_back("has_http_error_4xx");
-    names.push_back("has_http_error_5xx");
-    names.push_back("unique_ssl_versions_used");
-    names.push_back("most_freq_ssl_version"); // Base name, will be expanded in to_dot_string
-    names.push_back("unique_ssl_ciphers_used");
-    names.push_back("has_ssl_resumption");
-    names.push_back("has_ssl_server_name");
-    names.push_back("has_ssl_history");
+    names.push_back("most_freq_proto");         // 1
+    names.push_back("most_freq_conn_state");    // 2
+    names.push_back("top_proto_1");             // 3
+    names.push_back("service_1");             // 4
+    names.push_back("service_2");             // 5
+    names.push_back("service_3");             // 6
+    names.push_back("top_user_agent_1");        // 7
+    names.push_back("first_seen_seconds");      // 8
+    names.push_back("last_seen_seconds");       // 9
+    names.push_back("outgoing_connection_ratio");// 10
+    names.push_back("incoming_connection_ratio");// 11
+    names.push_back("unique_remote_ports_connected_to"); // 12
+    names.push_back("unique_local_ports_used");  // 13
+    names.push_back("unique_remote_ports_connected_from"); // 14
+    names.push_back("unique_local_ports_listening_on");// 15
+    names.push_back("ever_connected_to_privileged_port");// 16
+    names.push_back("ever_listened_on_privileged_port");// 17
+    names.push_back("unique_http_versions_used"); // 18
+    names.push_back("most_freq_http_version");    // 19
+    names.push_back("unique_http_status_codes_seen");// 20
+    names.push_back("has_http_error_4xx");      // 21
+    names.push_back("has_http_error_5xx");      // 22
+    names.push_back("unique_ssl_versions_used"); // 23
+    names.push_back("most_freq_ssl_version");   // 24
+    names.push_back("unique_ssl_ciphers_used"); // 25
+    names.push_back("has_ssl_resumption");      // 26
+    names.push_back("has_ssl_server_name");     // 27
+    names.push_back("has_ssl_history");         // 28
     return names;
 }

@@ -14,14 +14,18 @@ std::string GraphEdge::to_dot_string_encoded() const {
 
     std::vector<std::string> feature_names = EdgeFeatureEncoder::get_feature_names();
     for (size_t i = 0; i < encoded_features.size(); ++i) {
-        if (i != 0) {
+        std::string feature_name = (i < feature_names.size()) ? feature_names[i] : ("feature_" + std::to_string(i));
+
+        // Skip features related to ssl_version and user_agent
+        if (feature_name.rfind("ssl_version", 0) == 0 || feature_name.rfind("user_agent", 0) == 0) {
+            continue;
+        }
+
+        if (i != 0 && ss.tellp() > ss.str().find('[')) { // Add comma only if it's not the first feature after '['
             ss << ",";
         }
-        if (i < feature_names.size()) {
-            ss << feature_names[i] << "=" << static_cast<int>(encoded_features[i]);
-        } else {
-            ss << "feature_" << i << "=" << static_cast<int>(encoded_features[i]);
-        }
+
+        ss << feature_name << "=" << static_cast<int>(encoded_features[i]);
     }
 
     ss << "];\n";

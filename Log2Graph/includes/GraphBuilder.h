@@ -22,6 +22,7 @@
 
 #include "EdgeFeatureEncoder.h"
 #include "GraphUpdateQueue.h"
+#include "NodeFeatureEncoder.h"
 #include "TrafficGraph.h"
 
 
@@ -61,7 +62,8 @@ private:
     /**
 * @brief Feature encoder. Useful for passing data to GAT.
 */
-    EdgeFeatureEncoder feature_encoder;
+    EdgeFeatureEncoder edge_encoder;
+    NodeFeatureEncoder node_encoder;
     std::atomic<bool> save_pending{false};
 
 public:
@@ -139,7 +141,7 @@ public:
  */
     size_t get_feature_dimension() const {
         // This should match your encoder's output size
-        return feature_encoder.get_feature_dimension();
+        return edge_encoder.get_feature_dimension();
     }
 };
 

@@ -4,11 +4,27 @@
  */
 
 #include "includes/EdgeFeatureEncoder.h"
+
+#include <algorithm>
 #include <cmath>
 #include <ctime>
 #include <iostream>
 #include <stdexcept>
 #include <sstream>
+
+std::string categorize_user_agent_string(const std::string& user_agent_string) {
+    std::string user_agent_lower = user_agent_string;
+    std::transform(user_agent_lower.begin(), user_agent_lower.end(), user_agent_lower.begin(), ::tolower);
+
+    if (user_agent_lower.find("chrome") != std::string::npos) return "Chrome";
+    else if (user_agent_lower.find("firefox") != std::string::npos) return "Firefox";
+    else if (user_agent_lower.find("safari") != std::string::npos && user_agent_lower.find("chrome") == std::string::npos) return "Safari";
+    else if (user_agent_lower.find("edge") != std::string::npos) return "Edge";
+    else if (user_agent_lower.find("opera") != std::string::npos || user_agent_lower.find("opr/") != std::string::npos) return "Opera";
+    else if (user_agent_lower.find("bot") != std::string::npos || user_agent_lower.find("crawl") != std::string::npos || user_agent_lower.find("spider") != std::string::npos) return "Bot";
+    else if (user_agent_lower.find("Nmap") != std::string::npos) return "Nmap";
+    else return "Unknown";
+}
 
 EdgeFeatureEncoder::EdgeFeatureEncoder() : protocol_map({{"unknown_transport", 0}, {"tcp", 1}, {"udp", 2}, {"icmp", 3}}),
                                          conn_state_map({
@@ -87,18 +103,9 @@ std::vector<float> EdgeFeatureEncoder::encode_features(const std::unordered_map<
     features.insert(features.end(), ssl_version_encoding.begin(), ssl_version_encoding.end());
 
     // User Agent (one-hot - simplified categorization)
-    int user_agent_code = user_agent_map["Unknown"];
+    int user_agent_code = user_agent_map.at("Unknown");
     if (attrs.count("http_user_agent")) {
-        std::string user_agent = attrs.at("http_user_agent");
-        std::string user_agent_category = "Unknown";
-        if (user_agent.find("Chrome") != std::string::npos) user_agent_category = "Chrome";
-        else if (user_agent.find("Firefox") != std::string::npos) user_agent_category = "Firefox";
-        else if (user_agent.find("Safari") != std::string::npos) user_agent_category = "Safari";
-        else if (user_agent.find("Edge") != std::string::npos) user_agent_category = "Edge";
-        else if (user_agent.find("Opera") != std::string::npos) user_agent_category = "Opera";
-        else if (user_agent.find("Bot") != std::string::npos) user_agent_category = "Bot";
-        else if (user_agent == "Mozilla/5.0 (compatible; Nmap Scripting Engine; https://nmap.org/book/nse.html)") user_agent_category = "Nmap";
-        else if (user_agent == "Debian APT-HTTP/1.3 (2.0.9)") user_agent_category = "DebianAPT";
+        std::string user_agent_category = categorize_user_agent_string(attrs.at("http_user_agent")); // Use the helper
         auto user_agent_it = user_agent_map.find(user_agent_category);
         if (user_agent_it != user_agent_map.end()) {
             user_agent_code = user_agent_it->second;

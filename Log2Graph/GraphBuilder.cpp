@@ -57,6 +57,11 @@ void GraphBuilder::add_connection(const std::unordered_map<std::string, std::str
 
     src_node_ptr->update_connection_features(true, raw_feature_map);
     dst_node_ptr->update_connection_features(false, raw_feature_map);
+
+    // Encode node features and store them in the GraphNode object
+    src_node_ptr->encode_features(node_encoder);
+    dst_node_ptr->encode_features(node_encoder);
+
 }
 
 TrafficGraph &GraphBuilder::get_graph() {
