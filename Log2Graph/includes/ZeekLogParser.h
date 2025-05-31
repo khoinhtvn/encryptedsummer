@@ -164,10 +164,6 @@ public:
      */
     void start_monitoring();
 
-    void continue_monitoring_existing();
-
-    void monitor_new_files();
-
     /**
      * @brief Stops the log monitoring and processing.
      *
