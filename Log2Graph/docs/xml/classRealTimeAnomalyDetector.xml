@@ -1,58 +1,96 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="classRealTimeAnomalyDetector" kind="class" language="C++" prot="public">
-    <compoundname>RealTimeAnomalyDetector</compoundname>
-    <includes refid="RealTimeAnomalyDetector_8h" local="no">RealTimeAnomalyDetector.h</includes>
-    <innerclass refid="structRealTimeAnomalyDetector_1_1AnomalyScore" prot="public">RealTimeAnomalyDetector::AnomalyScore</innerclass>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>std::unordered_map&lt; std::string, <ref refid="structRealTimeAnomalyDetector_1_1AnomalyScore" kindref="compound">AnomalyScore</ref> &gt;</type>
-        <definition>std::unordered_map&lt; std::string, RealTimeAnomalyDetector::AnomalyScore &gt; RealTimeAnomalyDetector::detect</definition>
-        <argsstring>(const TrafficGraph &amp;graph)</argsstring>
-        <name>detect</name>
-        <qualifiedname>RealTimeAnomalyDetector::detect</qualifiedname>
-        <param>
-          <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;</type>
-          <declname>graph</declname>
-        </param>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="classRealTimeAnomalyDetector" kind="class" language="C++" prot="public">
+        <compoundname>RealTimeAnomalyDetector</compoundname>
+        <includes refid="RealTimeAnomalyDetector_8h" local="no">RealTimeAnomalyDetector.h</includes>
+        <innerclass refid="structRealTimeAnomalyDetector_1_1AnomalyScore" prot="public">
+            RealTimeAnomalyDetector::AnomalyScore
+        </innerclass>
+        <sectiondef kind="public-func">
+            <memberdef kind="function" id="classRealTimeAnomalyDetector_1a92cf1a7775b63a09b3aa27fdeb23c2a5"
+                       prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::unordered_map&lt; std::string, <ref refid="structRealTimeAnomalyDetector_1_1AnomalyScore"
+                                                               kindref="compound">AnomalyScore
+                </ref> &gt;
+                </type>
+                <definition>std::unordered_map&lt; std::string, AnomalyScore &gt; RealTimeAnomalyDetector::detect
+                </definition>
+                <argsstring>(const TrafficGraph &amp;graph)</argsstring>
+                <name>detect</name>
+                <qualifiedname>RealTimeAnomalyDetector::detect</qualifiedname>
+                <param>
+                    <type>const <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> &amp;
+                    </type>
+                    <declname>graph</declname>
+                </param>
+                <briefdescription>
+                    <para>Detects anomalies in the given network traffic graph.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>This method analyzes the nodes in the graph to identify those with anomalous behavior. It
+                        calculates an anomaly score for each node based on its connection patterns, protocol usage, and
+                        other relevant features.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>graph</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>A const reference to the <ref refid="classTrafficGraph" kindref="compound">
+                                        TrafficGraph
+                                    </ref> object representing the network traffic. The method does not modify the
+                                        graph.
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                        <simplesect kind="return">
+                            <para>An unordered map where the key is the node ID (string) and the value is an <ref
+                                    refid="structRealTimeAnomalyDetector_1_1AnomalyScore" kindref="compound">
+                                AnomalyScore
+                            </ref> struct containing the anomaly score and contributing factors for that node.
+                            </para>
+                        </simplesect>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/RealTimeAnomalyDetector.h" line="57" column="24"/>
+            </memberdef>
+        </sectiondef>
         <briefdescription>
-<para>Detects anomalies in the given network traffic graph. </para>
+            <para>Class for detecting real-time anomalies in network traffic.</para>
         </briefdescription>
         <detaileddescription>
-<para>This method analyzes the nodes in the graph to identify those with anomalous behavior. It calculates an anomaly score for each node based on its connection patterns, protocol usage, and other relevant features.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>graph</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A const reference to the <ref refid="classTrafficGraph" kindref="compound">TrafficGraph</ref> object representing the network traffic. The method does not modify the graph. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>An unordered map where the key is the node ID (string) and the value is an <ref refid="structRealTimeAnomalyDetector_1_1AnomalyScore" kindref="compound">AnomalyScore</ref> struct containing the anomaly score and contributing factors for that node. </para>
-</simplesect>
-</para>
+            <para>The
+                <computeroutput>
+                    <ref refid="classRealTimeAnomalyDetector" kindref="compound">RealTimeAnomalyDetector</ref>
+                </computeroutput>
+                class analyzes the network traffic graph constructed by the
+                <computeroutput>
+                    <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref>
+                </computeroutput>
+                to identify nodes that exhibit unusual behavior. It calculates an anomaly score for each node and
+                provides information about the factors contributing to the score.
+            </para>
         </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/RealTimeAnomalyDetector.h" line="57" column="24" bodyfile="RealTimeAnomalyDetector.cpp" bodystart="17" bodyend="60"/>
-      </memberdef>
-    </sectiondef>
-    <briefdescription>
-<para>Class for detecting real-time anomalies in network traffic. </para>
-    </briefdescription>
-    <detaileddescription>
-<para>The <computeroutput><ref refid="classRealTimeAnomalyDetector" kindref="compound">RealTimeAnomalyDetector</ref></computeroutput> class analyzes the network traffic graph constructed by the <computeroutput><ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref></computeroutput> to identify nodes that exhibit unusual behavior. It calculates an anomaly score for each node and provides information about the factors contributing to the score. </para>
-    </detaileddescription>
-    <collaborationgraph>
-      <node id="1">
-        <label>RealTimeAnomalyDetector</label>
-        <link refid="classRealTimeAnomalyDetector"/>
-      </node>
-    </collaborationgraph>
-    <location file="includes/RealTimeAnomalyDetector.h" line="28" column="1" bodyfile="includes/RealTimeAnomalyDetector.h" bodystart="28" bodyend="58"/>
-    <listofallmembers>
-      <member refid="classRealTimeAnomalyDetector_1a3493eb650d0e6f9b541f959a00596d11" prot="public" virt="non-virtual"><scope>RealTimeAnomalyDetector</scope><name>detect</name></member>
-    </listofallmembers>
-  </compounddef>
+        <collaborationgraph>
+            <node id="1">
+                <label>RealTimeAnomalyDetector</label>
+                <link refid="classRealTimeAnomalyDetector"/>
+            </node>
+        </collaborationgraph>
+        <location file="includes/RealTimeAnomalyDetector.h" line="28" column="1"
+                  bodyfile="includes/RealTimeAnomalyDetector.h" bodystart="28" bodyend="58"/>
+        <listofallmembers>
+            <member refid="classRealTimeAnomalyDetector_1a92cf1a7775b63a09b3aa27fdeb23c2a5" prot="public"
+                    virt="non-virtual">
+                <scope>RealTimeAnomalyDetector</scope>
+                <name>detect</name>
+            </member>
+        </listofallmembers>
+    </compounddef>
 </doxygen>

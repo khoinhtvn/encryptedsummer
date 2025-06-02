@@ -1,5 +1,5 @@
-var searchData=
-[
-  ['minute_5fwindow_0',['minute_window',['../classGraphNode.html#a7442585422a9af484aa4ee1cbb8701ae',1,'GraphNode']]],
-  ['monitoring_5fstart_1',['monitoring_start',['../classGraphNode.html#a8168b02a72ea169890faff00696f52a8',1,'GraphNode']]]
-];
+var searchData =
+    [
+        ['minute_5fwindow_0', ['minute_window', ['../structGraphNode_1_1TemporalFeatures.html#a3008fccab8347d3bf113a61b4b373124', 1, 'GraphNode::TemporalFeatures']]],
+        ['monitoring_5fstart_1', ['monitoring_start', ['../structGraphNode_1_1TemporalFeatures.html#ac4e93bc8950c5592e9331203428ddaf5', 1, 'GraphNode::TemporalFeatures']]]
+    ];

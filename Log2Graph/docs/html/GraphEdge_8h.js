@@ -1,4 +1,4 @@
 var GraphEdge_8h =
-[
-    [ "GraphEdge", "classGraphEdge.html", "classGraphEdge" ]
-];
+    [
+        ["GraphEdge", "classGraphEdge.html", "classGraphEdge"]
+    ];

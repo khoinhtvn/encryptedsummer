@@ -1,7 +1,0 @@
-digraph ZeekTraffic {
-  "ff02::2" [degree=3, in_degree=3, out_degree=0, activity_score=0.27, total_connections=3];
-  "fe80::bc67:c5ff:fecc:13cb" [degree=3, in_degree=0, out_degree=3, activity_score=0.27, total_connections=3];
-  "fe80::bc67:c5ff:fecc:13cb" -> "ff02::2" [label="icmp", resp_ip_bytes="0", orig_ip_bytes="224", protocol="icmp", orig_pkts="4", timestamp="1747405533.293350", local_resp="false", src_port="133", service="-", dst_port="134", conn_state="OTH", resp_bytes="0", local_orig="true", history="-", orig_bytes="32", resp_pkts="0"];
-  "fe80::bc67:c5ff:fecc:13cb" -> "ff02::2" [label="icmp", resp_ip_bytes="0", orig_ip_bytes="56", protocol="icmp", orig_pkts="1", timestamp="1747405648.877348", local_resp="false", src_port="133", service="-", dst_port="134", conn_state="OTH", resp_bytes="0", local_orig="true", history="-", orig_bytes="0", resp_pkts="0"];
-  "fe80::bc67:c5ff:fecc:13cb" -> "ff02::2" [label="icmp", resp_ip_bytes="0", orig_ip_bytes="56", protocol="icmp", orig_pkts="1", timestamp="1747405771.757349", local_resp="false", src_port="133", service="-", dst_port="134", conn_state="OTH", resp_bytes="0", local_orig="true", history="-", orig_bytes="0", resp_pkts="0"];
-}

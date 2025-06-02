@@ -1,0 +1,39 @@
+\doxysection{includes/\+Feature\+Encoder.h File Reference}
+\hypertarget{FeatureEncoder_8h}{}\label{FeatureEncoder_8h}\index{includes/FeatureEncoder.h@{includes/FeatureEncoder.h}}
+
+
+Defines the \doxylink{classFeatureEncoder}{Feature\+Encoder} class, which encodes network traffic features into a numerical vector.  
+
+
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$cmath$>$}\newline
+Include dependency graph for Feature\+Encoder.\+h\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{FeatureEncoder_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{FeatureEncoder_8h__dep__incl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classFeatureEncoder}{Feature\+Encoder}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Defines the \doxylink{classFeatureEncoder}{Feature\+Encoder} class, which encodes network traffic features into a numerical vector. 
+
+This class is designed for use in network traffic analysis or intrusion detection systems. It encodes a selected set of edge attributes for graph representation. The encoding process involves\+:
+\begin{DoxyItemize}
+\item One-\/hot encoding for categorical features (protocol, connection state, SSL version, user agent). 
+\end{DoxyItemize}

@@ -1,5 +1,5 @@
 var classRealTimeAnomalyDetector =
-[
-    [ "AnomalyScore", "structRealTimeAnomalyDetector_1_1AnomalyScore.html", "structRealTimeAnomalyDetector_1_1AnomalyScore" ],
-    [ "detect", "classRealTimeAnomalyDetector.html#a3493eb650d0e6f9b541f959a00596d11", null ]
-];
+    [
+        ["AnomalyScore", "structRealTimeAnomalyDetector_1_1AnomalyScore.html", "structRealTimeAnomalyDetector_1_1AnomalyScore"],
+        ["detect", "classRealTimeAnomalyDetector.html#a92cf1a7775b63a09b3aa27fdeb23c2a5", null]
+    ];

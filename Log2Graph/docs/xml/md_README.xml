@@ -1,90 +1,218 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="md_README" kind="page">
-    <compoundname>md_README</compoundname>
-    <title>Zeek Traffic Graph Analyzer</title>
-    <briefdescription>
-    </briefdescription>
-    <detaileddescription>
-<para><anchor id="md_README_1autotoc_md0"/></para>
-<para><image type="html" name="https://via.placeholder.com/150x50?text=Zeek+Traffic+Graph" alt="Project Logo" inline="yes"></image>
- <linebreak/>
- <emphasis>Real-time network traffic analysis using graph theory</emphasis> Usage</para>
-<sect1 id="md_README_1autotoc_md1">
-<title>Table of Contents</title><para><itemizedlist>
-<listitem><para>Features</para>
-</listitem><listitem><para>Requirements</para>
-</listitem><listitem><para>Installation</para>
-</listitem><listitem><para>Usage</para>
-</listitem></itemizedlist>
-</para>
-</sect1>
-<sect1 id="md_README_1autotoc_md2">
-<title>Features</title><para><itemizedlist>
-<listitem><para><bold>Real-time Processing</bold>: Continuously monitors Zeek logs</para>
-</listitem><listitem><para><bold>Graph Construction</bold>: Builds interactive network graphs with the following features<itemizedlist>
-<listitem><para><emphasis>Node level</emphasis>:<itemizedlist>
-<listitem><para>Degree (in/out/combined)</para>
-</listitem><listitem><para>Temporal features (connection in the last minute and hour)</para>
-</listitem></itemizedlist>
-</para>
-</listitem><listitem><para><emphasis>Edge level (one edge per connection)</emphasis><itemizedlist>
-<listitem><para>Source, target IP and port number</para>
-</listitem><listitem><para>Protocol, timestamp</para>
-</listitem><listitem><para>Host, Uri and HTTP method</para>
-</listitem><listitem><para>Version, user agent, status code</para>
-</listitem><listitem><para>Request and response body len</para>
-</listitem></itemizedlist>
-</para>
-</listitem></itemizedlist>
-</para>
-</listitem><listitem><para><bold>Advanced Analysis</bold>:<itemizedlist>
-<listitem><para>Anomaly detection</para>
-</listitem><listitem><para>Traffic pattern recognition</para>
-</listitem><listitem><para>Connection profiling</para>
-</listitem></itemizedlist>
-</para>
-</listitem><listitem><para><bold>Real time Visualization</bold>:<itemizedlist>
-<listitem><para>Graphviz-based diagrams</para>
-</listitem></itemizedlist>
-</para>
-</listitem><listitem><para><bold>Alert System</bold>: Notifications for suspicious activities</para>
-</listitem></itemizedlist>
-</para>
-</sect1>
-<sect1 id="md_README_1autotoc_md3">
-<title>Requirements</title><para><programlisting filename=".bash"><codeline><highlight class="normal">#<sp/>Core<sp/>dependencies</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>Zeek<sp/>Network<sp/>Security<sp/>Monitor</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>C++17<sp/>compatible<sp/>compiler</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>CMake<sp/>3.28+</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">#<sp/>Visualization<sp/>dependencies</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>Graphviz<sp/>(libgraphviz-dev)</highlight></codeline>
-</programlisting></para>
-</sect1>
-<sect1 id="md_README_1autotoc_md4">
-<title>Installation</title><sect2 id="md_README_1autotoc_md5">
-<title>Linux/maxOS</title><para><programlisting filename=".bash"><codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/khoinhtvn/encryptedsummer</highlight></codeline>
-<codeline><highlight class="normal">cd<sp/>encryptedsummer/Log2Graph</highlight></codeline>
-<codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
-<codeline><highlight class="normal">cmake<sp/>..<sp/>-DCMAKE_BUILD_TYPE=Release</highlight></codeline>
-<codeline><highlight class="normal">make<sp/>-j$(nproc)</highlight></codeline>
-</programlisting></para>
-</sect2>
-<sect2 id="md_README_1autotoc_md6">
-<title>Windows (Visual Studio)</title><para><programlisting filename=".shell"><codeline><highlight class="normal">cmake<sp/>-G<sp/>&quot;Visual<sp/>Studio<sp/>17<sp/>2022&quot;<sp/>-A<sp/>x64<sp/>..</highlight></codeline>
-<codeline><highlight class="normal">cmake<sp/>--build<sp/>.<sp/>--config<sp/>Release</highlight></codeline>
-</programlisting></para>
-</sect2>
-</sect1>
-<sect1 id="md_README_1autotoc_md7">
-<title>Usage</title><sect2 id="md_README_1autotoc_md8">
-<title>Basic Analysis</title><para>The program checks for files in the specified path. It just processes files with known names (conn.log).</para>
-<para><programlisting filename=".bash"><codeline><highlight class="normal">./Log2Graph<sp/>/path/to/zeek/logs</highlight></codeline>
-</programlisting> </para>
-</sect2>
-</sect1>
-    </detaileddescription>
-    <location file="README.md"/>
-  </compounddef>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="md_README" kind="page">
+        <compoundname>md_README</compoundname>
+        <title>Zeek Traffic Graph Analyzer</title>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+            <para>
+                <anchor id="md_README_1autotoc_md0"/>
+            </para>
+            <para>
+                <image type="html" name="https://via.placeholder.com/150x50?text=Zeek+Traffic+Graph" alt="Project Logo"
+                       inline="yes"></image>
+                <linebreak/>
+                <emphasis>Real-time network traffic analysis using graph theory</emphasis>
+                Usage
+            </para>
+            <sect1 id="md_README_1autotoc_md1">
+                <title>Table of Contents</title>
+                <para>
+                    <itemizedlist>
+                        <listitem>
+                            <para>Features</para>
+                        </listitem>
+                        <listitem>
+                            <para>Requirements</para>
+                        </listitem>
+                        <listitem>
+                            <para>Installation</para>
+                        </listitem>
+                        <listitem>
+                            <para>Usage</para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </sect1>
+            <sect1 id="md_README_1autotoc_md2">
+                <title>Features</title>
+                <para>
+                    <itemizedlist>
+                        <listitem>
+                            <para><bold>Real-time Processing</bold>: Continuously monitors Zeek logs
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para><bold>Graph Construction</bold>: Builds interactive network graphs with the following
+                                features
+                                <itemizedlist>
+                                    <listitem>
+                                        <para><emphasis>Node level</emphasis>:
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>Degree (in/out/combined)</para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>Temporal features (connection in the last minute and hour)
+                                                    </para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>
+                                            <emphasis>Edge level (one edge per connection)</emphasis>
+                                            <itemizedlist>
+                                                <listitem>
+                                                    <para>Source, target IP and port number</para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>Protocol, timestamp</para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>Host, Uri and HTTP method</para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>Version, user agent, status code</para>
+                                                </listitem>
+                                                <listitem>
+                                                    <para>Request and response body len</para>
+                                                </listitem>
+                                            </itemizedlist>
+                                        </para>
+                                    </listitem>
+                                </itemizedlist>
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para><bold>Advanced Analysis</bold>:
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Anomaly detection</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Traffic pattern recognition</para>
+                                    </listitem>
+                                    <listitem>
+                                        <para>Connection profiling</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para><bold>Real time Visualization</bold>:
+                                <itemizedlist>
+                                    <listitem>
+                                        <para>Graphviz-based diagrams</para>
+                                    </listitem>
+                                </itemizedlist>
+                            </para>
+                        </listitem>
+                        <listitem>
+                            <para><bold>Alert System</bold>: Notifications for suspicious activities
+                            </para>
+                        </listitem>
+                    </itemizedlist>
+                </para>
+            </sect1>
+            <sect1 id="md_README_1autotoc_md3">
+                <title>Requirements</title>
+                <para>
+                    <programlisting filename=".bash">
+                        <codeline>
+                            <highlight class="normal">#<sp/>Core<sp/>dependencies
+                            </highlight>
+                        </codeline>
+                        <codeline>
+                            <highlight class="normal">-<sp/>Zeek<sp/>Network<sp/>Security<sp/>Monitor
+                            </highlight>
+                        </codeline>
+                        <codeline>
+                            <highlight class="normal">-<sp/>C++17<sp/>compatible<sp/>compiler
+                            </highlight>
+                        </codeline>
+                        <codeline>
+                            <highlight class="normal">-<sp/>CMake<sp/>3.28+
+                            </highlight>
+                        </codeline>
+                        <codeline></codeline>
+                        <codeline>
+                            <highlight class="normal">#<sp/>Visualization<sp/>dependencies
+                            </highlight>
+                        </codeline>
+                        <codeline>
+                            <highlight class="normal">-<sp/>Graphviz<sp/>(libgraphviz-dev)
+                            </highlight>
+                        </codeline>
+                    </programlisting>
+                </para>
+            </sect1>
+            <sect1 id="md_README_1autotoc_md4">
+                <title>Installation</title>
+                <sect2 id="md_README_1autotoc_md5">
+                    <title>Linux/maxOS</title>
+                    <para>
+                        <programlisting filename=".bash">
+                            <codeline>
+                                <highlight class="normal">git<sp/>clone<sp/>https://github.com/khoinhtvn/encryptedsummer
+                                </highlight>
+                            </codeline>
+                            <codeline>
+                                <highlight class="normal">cd<sp/>encryptedsummer/Log2Graph
+                                </highlight>
+                            </codeline>
+                            <codeline>
+                                <highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build
+                                </highlight>
+                            </codeline>
+                            <codeline>
+                                <highlight class="normal">cmake<sp/>..<sp/>-DCMAKE_BUILD_TYPE=Release
+                                </highlight>
+                            </codeline>
+                            <codeline>
+                                <highlight class="normal">make<sp/>-j$(nproc)
+                                </highlight>
+                            </codeline>
+                        </programlisting>
+                    </para>
+                </sect2>
+                <sect2 id="md_README_1autotoc_md6">
+                    <title>Windows (Visual Studio)</title>
+                    <para>
+                        <programlisting filename=".shell">
+                            <codeline>
+                                <highlight class="normal">cmake<sp/>-G<sp/>&quot;Visual<sp/>Studio<sp/>17<sp/>2022&quot;<sp/>
+                                    -A<sp/>x64<sp/>..
+                                </highlight>
+                            </codeline>
+                            <codeline>
+                                <highlight class="normal">cmake<sp/>--build<sp/>.<sp/>--config<sp/>Release
+                                </highlight>
+                            </codeline>
+                        </programlisting>
+                    </para>
+                </sect2>
+            </sect1>
+            <sect1 id="md_README_1autotoc_md7">
+                <title>Usage</title>
+                <sect2 id="md_README_1autotoc_md8">
+                    <title>Basic Analysis</title>
+                    <para>The program checks for files in the specified path. It just processes files with known names
+                        (conn.log).
+                    </para>
+                    <para>
+                        <programlisting filename=".bash">
+                            <codeline>
+                                <highlight class="normal">./Log2Graph<sp/>/path/to/zeek/logs
+                                </highlight>
+                            </codeline>
+                        </programlisting>
+                    </para>
+                </sect2>
+            </sect1>
+        </detaileddescription>
+        <location file="README.md"/>
+    </compounddef>
 </doxygen>

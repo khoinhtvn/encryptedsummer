@@ -1,18 +1,21 @@
 <map id="includes/GraphUpdateQueue.h" name="includes/GraphUpdateQueue.h">
-<area shape="rect" id="Node000001" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates." alt="" coords="199,5,419,31"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="286,152,349,177"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="199,29,142,37,86,47,41,62,24,71,13,80,8,91,13,102,30,115,55,127,125,143,204,154,273,159,272,164,203,159,124,149,54,132,27,120,9,106,3,91,9,77,21,66,39,57,85,42,141,31,199,24"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="23,79,87,104"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="269,33,101,80,100,75,268,28"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="111,79,254,104"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="290,33,217,74,214,69,288,28"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="278,79,341,104"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="312,31,312,65,307,65,307,31"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="365,79,443,104"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="326,29,379,68,376,72,323,33"/>
-<area shape="rect" id="Node000007" href="$GraphEdge_8h.html" title=" " alt="" coords="467,79,573,104"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="344,28,474,72,472,77,342,33"/>
-<area shape="rect" id="Node000009" href="$GraphNode_8h.html" title=" " alt="" coords="597,79,704,104"/>
-<area shape="poly" id="edge7_Node000001_Node000009" title=" " alt="" coords="365,28,584,74,583,79,364,33"/>
-<area shape="poly" id="edge8_Node000009_Node000002" title=" " alt="" coords="598,107,363,156,361,151,597,101"/>
+<area shape="rect" id="Node000001" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates." alt="" coords="185,5,405,31"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,152,68,177"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="204,33,145,51,116,64,90,81,65,109,48,140,43,138,61,106,87,77,114,59,143,46,203,28"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="106,152,170,177"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="186,30,139,48,118,62,102,80,96,94,99,110,118,140,114,143,94,112,91,94,97,77,115,58,136,44,184,25"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="424,79,567,104"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="328,28,450,71,449,76,327,33"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="264,152,327,177"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="316,29,335,43,353,61,364,82,362,105,347,128,327,146,324,142,343,124,357,103,358,83,348,64,332,47,313,33"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="591,79,669,104"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="351,28,578,76,577,81,350,33"/>
+<area shape="rect" id="Node000007" href="$GraphEdge_8h.html" title=" " alt="" coords="243,79,348,104"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="298,31,298,65,293,65,293,31"/>
+<area shape="rect" id="Node000015" href="$GraphNode_8h.html" title=" " alt="" coords="111,79,218,104"/>
+<area shape="poly" id="edge8_Node000001_Node000015" title=" " alt="" coords="276,33,199,74,197,70,273,28"/>
+<area shape="poly" id="edge7_Node000007_Node000005" title=" " alt="" coords="298,104,298,138,293,138,293,104"/>
+<area shape="poly" id="edge11_Node000015_Node000002" title=" " alt="" coords="145,106,71,147,69,143,143,102"/>
+<area shape="poly" id="edge10_Node000015_Node000003" title=" " alt="" coords="163,105,150,140,145,138,158,103"/>
+<area shape="poly" id="edge9_Node000015_Node000005" title=" " alt="" coords="187,102,263,143,261,148,184,106"/>
 </map>

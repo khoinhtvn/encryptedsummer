@@ -8,6 +8,8 @@
 #include <iostream>
 #include <thread>
 #include <filesystem>
+#include <chrono>
+#include <cstdlib> // For std::stoi
 
 #include "includes/GraphBuilder.h"
 #include "includes/GraphExporter.h"
@@ -24,19 +26,37 @@
  * @param argc Number of command-line arguments.
  * @param argv Array of command-line arguments. The first argument should be the
  * path to the Zeek log directory. An optional --export-path argument specifies the export directory.
+ * An optional --export-interval <seconds> argument specifies the export interval in seconds.
  * @return 0 if the application runs successfully, 1 otherwise.
  */
 int main(int argc, char *argv[]) {
     if (argc < 2) {
-        std::cerr << "Usage: " << argv[0] << " <zeek_log_directory> [--export-path <export_path>]" << std::endl;
+        std::cerr << "Usage: " << argv[0] << " <zeek_log_directory> [--export-path <export_path>] [--export-interval <seconds>]" << std::endl;
         return 1;
     }
 
     std::string export_path = "./";
+    int export_interval_seconds = 60; // Default export interval
+
     for (int i = 2; i < argc; ++i) {
         if (std::string(argv[i]) == "--export-path" && i + 1 < argc) {
             export_path = argv[i + 1];
-            break;
+            i++; // Skip the next argument as it's the value for --export-path
+        } else if (std::string(argv[i]) == "--export-interval" && i + 1 < argc) {
+            try {
+                export_interval_seconds = std::stoi(argv[i + 1]);
+                if (export_interval_seconds <= 0) {
+                    std::cerr << "Error: Export interval must be a positive integer." << std::endl;
+                    return 1;
+                }
+            } catch (const std::invalid_argument& e) {
+                std::cerr << "Error: Invalid export interval value: " << argv[i + 1] << std::endl;
+                return 1;
+            } catch (const std::out_of_range& e) {
+                std::cerr << "Error: Export interval value out of range: " << argv[i + 1] << std::endl;
+                return 1;
+            }
+            i++; // Skip the next argument as it's the value for --export-interval
         }
     }
     // Ensure the export path exists
@@ -66,37 +86,32 @@ int main(int argc, char *argv[]) {
      */
     monitor.start();
 
+
     while (true) {
-        std::this_thread::sleep_for(std::chrono::seconds(10));
+        std::this_thread::sleep_for(std::chrono::seconds(export_interval_seconds));
 
-        static int counter = 0;
-        if (++counter % 3 == 0) {
-            /**
-             * @brief Get the current UTC timestamp for filename generation.
-             */
-            auto now = std::chrono::system_clock::now();
-            auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
+        auto now = std::chrono::system_clock::now();
+        auto UTC = std::chrono::duration_cast<std::chrono::seconds>(now.time_since_epoch()).count();
 
-            /**
-             * @brief Get a reference to the singleton instance of the GraphBuilder and its current graph.
-             */
-            auto &graph = GraphBuilder::get_instance().get_graph();
+        /**
+         * @brief Get a reference to the singleton instance of the GraphBuilder and its current graph.
+         */
+        auto &graph = GraphBuilder::get_instance().get_graph();
 
-            /**
-             * @brief Export the encoded incremental updates of the network graph to a DOT file.
-             *
-             * This call retrieves the latest changes to the graph since the last export
-             * and saves them in an encoded format to a DOT file. The filename includes
-             * the UTC timestamp to differentiate between exports. The output file is
-             * created in the specified `export_path`.
-             */
-            exporter.export_incremental_update_encoded(GraphBuilder::get_instance().get_last_updates(),
+        /**
+         * @brief Export the encoded full network graph to a DOT file.
+         */
+        exporter.export_full_graph_encoded_async(graph, export_path + std::filesystem::path::preferred_separator +
+                                                     "nw_graph_encoded_" + std::to_string(UTC) +
+                                                     ".dot");
+        /*
+        exporter.export_incremental_update_encoded_async(GraphBuilder::get_instance().get_last_updates(),
                                                         export_path + std::filesystem::path::preferred_separator +
                                                         "nw_graph_encoded_" + std::to_string(UTC) +
                                                         ".dot");
-        }
-    }
+                                                        */
 
+    }
     /**
      * @brief Stops the log monitoring process.
      *

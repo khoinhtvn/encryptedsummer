@@ -52,25 +52,21 @@
 \DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::move(update\_queue.popAll());}
 \DoxyCodeLine{00104\ \ \ \ \ \}}
 \DoxyCodeLine{00105\ }
-\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphBuilder_a434c06a59cbe6b93e7731769b8b244dd}{add\_connection}}(\textcolor{keyword}{const}\ std::string\ \&src\_ip,\ \textcolor{keyword}{const}\ std::string\ \&dst\_ip,}
-\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&proto,\ \textcolor{keyword}{const}\ std::string\ \&service,\ \textcolor{keyword}{const}\ std::string\ \&timestamp,}
-\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ src\_port,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ dst\_port,}
-\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ orig\_bytes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ resp\_bytes,}
-\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&conn\_state,}
-\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ local\_orig,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{bool}\ local\_resp,}
-\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \&history,}
-\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ orig\_pkts,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ resp\_pkts,}
-\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ orig\_ip\_bytes,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ resp\_ip\_bytes);}
-\DoxyCodeLine{00140\ }
-\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&\mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\_graph}}();}
-\DoxyCodeLine{00149\ }
-\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\_feature\_dimension}}()\textcolor{keyword}{\ const\ }\{}
-\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ should\ match\ your\ encoder's\ output\ size}}
-\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ feature\_encoder.get\_feature\_dimension();}
-\DoxyCodeLine{00157\ \ \ \ \ \}}
-\DoxyCodeLine{00158\ \};}
-\DoxyCodeLine{00159\ }
-\DoxyCodeLine{00160\ }
-\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHBUILDER\_H}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classGraphBuilder_aceabeb2e29b01e4e02f1ea7e4f8310ae}{add\_connection}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\ \&raw\_feature\_map,}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<float>\ \&encoded\_features);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classTrafficGraph}{TrafficGraph}}\ \&\mbox{\hyperlink{classGraphBuilder_a791f0173bacd48ce1071e6d87cd8bfaf}{get\_graph}}();}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classGraphBuilder_a5bd30a82778691790ebf82f364494a41}{get\_feature\_dimension}}()\textcolor{keyword}{\ const\ }\{}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ should\ match\ your\ encoder's\ output\ size}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ feature\_encoder.get\_feature\_dimension();}
+\DoxyCodeLine{00143\ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//GRAPHBUILDER\_H}}
 
 \end{DoxyCode}

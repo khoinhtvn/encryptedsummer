@@ -1,0 +1,405 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="classFeatureEncoder" kind="class" language="C++" prot="public">
+        <compoundname>FeatureEncoder</compoundname>
+        <includes refid="FeatureEncoder_8h" local="no">FeatureEncoder.h</includes>
+        <sectiondef kind="private-attrib">
+            <memberdef kind="variable" id="classFeatureEncoder_1abcd8f527f2c836c519287b6b999d68cf" prot="private"
+                       static="no" mutable="no">
+                <type>std::unordered_map&lt; std::string, int &gt;</type>
+                <definition>std::unordered_map&lt;std::string, int&gt; FeatureEncoder::protocol_map</definition>
+                <argsstring></argsstring>
+                <name>protocol_map</name>
+                <qualifiedname>FeatureEncoder::protocol_map</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="24" column="24" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="24" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1a467cf143f8c269649148b8c1ba36f2cf" prot="private"
+                       static="no" mutable="no">
+                <type>const int</type>
+                <definition>const int FeatureEncoder::NUM_PROTOCOL_CATEGORIES</definition>
+                <argsstring></argsstring>
+                <name>NUM_PROTOCOL_CATEGORIES</name>
+                <qualifiedname>FeatureEncoder::NUM_PROTOCOL_CATEGORIES</qualifiedname>
+                <initializer>= protocol_map.size()</initializer>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="25" column="15" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="25" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1a21438731d8a3773569af79776bf1acb6" prot="private"
+                       static="no" mutable="no">
+                <type>std::unordered_map&lt; std::string, int &gt;</type>
+                <definition>std::unordered_map&lt;std::string, int&gt; FeatureEncoder::conn_state_map</definition>
+                <argsstring></argsstring>
+                <name>conn_state_map</name>
+                <qualifiedname>FeatureEncoder::conn_state_map</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="26" column="24" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="26" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1a5408bfac0709d29e3b5aec87e816da35" prot="private"
+                       static="no" mutable="no">
+                <type>const int</type>
+                <definition>const int FeatureEncoder::NUM_CONN_STATE_CATEGORIES</definition>
+                <argsstring></argsstring>
+                <name>NUM_CONN_STATE_CATEGORIES</name>
+                <qualifiedname>FeatureEncoder::NUM_CONN_STATE_CATEGORIES</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="27" column="15" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="27" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1afdb30a4ee39e26c2477d9e53307c8543" prot="private"
+                       static="no" mutable="no">
+                <type>std::unordered_map&lt; std::string, int &gt;</type>
+                <definition>std::unordered_map&lt;std::string, int&gt; FeatureEncoder::ssl_version_map</definition>
+                <argsstring></argsstring>
+                <name>ssl_version_map</name>
+                <qualifiedname>FeatureEncoder::ssl_version_map</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="28" column="24" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="28" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1af9f62893e0a7b731dc8b2cda82eee140" prot="private"
+                       static="no" mutable="no">
+                <type>const int</type>
+                <definition>const int FeatureEncoder::NUM_SSL_VERSION_CATEGORIES</definition>
+                <argsstring></argsstring>
+                <name>NUM_SSL_VERSION_CATEGORIES</name>
+                <qualifiedname>FeatureEncoder::NUM_SSL_VERSION_CATEGORIES</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="29" column="15" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="29" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1a3d9a66feaff85c726af1fa2d84161fc1" prot="private"
+                       static="no" mutable="no">
+                <type>std::unordered_map&lt; std::string, int &gt;</type>
+                <definition>std::unordered_map&lt;std::string, int&gt; FeatureEncoder::user_agent_map</definition>
+                <argsstring></argsstring>
+                <name>user_agent_map</name>
+                <qualifiedname>FeatureEncoder::user_agent_map</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="30" column="24" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="30" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1a5052b734770e210f37ae34e180eb0dc3" prot="private"
+                       static="no" mutable="no">
+                <type>const int</type>
+                <definition>const int FeatureEncoder::NUM_USER_AGENT_CATEGORIES</definition>
+                <argsstring></argsstring>
+                <name>NUM_USER_AGENT_CATEGORIES</name>
+                <qualifiedname>FeatureEncoder::NUM_USER_AGENT_CATEGORIES</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="31" column="15" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="31" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classFeatureEncoder_1a796843aa28a1d3fbeb89816ca9617364" prot="private"
+                       static="no" mutable="no">
+                <type>size_t</type>
+                <definition>size_t FeatureEncoder::feature_dimension</definition>
+                <argsstring></argsstring>
+                <name>feature_dimension</name>
+                <qualifiedname>FeatureEncoder::feature_dimension</qualifiedname>
+                <briefdescription>
+                    <para>The total number of features in the encoded vector.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="33" column="12" bodyfile="includes/FeatureEncoder.h"
+                          bodystart="33" bodyend="-1"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="private-func">
+            <memberdef kind="function" id="classFeatureEncoder_1ad5c46bc20ebd688f51ea40e1e079a81f" prot="private"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::vector&lt; float &gt;</type>
+                <definition>std::vector&lt; float &gt; FeatureEncoder::one_hot</definition>
+                <argsstring>(int value, int num_classes)</argsstring>
+                <name>one_hot</name>
+                <qualifiedname>FeatureEncoder::one_hot</qualifiedname>
+                <param>
+                    <type>int</type>
+                    <declname>value</declname>
+                </param>
+                <param>
+                    <type>int</type>
+                    <declname>num_classes</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="36" column="17" bodyfile="FeatureEncoder.cpp"
+                          bodystart="42" bodyend="48"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="public-func">
+            <memberdef kind="function" id="classFeatureEncoder_1afaf2be970998ea6430e5d17ea95d80a7" prot="public"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type></type>
+                <definition>FeatureEncoder::FeatureEncoder</definition>
+                <argsstring>()</argsstring>
+                <name>FeatureEncoder</name>
+                <qualifiedname>FeatureEncoder::FeatureEncoder</qualifiedname>
+                <briefdescription>
+                    <para>Constructor for the <ref refid="classFeatureEncoder" kindref="compound">FeatureEncoder</ref> class.
+                    </para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>Initializes the encoding maps and calculates the total feature dimension.</para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="44" column="5" bodyfile="FeatureEncoder.cpp"
+                          bodystart="12" bodyend="36"/>
+            </memberdef>
+            <memberdef kind="function" id="classFeatureEncoder_1a60fa681a32d45d2326c87167d6b1a049" prot="public"
+                       static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>size_t</type>
+                <definition>size_t FeatureEncoder::get_feature_dimension</definition>
+                <argsstring>() const</argsstring>
+                <name>get_feature_dimension</name>
+                <qualifiedname>FeatureEncoder::get_feature_dimension</qualifiedname>
+                <briefdescription>
+                    <para>Gets the dimension of the encoded feature vector.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>
+                        <simplesect kind="return">
+                            <para>The total number of features.</para>
+                        </simplesect>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="51" column="12" bodyfile="FeatureEncoder.cpp"
+                          bodystart="38" bodyend="40"/>
+            </memberdef>
+            <memberdef kind="function" id="classFeatureEncoder_1aaa3ef6109c0b8e2d4b00f98e146d3830" prot="public"
+                       static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::vector&lt; float &gt;</type>
+                <definition>std::vector&lt; float &gt; FeatureEncoder::encode_features</definition>
+                <argsstring>(const std::unordered_map&lt; std::string, std::string &gt; &amp;attrs)</argsstring>
+                <name>encode_features</name>
+                <qualifiedname>FeatureEncoder::encode_features</qualifiedname>
+                <param>
+                    <type>const std::unordered_map&lt; std::string, std::string &gt; &amp;</type>
+                    <declname>attrs</declname>
+                </param>
+                <briefdescription>
+                    <para>Encodes a set of network connection attributes into a numerical feature vector.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>attrs</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>A map of connection attributes.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                        <simplesect kind="return">
+                            <para>A vector of float values representing the encoded features.</para>
+                        </simplesect>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="59" column="17" bodyfile="FeatureEncoder.cpp"
+                          bodystart="50" bodyend="108"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="public-static-func">
+            <memberdef kind="function" id="classFeatureEncoder_1a92aadd6c0de44aac9ed1f854048e82bb" prot="public"
+                       static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::vector&lt; std::string &gt;</type>
+                <definition>std::vector&lt; std::string &gt; FeatureEncoder::get_feature_names</definition>
+                <argsstring>()</argsstring>
+                <name>get_feature_names</name>
+                <qualifiedname>FeatureEncoder::get_feature_names</qualifiedname>
+                <briefdescription>
+                    <para>Returns the names of the features used in the encoded feature vector.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>The order of names corresponds to the order of features in the encoded vector.
+                        <simplesect kind="return">
+                            <para>A vector of strings representing the names of the encoded features.</para>
+                        </simplesect>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="67" column="24" bodyfile="FeatureEncoder.cpp"
+                          bodystart="110" bodyend="138"/>
+            </memberdef>
+            <memberdef kind="function" id="classFeatureEncoder_1a28d3e22e320c0a37824c6b0762f7ba35" prot="public"
+                       static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>std::string</type>
+                <definition>std::string FeatureEncoder::get_feature_name</definition>
+                <argsstring>(size_t index)</argsstring>
+                <name>get_feature_name</name>
+                <qualifiedname>FeatureEncoder::get_feature_name</qualifiedname>
+                <param>
+                    <type>size_t</type>
+                    <declname>index</declname>
+                </param>
+                <briefdescription>
+                    <para>Get the name for a specific feature index.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>index</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>The feature index.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                        <simplesect kind="return">
+                            <para>Name of the feature at that index.</para>
+                        </simplesect>
+                        <parameterlist kind="exception">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>std::out_of_range</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>if index is invalid.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/FeatureEncoder.h" line="76" column="24" bodyfile="FeatureEncoder.cpp"
+                          bodystart="140" bodyend="146"/>
+            </memberdef>
+        </sectiondef>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <collaborationgraph>
+            <node id="1">
+                <label>FeatureEncoder</label>
+                <link refid="classFeatureEncoder"/>
+            </node>
+        </collaborationgraph>
+        <location file="includes/FeatureEncoder.h" line="21" column="1" bodyfile="includes/FeatureEncoder.h"
+                  bodystart="21" bodyend="77"/>
+        <listofallmembers>
+            <member refid="classFeatureEncoder_1a21438731d8a3773569af79776bf1acb6" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>conn_state_map</name>
+            </member>
+            <member refid="classFeatureEncoder_1aaa3ef6109c0b8e2d4b00f98e146d3830" prot="public" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>encode_features</name>
+            </member>
+            <member refid="classFeatureEncoder_1a796843aa28a1d3fbeb89816ca9617364" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>feature_dimension</name>
+            </member>
+            <member refid="classFeatureEncoder_1afaf2be970998ea6430e5d17ea95d80a7" prot="public" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>FeatureEncoder</name>
+            </member>
+            <member refid="classFeatureEncoder_1a60fa681a32d45d2326c87167d6b1a049" prot="public" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>get_feature_dimension</name>
+            </member>
+            <member refid="classFeatureEncoder_1a28d3e22e320c0a37824c6b0762f7ba35" prot="public" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>get_feature_name</name>
+            </member>
+            <member refid="classFeatureEncoder_1a92aadd6c0de44aac9ed1f854048e82bb" prot="public" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>get_feature_names</name>
+            </member>
+            <member refid="classFeatureEncoder_1a5408bfac0709d29e3b5aec87e816da35" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>NUM_CONN_STATE_CATEGORIES</name>
+            </member>
+            <member refid="classFeatureEncoder_1a467cf143f8c269649148b8c1ba36f2cf" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>NUM_PROTOCOL_CATEGORIES</name>
+            </member>
+            <member refid="classFeatureEncoder_1af9f62893e0a7b731dc8b2cda82eee140" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>NUM_SSL_VERSION_CATEGORIES</name>
+            </member>
+            <member refid="classFeatureEncoder_1a5052b734770e210f37ae34e180eb0dc3" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>NUM_USER_AGENT_CATEGORIES</name>
+            </member>
+            <member refid="classFeatureEncoder_1ad5c46bc20ebd688f51ea40e1e079a81f" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>one_hot</name>
+            </member>
+            <member refid="classFeatureEncoder_1abcd8f527f2c836c519287b6b999d68cf" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>protocol_map</name>
+            </member>
+            <member refid="classFeatureEncoder_1afdb30a4ee39e26c2477d9e53307c8543" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>ssl_version_map</name>
+            </member>
+            <member refid="classFeatureEncoder_1a3d9a66feaff85c726af1fa2d84161fc1" prot="private" virt="non-virtual">
+                <scope>FeatureEncoder</scope>
+                <name>user_agent_map</name>
+            </member>
+        </listofallmembers>
+    </compounddef>
+</doxygen>

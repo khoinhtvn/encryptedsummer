@@ -1,166 +1,247 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: includes/GraphNode.h File Reference</title>
-<link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
-<link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
-<script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-  $(function() { init_search(); });
-/* @license-end */
-</script>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <meta content="text/xhtml;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="IE=11" http-equiv="X-UA-Compatible"/>
+    <meta content="Doxygen 1.13.2" name="generator"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>My Project: includes/GraphNode.h File Reference</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="dynsections.js" type="text/javascript"></script>
+    <script src="clipboard.js" type="text/javascript"></script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+    <script src="navtreedata.js" type="text/javascript"></script>
+    <script src="navtree.js" type="text/javascript"></script>
+    <script src="resize.js" type="text/javascript"></script>
+    <script src="cookie.js" type="text/javascript"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+    <script src="search/searchdata.js" type="text/javascript"></script>
+    <script src="search/search.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            init_search();
+        });
+        /* @license-end */
+    </script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
-<div id="titlearea">
-<table cellspacing="0" cellpadding="0">
- <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
-   <div id="projectname">My Project
-   </div>
-  </td>
-    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+    <div id="titlearea">
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr id="projectrow">
+                <td id="projectalign">
+                    <div id="projectname">My Project
+                    </div>
+                </td>
+                <td>
+                    <div class="MSearchBoxInactive" id="MSearchBox">
         <span class="left">
-          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" onmouseout="return searchBox.OnSearchSelectHide()"
+                onmouseover="return searchBox.OnSearchSelectShow()">&#160;</span>
+          <input accesskey="S" id="MSearchField" onblur="searchBox.OnSearchFieldFocus(false)" onfocus="searchBox.OnSearchFieldFocus(true)" onkeyup="searchBox.OnSearchFieldChange(event)"
+                 placeholder="Search"
+                 type="text"
+                 value=""/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+            <a href="javascript:searchBox.CloseResultsWindow()" id="MSearchClose"><img alt="" border="0"
+                                                                                       id="MSearchCloseImg"
+                                                                                       src="search/close.svg"/></a>
           </span>
-        </div>
-</td>
- </tr>
- </tbody>
-</table>
-</div>
-<!-- end header part -->
-<!-- Generated by Doxygen 1.13.2 -->
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
-</script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
-</script>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
+    <!-- end header part -->
+    <!-- Generated by Doxygen 1.13.2 -->
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        var searchBox = new SearchBox("searchBox", "search/", '.html');
+        /* @license-end */
+    </script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            codefold.init(0);
+        });
+        /* @license-end */
+    </script>
+</div><!-- top -->
+<div class="ui-resizable side-nav-resizable" id="side-nav">
+    <div id="nav-tree">
+        <div id="nav-tree-contents">
+            <div class="sync" id="nav-sync"></div>
+        </div>
+    </div>
+    <div class="ui-resizable-handle" id="splitbar"
+         style="-moz-user-select:none;">
+    </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('GraphNode_8h.html',''); initResizable(true); });
-/* @license-end */
+    /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+    $(function () {
+        initNavTree('GraphNode_8h.html', '');
+        initResizable(true);
+    });
+    /* @license-end */
 </script>
 <div id="doc-content">
-<!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+    <!-- window showing the filter options -->
+    <div id="MSearchSelectWindow"
+         onkeydown="return searchBox.OnSearchSelectKey(event)"
+         onmouseout="return searchBox.OnSearchSelectHide()"
+         onmouseover="return searchBox.OnSearchSelectShow()">
+    </div>
 
-<!-- iframe showing the search results (closed by default) -->
-<div id="MSearchResultsWindow">
-<div id="MSearchResults">
-<div class="SRPage">
-<div id="SRIndex">
-<div id="SRResults"></div>
-<div class="SRStatus" id="Loading">Loading...</div>
-<div class="SRStatus" id="Searching">Searching...</div>
-<div class="SRStatus" id="NoMatches">No Matches</div>
-</div>
-</div>
-</div>
-</div>
+    <!-- iframe showing the search results (closed by default) -->
+    <div id="MSearchResultsWindow">
+        <div id="MSearchResults">
+            <div class="SRPage">
+                <div id="SRIndex">
+                    <div id="SRResults"></div>
+                    <div class="SRStatus" id="Loading">Loading...</div>
+                    <div class="SRStatus" id="Searching">Searching...</div>
+                    <div class="SRStatus" id="NoMatches">No Matches</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
-  <div class="headertitle"><div class="title">GraphNode.h File Reference</div></div>
-</div><!--header-->
-<div class="contents">
-<div class="textblock"><code>#include &lt;atomic&gt;</code><br />
-<code>#include &lt;map&gt;</code><br />
-<code>#include &lt;queue&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for GraphNode.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="GraphNode_8h__incl.png" border="0" usemap="#aincludes_2GraphNode_8h" alt=""/></div>
-<map name="aincludes_2GraphNode_8h" id="aincludes_2GraphNode_8h">
-<area shape="rect" title=" " alt="" coords="79,5,244,31"/>
-<area shape="rect" title=" " alt="" coords="5,79,72,104"/>
-<area shape="poly" title=" " alt="" coords="143,33,72,74,69,69,140,28"/>
-<area shape="rect" title=" " alt="" coords="96,79,147,104"/>
-<area shape="poly" title=" " alt="" coords="157,32,137,68,132,65,152,30"/>
-<area shape="rect" title=" " alt="" coords="171,79,234,104"/>
-<area shape="poly" title=" " alt="" coords="170,30,191,65,187,68,166,32"/>
-<area shape="rect" title=" " alt="" coords="258,79,382,104"/>
-<area shape="poly" title=" " alt="" coords="188,28,283,71,281,75,186,33"/>
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="GraphNode_8h__dep__incl.png" border="0" usemap="#aincludes_2GraphNode_8hdep" alt=""/></div>
-<map name="aincludes_2GraphNode_8hdep" id="aincludes_2GraphNode_8hdep">
-<area shape="rect" title=" " alt="" coords="156,5,321,31"/>
-<area shape="rect" href="GraphNode_8cpp.html" title=" " alt="" coords="5,79,128,104"/>
-<area shape="poly" title=" " alt="" coords="200,38,96,81,94,76,198,33"/>
-<area shape="rect" href="TrafficGraph_8cpp.html" title=" " alt="" coords="286,152,413,177"/>
-<area shape="poly" title=" " alt="" coords="215,42,202,56,192,72,188,88,193,103,211,122,235,137,260,147,286,154,285,159,259,152,232,142,208,126,188,105,183,88,187,70,198,53,212,38"/>
-<area shape="rect" href="GraphUpdateQueue_8h.html" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates." alt="" coords="203,79,423,104"/>
-<area shape="poly" title=" " alt="" coords="262,38,303,77,299,80,259,42"/>
-<area shape="rect" href="TrafficGraph_8h.html" title=" " alt="" coords="448,79,619,104"/>
-<area shape="poly" title=" " alt="" coords="300,31,486,76,485,81,298,36"/>
-<area shape="poly" title=" " alt="" coords="492,111,380,154,378,149,490,106"/>
-</map>
-</div>
-</div>
-<p><a href="GraphNode_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphNode.html">GraphNode</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a node in the network traffic graph.  <a href="classGraphNode.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+    <div class="header">
+        <div class="summary">
+            <a href="#nested-classes">Classes</a></div>
+        <div class="headertitle">
+            <div class="title">GraphNode.h File Reference</div>
+        </div>
+    </div><!--header-->
+    <div class="contents">
+        <div class="textblock"><code>#include &lt;atomic&gt;</code><br/>
+            <code>#include &lt;map&gt;</code><br/>
+            <code>#include &lt;unordered_map&gt;</code><br/>
+            <code>#include &lt;vector&gt;</code><br/>
+            <code>#include &lt;chrono&gt;</code><br/>
+            <code>#include &lt;mutex&gt;</code><br/>
+            <code>#include &lt;queue&gt;</code><br/>
+            <code>#include &lt;set&gt;</code><br/>
+            <code>#include &lt;string&gt;</code><br/>
+            <code>#include &lt;sstream&gt;</code><br/>
+            <code>#include &lt;iomanip&gt;</code><br/>
+        </div>
+        <div class="textblock">
+            <div class="dynheader">
+                Include dependency graph for GraphNode.h:
+            </div>
+            <div class="dyncontent">
+                <div class="center"><img alt="" border="0" src="GraphNode_8h__incl.png"
+                                         usemap="#aincludes_2GraphNode_8h"/></div>
+                <map id="aincludes_2GraphNode_8h" name="aincludes_2GraphNode_8h">
+                    <area alt="" coords="447,5,612,31" shape="rect" title=" "/>
+                    <area alt="" coords="5,79,72,104" shape="rect" title=" "/>
+                    <area alt="" coords="447,30,284,50,86,81,85,76,283,45,446,25" shape="poly" title=" "/>
+                    <area alt="" coords="96,79,147,104" shape="rect" title=" "/>
+                    <area alt="" coords="447,32,316,51,161,81,160,76,315,46,446,27" shape="poly" title=" "/>
+                    <area alt="" coords="171,79,295,104" shape="rect" title=" "/>
+                    <area alt="" coords="482,33,295,78,294,73,481,28" shape="poly" title=" "/>
+                    <area alt="" coords="319,79,382,104" shape="rect" title=" "/>
+                    <area alt="" coords="502,33,393,76,391,71,500,28" shape="poly" title=" "/>
+                    <area alt="" coords="407,79,473,104" shape="rect" title=" "/>
+                    <area alt="" coords="517,33,467,72,464,68,513,29" shape="poly" title=" "/>
+                    <area alt="" coords="497,79,561,104" shape="rect" title=" "/>
+                    <area alt="" coords="532,31,532,65,527,65,527,31" shape="poly" title=" "/>
+                    <area alt="" coords="586,79,649,104" shape="rect" title=" "/>
+                    <area alt="" coords="545,29,594,68,591,72,542,33" shape="poly" title=" "/>
+                    <area alt="" coords="673,79,716,104" shape="rect" title=" "/>
+                    <area alt="" coords="557,28,662,73,660,78,555,33" shape="poly" title=" "/>
+                    <area alt="" coords="740,79,799,104" shape="rect" title=" "/>
+                    <area alt="" coords="569,28,728,75,726,80,567,33" shape="poly" title=" "/>
+                    <area alt="" coords="823,79,897,104" shape="rect" title=" "/>
+                    <area alt="" coords="585,28,810,76,809,81,584,33" shape="poly" title=" "/>
+                    <area alt="" coords="921,79,996,104" shape="rect" title=" "/>
+                    <area alt="" coords="613,28,747,48,908,76,907,81,746,53,612,33" shape="poly" title=" "/>
+                </map>
+            </div>
+        </div>
+        <div class="textblock">
+            <div class="dynheader">
+                This graph shows which files directly or indirectly include this file:
+            </div>
+            <div class="dyncontent">
+                <div class="center"><img alt="" border="0"
+                                         src="GraphNode_8h__dep__incl.png" usemap="#aincludes_2GraphNode_8hdep"/></div>
+                <map id="aincludes_2GraphNode_8hdep" name="aincludes_2GraphNode_8hdep">
+                    <area alt="" coords="249,5,414,31" shape="rect" title=" "/>
+                    <area alt="" coords="5,79,148,104" href="GraphExporter_8cpp.html" shape="rect" title=" "/>
+                    <area alt="" coords="278,37,119,81,117,76,276,32" shape="poly" title=" "/>
+                    <area alt="" coords="173,79,295,104" href="GraphNode_8cpp.html" shape="rect" title=" "/>
+                    <area alt="" coords="306,41,251,81,248,76,303,37" shape="poly" title=" "/>
+                    <area alt="" coords="320,79,540,104"
+                          href="GraphUpdateQueue_8h.html"
+                          shape="rect" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates."/>
+                    <area alt="" coords="360,36,415,76,412,81,356,41" shape="poly" title=" "/>
+                    <area alt="" coords="565,79,735,104" href="TrafficGraph_8h.html" shape="rect" title=" "/>
+                    <area alt="" coords="396,31,599,76,598,81,395,36" shape="poly" title=" "/>
+                </map>
+            </div>
+        </div>
+        <p><a href="GraphNode_8h_source.html">Go to the source code of this file.</a></p>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+                    Classes</h2></td>
+            </tr>
+            <tr class="memitem:">
+                <td align="right" class="memItemLeft" valign="top">class &#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="classGraphNode.html">GraphNode</a></td>
+            </tr>
+            <tr class="separator:">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:">
+                <td align="right" class="memItemLeft" valign="top">struct &#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="structGraphNode_1_1NodeFeatures.html">GraphNode::NodeFeatures</a>
+                </td>
+            </tr>
+            <tr class="memdesc:">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Structure to hold various features of the network node. <a
+                        href="structGraphNode_1_1NodeFeatures.html#details">More...</a><br/></td>
+            </tr>
+            <tr class="separator:">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:">
+                <td align="right" class="memItemLeft" valign="top">struct &#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="structGraphNode_1_1TemporalFeatures.html">GraphNode::TemporalFeatures</a>
+                </td>
+            </tr>
+            <tr class="memdesc:">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Structure to hold temporal features of the network node. <a
+                        href="structGraphNode_1_1TemporalFeatures.html#details">More...</a><br/></td>
+            </tr>
+            <tr class="separator:">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+    </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li><li class="navelem"><a class="el" href="GraphNode_8h.html">GraphNode.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
-  </ul>
+<div class="navpath" id="nav-path"><!-- id is needed for treeview function! -->
+    <ul>
+        <li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li>
+        <li class="navelem"><a class="el" href="GraphNode_8h.html">GraphNode.h</a></li>
+        <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img alt="doxygen"
+                                                                                          class="footer" height="31"
+                                                                                          src="doxygen.svg"
+                                                                                          width="104"/></a> 1.13.2
+        </li>
+    </ul>
 </div>
 </body>
 </html>

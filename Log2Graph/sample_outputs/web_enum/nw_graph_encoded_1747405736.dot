@@ -1,5 +1,0 @@
-digraph NWTraffic_update {
-  "fe80::bc67:c5ff:fecc:13cb" [degree=2, in_degree=0, out_degree=2, activity_score=0.19, total_connections=2];
-  "ff02::2" [degree=2, in_degree=2, out_degree=0, activity_score=0.19, total_connections=2];
-  "fe80::bc67:c5ff:fecc:13cb" -> "ff02::2" [protocol_UNKNOWN=0.00,protocol_TCP=0.00,protocol_UDP=0.00,protocol_ICMP=1.00,timestamp_sin=-0.60,timestamp_cos=-0.80,src_port_type=0.00,dst_port_type=0.00,conn_state_successful=0.00,conn_state_rejected_reset=0.00,conn_state_partial=0.00,conn_state_suspicious=0.00,conn_state_other=1.00,local_orig=1.00,local_resp=0.00,history_length=0.10,orig_bytes=0.00,resp_bytes=0.00,orig_pkts=0.05,resp_pkts=0.00,orig_ip_bytes=0.29,resp_ip_bytes=0.00,service_HTTP=0.00,service_FTP=0.00,service_SSH=0.00,service_DNS=0.00,service_UNKNOWN=1.00  ];
-}

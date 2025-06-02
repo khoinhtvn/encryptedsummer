@@ -1,0 +1,66 @@
+\doxysection{Log\+Entry Struct Reference}
+\hypertarget{structLogEntry}{}\label{structLogEntry}\index{LogEntry@{LogEntry}}
+
+
+Represents a parsed log entry.  
+
+
+
+
+{\ttfamily \#include $<$Zeek\+Log\+Parser.\+h$>$}
+
+
+
+Collaboration diagram for Log\+Entry\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structLogEntry__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{structLogEntry_a8d0edc412501a60ec6d9a21548f04528}{log\+\_\+type}}
+\item 
+std\+::map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{structLogEntry_ac8d4448ecf2ad0845d6c1c6c611e946a}{data}}
+\item 
+std\+::map$<$ std\+::string, std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{structLogEntry_ae9f734f9dab615e36a3861964ff49a34}{list\+\_\+data}}
+\item 
+std\+::map$<$ std\+::string, std\+::set$<$ std\+::string $>$ $>$ \mbox{\hyperlink{structLogEntry_a42700d8758ee45a0e45ede3b94d1aa45}{set\+\_\+data}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a parsed log entry. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structLogEntry_ac8d4448ecf2ad0845d6c1c6c611e946a}\index{LogEntry@{LogEntry}!data@{data}}
+\index{data@{data}!LogEntry@{LogEntry}}
+\doxysubsubsection{\texorpdfstring{data}{data}}
+{\footnotesize\ttfamily \label{structLogEntry_ac8d4448ecf2ad0845d6c1c6c611e946a} 
+std\+::map$<$std\+::string, std\+::string$>$ Log\+Entry\+::data}
+
+\Hypertarget{structLogEntry_ae9f734f9dab615e36a3861964ff49a34}\index{LogEntry@{LogEntry}!list\_data@{list\_data}}
+\index{list\_data@{list\_data}!LogEntry@{LogEntry}}
+\doxysubsubsection{\texorpdfstring{list\_data}{list\_data}}
+{\footnotesize\ttfamily \label{structLogEntry_ae9f734f9dab615e36a3861964ff49a34} 
+std\+::map$<$std\+::string, std\+::vector$<$std\+::string$>$ $>$ Log\+Entry\+::list\+\_\+data}
+
+\Hypertarget{structLogEntry_a8d0edc412501a60ec6d9a21548f04528}\index{LogEntry@{LogEntry}!log\_type@{log\_type}}
+\index{log\_type@{log\_type}!LogEntry@{LogEntry}}
+\doxysubsubsection{\texorpdfstring{log\_type}{log\_type}}
+{\footnotesize\ttfamily \label{structLogEntry_a8d0edc412501a60ec6d9a21548f04528} 
+std\+::string Log\+Entry\+::log\+\_\+type}
+
+\Hypertarget{structLogEntry_a42700d8758ee45a0e45ede3b94d1aa45}\index{LogEntry@{LogEntry}!set\_data@{set\_data}}
+\index{set\_data@{set\_data}!LogEntry@{LogEntry}}
+\doxysubsubsection{\texorpdfstring{set\_data}{set\_data}}
+{\footnotesize\ttfamily \label{structLogEntry_a42700d8758ee45a0e45ede3b94d1aa45} 
+std\+::map$<$std\+::string, std\+::set$<$std\+::string$>$ $>$ Log\+Entry\+::set\+\_\+data}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{ZeekLogParser_8h}{Zeek\+Log\+Parser.\+h}}\end{DoxyCompactItemize}

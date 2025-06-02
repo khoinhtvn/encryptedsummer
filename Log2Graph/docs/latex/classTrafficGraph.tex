@@ -2,11 +2,6 @@
 \hypertarget{classTrafficGraph}{}\label{classTrafficGraph}\index{TrafficGraph@{TrafficGraph}}
 
 
-Represents the entire network traffic graph.  
-
-
-
-
 {\ttfamily \#include $<$Traffic\+Graph.\+h$>$}
 
 
@@ -15,254 +10,113 @@ Collaboration diagram for Traffic\+Graph\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=248pt]{classTrafficGraph__coll__graph}
+\includegraphics[width=213pt]{classTrafficGraph__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classTrafficGraph_aa52225cd200774fe315bfcf344635fc9}{Traffic\+Graph}} ()
-\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classTrafficGraph}{Traffic\+Graph}. \end{DoxyCompactList}\item 
-\mbox{\hyperlink{classTrafficGraph_a0bbbfe4c14d9611db5060a1af21e3948}{\texorpdfstring{$\sim$}{\string~}\+Traffic\+Graph}} ()
-\begin{DoxyCompactList}\small\item\em Destructor for the \doxylink{classTrafficGraph}{Traffic\+Graph}. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classTrafficGraph_af58889777778f47f1d1692b03ab190c8}{clean\+\_\+all\+\_\+time\+\_\+windows}} ()
-\begin{DoxyCompactList}\small\item\em Cleans up the minute and hour time windows for all nodes in the graph. \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{classTrafficGraph_ae29bbb7c163056228cb8fa23fcb12795}{add\+\_\+node}} (const std\+::string \&id, const std\+::string \&type)
-\begin{DoxyCompactList}\small\item\em Adds a new node to the graph. \end{DoxyCompactList}\item 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ \mbox{\hyperlink{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153}{add\+\_\+edge}} (const std\+::string \&src, const std\+::string \&tgt, const std\+::string \&rel, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&attrs=\{\}, std\+::vector$<$ float $>$ encoded\+\_\+features=\{\})
-\begin{DoxyCompactList}\small\item\em Adds a new edge to the graph. \end{DoxyCompactList}\item 
-std\+::pair$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} \&, bool $>$ \mbox{\hyperlink{classTrafficGraph_a4fe8bf82ebe5a118c488142e2a0a0711}{get\+\_\+or\+\_\+create\+\_\+node}} (const std\+::string \&id, const std\+::string \&type)
-\begin{DoxyCompactList}\small\item\em Retrieves an existing node or creates a new one if it doesn\textquotesingle{}t exist. \end{DoxyCompactList}\item 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ \mbox{\hyperlink{classTrafficGraph_a050fc4ccd24adf28afb04769841bd738}{get\+\_\+node\+\_\+reference}} (const std\+::string \&id)
-\begin{DoxyCompactList}\small\item\em Retrieves a weak reference to an existing node. Used to create updatre queue. \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ $>$ \mbox{\hyperlink{classTrafficGraph_a503a7eb165f5df6b3099b10e71774735}{get\+\_\+nodes}} () const
-\begin{DoxyCompactList}\small\item\em Gets a vector of all nodes in the graph. \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ $>$ \mbox{\hyperlink{classTrafficGraph_a9537afb96e766b4d910038a7b503af7f}{get\+\_\+edges}} () const
-\begin{DoxyCompactList}\small\item\em Gets a vector of all edges in the graph. \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classTrafficGraph_aff5c1921c0c1614230fa3c43b215b320}{find\+\_\+connected\+\_\+components}} () const
-\begin{DoxyCompactList}\small\item\em Finds the connected components of the graph. \end{DoxyCompactList}\item 
-std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classTrafficGraph_a1d46ea0525b6507283b5806a6abffe3f}{detect\+\_\+anomalies}} () const
-\begin{DoxyCompactList}\small\item\em Detects anomalous nodes in the graph based on certain criteria. \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classTrafficGraph_ae485051f1b4e6f8cbb91ad7d89dc89b1}{is\+\_\+empty}} () const
-\begin{DoxyCompactList}\small\item\em Checks if the graph contains any nodes. \end{DoxyCompactList}\end{DoxyCompactItemize}
-\doxysubsubsection*{Friends}
-\begin{DoxyCompactItemize}
 \item 
-class \mbox{\hyperlink{classTrafficGraph_a1134b1f485145d7ba90b1075ec058533}{Real\+Time\+Anomaly\+Detector}}
-\begin{DoxyCompactList}\small\item\em Friend class allowing the anomaly detector to access the graph\textquotesingle{}s internal data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\mbox{\hyperlink{classTrafficGraph_a0bbbfe4c14d9611db5060a1af21e3948}{\texorpdfstring{$\sim$}{\string~}\+Traffic\+Graph}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ \mbox{\hyperlink{classTrafficGraph_aaa78dc30cf3211a8b1ff008e6e821fda}{get\+\_\+or\+\_\+create\+\_\+node}} (const std\+::string \&id, const std\+::string \&type)
+\item 
+void \mbox{\hyperlink{classTrafficGraph_a6103742580d1f6b65cad221f93dd5ac0}{add\+\_\+node}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ node)
+\item 
+void \mbox{\hyperlink{classTrafficGraph_a10ccbf8d4890bf2a6f2673aa74a85641}{add\+\_\+edge}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ edge)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ \mbox{\hyperlink{classTrafficGraph_a58a9e792e9d07459b1e6fee1f08efb48}{get\+\_\+node}} (const std\+::string \&id) const
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ $>$ \mbox{\hyperlink{classTrafficGraph_a503a7eb165f5df6b3099b10e71774735}{get\+\_\+nodes}} () const
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ $>$ \mbox{\hyperlink{classTrafficGraph_a9537afb96e766b4d910038a7b503af7f}{get\+\_\+edges}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classTrafficGraph_afe15319ddc0ebf3f9f03c80709c66e74}{get\+\_\+node\+\_\+count}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classTrafficGraph_a8038d37fa4975dd955870c61143b5432}{get\+\_\+edge\+\_\+count}} () const
+\item 
+bool \mbox{\hyperlink{classTrafficGraph_ae485051f1b4e6f8cbb91ad7d89dc89b1}{is\+\_\+empty}} () const
+\item 
+void \mbox{\hyperlink{classTrafficGraph_a7cbeed5458946820039e11f5d9665a37}{aggregate\+\_\+old\+\_\+edges}} (std\+::chrono\+::seconds age\+\_\+threshold)
+\end{DoxyCompactItemize}
 
-
-\doxysubsection{Detailed Description}
-Represents the entire network traffic graph. 
-
-The {\ttfamily \doxylink{classTrafficGraph}{Traffic\+Graph}} class manages a collection of {\ttfamily \doxylink{classGraphNode}{Graph\+Node}} and {\ttfamily \doxylink{classGraphEdge}{Graph\+Edge}} objects, providing methods to add nodes and edges, access the graph data, and perform graph-\/based analysis. It also includes a background thread for maintenance tasks. 
 
 \doxysubsection{Constructor \& Destructor Documentation}
 \Hypertarget{classTrafficGraph_aa52225cd200774fe315bfcf344635fc9}\index{TrafficGraph@{TrafficGraph}!TrafficGraph@{TrafficGraph}}
 \index{TrafficGraph@{TrafficGraph}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{TrafficGraph()}{TrafficGraph()}}
 {\footnotesize\ttfamily \label{classTrafficGraph_aa52225cd200774fe315bfcf344635fc9} 
-Traffic\+Graph\+::\+Traffic\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Traffic\+Graph\+::\+Traffic\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
-
-
-Constructor for the \doxylink{classTrafficGraph}{Traffic\+Graph}. 
-
-Initializes the maintenance thread, which periodically cleans up the time windows of all nodes in the graph. \Hypertarget{classTrafficGraph_a0bbbfe4c14d9611db5060a1af21e3948}\index{TrafficGraph@{TrafficGraph}!````~TrafficGraph@{\texorpdfstring{$\sim$}{\string~}TrafficGraph}}
+\Hypertarget{classTrafficGraph_a0bbbfe4c14d9611db5060a1af21e3948}\index{TrafficGraph@{TrafficGraph}!````~TrafficGraph@{\texorpdfstring{$\sim$}{\string~}TrafficGraph}}
 \index{````~TrafficGraph@{\texorpdfstring{$\sim$}{\string~}TrafficGraph}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TrafficGraph()}{\string~TrafficGraph()}}
 {\footnotesize\ttfamily \label{classTrafficGraph_a0bbbfe4c14d9611db5060a1af21e3948} 
-Traffic\+Graph\+::\texorpdfstring{$\sim$}{\string~}\+Traffic\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+Traffic\+Graph\+::\texorpdfstring{$\sim$}{\string~}\+Traffic\+Graph (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
 
 
-
-Destructor for the \doxylink{classTrafficGraph}{Traffic\+Graph}. 
-
-Stops the maintenance thread gracefully by setting the {\ttfamily running} flag to false and joining the thread. 
 
 \doxysubsection{Member Function Documentation}
-\Hypertarget{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153}\index{TrafficGraph@{TrafficGraph}!add\_edge@{add\_edge}}
+\Hypertarget{classTrafficGraph_a10ccbf8d4890bf2a6f2673aa74a85641}\index{TrafficGraph@{TrafficGraph}!add\_edge@{add\_edge}}
 \index{add\_edge@{add\_edge}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{add\_edge()}{add\_edge()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_a99df0f5fa9c14af4bc276659336de153} 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ Traffic\+Graph\+::add\+\_\+edge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{src}{, }\item[{const std\+::string \&}]{tgt}{, }\item[{const std\+::string \&}]{rel}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{attrs}{ = {\ttfamily \{\}}, }\item[{std\+::vector$<$ float $>$}]{encoded\+\_\+features}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classTrafficGraph_a10ccbf8d4890bf2a6f2673aa74a85641} 
+void Traffic\+Graph\+::add\+\_\+edge (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$}]{edge}{}\end{DoxyParamCaption})}
 
-
-
-Adds a new edge to the graph. 
-
-Creates a new {\ttfamily \doxylink{classGraphEdge}{Graph\+Edge}} object, adds it to the list of edges and returns a weak reference.
-
-
-\begin{DoxyParams}{Parameters}
-{\em src} & The identifier of the source node. \\
-\hline
-{\em tgt} & The identifier of the target node. \\
-\hline
-{\em rel} & The type of relationship between the nodes. \\
-\hline
-{\em attrs} & Optional attributes to associate with the edge. Defaults to an empty map. \\
-\hline
-{\em attrs} & Optional encoded featrures to associate with the edge. Defaults to an empty vector. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A weak reference to the \doxylink{classGraphEdge}{Graph\+Edge}. Useful for incremental updates. 
-\end{DoxyReturn}
-\Hypertarget{classTrafficGraph_ae29bbb7c163056228cb8fa23fcb12795}\index{TrafficGraph@{TrafficGraph}!add\_node@{add\_node}}
+\Hypertarget{classTrafficGraph_a6103742580d1f6b65cad221f93dd5ac0}\index{TrafficGraph@{TrafficGraph}!add\_node@{add\_node}}
 \index{add\_node@{add\_node}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{add\_node()}{add\_node()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_ae29bbb7c163056228cb8fa23fcb12795} 
-void Traffic\+Graph\+::add\+\_\+node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id}{, }\item[{const std\+::string \&}]{type}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classTrafficGraph_a6103742580d1f6b65cad221f93dd5ac0} 
+void Traffic\+Graph\+::add\+\_\+node (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$}]{node}{}\end{DoxyParamCaption})}
 
+\Hypertarget{classTrafficGraph_a7cbeed5458946820039e11f5d9665a37}\index{TrafficGraph@{TrafficGraph}!aggregate\_old\_edges@{aggregate\_old\_edges}}
+\index{aggregate\_old\_edges@{aggregate\_old\_edges}!TrafficGraph@{TrafficGraph}}
+\doxysubsubsection{\texorpdfstring{aggregate\_old\_edges()}{aggregate\_old\_edges()}}
+{\footnotesize\ttfamily \label{classTrafficGraph_a7cbeed5458946820039e11f5d9665a37} 
+void Traffic\+Graph\+::aggregate\+\_\+old\+\_\+edges (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{age\+\_\+threshold}{}\end{DoxyParamCaption})}
 
+\Hypertarget{classTrafficGraph_a8038d37fa4975dd955870c61143b5432}\index{TrafficGraph@{TrafficGraph}!get\_edge\_count@{get\_edge\_count}}
+\index{get\_edge\_count@{get\_edge\_count}!TrafficGraph@{TrafficGraph}}
+\doxysubsubsection{\texorpdfstring{get\_edge\_count()}{get\_edge\_count()}}
+{\footnotesize\ttfamily \label{classTrafficGraph_a8038d37fa4975dd955870c61143b5432} 
+size\+\_\+t Traffic\+Graph\+::get\+\_\+edge\+\_\+count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
-Adds a new node to the graph. 
-
-If a node with the given ID already exists, this method does nothing.
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & The unique identifier of the node to add. \\
-\hline
-{\em type} & The type of the node (e.\+g., "{}host"{}, "{}service"{}). \\
-\hline
-\end{DoxyParams}
-\Hypertarget{classTrafficGraph_af58889777778f47f1d1692b03ab190c8}\index{TrafficGraph@{TrafficGraph}!clean\_all\_time\_windows@{clean\_all\_time\_windows}}
-\index{clean\_all\_time\_windows@{clean\_all\_time\_windows}!TrafficGraph@{TrafficGraph}}
-\doxysubsubsection{\texorpdfstring{clean\_all\_time\_windows()}{clean\_all\_time\_windows()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_af58889777778f47f1d1692b03ab190c8} 
-void Traffic\+Graph\+::clean\+\_\+all\+\_\+time\+\_\+windows (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
-
-
-
-Cleans up the minute and hour time windows for all nodes in the graph. 
-
-This method acquires a shared lock on the graph and then iterates through all nodes, calling their {\ttfamily cleanup\+\_\+time\+\_\+windows()} method. \Hypertarget{classTrafficGraph_a1d46ea0525b6507283b5806a6abffe3f}\index{TrafficGraph@{TrafficGraph}!detect\_anomalies@{detect\_anomalies}}
-\index{detect\_anomalies@{detect\_anomalies}!TrafficGraph@{TrafficGraph}}
-\doxysubsubsection{\texorpdfstring{detect\_anomalies()}{detect\_anomalies()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_a1d46ea0525b6507283b5806a6abffe3f} 
-std\+::vector$<$ std\+::string $>$ Traffic\+Graph\+::detect\+\_\+anomalies (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
-
-
-
-Detects anomalous nodes in the graph based on certain criteria. 
-
-This method analyzes the features of the nodes (e.\+g., degree, activity score) to identify nodes that deviate significantly from the norm.
-
-\begin{DoxyReturn}{Returns}
-A vector of strings, where each string is the ID of an anomalous node. 
-\end{DoxyReturn}
-\Hypertarget{classTrafficGraph_aff5c1921c0c1614230fa3c43b215b320}\index{TrafficGraph@{TrafficGraph}!find\_connected\_components@{find\_connected\_components}}
-\index{find\_connected\_components@{find\_connected\_components}!TrafficGraph@{TrafficGraph}}
-\doxysubsubsection{\texorpdfstring{find\_connected\_components()}{find\_connected\_components()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_aff5c1921c0c1614230fa3c43b215b320} 
-std\+::vector$<$ std\+::string $>$ Traffic\+Graph\+::find\+\_\+connected\+\_\+components (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
-
-
-
-Finds the connected components of the graph. 
-
-This method performs a graph traversal (e.\+g., Depth-\/\+First Search or Breadth-\/\+First Search) to identify groups of nodes that are connected to each other.
-
-\begin{DoxyReturn}{Returns}
-A vector of vectors of strings, where each inner vector represents a connected component (e.\+g., by listing the IDs of the nodes in that component). 
-\end{DoxyReturn}
 \Hypertarget{classTrafficGraph_a9537afb96e766b4d910038a7b503af7f}\index{TrafficGraph@{TrafficGraph}!get\_edges@{get\_edges}}
 \index{get\_edges@{get\_edges}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{get\_edges()}{get\_edges()}}
 {\footnotesize\ttfamily \label{classTrafficGraph_a9537afb96e766b4d910038a7b503af7f} 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphEdge}{Graph\+Edge}} $>$ $>$ Traffic\+Graph\+::get\+\_\+edges (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
+\Hypertarget{classTrafficGraph_a58a9e792e9d07459b1e6fee1f08efb48}\index{TrafficGraph@{TrafficGraph}!get\_node@{get\_node}}
+\index{get\_node@{get\_node}!TrafficGraph@{TrafficGraph}}
+\doxysubsubsection{\texorpdfstring{get\_node()}{get\_node()}}
+{\footnotesize\ttfamily \label{classTrafficGraph_a58a9e792e9d07459b1e6fee1f08efb48} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ Traffic\+Graph\+::get\+\_\+node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id}{}\end{DoxyParamCaption}) const}
 
+\Hypertarget{classTrafficGraph_afe15319ddc0ebf3f9f03c80709c66e74}\index{TrafficGraph@{TrafficGraph}!get\_node\_count@{get\_node\_count}}
+\index{get\_node\_count@{get\_node\_count}!TrafficGraph@{TrafficGraph}}
+\doxysubsubsection{\texorpdfstring{get\_node\_count()}{get\_node\_count()}}
+{\footnotesize\ttfamily \label{classTrafficGraph_afe15319ddc0ebf3f9f03c80709c66e74} 
+size\+\_\+t Traffic\+Graph\+::get\+\_\+node\+\_\+count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
-Gets a vector of all edges in the graph. 
-
-Acquires a shared lock for read access before returning the edges.
-
-\begin{DoxyReturn}{Returns}
-A vector of shared pointers to all \doxylink{classGraphEdge}{Graph\+Edge} objects in the graph. 
-\end{DoxyReturn}
-\Hypertarget{classTrafficGraph_a050fc4ccd24adf28afb04769841bd738}\index{TrafficGraph@{TrafficGraph}!get\_node\_reference@{get\_node\_reference}}
-\index{get\_node\_reference@{get\_node\_reference}!TrafficGraph@{TrafficGraph}}
-\doxysubsubsection{\texorpdfstring{get\_node\_reference()}{get\_node\_reference()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_a050fc4ccd24adf28afb04769841bd738} 
-std\+::weak\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ Traffic\+Graph\+::get\+\_\+node\+\_\+reference (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id}{}\end{DoxyParamCaption})}
-
-
-
-Retrieves a weak reference to an existing node. Used to create updatre queue. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & The unique identifier of the node. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A reference to the \doxylink{classGraphNode}{Graph\+Node}. 
-\end{DoxyReturn}
 \Hypertarget{classTrafficGraph_a503a7eb165f5df6b3099b10e71774735}\index{TrafficGraph@{TrafficGraph}!get\_nodes@{get\_nodes}}
 \index{get\_nodes@{get\_nodes}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{get\_nodes()}{get\_nodes()}}
 {\footnotesize\ttfamily \label{classTrafficGraph_a503a7eb165f5df6b3099b10e71774735} 
 std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ $>$ Traffic\+Graph\+::get\+\_\+nodes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
 
-
-
-Gets a vector of all nodes in the graph. 
-
-Acquires a shared lock for read access before returning the nodes.
-
-\begin{DoxyReturn}{Returns}
-A vector of shared pointers to all \doxylink{classGraphNode}{Graph\+Node} objects in the graph. 
-\end{DoxyReturn}
-\Hypertarget{classTrafficGraph_a4fe8bf82ebe5a118c488142e2a0a0711}\index{TrafficGraph@{TrafficGraph}!get\_or\_create\_node@{get\_or\_create\_node}}
+\Hypertarget{classTrafficGraph_aaa78dc30cf3211a8b1ff008e6e821fda}\index{TrafficGraph@{TrafficGraph}!get\_or\_create\_node@{get\_or\_create\_node}}
 \index{get\_or\_create\_node@{get\_or\_create\_node}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{get\_or\_create\_node()}{get\_or\_create\_node()}}
-{\footnotesize\ttfamily \label{classTrafficGraph_a4fe8bf82ebe5a118c488142e2a0a0711} 
-std\+::pair$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} \&, bool $>$ Traffic\+Graph\+::get\+\_\+or\+\_\+create\+\_\+node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id}{, }\item[{const std\+::string \&}]{type}{}\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \label{classTrafficGraph_aaa78dc30cf3211a8b1ff008e6e821fda} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classGraphNode}{Graph\+Node}} $>$ Traffic\+Graph\+::get\+\_\+or\+\_\+create\+\_\+node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{id}{, }\item[{const std\+::string \&}]{type}{}\end{DoxyParamCaption})}
 
-
-
-Retrieves an existing node or creates a new one if it doesn\textquotesingle{}t exist. 
-
-This method first tries to find a node with the given ID. If found, it returns a reference to it. If not found, it creates a new node with the given ID and type, adds it to the graph, and then returns a reference to the newly created node.
-
-
-\begin{DoxyParams}{Parameters}
-{\em id} & The unique identifier of the node. \\
-\hline
-{\em type} & The type of the node. \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-A pair containing a reference to the \doxylink{classGraphNode}{Graph\+Node} and a boolean indicating if the node was freshly created. 
-\end{DoxyReturn}
 \Hypertarget{classTrafficGraph_ae485051f1b4e6f8cbb91ad7d89dc89b1}\index{TrafficGraph@{TrafficGraph}!is\_empty@{is\_empty}}
 \index{is\_empty@{is\_empty}!TrafficGraph@{TrafficGraph}}
 \doxysubsubsection{\texorpdfstring{is\_empty()}{is\_empty()}}
 {\footnotesize\ttfamily \label{classTrafficGraph_ae485051f1b4e6f8cbb91ad7d89dc89b1} 
 bool Traffic\+Graph\+::is\+\_\+empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
-
-
-
-Checks if the graph contains any nodes. 
-
-\begin{DoxyReturn}{Returns}
-True if the graph is empty (contains no nodes), false otherwise. 
-\end{DoxyReturn}
-
-
-\doxysubsection{Friends And Related Symbol Documentation}
-\Hypertarget{classTrafficGraph_a1134b1f485145d7ba90b1075ec058533}\index{TrafficGraph@{TrafficGraph}!RealTimeAnomalyDetector@{RealTimeAnomalyDetector}}
-\index{RealTimeAnomalyDetector@{RealTimeAnomalyDetector}!TrafficGraph@{TrafficGraph}}
-\doxysubsubsection{\texorpdfstring{RealTimeAnomalyDetector}{RealTimeAnomalyDetector}}
-{\footnotesize\ttfamily \label{classTrafficGraph_a1134b1f485145d7ba90b1075ec058533} 
-friend class \mbox{\hyperlink{classRealTimeAnomalyDetector}{Real\+Time\+Anomaly\+Detector}}\hspace{0.3cm}{\ttfamily [friend]}}
-
-
-
-Friend class allowing the anomaly detector to access the graph\textquotesingle{}s internal data. 
 
 
 

@@ -22,7 +22,14 @@ Collaboration diagram for Graph\+Edge\+:\nopagebreak
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classGraphEdge_a3cb272137fcf01bf7985e6ab17e71def}{Graph\+Edge}} (const std\+::string \&src, const std\+::string \&tgt, const std\+::string \&rel)
-\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphEdge}{Graph\+Edge}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Constructor for the \doxylink{classGraphEdge}{Graph\+Edge}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classGraphEdge_a0bb6c037458bc73a448aa771621df019}{to\+\_\+dot\+\_\+string}} () const
+\begin{DoxyCompactList}\small\item\em Generates a DOT format string representation of the edge, including its attributes and encoded features. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classGraphEdge_a66cb15ff27f3bed9df1809a614cb43f6}{escape\+\_\+dot\+\_\+string}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Escapes special characters in a string for DOT format. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -35,7 +42,9 @@ std\+::string \mbox{\hyperlink{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}
 std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}{attributes}}
 \begin{DoxyCompactList}\small\item\em Additional attributes associated with the edge. \end{DoxyCompactList}\item 
 std\+::vector$<$ float $>$ \mbox{\hyperlink{classGraphEdge_a6b6bacb716fb79e52b6b184f1c33b2cc}{encoded\+\_\+features}}
-\begin{DoxyCompactList}\small\item\em Encoded features, to feed to GAT. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Encoded features, to feed to GAT. \end{DoxyCompactList}\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classGraphEdge_a9cb0c4a71deae507aa42d738bd5a3b7f}{last\+\_\+seen}}
+\end{DoxyCompactItemize}
 
 
 \doxysubsection{Detailed Description}
@@ -65,6 +74,40 @@ Constructor for the \doxylink{classGraphEdge}{Graph\+Edge}.
 \end{DoxyParams}
 
 
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classGraphEdge_a66cb15ff27f3bed9df1809a614cb43f6}\index{GraphEdge@{GraphEdge}!escape\_dot\_string@{escape\_dot\_string}}
+\index{escape\_dot\_string@{escape\_dot\_string}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{escape\_dot\_string()}{escape\_dot\_string()}}
+{\footnotesize\ttfamily \label{classGraphEdge_a66cb15ff27f3bed9df1809a614cb43f6} 
+std\+::string Graph\+Edge\+::escape\+\_\+dot\+\_\+string (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Escapes special characters in a string for DOT format. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The input string to escape. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The escaped string. 
+\end{DoxyReturn}
+\Hypertarget{classGraphEdge_a0bb6c037458bc73a448aa771621df019}\index{GraphEdge@{GraphEdge}!to\_dot\_string@{to\_dot\_string}}
+\index{to\_dot\_string@{to\_dot\_string}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{to\_dot\_string()}{to\_dot\_string()}}
+{\footnotesize\ttfamily \label{classGraphEdge_a0bb6c037458bc73a448aa771621df019} 
+std\+::string Graph\+Edge\+::to\+\_\+dot\+\_\+string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Generates a DOT format string representation of the edge, including its attributes and encoded features. 
+
+/\texorpdfstring{$\ast$}{*}\texorpdfstring{$\ast$}{*} \begin{DoxyReturn}{Returns}
+A string in DOT format representing the edge. 
+\end{DoxyReturn}
+
+
 \doxysubsection{Member Data Documentation}
 \Hypertarget{classGraphEdge_a7a0dcb05bfdb31ed7735a746b13be8d6}\index{GraphEdge@{GraphEdge}!attributes@{attributes}}
 \index{attributes@{attributes}!GraphEdge@{GraphEdge}}
@@ -85,6 +128,12 @@ std\+::vector$<$float$>$ Graph\+Edge\+::encoded\+\_\+features}
 
 
 Encoded features, to feed to GAT. 
+
+\Hypertarget{classGraphEdge_a9cb0c4a71deae507aa42d738bd5a3b7f}\index{GraphEdge@{GraphEdge}!last\_seen@{last\_seen}}
+\index{last\_seen@{last\_seen}!GraphEdge@{GraphEdge}}
+\doxysubsubsection{\texorpdfstring{last\_seen}{last\_seen}}
+{\footnotesize\ttfamily \label{classGraphEdge_a9cb0c4a71deae507aa42d738bd5a3b7f} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point Graph\+Edge\+::last\+\_\+seen}
 
 \Hypertarget{classGraphEdge_ad3ce59edfe79128ddd587bc3df2c3370}\index{GraphEdge@{GraphEdge}!relationship@{relationship}}
 \index{relationship@{relationship}!GraphEdge@{GraphEdge}}
@@ -118,6 +167,7 @@ Identifier of the target node.
 
 
 
-The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
 \item 
-includes/\mbox{\hyperlink{GraphEdge_8h}{Graph\+Edge.\+h}}\end{DoxyCompactItemize}
+includes/\mbox{\hyperlink{GraphEdge_8h}{Graph\+Edge.\+h}}\item 
+\mbox{\hyperlink{GraphEdge_8cpp}{Graph\+Edge.\+cpp}}\end{DoxyCompactItemize}

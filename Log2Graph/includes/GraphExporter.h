@@ -1,11 +1,4 @@
-/**
- * @file GraphExporter.h
- * @brief Header file for the GraphExporter class, responsible for visualizing the network traffic graph.
- *
- * This file defines the `GraphExporter` class, which uses the Graphviz library
- * to generate visual representations of the `TrafficGraph`.
- */
-
+//
 // Created by lu on 4/28/25.
 //
 
@@ -13,136 +6,106 @@
 #define GRAPH_EXPORTER_H
 
 #include "GraphBuilder.h"
-#include <graphviz/gvc.h>
 #include <string>
 #include <memory>
-
-#include "GraphBuilder.h" // Self-include is unusual and likely unintentional. Remove in actual code.
+#include <future>
+#include <fstream> // For file output
 
 /**
- * @brief Class responsible for visualizing the network traffic graph using Graphviz.
+ * @brief Class responsible for exporting the network traffic graph with encoded features.
  *
- * The `GraphExporter` class takes a `TrafficGraph` object and renders it as a visual
- * representation, typically saving it as a PNG image. It utilizes the Graphviz library
- * for graph layout and rendering.
+ * The `GraphExporter` class takes a `TrafficGraph` object and exports its nodes and
+ * edges with their encoded features to a DOT file.
  */
 class GraphExporter {
 public:
     /**
      * @brief Constructor for the GraphExporter.
-     *
-     * Initializes the Graphviz context (`GVC_t`).
      */
     GraphExporter();
 
     /**
      * @brief Destructor for the GraphExporter.
-     *
-     * Releases the Graphviz context to free allocated resources.
      */
     ~GraphExporter();
 
     /**
-     * @brief Visualizes the given traffic graph and saves it to a file.
+     * @brief Exports the full traffic graph with encoded node and edge features
+     * to a DOT file in a separate thread.
      *
-     * This method takes a `TrafficGraph`, generates a visual representation using
-     * Graphviz, and saves it to the specified output file (defaulting to "graph.png").
-     * It can also optionally open the generated image and control whether the export
-     * should proceed.
+     * This method takes a `TrafficGraph`, retrieves the encoded string representation
+     * of each node and edge, and saves it to the specified output file
+     * (defaulting to "full_graph_encoded.dot") in a separate thread.
      *
-     * @param graph The `TrafficGraph` object to visualize.
-     * @param output_file The name of the output image file (default: "graph.png").
-     * @param open_image A boolean indicating whether to attempt to open the generated image (default: true).
-     * @param export_cond A boolean controlling whether the export process should proceed (default: true).
+     * @param graph The `TrafficGraph` object to export.
+     * @param output_file The name of the output DOT file (default: "full_graph_encoded.dot").
      */
-    void export_full_graph_human_readable(const TrafficGraph &graph,
-                           const std::string &output_file = "graph.png",
-                           bool open_image = true, bool export_cond = true);
+    void export_full_graph_encoded_async(const TrafficGraph &graph,
+                                          const std::string &output_file = "full_graph_encoded.dot");
 
     /**
-     * @brief Exports the encoded incremental updates of the graph to a DOT file.
+     * @brief Exports the encoded incremental updates of the graph to a DOT file
+     * in a separate thread.
      *
      * This method retrieves the latest incremental updates from the GraphBuilder,
-     * encodes them, and then saves the encoded representation to a specified
-     * DOT file. The filename includes a timestamp (UTC) to ensure uniqueness
-     * for each incremental update export.
+     * and saves the encoded representation of the created/updated nodes and edges
+     * to a specified DOT file in a separate thread. The filename includes a
+     * timestamp (UTC) to ensure uniqueness for each incremental update export.
      *
      * @param updates A vector of `GraphUpdate` objects representing the incremental changes
      * to the graph. This is typically obtained from the GraphBuilder.
      * @param output_file The full path and filename for the output DOT file.
-     * It defaults to "update.dot" if no path is provided. The
-     * function call constructs a more specific path including
-     * the base `export_path`, a separator, the prefix
-     * "nw_graph_encoded_", a UTC timestamp, and the ".dot" extension.
+     * It defaults to "update_encoded.dot". The function call
+     * constructs a more specific path including the base
+     * `export_path`, a separator, the prefix "nw_graph_update_",
+     * a UTC timestamp, and the ".dot" extension.
      */
-    void export_incremental_update_encoded(std::vector<GraphUpdate> updates,
-                                   const std::string &output_file = "update.dot");
+    void export_incremental_update_encoded_async(std::vector<GraphUpdate> updates,
+                                                  const std::string &output_file = "update_encoded.dot");
 
 private:
     /**
-     * @brief Graphviz context object.
+     * @brief Worker function to perform the full graph export with encoded features.
      *
-     * This context is required for interacting with the Graphviz library.
+     * @param graph The `TrafficGraph` object to export.
+     * @param output_file The name of the output DOT file.
      */
-    GVC_t *gvc;
+    void export_full_graph_worker(const TrafficGraph &graph,
+                                   const std::string &output_file);
 
     /**
-     * @brief Adds nodes from the `TrafficGraph` to the Graphviz graph.
+     * @brief Worker function to export incremental updates with encoded features
+     * to a DOT file.
      *
-     * Iterates through the nodes in the `TrafficGraph` and creates corresponding
-     * nodes in the Graphviz graph (`Agraph_t`).
-     *
-     * @param graph The Graphviz graph to add nodes to.
-     * @param traffic_graph The `TrafficGraph` containing the nodes to visualize.
+     * @param updates A vector of `GraphUpdate` objects representing the incremental changes.
+     * @param output_file The full path and filename for the output DOT file.
      */
-    void add_nodes(Agraph_t *graph, const TrafficGraph &traffic_graph);
+    void export_incremental_update_worker(std::vector<GraphUpdate> updates,
+                                            const std::string &output_file);
 
     /**
-     * @brief Adds edges from the `TrafficGraph` to the Graphviz graph.
+     * @brief Writes the encoded string representation of a node to the output stream.
      *
-     * Iterates through the edges in the `TrafficGraph` and creates corresponding
-     * edges in the Graphviz graph (`Agraph_t`), connecting the appropriate nodes.
-     *
-     * @param graph The Graphviz graph to add edges to.
-     * @param traffic_graph The `TrafficGraph` containing the edges to visualize.
+     * @param node The shared pointer to the GraphNode to write.
+     * @param ofstream The output file stream.
      */
-    void add_edges(Agraph_t *graph, const TrafficGraph &traffic_graph);
+    void write_node_encoded_to_file(const std::shared_ptr<GraphNode> &node, std::ofstream &ofstream);
 
     /**
-     * @brief Applies default visual styles to the Graphviz graph.
+     * @brief Writes the encoded string representation of an edge to the output stream.
      *
-     * Sets basic attributes for the graph, such as layout engine, node styles,
-     * and edge styles, to provide a consistent and readable visualization.
-     *
-     * @param graph The Graphviz graph to apply styles to.
+     * @param edge The shared pointer to the GraphEdge to write.
+     * @param ofstream The output file stream.
      */
-    void apply_default_styles(Agraph_t *graph);
+    void write_edge_encoded_to_file(const std::shared_ptr<GraphEdge> &edge, std::ofstream &ofstream);
 
     /**
-     * @brief Generates a valid Graphviz node ID from the original node ID.
-     *
-     * Ensures that node IDs are compatible with Graphviz's requirements,
-     * potentially escaping or modifying characters that could cause issues.
-     *
-     * @param original_id The original node identifier from the `TrafficGraph`.
-     * @return A string representing a valid Graphviz node ID.
-     */
-    std::string generate_node_id(const std::string &original_id);
-
-    void write_node_to_file(const std::shared_ptr<GraphNode> & node, std::ofstream & ofstream);
-
-    void write_edge_to_file(const std::shared_ptr<GraphEdge> & edge, std::ofstream & ofstream);
-
-    /**
-     * @brief Exports the `TrafficGraph` structure to a DOT file.
-     *
-     * This method can be used for debugging or if a DOT representation of the
-     * graph is needed. The DOT file can then be processed by Graphviz separately.
+     * @brief Exports the `TrafficGraph` structure to a DOT file with encoded features.
      *
      * @param graph The `TrafficGraph` to export.
      * @param filename The name of the output DOT file.
      */
-    void export_to_dot(const TrafficGraph &graph, const std::string &filename);
+    void export_to_dot_encoded(const TrafficGraph &graph, const std::string &filename);
 
     std::string escape_dot_string(const std::string &str);
 };

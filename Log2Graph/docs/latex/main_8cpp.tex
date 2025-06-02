@@ -29,7 +29,7 @@ int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int ar
 \doxysubsection{Detailed Description}
 Main entry point for the Zeek log analysis and anomaly detection application. 
 
-This application monitors Zeek logs from a specified directory, builds a graph representation of the network traffic, visualizes the graph periodically, and detects real-\/time anomalies. 
+This application monitors Zeek logs from a specified directory, builds a graph representation of the network traffic and visualizes the graph periodically. 
 
 \doxysubsection{Function Documentation}
 \Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{main.cpp@{main.cpp}!main@{main}}
@@ -54,31 +54,26 @@ This function parses command-\/line arguments, initializes the log monitor, anom
 \begin{DoxyReturn}{Returns}
 0 if the application runs successfully, 1 otherwise. 
 \end{DoxyReturn}
-Instance of the real-\/time anomaly detector.
-
 Instance of the graph exporter.
+
+This object is responsible for exporting the graph data in various formats, such as DOT files for visualization.
 
 Instance of the log monitor, responsible for reading and processing Zeek logs.
 
-The monitor is initialized with the directory containing the Zeek log files provided as a command-\/line argument.
+The monitor is initialized with the directory containing the Zeek log files provided as a command-\/line argument. It continuously reads new log entries and makes them available for graph building.
 
 Starts the log monitoring process in a separate thread.
 
-Retrieves the singleton instance of the \doxylink{classGraphBuilder}{Graph\+Builder} and gets the current graph.
+This allows the application to process logs in the background without blocking the main execution thread, enabling continuous monitoring.
 
-Visualizes the current network graph and saves it as a PNG file, as well as DOT file.
+Get the current UTC timestamp for filename generation.
 
-The filename includes the current UTC timestamp. The \textquotesingle{}false\textquotesingle{} argument likely controls whether to clear the graph before visualizing (in this context, it\textquotesingle{}s probably not clearing), and \textquotesingle{}true\textquotesingle{} might indicate whether to include labels on the nodes.
+Get a reference to the singleton instance of the \doxylink{classGraphBuilder}{Graph\+Builder} and its current graph.
 
+Export the encoded incremental updates of the network graph to a DOT file.
 
-\begin{DoxyParams}{Parameters}
-{\em graph} & The graph to visualize. \\
-\hline
-{\em ./zeek\+\_\+graph\+\_\+} & + std\+::to\+\_\+string(\+UTC) The base filename for the output PNG. \\
-\hline
-{\em false} & Flag indicating whether to clear the graph before visualization. \\
-\hline
-{\em true} & Flag indicating whether to include labels on the nodes.\\
-\hline
-\end{DoxyParams}
+This call retrieves the latest changes to the graph since the last export and saves them in an encoded format to a DOT file. The filename includes the UTC timestamp to differentiate between exports. The output file is created in the specified {\ttfamily export\+\_\+path}.
+
 Stops the log monitoring process.
+
+This ensures that the log monitoring thread is properly terminated before the application exits, releasing any resources it might be holding.

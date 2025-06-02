@@ -1,130 +1,161 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="structGraphUpdate" kind="struct" language="C++" prot="public">
-    <compoundname>GraphUpdate</compoundname>
-    <includes refid="GraphUpdateQueue_8h" local="no">GraphUpdateQueue.h</includes>
-    <sectiondef kind="public-type">
-      <memberdef kind="enum" id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" prot="public" static="no" strong="yes">
-        <type></type>
-        <name>Type</name>
-        <qualifiedname>GraphUpdate::Type</qualifiedname>
-        <enumvalue id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad" prot="public">
-          <name>NODE_CREATE</name>
-          <briefdescription>
-<para>Represents the creation of a new graph node. </para>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7" prot="public">
-          <name>NODE_UPDATE</name>
-          <briefdescription>
-<para>Represents an update to a graph node. </para>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
-        <enumvalue id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b" prot="public">
-          <name>EDGE_CREATE</name>
-          <briefdescription>
-<para>Represents te creation of a graph edge. </para>
-          </briefdescription>
-          <detaileddescription>
-          </detaileddescription>
-        </enumvalue>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="structGraphUpdate" kind="struct" language="C++" prot="public">
+        <compoundname>GraphUpdate</compoundname>
+        <includes refid="GraphUpdateQueue_8h" local="no">GraphUpdateQueue.h</includes>
+        <sectiondef kind="public-type">
+            <memberdef kind="enum" id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" prot="public" static="no"
+                       strong="yes">
+                <type></type>
+                <name>Type</name>
+                <qualifiedname>GraphUpdate::Type</qualifiedname>
+                <enumvalue id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baaf46a4f24a27c47d5a24536031a7541ad"
+                           prot="public">
+                    <name>NODE_CREATE</name>
+                    <briefdescription>
+                        <para>Represents the creation of a new graph node.</para>
+                    </briefdescription>
+                    <detaileddescription>
+                    </detaileddescription>
+                </enumvalue>
+                <enumvalue id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baa37d2fc1bfd9732632eb6e0808e1a5ab7"
+                           prot="public">
+                    <name>NODE_UPDATE</name>
+                    <briefdescription>
+                        <para>Represents an update to a graph node.</para>
+                    </briefdescription>
+                    <detaileddescription>
+                    </detaileddescription>
+                </enumvalue>
+                <enumvalue id="structGraphUpdate_1a37a13b443637ec95ee3f8763587838baa74b5084affe661ad56577f21b1031f4b"
+                           prot="public">
+                    <name>EDGE_CREATE</name>
+                    <briefdescription>
+                        <para>Represents te creation of a graph edge.</para>
+                    </briefdescription>
+                    <detaileddescription>
+                    </detaileddescription>
+                </enumvalue>
+                <briefdescription>
+                    <para>Enum indicating the type of graph update.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphUpdateQueue.h" line="33" column="5" bodyfile="includes/GraphUpdateQueue.h"
+                          bodystart="33" bodyend="46"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="public-attrib">
+            <memberdef kind="variable" id="structGraphUpdate_1a5da40c0a068e966f7e16bdd40d7d00c0" prot="public"
+                       static="no" mutable="no">
+                <type>
+                    <ref refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" kindref="member">Type</ref>
+                </type>
+                <definition>Type GraphUpdate::type</definition>
+                <argsstring></argsstring>
+                <name>type</name>
+                <qualifiedname>GraphUpdate::type</qualifiedname>
+                <briefdescription>
+                    <para>The type of graph update (node or edge).</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphUpdateQueue.h" line="51" column="10"
+                          bodyfile="includes/GraphUpdateQueue.h" bodystart="51" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphUpdate_1a47890c709372ac8f0c65d819390fab47" prot="public"
+                       static="no" mutable="no">
+                <type>std::weak_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt;
+                </type>
+                <definition>std::weak_ptr&lt;GraphNode&gt; GraphUpdate::node</definition>
+                <argsstring></argsstring>
+                <name>node</name>
+                <qualifiedname>GraphUpdate::node</qualifiedname>
+                <briefdescription>
+                    <para>A weak pointer to the updated graph node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphUpdateQueue.h" line="55" column="19"
+                          bodyfile="includes/GraphUpdateQueue.h" bodystart="55" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphUpdate_1aaf9da414880949a68ec96bd30d00fa12" prot="public"
+                       static="no" mutable="no">
+                <type>std::weak_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt;
+                </type>
+                <definition>std::weak_ptr&lt;GraphEdge&gt; GraphUpdate::edge</definition>
+                <argsstring></argsstring>
+                <name>edge</name>
+                <qualifiedname>GraphUpdate::edge</qualifiedname>
+                <briefdescription>
+                    <para>A weak pointer to the updated graph edge.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphUpdateQueue.h" line="59" column="19"
+                          bodyfile="includes/GraphUpdateQueue.h" bodystart="59" bodyend="-1"/>
+            </memberdef>
+        </sectiondef>
         <briefdescription>
-<para>Enum indicating the type of graph update. </para>
+            <para>Represents an update to the network traffic graph.</para>
         </briefdescription>
         <detaileddescription>
+            <para>This struct encapsulates either a node update or an edge update. It uses a weak pointer to the updated
+                graph element to avoid creating a strong dependency and potential circular references.
+            </para>
         </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphUpdateQueue.h" line="33" column="5" bodyfile="includes/GraphUpdateQueue.h" bodystart="33" bodyend="46"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structGraphUpdate_1a5da40c0a068e966f7e16bdd40d7d00c0" prot="public" static="no" mutable="no">
-        <type><ref refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" kindref="member">Type</ref></type>
-        <definition>Type GraphUpdate::type</definition>
-        <argsstring></argsstring>
-        <name>type</name>
-        <qualifiedname>GraphUpdate::type</qualifiedname>
-        <briefdescription>
-<para>The type of graph update (node or edge). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphUpdateQueue.h" line="51" column="10" bodyfile="includes/GraphUpdateQueue.h" bodystart="51" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphUpdate_1a47890c709372ac8f0c65d819390fab47" prot="public" static="no" mutable="no">
-        <type>std::weak_ptr&lt; <ref refid="classGraphNode" kindref="compound">GraphNode</ref> &gt;</type>
-        <definition>std::weak_ptr&lt;GraphNode&gt; GraphUpdate::node</definition>
-        <argsstring></argsstring>
-        <name>node</name>
-        <qualifiedname>GraphUpdate::node</qualifiedname>
-        <briefdescription>
-<para>A weak pointer to the updated graph node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphUpdateQueue.h" line="55" column="19" bodyfile="includes/GraphUpdateQueue.h" bodystart="55" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphUpdate_1aaf9da414880949a68ec96bd30d00fa12" prot="public" static="no" mutable="no">
-        <type>std::weak_ptr&lt; <ref refid="classGraphEdge" kindref="compound">GraphEdge</ref> &gt;</type>
-        <definition>std::weak_ptr&lt;GraphEdge&gt; GraphUpdate::edge</definition>
-        <argsstring></argsstring>
-        <name>edge</name>
-        <qualifiedname>GraphUpdate::edge</qualifiedname>
-        <briefdescription>
-<para>A weak pointer to the updated graph edge. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphUpdateQueue.h" line="59" column="19" bodyfile="includes/GraphUpdateQueue.h" bodystart="59" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <briefdescription>
-<para>Represents an update to the network traffic graph. </para>
-    </briefdescription>
-    <detaileddescription>
-<para>This struct encapsulates either a node update or an edge update. It uses a weak pointer to the updated graph element to avoid creating a strong dependency and potential circular references. </para>
-    </detaileddescription>
-    <collaborationgraph>
-      <node id="1">
-        <label>GraphUpdate</label>
-        <link refid="structGraphUpdate"/>
-        <childnode refid="2" relation="usage">
-          <edgelabel>+type</edgelabel>
-        </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>+node</edgelabel>
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>+edge</edgelabel>
-        </childnode>
-      </node>
-      <node id="2">
-        <label>Type</label>
-      </node>
-      <node id="4">
-        <label>weak_ptr&lt; GraphEdge &gt;</label>
-      </node>
-      <node id="3">
-        <label>weak_ptr&lt; GraphNode &gt;</label>
-      </node>
-    </collaborationgraph>
-    <location file="includes/GraphUpdateQueue.h" line="29" column="1" bodyfile="includes/GraphUpdateQueue.h" bodystart="29" bodyend="60"/>
-    <listofallmembers>
-      <member refid="structGraphUpdate_1aaf9da414880949a68ec96bd30d00fa12" prot="public" virt="non-virtual"><scope>GraphUpdate</scope><name>edge</name></member>
-      <member refid="structGraphUpdate_1a47890c709372ac8f0c65d819390fab47" prot="public" virt="non-virtual"><scope>GraphUpdate</scope><name>node</name></member>
-      <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" prot="public" virt="non-virtual"><scope>GraphUpdate</scope><name>Type</name></member>
-      <member refid="structGraphUpdate_1a5da40c0a068e966f7e16bdd40d7d00c0" prot="public" virt="non-virtual"><scope>GraphUpdate</scope><name>type</name></member>
-    </listofallmembers>
-  </compounddef>
+        <collaborationgraph>
+            <node id="1">
+                <label>GraphUpdate</label>
+                <link refid="structGraphUpdate"/>
+                <childnode refid="2" relation="usage">
+                    <edgelabel>+type</edgelabel>
+                </childnode>
+                <childnode refid="3" relation="usage">
+                    <edgelabel>+node</edgelabel>
+                </childnode>
+                <childnode refid="4" relation="usage">
+                    <edgelabel>+edge</edgelabel>
+                </childnode>
+            </node>
+            <node id="2">
+                <label>Type</label>
+            </node>
+            <node id="4">
+                <label>weak_ptr&lt; GraphEdge &gt;</label>
+            </node>
+            <node id="3">
+                <label>weak_ptr&lt; GraphNode &gt;</label>
+            </node>
+        </collaborationgraph>
+        <location file="includes/GraphUpdateQueue.h" line="29" column="1" bodyfile="includes/GraphUpdateQueue.h"
+                  bodystart="29" bodyend="60"/>
+        <listofallmembers>
+            <member refid="structGraphUpdate_1aaf9da414880949a68ec96bd30d00fa12" prot="public" virt="non-virtual">
+                <scope>GraphUpdate</scope>
+                <name>edge</name>
+            </member>
+            <member refid="structGraphUpdate_1a47890c709372ac8f0c65d819390fab47" prot="public" virt="non-virtual">
+                <scope>GraphUpdate</scope>
+                <name>node</name>
+            </member>
+            <member refid="structGraphUpdate_1a37a13b443637ec95ee3f8763587838ba" prot="public" virt="non-virtual">
+                <scope>GraphUpdate</scope>
+                <name>Type</name>
+            </member>
+            <member refid="structGraphUpdate_1a5da40c0a068e966f7e16bdd40d7d00c0" prot="public" virt="non-virtual">
+                <scope>GraphUpdate</scope>
+                <name>type</name>
+            </member>
+        </listofallmembers>
+    </compounddef>
 </doxygen>

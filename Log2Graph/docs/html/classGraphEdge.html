@@ -1,298 +1,557 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: GraphEdge Class Reference</title>
-<link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
-<link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
-<script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-  $(function() { init_search(); });
-/* @license-end */
-</script>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <meta content="text/xhtml;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="IE=11" http-equiv="X-UA-Compatible"/>
+    <meta content="Doxygen 1.13.2" name="generator"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>My Project: GraphEdge Class Reference</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="dynsections.js" type="text/javascript"></script>
+    <script src="clipboard.js" type="text/javascript"></script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+    <script src="navtreedata.js" type="text/javascript"></script>
+    <script src="navtree.js" type="text/javascript"></script>
+    <script src="resize.js" type="text/javascript"></script>
+    <script src="cookie.js" type="text/javascript"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+    <script src="search/searchdata.js" type="text/javascript"></script>
+    <script src="search/search.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            init_search();
+        });
+        /* @license-end */
+    </script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
-<div id="titlearea">
-<table cellspacing="0" cellpadding="0">
- <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
-   <div id="projectname">My Project
-   </div>
-  </td>
-    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+    <div id="titlearea">
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr id="projectrow">
+                <td id="projectalign">
+                    <div id="projectname">My Project
+                    </div>
+                </td>
+                <td>
+                    <div class="MSearchBoxInactive" id="MSearchBox">
         <span class="left">
-          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" onmouseout="return searchBox.OnSearchSelectHide()"
+                onmouseover="return searchBox.OnSearchSelectShow()">&#160;</span>
+          <input accesskey="S" id="MSearchField" onblur="searchBox.OnSearchFieldFocus(false)" onfocus="searchBox.OnSearchFieldFocus(true)" onkeyup="searchBox.OnSearchFieldChange(event)"
+                 placeholder="Search"
+                 type="text"
+                 value=""/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+            <a href="javascript:searchBox.CloseResultsWindow()" id="MSearchClose"><img alt="" border="0"
+                                                                                       id="MSearchCloseImg"
+                                                                                       src="search/close.svg"/></a>
           </span>
-        </div>
-</td>
- </tr>
- </tbody>
-</table>
-</div>
-<!-- end header part -->
-<!-- Generated by Doxygen 1.13.2 -->
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
-</script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
-</script>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
+    <!-- end header part -->
+    <!-- Generated by Doxygen 1.13.2 -->
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        var searchBox = new SearchBox("searchBox", "search/", '.html');
+        /* @license-end */
+    </script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            codefold.init(0);
+        });
+        /* @license-end */
+    </script>
+</div><!-- top -->
+<div class="ui-resizable side-nav-resizable" id="side-nav">
+    <div id="nav-tree">
+        <div id="nav-tree-contents">
+            <div class="sync" id="nav-sync"></div>
+        </div>
+    </div>
+    <div class="ui-resizable-handle" id="splitbar"
+         style="-moz-user-select:none;">
+    </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('classGraphEdge.html',''); initResizable(true); });
-/* @license-end */
+    /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+    $(function () {
+        initNavTree('classGraphEdge.html', '');
+        initResizable(true);
+    });
+    /* @license-end */
 </script>
 <div id="doc-content">
-<!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+    <!-- window showing the filter options -->
+    <div id="MSearchSelectWindow"
+         onkeydown="return searchBox.OnSearchSelectKey(event)"
+         onmouseout="return searchBox.OnSearchSelectHide()"
+         onmouseover="return searchBox.OnSearchSelectShow()">
+    </div>
 
-<!-- iframe showing the search results (closed by default) -->
-<div id="MSearchResultsWindow">
-<div id="MSearchResults">
-<div class="SRPage">
-<div id="SRIndex">
-<div id="SRResults"></div>
-<div class="SRStatus" id="Loading">Loading...</div>
-<div class="SRStatus" id="Searching">Searching...</div>
-<div class="SRStatus" id="NoMatches">No Matches</div>
-</div>
-</div>
-</div>
-</div>
+    <!-- iframe showing the search results (closed by default) -->
+    <div id="MSearchResultsWindow">
+        <div id="MSearchResults">
+            <div class="SRPage">
+                <div id="SRIndex">
+                    <div id="SRResults"></div>
+                    <div class="SRStatus" id="Loading">Loading...</div>
+                    <div class="SRStatus" id="Searching">Searching...</div>
+                    <div class="SRStatus" id="NoMatches">No Matches</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-attribs">Public Attributes</a> &#124;
-<a href="classGraphEdge-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">GraphEdge Class Reference</div></div>
-</div><!--header-->
-<div class="contents">
+    <div class="header">
+        <div class="summary">
+            <a href="#pub-methods">Public Member Functions</a> &#124;
+            <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
+            <a href="#pub-attribs">Public Attributes</a> &#124;
+            <a href="classGraphEdge-members.html">List of all members</a></div>
+        <div class="headertitle">
+            <div class="title">GraphEdge Class Reference</div>
+        </div>
+    </div><!--header-->
+    <div class="contents">
 
-<p>Represents an edge in the network traffic graph, connecting two GraphNodes.  
- <a href="#details">More...</a></p>
+        <p>Represents an edge in the network traffic graph, connecting two GraphNodes.
+            <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="GraphEdge_8h_source.html">GraphEdge.h</a>&gt;</code></p>
-<div class="dynheader">
-Collaboration diagram for GraphEdge:</div>
-<div class="dyncontent">
-<div class="center"><img src="classGraphEdge__coll__graph.png" border="0" usemap="#aGraphEdge_coll__map" alt="Collaboration graph"/></div>
-<map name="aGraphEdge_coll__map" id="aGraphEdge_coll__map">
-<area shape="rect" title="Represents an edge in the network traffic graph, connecting two GraphNodes." alt="" coords="101,177,211,243"/>
-<area shape="rect" title=" " alt="" coords="5,13,56,78"/>
-<area shape="poly" title=" " alt="" coords="35,78,42,116,49,135,59,152,89,178,85,182,55,155,44,137,37,117,29,79"/>
-<area shape="rect" title=" " alt="" coords="81,5,231,85"/>
-<area shape="poly" title=" " alt="" coords="159,85,159,161,153,161,153,85"/>
-<area shape="rect" title=" " alt="" coords="256,13,371,78"/>
-<area shape="poly" title=" " alt="" coords="298,80,274,118,242,155,226,169,222,165,238,151,269,114,294,77"/>
-</map>
-</div>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
-Public Member Functions</h2></td></tr>
-<tr class="memitem:a3cb272137fcf01bf7985e6ab17e71def" id="r_a3cb272137fcf01bf7985e6ab17e71def"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cb272137fcf01bf7985e6ab17e71def">GraphEdge</a> (const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel)</td></tr>
-<tr class="memdesc:a3cb272137fcf01bf7985e6ab17e71def"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor for the <a class="el" href="classGraphEdge.html" title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a>.  <br /></td></tr>
-<tr class="separator:a3cb272137fcf01bf7985e6ab17e71def"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
-Public Attributes</h2></td></tr>
-<tr class="memitem:a15bf6a4cc4dae4f0368ef9112273ab80" id="r_a15bf6a4cc4dae4f0368ef9112273ab80"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a15bf6a4cc4dae4f0368ef9112273ab80">source</a></td></tr>
-<tr class="memdesc:a15bf6a4cc4dae4f0368ef9112273ab80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the source node.  <br /></td></tr>
-<tr class="separator:a15bf6a4cc4dae4f0368ef9112273ab80"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a96de026803e8fceda55bf716e7416303" id="r_a96de026803e8fceda55bf716e7416303"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a96de026803e8fceda55bf716e7416303">target</a></td></tr>
-<tr class="memdesc:a96de026803e8fceda55bf716e7416303"><td class="mdescLeft">&#160;</td><td class="mdescRight">Identifier of the target node.  <br /></td></tr>
-<tr class="separator:a96de026803e8fceda55bf716e7416303"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3ce59edfe79128ddd587bc3df2c3370" id="r_ad3ce59edfe79128ddd587bc3df2c3370"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad3ce59edfe79128ddd587bc3df2c3370">relationship</a></td></tr>
-<tr class="memdesc:ad3ce59edfe79128ddd587bc3df2c3370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of relationship between the source and target nodes (e.g., "connects_to", "sends_data_to").  <br /></td></tr>
-<tr class="separator:ad3ce59edfe79128ddd587bc3df2c3370"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7a0dcb05bfdb31ed7735a746b13be8d6" id="r_a7a0dcb05bfdb31ed7735a746b13be8d6"><td class="memItemLeft" align="right" valign="top">std::unordered_map&lt; std::string, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7a0dcb05bfdb31ed7735a746b13be8d6">attributes</a></td></tr>
-<tr class="memdesc:a7a0dcb05bfdb31ed7735a746b13be8d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Additional attributes associated with the edge.  <br /></td></tr>
-<tr class="separator:a7a0dcb05bfdb31ed7735a746b13be8d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6b6bacb716fb79e52b6b184f1c33b2cc" id="r_a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="memItemLeft" align="right" valign="top">std::vector&lt; float &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6b6bacb716fb79e52b6b184f1c33b2cc">encoded_features</a></td></tr>
-<tr class="memdesc:a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Encoded features, to feed to GAT.  <br /></td></tr>
-<tr class="separator:a6b6bacb716fb79e52b6b184f1c33b2cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Represents an edge in the network traffic graph, connecting two GraphNodes. </p>
-<p>Each <code><a class="el" href="classGraphEdge.html" title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a></code> represents a communication or relationship between two network entities. It stores the identifiers of the source and target nodes, the type of relationship, and any additional attributes associated with the connection. </p>
-</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3cb272137fcf01bf7985e6ab17e71def" name="a3cb272137fcf01bf7985e6ab17e71def"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3cb272137fcf01bf7985e6ab17e71def">&#9670;&#160;</a></span>GraphEdge()</h2>
+        <p><code>#include &lt;<a class="el" href="GraphEdge_8h_source.html">GraphEdge.h</a>&gt;</code></p>
+        <div class="dynheader">
+            Collaboration diagram for GraphEdge:
+        </div>
+        <div class="dyncontent">
+            <div class="center"><img alt="Collaboration graph" border="0" src="classGraphEdge__coll__graph.png"
+                                     usemap="#aGraphEdge_coll__map"/></div>
+            <map id="aGraphEdge_coll__map" name="aGraphEdge_coll__map">
+                <area alt="" coords="145,177,303,283"
+                      shape="rect" title="Represents an edge in the network traffic graph, connecting two GraphNodes."/>
+                <area alt="" coords="5,13,56,78" shape="rect" title=" "/>
+                <area alt="" coords="39,78,52,116,74,152,101,175,132,194,129,198,98,179,70,155,47,118,34,79" shape="poly"
+                      title=" "/>
+                <area alt="" coords="81,5,231,85" shape="rect" title=" "/>
+                <area alt="" coords="167,85,188,152,191,161,187,163,183,154,162,87" shape="poly" title=" "/>
+                <area alt="" coords="256,13,371,78" shape="rect" title=" "/>
+                <area alt="" coords="302,79,266,154,262,164,257,161,262,152,297,77" shape="poly" title=" "/>
+                <area alt="" coords="414,13,498,78" shape="rect" title=" "/>
+                <area alt="" coords="456,79,445,118,436,138,423,155,401,175,375,191,320,213,318,208,372,186,397,171,419,152,432,135,440,116,450,78" shape="poly"
+                      title=" "/>
+            </map>
+        </div>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+                    Public Member Functions</h2></td>
+            </tr>
+            <tr class="memitem:a3cb272137fcf01bf7985e6ab17e71def" id="r_a3cb272137fcf01bf7985e6ab17e71def">
+                <td align="right" class="memItemLeft" valign="top">&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#a3cb272137fcf01bf7985e6ab17e71def">GraphEdge</a>
+                    (const std::string &amp;src, const std::string &amp;tgt, const std::string &amp;rel)
+                </td>
+            </tr>
+            <tr class="memdesc:a3cb272137fcf01bf7985e6ab17e71def">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Constructor for the <a class="el" href="classGraphEdge.html"
+                                                              title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a>.
+                    <br/></td>
+            </tr>
+            <tr class="separator:a3cb272137fcf01bf7985e6ab17e71def">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:a0bb6c037458bc73a448aa771621df019" id="r_a0bb6c037458bc73a448aa771621df019">
+                <td align="right" class="memItemLeft" valign="top">std::string&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#a0bb6c037458bc73a448aa771621df019">to_dot_string</a>
+                    () const
+                </td>
+            </tr>
+            <tr class="memdesc:a0bb6c037458bc73a448aa771621df019">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Generates a DOT format string representation of the edge, including its
+                    attributes and encoded features. <br/></td>
+            </tr>
+            <tr class="separator:a0bb6c037458bc73a448aa771621df019">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
+                    Static Public Member Functions</h2></td>
+            </tr>
+            <tr class="memitem:a66cb15ff27f3bed9df1809a614cb43f6" id="r_a66cb15ff27f3bed9df1809a614cb43f6">
+                <td align="right" class="memItemLeft" valign="top">static std::string&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#a66cb15ff27f3bed9df1809a614cb43f6">escape_dot_string</a>
+                    (const std::string &amp;str)
+                </td>
+            </tr>
+            <tr class="memdesc:a66cb15ff27f3bed9df1809a614cb43f6">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Escapes special characters in a string for DOT format. <br/></td>
+            </tr>
+            <tr class="separator:a66cb15ff27f3bed9df1809a614cb43f6">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
+                    Public Attributes</h2></td>
+            </tr>
+            <tr class="memitem:a15bf6a4cc4dae4f0368ef9112273ab80" id="r_a15bf6a4cc4dae4f0368ef9112273ab80">
+                <td align="right" class="memItemLeft" valign="top">std::string&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="#a15bf6a4cc4dae4f0368ef9112273ab80">source</a></td>
+            </tr>
+            <tr class="memdesc:a15bf6a4cc4dae4f0368ef9112273ab80">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Identifier of the source node. <br/></td>
+            </tr>
+            <tr class="separator:a15bf6a4cc4dae4f0368ef9112273ab80">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:a96de026803e8fceda55bf716e7416303" id="r_a96de026803e8fceda55bf716e7416303">
+                <td align="right" class="memItemLeft" valign="top">std::string&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el"
+                                                            href="#a96de026803e8fceda55bf716e7416303">target</a></td>
+            </tr>
+            <tr class="memdesc:a96de026803e8fceda55bf716e7416303">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Identifier of the target node. <br/></td>
+            </tr>
+            <tr class="separator:a96de026803e8fceda55bf716e7416303">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:ad3ce59edfe79128ddd587bc3df2c3370" id="r_ad3ce59edfe79128ddd587bc3df2c3370">
+                <td align="right" class="memItemLeft" valign="top">std::string&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#ad3ce59edfe79128ddd587bc3df2c3370">relationship</a>
+                </td>
+            </tr>
+            <tr class="memdesc:ad3ce59edfe79128ddd587bc3df2c3370">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Type of relationship between the source and target nodes (e.g., "connects_to",
+                    "sends_data_to"). <br/></td>
+            </tr>
+            <tr class="separator:ad3ce59edfe79128ddd587bc3df2c3370">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:a7a0dcb05bfdb31ed7735a746b13be8d6" id="r_a7a0dcb05bfdb31ed7735a746b13be8d6">
+                <td align="right" class="memItemLeft" valign="top">std::unordered_map&lt; std::string, std::string &gt;&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#a7a0dcb05bfdb31ed7735a746b13be8d6">attributes</a>
+                </td>
+            </tr>
+            <tr class="memdesc:a7a0dcb05bfdb31ed7735a746b13be8d6">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Additional attributes associated with the edge. <br/></td>
+            </tr>
+            <tr class="separator:a7a0dcb05bfdb31ed7735a746b13be8d6">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:a6b6bacb716fb79e52b6b184f1c33b2cc" id="r_a6b6bacb716fb79e52b6b184f1c33b2cc">
+                <td align="right" class="memItemLeft" valign="top">std::vector&lt; float &gt;&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#a6b6bacb716fb79e52b6b184f1c33b2cc">encoded_features</a>
+                </td>
+            </tr>
+            <tr class="memdesc:a6b6bacb716fb79e52b6b184f1c33b2cc">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Encoded features, to feed to GAT. <br/></td>
+            </tr>
+            <tr class="separator:a6b6bacb716fb79e52b6b184f1c33b2cc">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+            <tr class="memitem:a9cb0c4a71deae507aa42d738bd5a3b7f" id="r_a9cb0c4a71deae507aa42d738bd5a3b7f">
+                <td align="right" class="memItemLeft" valign="top">std::chrono::system_clock::time_point&#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="#a9cb0c4a71deae507aa42d738bd5a3b7f">last_seen</a>
+                </td>
+            </tr>
+            <tr class="separator:a9cb0c4a71deae507aa42d738bd5a3b7f">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+        <a id="details" name="details"></a>
+        <h2 class="groupheader">Detailed Description</h2>
+        <div class="textblock"><p>Represents an edge in the network traffic graph, connecting two GraphNodes. </p>
+            <p>Each <code><a class="el" href="classGraphEdge.html"
+                             title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a></code>
+                represents a communication or relationship between two network entities. It stores the identifiers of
+                the source and target nodes, the type of relationship, and any additional attributes associated with the
+                connection. </p>
+        </div>
+        <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+        <a id="a3cb272137fcf01bf7985e6ab17e71def" name="a3cb272137fcf01bf7985e6ab17e71def"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a3cb272137fcf01bf7985e6ab17e71def">&#9670;&#160;</a></span>GraphEdge()</h2>
 
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">GraphEdge::GraphEdge </td>
-          <td>(</td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>src</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>tgt</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>rel</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+        <div class="memitem">
+            <div class="memproto">
+                <table class="mlabels">
+                    <tr>
+                        <td class="mlabels-left">
+                            <table class="memname">
+                                <tr>
+                                    <td class="memname">GraphEdge::GraphEdge</td>
+                                    <td>(</td>
+                                    <td class="paramtype">const std::string &amp;</td>
+                                    <td class="paramname"><span class="paramname"><em>src</em></span>,</td>
+                                </tr>
+                                <tr>
+                                    <td class="paramkey"></td>
+                                    <td></td>
+                                    <td class="paramtype">const std::string &amp;</td>
+                                    <td class="paramname"><span class="paramname"><em>tgt</em></span>,</td>
+                                </tr>
+                                <tr>
+                                    <td class="paramkey"></td>
+                                    <td></td>
+                                    <td class="paramtype">const std::string &amp;</td>
+                                    <td class="paramname"><span class="paramname"><em>rel</em></span>&#160;)</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="mlabels-right">
+                            <span class="mlabels"><span class="mlabel inline">inline</span></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
-<p>Constructor for the <a class="el" href="classGraphEdge.html" title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">src</td><td>The identifier of the source node. </td></tr>
-    <tr><td class="paramname">tgt</td><td>The identifier of the target node. </td></tr>
-    <tr><td class="paramname">rel</td><td>The type of relationship between the nodes. </td></tr>
-  </table>
-  </dd>
-</dl>
+                <p>Constructor for the <a class="el" href="classGraphEdge.html"
+                                          title="Represents an edge in the network traffic graph, connecting two GraphNodes.">GraphEdge</a>.
+                </p>
+                <dl class="params">
+                    <dt>Parameters</dt>
+                    <dd>
+                        <table class="params">
+                            <tr>
+                                <td class="paramname">src</td>
+                                <td>The identifier of the source node.</td>
+                            </tr>
+                            <tr>
+                                <td class="paramname">tgt</td>
+                                <td>The identifier of the target node.</td>
+                            </tr>
+                            <tr>
+                                <td class="paramname">rel</td>
+                                <td>The type of relationship between the nodes.</td>
+                            </tr>
+                        </table>
+                    </dd>
+                </dl>
 
-</div>
-</div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a7a0dcb05bfdb31ed7735a746b13be8d6" name="a7a0dcb05bfdb31ed7735a746b13be8d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7a0dcb05bfdb31ed7735a746b13be8d6">&#9670;&#160;</a></span>attributes</h2>
+            </div>
+        </div>
+        <h2 class="groupheader">Member Function Documentation</h2>
+        <a id="a66cb15ff27f3bed9df1809a614cb43f6" name="a66cb15ff27f3bed9df1809a614cb43f6"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a66cb15ff27f3bed9df1809a614cb43f6">&#9670;&#160;</a></span>escape_dot_string()</h2>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::unordered_map&lt;std::string, std::string&gt; GraphEdge::attributes</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+        <div class="memitem">
+            <div class="memproto">
+                <table class="mlabels">
+                    <tr>
+                        <td class="mlabels-left">
+                            <table class="memname">
+                                <tr>
+                                    <td class="memname">std::string GraphEdge::escape_dot_string</td>
+                                    <td>(</td>
+                                    <td class="paramtype">const std::string &amp;</td>
+                                    <td class="paramname"><span class="paramname"><em>str</em></span></td>
+                                    <td>)</td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="mlabels-right">
+                            <span class="mlabels"><span class="mlabel static">static</span></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
-<p>Additional attributes associated with the edge. </p>
+                <p>Escapes special characters in a string for DOT format. </p>
+                <dl class="params">
+                    <dt>Parameters</dt>
+                    <dd>
+                        <table class="params">
+                            <tr>
+                                <td class="paramname">str</td>
+                                <td>The input string to escape.</td>
+                            </tr>
+                        </table>
+                    </dd>
+                </dl>
+                <dl class="section return">
+                    <dt>Returns</dt>
+                    <dd>The escaped string.</dd>
+                </dl>
 
-</div>
-</div>
-<a id="a6b6bacb716fb79e52b6b184f1c33b2cc" name="a6b6bacb716fb79e52b6b184f1c33b2cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6b6bacb716fb79e52b6b184f1c33b2cc">&#9670;&#160;</a></span>encoded_features</h2>
+            </div>
+        </div>
+        <a id="a0bb6c037458bc73a448aa771621df019" name="a0bb6c037458bc73a448aa771621df019"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a0bb6c037458bc73a448aa771621df019">&#9670;&#160;</a></span>to_dot_string()</h2>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::vector&lt;float&gt; GraphEdge::encoded_features</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::string GraphEdge::to_dot_string</td>
+                        <td>(</td>
+                        <td class="paramname"><span class="paramname"><em></em></span></td>
+                        <td>)</td>
+                        <td> const</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
-<p>Encoded features, to feed to GAT. </p>
+                <p>Generates a DOT format string representation of the edge, including its attributes and encoded
+                    features. </p>
+                <p>/** </p>
+                <dl class="section return">
+                    <dt>Returns</dt>
+                    <dd>A string in DOT format representing the edge.</dd>
+                </dl>
 
-</div>
-</div>
-<a id="ad3ce59edfe79128ddd587bc3df2c3370" name="ad3ce59edfe79128ddd587bc3df2c3370"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad3ce59edfe79128ddd587bc3df2c3370">&#9670;&#160;</a></span>relationship</h2>
+            </div>
+        </div>
+        <h2 class="groupheader">Member Data Documentation</h2>
+        <a id="a7a0dcb05bfdb31ed7735a746b13be8d6" name="a7a0dcb05bfdb31ed7735a746b13be8d6"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a7a0dcb05bfdb31ed7735a746b13be8d6">&#9670;&#160;</a></span>attributes</h2>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string GraphEdge::relationship</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::unordered_map&lt;std::string, std::string&gt; GraphEdge::attributes
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
-<p>Type of relationship between the source and target nodes (e.g., "connects_to", "sends_data_to"). </p>
+                <p>Additional attributes associated with the edge. </p>
 
-</div>
-</div>
-<a id="a15bf6a4cc4dae4f0368ef9112273ab80" name="a15bf6a4cc4dae4f0368ef9112273ab80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a15bf6a4cc4dae4f0368ef9112273ab80">&#9670;&#160;</a></span>source</h2>
+            </div>
+        </div>
+        <a id="a6b6bacb716fb79e52b6b184f1c33b2cc" name="a6b6bacb716fb79e52b6b184f1c33b2cc"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a6b6bacb716fb79e52b6b184f1c33b2cc">&#9670;&#160;</a></span>encoded_features</h2>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string GraphEdge::source</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::vector&lt;float&gt; GraphEdge::encoded_features</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
-<p>Identifier of the source node. </p>
+                <p>Encoded features, to feed to GAT. </p>
 
-</div>
-</div>
-<a id="a96de026803e8fceda55bf716e7416303" name="a96de026803e8fceda55bf716e7416303"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a96de026803e8fceda55bf716e7416303">&#9670;&#160;</a></span>target</h2>
+            </div>
+        </div>
+        <a id="a9cb0c4a71deae507aa42d738bd5a3b7f" name="a9cb0c4a71deae507aa42d738bd5a3b7f"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a9cb0c4a71deae507aa42d738bd5a3b7f">&#9670;&#160;</a></span>last_seen</h2>
 
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string GraphEdge::target</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::chrono::system_clock::time_point GraphEdge::last_seen</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
 
-<p>Identifier of the target node. </p>
+            </div>
+        </div>
+        <a id="ad3ce59edfe79128ddd587bc3df2c3370" name="ad3ce59edfe79128ddd587bc3df2c3370"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#ad3ce59edfe79128ddd587bc3df2c3370">&#9670;&#160;</a></span>relationship</h2>
 
-</div>
-</div>
-<hr/>The documentation for this class was generated from the following file:<ul>
-<li>includes/<a class="el" href="GraphEdge_8h_source.html">GraphEdge.h</a></li>
-</ul>
-</div><!-- contents -->
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::string GraphEdge::relationship</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+                <p>Type of relationship between the source and target nodes (e.g., "connects_to", "sends_data_to"). </p>
+
+            </div>
+        </div>
+        <a id="a15bf6a4cc4dae4f0368ef9112273ab80" name="a15bf6a4cc4dae4f0368ef9112273ab80"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a15bf6a4cc4dae4f0368ef9112273ab80">&#9670;&#160;</a></span>source</h2>
+
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::string GraphEdge::source</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+                <p>Identifier of the source node. </p>
+
+            </div>
+        </div>
+        <a id="a96de026803e8fceda55bf716e7416303" name="a96de026803e8fceda55bf716e7416303"></a>
+        <h2 class="memtitle"><span class="permalink"><a
+                href="#a96de026803e8fceda55bf716e7416303">&#9670;&#160;</a></span>target</h2>
+
+        <div class="memitem">
+            <div class="memproto">
+                <table class="memname">
+                    <tr>
+                        <td class="memname">std::string GraphEdge::target</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="memdoc">
+
+                <p>Identifier of the target node. </p>
+
+            </div>
+        </div>
+        <hr/>
+        The documentation for this class was generated from the following files:
+        <ul>
+            <li>includes/<a class="el" href="GraphEdge_8h_source.html">GraphEdge.h</a></li>
+            <li><a class="el" href="GraphEdge_8cpp.html">GraphEdge.cpp</a></li>
+        </ul>
+    </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="classGraphEdge.html">GraphEdge</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
-  </ul>
+<div class="navpath" id="nav-path"><!-- id is needed for treeview function! -->
+    <ul>
+        <li class="navelem"><a class="el" href="classGraphEdge.html">GraphEdge</a></li>
+        <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img alt="doxygen"
+                                                                                          class="footer" height="31"
+                                                                                          src="doxygen.svg"
+                                                                                          width="104"/></a> 1.13.2
+        </li>
+    </ul>
 </div>
 </body>
 </html>

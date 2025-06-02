@@ -1,15 +1,16 @@
 <map id="LogMonitor.cpp" name="LogMonitor.cpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="166,5,287,31"/>
-<area shape="rect" id="Node000002" href="$LogMonitor_8h.html" title="Header file for the LogMonitor class, responsible for monitoring Zeek log files." alt="" coords="24,79,188,104"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="208,33,139,74,137,69,206,28"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="13,152,77,177"/>
-<area shape="poly" id="edge4_Node000001_Node000004" title=" " alt="" coords="166,31,75,50,37,64,14,80,8,94,10,109,27,140,23,143,5,111,3,93,10,77,34,59,74,45,165,25"/>
-<area shape="rect" id="Node000005" href="$ZeekLogParser_8h.html" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files." alt="" coords="131,152,260,177"/>
-<area shape="poly" id="edge7_Node000001_Node000005" title=" " alt="" coords="227,32,204,139,198,138,221,31"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="264,79,330,104"/>
-<area shape="poly" id="edge5_Node000001_Node000008" title=" " alt="" coords="240,29,278,67,274,71,236,33"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="354,79,421,104"/>
-<area shape="poly" id="edge6_Node000001_Node000009" title=" " alt="" coords="253,28,350,71,348,75,251,33"/>
-<area shape="poly" id="edge2_Node000002_Node000004" title=" " alt="" coords="98,106,66,143,62,140,94,103"/>
-<area shape="poly" id="edge3_Node000002_Node000005" title=" " alt="" coords="122,102,172,141,169,145,119,106"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="197,5,319,31"/>
+<area shape="rect" id="Node000002" href="$LogMonitor_8h.html" title="Header file for the LogMonitor class, responsible for monitoring Zeek log files." alt="" coords="5,79,169,104"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="232,33,129,76,127,71,230,28"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="123,225,187,251"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="262,31,260,97,252,139,235,179,215,202,192,220,188,216,211,198,230,176,247,137,255,96,256,31"/>
+<area shape="rect" id="Node000005" href="$ZeekLogParser_8h.html" title="Header file for the ZeekLogParser class, responsible for parsing Zeek log files in parallel." alt="" coords="91,152,220,177"/>
+<area shape="poly" id="edge8_Node000001_Node000005" title=" " alt="" coords="252,33,174,142,169,139,247,30"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="295,79,362,104"/>
+<area shape="poly" id="edge6_Node000001_Node000013" title=" " alt="" coords="272,29,310,67,306,71,268,33"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="386,79,453,104"/>
+<area shape="poly" id="edge7_Node000001_Node000014" title=" " alt="" coords="285,28,382,71,379,75,283,33"/>
+<area shape="poly" id="edge2_Node000002_Node000004" title=" " alt="" coords="85,105,77,139,77,158,82,176,99,199,121,216,117,220,95,202,77,179,71,159,72,138,80,104"/>
+<area shape="poly" id="edge3_Node000002_Node000005" title=" " alt="" coords="100,102,137,140,133,144,97,106"/>
+<area shape="poly" id="edge4_Node000005_Node000004" title=" " alt="" coords="158,178,158,212,153,212,153,178"/>
 </map>

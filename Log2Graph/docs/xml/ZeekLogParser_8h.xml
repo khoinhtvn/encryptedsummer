@@ -1,131 +1,1016 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="ZeekLogParser_8h" kind="file" language="C++">
-    <compoundname>ZeekLogParser.h</compoundname>
-    <includes local="no">string</includes>
-    <includes local="no">unordered_map</includes>
-    <includes local="no">filesystem</includes>
-    <includedby refid="LogMonitor_8cpp" local="yes">LogMonitor.cpp</includedby>
-    <includedby refid="ZeekLogParser_8cpp" local="yes">ZeekLogParser.cpp</includedby>
-    <includedby refid="LogMonitor_8h" local="yes">includes/LogMonitor.h</includedby>
-    <incdepgraph>
-      <node id="1">
-        <label>includes/ZeekLogParser.h</label>
-        <link refid="ZeekLogParser_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="4">
-        <label>filesystem</label>
-      </node>
-      <node id="2">
-        <label>string</label>
-      </node>
-      <node id="3">
-        <label>unordered_map</label>
-      </node>
-    </incdepgraph>
-    <invincdepgraph>
-      <node id="2">
-        <label>LogMonitor.cpp</label>
-        <link refid="LogMonitor_8cpp"/>
-      </node>
-      <node id="3">
-        <label>ZeekLogParser.cpp</label>
-        <link refid="ZeekLogParser_8cpp"/>
-      </node>
-      <node id="4">
-        <label>includes/LogMonitor.h</label>
-        <link refid="LogMonitor_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>includes/ZeekLogParser.h</label>
-        <link refid="ZeekLogParser_8h"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>main.cpp</label>
-        <link refid="main_8cpp"/>
-      </node>
-    </invincdepgraph>
-    <innerclass refid="structFileState" prot="public">FileState</innerclass>
-    <innerclass refid="classZeekLogParser" prot="public">ZeekLogParser</innerclass>
-    <briefdescription>
-<para>Header file for the <ref refid="classZeekLogParser" kindref="compound">ZeekLogParser</ref> class, responsible for parsing Zeek log files. </para>
-    </briefdescription>
-    <detaileddescription>
-<para>This file defines the <computeroutput><ref refid="classZeekLogParser" kindref="compound">ZeekLogParser</ref></computeroutput> class, which parses Zeek log files to extract network traffic information. It also defines the <computeroutput><ref refid="structFileState" kindref="compound">FileState</ref></computeroutput> struct to track the state of monitored log files. </para>
-    </detaileddescription>
-    <programlisting>
-<codeline lineno="1"><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Created<sp/>by<sp/>lu<sp/>on<sp/>4/25/25.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>ZEEKLOGPARSER_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ZEEKLOGPARSER_H</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;string&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="18"><highlight class="normal"></highlight></codeline>
-<codeline lineno="25" refid="structFileState" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" kindref="member">FileState</ref><sp/>{</highlight></codeline>
-<codeline lineno="29" refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>ino_t<sp/><ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref>;</highlight></codeline>
-<codeline lineno="33" refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>off_t<sp/><ref refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kindref="member">last_size</ref>;</highlight></codeline>
-<codeline lineno="37" refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/><ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>;</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"></highlight></codeline>
-<codeline lineno="42" refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" kindref="member">FileState</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"></highlight></codeline>
-<codeline lineno="51" refid="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" kindref="member">FileState</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>p)<sp/>:<sp/><ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>(p),<sp/><ref refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kindref="member">last_size</ref>(0),<sp/><ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref>(0)<sp/>{</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kindref="member">update</ref>();</highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kindref="member">update</ref>();</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" kindref="member">operator==</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structFileState" kindref="compound">FileState</ref>&amp;<sp/>other)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83" refid="classZeekLogParser" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" kindref="member">ZeekLogParser</ref><sp/>{</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="92" refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" kindref="member">ZeekLogParser</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>log_dir)<sp/>:<sp/>log_directory(log_dir)<sp/>{}</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1af922e185b33640058001015a136545a3" kindref="member">monitor_logs</ref>();</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1afc2dc1c7ef6b3d99d96c17156b565bff" kindref="member">process_new_file</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structFileState" kindref="compound">FileState</ref><sp/>&amp;file);</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1ab40d5d847d4254335368a0231bca696d" kindref="member">process_appended_data</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;path,<sp/>off_t<sp/>old_size,<sp/>off_t<sp/>new_size);</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classZeekLogParser_1a5a5dee5a6d6c6daf5fb1a517f848961e" kindref="member">process_content</ref>(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;path,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string<sp/>&amp;content);</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::string,<sp/>FileState&gt;<sp/>tracked_files;</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>log_directory;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>std::unordered_map&lt;std::string,<sp/>std::string&gt;<sp/>partial_lines;</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_log_file(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::filesystem::path&amp;<sp/>file_path);</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_log_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>log_type,<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>entry);</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_conn_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>entry);</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>process_http_entry(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::string&amp;<sp/>entry);</highlight></codeline>
-<codeline lineno="191"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"></highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">//<sp/>ZEEKLOGPARSER_H</highlight><highlight class="normal"></highlight></codeline>
-    </programlisting>
-    <location file="includes/ZeekLogParser.h"/>
-  </compounddef>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="ZeekLogParser_8h" kind="file" language="C++">
+        <compoundname>ZeekLogParser.h</compoundname>
+        <includes local="no">string</includes>
+        <includes local="no">unordered_map</includes>
+        <includes local="no">filesystem</includes>
+        <includes local="no">thread</includes>
+        <includes local="no">mutex</includes>
+        <includes local="no">condition_variable</includes>
+        <includes local="no">queue</includes>
+        <includes local="no">map</includes>
+        <includes local="no">set</includes>
+        <includedby refid="LogMonitor_8cpp" local="yes">LogMonitor.cpp</includedby>
+        <includedby refid="ZeekLogParser_8cpp" local="yes">ZeekLogParser.cpp</includedby>
+        <includedby refid="LogMonitor_8h" local="yes">includes/LogMonitor.h</includedby>
+        <incdepgraph>
+            <node id="1">
+                <label>includes/ZeekLogParser.h</label>
+                <link refid="ZeekLogParser_8h"/>
+                <childnode refid="2" relation="include">
+                </childnode>
+                <childnode refid="3" relation="include">
+                </childnode>
+                <childnode refid="4" relation="include">
+                </childnode>
+                <childnode refid="5" relation="include">
+                </childnode>
+                <childnode refid="6" relation="include">
+                </childnode>
+                <childnode refid="7" relation="include">
+                </childnode>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="9" relation="include">
+                </childnode>
+                <childnode refid="10" relation="include">
+                </childnode>
+            </node>
+            <node id="7">
+                <label>condition_variable</label>
+            </node>
+            <node id="4">
+                <label>filesystem</label>
+            </node>
+            <node id="9">
+                <label>map</label>
+            </node>
+            <node id="6">
+                <label>mutex</label>
+            </node>
+            <node id="8">
+                <label>queue</label>
+            </node>
+            <node id="10">
+                <label>set</label>
+            </node>
+            <node id="2">
+                <label>string</label>
+            </node>
+            <node id="5">
+                <label>thread</label>
+            </node>
+            <node id="3">
+                <label>unordered_map</label>
+            </node>
+        </incdepgraph>
+        <invincdepgraph>
+            <node id="2">
+                <label>LogMonitor.cpp</label>
+                <link refid="LogMonitor_8cpp"/>
+            </node>
+            <node id="3">
+                <label>ZeekLogParser.cpp</label>
+                <link refid="ZeekLogParser_8cpp"/>
+            </node>
+            <node id="4">
+                <label>includes/LogMonitor.h</label>
+                <link refid="LogMonitor_8h"/>
+                <childnode refid="2" relation="include">
+                </childnode>
+                <childnode refid="5" relation="include">
+                </childnode>
+            </node>
+            <node id="1">
+                <label>includes/ZeekLogParser.h</label>
+                <link refid="ZeekLogParser_8h"/>
+                <childnode refid="2" relation="include">
+                </childnode>
+                <childnode refid="3" relation="include">
+                </childnode>
+                <childnode refid="4" relation="include">
+                </childnode>
+            </node>
+            <node id="5">
+                <label>main.cpp</label>
+                <link refid="main_8cpp"/>
+            </node>
+        </invincdepgraph>
+        <innerclass refid="structFileState" prot="public">FileState</innerclass>
+        <innerclass refid="structLogEntry" prot="public">LogEntry</innerclass>
+        <innerclass refid="classSafeQueue" prot="public">SafeQueue</innerclass>
+        <innerclass refid="classZeekLogParser" prot="public">ZeekLogParser</innerclass>
+        <briefdescription>
+            <para>Header file for the <ref refid="classZeekLogParser" kindref="compound">ZeekLogParser</ref> class,
+                responsible for parsing Zeek log files in parallel.
+            </para>
+        </briefdescription>
+        <detaileddescription>
+            <para>This file defines the
+                <computeroutput>
+                    <ref refid="classZeekLogParser" kindref="compound">ZeekLogParser</ref>
+                </computeroutput>
+                class, which monitors a directory for Zeek log files, and uses multiple threads to parse them in
+                parallel. It also defines the
+                <computeroutput>
+                    <ref refid="structFileState" kindref="compound">FileState</ref>
+                </computeroutput>
+                struct to track the state of monitored log files and the
+                <computeroutput>
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                </computeroutput>
+                struct to hold parsed data.
+            </para>
+        </detaileddescription>
+        <programlisting>
+            <codeline lineno="1">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="9">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="10">
+                <highlight class="normal"></highlight>
+                <highlight class="comment">//<sp/>Created<sp/>by<sp/>lu<sp/>on<sp/>4/25/25.
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="11">
+                <highlight class="normal"></highlight>
+                <highlight class="comment">//<sp/>Modified<sp/>for<sp/>parallel<sp/>processing.
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="12">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="13">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#ifndef<sp/>ZEEKLOGPARSER_H
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="14">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#define<sp/>ZEEKLOGPARSER_H
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="15">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="16">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;string&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="17">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;unordered_map&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="18">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="19">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;thread&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="20">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;mutex&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="21">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;condition_variable&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="22">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;queue&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="23">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;map&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="24">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;set&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="25">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="32" refid="structFileState" refkind="compound">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">struct
+                    <sp/>
+                </highlight>
+                <highlight class="normal">
+                    <ref refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" kindref="member">FileState</ref>
+                    <sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="36" refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>ino_t
+                    <sp/>
+                    <ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref>;
+                </highlight>
+            </codeline>
+            <codeline lineno="40" refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>off_t
+                    <sp/>
+                    <ref refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kindref="member">last_size</ref>;
+                </highlight>
+            </codeline>
+            <codeline lineno="44" refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::string
+                    <sp/>
+                    <ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>;
+                </highlight>
+            </codeline>
+            <codeline lineno="45">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="49" refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="structFileState_1a29ca2864c94e4eca416d81007058eb4f" kindref="member">FileState</ref>()
+                    <sp/>=
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">default</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="50">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="58" refid="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="structFileState_1ae6c916efcf345fedb2a4165b5c637aba" kindref="member">FileState</ref>(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>p)<sp/>:
+                    <sp/>
+                    <ref refid="structFileState_1aa54fe5f4df7f270814dd53db110bb7d5" kindref="member">path</ref>(p),
+                    <sp/>
+                    <ref refid="structFileState_1acb4eeb0f402fe2ff73624f40fd8b6183" kindref="member">last_size</ref>(0),
+                    <sp/>
+                    <ref refid="structFileState_1ae010c4938bde94f555a4589146fa7b39" kindref="member">inode</ref>(0)<sp/>
+                    {
+                </highlight>
+            </codeline>
+            <codeline lineno="59">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kindref="member">update</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="60">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="61">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="70">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">bool</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="structFileState_1a8a334d569b2977c7ccc221d6d01ada41" kindref="member">update</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="71">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="80">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">bool</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="structFileState_1ac6b4ee72d0eac3bd51186f1d84af950b" kindref="member">operator==</ref>(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="structFileState" kindref="compound">FileState</ref>&amp;<sp/>other)
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="81">
+                <highlight class="normal">};</highlight>
+            </codeline>
+            <codeline lineno="82">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="86" refid="structLogEntry" refkind="compound">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">struct
+                    <sp/>
+                </highlight>
+                <highlight class="normal">
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                    <sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="87" refid="structLogEntry_1a8d0edc412501a60ec6d9a21548f04528" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::string
+                    <sp/>
+                    <ref refid="structLogEntry_1a8d0edc412501a60ec6d9a21548f04528" kindref="member">log_type</ref>;
+                </highlight>
+            </codeline>
+            <codeline lineno="88" refid="structLogEntry_1ac8d4448ecf2ad0845d6c1c6c611e946a" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::map&lt;std::string,<sp/>std::string&gt;<sp/>
+                    <ref refid="structLogEntry_1ac8d4448ecf2ad0845d6c1c6c611e946a" kindref="member">data</ref>;
+                </highlight>
+            </codeline>
+            <codeline lineno="89" refid="structLogEntry_1ae9f734f9dab615e36a3861964ff49a34" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::map&lt;std::string,<sp/>std::vector&lt;std::string&gt;&gt;<sp/>
+                    <ref refid="structLogEntry_1ae9f734f9dab615e36a3861964ff49a34" kindref="member">list_data</ref>;
+                    <sp/>
+                </highlight>
+                <highlight class="comment">//<sp/>For<sp/>vector<sp/>types
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="90" refid="structLogEntry_1a42700d8758ee45a0e45ede3b94d1aa45" refkind="member">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::map&lt;std::string,<sp/>std::set&lt;std::string&gt;&gt;<sp/>
+                    <ref refid="structLogEntry_1a42700d8758ee45a0e45ede3b94d1aa45" kindref="member">set_data</ref>;
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="comment">//<sp/>For<sp/>set<sp/>types
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="91">
+                <highlight class="normal">};</highlight>
+            </codeline>
+            <codeline lineno="92">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="96" refid="classSafeQueue" refkind="compound">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">class
+                    <sp/>
+                </highlight>
+                <highlight class="normal">
+                    <ref refid="classSafeQueue" kindref="compound">SafeQueue</ref>
+                    <sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="97">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">public</highlight>
+                <highlight class="normal">:</highlight>
+            </codeline>
+            <codeline lineno="98">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="classSafeQueue_1aa28b85e7ca2625feecb4c6674fd64bb4" kindref="member">enqueue</ref>(
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                    <sp/>entry);
+                </highlight>
+            </codeline>
+            <codeline lineno="99">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                    <sp/>
+                    <ref refid="classSafeQueue_1ac6d7f1830ee1b751beb3739d5636f454" kindref="member">dequeue</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="100">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="classSafeQueue_1a2fa92b97d343534fdc61c6a737b7cd9d" kindref="member">stop</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="101">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">bool</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="classSafeQueue_1a02cacf8f629f6967bec1a714dd72cb17" kindref="member">is_running</ref>()
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="102">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">private</highlight>
+                <highlight class="normal">:</highlight>
+            </codeline>
+            <codeline lineno="103">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::queue&lt;LogEntry&gt;<sp/>queue_;
+                </highlight>
+            </codeline>
+            <codeline lineno="104">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">mutable</highlight>
+                <highlight class="normal"><sp/>std::mutex<sp/>mutex_;
+                </highlight>
+            </codeline>
+            <codeline lineno="105">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::condition_variable<sp/>condition_;
+                </highlight>
+            </codeline>
+            <codeline lineno="106">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">bool</highlight>
+                <highlight class="normal"><sp/>running_<sp/>=
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">true</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="107">
+                <highlight class="normal">};</highlight>
+            </codeline>
+            <codeline lineno="108">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="115" refid="classZeekLogParser" refkind="compound">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">class
+                    <sp/>
+                </highlight>
+                <highlight class="normal">
+                    <ref refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" kindref="member">ZeekLogParser
+                    </ref>
+                    <sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="116">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">public</highlight>
+                <highlight class="normal">:</highlight>
+            </codeline>
+            <codeline lineno="125">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">explicit</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="classZeekLogParser_1ac14af41e221d8102cebb6f73ab750f20" kindref="member">
+                        ZeekLogParser</ref>(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>log_dir);
+                </highlight>
+            </codeline>
+            <codeline lineno="126">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="132">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="classZeekLogParser_1acbb5b48110832629419912fe2f1e8146" kindref="member">
+                        ~ZeekLogParser</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="133">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="137">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="classZeekLogParser_1af492bde7c2057f7f3da6f370d03db5f0" kindref="member">
+                        start_monitoring</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="138">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="142">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="classZeekLogParser_1a7e8fe3cca283db041126fcaa393a301d" kindref="member">
+                        stop_monitoring</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="143">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="144">
+                <highlight class="normal"></highlight>
+                <highlight class="keyword">private</highlight>
+                <highlight class="normal">:</highlight>
+            </codeline>
+            <codeline lineno="148">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::unordered_map&lt;std::string,<sp/>FileState&gt;<sp/>tracked_files_;
+                </highlight>
+            </codeline>
+            <codeline lineno="152">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::string<sp/>log_directory_;
+                </highlight>
+            </codeline>
+            <codeline lineno="156">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="classSafeQueue" kindref="compound">SafeQueue</ref>
+                    <sp/>entry_queue_;
+                </highlight>
+            </codeline>
+            <codeline lineno="160">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::vector&lt;std::thread&gt;<sp/>monitor_threads_;
+                </highlight>
+            </codeline>
+            <codeline lineno="164">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">static</highlight>
+                <highlight class="normal">
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal">
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">int</highlight>
+                <highlight class="normal"><sp/>num_worker_threads_<sp/>=<sp/>4;
+                </highlight>
+            </codeline>
+            <codeline lineno="168">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::vector&lt;std::thread&gt;<sp/>worker_threads_;
+                </highlight>
+            </codeline>
+            <codeline lineno="172">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::mutex<sp/>tracked_files_mutex_;
+                </highlight>
+            </codeline>
+            <codeline lineno="176">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::unordered_map&lt;std::string,<sp/>std::string&gt;<sp/>partial_lines_;
+                </highlight>
+            </codeline>
+            <codeline lineno="180">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::mutex<sp/>partial_lines_mutex_;
+                </highlight>
+            </codeline>
+            <codeline lineno="184">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">bool</highlight>
+                <highlight class="normal"><sp/>running_<sp/>=
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">false</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="185">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="207">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::unordered_map&lt;std::string,<sp/>std::map&lt;std::string,<sp/>std::map&lt;std::string,
+                    <sp/>std::string&gt;&gt;&gt;<sp/>uid_data_;
+                </highlight>
+            </codeline>
+            <codeline lineno="208">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="218">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::mutex<sp/>uid_data_mutex_;
+                </highlight>
+            </codeline>
+            <codeline lineno="219">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="223">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>monitor_directory();
+                </highlight>
+            </codeline>
+            <codeline lineno="224">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="230">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>monitor_single_file(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>file_path);
+                </highlight>
+            </codeline>
+            <codeline lineno="231">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="239">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>process_log_file(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>file_path);
+                </highlight>
+            </codeline>
+            <codeline lineno="240">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="249">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>process_content(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>path,
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>content);
+                </highlight>
+            </codeline>
+            <codeline lineno="250">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="258">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>process_entry(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>&amp;<sp/>entry);
+                </highlight>
+            </codeline>
+            <codeline lineno="259">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="272">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>attempt_build_graph_node(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>uid);
+                </highlight>
+            </codeline>
+            <codeline lineno="273">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="289">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>build_graph_node(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>uid,
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::map&lt;std::string,<sp/>std::map&lt;std::string,<sp/>std::string&gt;&gt;&amp;<sp/>
+                    combined_data);
+                </highlight>
+            </codeline>
+            <codeline lineno="290">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="291">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="292">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="300">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                    <sp/>parse_log_entry(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>log_type,
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>entry);
+                </highlight>
+            </codeline>
+            <codeline lineno="301">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="308">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::map&lt;std::string,<sp/>std::string&gt;<sp/>parse_conn_entry(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::vector&lt;std::string&gt;&amp;<sp/>fields);
+                </highlight>
+            </codeline>
+            <codeline lineno="309">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="316">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::map&lt;std::string,<sp/>std::string&gt;<sp/>parse_ssl_entry(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::vector&lt;std::string&gt;&amp;<sp/>fields);
+                </highlight>
+            </codeline>
+            <codeline lineno="317">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="325">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::map&lt;std::string,<sp/>std::string&gt;<sp/>parse_http_entry(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::vector&lt;std::string&gt;&amp;<sp/>fields,
+                    <sp/>
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>&amp;<sp/>log_entry);
+                </highlight>
+            </codeline>
+            <codeline lineno="326">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="327">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="335">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>handle_new_file(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>file_path);
+                </highlight>
+            </codeline>
+            <codeline lineno="336">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="346">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">void</highlight>
+                <highlight class="normal"><sp/>handle_appended_data(
+                </highlight>
+                <highlight class="keyword">const</highlight>
+                <highlight class="normal"><sp/>std::string&amp;<sp/>file_path,<sp/>off_t<sp/>old_size,<sp/>off_t<sp/>
+                    new_size);
+                </highlight>
+            </codeline>
+            <codeline lineno="347">
+                <highlight class="normal">};</highlight>
+            </codeline>
+            <codeline lineno="348">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="349">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#endif
+                    <sp/>
+                </highlight>
+                <highlight class="comment">//<sp/>ZEEKLOGPARSER_H
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+        </programlisting>
+        <location file="includes/ZeekLogParser.h"/>
+    </compounddef>
 </doxygen>

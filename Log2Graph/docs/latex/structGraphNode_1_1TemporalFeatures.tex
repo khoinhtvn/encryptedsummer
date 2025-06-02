@@ -1,0 +1,142 @@
+\doxysection{Graph\+Node\+::Temporal\+Features Struct Reference}
+\hypertarget{structGraphNode_1_1TemporalFeatures}{}\label{structGraphNode_1_1TemporalFeatures}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+
+
+Structure to hold temporal features of the network node.  
+
+
+
+
+{\ttfamily \#include $<$Graph\+Node.\+h$>$}
+
+
+
+Collaboration diagram for Graph\+Node\+::Temporal\+Features\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{structGraphNode_1_1TemporalFeatures__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a95afafcadf9b27a7ffcb40c164c9b995}{connections\+\_\+last\+\_\+minute}} \{0\}
+\begin{DoxyCompactList}\small\item\em Number of connections seen in the last minute. \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a8cabf3e9d0a57829d244c8d48caaccd0}{connections\+\_\+last\+\_\+hour}} \{0\}
+\begin{DoxyCompactList}\small\item\em Number of connections seen in the last hour. \end{DoxyCompactList}\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_ac4e93bc8950c5592e9331203428ddaf5}{monitoring\+\_\+start}}
+\begin{DoxyCompactList}\small\item\em Time when monitoring of this node started. \end{DoxyCompactList}\item 
+std\+::atomic$<$ int $>$ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a68f7f0b74f4720077047b80694ba6877}{total\+\_\+connections}} \{0\}
+\begin{DoxyCompactList}\small\item\em Total number of connections this node has been involved in. \end{DoxyCompactList}\item 
+std\+::mutex \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_ad969bda057f83e5426d05709c322dfd0}{window\+\_\+mutex}}
+\begin{DoxyCompactList}\small\item\em Mutex to protect the minute\+\_\+window and hour\+\_\+window queues. \end{DoxyCompactList}\item 
+std\+::queue$<$ std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a3008fccab8347d3bf113a61b4b373124}{minute\+\_\+window}}
+\begin{DoxyCompactList}\small\item\em Queue to track connection times for the last minute. \end{DoxyCompactList}\item 
+std\+::queue$<$ std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_aaa043e6af8a3bc7bd751241c13515369}{hour\+\_\+window}}
+\begin{DoxyCompactList}\small\item\em Queue to track connection times for the last hour. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a57898bcb0394a8e60267f9b77b1df500}{first\+\_\+seen}}
+\begin{DoxyCompactList}\small\item\em Timestamp of when this node was first observed. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{structGraphNode_1_1TemporalFeatures_a907380cd5b111b7c037a5e142d16586f}{last\+\_\+seen}}
+\begin{DoxyCompactList}\small\item\em Timestamp of when this node was last observed in a connection. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Structure to hold temporal features of the network node. 
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structGraphNode_1_1TemporalFeatures_a8cabf3e9d0a57829d244c8d48caaccd0}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!connections\_last\_hour@{connections\_last\_hour}}
+\index{connections\_last\_hour@{connections\_last\_hour}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{connections\_last\_hour}{connections\_last\_hour}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_a8cabf3e9d0a57829d244c8d48caaccd0} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Temporal\+Features\+::connections\+\_\+last\+\_\+hour \{0\}}
+
+
+
+Number of connections seen in the last hour. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_a95afafcadf9b27a7ffcb40c164c9b995}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!connections\_last\_minute@{connections\_last\_minute}}
+\index{connections\_last\_minute@{connections\_last\_minute}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{connections\_last\_minute}{connections\_last\_minute}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_a95afafcadf9b27a7ffcb40c164c9b995} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Temporal\+Features\+::connections\+\_\+last\+\_\+minute \{0\}}
+
+
+
+Number of connections seen in the last minute. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_a57898bcb0394a8e60267f9b77b1df500}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!first\_seen@{first\_seen}}
+\index{first\_seen@{first\_seen}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{first\_seen}{first\_seen}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_a57898bcb0394a8e60267f9b77b1df500} 
+std\+::string Graph\+Node\+::\+Temporal\+Features\+::first\+\_\+seen}
+
+
+
+Timestamp of when this node was first observed. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_aaa043e6af8a3bc7bd751241c13515369}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!hour\_window@{hour\_window}}
+\index{hour\_window@{hour\_window}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{hour\_window}{hour\_window}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_aaa043e6af8a3bc7bd751241c13515369} 
+std\+::queue$<$std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point$>$ Graph\+Node\+::\+Temporal\+Features\+::hour\+\_\+window}
+
+
+
+Queue to track connection times for the last hour. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_a907380cd5b111b7c037a5e142d16586f}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!last\_seen@{last\_seen}}
+\index{last\_seen@{last\_seen}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{last\_seen}{last\_seen}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_a907380cd5b111b7c037a5e142d16586f} 
+std\+::string Graph\+Node\+::\+Temporal\+Features\+::last\+\_\+seen}
+
+
+
+Timestamp of when this node was last observed in a connection. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_a3008fccab8347d3bf113a61b4b373124}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!minute\_window@{minute\_window}}
+\index{minute\_window@{minute\_window}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{minute\_window}{minute\_window}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_a3008fccab8347d3bf113a61b4b373124} 
+std\+::queue$<$std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point$>$ Graph\+Node\+::\+Temporal\+Features\+::minute\+\_\+window}
+
+
+
+Queue to track connection times for the last minute. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_ac4e93bc8950c5592e9331203428ddaf5}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!monitoring\_start@{monitoring\_start}}
+\index{monitoring\_start@{monitoring\_start}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{monitoring\_start}{monitoring\_start}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_ac4e93bc8950c5592e9331203428ddaf5} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point Graph\+Node\+::\+Temporal\+Features\+::monitoring\+\_\+start}
+
+
+
+Time when monitoring of this node started. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_a68f7f0b74f4720077047b80694ba6877}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!total\_connections@{total\_connections}}
+\index{total\_connections@{total\_connections}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{total\_connections}{total\_connections}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_a68f7f0b74f4720077047b80694ba6877} 
+std\+::atomic$<$int$>$ Graph\+Node\+::\+Temporal\+Features\+::total\+\_\+connections \{0\}}
+
+
+
+Total number of connections this node has been involved in. 
+
+\Hypertarget{structGraphNode_1_1TemporalFeatures_ad969bda057f83e5426d05709c322dfd0}\index{GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}!window\_mutex@{window\_mutex}}
+\index{window\_mutex@{window\_mutex}!GraphNode::TemporalFeatures@{GraphNode::TemporalFeatures}}
+\doxysubsubsection{\texorpdfstring{window\_mutex}{window\_mutex}}
+{\footnotesize\ttfamily \label{structGraphNode_1_1TemporalFeatures_ad969bda057f83e5426d05709c322dfd0} 
+std\+::mutex Graph\+Node\+::\+Temporal\+Features\+::window\+\_\+mutex\hspace{0.3cm}{\ttfamily [mutable]}}
+
+
+
+Mutex to protect the minute\+\_\+window and hour\+\_\+window queues. 
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+includes/\mbox{\hyperlink{GraphNode_8h}{Graph\+Node.\+h}}\end{DoxyCompactItemize}

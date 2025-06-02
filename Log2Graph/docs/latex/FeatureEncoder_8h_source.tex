@@ -1,0 +1,49 @@
+\doxysection{Feature\+Encoder.\+h}
+\hypertarget{FeatureEncoder_8h_source}{}\label{FeatureEncoder_8h_source}\index{includes/FeatureEncoder.h@{includes/FeatureEncoder.h}}
+\mbox{\hyperlink{FeatureEncoder_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Created\ by\ lu\ on\ 5/9/25.}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#ifndef\ FEATUREENCODER\_H}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#define\ FEATUREENCODER\_H}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classFeatureEncoder_afaf2be970998ea6430e5d17ea95d80a7}{FeatureEncoder}}\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Encoding\ Maps\ for\ Categorical\ Features\ -\/-\/-\/}}
+\DoxyCodeLine{00024\ \ \ \ \ std::unordered\_map<std::string,\ int>\ protocol\_map;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NUM\_PROTOCOL\_CATEGORIES\ =\ protocol\_map.size();}
+\DoxyCodeLine{00026\ \ \ \ \ std::unordered\_map<std::string,\ int>\ conn\_state\_map;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NUM\_CONN\_STATE\_CATEGORIES;}
+\DoxyCodeLine{00028\ \ \ \ \ std::unordered\_map<std::string,\ int>\ ssl\_version\_map;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NUM\_SSL\_VERSION\_CATEGORIES;}
+\DoxyCodeLine{00030\ \ \ \ \ std::unordered\_map<std::string,\ int>\ user\_agent\_map;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ NUM\_USER\_AGENT\_CATEGORIES;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ feature\_dimension;\ }
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{comment}{//\ -\/-\/-\/\ Utility\ Encoding\ Functions\ -\/-\/-\/}}
+\DoxyCodeLine{00036\ \ \ \ \ std::vector<float>\ one\_hot(\textcolor{keywordtype}{int}\ value,\ \textcolor{keywordtype}{int}\ num\_classes);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classFeatureEncoder_afaf2be970998ea6430e5d17ea95d80a7}{FeatureEncoder}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classFeatureEncoder_a60fa681a32d45d2326c87167d6b1a049}{get\_feature\_dimension}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::vector<float>\ \mbox{\hyperlink{classFeatureEncoder_aaa3ef6109c0b8e2d4b00f98e146d3830}{encode\_features}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\ \&attrs);}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classFeatureEncoder_a92aadd6c0de44aac9ed1f854048e82bb}{get\_feature\_names}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classFeatureEncoder_a28d3e22e320c0a37824c6b0762f7ba35}{get\_feature\_name}}(\textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//\ FEATUREENCODER\_H}}
+
+\end{DoxyCode}

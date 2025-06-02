@@ -1,4 +1,4 @@
 var GraphExporter_8h =
-[
-    [ "GraphExporter", "classGraphExporter.html", "classGraphExporter" ]
-];
+    [
+        ["GraphExporter", "classGraphExporter.html", "classGraphExporter"]
+    ];
