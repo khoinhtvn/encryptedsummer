@@ -100,9 +100,9 @@ std::string AggregatedGraphEdge::to_dot_string_aggregated() const {
     ss_last << std::put_time(std::localtime(&last_seen_t), "%Y-%m-%d %H:%M:%S");
     ss << ", first_seen=\"" << ss_first.str() << "\"";
     ss << ", last_seen=\"" << ss_last.str() << "\"";
-
-    ss << "]";
     */
+    ss << "];\n";
+
     return ss.str();
 }
 

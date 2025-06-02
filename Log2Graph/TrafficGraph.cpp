@@ -24,31 +24,52 @@ void TrafficGraph::add_node(std::shared_ptr<GraphNode> node) {
     nodes_[node->id] = node;
 }
 
-void TrafficGraph::add_aggregated_edge(const AggregatedGraphEdge& edge) {
+void TrafficGraph::add_aggregated_edge(const AggregatedGraphEdge& new_edge) {
     std::lock_guard<std::mutex> lock(graph_mutex_);
-    aggregated_edges_.push_back(edge);
-    std::string src_id = edge.source;
-    std::string dest_id = edge.target;
+    std::string src_id = new_edge.source;
+    std::string dest_id = new_edge.target;
 
-    if (nodes_.find(src_id) == nodes_.end()) {
+    auto source_it = nodes_.find(src_id);
+    if (source_it == nodes_.end()) {
         std::cerr << "Error: Source node with ID '" << src_id << "' not found for aggregated edge." << std::endl;
         return;
     }
-    if (nodes_.find(dest_id) == nodes_.end()) {
+    auto dest_it = nodes_.find(dest_id);
+    if (dest_it == nodes_.end()) {
         std::cerr << "Error: Destination node with ID '" << dest_id << "' not found for aggregated edge." << std::endl;
         return;
     }
 
-    if (auto source_node = nodes_.find(src_id); source_node != nodes_.end()) {
-        source_node->second->increment_out_degree();
-        source_node->second->increment_degree();
+    bool found = false;
+    for (auto& existing_edge : aggregated_edges_) {
+        if (existing_edge.source == new_edge.source &&
+            existing_edge.target == new_edge.target &&
+            existing_edge.protocol == new_edge.protocol &&
+            existing_edge.service == new_edge.service &&
+            existing_edge.dst_port == new_edge.dst_port) {
+            // Update the existing edge
+            existing_edge.connection_count += new_edge.connection_count;
+            existing_edge.total_orig_bytes += new_edge.total_orig_bytes;
+            existing_edge.total_resp_bytes += new_edge.total_resp_bytes;
+            existing_edge.total_orig_pkts += new_edge.total_orig_pkts;
+            existing_edge.total_resp_pkts += new_edge.total_resp_pkts;
+            existing_edge.total_orig_ip_bytes += new_edge.total_orig_ip_bytes;
+            existing_edge.total_resp_ip_bytes += new_edge.total_resp_ip_bytes;
+            existing_edge.last_seen = new_edge.last_seen;
+            // Potentially update aggregated_encoded_features as well
+            found = true;
+            break;
+        }
     }
-    if (auto dest_node = nodes_.find(dest_id); dest_node != nodes_.end()) {
-        dest_node->second->increment_in_degree();
-        dest_node->second->increment_degree();
+
+    if (!found) {
+        aggregated_edges_.push_back(new_edge);
+        source_it->second->increment_out_degree();
+        source_it->second->increment_degree();
+        dest_it->second->increment_in_degree();
+        dest_it->second->increment_degree();
     }
 }
-
 std::shared_ptr<GraphNode> TrafficGraph::get_node(const std::string &id) const {
     std::lock_guard<std::mutex> lock(graph_mutex_);
     auto it = nodes_.find(id);
