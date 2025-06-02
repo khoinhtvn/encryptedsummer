@@ -76,7 +76,7 @@ struct FileState {
      *
      * @param p The path to the file.
      */
-    FileState(const std::string& p) : path(p), last_size(0), processed_size(0), inode(0) {
+    FileState(const std::string &p) : path(p), last_size(0), processed_size(0), inode(0) {
         update();
         processed_size = last_size; // Mark entire file as processed initially
     }
@@ -101,7 +101,7 @@ struct FileState {
      * @param other The FileState object to compare with
      * @return true if the two objects are equal, false otherwise
      */
-    bool operator==(const FileState& other) const;
+    bool operator==(const FileState &other) const;
 };
 
 /**
@@ -110,8 +110,8 @@ struct FileState {
 struct LogEntry {
     std::string log_type;
     std::map<std::string, std::string> data;
-    std::map<std::string, std::vector<std::string>> list_data; // For vector types
-    std::map<std::string, std::set<std::string>> set_data;      // For set types
+    std::map<std::string, std::vector<std::string> > list_data; // For vector types
+    std::map<std::string, std::set<std::string> > set_data; // For set types
 };
 
 /**
@@ -120,10 +120,14 @@ struct LogEntry {
 class SafeQueue {
 public:
     void enqueue(LogEntry entry);
+
     LogEntry dequeue();
+
     void stop();
+
     void stop_waiting(); // Add this method
     bool is_running() const;
+
     bool is_empty() const; // New method
 private:
     std::queue<LogEntry> queue_;
@@ -148,7 +152,7 @@ public:
      *
      * @param log_dir The path to the directory containing the Zeek log files.
      */
-    explicit ZeekLogParser(const std::string& log_dir);
+    explicit ZeekLogParser(const std::string &log_dir);
 
     /**
      * @brief Destructor for ZeekLogParser.
@@ -184,7 +188,7 @@ private:
      * @param filename The full path to the file.
      * @return true if the filename stem is "conn", "ssl", or "http", false otherwise.
      */
-    bool is_interesting_log_file(const std::string& filename) const;
+    bool is_interesting_log_file(const std::string &filename) const;
 
     /**
      * @brief Map of file paths to FileState objects, used to track monitored files.
@@ -264,7 +268,7 @@ private:
      * ...
      * }
      */
-    std::unordered_map<std::string, std::map<std::string, std::map<std::string, std::string>>> uid_data_;
+    std::unordered_map<std::string, std::map<std::string, std::map<std::string, std::string> > > uid_data_;
 
     /**
      * @brief Mutex to protect access to the `uid_data_` map in a multi-threaded environment.
@@ -293,7 +297,7 @@ private:
      *
      * @param file_path The path to the log file to monitor.
      */
-    void monitor_file(const std::string& file_path);
+    void monitor_file(const std::string &file_path);
 
     /**
      * @brief Processes a single log file by reading its entire content.
@@ -302,7 +306,7 @@ private:
      *
      * @param file_path The path to the log file.
      */
-    void process_log_file(const std::string& file_path);
+    void process_log_file(const std::string &file_path);
 
     /**
      * @brief Processes the content of a log file or a portion of it.
@@ -312,7 +316,7 @@ private:
      * @param path The path to the log file (used for `partial_lines_` buffer).
      * @param content The content string to process.
      */
-    void process_content(const std::string& path, const std::string& content);
+    void process_content(const std::string &path, const std::string &content);
 
     /**
      * @brief Processes a single log entry from the queue.
@@ -322,7 +326,7 @@ private:
      *
      * @param entry The log entry to process.
      */
-    void process_entry(const LogEntry& entry);
+    void process_entry(const LogEntry &entry);
 
     /**
      * @brief Attempts to build a graph node for a given UID after all related log entries
@@ -336,7 +340,7 @@ private:
      *
      * @param uid The unique identifier of the connection for which to build the graph node.
      */
-    void attempt_build_graph_node(const std::string& uid);
+    void attempt_build_graph_node(const std::string &uid);
 
     /**
      * @brief Builds a graph node and its associated edge using the combined data from
@@ -353,7 +357,9 @@ private:
      * and the value is another map containing the fields and
      * their values from that log entry.
      */
-    void build_graph_node(const std::string& uid, const std::map<std::string, std::map<std::string, std::string>>& combined_data);
+    void build_graph_node(const std::string &uid,
+                          const std::map<std::string, std::map<std::string, std::string> > &combined_data);
+
     /**
      * @brief Parses a single log entry string into a `LogEntry` struct.
      *
@@ -361,7 +367,7 @@ private:
      * @param entry The raw log entry string.
      * @return The parsed `LogEntry` struct.
      */
-    LogEntry parse_log_entry(const std::string& log_type, const std::string& entry);
+    LogEntry parse_log_entry(const std::string &log_type, const std::string &entry);
 
     /**
      * @brief Parses a connection log entry.
@@ -369,7 +375,7 @@ private:
      * @param fields Vector of fields from the log entry.
      * @return A map containing the parsed fields.
      */
-    std::map<std::string, std::string> parse_conn_entry(const std::vector<std::string>& fields);
+    std::map<std::string, std::string> parse_conn_entry(const std::vector<std::string> &fields);
 
     /**
      * @brief Parses an SSL log entry.
@@ -377,7 +383,7 @@ private:
      * @param fields Vector of fields from the log entry.
      * @return A map containing the parsed fields.
      */
-    std::map<std::string, std::string> parse_ssl_entry(const std::vector<std::string>& fields);
+    std::map<std::string, std::string> parse_ssl_entry(const std::vector<std::string> &fields);
 
     /**
      * @brief Parses an HTTP log entry.
@@ -386,7 +392,7 @@ private:
      * @param log_entry The `LogEntry` struct to populate with set and list data.
      * @return A map containing the parsed fields.
      */
-    std::map<std::string, std::string> parse_http_entry(const std::vector<std::string>& fields, LogEntry& log_entry);
+    std::map<std::string, std::string> parse_http_entry(const std::vector<std::string> &fields, LogEntry &log_entry);
 
     // New method for the processing thread
     void processing_loop();

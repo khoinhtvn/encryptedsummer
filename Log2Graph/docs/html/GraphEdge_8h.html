@@ -1,175 +1,221 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=11"/>
-<meta name="generator" content="Doxygen 1.13.2"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>My Project: includes/GraphEdge.h File Reference</title>
-<link href="tabs.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript" src="dynsections.js"></script>
-<script type="text/javascript" src="clipboard.js"></script>
-<link href="navtree.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="navtreedata.js"></script>
-<script type="text/javascript" src="navtree.js"></script>
-<script type="text/javascript" src="resize.js"></script>
-<script type="text/javascript" src="cookie.js"></script>
-<link href="search/search.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript" src="search/searchdata.js"></script>
-<script type="text/javascript" src="search/search.js"></script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-  $(function() { init_search(); });
-/* @license-end */
-</script>
-<link href="doxygen.css" rel="stylesheet" type="text/css" />
+    <meta content="text/xhtml;charset=UTF-8" http-equiv="Content-Type"/>
+    <meta content="IE=11" http-equiv="X-UA-Compatible"/>
+    <meta content="Doxygen 1.13.2" name="generator"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <title>My Project: includes/GraphEdge.h File Reference</title>
+    <link href="tabs.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="dynsections.js" type="text/javascript"></script>
+    <script src="clipboard.js" type="text/javascript"></script>
+    <link href="navtree.css" rel="stylesheet" type="text/css"/>
+    <script src="navtreedata.js" type="text/javascript"></script>
+    <script src="navtree.js" type="text/javascript"></script>
+    <script src="resize.js" type="text/javascript"></script>
+    <script src="cookie.js" type="text/javascript"></script>
+    <link href="search/search.css" rel="stylesheet" type="text/css"/>
+    <script src="search/searchdata.js" type="text/javascript"></script>
+    <script src="search/search.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            init_search();
+        });
+        /* @license-end */
+    </script>
+    <link href="doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
-<div id="titlearea">
-<table cellspacing="0" cellpadding="0">
- <tbody>
- <tr id="projectrow">
-  <td id="projectalign">
-   <div id="projectname">My Project
-   </div>
-  </td>
-    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+    <div id="titlearea">
+        <table cellpadding="0" cellspacing="0">
+            <tbody>
+            <tr id="projectrow">
+                <td id="projectalign">
+                    <div id="projectname">My Project
+                    </div>
+                </td>
+                <td>
+                    <div class="MSearchBoxInactive" id="MSearchBox">
         <span class="left">
-          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
-          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
-               onfocus="searchBox.OnSearchFieldFocus(true)" 
-               onblur="searchBox.OnSearchFieldFocus(false)" 
-               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          <span id="MSearchSelect" onmouseout="return searchBox.OnSearchSelectHide()"
+                onmouseover="return searchBox.OnSearchSelectShow()">&#160;</span>
+          <input accesskey="S" id="MSearchField" onblur="searchBox.OnSearchFieldFocus(false)" onfocus="searchBox.OnSearchFieldFocus(true)" onkeyup="searchBox.OnSearchFieldChange(event)"
+                 placeholder="Search"
+                 type="text"
+                 value=""/>
           </span><span class="right">
-            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+            <a href="javascript:searchBox.CloseResultsWindow()" id="MSearchClose"><img alt="" border="0"
+                                                                                       id="MSearchCloseImg"
+                                                                                       src="search/close.svg"/></a>
           </span>
-        </div>
-</td>
- </tr>
- </tbody>
-</table>
-</div>
-<!-- end header part -->
-<!-- Generated by Doxygen 1.13.2 -->
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-var searchBox = new SearchBox("searchBox", "search/",'.html');
-/* @license-end */
-</script>
-<script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function() { codefold.init(0); });
-/* @license-end */
-</script>
-</div><!-- top -->
-<div id="side-nav" class="ui-resizable side-nav-resizable">
-  <div id="nav-tree">
-    <div id="nav-tree-contents">
-      <div id="nav-sync" class="sync"></div>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
-  </div>
-  <div id="splitbar" style="-moz-user-select:none;" 
-       class="ui-resizable-handle">
-  </div>
+    <!-- end header part -->
+    <!-- Generated by Doxygen 1.13.2 -->
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        var searchBox = new SearchBox("searchBox", "search/", '.html');
+        /* @license-end */
+    </script>
+    <script type="text/javascript">
+        /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+        $(function () {
+            codefold.init(0);
+        });
+        /* @license-end */
+    </script>
+</div><!-- top -->
+<div class="ui-resizable side-nav-resizable" id="side-nav">
+    <div id="nav-tree">
+        <div id="nav-tree-contents">
+            <div class="sync" id="nav-sync"></div>
+        </div>
+    </div>
+    <div class="ui-resizable-handle" id="splitbar"
+         style="-moz-user-select:none;">
+    </div>
 </div>
 <script type="text/javascript">
-/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(function(){initNavTree('GraphEdge_8h.html',''); initResizable(true); });
-/* @license-end */
+    /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+    $(function () {
+        initNavTree('GraphEdge_8h.html', '');
+        initResizable(true);
+    });
+    /* @license-end */
 </script>
 <div id="doc-content">
-<!-- window showing the filter options -->
-<div id="MSearchSelectWindow"
-     onmouseover="return searchBox.OnSearchSelectShow()"
-     onmouseout="return searchBox.OnSearchSelectHide()"
-     onkeydown="return searchBox.OnSearchSelectKey(event)">
-</div>
+    <!-- window showing the filter options -->
+    <div id="MSearchSelectWindow"
+         onkeydown="return searchBox.OnSearchSelectKey(event)"
+         onmouseout="return searchBox.OnSearchSelectHide()"
+         onmouseover="return searchBox.OnSearchSelectShow()">
+    </div>
 
-<!-- iframe showing the search results (closed by default) -->
-<div id="MSearchResultsWindow">
-<div id="MSearchResults">
-<div class="SRPage">
-<div id="SRIndex">
-<div id="SRResults"></div>
-<div class="SRStatus" id="Loading">Loading...</div>
-<div class="SRStatus" id="Searching">Searching...</div>
-<div class="SRStatus" id="NoMatches">No Matches</div>
-</div>
-</div>
-</div>
-</div>
+    <!-- iframe showing the search results (closed by default) -->
+    <div id="MSearchResultsWindow">
+        <div id="MSearchResults">
+            <div class="SRPage">
+                <div id="SRIndex">
+                    <div id="SRResults"></div>
+                    <div class="SRStatus" id="Loading">Loading...</div>
+                    <div class="SRStatus" id="Searching">Searching...</div>
+                    <div class="SRStatus" id="NoMatches">No Matches</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<div class="header">
-  <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
-  <div class="headertitle"><div class="title">GraphEdge.h File Reference</div></div>
-</div><!--header-->
-<div class="contents">
-<div class="textblock"><code>#include &lt;chrono&gt;</code><br />
-<code>#include &lt;unordered_map&gt;</code><br />
-<code>#include &lt;string&gt;</code><br />
-<code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;<a class="el" href="FeatureEncoder_8h_source.html">FeatureEncoder.h</a>&quot;</code><br />
-<code>#include &lt;sstream&gt;</code><br />
-<code>#include &lt;iomanip&gt;</code><br />
-</div><div class="textblock"><div class="dynheader">
-Include dependency graph for GraphEdge.h:</div>
-<div class="dyncontent">
-<div class="center"><img src="GraphEdge_8h__incl.png" border="0" usemap="#aincludes_2GraphEdge_8h" alt=""/></div>
-<map name="aincludes_2GraphEdge_8h" id="aincludes_2GraphEdge_8h">
-<area shape="rect" title=" " alt="" coords="184,5,347,31"/>
-<area shape="rect" title=" " alt="" coords="5,79,72,104"/>
-<area shape="poly" title=" " alt="" coords="230,33,86,78,84,73,228,28"/>
-<area shape="rect" title=" " alt="" coords="67,152,191,177"/>
-<area shape="poly" title=" " alt="" coords="244,33,211,53,179,80,157,110,142,141,137,138,153,108,175,77,208,49,241,29"/>
-<area shape="rect" title=" " alt="" coords="225,152,284,177"/>
-<area shape="poly" title=" " alt="" coords="241,33,211,52,198,65,188,80,185,97,192,114,206,129,224,143,220,147,203,133,188,117,180,98,183,78,194,61,208,48,238,28"/>
-<area shape="rect" title=" " alt="" coords="323,152,386,177"/>
-<area shape="poly" title=" " alt="" coords="292,29,322,48,348,77,358,108,360,138,354,138,353,109,343,80,318,52,289,33"/>
-<area shape="rect" href="FeatureEncoder_8h.html" title="Defines the FeatureEncoder class, which encodes network traffic features into a numerical vector." alt="" coords="198,79,333,104"/>
-<area shape="poly" title=" " alt="" coords="268,31,268,65,263,65,263,31"/>
-<area shape="rect" title=" " alt="" coords="408,79,483,104"/>
-<area shape="poly" title=" " alt="" coords="295,28,404,71,402,76,293,33"/>
-<area shape="rect" title=" " alt="" coords="507,79,581,104"/>
-<area shape="poly" title=" " alt="" coords="311,28,494,75,493,80,309,33"/>
-<area shape="poly" title=" " alt="" coords="245,106,165,148,162,143,242,102"/>
-<area shape="poly" title=" " alt="" coords="266,105,261,139,256,138,261,104"/>
-<area shape="poly" title=" " alt="" coords="281,102,331,141,328,145,278,106"/>
-</map>
-</div>
-</div><div class="textblock"><div class="dynheader">
-This graph shows which files directly or indirectly include this file:</div>
-<div class="dyncontent">
-<div class="center"><img src="GraphEdge_8h__dep__incl.png" border="0" usemap="#aincludes_2GraphEdge_8hdep" alt=""/></div>
-<map name="aincludes_2GraphEdge_8hdep" id="aincludes_2GraphEdge_8hdep">
-<area shape="rect" title=" " alt="" coords="179,5,341,31"/>
-<area shape="rect" href="GraphEdge_8cpp.html" title=" " alt="" coords="5,79,125,104"/>
-<area shape="poly" title=" " alt="" coords="217,38,98,81,96,76,215,33"/>
-<area shape="rect" href="GraphUpdateQueue_8h.html" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates." alt="" coords="150,79,370,104"/>
-<area shape="poly" title=" " alt="" coords="263,44,263,79,257,79,257,44"/>
-<area shape="rect" href="TrafficGraph_8h.html" title=" " alt="" coords="395,79,565,104"/>
-<area shape="poly" title=" " alt="" coords="309,32,445,76,444,81,308,37"/>
-</map>
-</div>
-</div>
-<p><a href="GraphEdge_8h_source.html">Go to the source code of this file.</a></p>
-<table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classGraphEdge.html">GraphEdge</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents an edge in the network traffic graph, connecting two GraphNodes.  <a href="classGraphEdge.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table>
-</div><!-- contents -->
+    <div class="header">
+        <div class="summary">
+            <a href="#nested-classes">Classes</a></div>
+        <div class="headertitle">
+            <div class="title">GraphEdge.h File Reference</div>
+        </div>
+    </div><!--header-->
+    <div class="contents">
+        <div class="textblock"><code>#include &lt;chrono&gt;</code><br/>
+            <code>#include &lt;unordered_map&gt;</code><br/>
+            <code>#include &lt;string&gt;</code><br/>
+            <code>#include &lt;vector&gt;</code><br/>
+            <code>#include &quot;<a class="el"
+                                    href="FeatureEncoder_8h_source.html">FeatureEncoder.h</a>&quot;</code><br/>
+            <code>#include &lt;sstream&gt;</code><br/>
+            <code>#include &lt;iomanip&gt;</code><br/>
+        </div>
+        <div class="textblock">
+            <div class="dynheader">
+                Include dependency graph for GraphEdge.h:
+            </div>
+            <div class="dyncontent">
+                <div class="center"><img alt="" border="0" src="GraphEdge_8h__incl.png"
+                                         usemap="#aincludes_2GraphEdge_8h"/></div>
+                <map id="aincludes_2GraphEdge_8h" name="aincludes_2GraphEdge_8h">
+                    <area alt="" coords="184,5,347,31" shape="rect" title=" "/>
+                    <area alt="" coords="5,79,72,104" shape="rect" title=" "/>
+                    <area alt="" coords="230,33,86,78,84,73,228,28" shape="poly" title=" "/>
+                    <area alt="" coords="67,152,191,177" shape="rect" title=" "/>
+                    <area alt="" coords="244,33,211,53,179,80,157,110,142,141,137,138,153,108,175,77,208,49,241,29" shape="poly"
+                          title=" "/>
+                    <area alt="" coords="225,152,284,177" shape="rect" title=" "/>
+                    <area alt="" coords="241,33,211,52,198,65,188,80,185,97,192,114,206,129,224,143,220,147,203,133,188,117,180,98,183,78,194,61,208,48,238,28" shape="poly"
+                          title=" "/>
+                    <area alt="" coords="323,152,386,177" shape="rect" title=" "/>
+                    <area alt="" coords="292,29,322,48,348,77,358,108,360,138,354,138,353,109,343,80,318,52,289,33" shape="poly"
+                          title=" "/>
+                    <area alt="" coords="198,79,333,104"
+                          href="FeatureEncoder_8h.html"
+                          shape="rect" title="Defines the FeatureEncoder class, which encodes network traffic features into a numerical vector."/>
+                    <area alt="" coords="268,31,268,65,263,65,263,31" shape="poly" title=" "/>
+                    <area alt="" coords="408,79,483,104" shape="rect" title=" "/>
+                    <area alt="" coords="295,28,404,71,402,76,293,33" shape="poly" title=" "/>
+                    <area alt="" coords="507,79,581,104" shape="rect" title=" "/>
+                    <area alt="" coords="311,28,494,75,493,80,309,33" shape="poly" title=" "/>
+                    <area alt="" coords="245,106,165,148,162,143,242,102" shape="poly" title=" "/>
+                    <area alt="" coords="266,105,261,139,256,138,261,104" shape="poly" title=" "/>
+                    <area alt="" coords="281,102,331,141,328,145,278,106" shape="poly" title=" "/>
+                </map>
+            </div>
+        </div>
+        <div class="textblock">
+            <div class="dynheader">
+                This graph shows which files directly or indirectly include this file:
+            </div>
+            <div class="dyncontent">
+                <div class="center"><img alt="" border="0"
+                                         src="GraphEdge_8h__dep__incl.png" usemap="#aincludes_2GraphEdge_8hdep"/></div>
+                <map id="aincludes_2GraphEdge_8hdep" name="aincludes_2GraphEdge_8hdep">
+                    <area alt="" coords="179,5,341,31" shape="rect" title=" "/>
+                    <area alt="" coords="5,79,125,104" href="GraphEdge_8cpp.html" shape="rect" title=" "/>
+                    <area alt="" coords="217,38,98,81,96,76,215,33" shape="poly" title=" "/>
+                    <area alt="" coords="150,79,370,104"
+                          href="GraphUpdateQueue_8h.html"
+                          shape="rect" title="Header file for the GraphUpdateQueue class, which manages a thread&#45;safe queue for graph updates."/>
+                    <area alt="" coords="263,44,263,79,257,79,257,44" shape="poly" title=" "/>
+                    <area alt="" coords="395,79,565,104" href="TrafficGraph_8h.html" shape="rect" title=" "/>
+                    <area alt="" coords="309,32,445,76,444,81,308,37" shape="poly" title=" "/>
+                </map>
+            </div>
+        </div>
+        <p><a href="GraphEdge_8h_source.html">Go to the source code of this file.</a></p>
+        <table class="memberdecls">
+            <tr class="heading">
+                <td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+                    Classes</h2></td>
+            </tr>
+            <tr class="memitem:">
+                <td align="right" class="memItemLeft" valign="top">class &#160;</td>
+                <td class="memItemRight" valign="bottom"><a class="el" href="classGraphEdge.html">GraphEdge</a></td>
+            </tr>
+            <tr class="memdesc:">
+                <td class="mdescLeft">&#160;</td>
+                <td class="mdescRight">Represents an edge in the network traffic graph, connecting two GraphNodes. <a
+                        href="classGraphEdge.html#details">More...</a><br/></td>
+            </tr>
+            <tr class="separator:">
+                <td class="memSeparator" colspan="2">&#160;</td>
+            </tr>
+        </table>
+    </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
-<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
-  <ul>
-    <li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li><li class="navelem"><a class="el" href="GraphEdge_8h.html">GraphEdge.h</a></li>
-    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2 </li>
-  </ul>
+<div class="navpath" id="nav-path"><!-- id is needed for treeview function! -->
+    <ul>
+        <li class="navelem"><a class="el" href="dir_09e761304027c904456130627fd4dcf5.html">includes</a></li>
+        <li class="navelem"><a class="el" href="GraphEdge_8h.html">GraphEdge.h</a></li>
+        <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img alt="doxygen"
+                                                                                          class="footer" height="31"
+                                                                                          src="doxygen.svg"
+                                                                                          width="104"/></a> 1.13.2
+        </li>
+    </ul>
 </div>
 </body>
 </html>

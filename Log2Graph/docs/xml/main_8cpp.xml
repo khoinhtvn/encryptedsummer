@@ -1,370 +1,1026 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="main_8cpp" kind="file" language="C++">
-    <compoundname>main.cpp</compoundname>
-    <includes local="no">iostream</includes>
-    <includes local="no">thread</includes>
-    <includes local="no">filesystem</includes>
-    <includes refid="GraphBuilder_8h" local="yes">includes/GraphBuilder.h</includes>
-    <includes refid="GraphExporter_8h" local="yes">includes/GraphExporter.h</includes>
-    <includes refid="LogMonitor_8h" local="yes">includes/LogMonitor.h</includes>
-    <includes refid="RealTimeAnomalyDetector_8h" local="yes">includes/RealTimeAnomalyDetector.h</includes>
-    <incdepgraph>
-      <node id="9">
-        <label>FeatureEncoder.h</label>
-        <link refid="FeatureEncoder_8h"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-      </node>
-      <node id="5">
-        <label>includes/GraphBuilder.h</label>
-        <link refid="GraphBuilder_8h"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="24" relation="include">
-        </childnode>
-      </node>
-      <node id="16">
-        <label>GraphEdge.h</label>
-        <link refid="GraphEdge_8h"/>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="25">
-        <label>includes/GraphExporter.h</label>
-        <link refid="GraphExporter_8h"/>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="26" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="20">
-        <label>GraphNode.h</label>
-        <link refid="GraphNode_8h"/>
-        <childnode refid="21" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="19" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>GraphUpdateQueue.h</label>
-        <link refid="GraphUpdateQueue_8h"/>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
-        <label>includes/LogMonitor.h</label>
-        <link refid="LogMonitor_8h"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="29" relation="include">
-        </childnode>
-      </node>
-      <node id="30">
-        <label>includes/RealTimeAnomalyDetector.h</label>
-        <link refid="RealTimeAnomalyDetector_8h"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-      </node>
-      <node id="24">
-        <label>TrafficGraph.h</label>
-        <link refid="TrafficGraph_8h"/>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
-      </node>
-      <node id="29">
-        <label>ZeekLogParser.h</label>
-        <link refid="ZeekLogParser_8h"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="23" relation="include">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>main.cpp</label>
-        <link refid="main_8cpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="5" relation="include">
-        </childnode>
-        <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
-        <label>atomic</label>
-      </node>
-      <node id="17">
-        <label>chrono</label>
-      </node>
-      <node id="12">
-        <label>cmath</label>
-      </node>
-      <node id="15">
-        <label>condition_variable</label>
-      </node>
-      <node id="4">
-        <label>filesystem</label>
-      </node>
-      <node id="27">
-        <label>future</label>
-      </node>
-      <node id="26">
-        <label>graphviz/gvc.h</label>
-      </node>
-      <node id="19">
-        <label>iomanip</label>
-      </node>
-      <node id="2">
-        <label>iostream</label>
-      </node>
-      <node id="22">
-        <label>map</label>
-      </node>
-      <node id="6">
-        <label>memory</label>
-      </node>
-      <node id="7">
-        <label>mutex</label>
-      </node>
-      <node id="14">
-        <label>queue</label>
-      </node>
-      <node id="23">
-        <label>set</label>
-      </node>
-      <node id="18">
-        <label>sstream</label>
-      </node>
-      <node id="10">
-        <label>string</label>
-      </node>
-      <node id="3">
-        <label>thread</label>
-      </node>
-      <node id="11">
-        <label>unordered_map</label>
-      </node>
-      <node id="8">
-        <label>vector</label>
-      </node>
-    </incdepgraph>
-    <sectiondef kind="func">
-      <memberdef kind="function" id="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>int</type>
-        <definition>int main</definition>
-        <argsstring>(int argc, char *argv[])</argsstring>
-        <name>main</name>
-        <param>
-          <type>int</type>
-          <declname>argc</declname>
-        </param>
-        <param>
-          <type>char *</type>
-          <declname>argv</declname>
-          <array>[]</array>
-        </param>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="main_8cpp" kind="file" language="C++">
+        <compoundname>main.cpp</compoundname>
+        <includes local="no">iostream</includes>
+        <includes local="no">thread</includes>
+        <includes local="no">filesystem</includes>
+        <includes refid="GraphBuilder_8h" local="yes">includes/GraphBuilder.h</includes>
+        <includes refid="GraphExporter_8h" local="yes">includes/GraphExporter.h</includes>
+        <includes refid="LogMonitor_8h" local="yes">includes/LogMonitor.h</includes>
+        <includes refid="RealTimeAnomalyDetector_8h" local="yes">includes/RealTimeAnomalyDetector.h</includes>
+        <incdepgraph>
+            <node id="9">
+                <label>FeatureEncoder.h</label>
+                <link refid="FeatureEncoder_8h"/>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="11" relation="include">
+                </childnode>
+                <childnode refid="12" relation="include">
+                </childnode>
+            </node>
+            <node id="5">
+                <label>includes/GraphBuilder.h</label>
+                <link refid="GraphBuilder_8h"/>
+                <childnode refid="6" relation="include">
+                </childnode>
+                <childnode refid="7" relation="include">
+                </childnode>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="9" relation="include">
+                </childnode>
+                <childnode refid="13" relation="include">
+                </childnode>
+                <childnode refid="24" relation="include">
+                </childnode>
+            </node>
+            <node id="16">
+                <label>GraphEdge.h</label>
+                <link refid="GraphEdge_8h"/>
+                <childnode refid="17" relation="include">
+                </childnode>
+                <childnode refid="11" relation="include">
+                </childnode>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="9" relation="include">
+                </childnode>
+                <childnode refid="18" relation="include">
+                </childnode>
+                <childnode refid="19" relation="include">
+                </childnode>
+            </node>
+            <node id="25">
+                <label>includes/GraphExporter.h</label>
+                <link refid="GraphExporter_8h"/>
+                <childnode refid="5" relation="include">
+                </childnode>
+                <childnode refid="26" relation="include">
+                </childnode>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="6" relation="include">
+                </childnode>
+                <childnode refid="27" relation="include">
+                </childnode>
+            </node>
+            <node id="20">
+                <label>GraphNode.h</label>
+                <link refid="GraphNode_8h"/>
+                <childnode refid="21" relation="include">
+                </childnode>
+                <childnode refid="22" relation="include">
+                </childnode>
+                <childnode refid="11" relation="include">
+                </childnode>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="17" relation="include">
+                </childnode>
+                <childnode refid="7" relation="include">
+                </childnode>
+                <childnode refid="14" relation="include">
+                </childnode>
+                <childnode refid="23" relation="include">
+                </childnode>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="18" relation="include">
+                </childnode>
+                <childnode refid="19" relation="include">
+                </childnode>
+            </node>
+            <node id="13">
+                <label>GraphUpdateQueue.h</label>
+                <link refid="GraphUpdateQueue_8h"/>
+                <childnode refid="14" relation="include">
+                </childnode>
+                <childnode refid="7" relation="include">
+                </childnode>
+                <childnode refid="15" relation="include">
+                </childnode>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="6" relation="include">
+                </childnode>
+                <childnode refid="16" relation="include">
+                </childnode>
+                <childnode refid="20" relation="include">
+                </childnode>
+            </node>
+            <node id="28">
+                <label>includes/LogMonitor.h</label>
+                <link refid="LogMonitor_8h"/>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="3" relation="include">
+                </childnode>
+                <childnode refid="29" relation="include">
+                </childnode>
+            </node>
+            <node id="30">
+                <label>includes/RealTimeAnomalyDetector.h</label>
+                <link refid="RealTimeAnomalyDetector_8h"/>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="8" relation="include">
+                </childnode>
+                <childnode refid="11" relation="include">
+                </childnode>
+                <childnode refid="5" relation="include">
+                </childnode>
+            </node>
+            <node id="24">
+                <label>TrafficGraph.h</label>
+                <link refid="TrafficGraph_8h"/>
+                <childnode refid="6" relation="include">
+                </childnode>
+                <childnode refid="7" relation="include">
+                </childnode>
+                <childnode refid="17" relation="include">
+                </childnode>
+                <childnode refid="16" relation="include">
+                </childnode>
+                <childnode refid="20" relation="include">
+                </childnode>
+            </node>
+            <node id="29">
+                <label>ZeekLogParser.h</label>
+                <link refid="ZeekLogParser_8h"/>
+                <childnode refid="10" relation="include">
+                </childnode>
+                <childnode refid="11" relation="include">
+                </childnode>
+                <childnode refid="4" relation="include">
+                </childnode>
+                <childnode refid="3" relation="include">
+                </childnode>
+                <childnode refid="7" relation="include">
+                </childnode>
+                <childnode refid="15" relation="include">
+                </childnode>
+                <childnode refid="14" relation="include">
+                </childnode>
+                <childnode refid="22" relation="include">
+                </childnode>
+                <childnode refid="23" relation="include">
+                </childnode>
+            </node>
+            <node id="1">
+                <label>main.cpp</label>
+                <link refid="main_8cpp"/>
+                <childnode refid="2" relation="include">
+                </childnode>
+                <childnode refid="3" relation="include">
+                </childnode>
+                <childnode refid="4" relation="include">
+                </childnode>
+                <childnode refid="5" relation="include">
+                </childnode>
+                <childnode refid="25" relation="include">
+                </childnode>
+                <childnode refid="28" relation="include">
+                </childnode>
+                <childnode refid="30" relation="include">
+                </childnode>
+            </node>
+            <node id="21">
+                <label>atomic</label>
+            </node>
+            <node id="17">
+                <label>chrono</label>
+            </node>
+            <node id="12">
+                <label>cmath</label>
+            </node>
+            <node id="15">
+                <label>condition_variable</label>
+            </node>
+            <node id="4">
+                <label>filesystem</label>
+            </node>
+            <node id="27">
+                <label>future</label>
+            </node>
+            <node id="26">
+                <label>graphviz/gvc.h</label>
+            </node>
+            <node id="19">
+                <label>iomanip</label>
+            </node>
+            <node id="2">
+                <label>iostream</label>
+            </node>
+            <node id="22">
+                <label>map</label>
+            </node>
+            <node id="6">
+                <label>memory</label>
+            </node>
+            <node id="7">
+                <label>mutex</label>
+            </node>
+            <node id="14">
+                <label>queue</label>
+            </node>
+            <node id="23">
+                <label>set</label>
+            </node>
+            <node id="18">
+                <label>sstream</label>
+            </node>
+            <node id="10">
+                <label>string</label>
+            </node>
+            <node id="3">
+                <label>thread</label>
+            </node>
+            <node id="11">
+                <label>unordered_map</label>
+            </node>
+            <node id="8">
+                <label>vector</label>
+            </node>
+        </incdepgraph>
+        <sectiondef kind="func">
+            <memberdef kind="function" id="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" prot="public" static="no"
+                       const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>int</type>
+                <definition>int main</definition>
+                <argsstring>(int argc, char *argv[])</argsstring>
+                <name>main</name>
+                <param>
+                    <type>int</type>
+                    <declname>argc</declname>
+                </param>
+                <param>
+                    <type>char *</type>
+                    <declname>argv</declname>
+                    <array>[]</array>
+                </param>
+                <briefdescription>
+                    <para>Main function of the application.</para>
+                </briefdescription>
+                <detaileddescription>
+                    <para>This function parses command-line arguments, initializes the log monitor, anomaly detector,
+                        and graph exporter, and then enters a main loop for continuous monitoring and analysis.
+                    </para>
+                    <para>
+                        <parameterlist kind="param">
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>argc</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>Number of command-line arguments.</para>
+                                </parameterdescription>
+                            </parameteritem>
+                            <parameteritem>
+                                <parameternamelist>
+                                    <parametername>argv</parametername>
+                                </parameternamelist>
+                                <parameterdescription>
+                                    <para>Array of command-line arguments. The first argument should be the path to the
+                                        Zeek log directory. An optional<ndash/>export-path argument specifies the export
+                                        directory.
+                                    </para>
+                                </parameterdescription>
+                            </parameteritem>
+                        </parameterlist>
+                        <simplesect kind="return">
+                            <para>0 if the application runs successfully, 1 otherwise.</para>
+                        </simplesect>
+                    </para>
+                </detaileddescription>
+                <inbodydescription>
+                    <para>Instance of the graph exporter.</para>
+                    <para>This object is responsible for exporting the graph data in various formats, such as DOT files
+                        for visualization.
+                    </para>
+                    <para>Instance of the log monitor, responsible for reading and processing Zeek logs.</para>
+                    <para>The monitor is initialized with the directory containing the Zeek log files provided as a
+                        command-line argument. It continuously reads new log entries and makes them available for graph
+                        building.
+                    </para>
+                    <para>Starts the log monitoring process in a separate thread.</para>
+                    <para>This allows the application to process logs in the background without blocking the main
+                        execution thread, enabling continuous monitoring.
+                    </para>
+                    <para>Get the current UTC timestamp for filename generation.</para>
+                    <para>Get a reference to the singleton instance of the <ref refid="classGraphBuilder"
+                                                                                kindref="compound">GraphBuilder
+                    </ref> and its current graph.
+                    </para>
+                    <para>Export the encoded incremental updates of the network graph to a DOT file.</para>
+                    <para>This call retrieves the latest changes to the graph since the last export and saves them in an
+                        encoded format to a DOT file. The filename includes the UTC timestamp to differentiate between
+                        exports. The output file is created in the specified <computeroutput>
+                            export_path</computeroutput>.
+                    </para>
+                    <para>Stops the log monitoring process.</para>
+                    <para>This ensures that the log monitoring thread is properly terminated before the application
+                        exits, releasing any resources it might be holding.
+                    </para>
+                </inbodydescription>
+                <location file="main.cpp" line="29" column="5" bodyfile="main.cpp" bodystart="29" bodyend="108"/>
+            </memberdef>
+        </sectiondef>
         <briefdescription>
-<para>Main function of the application. </para>
+            <para>Main entry point for the Zeek log analysis and anomaly detection application.</para>
         </briefdescription>
         <detaileddescription>
-<para>This function parses command-line arguments, initializes the log monitor, anomaly detector, and graph exporter, and then enters a main loop for continuous monitoring and analysis.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>argc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Number of command-line arguments. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>argv</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Array of command-line arguments. The first argument should be the path to the Zeek log directory. An optional <ndash/>export-path argument specifies the export directory. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>0 if the application runs successfully, 1 otherwise. </para>
-</simplesect>
-</para>
+            <para>This application monitors Zeek logs from a specified directory, builds a graph representation of the
+                network traffic and visualizes the graph periodically.
+            </para>
         </detaileddescription>
-        <inbodydescription>
-<para>Instance of the graph exporter.</para>
-<para>This object is responsible for exporting the graph data in various formats, such as DOT files for visualization.</para>
-<para>Instance of the log monitor, responsible for reading and processing Zeek logs.</para>
-<para>The monitor is initialized with the directory containing the Zeek log files provided as a command-line argument. It continuously reads new log entries and makes them available for graph building.</para>
-<para>Starts the log monitoring process in a separate thread.</para>
-<para>This allows the application to process logs in the background without blocking the main execution thread, enabling continuous monitoring.</para>
-<para>Get the current UTC timestamp for filename generation.</para>
-<para>Get a reference to the singleton instance of the <ref refid="classGraphBuilder" kindref="compound">GraphBuilder</ref> and its current graph.</para>
-<para>Export the encoded incremental updates of the network graph to a DOT file.</para>
-<para>This call retrieves the latest changes to the graph since the last export and saves them in an encoded format to a DOT file. The filename includes the UTC timestamp to differentiate between exports. The output file is created in the specified <computeroutput>export_path</computeroutput>.</para>
-<para>Stops the log monitoring process.</para>
-<para>This ensures that the log monitoring thread is properly terminated before the application exits, releasing any resources it might be holding.</para>
-        </inbodydescription>
-        <location file="main.cpp" line="29" column="5" bodyfile="main.cpp" bodystart="29" bodyend="108"/>
-      </memberdef>
-    </sectiondef>
-    <briefdescription>
-<para>Main entry point for the Zeek log analysis and anomaly detection application. </para>
-    </briefdescription>
-    <detaileddescription>
-<para>This application monitors Zeek logs from a specified directory, builds a graph representation of the network traffic and visualizes the graph periodically. </para>
-    </detaileddescription>
-    <programlisting>
-<codeline lineno="1"><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;iostream&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;thread&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="11"><highlight class="normal"></highlight></codeline>
-<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="GraphBuilder_8h" kindref="compound">includes/GraphBuilder.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="GraphExporter_8h" kindref="compound">includes/GraphExporter.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="LogMonitor_8h" kindref="compound">includes/LogMonitor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="RealTimeAnomalyDetector_8h" kindref="compound">includes/RealTimeAnomalyDetector.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="16"><highlight class="normal"></highlight></codeline>
-<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/>*argv[])<sp/>{</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(argc<sp/>&lt;<sp/>2)<sp/>{</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::cerr<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;Usage:<sp/>&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>argv[0]<sp/>&lt;&lt;<sp/></highlight><highlight class="stringliteral">&quot;<sp/>&lt;zeek_log_directory&gt;<sp/>[--export-path<sp/>&lt;export_path&gt;]&quot;</highlight><highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
-<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="34"><highlight class="normal"></highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>std::string<sp/>export_path<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;./&quot;</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i<sp/>=<sp/>2;<sp/>i<sp/>&lt;<sp/>argc;<sp/>++i)<sp/>{</highlight></codeline>
-<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(std::string(argv[i])<sp/>==<sp/></highlight><highlight class="stringliteral">&quot;--export-path&quot;</highlight><highlight class="normal"><sp/>&amp;&amp;<sp/>i<sp/>+<sp/>1<sp/>&lt;<sp/>argc)<sp/>{</highlight></codeline>
-<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>export_path<sp/>=<sp/>argv[i<sp/>+<sp/>1];</highlight></codeline>
-<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Ensure<sp/>the<sp/>export<sp/>path<sp/>exists</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!std::filesystem::exists(export_path))<sp/>{</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::filesystem::create_directories(export_path);</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classGraphExporter" kindref="compound">GraphExporter</ref><sp/>exporter;</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classLogMonitor" kindref="compound">LogMonitor</ref><sp/>monitor(argv[1]);</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>monitor.start();</highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keyword">true</highlight><highlight class="normal">)<sp/>{</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::this_thread::sleep_for(std::chrono::seconds(10));</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>counter<sp/>=<sp/>0;</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(++counter<sp/>%<sp/>3<sp/>==<sp/>0)<sp/>{</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>now<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>UTC<sp/>=<sp/>std::chrono::duration_cast&lt;std::chrono::seconds&gt;(now.time_since_epoch()).count();</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>&amp;graph<sp/>=<sp/><ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().<ref refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kindref="member">get_graph</ref>();</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>exporter.<ref refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" kindref="member">export_incremental_update_encoded_async</ref>(<ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">GraphBuilder::get_instance</ref>().get_last_updates(),</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>export_path<sp/>+<sp/>std::filesystem::path::preferred_separator<sp/>+</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;nw_graph_encoded_&quot;</highlight><highlight class="normal"><sp/>+<sp/>std::to_string(UTC)<sp/>+</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;.dot&quot;</highlight><highlight class="normal">);</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/>monitor.stop();</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
-    </programlisting>
-    <location file="main.cpp"/>
-  </compounddef>
+        <programlisting>
+            <codeline lineno="1">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="8">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;iostream&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="9">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;thread&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="10">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&lt;filesystem&gt;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="11">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="12">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&quot;<ref refid="GraphBuilder_8h" kindref="compound">
+                    includes/GraphBuilder.h</ref>&quot;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="13">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&quot;<ref refid="GraphExporter_8h" kindref="compound">
+                    includes/GraphExporter.h</ref>&quot;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="14">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&quot;<ref refid="LogMonitor_8h" kindref="compound">
+                    includes/LogMonitor.h</ref>&quot;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="15">
+                <highlight class="normal"></highlight>
+                <highlight class="preprocessor">#include<sp/>&quot;<ref refid="RealTimeAnomalyDetector_8h"
+                                                                        kindref="compound">
+                    includes/RealTimeAnomalyDetector.h</ref>&quot;
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="16">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="29">
+                <highlight class="normal"></highlight>
+                <highlight class="keywordtype">int</highlight>
+                <highlight class="normal">
+                    <sp/>
+                    <ref refid="main_8cpp_1a0ddf1224851353fc92bfbff6f499fa97" kindref="member">main</ref>(
+                </highlight>
+                <highlight class="keywordtype">int</highlight>
+                <highlight class="normal"><sp/>argc,
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">char</highlight>
+                <highlight class="normal"><sp/>*argv[])<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="30">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">if</highlight>
+                <highlight class="normal"><sp/>(argc<sp/>&lt;<sp/>2)<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="31">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::cerr<sp/>&lt;&lt;<sp/>
+                </highlight>
+                <highlight class="stringliteral">&quot;Usage:<sp/>&quot;
+                </highlight>
+                <highlight class="normal"><sp/>&lt;&lt;<sp/>argv[0]<sp/>&lt;&lt;<sp/>
+                </highlight>
+                <highlight class="stringliteral">&quot;<sp/>&lt;zeek_log_directory&gt;<sp/>[--export-path<sp/>&lt;export_path&gt;]&quot;
+                </highlight>
+                <highlight class="normal"><sp/>&lt;&lt;<sp/>std::endl;
+                </highlight>
+            </codeline>
+            <codeline lineno="32">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">return</highlight>
+                <highlight class="normal"><sp/>1;
+                </highlight>
+            </codeline>
+            <codeline lineno="33">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="34">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="35">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::string<sp/>export_path<sp/>=
+                    <sp/>
+                </highlight>
+                <highlight class="stringliteral">&quot;./&quot;</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="36">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">for</highlight>
+                <highlight class="normal"><sp/>(
+                </highlight>
+                <highlight class="keywordtype">int</highlight>
+                <highlight class="normal"><sp/>i<sp/>=<sp/>2;<sp/>i<sp/>&lt;<sp/>argc;<sp/>++i)<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="37">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">if</highlight>
+                <highlight class="normal"><sp/>(std::string(argv[i])<sp/>==
+                    <sp/>
+                </highlight>
+                <highlight class="stringliteral">&quot;--export-path&quot;</highlight>
+                <highlight class="normal"><sp/>&amp;&amp;<sp/>i<sp/>+<sp/>1<sp/>&lt;<sp/>argc)<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="38">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>export_path<sp/>=<sp/>argv[i<sp/>+<sp/>1];
+                </highlight>
+            </codeline>
+            <codeline lineno="39">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">break</highlight>
+                <highlight class="normal">;</highlight>
+            </codeline>
+            <codeline lineno="40">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="41">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="42">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="comment">//<sp/>Ensure<sp/>the<sp/>export<sp/>path<sp/>exists
+                </highlight>
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="43">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">if</highlight>
+                <highlight class="normal"><sp/>(!std::filesystem::exists(export_path))<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="44">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::filesystem::create_directories(export_path);
+                </highlight>
+            </codeline>
+            <codeline lineno="45">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="52">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="classGraphExporter" kindref="compound">GraphExporter</ref>
+                    <sp/>exporter;
+                </highlight>
+            </codeline>
+            <codeline lineno="60">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <ref refid="classLogMonitor" kindref="compound">LogMonitor</ref>
+                    <sp/>monitor(argv[1]);
+                </highlight>
+            </codeline>
+            <codeline lineno="67">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>monitor.start();
+                </highlight>
+            </codeline>
+            <codeline lineno="68">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="69">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">while</highlight>
+                <highlight class="normal"><sp/>(
+                </highlight>
+                <highlight class="keyword">true</highlight>
+                <highlight class="normal">)<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="70">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>std::this_thread::sleep_for(std::chrono::seconds(10));
+                </highlight>
+            </codeline>
+            <codeline lineno="71">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="72">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">static</highlight>
+                <highlight class="normal">
+                    <sp/>
+                </highlight>
+                <highlight class="keywordtype">int</highlight>
+                <highlight class="normal"><sp/>counter<sp/>=<sp/>0;
+                </highlight>
+            </codeline>
+            <codeline lineno="73">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">if</highlight>
+                <highlight class="normal"><sp/>(++counter<sp/>%<sp/>3<sp/>==<sp/>0)<sp/>{
+                </highlight>
+            </codeline>
+            <codeline lineno="77">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">auto</highlight>
+                <highlight class="normal"><sp/>now<sp/>=<sp/>std::chrono::system_clock::now();
+                </highlight>
+            </codeline>
+            <codeline lineno="78">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">auto</highlight>
+                <highlight class="normal"><sp/>UTC<sp/>=<sp/>std::chrono::duration_cast&lt;std::chrono::seconds&gt;(now.time_since_epoch()).count();
+                </highlight>
+            </codeline>
+            <codeline lineno="79">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="83">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keyword">auto</highlight>
+                <highlight class="normal"><sp/>&amp;graph<sp/>=
+                    <sp/>
+                    <ref refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">
+                        GraphBuilder::get_instance</ref>().<ref
+                            refid="classGraphBuilder_1a791f0173bacd48ce1071e6d87cd8bfaf" kindref="member">
+                        get_graph</ref>();
+                </highlight>
+            </codeline>
+            <codeline lineno="84">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="93">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>exporter.<ref refid="classGraphExporter_1ac61130aae979af8b0ed875bcf036208d" kindref="member">
+                    export_incremental_update_encoded_async</ref>(<ref
+                        refid="classGraphBuilder_1adbe9d786ed3fbcd471f83e3ec9ac9efa" kindref="member">
+                    GraphBuilder::get_instance</ref>().get_last_updates(),
+                </highlight>
+            </codeline>
+            <codeline lineno="94">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>export_path<sp/>+<sp/>std::filesystem::path::preferred_separator<sp/>+
+                </highlight>
+            </codeline>
+            <codeline lineno="95">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="stringliteral">&quot;nw_graph_encoded_&quot;</highlight>
+                <highlight class="normal"><sp/>+<sp/>std::to_string(UTC)<sp/>+
+                </highlight>
+            </codeline>
+            <codeline lineno="96">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="stringliteral">&quot;.dot&quot;</highlight>
+                <highlight class="normal">);</highlight>
+            </codeline>
+            <codeline lineno="97">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="98">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>}
+                </highlight>
+            </codeline>
+            <codeline lineno="99">
+                <highlight class="normal"></highlight>
+            </codeline>
+            <codeline lineno="106">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>monitor.stop();
+                </highlight>
+            </codeline>
+            <codeline lineno="107">
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                </highlight>
+                <highlight class="keywordflow">return</highlight>
+                <highlight class="normal"><sp/>0;
+                </highlight>
+            </codeline>
+            <codeline lineno="108">
+                <highlight class="normal">}</highlight>
+            </codeline>
+        </programlisting>
+        <location file="main.cpp"/>
+    </compounddef>
 </doxygen>

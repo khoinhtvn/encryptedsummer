@@ -33,6 +33,8 @@ public:
                                      const std::map<std::string, int>& vocabulary,
                                      size_t vector_size) const;
 
+    std::pair<double, double> encode_hour_minute_from_epoch(double epoch_timestamp) const;
+
     std::pair<double, double> encode_hour_minute_to_circle(long long timestamp) const;
 
     std::vector<float> encode_node_features(const struct GraphNode::NodeFeatures& features, const struct GraphNode::TemporalFeatures& temporal) const;

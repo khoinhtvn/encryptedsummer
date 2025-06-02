@@ -1,4 +1,4 @@
-var searchData=
-[
-  ['zeeklogparser_0',['ZeekLogParser',['../classZeekLogParser.html',1,'']]]
-];
+var searchData =
+    [
+        ['zeeklogparser_0', ['ZeekLogParser', ['../classZeekLogParser.html', 1, '']]]
+    ];

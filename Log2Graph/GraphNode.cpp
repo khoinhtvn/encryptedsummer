@@ -483,7 +483,6 @@ std::string GraphNode::to_dot_string() const {
     ss << "];\n";
     return ss.str();
 }
-
 std::string GraphNode::to_dot_string_encoded() const {
     std::lock_guard<std::mutex> lock(node_mutex);
     std::stringstream ss;
@@ -495,7 +494,11 @@ std::string GraphNode::to_dot_string_encoded() const {
     if (!encoded_features_local.empty()) {
         size_t encoded_index = 0;
         for (const auto& feature_name : feature_names) {
-           ss << ", " << feature_name << "=";
+            if (encoded_index > 0) {
+                ss << ", ";
+            }
+            ss << feature_name << "=";
+
             if (feature_name == "most_freq_proto" || feature_name == "top_proto_1") {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::PROTOCOLS.size(); ++i) {
@@ -546,7 +549,7 @@ std::string GraphNode::to_dot_string_encoded() const {
                 }
                 ss << hot_index;
                 encoded_index += NodeFeatureEncoder::HTTP_VERSIONS.size();
-            } else if (feature_name == "ssl_version") {
+            } else if (feature_name == "most_freq_ssl_version") {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::SSL_VERSIONS.size(); ++i) {
                     if (encoded_features_local[encoded_index + i] == 1.0f) {
@@ -556,8 +559,15 @@ std::string GraphNode::to_dot_string_encoded() const {
                 }
                 ss << hot_index;
                 encoded_index += NodeFeatureEncoder::SSL_VERSIONS.size();
-            } else { // Handle scalar features
-                ss << static_cast<int>(encoded_features_local[encoded_index]);
+            } else if (feature_name == "first_seen_hour_minute_sin" ||
+                       feature_name == "first_seen_hour_minute_cos" ||
+                       feature_name == "last_seen_hour_minute_sin" ||
+                       feature_name == "last_seen_hour_minute_cos") {
+                ss << encoded_features_local[encoded_index];
+                encoded_index += 1;
+            }
+            else { // Handle other scalar (non-one-hot) float or int features
+                ss << encoded_features_local[encoded_index];
                 encoded_index += 1;
             }
         }

@@ -40,6 +40,7 @@
 - C++17 compatible compiler
 - CMake 3.28+
 ```
+
 ## Installation
 
 ### Linux/macOS
@@ -51,7 +52,9 @@ mkdir build && cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make -j$(nproc)
 ```
-The command-line parameters for the Zeek Traffic Graph Analyzer are described in the Command-Line Parameters section of the README file.
+
+The command-line parameters for the Zeek Traffic Graph Analyzer are described in the Command-Line Parameters section of
+the README file.
 
 Here's that section again for your convenience:
 
@@ -61,8 +64,8 @@ Markdown
 
 The Zeek Traffic Graph Analyzer accepts the following command-line parameters:
 
-| Parameter             | Description                                                                 | Default Value | Example                                           |
-| --------------------- | --------------------------------------------------------------------------- |---------------| ------------------------------------------------- |
-| `<zeek_log_directory>` | **Required.** The path to the directory containing the Zeek log files.      | N/A           | `./Log2Graph /var/log/zeek`                       |
-| `--export-path`       | Optional. The directory where the generated graph DOT files will be saved. | `./`          | `./Log2Graph /logs --export-path /output/graphs` |
-| `--export-interval`   | Optional. The interval in seconds between graph exports.                   | `60`          | `./Log2Graph /logs --export-interval 15`          |
+| Parameter              | Description                                                                | Default Value | Example                                          |
+|------------------------|----------------------------------------------------------------------------|---------------|--------------------------------------------------|
+| `<zeek_log_directory>` | **Required.** The path to the directory containing the Zeek log files.     | N/A           | `./Log2Graph /var/log/zeek`                      |
+| `--export-path`        | Optional. The directory where the generated graph DOT files will be saved. | `./`          | `./Log2Graph /logs --export-path /output/graphs` |
+| `--export-interval`    | Optional. The interval in seconds between graph exports.                   | `60`          | `./Log2Graph /logs --export-interval 15`         |

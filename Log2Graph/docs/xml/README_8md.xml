@@ -1,87 +1,340 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="README_8md" kind="file" language="Markdown">
-    <compoundname>README.md</compoundname>
-    <briefdescription>
-    </briefdescription>
-    <detaileddescription>
-    </detaileddescription>
-    <programlisting>
-<codeline><highlight class="normal">#<sp/>Zeek<sp/>Traffic<sp/>Graph<sp/>Analyzer</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">![Project<sp/>Logo](https://via.placeholder.com/150x50?text=Zeek+Traffic+Graph)<sp/><sp/></highlight></codeline>
-<codeline><highlight class="normal">*Real-time<sp/>network<sp/>traffic<sp/>analysis<sp/>using<sp/>graph<sp/>theory*</highlight></codeline>
-<codeline><highlight class="normal">Usage</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Table<sp/>of<sp/>Contents</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">-<sp/>[Features](#Features)</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>[Requirements](#Requirements)</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>[Installation](#Installation)</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>[Usage](#Usage)</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Features</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">-<sp/>**Real-time<sp/>Processing**:<sp/>Continuously<sp/>monitors<sp/>Zeek<sp/>logs</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Graph<sp/>Construction**:<sp/>Builds<sp/>interactive<sp/>network<sp/>graphs<sp/>with<sp/>the<sp/>following<sp/>features</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>*Node<sp/>level*:</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Degree<sp/>(in/out/combined)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Temporal<sp/>features<sp/>(connection<sp/>in<sp/>the<sp/>last<sp/>minute<sp/>and<sp/>hour)</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>*Edge<sp/>level<sp/>(one<sp/>edge<sp/>per<sp/>connection)*</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Source,<sp/>target<sp/>IP<sp/>and<sp/>port<sp/>number</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Protocol,<sp/>timestamp</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Host,<sp/>Uri<sp/>and<sp/>HTTP<sp/>method</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Version,<sp/>user<sp/>agent,<sp/>status<sp/>code</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>Request<sp/>and<sp/>response<sp/>body<sp/>len</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Advanced<sp/>Analysis**:</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Anomaly<sp/>detection</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Traffic<sp/>pattern<sp/>recognition</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Connection<sp/>profiling</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Real<sp/>time<sp/>Visualization**:</highlight></codeline>
-<codeline><highlight class="normal"><sp/><sp/><sp/><sp/>-<sp/>Graphviz-based<sp/>diagrams</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>**Alert<sp/>System**:<sp/>Notifications<sp/>for<sp/>suspicious<sp/>activities</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Requirements</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">```bash</highlight></codeline>
-<codeline><highlight class="normal">#<sp/>Core<sp/>dependencies</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>Zeek<sp/>Network<sp/>Security<sp/>Monitor</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>C++17<sp/>compatible<sp/>compiler</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>CMake<sp/>3.28+</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">#<sp/>Visualization<sp/>dependencies</highlight></codeline>
-<codeline><highlight class="normal">-<sp/>Graphviz<sp/>(libgraphviz-dev)</highlight></codeline>
-<codeline><highlight class="normal">```</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Installation</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">###<sp/>Linux/maxOS</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">```bash</highlight></codeline>
-<codeline><highlight class="normal">git<sp/>clone<sp/>https://github.com/khoinhtvn/encryptedsummer</highlight></codeline>
-<codeline><highlight class="normal">cd<sp/>encryptedsummer/Log2Graph</highlight></codeline>
-<codeline><highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build</highlight></codeline>
-<codeline><highlight class="normal">cmake<sp/>..<sp/>-DCMAKE_BUILD_TYPE=Release</highlight></codeline>
-<codeline><highlight class="normal">make<sp/>-j$(nproc)</highlight></codeline>
-<codeline><highlight class="normal">```</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">###<sp/>Windows<sp/>(Visual<sp/>Studio)</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">```shell</highlight></codeline>
-<codeline><highlight class="normal">cmake<sp/>-G<sp/>&quot;Visual<sp/>Studio<sp/>17<sp/>2022&quot;<sp/>-A<sp/>x64<sp/>..</highlight></codeline>
-<codeline><highlight class="normal">cmake<sp/>--build<sp/>.<sp/>--config<sp/>Release</highlight></codeline>
-<codeline><highlight class="normal">```</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">##<sp/>Usage</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">###<sp/>Basic<sp/>Analysis</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">The<sp/>program<sp/>checks<sp/>for<sp/>files<sp/>in<sp/>the<sp/>specified<sp/>path.<sp/>It<sp/>just<sp/>processes<sp/>files<sp/>with<sp/>known<sp/>names<sp/>(conn.log).</highlight></codeline>
-<codeline></codeline>
-<codeline><highlight class="normal">```bash</highlight></codeline>
-<codeline><highlight class="normal">./Log2Graph<sp/>/path/to/zeek/logs</highlight></codeline>
-<codeline><highlight class="normal">```</highlight></codeline>
-    </programlisting>
-    <location file="README.md"/>
-  </compounddef>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="README_8md" kind="file" language="Markdown">
+        <compoundname>README.md</compoundname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <programlisting>
+            <codeline>
+                <highlight class="normal">#<sp/>Zeek<sp/>Traffic<sp/>Graph<sp/>Analyzer
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">![Project<sp/>
+                    Logo](https://via.placeholder.com/150x50?text=Zeek+Traffic+Graph)
+                    <sp/>
+                    <sp/>
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">*Real-time<sp/>network<sp/>traffic<sp/>analysis<sp/>using<sp/>graph<sp/>
+                    theory*
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">Usage</highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">##<sp/>Table<sp/>of<sp/>Contents
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>[Features](#Features)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>[Requirements](#Requirements)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>[Installation](#Installation)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>[Usage](#Usage)
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">##<sp/>Features
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>**Real-time<sp/>Processing**:<sp/>Continuously<sp/>monitors<sp/>Zeek
+                    <sp/>logs
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>**Graph<sp/>Construction**:<sp/>Builds<sp/>interactive<sp/>network<sp/>
+                    graphs<sp/>with<sp/>the<sp/>following<sp/>features
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>*Node<sp/>level*:
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Degree<sp/>(in/out/combined)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Temporal<sp/>features<sp/>(connection<sp/>in<sp/>the<sp/>last<sp/>minute<sp/>and<sp/>
+                    hour)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>*Edge<sp/>level<sp/>(one<sp/>edge<sp/>per<sp/>connection)*
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Source,<sp/>target<sp/>IP<sp/>and<sp/>port<sp/>number
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Protocol,<sp/>timestamp
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Host,<sp/>Uri<sp/>and<sp/>HTTP<sp/>method
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Version,<sp/>user<sp/>agent,<sp/>status<sp/>code
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Request<sp/>and<sp/>response<sp/>body<sp/>len
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>**Advanced<sp/>Analysis**:
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Anomaly<sp/>detection
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Traffic<sp/>pattern<sp/>recognition
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Connection<sp/>profiling
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>**Real<sp/>time<sp/>Visualization**:
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">
+                    <sp/>
+                    <sp/>
+                    <sp/>
+                    <sp/>-<sp/>Graphviz-based<sp/>diagrams
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>**Alert<sp/>System**:<sp/>Notifications<sp/>for<sp/>suspicious<sp/>
+                    activities
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">##<sp/>Requirements
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">```bash</highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">#<sp/>Core<sp/>dependencies
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>Zeek<sp/>Network<sp/>Security<sp/>Monitor
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>C++17<sp/>compatible<sp/>compiler
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>CMake<sp/>3.28+
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">#<sp/>Visualization<sp/>dependencies
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">-<sp/>Graphviz<sp/>(libgraphviz-dev)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">```</highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">##<sp/>Installation
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">###<sp/>Linux/maxOS
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">```bash</highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">git<sp/>clone<sp/>https://github.com/khoinhtvn/encryptedsummer
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">cd<sp/>encryptedsummer/Log2Graph
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">mkdir<sp/>build<sp/>&amp;&amp;<sp/>cd<sp/>build
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">cmake<sp/>..<sp/>-DCMAKE_BUILD_TYPE=Release
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">make<sp/>-j$(nproc)
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">```</highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">###<sp/>Windows<sp/>(Visual<sp/>Studio)
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">```shell</highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">cmake<sp/>-G<sp/>&quot;Visual<sp/>Studio<sp/>17<sp/>2022&quot;<sp/>-A<sp/>x64
+                    <sp/>..
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">cmake<sp/>--build<sp/>.<sp/>--config<sp/>Release
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">```</highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">##<sp/>Usage
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">###<sp/>Basic<sp/>Analysis
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">The<sp/>program<sp/>checks<sp/>for<sp/>files<sp/>in<sp/>the<sp/>specified<sp/>
+                    path.<sp/>It<sp/>just<sp/>processes<sp/>files<sp/>with<sp/>known<sp/>names<sp/>(conn.log).
+                </highlight>
+            </codeline>
+            <codeline></codeline>
+            <codeline>
+                <highlight class="normal">```bash</highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">./Log2Graph<sp/>/path/to/zeek/logs
+                </highlight>
+            </codeline>
+            <codeline>
+                <highlight class="normal">```</highlight>
+            </codeline>
+        </programlisting>
+        <location file="README.md"/>
+    </compounddef>
 </doxygen>

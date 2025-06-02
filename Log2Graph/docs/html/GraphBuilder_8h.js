@@ -1,4 +1,4 @@
 var GraphBuilder_8h =
-[
-    [ "GraphBuilder", "classGraphBuilder.html", "classGraphBuilder" ]
-];
+    [
+        ["GraphBuilder", "classGraphBuilder.html", "classGraphBuilder"]
+    ];

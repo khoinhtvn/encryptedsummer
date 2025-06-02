@@ -1,930 +1,1247 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="structGraphNode_1_1NodeFeatures" kind="struct" language="C++" prot="public">
-    <compoundname>GraphNode::NodeFeatures</compoundname>
-    <includes refid="GraphNode_8h" local="no">GraphNode.h</includes>
-    <sectiondef kind="public-attrib">
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a9f7df6cb5a7e14294490091ad520e436" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; uint32_t &gt;</type>
-        <definition>std::atomic&lt;uint32_t&gt; GraphNode::NodeFeatures::degree</definition>
-        <argsstring></argsstring>
-        <name>degree</name>
-        <qualifiedname>GraphNode::NodeFeatures::degree</qualifiedname>
-        <initializer>{0}</initializer>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="structGraphNode_1_1NodeFeatures" kind="struct" language="C++" prot="public">
+        <compoundname>GraphNode::NodeFeatures</compoundname>
+        <includes refid="GraphNode_8h" local="no">GraphNode.h</includes>
+        <sectiondef kind="public-attrib">
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a9f7df6cb5a7e14294490091ad520e436"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; uint32_t &gt;</type>
+                <definition>std::atomic&lt;uint32_t&gt; GraphNode::NodeFeatures::degree</definition>
+                <argsstring></argsstring>
+                <name>degree</name>
+                <qualifiedname>GraphNode::NodeFeatures::degree</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of connections to/from this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="26" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="26" bodyend="26"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1af50ed2cd80fe6812b472d5494c16cbdb"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; uint32_t &gt;</type>
+                <definition>std::atomic&lt;uint32_t&gt; GraphNode::NodeFeatures::in_degree</definition>
+                <argsstring></argsstring>
+                <name>in_degree</name>
+                <qualifiedname>GraphNode::NodeFeatures::in_degree</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Number of incoming connections.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="27" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="27" bodyend="27"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ada3c8f493b6af8d82a39eb6c9278495b"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; uint32_t &gt;</type>
+                <definition>std::atomic&lt;uint32_t&gt; GraphNode::NodeFeatures::out_degree</definition>
+                <argsstring></argsstring>
+                <name>out_degree</name>
+                <qualifiedname>GraphNode::NodeFeatures::out_degree</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Number of outgoing connections.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="28" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="28" bodyend="28"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ac96d6a3c89949a9f1531f9acf0f7d442"
+                       prot="public" static="no" mutable="no">
+                <type>std::map&lt; std::string, int &gt;</type>
+                <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::protocol_counts</definition>
+                <argsstring></argsstring>
+                <name>protocol_counts</name>
+                <qualifiedname>GraphNode::NodeFeatures::protocol_counts</qualifiedname>
+                <briefdescription>
+                    <para>Count of connections per protocol.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="29" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="29" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a0ca519c1fe6bb06725bcd02a7f4ce2ba"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; double &gt;</type>
+                <definition>std::atomic&lt;double&gt; GraphNode::NodeFeatures::activity_score</definition>
+                <argsstring></argsstring>
+                <name>activity_score</name>
+                <qualifiedname>GraphNode::NodeFeatures::activity_score</qualifiedname>
+                <initializer>{0.0}</initializer>
+                <briefdescription>
+                    <para>A score indicating the node&apos;s activity level.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="30" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="30" bodyend="30"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3ebaaf8a27f1eb09a9a807490138fb6f"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; int &gt;</type>
+                <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::total_connections_initiated</definition>
+                <argsstring></argsstring>
+                <name>total_connections_initiated</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_connections_initiated</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of connections initiated by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="31" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="31" bodyend="31"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a956142f8d2f2fa882b4d73c2c8bf7e59"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; int &gt;</type>
+                <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::total_connections_received</definition>
+                <argsstring></argsstring>
+                <name>total_connections_received</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_connections_received</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of connections received by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="32" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="32" bodyend="32"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ab798173cfe4a902273eefb609ece63bb"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::protocols_used</definition>
+                <argsstring></argsstring>
+                <name>protocols_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::protocols_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique protocols used by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="33" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="33" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a0903de3f4a05d95132091463dbdc124d"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::remote_ports_connected_to</definition>
+                <argsstring></argsstring>
+                <name>remote_ports_connected_to</name>
+                <qualifiedname>GraphNode::NodeFeatures::remote_ports_connected_to</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique remote ports this node connected to.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="34" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="34" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1abd2fbfd27c82764b79b46c21c6e93742"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::local_ports_used</definition>
+                <argsstring></argsstring>
+                <name>local_ports_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::local_ports_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique local ports used by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="35" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="35" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ae4abee02a900bee189c7c3ff4c8d18d7"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::remote_ports_connected_from
+                </definition>
+                <argsstring></argsstring>
+                <name>remote_ports_connected_from</name>
+                <qualifiedname>GraphNode::NodeFeatures::remote_ports_connected_from</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique remote ports that connected to this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="36" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="36" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a2a8f5f8e69588c48907b937bc88002df"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::local_ports_listening_on</definition>
+                <argsstring></argsstring>
+                <name>local_ports_listening_on</name>
+                <qualifiedname>GraphNode::NodeFeatures::local_ports_listening_on</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique local ports this node was listening on.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="37" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="37" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a03c34b70889a2c647c51f0d9ca7df22e"
+                       prot="public" static="no" mutable="no">
+                <type>std::map&lt; std::string, int &gt;</type>
+                <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::connection_state_counts
+                </definition>
+                <argsstring></argsstring>
+                <name>connection_state_counts</name>
+                <qualifiedname>GraphNode::NodeFeatures::connection_state_counts</qualifiedname>
+                <briefdescription>
+                    <para>Count of connections per connection state (e.g., ESTABLISHED).</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="38" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="38" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1abcb4893bbb8e85d2317ce4c528c3df7f"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; bool &gt;</type>
+                <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_local_originated</definition>
+                <argsstring></argsstring>
+                <name>ever_local_originated</name>
+                <qualifiedname>GraphNode::NodeFeatures::ever_local_originated</qualifiedname>
+                <initializer>{false}</initializer>
+                <briefdescription>
+                    <para>True if this node ever initiated a local connection.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="39" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="39" bodyend="39"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a77a8f4c4e35297de72ac27773468a660"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; bool &gt;</type>
+                <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_local_responded</definition>
+                <argsstring></argsstring>
+                <name>ever_local_responded</name>
+                <qualifiedname>GraphNode::NodeFeatures::ever_local_responded</qualifiedname>
+                <initializer>{false}</initializer>
+                <briefdescription>
+                    <para>True if this node ever responded to a local connection.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="40" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="40" bodyend="40"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a149b5604830f6eb00ba8fb185bb8f7d0"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; long long &gt;</type>
+                <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_orig_bytes</definition>
+                <argsstring></argsstring>
+                <name>total_orig_bytes</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_orig_bytes</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of bytes sent by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="41" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="41" bodyend="41"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a42001ee4d942e18a58dbd2ce44892365"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; long long &gt;</type>
+                <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_resp_bytes</definition>
+                <argsstring></argsstring>
+                <name>total_resp_bytes</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_resp_bytes</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of bytes received by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="42" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="42" bodyend="42"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a05db57c3e7e1eaa6925a3be96c126b39"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; long long &gt;</type>
+                <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_orig_pkts</definition>
+                <argsstring></argsstring>
+                <name>total_orig_pkts</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_orig_pkts</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of packets sent by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="43" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="43" bodyend="43"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a7c6d92589175b63da17ec8359a1a9e4e"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; long long &gt;</type>
+                <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_resp_pkts</definition>
+                <argsstring></argsstring>
+                <name>total_resp_pkts</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_resp_pkts</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of packets received by this node.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="44" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="44" bodyend="44"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ab2a04bf23f5cf67eea006eee910d56d3"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::services_used</definition>
+                <argsstring></argsstring>
+                <name>services_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::services_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique services used by this node (e.g., http, dns).</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="45" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="45" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ac5c6457600ee75d83ca602f48d4b4367"
+                       prot="public" static="no" mutable="no">
+                <type>std::map&lt; std::string, int &gt;</type>
+                <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::http_user_agent_counts
+                </definition>
+                <argsstring></argsstring>
+                <name>http_user_agent_counts</name>
+                <qualifiedname>GraphNode::NodeFeatures::http_user_agent_counts</qualifiedname>
+                <briefdescription>
+                    <para>Count of connections per HTTP user agent.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="46" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="46" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aa21518842161ff0b7c3cc8372e3e58a4"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::http_versions_used</definition>
+                <argsstring></argsstring>
+                <name>http_versions_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::http_versions_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique HTTP versions used.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="47" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="47" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1affba116eabe1c1edd8871120bfd16412"
+                       prot="public" static="no" mutable="no">
+                <type>std::map&lt; int, int &gt;</type>
+                <definition>std::map&lt;int, int&gt; GraphNode::NodeFeatures::http_status_code_counts</definition>
+                <argsstring></argsstring>
+                <name>http_status_code_counts</name>
+                <qualifiedname>GraphNode::NodeFeatures::http_status_code_counts</qualifiedname>
+                <briefdescription>
+                    <para>Count of connections per HTTP status code.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="48" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="48" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aa610e8dfb31b64d6089bbb511feda417"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::ssl_versions_used</definition>
+                <argsstring></argsstring>
+                <name>ssl_versions_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::ssl_versions_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique SSL/TLS versions used.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="49" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="49" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a9946a161ed7d2cab7d5e6a0d4f10e438"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::ssl_ciphers_used</definition>
+                <argsstring></argsstring>
+                <name>ssl_ciphers_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::ssl_ciphers_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique SSL/TLS ciphers used.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="50" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="50" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3d5461b4d051ab7c6f50a1f9b1764185"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; bool &gt;</type>
+                <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_curve_present</definition>
+                <argsstring></argsstring>
+                <name>ever_ssl_curve_present</name>
+                <qualifiedname>GraphNode::NodeFeatures::ever_ssl_curve_present</qualifiedname>
+                <initializer>{false}</initializer>
+                <briefdescription>
+                    <para>True if an SSL/TLS elliptic curve was ever present.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="51" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="51" bodyend="51"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a1b0a5e08a3d6093af05341072fbbbe6e"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; bool &gt;</type>
+                <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_server_name_present</definition>
+                <argsstring></argsstring>
+                <name>ever_ssl_server_name_present</name>
+                <qualifiedname>GraphNode::NodeFeatures::ever_ssl_server_name_present</qualifiedname>
+                <initializer>{false}</initializer>
+                <briefdescription>
+                    <para>True if an SSL/TLS server name was ever present.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="52" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="52" bodyend="52"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aac9afcd3f6bb6ef7a9f17706027bed61"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; int &gt;</type>
+                <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::ssl_resumption_count</definition>
+                <argsstring></argsstring>
+                <name>ssl_resumption_count</name>
+                <qualifiedname>GraphNode::NodeFeatures::ssl_resumption_count</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Count of SSL/TLS session resumptions.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="53" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="53" bodyend="53"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1adb5a262e71c360774a38427fc7116cee"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; bool &gt;</type>
+                <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_last_alert_present</definition>
+                <argsstring></argsstring>
+                <name>ever_ssl_last_alert_present</name>
+                <qualifiedname>GraphNode::NodeFeatures::ever_ssl_last_alert_present</qualifiedname>
+                <initializer>{false}</initializer>
+                <briefdescription>
+                    <para>True if an SSL/TLS alert was ever present.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="54" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="54" bodyend="54"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a967b1a49334ea549f32909af1b79c82e"
+                       prot="public" static="no" mutable="no">
+                <type>std::set&lt; std::string &gt;</type>
+                <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::ssl_next_protocols_used</definition>
+                <argsstring></argsstring>
+                <name>ssl_next_protocols_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::ssl_next_protocols_used</qualifiedname>
+                <briefdescription>
+                    <para>Set of unique SSL/TLS next protocols used (e.g., h2).</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="55" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="55" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aef451f7731b2fa8e67ab63f0812fc0fd"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; int &gt;</type>
+                <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::ssl_established_count</definition>
+                <argsstring></argsstring>
+                <name>ssl_established_count</name>
+                <qualifiedname>GraphNode::NodeFeatures::ssl_established_count</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Count of successful SSL/TLS handshakes.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="56" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="56" bodyend="56"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a2bce23b95434b3eb5f889309b7d6a474"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; bool &gt;</type>
+                <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_history_present</definition>
+                <argsstring></argsstring>
+                <name>ever_ssl_history_present</name>
+                <qualifiedname>GraphNode::NodeFeatures::ever_ssl_history_present</qualifiedname>
+                <initializer>{false}</initializer>
+                <briefdescription>
+                    <para>True if SSL/TLS history was ever present.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="57" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="57" bodyend="57"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a1952d96277ea55e078706fc0d88cff8c"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; double &gt;</type>
+                <definition>std::atomic&lt;double&gt; GraphNode::NodeFeatures::avg_packet_size_sent</definition>
+                <argsstring></argsstring>
+                <name>avg_packet_size_sent</name>
+                <qualifiedname>GraphNode::NodeFeatures::avg_packet_size_sent</qualifiedname>
+                <initializer>{0.0}</initializer>
+                <briefdescription>
+                    <para>Average size of packets sent.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="58" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="58" bodyend="58"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3c070876d6a70a11b02e313b7cdc5ef4"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; double &gt;</type>
+                <definition>std::atomic&lt;double&gt; GraphNode::NodeFeatures::avg_packet_size_received</definition>
+                <argsstring></argsstring>
+                <name>avg_packet_size_received</name>
+                <qualifiedname>GraphNode::NodeFeatures::avg_packet_size_received</qualifiedname>
+                <initializer>{0.0}</initializer>
+                <briefdescription>
+                    <para>Average size of packets received.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="59" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="59" bodyend="59"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a524ebc33d5f6a4a6eb3e219d8ac06d63"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; long long &gt;</type>
+                <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::historical_total_orig_bytes
+                </definition>
+                <argsstring></argsstring>
+                <name>historical_total_orig_bytes</name>
+                <qualifiedname>GraphNode::NodeFeatures::historical_total_orig_bytes</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total original bytes aggregated over time.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="62" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="62" bodyend="62"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a6d022986e7b7c2cb6d1379af59101c89"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; long long &gt;</type>
+                <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::historical_total_resp_bytes
+                </definition>
+                <argsstring></argsstring>
+                <name>historical_total_resp_bytes</name>
+                <qualifiedname>GraphNode::NodeFeatures::historical_total_resp_bytes</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total response bytes aggregated over time.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="63" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="63" bodyend="63"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3307c40b196c6e6a15d07f61d8da37bc"
+                       prot="public" static="no" mutable="no">
+                <type>std::map&lt; std::string, int &gt;</type>
+                <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::historical_protocol_counts
+                </definition>
+                <argsstring></argsstring>
+                <name>historical_protocol_counts</name>
+                <qualifiedname>GraphNode::NodeFeatures::historical_protocol_counts</qualifiedname>
+                <briefdescription>
+                    <para>Aggregated counts of protocols over time.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="64" column="18" bodyfile="includes/GraphNode.h"
+                          bodystart="64" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a7938c1b049f4a9eedee7a29a00156760"
+                       prot="public" static="no" mutable="no">
+                <type>std::atomic&lt; int &gt;</type>
+                <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::historical_total_connections</definition>
+                <argsstring></argsstring>
+                <name>historical_total_connections</name>
+                <qualifiedname>GraphNode::NodeFeatures::historical_total_connections</qualifiedname>
+                <initializer>{0}</initializer>
+                <briefdescription>
+                    <para>Total number of connections aggregated over time.</para>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="65" column="21" bodyfile="includes/GraphNode.h"
+                          bodystart="65" bodyend="65"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="public-func">
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1ae8f3a4eb872c73cd824a737ffa38e9a6"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>double</type>
+                <definition>double GraphNode::NodeFeatures::outgoing_connection_ratio</definition>
+                <argsstring>() const</argsstring>
+                <name>outgoing_connection_ratio</name>
+                <qualifiedname>GraphNode::NodeFeatures::outgoing_connection_ratio</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="67" column="16" bodyfile="GraphNode.cpp" bodystart="192"
+                          bodyend="196"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1abf7190e454607a7473b00fbef1441f91"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>double</type>
+                <definition>double GraphNode::NodeFeatures::incoming_connection_ratio</definition>
+                <argsstring>() const</argsstring>
+                <name>incoming_connection_ratio</name>
+                <qualifiedname>GraphNode::NodeFeatures::incoming_connection_ratio</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="68" column="16" bodyfile="GraphNode.cpp" bodystart="198"
+                          bodyend="202"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a0ecc6547e04fe6a11e3fdc4133ce1b0b"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>std::string</type>
+                <definition>std::string GraphNode::NodeFeatures::most_frequent_protocol</definition>
+                <argsstring>() const</argsstring>
+                <name>most_frequent_protocol</name>
+                <qualifiedname>GraphNode::NodeFeatures::most_frequent_protocol</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="69" column="21" bodyfile="GraphNode.cpp" bodystart="204"
+                          bodyend="215"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a923b3588ab376aa69f7ee27b09856866"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>size_t</type>
+                <definition>size_t GraphNode::NodeFeatures::unique_remote_ports_connected_to</definition>
+                <argsstring>() const</argsstring>
+                <name>unique_remote_ports_connected_to</name>
+                <qualifiedname>GraphNode::NodeFeatures::unique_remote_ports_connected_to</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="70" column="16" bodyfile="GraphNode.cpp" bodystart="217"
+                          bodyend="219"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a3a15da558bdd57a1893f195779600db2"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>size_t</type>
+                <definition>size_t GraphNode::NodeFeatures::unique_local_ports_used</definition>
+                <argsstring>() const</argsstring>
+                <name>unique_local_ports_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::unique_local_ports_used</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="71" column="16" bodyfile="GraphNode.cpp" bodystart="221"
+                          bodyend="223"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1aaa3b8264a7eb598781bf0ebefbb4d7a4"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>std::string</type>
+                <definition>std::string GraphNode::NodeFeatures::most_frequent_connection_state</definition>
+                <argsstring>() const</argsstring>
+                <name>most_frequent_connection_state</name>
+                <qualifiedname>GraphNode::NodeFeatures::most_frequent_connection_state</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="72" column="21" bodyfile="GraphNode.cpp" bodystart="225"
+                          bodyend="235"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a4df47e914db9acf1968bf7a5fb854976"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>bool</type>
+                <definition>bool GraphNode::NodeFeatures::connected_to_privileged_port</definition>
+                <argsstring>() const</argsstring>
+                <name>connected_to_privileged_port</name>
+                <qualifiedname>GraphNode::NodeFeatures::connected_to_privileged_port</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="73" column="14" bodyfile="GraphNode.cpp" bodystart="237"
+                          bodyend="249"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a0a31d9c6096b99797fad43296d049ee1"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>bool</type>
+                <definition>bool GraphNode::NodeFeatures::listened_on_privileged_port</definition>
+                <argsstring>() const</argsstring>
+                <name>listened_on_privileged_port</name>
+                <qualifiedname>GraphNode::NodeFeatures::listened_on_privileged_port</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="74" column="14" bodyfile="GraphNode.cpp" bodystart="251"
+                          bodyend="263"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a9ae2b8d094bc8cc64d5bc0bea7134472"
+                       prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+                <type>long long</type>
+                <definition>long long GraphNode::NodeFeatures::total_bytes_sent</definition>
+                <argsstring>() const</argsstring>
+                <name>total_bytes_sent</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_bytes_sent</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="75" column="19" bodyfile="includes/GraphNode.h"
+                          bodystart="75" bodyend="75"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a3ffcbffc7f04690e79e79f7dd56b9bca"
+                       prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+                <type>long long</type>
+                <definition>long long GraphNode::NodeFeatures::total_bytes_received</definition>
+                <argsstring>() const</argsstring>
+                <name>total_bytes_received</name>
+                <qualifiedname>GraphNode::NodeFeatures::total_bytes_received</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="76" column="19" bodyfile="includes/GraphNode.h"
+                          bodystart="76" bodyend="76"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1ab51eca1f2afbe9de2be9fa0657224d6f"
+                       prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>bool</type>
+                <definition>bool GraphNode::NodeFeatures::used_ssl_tls</definition>
+                <argsstring>() const</argsstring>
+                <name>used_ssl_tls</name>
+                <qualifiedname>GraphNode::NodeFeatures::used_ssl_tls</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="77" column="14" bodyfile="GraphNode.cpp" bodystart="265"
+                          bodyend="267"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a59cabf26e884d63210f2b61eb9223ee7"
+                       prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+                <type>const std::set&lt; std::string &gt; &amp;</type>
+                <definition>const std::set&lt; std::string &gt; &amp; GraphNode::NodeFeatures::get_ssl_versions_used
+                </definition>
+                <argsstring>() const</argsstring>
+                <name>get_ssl_versions_used</name>
+                <qualifiedname>GraphNode::NodeFeatures::get_ssl_versions_used</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="78" column="24" bodyfile="includes/GraphNode.h"
+                          bodystart="78" bodyend="78"/>
+            </memberdef>
+            <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a0aaae3f089800ab196f2add3bd362694"
+                       prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+                <type>const std::map&lt; std::string, int &gt; &amp;</type>
+                <definition>const std::map&lt; std::string, int &gt; &amp;
+                    GraphNode::NodeFeatures::get_http_user_agent_counts
+                </definition>
+                <argsstring>() const</argsstring>
+                <name>get_http_user_agent_counts</name>
+                <qualifiedname>GraphNode::NodeFeatures::get_http_user_agent_counts</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/GraphNode.h" line="79" column="24" bodyfile="includes/GraphNode.h"
+                          bodystart="79" bodyend="79"/>
+            </memberdef>
+        </sectiondef>
         <briefdescription>
-<para>Total number of connections to/from this node. </para>
+            <para>Structure to hold various features of the network node.</para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="26" column="21" bodyfile="includes/GraphNode.h" bodystart="26" bodyend="26"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1af50ed2cd80fe6812b472d5494c16cbdb" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; uint32_t &gt;</type>
-        <definition>std::atomic&lt;uint32_t&gt; GraphNode::NodeFeatures::in_degree</definition>
-        <argsstring></argsstring>
-        <name>in_degree</name>
-        <qualifiedname>GraphNode::NodeFeatures::in_degree</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Number of incoming connections. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="27" column="21" bodyfile="includes/GraphNode.h" bodystart="27" bodyend="27"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ada3c8f493b6af8d82a39eb6c9278495b" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; uint32_t &gt;</type>
-        <definition>std::atomic&lt;uint32_t&gt; GraphNode::NodeFeatures::out_degree</definition>
-        <argsstring></argsstring>
-        <name>out_degree</name>
-        <qualifiedname>GraphNode::NodeFeatures::out_degree</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Number of outgoing connections. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="28" column="21" bodyfile="includes/GraphNode.h" bodystart="28" bodyend="28"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ac96d6a3c89949a9f1531f9acf0f7d442" prot="public" static="no" mutable="no">
-        <type>std::map&lt; std::string, int &gt;</type>
-        <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::protocol_counts</definition>
-        <argsstring></argsstring>
-        <name>protocol_counts</name>
-        <qualifiedname>GraphNode::NodeFeatures::protocol_counts</qualifiedname>
-        <briefdescription>
-<para>Count of connections per protocol. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="29" column="18" bodyfile="includes/GraphNode.h" bodystart="29" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a0ca519c1fe6bb06725bcd02a7f4ce2ba" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; double &gt;</type>
-        <definition>std::atomic&lt;double&gt; GraphNode::NodeFeatures::activity_score</definition>
-        <argsstring></argsstring>
-        <name>activity_score</name>
-        <qualifiedname>GraphNode::NodeFeatures::activity_score</qualifiedname>
-        <initializer>{0.0}</initializer>
-        <briefdescription>
-<para>A score indicating the node&apos;s activity level. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="30" column="21" bodyfile="includes/GraphNode.h" bodystart="30" bodyend="30"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3ebaaf8a27f1eb09a9a807490138fb6f" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; int &gt;</type>
-        <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::total_connections_initiated</definition>
-        <argsstring></argsstring>
-        <name>total_connections_initiated</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_connections_initiated</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of connections initiated by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="31" column="21" bodyfile="includes/GraphNode.h" bodystart="31" bodyend="31"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a956142f8d2f2fa882b4d73c2c8bf7e59" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; int &gt;</type>
-        <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::total_connections_received</definition>
-        <argsstring></argsstring>
-        <name>total_connections_received</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_connections_received</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of connections received by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="32" column="21" bodyfile="includes/GraphNode.h" bodystart="32" bodyend="32"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ab798173cfe4a902273eefb609ece63bb" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::protocols_used</definition>
-        <argsstring></argsstring>
-        <name>protocols_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::protocols_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique protocols used by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="33" column="18" bodyfile="includes/GraphNode.h" bodystart="33" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a0903de3f4a05d95132091463dbdc124d" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::remote_ports_connected_to</definition>
-        <argsstring></argsstring>
-        <name>remote_ports_connected_to</name>
-        <qualifiedname>GraphNode::NodeFeatures::remote_ports_connected_to</qualifiedname>
-        <briefdescription>
-<para>Set of unique remote ports this node connected to. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="34" column="18" bodyfile="includes/GraphNode.h" bodystart="34" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1abd2fbfd27c82764b79b46c21c6e93742" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::local_ports_used</definition>
-        <argsstring></argsstring>
-        <name>local_ports_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::local_ports_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique local ports used by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="35" column="18" bodyfile="includes/GraphNode.h" bodystart="35" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ae4abee02a900bee189c7c3ff4c8d18d7" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::remote_ports_connected_from</definition>
-        <argsstring></argsstring>
-        <name>remote_ports_connected_from</name>
-        <qualifiedname>GraphNode::NodeFeatures::remote_ports_connected_from</qualifiedname>
-        <briefdescription>
-<para>Set of unique remote ports that connected to this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="36" column="18" bodyfile="includes/GraphNode.h" bodystart="36" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a2a8f5f8e69588c48907b937bc88002df" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::local_ports_listening_on</definition>
-        <argsstring></argsstring>
-        <name>local_ports_listening_on</name>
-        <qualifiedname>GraphNode::NodeFeatures::local_ports_listening_on</qualifiedname>
-        <briefdescription>
-<para>Set of unique local ports this node was listening on. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="37" column="18" bodyfile="includes/GraphNode.h" bodystart="37" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a03c34b70889a2c647c51f0d9ca7df22e" prot="public" static="no" mutable="no">
-        <type>std::map&lt; std::string, int &gt;</type>
-        <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::connection_state_counts</definition>
-        <argsstring></argsstring>
-        <name>connection_state_counts</name>
-        <qualifiedname>GraphNode::NodeFeatures::connection_state_counts</qualifiedname>
-        <briefdescription>
-<para>Count of connections per connection state (e.g., ESTABLISHED). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="38" column="18" bodyfile="includes/GraphNode.h" bodystart="38" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1abcb4893bbb8e85d2317ce4c528c3df7f" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; bool &gt;</type>
-        <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_local_originated</definition>
-        <argsstring></argsstring>
-        <name>ever_local_originated</name>
-        <qualifiedname>GraphNode::NodeFeatures::ever_local_originated</qualifiedname>
-        <initializer>{false}</initializer>
-        <briefdescription>
-<para>True if this node ever initiated a local connection. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="39" column="21" bodyfile="includes/GraphNode.h" bodystart="39" bodyend="39"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a77a8f4c4e35297de72ac27773468a660" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; bool &gt;</type>
-        <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_local_responded</definition>
-        <argsstring></argsstring>
-        <name>ever_local_responded</name>
-        <qualifiedname>GraphNode::NodeFeatures::ever_local_responded</qualifiedname>
-        <initializer>{false}</initializer>
-        <briefdescription>
-<para>True if this node ever responded to a local connection. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="40" column="21" bodyfile="includes/GraphNode.h" bodystart="40" bodyend="40"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a149b5604830f6eb00ba8fb185bb8f7d0" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; long long &gt;</type>
-        <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_orig_bytes</definition>
-        <argsstring></argsstring>
-        <name>total_orig_bytes</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_orig_bytes</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of bytes sent by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="41" column="21" bodyfile="includes/GraphNode.h" bodystart="41" bodyend="41"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a42001ee4d942e18a58dbd2ce44892365" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; long long &gt;</type>
-        <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_resp_bytes</definition>
-        <argsstring></argsstring>
-        <name>total_resp_bytes</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_resp_bytes</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of bytes received by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="42" column="21" bodyfile="includes/GraphNode.h" bodystart="42" bodyend="42"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a05db57c3e7e1eaa6925a3be96c126b39" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; long long &gt;</type>
-        <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_orig_pkts</definition>
-        <argsstring></argsstring>
-        <name>total_orig_pkts</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_orig_pkts</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of packets sent by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="43" column="21" bodyfile="includes/GraphNode.h" bodystart="43" bodyend="43"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a7c6d92589175b63da17ec8359a1a9e4e" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; long long &gt;</type>
-        <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::total_resp_pkts</definition>
-        <argsstring></argsstring>
-        <name>total_resp_pkts</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_resp_pkts</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of packets received by this node. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="44" column="21" bodyfile="includes/GraphNode.h" bodystart="44" bodyend="44"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ab2a04bf23f5cf67eea006eee910d56d3" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::services_used</definition>
-        <argsstring></argsstring>
-        <name>services_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::services_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique services used by this node (e.g., http, dns). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="45" column="18" bodyfile="includes/GraphNode.h" bodystart="45" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1ac5c6457600ee75d83ca602f48d4b4367" prot="public" static="no" mutable="no">
-        <type>std::map&lt; std::string, int &gt;</type>
-        <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::http_user_agent_counts</definition>
-        <argsstring></argsstring>
-        <name>http_user_agent_counts</name>
-        <qualifiedname>GraphNode::NodeFeatures::http_user_agent_counts</qualifiedname>
-        <briefdescription>
-<para>Count of connections per HTTP user agent. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="46" column="18" bodyfile="includes/GraphNode.h" bodystart="46" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aa21518842161ff0b7c3cc8372e3e58a4" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::http_versions_used</definition>
-        <argsstring></argsstring>
-        <name>http_versions_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::http_versions_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique HTTP versions used. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="47" column="18" bodyfile="includes/GraphNode.h" bodystart="47" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1affba116eabe1c1edd8871120bfd16412" prot="public" static="no" mutable="no">
-        <type>std::map&lt; int, int &gt;</type>
-        <definition>std::map&lt;int, int&gt; GraphNode::NodeFeatures::http_status_code_counts</definition>
-        <argsstring></argsstring>
-        <name>http_status_code_counts</name>
-        <qualifiedname>GraphNode::NodeFeatures::http_status_code_counts</qualifiedname>
-        <briefdescription>
-<para>Count of connections per HTTP status code. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="48" column="18" bodyfile="includes/GraphNode.h" bodystart="48" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aa610e8dfb31b64d6089bbb511feda417" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::ssl_versions_used</definition>
-        <argsstring></argsstring>
-        <name>ssl_versions_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::ssl_versions_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique SSL/TLS versions used. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="49" column="18" bodyfile="includes/GraphNode.h" bodystart="49" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a9946a161ed7d2cab7d5e6a0d4f10e438" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::ssl_ciphers_used</definition>
-        <argsstring></argsstring>
-        <name>ssl_ciphers_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::ssl_ciphers_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique SSL/TLS ciphers used. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="50" column="18" bodyfile="includes/GraphNode.h" bodystart="50" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3d5461b4d051ab7c6f50a1f9b1764185" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; bool &gt;</type>
-        <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_curve_present</definition>
-        <argsstring></argsstring>
-        <name>ever_ssl_curve_present</name>
-        <qualifiedname>GraphNode::NodeFeatures::ever_ssl_curve_present</qualifiedname>
-        <initializer>{false}</initializer>
-        <briefdescription>
-<para>True if an SSL/TLS elliptic curve was ever present. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="51" column="21" bodyfile="includes/GraphNode.h" bodystart="51" bodyend="51"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a1b0a5e08a3d6093af05341072fbbbe6e" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; bool &gt;</type>
-        <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_server_name_present</definition>
-        <argsstring></argsstring>
-        <name>ever_ssl_server_name_present</name>
-        <qualifiedname>GraphNode::NodeFeatures::ever_ssl_server_name_present</qualifiedname>
-        <initializer>{false}</initializer>
-        <briefdescription>
-<para>True if an SSL/TLS server name was ever present. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="52" column="21" bodyfile="includes/GraphNode.h" bodystart="52" bodyend="52"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aac9afcd3f6bb6ef7a9f17706027bed61" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; int &gt;</type>
-        <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::ssl_resumption_count</definition>
-        <argsstring></argsstring>
-        <name>ssl_resumption_count</name>
-        <qualifiedname>GraphNode::NodeFeatures::ssl_resumption_count</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Count of SSL/TLS session resumptions. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="53" column="21" bodyfile="includes/GraphNode.h" bodystart="53" bodyend="53"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1adb5a262e71c360774a38427fc7116cee" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; bool &gt;</type>
-        <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_last_alert_present</definition>
-        <argsstring></argsstring>
-        <name>ever_ssl_last_alert_present</name>
-        <qualifiedname>GraphNode::NodeFeatures::ever_ssl_last_alert_present</qualifiedname>
-        <initializer>{false}</initializer>
-        <briefdescription>
-<para>True if an SSL/TLS alert was ever present. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="54" column="21" bodyfile="includes/GraphNode.h" bodystart="54" bodyend="54"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a967b1a49334ea549f32909af1b79c82e" prot="public" static="no" mutable="no">
-        <type>std::set&lt; std::string &gt;</type>
-        <definition>std::set&lt;std::string&gt; GraphNode::NodeFeatures::ssl_next_protocols_used</definition>
-        <argsstring></argsstring>
-        <name>ssl_next_protocols_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::ssl_next_protocols_used</qualifiedname>
-        <briefdescription>
-<para>Set of unique SSL/TLS next protocols used (e.g., h2). </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="55" column="18" bodyfile="includes/GraphNode.h" bodystart="55" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1aef451f7731b2fa8e67ab63f0812fc0fd" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; int &gt;</type>
-        <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::ssl_established_count</definition>
-        <argsstring></argsstring>
-        <name>ssl_established_count</name>
-        <qualifiedname>GraphNode::NodeFeatures::ssl_established_count</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Count of successful SSL/TLS handshakes. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="56" column="21" bodyfile="includes/GraphNode.h" bodystart="56" bodyend="56"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a2bce23b95434b3eb5f889309b7d6a474" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; bool &gt;</type>
-        <definition>std::atomic&lt;bool&gt; GraphNode::NodeFeatures::ever_ssl_history_present</definition>
-        <argsstring></argsstring>
-        <name>ever_ssl_history_present</name>
-        <qualifiedname>GraphNode::NodeFeatures::ever_ssl_history_present</qualifiedname>
-        <initializer>{false}</initializer>
-        <briefdescription>
-<para>True if SSL/TLS history was ever present. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="57" column="21" bodyfile="includes/GraphNode.h" bodystart="57" bodyend="57"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a1952d96277ea55e078706fc0d88cff8c" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; double &gt;</type>
-        <definition>std::atomic&lt;double&gt; GraphNode::NodeFeatures::avg_packet_size_sent</definition>
-        <argsstring></argsstring>
-        <name>avg_packet_size_sent</name>
-        <qualifiedname>GraphNode::NodeFeatures::avg_packet_size_sent</qualifiedname>
-        <initializer>{0.0}</initializer>
-        <briefdescription>
-<para>Average size of packets sent. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="58" column="21" bodyfile="includes/GraphNode.h" bodystart="58" bodyend="58"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3c070876d6a70a11b02e313b7cdc5ef4" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; double &gt;</type>
-        <definition>std::atomic&lt;double&gt; GraphNode::NodeFeatures::avg_packet_size_received</definition>
-        <argsstring></argsstring>
-        <name>avg_packet_size_received</name>
-        <qualifiedname>GraphNode::NodeFeatures::avg_packet_size_received</qualifiedname>
-        <initializer>{0.0}</initializer>
-        <briefdescription>
-<para>Average size of packets received. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="59" column="21" bodyfile="includes/GraphNode.h" bodystart="59" bodyend="59"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a524ebc33d5f6a4a6eb3e219d8ac06d63" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; long long &gt;</type>
-        <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::historical_total_orig_bytes</definition>
-        <argsstring></argsstring>
-        <name>historical_total_orig_bytes</name>
-        <qualifiedname>GraphNode::NodeFeatures::historical_total_orig_bytes</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total original bytes aggregated over time. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="62" column="21" bodyfile="includes/GraphNode.h" bodystart="62" bodyend="62"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a6d022986e7b7c2cb6d1379af59101c89" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; long long &gt;</type>
-        <definition>std::atomic&lt;long long&gt; GraphNode::NodeFeatures::historical_total_resp_bytes</definition>
-        <argsstring></argsstring>
-        <name>historical_total_resp_bytes</name>
-        <qualifiedname>GraphNode::NodeFeatures::historical_total_resp_bytes</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total response bytes aggregated over time. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="63" column="21" bodyfile="includes/GraphNode.h" bodystart="63" bodyend="63"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a3307c40b196c6e6a15d07f61d8da37bc" prot="public" static="no" mutable="no">
-        <type>std::map&lt; std::string, int &gt;</type>
-        <definition>std::map&lt;std::string, int&gt; GraphNode::NodeFeatures::historical_protocol_counts</definition>
-        <argsstring></argsstring>
-        <name>historical_protocol_counts</name>
-        <qualifiedname>GraphNode::NodeFeatures::historical_protocol_counts</qualifiedname>
-        <briefdescription>
-<para>Aggregated counts of protocols over time. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="64" column="18" bodyfile="includes/GraphNode.h" bodystart="64" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="structGraphNode_1_1NodeFeatures_1a7938c1b049f4a9eedee7a29a00156760" prot="public" static="no" mutable="no">
-        <type>std::atomic&lt; int &gt;</type>
-        <definition>std::atomic&lt;int&gt; GraphNode::NodeFeatures::historical_total_connections</definition>
-        <argsstring></argsstring>
-        <name>historical_total_connections</name>
-        <qualifiedname>GraphNode::NodeFeatures::historical_total_connections</qualifiedname>
-        <initializer>{0}</initializer>
-        <briefdescription>
-<para>Total number of connections aggregated over time. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="65" column="21" bodyfile="includes/GraphNode.h" bodystart="65" bodyend="65"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1ae8f3a4eb872c73cd824a737ffa38e9a6" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>double</type>
-        <definition>double GraphNode::NodeFeatures::outgoing_connection_ratio</definition>
-        <argsstring>() const</argsstring>
-        <name>outgoing_connection_ratio</name>
-        <qualifiedname>GraphNode::NodeFeatures::outgoing_connection_ratio</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="67" column="16" bodyfile="GraphNode.cpp" bodystart="192" bodyend="196"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1abf7190e454607a7473b00fbef1441f91" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>double</type>
-        <definition>double GraphNode::NodeFeatures::incoming_connection_ratio</definition>
-        <argsstring>() const</argsstring>
-        <name>incoming_connection_ratio</name>
-        <qualifiedname>GraphNode::NodeFeatures::incoming_connection_ratio</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="68" column="16" bodyfile="GraphNode.cpp" bodystart="198" bodyend="202"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a0ecc6547e04fe6a11e3fdc4133ce1b0b" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>std::string</type>
-        <definition>std::string GraphNode::NodeFeatures::most_frequent_protocol</definition>
-        <argsstring>() const</argsstring>
-        <name>most_frequent_protocol</name>
-        <qualifiedname>GraphNode::NodeFeatures::most_frequent_protocol</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="69" column="21" bodyfile="GraphNode.cpp" bodystart="204" bodyend="215"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a923b3588ab376aa69f7ee27b09856866" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>size_t</type>
-        <definition>size_t GraphNode::NodeFeatures::unique_remote_ports_connected_to</definition>
-        <argsstring>() const</argsstring>
-        <name>unique_remote_ports_connected_to</name>
-        <qualifiedname>GraphNode::NodeFeatures::unique_remote_ports_connected_to</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="70" column="16" bodyfile="GraphNode.cpp" bodystart="217" bodyend="219"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a3a15da558bdd57a1893f195779600db2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>size_t</type>
-        <definition>size_t GraphNode::NodeFeatures::unique_local_ports_used</definition>
-        <argsstring>() const</argsstring>
-        <name>unique_local_ports_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::unique_local_ports_used</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="71" column="16" bodyfile="GraphNode.cpp" bodystart="221" bodyend="223"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1aaa3b8264a7eb598781bf0ebefbb4d7a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>std::string</type>
-        <definition>std::string GraphNode::NodeFeatures::most_frequent_connection_state</definition>
-        <argsstring>() const</argsstring>
-        <name>most_frequent_connection_state</name>
-        <qualifiedname>GraphNode::NodeFeatures::most_frequent_connection_state</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="72" column="21" bodyfile="GraphNode.cpp" bodystart="225" bodyend="235"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a4df47e914db9acf1968bf7a5fb854976" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool GraphNode::NodeFeatures::connected_to_privileged_port</definition>
-        <argsstring>() const</argsstring>
-        <name>connected_to_privileged_port</name>
-        <qualifiedname>GraphNode::NodeFeatures::connected_to_privileged_port</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="73" column="14" bodyfile="GraphNode.cpp" bodystart="237" bodyend="249"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a0a31d9c6096b99797fad43296d049ee1" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool GraphNode::NodeFeatures::listened_on_privileged_port</definition>
-        <argsstring>() const</argsstring>
-        <name>listened_on_privileged_port</name>
-        <qualifiedname>GraphNode::NodeFeatures::listened_on_privileged_port</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="74" column="14" bodyfile="GraphNode.cpp" bodystart="251" bodyend="263"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a9ae2b8d094bc8cc64d5bc0bea7134472" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>long long</type>
-        <definition>long long GraphNode::NodeFeatures::total_bytes_sent</definition>
-        <argsstring>() const</argsstring>
-        <name>total_bytes_sent</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_bytes_sent</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="75" column="19" bodyfile="includes/GraphNode.h" bodystart="75" bodyend="75"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a3ffcbffc7f04690e79e79f7dd56b9bca" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>long long</type>
-        <definition>long long GraphNode::NodeFeatures::total_bytes_received</definition>
-        <argsstring>() const</argsstring>
-        <name>total_bytes_received</name>
-        <qualifiedname>GraphNode::NodeFeatures::total_bytes_received</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="76" column="19" bodyfile="includes/GraphNode.h" bodystart="76" bodyend="76"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1ab51eca1f2afbe9de2be9fa0657224d6f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool GraphNode::NodeFeatures::used_ssl_tls</definition>
-        <argsstring>() const</argsstring>
-        <name>used_ssl_tls</name>
-        <qualifiedname>GraphNode::NodeFeatures::used_ssl_tls</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="77" column="14" bodyfile="GraphNode.cpp" bodystart="265" bodyend="267"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a59cabf26e884d63210f2b61eb9223ee7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>const std::set&lt; std::string &gt; &amp;</type>
-        <definition>const std::set&lt; std::string &gt; &amp; GraphNode::NodeFeatures::get_ssl_versions_used</definition>
-        <argsstring>() const</argsstring>
-        <name>get_ssl_versions_used</name>
-        <qualifiedname>GraphNode::NodeFeatures::get_ssl_versions_used</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="78" column="24" bodyfile="includes/GraphNode.h" bodystart="78" bodyend="78"/>
-      </memberdef>
-      <memberdef kind="function" id="structGraphNode_1_1NodeFeatures_1a0aaae3f089800ab196f2add3bd362694" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>const std::map&lt; std::string, int &gt; &amp;</type>
-        <definition>const std::map&lt; std::string, int &gt; &amp; GraphNode::NodeFeatures::get_http_user_agent_counts</definition>
-        <argsstring>() const</argsstring>
-        <name>get_http_user_agent_counts</name>
-        <qualifiedname>GraphNode::NodeFeatures::get_http_user_agent_counts</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/GraphNode.h" line="79" column="24" bodyfile="includes/GraphNode.h" bodystart="79" bodyend="79"/>
-      </memberdef>
-    </sectiondef>
-    <briefdescription>
-<para>Structure to hold various features of the network node. </para>
-    </briefdescription>
-    <detaileddescription>
-    </detaileddescription>
-    <collaborationgraph>
-      <node id="1">
-        <label>GraphNode::NodeFeatures</label>
-        <link refid="structGraphNode_1_1NodeFeatures"/>
-        <childnode refid="2" relation="usage">
-          <edgelabel>+degree</edgelabel>
-          <edgelabel>+in_degree</edgelabel>
-          <edgelabel>+out_degree</edgelabel>
-        </childnode>
-        <childnode refid="3" relation="usage">
-          <edgelabel>+connection_state_counts</edgelabel>
-          <edgelabel>+historical_protocol_counts</edgelabel>
-          <edgelabel>+http_user_agent_counts</edgelabel>
-          <edgelabel>+protocol_counts</edgelabel>
-        </childnode>
-        <childnode refid="4" relation="usage">
-          <edgelabel>+activity_score</edgelabel>
-          <edgelabel>+avg_packet_size_received</edgelabel>
-          <edgelabel>+avg_packet_size_sent</edgelabel>
-        </childnode>
-        <childnode refid="5" relation="usage">
-          <edgelabel>+historical_total_connections</edgelabel>
-          <edgelabel>+ssl_established_count</edgelabel>
-          <edgelabel>+ssl_resumption_count</edgelabel>
-          <edgelabel>+total_connections_initiated</edgelabel>
-          <edgelabel>+total_connections_received</edgelabel>
-        </childnode>
-        <childnode refid="6" relation="usage">
-          <edgelabel>+http_versions_used</edgelabel>
-          <edgelabel>+local_ports_listening_on</edgelabel>
-          <edgelabel>+local_ports_used</edgelabel>
-          <edgelabel>+protocols_used</edgelabel>
-          <edgelabel>+remote_ports_connected_from</edgelabel>
-          <edgelabel>+remote_ports_connected_to</edgelabel>
-          <edgelabel>+services_used</edgelabel>
-          <edgelabel>+ssl_ciphers_used</edgelabel>
-          <edgelabel>+ssl_next_protocols_used</edgelabel>
-          <edgelabel>+ssl_versions_used</edgelabel>
-          <edgelabel>...</edgelabel>
-        </childnode>
-        <childnode refid="7" relation="usage">
-          <edgelabel>+ever_local_originated</edgelabel>
-          <edgelabel>+ever_local_responded</edgelabel>
-          <edgelabel>+ever_ssl_curve_present</edgelabel>
-          <edgelabel>+ever_ssl_history_present</edgelabel>
-          <edgelabel>+ever_ssl_last_alert_present</edgelabel>
-          <edgelabel>+ever_ssl_server_name_present</edgelabel>
-        </childnode>
-        <childnode refid="8" relation="usage">
-          <edgelabel>+historical_total_orig_bytes</edgelabel>
-          <edgelabel>+historical_total_resp_bytes</edgelabel>
-          <edgelabel>+total_orig_bytes</edgelabel>
-          <edgelabel>+total_orig_pkts</edgelabel>
-          <edgelabel>+total_resp_bytes</edgelabel>
-          <edgelabel>+total_resp_pkts</edgelabel>
-        </childnode>
-        <childnode refid="9" relation="usage">
-          <edgelabel>+http_status_code_counts</edgelabel>
-        </childnode>
-      </node>
-      <node id="7">
-        <label>atomic&lt; bool &gt;</label>
-      </node>
-      <node id="4">
-        <label>atomic&lt; double &gt;</label>
-      </node>
-      <node id="5">
-        <label>atomic&lt; int &gt;</label>
-      </node>
-      <node id="8">
-        <label>atomic&lt; long long &gt;</label>
-      </node>
-      <node id="2">
-        <label>atomic&lt; uint32_t &gt;</label>
-      </node>
-      <node id="9">
-        <label>map&lt; int, int &gt;</label>
-      </node>
-      <node id="3">
-        <label>map&lt; std::string, int &gt;</label>
-      </node>
-      <node id="6">
-        <label>set&lt; std::string &gt;</label>
-      </node>
-    </collaborationgraph>
-    <location file="includes/GraphNode.h" line="25" column="5" bodyfile="includes/GraphNode.h" bodystart="25" bodyend="80"/>
-    <listofallmembers>
-      <member refid="structGraphNode_1_1NodeFeatures_1a0ca519c1fe6bb06725bcd02a7f4ce2ba" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>activity_score</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a3c070876d6a70a11b02e313b7cdc5ef4" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>avg_packet_size_received</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a1952d96277ea55e078706fc0d88cff8c" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>avg_packet_size_sent</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a4df47e914db9acf1968bf7a5fb854976" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>connected_to_privileged_port</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a03c34b70889a2c647c51f0d9ca7df22e" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>connection_state_counts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a9f7df6cb5a7e14294490091ad520e436" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>degree</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1abcb4893bbb8e85d2317ce4c528c3df7f" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ever_local_originated</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a77a8f4c4e35297de72ac27773468a660" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ever_local_responded</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a3d5461b4d051ab7c6f50a1f9b1764185" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ever_ssl_curve_present</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a2bce23b95434b3eb5f889309b7d6a474" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ever_ssl_history_present</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1adb5a262e71c360774a38427fc7116cee" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ever_ssl_last_alert_present</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a1b0a5e08a3d6093af05341072fbbbe6e" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ever_ssl_server_name_present</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a0aaae3f089800ab196f2add3bd362694" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>get_http_user_agent_counts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a59cabf26e884d63210f2b61eb9223ee7" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>get_ssl_versions_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a3307c40b196c6e6a15d07f61d8da37bc" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>historical_protocol_counts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a7938c1b049f4a9eedee7a29a00156760" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>historical_total_connections</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a524ebc33d5f6a4a6eb3e219d8ac06d63" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>historical_total_orig_bytes</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a6d022986e7b7c2cb6d1379af59101c89" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>historical_total_resp_bytes</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1affba116eabe1c1edd8871120bfd16412" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>http_status_code_counts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ac5c6457600ee75d83ca602f48d4b4367" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>http_user_agent_counts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1aa21518842161ff0b7c3cc8372e3e58a4" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>http_versions_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1af50ed2cd80fe6812b472d5494c16cbdb" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>in_degree</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1abf7190e454607a7473b00fbef1441f91" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>incoming_connection_ratio</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a0a31d9c6096b99797fad43296d049ee1" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>listened_on_privileged_port</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a2a8f5f8e69588c48907b937bc88002df" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>local_ports_listening_on</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1abd2fbfd27c82764b79b46c21c6e93742" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>local_ports_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1aaa3b8264a7eb598781bf0ebefbb4d7a4" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>most_frequent_connection_state</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a0ecc6547e04fe6a11e3fdc4133ce1b0b" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>most_frequent_protocol</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ada3c8f493b6af8d82a39eb6c9278495b" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>out_degree</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ae8f3a4eb872c73cd824a737ffa38e9a6" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>outgoing_connection_ratio</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ac96d6a3c89949a9f1531f9acf0f7d442" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>protocol_counts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ab798173cfe4a902273eefb609ece63bb" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>protocols_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ae4abee02a900bee189c7c3ff4c8d18d7" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>remote_ports_connected_from</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a0903de3f4a05d95132091463dbdc124d" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>remote_ports_connected_to</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ab2a04bf23f5cf67eea006eee910d56d3" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>services_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a9946a161ed7d2cab7d5e6a0d4f10e438" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ssl_ciphers_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1aef451f7731b2fa8e67ab63f0812fc0fd" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ssl_established_count</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a967b1a49334ea549f32909af1b79c82e" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ssl_next_protocols_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1aac9afcd3f6bb6ef7a9f17706027bed61" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ssl_resumption_count</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1aa610e8dfb31b64d6089bbb511feda417" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>ssl_versions_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a3ffcbffc7f04690e79e79f7dd56b9bca" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_bytes_received</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a9ae2b8d094bc8cc64d5bc0bea7134472" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_bytes_sent</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a3ebaaf8a27f1eb09a9a807490138fb6f" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_connections_initiated</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a956142f8d2f2fa882b4d73c2c8bf7e59" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_connections_received</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a149b5604830f6eb00ba8fb185bb8f7d0" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_orig_bytes</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a05db57c3e7e1eaa6925a3be96c126b39" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_orig_pkts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a42001ee4d942e18a58dbd2ce44892365" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_resp_bytes</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a7c6d92589175b63da17ec8359a1a9e4e" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>total_resp_pkts</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a3a15da558bdd57a1893f195779600db2" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>unique_local_ports_used</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1a923b3588ab376aa69f7ee27b09856866" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>unique_remote_ports_connected_to</name></member>
-      <member refid="structGraphNode_1_1NodeFeatures_1ab51eca1f2afbe9de2be9fa0657224d6f" prot="public" virt="non-virtual"><scope>GraphNode::NodeFeatures</scope><name>used_ssl_tls</name></member>
-    </listofallmembers>
-  </compounddef>
+        <collaborationgraph>
+            <node id="1">
+                <label>GraphNode::NodeFeatures</label>
+                <link refid="structGraphNode_1_1NodeFeatures"/>
+                <childnode refid="2" relation="usage">
+                    <edgelabel>+degree</edgelabel>
+                    <edgelabel>+in_degree</edgelabel>
+                    <edgelabel>+out_degree</edgelabel>
+                </childnode>
+                <childnode refid="3" relation="usage">
+                    <edgelabel>+connection_state_counts</edgelabel>
+                    <edgelabel>+historical_protocol_counts</edgelabel>
+                    <edgelabel>+http_user_agent_counts</edgelabel>
+                    <edgelabel>+protocol_counts</edgelabel>
+                </childnode>
+                <childnode refid="4" relation="usage">
+                    <edgelabel>+activity_score</edgelabel>
+                    <edgelabel>+avg_packet_size_received</edgelabel>
+                    <edgelabel>+avg_packet_size_sent</edgelabel>
+                </childnode>
+                <childnode refid="5" relation="usage">
+                    <edgelabel>+historical_total_connections</edgelabel>
+                    <edgelabel>+ssl_established_count</edgelabel>
+                    <edgelabel>+ssl_resumption_count</edgelabel>
+                    <edgelabel>+total_connections_initiated</edgelabel>
+                    <edgelabel>+total_connections_received</edgelabel>
+                </childnode>
+                <childnode refid="6" relation="usage">
+                    <edgelabel>+http_versions_used</edgelabel>
+                    <edgelabel>+local_ports_listening_on</edgelabel>
+                    <edgelabel>+local_ports_used</edgelabel>
+                    <edgelabel>+protocols_used</edgelabel>
+                    <edgelabel>+remote_ports_connected_from</edgelabel>
+                    <edgelabel>+remote_ports_connected_to</edgelabel>
+                    <edgelabel>+services_used</edgelabel>
+                    <edgelabel>+ssl_ciphers_used</edgelabel>
+                    <edgelabel>+ssl_next_protocols_used</edgelabel>
+                    <edgelabel>+ssl_versions_used</edgelabel>
+                    <edgelabel>...</edgelabel>
+                </childnode>
+                <childnode refid="7" relation="usage">
+                    <edgelabel>+ever_local_originated</edgelabel>
+                    <edgelabel>+ever_local_responded</edgelabel>
+                    <edgelabel>+ever_ssl_curve_present</edgelabel>
+                    <edgelabel>+ever_ssl_history_present</edgelabel>
+                    <edgelabel>+ever_ssl_last_alert_present</edgelabel>
+                    <edgelabel>+ever_ssl_server_name_present</edgelabel>
+                </childnode>
+                <childnode refid="8" relation="usage">
+                    <edgelabel>+historical_total_orig_bytes</edgelabel>
+                    <edgelabel>+historical_total_resp_bytes</edgelabel>
+                    <edgelabel>+total_orig_bytes</edgelabel>
+                    <edgelabel>+total_orig_pkts</edgelabel>
+                    <edgelabel>+total_resp_bytes</edgelabel>
+                    <edgelabel>+total_resp_pkts</edgelabel>
+                </childnode>
+                <childnode refid="9" relation="usage">
+                    <edgelabel>+http_status_code_counts</edgelabel>
+                </childnode>
+            </node>
+            <node id="7">
+                <label>atomic&lt; bool &gt;</label>
+            </node>
+            <node id="4">
+                <label>atomic&lt; double &gt;</label>
+            </node>
+            <node id="5">
+                <label>atomic&lt; int &gt;</label>
+            </node>
+            <node id="8">
+                <label>atomic&lt; long long &gt;</label>
+            </node>
+            <node id="2">
+                <label>atomic&lt; uint32_t &gt;</label>
+            </node>
+            <node id="9">
+                <label>map&lt; int, int &gt;</label>
+            </node>
+            <node id="3">
+                <label>map&lt; std::string, int &gt;</label>
+            </node>
+            <node id="6">
+                <label>set&lt; std::string &gt;</label>
+            </node>
+        </collaborationgraph>
+        <location file="includes/GraphNode.h" line="25" column="5" bodyfile="includes/GraphNode.h" bodystart="25"
+                  bodyend="80"/>
+        <listofallmembers>
+            <member refid="structGraphNode_1_1NodeFeatures_1a0ca519c1fe6bb06725bcd02a7f4ce2ba" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>activity_score</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a3c070876d6a70a11b02e313b7cdc5ef4" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>avg_packet_size_received</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a1952d96277ea55e078706fc0d88cff8c" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>avg_packet_size_sent</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a4df47e914db9acf1968bf7a5fb854976" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>connected_to_privileged_port</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a03c34b70889a2c647c51f0d9ca7df22e" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>connection_state_counts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a9f7df6cb5a7e14294490091ad520e436" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>degree</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1abcb4893bbb8e85d2317ce4c528c3df7f" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ever_local_originated</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a77a8f4c4e35297de72ac27773468a660" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ever_local_responded</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a3d5461b4d051ab7c6f50a1f9b1764185" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ever_ssl_curve_present</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a2bce23b95434b3eb5f889309b7d6a474" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ever_ssl_history_present</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1adb5a262e71c360774a38427fc7116cee" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ever_ssl_last_alert_present</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a1b0a5e08a3d6093af05341072fbbbe6e" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ever_ssl_server_name_present</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a0aaae3f089800ab196f2add3bd362694" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>get_http_user_agent_counts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a59cabf26e884d63210f2b61eb9223ee7" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>get_ssl_versions_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a3307c40b196c6e6a15d07f61d8da37bc" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>historical_protocol_counts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a7938c1b049f4a9eedee7a29a00156760" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>historical_total_connections</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a524ebc33d5f6a4a6eb3e219d8ac06d63" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>historical_total_orig_bytes</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a6d022986e7b7c2cb6d1379af59101c89" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>historical_total_resp_bytes</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1affba116eabe1c1edd8871120bfd16412" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>http_status_code_counts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ac5c6457600ee75d83ca602f48d4b4367" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>http_user_agent_counts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1aa21518842161ff0b7c3cc8372e3e58a4" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>http_versions_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1af50ed2cd80fe6812b472d5494c16cbdb" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>in_degree</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1abf7190e454607a7473b00fbef1441f91" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>incoming_connection_ratio</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a0a31d9c6096b99797fad43296d049ee1" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>listened_on_privileged_port</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a2a8f5f8e69588c48907b937bc88002df" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>local_ports_listening_on</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1abd2fbfd27c82764b79b46c21c6e93742" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>local_ports_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1aaa3b8264a7eb598781bf0ebefbb4d7a4" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>most_frequent_connection_state</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a0ecc6547e04fe6a11e3fdc4133ce1b0b" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>most_frequent_protocol</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ada3c8f493b6af8d82a39eb6c9278495b" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>out_degree</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ae8f3a4eb872c73cd824a737ffa38e9a6" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>outgoing_connection_ratio</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ac96d6a3c89949a9f1531f9acf0f7d442" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>protocol_counts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ab798173cfe4a902273eefb609ece63bb" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>protocols_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ae4abee02a900bee189c7c3ff4c8d18d7" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>remote_ports_connected_from</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a0903de3f4a05d95132091463dbdc124d" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>remote_ports_connected_to</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ab2a04bf23f5cf67eea006eee910d56d3" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>services_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a9946a161ed7d2cab7d5e6a0d4f10e438" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ssl_ciphers_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1aef451f7731b2fa8e67ab63f0812fc0fd" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ssl_established_count</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a967b1a49334ea549f32909af1b79c82e" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ssl_next_protocols_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1aac9afcd3f6bb6ef7a9f17706027bed61" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ssl_resumption_count</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1aa610e8dfb31b64d6089bbb511feda417" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>ssl_versions_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a3ffcbffc7f04690e79e79f7dd56b9bca" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_bytes_received</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a9ae2b8d094bc8cc64d5bc0bea7134472" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_bytes_sent</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a3ebaaf8a27f1eb09a9a807490138fb6f" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_connections_initiated</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a956142f8d2f2fa882b4d73c2c8bf7e59" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_connections_received</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a149b5604830f6eb00ba8fb185bb8f7d0" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_orig_bytes</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a05db57c3e7e1eaa6925a3be96c126b39" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_orig_pkts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a42001ee4d942e18a58dbd2ce44892365" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_resp_bytes</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a7c6d92589175b63da17ec8359a1a9e4e" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>total_resp_pkts</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a3a15da558bdd57a1893f195779600db2" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>unique_local_ports_used</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1a923b3588ab376aa69f7ee27b09856866" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>unique_remote_ports_connected_to</name>
+            </member>
+            <member refid="structGraphNode_1_1NodeFeatures_1ab51eca1f2afbe9de2be9fa0657224d6f" prot="public"
+                    virt="non-virtual">
+                <scope>GraphNode::NodeFeatures</scope>
+                <name>used_ssl_tls</name>
+            </member>
+        </listofallmembers>
+    </compounddef>
 </doxygen>

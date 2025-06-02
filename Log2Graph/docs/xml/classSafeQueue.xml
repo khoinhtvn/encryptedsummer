@@ -1,150 +1,197 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="classSafeQueue" kind="class" language="C++" prot="public">
-    <compoundname>SafeQueue</compoundname>
-    <includes refid="ZeekLogParser_8h" local="no">ZeekLogParser.h</includes>
-    <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classSafeQueue_1aa5fa7276b07a5201398f63734ed3003e" prot="private" static="no" mutable="no">
-        <type>std::queue&lt; <ref refid="structLogEntry" kindref="compound">LogEntry</ref> &gt;</type>
-        <definition>std::queue&lt;LogEntry&gt; SafeQueue::queue_</definition>
-        <argsstring></argsstring>
-        <name>queue_</name>
-        <qualifiedname>SafeQueue::queue_</qualifiedname>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="classSafeQueue" kind="class" language="C++" prot="public">
+        <compoundname>SafeQueue</compoundname>
+        <includes refid="ZeekLogParser_8h" local="no">ZeekLogParser.h</includes>
+        <sectiondef kind="private-attrib">
+            <memberdef kind="variable" id="classSafeQueue_1aa5fa7276b07a5201398f63734ed3003e" prot="private" static="no"
+                       mutable="no">
+                <type>std::queue&lt; <ref refid="structLogEntry" kindref="compound">LogEntry</ref> &gt;
+                </type>
+                <definition>std::queue&lt;LogEntry&gt; SafeQueue::queue_</definition>
+                <argsstring></argsstring>
+                <name>queue_</name>
+                <qualifiedname>SafeQueue::queue_</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="103" column="16" bodyfile="includes/ZeekLogParser.h"
+                          bodystart="103" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classSafeQueue_1abeb939317e4d40581d9f753024a08823" prot="private" static="no"
+                       mutable="yes">
+                <type>std::mutex</type>
+                <definition>std::mutex SafeQueue::mutex_</definition>
+                <argsstring></argsstring>
+                <name>mutex_</name>
+                <qualifiedname>SafeQueue::mutex_</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="104" column="24" bodyfile="includes/ZeekLogParser.h"
+                          bodystart="104" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classSafeQueue_1aab3b907dd0a0ed5eb2cf73d4ba3c48c6" prot="private" static="no"
+                       mutable="no">
+                <type>std::condition_variable</type>
+                <definition>std::condition_variable SafeQueue::condition_</definition>
+                <argsstring></argsstring>
+                <name>condition_</name>
+                <qualifiedname>SafeQueue::condition_</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="105" column="29" bodyfile="includes/ZeekLogParser.h"
+                          bodystart="105" bodyend="-1"/>
+            </memberdef>
+            <memberdef kind="variable" id="classSafeQueue_1aee8078aa0fec15a2308e18c87f5cb3a4" prot="private" static="no"
+                       mutable="no">
+                <type>bool</type>
+                <definition>bool SafeQueue::running_</definition>
+                <argsstring></argsstring>
+                <name>running_</name>
+                <qualifiedname>SafeQueue::running_</qualifiedname>
+                <initializer>= true</initializer>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="106" column="10" bodyfile="includes/ZeekLogParser.h"
+                          bodystart="106" bodyend="-1"/>
+            </memberdef>
+        </sectiondef>
+        <sectiondef kind="public-func">
+            <memberdef kind="function" id="classSafeQueue_1aa28b85e7ca2625feecb4c6674fd64bb4" prot="public" static="no"
+                       const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void SafeQueue::enqueue</definition>
+                <argsstring>(LogEntry entry)</argsstring>
+                <name>enqueue</name>
+                <qualifiedname>SafeQueue::enqueue</qualifiedname>
+                <param>
+                    <type>
+                        <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                    </type>
+                    <declname>entry</declname>
+                </param>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="98" column="10" bodyfile="ZeekLogParser.cpp"
+                          bodystart="35" bodyend="39"/>
+            </memberdef>
+            <memberdef kind="function" id="classSafeQueue_1ac6d7f1830ee1b751beb3739d5636f454" prot="public" static="no"
+                       const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>
+                    <ref refid="structLogEntry" kindref="compound">LogEntry</ref>
+                </type>
+                <definition>LogEntry SafeQueue::dequeue</definition>
+                <argsstring>()</argsstring>
+                <name>dequeue</name>
+                <qualifiedname>SafeQueue::dequeue</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="99" column="14" bodyfile="ZeekLogParser.cpp"
+                          bodystart="41" bodyend="50"/>
+            </memberdef>
+            <memberdef kind="function" id="classSafeQueue_1a2fa92b97d343534fdc61c6a737b7cd9d" prot="public" static="no"
+                       const="no" explicit="no" inline="no" virt="non-virtual">
+                <type>void</type>
+                <definition>void SafeQueue::stop</definition>
+                <argsstring>()</argsstring>
+                <name>stop</name>
+                <qualifiedname>SafeQueue::stop</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="100" column="10" bodyfile="ZeekLogParser.cpp"
+                          bodystart="52" bodyend="56"/>
+            </memberdef>
+            <memberdef kind="function" id="classSafeQueue_1a02cacf8f629f6967bec1a714dd72cb17" prot="public" static="no"
+                       const="yes" explicit="no" inline="no" virt="non-virtual">
+                <type>bool</type>
+                <definition>bool SafeQueue::is_running</definition>
+                <argsstring>() const</argsstring>
+                <name>is_running</name>
+                <qualifiedname>SafeQueue::is_running</qualifiedname>
+                <briefdescription>
+                </briefdescription>
+                <detaileddescription>
+                </detaileddescription>
+                <inbodydescription>
+                </inbodydescription>
+                <location file="includes/ZeekLogParser.h" line="101" column="10" bodyfile="ZeekLogParser.cpp"
+                          bodystart="58" bodyend="61"/>
+            </memberdef>
+        </sectiondef>
         <briefdescription>
+            <para>A thread-safe queue for passing parsed log entries.</para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="103" column="16" bodyfile="includes/ZeekLogParser.h" bodystart="103" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSafeQueue_1abeb939317e4d40581d9f753024a08823" prot="private" static="no" mutable="yes">
-        <type>std::mutex</type>
-        <definition>std::mutex SafeQueue::mutex_</definition>
-        <argsstring></argsstring>
-        <name>mutex_</name>
-        <qualifiedname>SafeQueue::mutex_</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="104" column="24" bodyfile="includes/ZeekLogParser.h" bodystart="104" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSafeQueue_1aab3b907dd0a0ed5eb2cf73d4ba3c48c6" prot="private" static="no" mutable="no">
-        <type>std::condition_variable</type>
-        <definition>std::condition_variable SafeQueue::condition_</definition>
-        <argsstring></argsstring>
-        <name>condition_</name>
-        <qualifiedname>SafeQueue::condition_</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="105" column="29" bodyfile="includes/ZeekLogParser.h" bodystart="105" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="variable" id="classSafeQueue_1aee8078aa0fec15a2308e18c87f5cb3a4" prot="private" static="no" mutable="no">
-        <type>bool</type>
-        <definition>bool SafeQueue::running_</definition>
-        <argsstring></argsstring>
-        <name>running_</name>
-        <qualifiedname>SafeQueue::running_</qualifiedname>
-        <initializer>= true</initializer>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="106" column="10" bodyfile="includes/ZeekLogParser.h" bodystart="106" bodyend="-1"/>
-      </memberdef>
-    </sectiondef>
-    <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSafeQueue_1aa28b85e7ca2625feecb4c6674fd64bb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SafeQueue::enqueue</definition>
-        <argsstring>(LogEntry entry)</argsstring>
-        <name>enqueue</name>
-        <qualifiedname>SafeQueue::enqueue</qualifiedname>
-        <param>
-          <type><ref refid="structLogEntry" kindref="compound">LogEntry</ref></type>
-          <declname>entry</declname>
-        </param>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="98" column="10" bodyfile="ZeekLogParser.cpp" bodystart="35" bodyend="39"/>
-      </memberdef>
-      <memberdef kind="function" id="classSafeQueue_1ac6d7f1830ee1b751beb3739d5636f454" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="structLogEntry" kindref="compound">LogEntry</ref></type>
-        <definition>LogEntry SafeQueue::dequeue</definition>
-        <argsstring>()</argsstring>
-        <name>dequeue</name>
-        <qualifiedname>SafeQueue::dequeue</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="99" column="14" bodyfile="ZeekLogParser.cpp" bodystart="41" bodyend="50"/>
-      </memberdef>
-      <memberdef kind="function" id="classSafeQueue_1a2fa92b97d343534fdc61c6a737b7cd9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type>void</type>
-        <definition>void SafeQueue::stop</definition>
-        <argsstring>()</argsstring>
-        <name>stop</name>
-        <qualifiedname>SafeQueue::stop</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="100" column="10" bodyfile="ZeekLogParser.cpp" bodystart="52" bodyend="56"/>
-      </memberdef>
-      <memberdef kind="function" id="classSafeQueue_1a02cacf8f629f6967bec1a714dd72cb17" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
-        <type>bool</type>
-        <definition>bool SafeQueue::is_running</definition>
-        <argsstring>() const</argsstring>
-        <name>is_running</name>
-        <qualifiedname>SafeQueue::is_running</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="includes/ZeekLogParser.h" line="101" column="10" bodyfile="ZeekLogParser.cpp" bodystart="58" bodyend="61"/>
-      </memberdef>
-    </sectiondef>
-    <briefdescription>
-<para>A thread-safe queue for passing parsed log entries. </para>
-    </briefdescription>
-    <detaileddescription>
-    </detaileddescription>
-    <collaborationgraph>
-      <node id="1">
-        <label>SafeQueue</label>
-        <link refid="classSafeQueue"/>
-      </node>
-    </collaborationgraph>
-    <location file="includes/ZeekLogParser.h" line="96" column="1" bodyfile="includes/ZeekLogParser.h" bodystart="96" bodyend="107"/>
-    <listofallmembers>
-      <member refid="classSafeQueue_1aab3b907dd0a0ed5eb2cf73d4ba3c48c6" prot="private" virt="non-virtual"><scope>SafeQueue</scope><name>condition_</name></member>
-      <member refid="classSafeQueue_1ac6d7f1830ee1b751beb3739d5636f454" prot="public" virt="non-virtual"><scope>SafeQueue</scope><name>dequeue</name></member>
-      <member refid="classSafeQueue_1aa28b85e7ca2625feecb4c6674fd64bb4" prot="public" virt="non-virtual"><scope>SafeQueue</scope><name>enqueue</name></member>
-      <member refid="classSafeQueue_1a02cacf8f629f6967bec1a714dd72cb17" prot="public" virt="non-virtual"><scope>SafeQueue</scope><name>is_running</name></member>
-      <member refid="classSafeQueue_1abeb939317e4d40581d9f753024a08823" prot="private" virt="non-virtual"><scope>SafeQueue</scope><name>mutex_</name></member>
-      <member refid="classSafeQueue_1aa5fa7276b07a5201398f63734ed3003e" prot="private" virt="non-virtual"><scope>SafeQueue</scope><name>queue_</name></member>
-      <member refid="classSafeQueue_1aee8078aa0fec15a2308e18c87f5cb3a4" prot="private" virt="non-virtual"><scope>SafeQueue</scope><name>running_</name></member>
-      <member refid="classSafeQueue_1a2fa92b97d343534fdc61c6a737b7cd9d" prot="public" virt="non-virtual"><scope>SafeQueue</scope><name>stop</name></member>
-    </listofallmembers>
-  </compounddef>
+        <collaborationgraph>
+            <node id="1">
+                <label>SafeQueue</label>
+                <link refid="classSafeQueue"/>
+            </node>
+        </collaborationgraph>
+        <location file="includes/ZeekLogParser.h" line="96" column="1" bodyfile="includes/ZeekLogParser.h"
+                  bodystart="96" bodyend="107"/>
+        <listofallmembers>
+            <member refid="classSafeQueue_1aab3b907dd0a0ed5eb2cf73d4ba3c48c6" prot="private" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>condition_</name>
+            </member>
+            <member refid="classSafeQueue_1ac6d7f1830ee1b751beb3739d5636f454" prot="public" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>dequeue</name>
+            </member>
+            <member refid="classSafeQueue_1aa28b85e7ca2625feecb4c6674fd64bb4" prot="public" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>enqueue</name>
+            </member>
+            <member refid="classSafeQueue_1a02cacf8f629f6967bec1a714dd72cb17" prot="public" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>is_running</name>
+            </member>
+            <member refid="classSafeQueue_1abeb939317e4d40581d9f753024a08823" prot="private" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>mutex_</name>
+            </member>
+            <member refid="classSafeQueue_1aa5fa7276b07a5201398f63734ed3003e" prot="private" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>queue_</name>
+            </member>
+            <member refid="classSafeQueue_1aee8078aa0fec15a2308e18c87f5cb3a4" prot="private" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>running_</name>
+            </member>
+            <member refid="classSafeQueue_1a2fa92b97d343534fdc61c6a737b7cd9d" prot="public" virt="non-virtual">
+                <scope>SafeQueue</scope>
+                <name>stop</name>
+            </member>
+        </listofallmembers>
+    </compounddef>
 </doxygen>

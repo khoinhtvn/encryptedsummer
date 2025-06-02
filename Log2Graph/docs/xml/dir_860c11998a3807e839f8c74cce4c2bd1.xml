@@ -1,13 +1,16 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
-<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.13.2" xml:lang="en-US">
-  <compounddef id="dir_860c11998a3807e839f8c74cce4c2bd1" kind="dir">
-    <compoundname>cmake-build-debug/CMakeFiles/3.31.6</compoundname>
-    <innerdir refid="dir_007ad4948e580287e9d3cd339e78f152">cmake-build-debug/CMakeFiles/3.31.6/CompilerIdC</innerdir>
-    <innerdir refid="dir_08cec4c655d37361da453b6dde918433">cmake-build-debug/CMakeFiles/3.31.6/CompilerIdCXX</innerdir>
-    <briefdescription>
-    </briefdescription>
-    <detaileddescription>
-    </detaileddescription>
-    <location file="cmake-build-debug/CMakeFiles/3.31.6/"/>
-  </compounddef>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd"
+         version="1.13.2" xml:lang="en-US">
+    <compounddef id="dir_860c11998a3807e839f8c74cce4c2bd1" kind="dir">
+        <compoundname>cmake-build-debug/CMakeFiles/3.31.6</compoundname>
+        <innerdir refid="dir_007ad4948e580287e9d3cd339e78f152">cmake-build-debug/CMakeFiles/3.31.6/CompilerIdC
+        </innerdir>
+        <innerdir refid="dir_08cec4c655d37361da453b6dde918433">cmake-build-debug/CMakeFiles/3.31.6/CompilerIdCXX
+        </innerdir>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <location file="cmake-build-debug/CMakeFiles/3.31.6/"/>
+    </compounddef>
 </doxygen>
