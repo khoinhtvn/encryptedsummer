@@ -104,7 +104,7 @@ class GraphAutoencoder(nn.Module):
 
 class HybridGNNAnomalyDetector(nn.Module):
     def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5,
-                 export_dir=None):
+                 export_dir: str = None):
         super(HybridGNNAnomalyDetector, self).__init__()
         logging.info(
             f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, hidden_dim={hidden_dim}, embedding_dim={embedding_dim}, heads={heads}")
@@ -156,6 +156,11 @@ class HybridGNNAnomalyDetector(nn.Module):
             os.makedirs(self.export_dir, exist_ok=True)
             logging.info(f"Embedding export will occur every {self.export_period} updates, saving to {self.export_dir}")
 
+        # Set device (GPU if available)
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        self.to(self.device)
+        logging.info(f"Using device: {self.device}")
+
     def forward(self, data):
         embedding, node_recon, edge_recon = self.autoencoder(data)
 
@@ -177,7 +182,7 @@ class HybridGNNAnomalyDetector(nn.Module):
 
         return node_scores, edge_scores, global_score, node_recon, edge_recon, embedding, global_embedding
 
-    def update_online(self, data, n_steps=15, recon_weight=0.8, anomaly_weight=0.2):
+    def update_online(self, data: Data, n_steps=15, recon_weight=0.8, anomaly_weight=0.2):
         """Hybrid online update with reconstruction and anomaly scoring loss."""
         self.train()
         logging.info(f"Starting online update for {n_steps} steps.")
@@ -186,6 +191,9 @@ class HybridGNNAnomalyDetector(nn.Module):
             logging.error("`data` is None. Skipping update_online.")
             return 0.0
 
+        # Move data to the device
+        data = data.to(self.device)
+
         # Update running statistics
         if data.x is not None and data.x.numel() > 0:
             self._update_running_stats(self.node_stats, data.x)
@@ -193,19 +201,20 @@ class HybridGNNAnomalyDetector(nn.Module):
             self._update_running_stats(self.edge_stats, data.edge_attr)
 
         # Add current data to replay buffer
-        self._add_to_replay_buffer(data)
+        self._add_to_replay_buffer(data.cpu())  # Store on CPU to save GPU memory
 
         total_loss = 0.0
         successful_steps = 0
 
         for step in range(n_steps):
             logging.debug(f"Online update step: {step + 1}/{n_steps}")
-            batch = self._get_training_batch(data)
+            batch = self._get_training_batch()  # Sample batch from buffer
             if batch is None:
-                logging.warning("No training batch available. Skipping this step.")
+                logging.warning("No training batch available in replay buffer. Skipping this step.")
                 continue
 
             self.optimizer.zero_grad()
+            batch = batch.to(self.device)  # Move batch to device for training
             loss = self._calculate_online_loss(batch, recon_weight, anomaly_weight)
 
             if loss is not None:
@@ -236,18 +245,14 @@ class HybridGNNAnomalyDetector(nn.Module):
             running_stats.update(mean.detach().cpu().numpy())
             running_stats.update(std.detach().cpu().numpy())
 
-    def _get_training_batch(self, current_data):
-        """Retrieves a training batch from the replay buffer or uses current data."""
-        if len(self.replay_buffer) >= self.batch_size:
-            batch = self._sample_from_replay_buffer()
-            logging.debug(f"Sampled batch from replay buffer (size: {batch.num_graphs} graphs).")
-            return batch
-        elif current_data is not None:
-            logging.debug(f"Replay buffer too small (size: {len(self.replay_buffer)}), using current data.")
-            return current_data
-        else:
-            logging.warning("No data available for training batch.")
+    def _get_training_batch(self):
+        """Retrieves a training batch from the replay buffer."""
+        if len(self.replay_buffer) < self.batch_size:
             return None
+        indices = np.random.choice(len(self.replay_buffer), self.batch_size, replace=False)
+        batch = Batch.from_data_list([self.replay_buffer[i] for i in indices])
+        logging.debug(f"Sampled batch from replay buffer (size: {batch.num_graphs} graphs).")
+        return batch
 
     def _calculate_online_loss(self, batch, recon_weight, anomaly_weight):
         """Calculates the combined reconstruction and anomaly loss."""
@@ -255,8 +260,8 @@ class HybridGNNAnomalyDetector(nn.Module):
             node_scores, edge_scores, _, node_recon, edge_recon, _, _ = self(batch)
 
             recon_loss_node = F.mse_loss(node_recon,
-                                         batch.x) if batch.x is not None and batch.x.numel() > 0 else torch.tensor(0.0,
-                                                                                                                   device=self.device)
+                                            batch.x) if batch.x is not None and batch.x.numel() > 0 else torch.tensor(
+                0.0, device=self.device)
             edge_recon_target = torch.ones_like(
                 edge_recon) * 0.5 if edge_recon is not None and edge_recon.numel() > 0 else torch.tensor(0.0,
                                                                                                          device=self.device)
@@ -278,6 +283,10 @@ class HybridGNNAnomalyDetector(nn.Module):
 
     def detect_feature_drift(self, data):
         """Statistical drift detection"""
+        if data.x is None or data.edge_attr is None:
+            logging.warning("Skipping drift detection: Node or edge features are None.")
+            return
+
         current_node_mean = data.x.mean(dim=0)
         current_edge_mean = data.edge_attr.mean(dim=0)
         logging.debug(
@@ -299,8 +308,8 @@ class HybridGNNAnomalyDetector(nn.Module):
                 self.consecutive_drifts = 0
 
         # Update reference statistics
-        self.feature_mean = (current_node_mean, current_edge_mean)
-        self.feature_std = (data.x.std(dim=0), data.edge_attr.std(dim=0))
+        self.feature_mean = (current_node_mean.clone().detach(), current_edge_mean.clone().detach())
+        self.feature_std = (data.x.std(dim=0).clone().detach(), data.edge_attr.std(dim=0).clone().detach())
         logging.debug(
             f"Updated reference mean: node={self.feature_mean[0].cpu().numpy()}, edge={self.feature_mean[1].cpu().numpy()}")
         logging.debug(
@@ -328,59 +337,27 @@ class HybridGNNAnomalyDetector(nn.Module):
             if module.bias is not None:
                 nn.init.zeros_(module.bias)
 
-    def _add_to_replay_buffer(self, data):
-        """Optional: Add subsampled graph to replay buffer"""
-        num_nodes = data.x.size(0)
-        num_edges = data.edge_index.size(1)
-        max_nodes = 100
-        max_edges = 200
-
-        sampled_nodes_indices = torch.randperm(num_nodes)[:min(max_nodes, num_nodes)]
-        node_mask = torch.zeros(num_nodes, dtype=torch.bool)
-        node_mask[sampled_nodes_indices] = True
-
-        edge_mask = (node_mask[data.edge_index[0]] & node_mask[data.edge_index[1]])
-        sampled_edges_indices = torch.where(edge_mask)[0][:min(max_edges, edge_mask.sum())]
-
-        if sampled_edges_indices.numel() > 0 and sampled_nodes_indices.numel() > 0:
-            subgraph_edge_index = data.edge_index[:, sampled_edges_indices]
-
-            # Create mapping from original node indices to subgraph node indices
-            unique_nodes_subgraph = torch.unique(subgraph_edge_index.flatten()).sort().values
-            subgraph_node_map = {orig_idx.item(): new_idx for new_idx, orig_idx in enumerate(unique_nodes_subgraph)}
-
-            # Remap edge indices
-            remapped_edge_index = torch.tensor(
-                [[subgraph_node_map[i.item()] for i in row] for row in subgraph_edge_index], dtype=torch.long)
-
-            subgraph = Data(
-                x=data.x[unique_nodes_subgraph],
-                edge_index=remapped_edge_index,
-                edge_attr=data.edge_attr[sampled_edges_indices] if data.edge_attr is not None else None
-            )
-            self.replay_buffer.append(subgraph)
-            logging.debug(f"Added subsampled graph to replay buffer: {subgraph}")
-        elif num_nodes > 0:
-            # If no edges are left after sampling, add a node-only subgraph
-            subgraph = Data(x=data.x[sampled_nodes_indices])
-            self.replay_buffer.append(subgraph)
-            logging.debug(f"Added node-only subgraph to replay buffer: {subgraph}")
-        else:
-            logging.debug("Skipped adding to replay buffer: no nodes in data.")
+    def _add_to_replay_buffer(self, data: Data):
+        """Adds a Data object to the replay buffer."""
+        logging.debug(f"Adding data to replay buffer. Has edge_index: {hasattr(data, 'edge_index')}")
+        self.replay_buffer.append(data)
+        if len(self.replay_buffer) > self.replay_buffer.maxlen:  # Use .maxlen here
+            self.replay_buffer.popleft()
 
     def _sample_from_replay_buffer(self):
         """Sample a batch from replay buffer"""
         if len(self.replay_buffer) < self.batch_size:
             return None
         indices = np.random.choice(len(self.replay_buffer), self.batch_size, replace=False)
-        batch = Batch.from_data_list([self.replay_buffer[i] for i in indices])
-        logging.debug(f"Sampled batch from replay buffer: {batch}")
+        batch = Batch.from_data_list([self.replay_buffer[i].to(self.device) for i in indices])
+        logging.debug(f"Sampled batch from replay buffer (size: {batch.num_graphs} graphs).")
         return batch
 
-    def detect_anomalies(self, data, threshold=2.5):
+    def detect_anomalies(self, data: Data, threshold=2.5):
         """Detect anomalies with statistical normalization on reconstruction error"""
         self.eval()
         logging.info("Starting anomaly detection.")
+        data = data.to(self.device)
         with torch.no_grad():
             embedding, node_recon, edge_recon = self.autoencoder(data)
 
@@ -415,18 +392,19 @@ class HybridGNNAnomalyDetector(nn.Module):
                 embedding.size(0), dtype=torch.long, device=embedding.device)))).item()
 
             return {
-                'node_anomalies_recon': anomalous_nodes,
-                'edge_anomalies_recon': anomalous_edges,
-                'node_recon_errors': node_recon_error,
-                'edge_recon_errors': edge_recon_error,
-                'node_scores_mlp': node_scores_mlp,
-                'edge_scores_mlp': edge_scores_mlp,
+                'node_anomalies_recon': anomalous_nodes.cpu().numpy(),
+                'edge_anomalies_recon': anomalous_edges.cpu().numpy(),
+                'node_recon_errors': node_recon_error.cpu().numpy(),
+                'edge_recon_errors': edge_recon_error.cpu().numpy(),
+                'node_scores_mlp': node_scores_mlp.cpu().numpy(),
+                'edge_scores_mlp': edge_scores_mlp.cpu().numpy(),
                 'global_anomaly_mlp': global_score_mlp,
                 'embedding': embedding.cpu().numpy()
             }
 
-    def export_embeddings(self, data, filename="embeddings.png", n_components=2, perplexity=30, n_iter=300):
+    def export_embeddings(self, data: Data, filename="embeddings.png", n_components=2, perplexity=30, n_iter=300):
         self.eval()
+        data = data.to(self.device)
         with torch.no_grad():
             embedding, _, _ = self.autoencoder(data)
             embedding_np = embedding.cpu().numpy()
@@ -438,8 +416,8 @@ class HybridGNNAnomalyDetector(nn.Module):
                 logging.error(
                     f"Error during embedding export: n_samples ({n_samples}) is too small for meaningful t-SNE.")
                 return
-
-            tsne = TSNE(n_components=n_components, random_state=42, perplexity=safe_perplexity, n_iter=n_iter)
+            logging.debug(f"Embedding standard deviations before t-SNE: {np.std(embedding_np, axis=0)}")
+            tsne = TSNE(n_components=n_components, random_state=42, perplexity=safe_perplexity, max_iter=n_iter)
             reduced_embeddings = tsne.fit_transform(embedding_np)
 
             plt.figure(figsize=(8, 8))
@@ -450,3 +428,12 @@ class HybridGNNAnomalyDetector(nn.Module):
             plt.savefig(filename)
             plt.close()
             logging.info(f"Embeddings visualization saved to {filename}")
+
+    @property
+    def device(self):
+        return self._device
+
+    @device.setter
+    def device(self, value):
+        self._device = value
+        self.to(value)
