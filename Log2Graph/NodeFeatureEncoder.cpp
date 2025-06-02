@@ -6,7 +6,11 @@
 #include <chrono>
 #include <cmath>
 #include <iostream>
+#include <tuple> // For std::tuple
 
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
 
 const std::vector<std::string> NodeFeatureEncoder::PROTOCOLS = {"tcp", "udp", "icmp", "other"};
 const std::vector<std::string> NodeFeatureEncoder::CONN_STATES = {"S0", "S1", "SF", "REJ", "RSTO", "RSTR", "OTH", "SH", "SHR", "RSTOS0", "RSTRH", "other"};
@@ -83,8 +87,10 @@ NodeFeatureEncoder::NodeFeatureEncoder() {
         "top_proto_1",
         "service_1", "service_2", "service_3", // Assuming 3 service features
         "top_user_agent_1",
-        "first_seen_seconds",
-        "last_seen_seconds",
+        "first_seen_hour_minute_sin",
+        "first_seen_hour_minute_cos",
+        "last_seen_hour_minute_sin",
+        "last_seen_hour_minute_cos",
         "outgoing_connection_ratio",
         "incoming_connection_ratio",
         "unique_remote_ports_connected_to",
@@ -126,15 +132,34 @@ std::vector<float> NodeFeatureEncoder::one_hot_encode(const std::string& value,
     if (it != vocabulary.end()) {
         encoded_vector[it->second] = 1.0f;
     } else {
-         auto other_it = vocabulary.find("other");
+        auto other_it = vocabulary.find("other");
         if (other_it != vocabulary.end()) {
             encoded_vector[other_it->second] = 1.0f;
         } else {
-           std::cerr << "[ERROR - NodeFeatureEncoder] 'other' category not found in vocabulary for value: \"" << value << "\"" << std::endl;
+            std::cerr << "[ERROR - NodeFeatureEncoder] 'other' category not found in vocabulary for value: \"" << value << "\"" << std::endl;
             // Handle this critical error appropriately, perhaps by returning the zero vector or throwing an exception.
         }
     }
     return encoded_vector;
+}
+
+std::pair<double, double> NodeFeatureEncoder::encode_hour_minute_to_circle(long long timestamp) const {
+    if (timestamp == 0) {
+        return {0.0, 0.0};
+    }
+    std::time_t time_t_timestamp = static_cast<std::time_t>(timestamp);
+    std::tm* local_time = std::localtime(&time_t_timestamp);
+    if (local_time) {
+        int hour = local_time->tm_hour;
+        int minute = local_time->tm_min;
+
+        double combined_fraction = (hour * 60.0 + minute) / 1440.0;
+        double angle = 2 * M_PI * combined_fraction;
+
+        return {sin(angle), cos(angle)};
+    } else {
+        return {0.0, 0.0};
+    }
 }
 
 std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNode::NodeFeatures& features, const struct GraphNode::TemporalFeatures& temporal) const {
@@ -172,7 +197,6 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
         service_count++;
     }
 
-
     // 7. top_user_agent_1
     std::vector<std::pair<std::string, int>> sorted_user_agents(features.http_user_agent_counts.begin(), features.http_user_agent_counts.end());
     std::sort(sorted_user_agents.begin(), sorted_user_agents.end(), [](const auto& a, const auto& b) {
@@ -181,13 +205,10 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
 
     // top_user_agent_1 will now already be a category string because http_user_agent_counts stores categories
     std::string top_user_agent_category = sorted_user_agents.empty() ? "Unknown" : sorted_user_agents[0].first;
-
-
     temp_encoding = one_hot_encode(top_user_agent_category, user_agent_vocab_, user_agent_vec_size_);
     encoded_features.insert(encoded_features.end(), temp_encoding.begin(), temp_encoding.end());
 
-
-    // 8. first_seen (Convert to integer where possible)
+    // 8-9. Cyclical encoding for first_seen (Hour and Minute combined)
     long long first_seen_int = 0;
     try {
         std::tm t{};
@@ -199,12 +220,12 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
                 first_seen_int = static_cast<long long>(timeSinceEpoch);
             }
         }
-    } catch (...) {
-        // Keep as 0 if parsing fails
-    }
-    encoded_features.push_back(static_cast<float>(first_seen_int));
+    } catch (...) {}
+    auto [first_seen_sin, first_seen_cos] = encode_hour_minute_to_circle(first_seen_int);
+    encoded_features.push_back(static_cast<float>(first_seen_sin));
+    encoded_features.push_back(static_cast<float>(first_seen_cos));
 
-    // 9. last_seen (Convert to integer where possible)
+    // 10-11. Cyclical encoding for last_seen (Hour and Minute combined)
     long long last_seen_int = 0;
     try {
         std::tm t{};
@@ -216,39 +237,39 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
                 last_seen_int = static_cast<long long>(timeSinceEpoch);
             }
         }
-    } catch (...) {
-        // Keep as 0 if parsing fails
-    }
-    encoded_features.push_back(static_cast<float>(last_seen_int));
+    } catch (...) {}
+    auto [last_seen_sin, last_seen_cos] = encode_hour_minute_to_circle(last_seen_int);
+    encoded_features.push_back(static_cast<float>(last_seen_sin));
+    encoded_features.push_back(static_cast<float>(last_seen_cos));
 
-    // 10. outgoing_connection_ratio
+    // 12. outgoing_connection_ratio
     encoded_features.push_back(static_cast<float>(features.outgoing_connection_ratio()));
 
-    // 11. incoming_connection_ratio
+    // 13. incoming_connection_ratio
     encoded_features.push_back(static_cast<float>(features.incoming_connection_ratio()));
 
-    // 12. unique_remote_ports_connected_to (Convert to integer)
+    // 14. unique_remote_ports_connected_to (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.unique_remote_ports_connected_to()));
 
-    // 13. unique_local_ports_used (Convert to integer)
+    // 15. unique_local_ports_used (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.unique_local_ports_used()));
 
-    // 14. unique_remote_ports_connected_from (Convert to integer)
+    // 16. unique_remote_ports_connected_from (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.remote_ports_connected_from.size()));
 
-    // 15. unique_local_ports_listening_on (Convert to integer)
+    // 17. unique_local_ports_listening_on (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.local_ports_listening_on.size()));
 
-    // 16. ever_connected_to_privileged_port (Convert to integer boolean)
+    // 18. ever_connected_to_privileged_port (Convert to integer boolean)
     encoded_features.push_back(features.connected_to_privileged_port() ? 1.0f : 0.0f);
 
-    // 17. ever_listened_on_privileged_port (Convert to integer boolean)
+    // 19. ever_listened_on_privileged_port (Convert to integer boolean)
     encoded_features.push_back(features.listened_on_privileged_port() ? 1.0f : 0.0f);
 
-    // 18. unique_http_versions_used (Convert to integer)
+    // 20. unique_http_versions_used (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.http_versions_used.size()));
 
-    // 19. most_frequent_http_version
+    // 21. most_frequent_http_version
     std::string most_freq_http_version = "other";
     int max_http_version_count = 0;
     for (const auto& pair : features.http_version_counts) {
@@ -257,16 +278,16 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
             most_freq_http_version = pair.first;
         }
     }
-    // Add this check:
     if (features.http_version_counts.empty()) {
         most_freq_http_version = "other";
     }
-   temp_encoding = one_hot_encode(most_freq_http_version, http_version_vocab_, http_version_vec_size_);
+    temp_encoding = one_hot_encode(most_freq_http_version, http_version_vocab_, http_version_vec_size_);
     encoded_features.insert(encoded_features.end(), temp_encoding.begin(), temp_encoding.end());
-    // 20. unique_http_status_codes_seen (Convert to integer)
+
+    // 22. unique_http_status_codes_seen (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.http_status_code_counts.size()));
 
-    // 21. has_http_error_4xx (Convert to integer boolean)
+    // 23. has_http_error_4xx (Convert to integer boolean)
     bool has_4xx = false;
     for (const auto& code : features.http_status_code_counts) {
         if (code.first >= 400 && code.first < 500) {
@@ -276,7 +297,7 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
     }
     encoded_features.push_back(has_4xx ? 1.0f : 0.0f);
 
-    // 22. has_http_error_5xx (Convert to integer boolean)
+    // 24. has_http_error_5xx (Convert to integer boolean)
     bool has_5xx = false;
     for (const auto& code : features.http_status_code_counts) {
         if (code.first >= 500 && code.first < 600) {
@@ -286,11 +307,10 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
     }
     encoded_features.push_back(has_5xx ? 1.0f : 0.0f);
 
-    // 23. unique_ssl_versions_used (Convert to integer)
-
+    // 25. unique_ssl_versions_used (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.ssl_versions_used.size()));
 
-    // 24. most_frequent_ssl_version
+    // 26. most_frequent_ssl_version
     std::string most_freq_ssl_version = "other";
     int max_ssl_version_count = 0;
     for (const auto& version : features.ssl_version_counts) {
@@ -302,16 +322,16 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
     temp_encoding = one_hot_encode(most_freq_ssl_version, ssl_version_vocab_, ssl_version_vec_size_);
     encoded_features.insert(encoded_features.end(), temp_encoding.begin(), temp_encoding.end());
 
-    // 25. unique_ssl_ciphers_used (Convert to integer)
+    // 27. unique_ssl_ciphers_used (Convert to integer)
     encoded_features.push_back(static_cast<float>(features.ssl_ciphers_used.size()));
 
-    // 26. has_ssl_resumption (Convert to integer boolean)
+    // 28. has_ssl_resumption (Convert to integer boolean)
     encoded_features.push_back(features.ssl_resumption_count > 0 ? 1.0f : 0.0f);
 
-    // 27. has_ssl_server_name (Convert to integer boolean)
+    // 29. has_ssl_server_name (Convert to integer boolean)
     encoded_features.push_back(features.ever_ssl_server_name_present.load() ? 1.0f : 0.0f);
 
-    // 28. has_ssl_history (Convert to integer boolean)
+    // 30. has_ssl_history (Convert to integer boolean)
     encoded_features.push_back(features.ever_ssl_history_present.load() ? 1.0f : 0.0f);
 
     return encoded_features;
@@ -319,33 +339,35 @@ std::vector<float> NodeFeatureEncoder::encode_node_features(const struct GraphNo
 
 std::vector<std::string> NodeFeatureEncoder::get_feature_names_base() const {
     std::vector<std::string> names;
-    names.push_back("most_freq_proto");         // 1
-    names.push_back("most_freq_conn_state");    // 2
-    names.push_back("top_proto_1");             // 3
-    names.push_back("service_1");             // 4
-    names.push_back("service_2");             // 5
-    names.push_back("service_3");             // 6
-    names.push_back("top_user_agent_1");        // 7
-    names.push_back("first_seen_seconds");      // 8
-    names.push_back("last_seen_seconds");       // 9
-    names.push_back("outgoing_connection_ratio");// 10
-    names.push_back("incoming_connection_ratio");// 11
-    names.push_back("unique_remote_ports_connected_to"); // 12
-    names.push_back("unique_local_ports_used");  // 13
-    names.push_back("unique_remote_ports_connected_from"); // 14
-    names.push_back("unique_local_ports_listening_on");// 15
-    names.push_back("ever_connected_to_privileged_port");// 16
-    names.push_back("ever_listened_on_privileged_port");// 17
-    names.push_back("unique_http_versions_used"); // 18
-    names.push_back("most_freq_http_version");    // 19
-    names.push_back("unique_http_status_codes_seen");// 20
-    names.push_back("has_http_error_4xx");      // 21
-    names.push_back("has_http_error_5xx");      // 22
-    names.push_back("unique_ssl_versions_used"); // 23
-    names.push_back("most_freq_ssl_version");   // 24
-    names.push_back("unique_ssl_ciphers_used"); // 25
-    names.push_back("has_ssl_resumption");      // 26
-    names.push_back("has_ssl_server_name");     // 27
-    names.push_back("has_ssl_history");         // 28
+    names.push_back("most_freq_proto");             // 1
+    names.push_back("most_freq_conn_state");         // 2
+    names.push_back("top_proto_1");                 // 3
+    names.push_back("service_1");                   // 4
+    names.push_back("service_2");                   // 5
+    names.push_back("service_3");                   // 6
+    names.push_back("top_user_agent_1");            // 7
+    names.push_back("first_seen_hour_minute_sin");  // 8
+    names.push_back("first_seen_hour_minute_cos");  // 9
+    names.push_back("last_seen_hour_minute_sin");   // 10
+    names.push_back("last_seen_hour_minute_cos");    // 11
+    names.push_back("outgoing_connection_ratio");    // 12
+    names.push_back("incoming_connection_ratio");    // 13
+    names.push_back("unique_remote_ports_connected_to"); // 14
+    names.push_back("unique_local_ports_used");    // 15
+    names.push_back("unique_remote_ports_connected_from"); // 16
+    names.push_back("unique_local_ports_listening_on");// 17
+    names.push_back("ever_connected_to_privileged_port");// 18
+    names.push_back("ever_listened_on_privileged_port");// 19
+    names.push_back("unique_http_versions_used");   // 20
+    names.push_back("most_freq_http_version");       // 21
+    names.push_back("unique_http_status_codes_seen");// 22
+    names.push_back("has_http_error_4xx");         // 23
+    names.push_back("has_http_error_5xx");         // 24
+    names.push_back("unique_ssl_versions_used");    // 25
+    names.push_back("most_freq_ssl_version");        // 26
+    names.push_back("unique_ssl_ciphers_used");    // 27
+    names.push_back("has_ssl_resumption");         // 28
+    names.push_back("has_ssl_server_name");        // 29
+    names.push_back("has_ssl_history");            // 30
     return names;
 }

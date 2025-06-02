@@ -32,6 +32,9 @@ public:
     std::vector<float> one_hot_encode(const std::string& value,
                                      const std::map<std::string, int>& vocabulary,
                                      size_t vector_size) const;
+
+    std::pair<double, double> encode_hour_minute_to_circle(long long timestamp) const;
+
     std::vector<float> encode_node_features(const struct GraphNode::NodeFeatures& features, const struct GraphNode::TemporalFeatures& temporal) const;
     std::vector<std::string> get_feature_names_base() const;
     /**

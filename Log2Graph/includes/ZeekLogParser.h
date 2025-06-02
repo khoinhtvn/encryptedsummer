@@ -8,7 +8,7 @@
  */
 
 // Created by lu on 4/25/25.
-// Modified for parallel processing.
+// Modified for parallel processing and new file monitoring.
 
 #ifndef ZEEKLOGPARSER_H
 #define ZEEKLOGPARSER_H
@@ -122,6 +122,7 @@ public:
     void enqueue(LogEntry entry);
     LogEntry dequeue();
     void stop();
+    void stop_waiting(); // Add this method
     bool is_running() const;
     bool is_empty() const; // New method
 private:
@@ -157,19 +158,24 @@ public:
     ~ZeekLogParser();
 
     /**
-     * @brief Starts monitoring the log directory and processing files.
+     * @brief Starts monitoring the log directory and processing files, including new files.
      *
      * This method discovers interesting log files at startup and launches a dedicated
-     * monitoring thread for each. It also starts the worker threads for processing.
+     * monitoring thread for each. It also starts a separate thread to periodically
+     * scan for new interesting log files and begin monitoring them. Finally, it starts
+     * the worker threads for processing.
      */
     void start_monitoring();
 
     /**
      * @brief Stops the log monitoring and processing.
      *
-     * Signals all monitoring and worker threads to stop and waits for them to join.
+     * Signals all monitoring and worker threads to stop and waits for them to join,
+     * including the new file monitoring thread.
      */
     void stop_monitoring();
+
+    bool isRunning() const;
 
 private:
     /**
@@ -227,11 +233,11 @@ private:
      * @brief Flag to indicate if monitoring is running.
      * Protected by `running_mutex_`.
      */
-    bool running_ = false;
+    std::atomic<bool> running_ = false;
     /**
      * @brief Mutex to protect access to the `running_` flag.
      */
-    std::mutex running_mutex_;
+    mutable std::mutex running_mutex_; // Made mutable
     /**
      * @brief Condition variable to notify monitoring threads about changes to `running_` flag.
      */
@@ -271,13 +277,13 @@ private:
      */
     std::mutex uid_data_mutex_;
 
-    // New members for time-based aggregation
+    // New members for time-based aggregation and new file monitoring
     std::unordered_map<std::string, std::chrono::steady_clock::time_point> uid_last_update_time_;
     std::mutex uid_last_update_time_mutex_;
     std::thread processing_thread_;
     std::atomic<bool> processing_thread_running_;
     std::condition_variable processing_cv_;
-
+    std::thread new_file_monitor_thread_; // Thread to monitor for new files
 
     /**
      * @brief Monitors a single log file continuously for appended content.

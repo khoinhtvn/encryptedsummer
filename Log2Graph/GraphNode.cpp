@@ -493,7 +493,6 @@ std::string GraphNode::to_dot_string_encoded() const {
     std::vector<std::string> feature_names = NodeFeatureEncoder::get_feature_names();
 
     if (!encoded_features_local.empty()) {
-        ss << "encoded_feature_count=" << feature_names.size();
         size_t encoded_index = 0;
         for (const auto& feature_name : feature_names) {
            ss << ", " << feature_name << "=";

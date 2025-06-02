@@ -1,5 +1,5 @@
 /**
-* @file ZeekLogParser.cpp
+ * @file ZeekLogParser.cpp
  * @brief Implementation file for the ZeekLogParser class.
  */
 
@@ -72,6 +72,12 @@ void SafeQueue::stop() {
     condition_.notify_all();
 }
 
+void SafeQueue::stop_waiting() {
+    std::unique_lock<std::mutex> lock(mutex_);
+    running_ = false;
+    condition_.notify_all();
+}
+
 bool SafeQueue::is_running() const {
     std::lock_guard<std::mutex> lock(mutex_);
     return running_;
@@ -98,24 +104,56 @@ void ZeekLogParser::start_monitoring() {
         running_ = true;
     }
 
-    // Discover interesting files and launch a monitoring thread for each unique file
+    auto monitor_new_files = [this]() {
+        while (isRunning()) {
+            // Discover all interesting files in the directory
+            for (const auto& entry : fs::directory_iterator(log_directory_)) {
+                if (entry.is_regular_file() && entry.path().extension() == ".log" && is_interesting_log_file(entry.path().string())) {
+                    std::string file_path = entry.path().string();
+                    {
+                        std::lock_guard<std::mutex> lock(tracked_files_mutex_);
+                        if (tracked_files_.find(file_path) == tracked_files_.end()) {
+                            tracked_files_[file_path] = FileState(file_path);
+                            tracked_files_[file_path].processed_size = 0;
+                            {
+                                std::lock_guard<std::mutex> lock(monitor_threads_mutex_);
+                                monitor_threads_.emplace_back(&ZeekLogParser::monitor_file, this, file_path);
+                            }
+                            std::cout << "[New File Monitor] Started monitoring for new file: " << file_path << std::endl;
+                        }
+                    }
+                }
+            }
+            // Wait for a certain period before checking for new files again
+            std::this_thread::sleep_for(std::chrono::seconds(5)); // Adjust the interval as needed
+        }
+        std::cout << "[New File Monitor] Exiting." << std::endl;
+    };
+
+    // Start the initial discovery and monitoring of existing files
     for (const auto &entry : fs::directory_iterator(log_directory_)) {
         if (entry.is_regular_file() && entry.path().extension() == ".log" && is_interesting_log_file(entry.path().string())) {
             std::string file_path = entry.path().string();
-            std::lock_guard<std::mutex> lock(tracked_files_mutex_);
-            if (tracked_files_.find(file_path) == tracked_files_.end()) {
-                tracked_files_[file_path] = FileState(file_path);
-                tracked_files_[file_path].processed_size = 0;
-                {
-                    std::lock_guard<std::mutex> lock(monitor_threads_mutex_);
-                    monitor_threads_.emplace_back(&ZeekLogParser::monitor_file, this, file_path);
+            {
+                std::lock_guard<std::mutex> lock(tracked_files_mutex_);
+                if (tracked_files_.find(file_path) == tracked_files_.end()) {
+                    tracked_files_[file_path] = FileState(file_path);
+                    tracked_files_[file_path].processed_size = 0;
+                    {
+                        std::lock_guard<std::mutex> lock(monitor_threads_mutex_);
+                        monitor_threads_.emplace_back(&ZeekLogParser::monitor_file, this, file_path);
+                    }
+                    std::cout << "[Main Thread] Started monitoring for: " << file_path << std::endl;
+                } else {
+                    std::cout << "[Main Thread] Already monitoring: " << file_path << std::endl;
                 }
-                std::cout << "[Main Thread] Started monitoring for: " << file_path << std::endl;
-            } else {
-                std::cout << "[Main Thread] Already monitoring: " << file_path << std::endl;
             }
         }
     }
+
+    // Start a separate thread to periodically check for new files
+    new_file_monitor_thread_ = std::thread(monitor_new_files);
+    std::cout << "[Main Thread] Started new file monitoring thread." << std::endl;
 
     // Start worker threads for processing enqueued log entries
     for (int i = 0; i < num_worker_threads_; ++i) {
@@ -144,7 +182,7 @@ void ZeekLogParser::stop_monitoring() {
         running_ = false; // Signal all threads to stop
     }
     running_cv_.notify_all(); // Notify monitoring threads waiting on condition variable
-    entry_queue_.stop();      // Signal the SafeQueue to stop and unblock worker threads
+    entry_queue_.stop();       // Signal the SafeQueue to stop and unblock worker threads
 
     // Signal processing thread to stop and join
     {
@@ -153,6 +191,12 @@ void ZeekLogParser::stop_monitoring() {
         processing_thread_running_ = false;
     }
     processing_cv_.notify_one(); // Notify processing thread to wake up and check its running state
+
+    // Stop and join the new file monitoring thread
+    if (new_file_monitor_thread_.joinable()) {
+        new_file_monitor_thread_.join();
+        std::cout << "[Main Thread] Stopped new file monitoring thread." << std::endl;
+    }
 
     // Join all monitoring threads
     {
@@ -178,6 +222,11 @@ void ZeekLogParser::stop_monitoring() {
         processing_thread_.join();
     }
     std::cout << "[Main Thread] Processing thread joined." << std::endl;
+}
+
+bool ZeekLogParser::isRunning() const {
+    std::lock_guard<std::mutex> lock(running_mutex_);
+    return running_;
 }
 
 bool ZeekLogParser::is_interesting_log_file(const std::string& filename) const {
