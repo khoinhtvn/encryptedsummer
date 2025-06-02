@@ -25,15 +25,14 @@ add_executable(Log2Graph main.cpp
         includes/LogMonitor.h
         GraphExporter.cpp
         includes/GraphExporter.h
-        includes/GraphUpdateQueue.h
         includes/GraphNode.h
-        includes/GraphEdge.h
         includes/TrafficGraph.h
         GraphNode.cpp
         TrafficGraph.cpp
         EdgeFeatureEncoder.cpp
         includes/EdgeFeatureEncoder.h
-        GraphEdge.cpp
         includes/NodeFeatureEncoder.h
-        NodeFeatureEncoder.cpp)
+        NodeFeatureEncoder.cpp
+        includes/AggregatedGraphEdge.h
+        AggregatedGraphEdge.cpp)
 

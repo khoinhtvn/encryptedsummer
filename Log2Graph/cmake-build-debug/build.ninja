@@ -97,14 +97,14 @@ build CMakeFiles/Log2Graph.dir/EdgeFeatureEncoder.cpp.o: CXX_COMPILER__Log2Graph
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
-build CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/GraphEdge.cpp || cmake_object_order_depends_target_Log2Graph
-  DEP_FILE = CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o.d
+build CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/NodeFeatureEncoder.cpp || cmake_object_order_depends_target_Log2Graph
+  DEP_FILE = CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o.d
   FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
 
-build CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/NodeFeatureEncoder.cpp || cmake_object_order_depends_target_Log2Graph
-  DEP_FILE = CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o.d
+build CMakeFiles/Log2Graph.dir/AggregatedGraphEdge.cpp.o: CXX_COMPILER__Log2Graph_unscanned_Debug /home/lu/Documents/encryptedsummer/Log2Graph/AggregatedGraphEdge.cpp || cmake_object_order_depends_target_Log2Graph
+  DEP_FILE = CMakeFiles/Log2Graph.dir/AggregatedGraphEdge.cpp.o.d
   FLAGS = -O0 -g  -static-libasan -std=gnu++20 -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles/Log2Graph.dir
   OBJECT_FILE_DIR = CMakeFiles/Log2Graph.dir
@@ -117,7 +117,7 @@ build CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o: CXX_COMPILER__Log2Graph
 #############################################
 # Link the executable Log2Graph
 
-build Log2Graph: CXX_EXECUTABLE_LINKER__Log2Graph_Debug CMakeFiles/Log2Graph.dir/main.cpp.o CMakeFiles/Log2Graph.dir/ZeekLogParser.cpp.o CMakeFiles/Log2Graph.dir/GraphBuilder.cpp.o CMakeFiles/Log2Graph.dir/LogMonitor.cpp.o CMakeFiles/Log2Graph.dir/GraphExporter.cpp.o CMakeFiles/Log2Graph.dir/GraphNode.cpp.o CMakeFiles/Log2Graph.dir/TrafficGraph.cpp.o CMakeFiles/Log2Graph.dir/EdgeFeatureEncoder.cpp.o CMakeFiles/Log2Graph.dir/GraphEdge.cpp.o CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o
+build Log2Graph: CXX_EXECUTABLE_LINKER__Log2Graph_Debug CMakeFiles/Log2Graph.dir/main.cpp.o CMakeFiles/Log2Graph.dir/ZeekLogParser.cpp.o CMakeFiles/Log2Graph.dir/GraphBuilder.cpp.o CMakeFiles/Log2Graph.dir/LogMonitor.cpp.o CMakeFiles/Log2Graph.dir/GraphExporter.cpp.o CMakeFiles/Log2Graph.dir/GraphNode.cpp.o CMakeFiles/Log2Graph.dir/TrafficGraph.cpp.o CMakeFiles/Log2Graph.dir/EdgeFeatureEncoder.cpp.o CMakeFiles/Log2Graph.dir/NodeFeatureEncoder.cpp.o CMakeFiles/Log2Graph.dir/AggregatedGraphEdge.cpp.o
   DEP_FILE = CMakeFiles/Log2Graph.dir/link.d
   FLAGS = -O0 -g  -static-libasan
   LINK_FLAGS = -static-libasan   -Wl,--dependency-file=CMakeFiles/Log2Graph.dir/link.d

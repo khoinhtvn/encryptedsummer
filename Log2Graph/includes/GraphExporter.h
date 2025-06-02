@@ -1,113 +1,96 @@
-//
-// Created by lu on 4/28/25.
-//
+#ifndef GRAPHEXPORTER_H
+#define GRAPHEXPORTER_H
 
-#ifndef GRAPH_EXPORTER_H
-#define GRAPH_EXPORTER_H
+#include <vector>   // For using std::vector
+#include <string>   // For using std::string
+#include <memory>   // For using std::shared_ptr
+#include <fstream>  // For file stream operations (std::ofstream)
 
-#include "GraphBuilder.h"
-#include <string>
-#include <memory>
-#include <future>
-#include <fstream> // For file output
+#include "TrafficGraph.h"    // For accessing the TrafficGraph data structure
+#include "GraphNode.h"       // For representing nodes in the graph
+#include "AggregatedGraphEdge.h" // For representing aggregated edges in the graph
 
 /**
- * @brief Class responsible for exporting the network traffic graph with encoded features.
- *
- * The `GraphExporter` class takes a `TrafficGraph` object and exports its nodes and
- * edges with their encoded features to a DOT file.
+ * @brief Class responsible for exporting the network traffic graph to various formats,
+ * currently focusing on the DOT language for graph visualization.
  */
 class GraphExporter {
 public:
     /**
-     * @brief Constructor for the GraphExporter.
+     * @brief Default constructor for the GraphExporter.
      */
     GraphExporter();
 
     /**
-     * @brief Destructor for the GraphExporter.
+     * @brief Virtual destructor for proper cleanup of resources.
      */
     ~GraphExporter();
 
     /**
-     * @brief Exports the full traffic graph with encoded node and edge features
-     * to a DOT file in a separate thread.
+     * @brief Exports the entire traffic graph (nodes and aggregated edges) to a DOT file asynchronously.
      *
-     * This method takes a `TrafficGraph`, retrieves the encoded string representation
-     * of each node and edge, and saves it to the specified output file
-     * (defaulting to "full_graph_encoded.dot") in a separate thread.
+     * The export operation is performed in a separate thread to avoid blocking the main thread.
+     * The output includes encoded features of nodes and edges.
      *
-     * @param graph The `TrafficGraph` object to export.
-     * @param output_file The name of the output DOT file (default: "full_graph_encoded.dot").
+     * @param graph The TrafficGraph object to export.
+     * @param output_file The path to the file where the DOT representation will be written.
      */
-    void export_full_graph_encoded_async(const TrafficGraph &graph,
-                                          const std::string &output_file = "full_graph_encoded.dot");
+    void export_full_graph_encoded_async(const TrafficGraph &graph, const std::string &output_file);
 
-    /**
-     * @brief Exports the encoded incremental updates of the graph to a DOT file
-     * in a separate thread.
-     *
-     * This method retrieves the latest incremental updates from the GraphBuilder,
-     * and saves the encoded representation of the created/updated nodes and edges
-     * to a specified DOT file in a separate thread. The filename includes a
-     * timestamp (UTC) to ensure uniqueness for each incremental update export.
-     *
-     * @param updates A vector of `GraphUpdate` objects representing the incremental changes
-     * to the graph. This is typically obtained from the GraphBuilder.
-     * @param output_file The full path and filename for the output DOT file.
-     * It defaults to "update_encoded.dot". The function call
-     * constructs a more specific path including the base
-     * `export_path`, a separator, the prefix "nw_graph_update_",
-     * a UTC timestamp, and the ".dot" extension.
-     */
-    void export_incremental_update_encoded_async(std::vector<GraphUpdate> updates,
-                                                  const std::string &output_file = "update_encoded.dot");
 
 private:
     /**
-     * @brief Worker function to perform the full graph export with encoded features.
+     * @brief Worker function executed in a separate thread to export the full graph to a DOT file.
      *
-     * @param graph The `TrafficGraph` object to export.
-     * @param output_file The name of the output DOT file.
+     * @param graph The TrafficGraph object to export (passed by reference).
+     * @param output_file The path to the output DOT file.
      */
-    void export_full_graph_worker(const TrafficGraph &graph,
-                                   const std::string &output_file);
+    void export_full_graph_worker(const TrafficGraph &graph, const std::string &output_file);
+
 
     /**
-     * @brief Worker function to export incremental updates with encoded features
-     * to a DOT file.
+     * @brief Exports the entire traffic graph (nodes and aggregated edges) to a DOT file.
      *
-     * @param updates A vector of `GraphUpdate` objects representing the incremental changes.
-     * @param output_file The full path and filename for the output DOT file.
+     * This is the synchronous version of the full graph export.
+     *
+     * @param graph The TrafficGraph object to export.
+     * @param filename The path to the output DOT file.
      */
-    void export_incremental_update_worker(std::vector<GraphUpdate> updates,
-                                            const std::string &output_file);
+    void export_to_dot_encoded(const TrafficGraph &graph, const std::string &filename);
 
     /**
-     * @brief Writes the encoded string representation of a node to the output stream.
+     * @brief Writes the DOT representation of a single GraphNode (including encoded features) to the output file stream.
      *
-     * @param node The shared pointer to the GraphNode to write.
-     * @param ofstream The output file stream.
+     * @param node A shared pointer to the GraphNode to write.
+     * @param ofstream A reference to the output file stream.
      */
     void write_node_encoded_to_file(const std::shared_ptr<GraphNode> &node, std::ofstream &ofstream);
 
     /**
-     * @brief Writes the encoded string representation of an edge to the output stream.
+     * @brief Writes the DOT representation of a single GraphEdge (including encoded features) to the output file stream.
      *
-     * @param edge The shared pointer to the GraphEdge to write.
-     * @param ofstream The output file stream.
+     * This is for legacy individual edges.
+     *
+     * @param edge A shared pointer to the GraphEdge to write.
+     * @param ofstream A reference to the output file stream.
      */
-    void write_edge_encoded_to_file(const std::shared_ptr<GraphEdge> &edge, std::ofstream &ofstream);
+    void write_edge_encoded_to_file(const std::shared_ptr<AggregatedGraphEdge> &edge, std::ofstream &ofstream);
 
     /**
-     * @brief Exports the `TrafficGraph` structure to a DOT file with encoded features.
+     * @brief Writes the DOT representation of a single AggregatedGraphEdge (including aggregated information and potentially features) to the output file stream.
      *
-     * @param graph The `TrafficGraph` to export.
-     * @param filename The name of the output DOT file.
+     * @param edge A shared pointer to the AggregatedGraphEdge to write.
+     * @param ofstream A reference to the output file stream.
      */
-    void export_to_dot_encoded(const TrafficGraph &graph, const std::string &filename);
+    void write_aggregated_edge_encoded_to_file(const std::shared_ptr<AggregatedGraphEdge> &edge, std::ofstream &ofstream);
 
+    /**
+     * @brief Escapes special characters in a string so it can be safely used within a DOT language label.
+     *
+     * @param str The input string to escape.
+     * @return The escaped string.
+     */
     std::string escape_dot_string(const std::string &str);
 };
 
-#endif // GRAPH_EXPORTER_H
+#endif // GRAPHEXPORTER_H

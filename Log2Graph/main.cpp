@@ -14,7 +14,6 @@
 #include "includes/GraphBuilder.h"
 #include "includes/GraphExporter.h"
 #include "includes/LogMonitor.h"
-#include "includes/RealTimeAnomalyDetector.h"
 
 /**
  * @brief Main function of the application.
