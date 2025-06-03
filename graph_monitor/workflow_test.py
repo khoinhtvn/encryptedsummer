@@ -13,28 +13,33 @@ from visualization import *
 from utils import *
 
 
-def process_single_update(filepath, main_graph):
-    """Processes a single graph update file and updates the main graph."""
-    logging.info(f"Processing update file: {filepath}")
-    if main_graph is None:
-        initial_graph = dot_to_nx(filepath)
-        pytorch_data = nx_to_pyg(initial_graph, node_scaling='none', edge_scaling='none')
-        logging.info(
-            f"Initialized main graph with {initial_graph.number_of_nodes()} nodes and {initial_graph.number_of_edges()} edges.")
-        return initial_graph, pytorch_data
-    else:
-        updated_graph = update_nx_graph(main_graph, filepath)
-        pytorch_data = nx_to_pyg(updated_graph, node_scaling='none', edge_scaling='none')
-        logging.info(
-            f"Updated main graph to {updated_graph.number_of_nodes()} nodes and {updated_graph.number_of_edges()} edges.")
-        return updated_graph, pytorch_data
+def process_single_update(filepath):
+    logging.info(f"Processing update from: {filepath}")
+    graph = dot_to_nx(filepath)
+
+    # Initialize the global dictionary if it hasn't been already (though the import should handle this)
+    if not 'edge_categorical_encoders' in globals():
+        global edge_categorical_encoders
+        edge_categorical_encoders = {}
+
+    pytorch_data = nx_to_pyg(graph, node_scaling='standard', edge_scaling='standard')
+    return graph, pytorch_data
 
 
 def process_existing_directory(directory, model_save_path, stats_save_path, anomaly_log_path,
-                               export_period_updates=50, visualization_path=None):
+                               export_period_updates=50, visualization_path=None, train_mode=False):
     """
     Processes all .dot files in the specified directory, updating the graph and training the model
     sequentially for each file.
+
+    Args:
+        directory (str): Path to the directory containing .dot files.
+        model_save_path (str): Path to save the model checkpoint.
+        stats_save_path (str): Path to save the running statistics.
+        anomaly_log_path (str): Path to save the anomaly logs.
+        export_period_updates (int): Frequency (in number of updates) to export embeddings.
+        visualization_path (str, optional): Path to save visualizations. Defaults to None.
+        train_mode (bool): If True, performs more extensive initial training. Defaults to False.
     """
     all_files = [f for f in os.listdir(directory) if os.path.isfile(os.path.join(directory, f)) and f.endswith('.dot')]
     files_with_timestamps = []
@@ -56,16 +61,16 @@ def process_existing_directory(directory, model_save_path, stats_save_path, anom
     export_counter = 0
 
     # Training parameters
-    initial_training_epochs = 50  # Only for first training
-    online_update_steps = 25  # For subsequent updates
+    initial_training_epochs = 100 if train_mode else 50  # More epochs if train_mode is True
+    online_update_steps = 50 if train_mode else 25  # More steps if train_mode is True
 
-    logging.info(f"Starting processing of existing directory: {directory}")
+    logging.info(f"Starting processing of existing directory: {directory}, Train Mode: {train_mode}")
 
     for timestamp_dt, filepath, filename in files_with_timestamps:
         logging.info(f"\n--- Processing file: {filename} (Timestamp: {timestamp_dt}) ---")
 
         # Process the current update file
-        main_graph, main_data = process_single_update(filepath, main_graph)
+        main_graph, main_data = process_single_update(filepath)
         processed_count += 1
 
         if main_data is not None:
@@ -73,8 +78,17 @@ def process_existing_directory(directory, model_save_path, stats_save_path, anom
             if gnn_model is None:
                 node_feature_dim = main_data.x.size(1)
                 edge_feature_dim = main_data.edge_attr.size(1) if main_data.edge_attr is not None else 0
-                gnn_model = HybridGNNAnomalyDetector(node_feature_dim, edge_feature_dim,
-                                                     export_dir=visualization_path)
+                gnn_model = HybridGNNAnomalyDetector(
+                        node_feature_dim=node_feature_dim,
+                        edge_feature_dim=edge_feature_dim,
+                        hidden_dim=128,
+                        embedding_dim=64,
+                        num_gat_layers=3,
+                        gat_heads=4,
+                        recon_loss_type='mse',  # Or 'l1'
+                        edge_recon_loss_type='bce', # Or 'mse', 'l1'
+                        batch_size=8
+                    )
                 logging.info(f"Initialized Hybrid GNN (node_dim={node_feature_dim}, edge_dim={edge_feature_dim})")
 
                 # Initial training
