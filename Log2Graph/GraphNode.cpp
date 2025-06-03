@@ -10,6 +10,7 @@
 #include <sstream>
 #include <iomanip>
 #include <iostream>
+#include <unordered_set>
 
 #include "includes/EdgeFeatureEncoder.h"
 
@@ -491,26 +492,79 @@ std::string GraphNode::to_dot_string_encoded() const {
     std::vector<float> encoded_features_local = encoded_features;
     std::vector<std::string> feature_names = NodeFeatureEncoder::get_feature_names();
 
+    // Define the set of features to exclude from the DOT output
+    static const std::unordered_set<std::string> EXCLUDED_FEATURES = {
+        "incoming_connection_ratio",
+        "outgoing_connection_ratio",
+        "unique_remote_ports_connected_to",
+        "unique_local_ports_used",
+        "unique_remote_ports_connected_from",
+        "unique_local_ports_listening_on",
+        "ever_connected_to_privileged_port",
+        "ever_listened_on_privileged_port",
+        "has_http_error_4xx",
+        "has_http_error_5xx",
+        "unique_http_status_codes_seen",
+        "unique_http_versions_used",
+        "most_freq_proto"
+    };
+
     if (!encoded_features_local.empty()) {
         size_t encoded_index = 0;
+        bool first_feature_printed = true; // Flag to manage commas
+
         for (const auto& feature_name : feature_names) {
-            if (encoded_index > 0) {
+            // Determine the size of the current feature's encoded part
+            size_t current_feature_vec_size = 1; // Default for scalar features
+            if (feature_name == "most_freq_proto" || feature_name == "top_proto_1") {
+                current_feature_vec_size = NodeFeatureEncoder::PROTOCOLS.size();
+            } else if (feature_name == "most_freq_conn_state") {
+                current_feature_vec_size = NodeFeatureEncoder::CONN_STATES.size();
+            } else if (feature_name.find("service") != std::string::npos) {
+                current_feature_vec_size = NodeFeatureEncoder::SERVICES.size();
+            } else if (feature_name == "top_user_agent_1") {
+                current_feature_vec_size = NodeFeatureEncoder::USER_AGENTS.size();
+            } else if (feature_name == "most_freq_http_version") {
+                current_feature_vec_size = NodeFeatureEncoder::HTTP_VERSIONS.size();
+            } else if (feature_name == "most_freq_ssl_version") {
+                current_feature_vec_size = NodeFeatureEncoder::SSL_VERSIONS.size();
+            }
+            // For boolean flags like 'ever_ssl_curve_present', 'has_ssl_resumption' etc.,
+            // and numerical values like 'first_seen_seconds', 'total_orig_bytes',
+            // 'unique_ssl_versions_used', 'unique_ssl_ciphers_used',
+            // 'ssl_resumption_count', 'ssl_established_count',
+            // 'historical_total_orig_bytes', 'historical_total_resp_bytes',
+            // 'historical_total_connections', 'activity_score',
+            // 'avg_packet_size_sent', 'avg_packet_size_received',
+            // 'total_connections_initiated', 'total_connections_received',
+            // 'degree', 'in_degree', 'out_degree', 'total_orig_pkts', 'total_resp_pkts',
+            // the size is 1.
+
+            // Check if the current feature should be excluded
+            if (EXCLUDED_FEATURES.count(feature_name)) {
+                std::cout << "[DEBUG - DOT] Skipping excluded feature: " << feature_name << std::endl;
+                encoded_index += current_feature_vec_size; // Still advance index
+                continue; // Skip to the next feature
+            }
+
+            // Add comma before adding the feature, unless it's the very first one printed
+            if (!first_feature_printed) {
                 ss << ", ";
             }
+            first_feature_printed = false; // After the first feature, set to false
+
             ss << feature_name << "=";
 
             if (feature_name == "most_freq_proto" || feature_name == "top_proto_1") {
-                if (feature_name == "top_proto_1") {
-                    int hot_index = -1;
-                    for (size_t i = 0; i < NodeFeatureEncoder::PROTOCOLS.size(); ++i) {
-                        if (encoded_features_local[encoded_index + i] == 1.0f) {
-                            hot_index = static_cast<int>(i);
-                            break;
-                        }
+                int hot_index = -1;
+                for (size_t i = 0; i < NodeFeatureEncoder::PROTOCOLS.size(); ++i) {
+                    if (encoded_features_local[encoded_index + i] == 1.0f) {
+                        hot_index = static_cast<int>(i);
+                        break;
                     }
-                    ss << hot_index;
                 }
-                encoded_index += NodeFeatureEncoder::PROTOCOLS.size();
+                ss << hot_index;
+                // encoded_index += NodeFeatureEncoder::PROTOCOLS.size(); // Handled outside the if/else if chain
             } else if (feature_name == "most_freq_conn_state") {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::CONN_STATES.size(); ++i) {
@@ -520,7 +574,7 @@ std::string GraphNode::to_dot_string_encoded() const {
                     }
                 }
                 ss << hot_index;
-                encoded_index += NodeFeatureEncoder::CONN_STATES.size();
+                // encoded_index += NodeFeatureEncoder::CONN_STATES.size(); // Handled outside the if/else if chain
             } else if (feature_name.find("service") != std::string::npos) {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::SERVICES.size(); ++i) {
@@ -530,7 +584,7 @@ std::string GraphNode::to_dot_string_encoded() const {
                     }
                 }
                 ss << hot_index;
-                encoded_index += NodeFeatureEncoder::SERVICES.size();
+                // encoded_index += NodeFeatureEncoder::SERVICES.size(); // Handled outside the if/else if chain
             } else if (feature_name == "top_user_agent_1") {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::USER_AGENTS.size(); ++i) {
@@ -540,7 +594,7 @@ std::string GraphNode::to_dot_string_encoded() const {
                     }
                 }
                 ss << hot_index;
-                encoded_index += NodeFeatureEncoder::USER_AGENTS.size();
+                // encoded_index += NodeFeatureEncoder::USER_AGENTS.size(); // Handled outside the if/else if chain
             } else if (feature_name == "most_freq_http_version") {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::HTTP_VERSIONS.size(); ++i) {
@@ -550,7 +604,7 @@ std::string GraphNode::to_dot_string_encoded() const {
                     }
                 }
                 ss << hot_index;
-                encoded_index += NodeFeatureEncoder::HTTP_VERSIONS.size();
+                // encoded_index += NodeFeatureEncoder::HTTP_VERSIONS.size(); // Handled outside the if/else if chain
             } else if (feature_name == "most_freq_ssl_version") {
                 int hot_index = -1;
                 for (size_t i = 0; i < NodeFeatureEncoder::SSL_VERSIONS.size(); ++i) {
@@ -560,24 +614,19 @@ std::string GraphNode::to_dot_string_encoded() const {
                     }
                 }
                 ss << hot_index;
-                encoded_index += NodeFeatureEncoder::SSL_VERSIONS.size();
+                // encoded_index += NodeFeatureEncoder::SSL_VERSIONS.size(); // Handled outside the if/else if chain
             } else if (feature_name == "first_seen_hour_minute_sin" ||
                        feature_name == "first_seen_hour_minute_cos" ||
                        feature_name == "last_seen_hour_minute_sin" ||
                        feature_name == "last_seen_hour_minute_cos") {
                 ss << encoded_features_local[encoded_index];
-                encoded_index += 1;
+                // encoded_index += 1; // Handled outside the if/else if chain
             }
             else { // Handle other scalar (non-one-hot) float or int features
-                if (feature_name != "service_3" && feature_name != "incoming_connection_ratio" && feature_name != "outgoing_connection_ratio"
-                    && feature_name != "unique_remote_ports_connected_to" && feature_name != "unique_local_ports_used"
-                    && feature_name != "unique_remote_ports_connected_from" && feature_name != "unique_local_ports_listening_on"
-                    && feature_name != "ever_connected_to_privileged_port" && feature_name != "ever_listened_on_privileged_port"
-                    && feature_name != "has_http_error_4xx" && feature_name != "has_http_error_5xx"
-                    && feature_name != "unique_http_status_codes_seen" && feature_name != "unique_http_versions_used")
-                    ss << encoded_features_local[encoded_index];
-                encoded_index += 1;
+                ss << encoded_features_local[encoded_index];
+                // encoded_index += 1; // Handled outside the if/else if chain
             }
+            encoded_index += current_feature_vec_size; // Advance index AFTER processing/skipping
         }
     } else {
         ss << "encoded_features=\"[]\"";
