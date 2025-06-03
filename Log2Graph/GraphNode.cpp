@@ -542,7 +542,6 @@ std::string GraphNode::to_dot_string_encoded() const {
 
             // Check if the current feature should be excluded
             if (EXCLUDED_FEATURES.count(feature_name)) {
-                std::cout << "[DEBUG - DOT] Skipping excluded feature: " << feature_name << std::endl;
                 encoded_index += current_feature_vec_size; // Still advance index
                 continue; // Skip to the next feature
             }
