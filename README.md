@@ -12,6 +12,7 @@ This project provides a complete pipeline for network anomaly detection using Gr
 * Uses an adaptive GNN model to track and learn network behavior.
 * Periodically visualizes and exports node/edge features and graph embeddings.
 * Detects and logs anomalies based on structural and feature deviations.
+* **Note:** This component requires a model trained on normal network traffic data to effectively operate in anomaly detection mode.
 
 ### 2. **Log2Graph**
 
@@ -33,11 +34,11 @@ This project provides a complete pipeline for network anomaly detection using Gr
 
 ```bash
 python3 main.py \
-  -p <graph_output_directory> \
-  --log_level DEBUG \
-  --log_path logs \
-  --visualization_path vis \
-  --export_period_updates 10
+    -p <graph_output_directory> \
+    --log_level DEBUG \
+    --log_path logs \
+    --visualization_path vis \
+    --export_period_updates 10
 ```
 
 * Monitors the `<graph_output_directory>` folder for `.dot` graph files.
