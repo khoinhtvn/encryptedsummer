@@ -70,9 +70,12 @@ class GraphAutoencoder(nn.Module):
         self.use_batch_norm = use_batch_norm
         self.use_residual = use_residual
 
+        # Store edge feature dimension for handling None cases
+        self.edge_feature_dim = edge_feature_dim if edge_feature_dim is not None else 0
+
         self.gat_layers = nn.ModuleList()
         self.batch_norms = nn.ModuleList() if use_batch_norm else None
-        self.dropout = nn.Dropout(0.2)  # Increased dropout for better regularization
+        self.dropout = nn.Dropout(0.2)
 
         # Encoder GAT layers with better initialization
         current_dim = node_feature_dim
@@ -84,7 +87,9 @@ class GraphAutoencoder(nn.Module):
                 out_dim = hidden_dim
                 heads = gat_heads
 
-            self.gat_layers.append(GATConv(current_dim, out_dim, heads=heads, edge_dim=edge_feature_dim,
+            # Handle None edge_feature_dim for GAT layers
+            gat_edge_dim = edge_feature_dim if edge_feature_dim is not None else None
+            self.gat_layers.append(GATConv(current_dim, out_dim, heads=heads, edge_dim=gat_edge_dim,
                                            dropout=0.1, add_self_loops=True, bias=True))
 
             if use_batch_norm and i < num_gat_layers - 1:
@@ -105,8 +110,11 @@ class GraphAutoencoder(nn.Module):
             nn.Linear(hidden_dim, node_feature_dim)
         )
 
+        # Edge decoder input dimension: embedding_dim * 2 + edge_feature_dim
+        # Use max(1, edge_feature_dim) to handle None case
+        edge_decoder_input_dim = embedding_dim * 2 + max(1, self.edge_feature_dim)
         self.edge_decoder = nn.Sequential(
-            nn.Linear(embedding_dim * 2 + edge_feature_dim, hidden_dim * 2),
+            nn.Linear(edge_decoder_input_dim, hidden_dim * 2),
             nn.ReLU(),
             nn.BatchNorm1d(hidden_dim * 2),
             nn.Dropout(0.1),
@@ -125,9 +133,28 @@ class GraphAutoencoder(nn.Module):
             nn.init.kaiming_normal_(module.weight, mode='fan_out', nonlinearity='relu')
             if module.bias is not None:
                 nn.init.constant_(module.bias, 0)
-        elif isinstance(module, nn.BatchNorm1d):
-            nn.init.constant_(module.weight, 1)
-            nn.init.constant_(module.bias, 0)
+        elif isinstance(module, (nn.BatchNorm1d, nn.BatchNorm2d, nn.BatchNorm3d)):
+            # Standard PyTorch BatchNorm layers
+            if hasattr(module, 'weight') and module.weight is not None:
+                nn.init.constant_(module.weight, 1)
+            if hasattr(module, 'bias') and module.bias is not None:
+                nn.init.constant_(module.bias, 0)
+        elif hasattr(module, '__class__') and 'BatchNorm' in module.__class__.__name__:
+            # PyTorch Geometric BatchNorm or other BatchNorm variants
+            try:
+                if hasattr(module, 'weight') and module.weight is not None:
+                    nn.init.constant_(module.weight, 1)
+                if hasattr(module, 'bias') and module.bias is not None:
+                    nn.init.constant_(module.bias, 0)
+            except Exception as e:
+                # If initialization fails for any reason, just skip it
+                logging.debug(f"Skipping initialization for {module.__class__.__name__}: {e}")
+                pass
+        elif isinstance(module, nn.LayerNorm):
+            if hasattr(module, 'weight') and module.weight is not None:
+                nn.init.constant_(module.weight, 1)
+            if hasattr(module, 'bias') and module.bias is not None:
+                nn.init.constant_(module.bias, 0)
 
     def encode(self, x, edge_index, edge_attr):
         residual = None
@@ -158,7 +185,22 @@ class GraphAutoencoder(nn.Module):
 
     def decode_edge(self, z, edge_index, edge_attr):
         src, dst = edge_index[0], edge_index[1]
-        edge_features = torch.cat([z[src], z[dst], edge_attr], dim=1)
+
+        # Handle case where edge_attr is None
+        if edge_attr is not None:
+            edge_features = torch.cat([z[src], z[dst], edge_attr], dim=1)
+        else:
+            # If no edge attributes, create zero padding
+            device = z.device
+            num_edges = edge_index.shape[1]
+            if self.edge_feature_dim > 0:
+                zero_edge_attr = torch.zeros(num_edges, self.edge_feature_dim, device=device)
+                edge_features = torch.cat([z[src], z[dst], zero_edge_attr], dim=1)
+            else:
+                # If edge_feature_dim was None/0, use a single zero feature
+                zero_edge_attr = torch.zeros(num_edges, 1, device=device)
+                edge_features = torch.cat([z[src], z[dst], zero_edge_attr], dim=1)
+
         return torch.sigmoid(self.edge_decoder(edge_features)).squeeze()
 
     def forward(self, data):
@@ -168,11 +210,10 @@ class GraphAutoencoder(nn.Module):
         edge_recon = self.decode_edge(embedding, edge_index, edge_attr)
         return embedding, node_recon, edge_recon
 
-
 class HybridGNNAnomalyDetector(nn.Module):
     def __init__(self, node_feature_dim, edge_feature_dim, hidden_dim=64, embedding_dim=32, heads=4, export_period=5,
                  export_dir: str = None, num_gat_layers=2, gat_heads=4,
-                 recon_loss_type='mse', edge_recon_loss_type='bce', use_batch_norm=True, use_residual=True):
+                 recon_loss_type='mse', edge_recon_loss_type='bce', use_batch_norm=True, use_residual=True, batch_size = 64):
         super().__init__()
         logging.info(
             f"Initializing HybridGNNAnomalyDetector with node_dim={node_feature_dim}, edge_dim={edge_feature_dim}, "
@@ -208,7 +249,7 @@ class HybridGNNAnomalyDetector(nn.Module):
         self.global_anomaly_mlp = nn.Sequential(
             nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
-            nn.BatchNorm1d(hidden_dim),
+            nn.LayerNorm(hidden_dim),
             nn.Dropout(0.1),
             nn.Linear(hidden_dim, hidden_dim // 2),
             nn.ReLU(),
@@ -228,7 +269,7 @@ class HybridGNNAnomalyDetector(nn.Module):
 
         # Experience replay buffer
         self.replay_buffer = deque(maxlen=2000)  # Increased buffer size
-        self.batch_size = 64  # Increased batch size
+        self.batch_size = batch_size  # Increased batch size
         logging.info(f"Replay buffer initialized with maxlen={self.replay_buffer.maxlen}, batch_size={self.batch_size}")
 
         # Statistical controls
@@ -259,9 +300,23 @@ class HybridGNNAnomalyDetector(nn.Module):
             nn.init.kaiming_normal_(module.weight, mode='fan_out', nonlinearity='relu')
             if module.bias is not None:
                 nn.init.constant_(module.bias, 0)
-        elif isinstance(module, (nn.BatchNorm1d, BatchNorm)):
-            nn.init.constant_(module.weight, 1)
-            nn.init.constant_(module.bias, 0)
+        elif isinstance(module, (nn.BatchNorm1d, nn.BatchNorm2d, nn.BatchNorm3d)):
+            # Standard PyTorch BatchNorm layers
+            if hasattr(module, 'weight') and module.weight is not None:
+                nn.init.constant_(module.weight, 1)
+            if hasattr(module, 'bias') and module.bias is not None:
+                nn.init.constant_(module.bias, 0)
+        elif hasattr(module, '__class__') and 'BatchNorm' in module.__class__.__name__:
+            # PyTorch Geometric BatchNorm or other BatchNorm variants
+            try:
+                if hasattr(module, 'weight') and module.weight is not None:
+                    nn.init.constant_(module.weight, 1)
+                if hasattr(module, 'bias') and module.bias is not None:
+                    nn.init.constant_(module.bias, 0)
+            except Exception as e:
+                # If initialization fails for any reason, just skip it
+                logging.debug(f"Skipping initialization for {module.__class__.__name__}: {e}")
+                pass
 
     def forward(self, data):
         embedding, node_recon, edge_recon = self.autoencoder(data)
@@ -272,7 +327,22 @@ class HybridGNNAnomalyDetector(nn.Module):
 
         # Edge-level anomaly scores
         src, dst = data.edge_index[0], data.edge_index[1]
-        edge_features = torch.cat([embedding[src], embedding[dst], data.edge_attr], dim=1)
+
+        # Handle None edge attributes
+        if data.edge_attr is not None:
+            edge_features = torch.cat([embedding[src], embedding[dst], data.edge_attr], dim=1)
+        else:
+            # If no edge attributes, create zero padding or just use node embeddings
+            device = embedding.device
+            num_edges = data.edge_index.shape[1]
+            # Use the same edge feature dimension as stored in autoencoder
+            edge_feature_dim = getattr(self.autoencoder, 'edge_feature_dim', 1)
+            if edge_feature_dim > 0:
+                zero_edge_attr = torch.zeros(num_edges, edge_feature_dim, device=device)
+            else:
+                zero_edge_attr = torch.zeros(num_edges, 1, device=device)
+            edge_features = torch.cat([embedding[src], embedding[dst], zero_edge_attr], dim=1)
+
         edge_scores = self.edge_anomaly_mlp(edge_features)
         logging.debug(f"Edge anomaly scores shape: {edge_scores.shape}")
 

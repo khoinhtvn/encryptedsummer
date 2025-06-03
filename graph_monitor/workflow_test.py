@@ -13,21 +13,17 @@ from visualization import *
 from utils import *
 
 
-def process_single_update(filepath, initial_graph=None):
+def process_single_update(filepath):
     logging.info(f"Processing update from: {filepath}")
-    current_graph = dot_to_nx(filepath)
-    if initial_graph is None:
-        initial_graph = current_graph
-    else:
-        initial_graph = update_nx_graph(initial_graph, filepath)
+    graph = dot_to_nx(filepath)
 
     # Initialize the global dictionary if it hasn't been already (though the import should handle this)
     if not 'edge_categorical_encoders' in globals():
         global edge_categorical_encoders
         edge_categorical_encoders = {}
 
-    pytorch_data = nx_to_pyg(initial_graph, node_scaling='standard', edge_scaling='standard')
-    return initial_graph, pytorch_data
+    pytorch_data = nx_to_pyg(graph, node_scaling='standard', edge_scaling='standard')
+    return graph, pytorch_data
 
 
 def process_existing_directory(directory, model_save_path, stats_save_path, anomaly_log_path,
@@ -74,7 +70,7 @@ def process_existing_directory(directory, model_save_path, stats_save_path, anom
         logging.info(f"\n--- Processing file: {filename} (Timestamp: {timestamp_dt}) ---")
 
         # Process the current update file
-        main_graph, main_data = process_single_update(filepath, main_graph)
+        main_graph, main_data = process_single_update(filepath)
         processed_count += 1
 
         if main_data is not None:
@@ -85,12 +81,13 @@ def process_existing_directory(directory, model_save_path, stats_save_path, anom
                 gnn_model = HybridGNNAnomalyDetector(
                         node_feature_dim=node_feature_dim,
                         edge_feature_dim=edge_feature_dim,
-                        hidden_dim=128,  # increased
-                        embedding_dim=64, # increased
-                        num_gat_layers=3,  # increased
+                        hidden_dim=128,
+                        embedding_dim=64,
+                        num_gat_layers=3,
                         gat_heads=4,
                         recon_loss_type='mse',  # Or 'l1'
-                        edge_recon_loss_type='bce' # Or 'mse', 'l1'
+                        edge_recon_loss_type='bce', # Or 'mse', 'l1'
+                        batch_size=8
                     )
                 logging.info(f"Initialized Hybrid GNN (node_dim={node_feature_dim}, edge_dim={edge_feature_dim})")
 
