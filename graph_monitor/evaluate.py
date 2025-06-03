@@ -26,8 +26,8 @@ except ImportError as e:
 
 # --- Configuration ---
 # Define paths for your model checkpoint, running statistics, and validation data
-MODEL_SAVE_PATH = 'model_checkpoints/latest_checkpoint.pth'  # Update with your actual path
-STATS_SAVE_PATH = 'model_checkpoints/running_stats.pkl'  # Update with your actual path
+MODEL_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/model_checkpoints'
+STATS_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/stats'
 VALIDATION_DATA_DIR = '/home/lu/Desktop/output'  # Update with your actual path to .dot files
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
