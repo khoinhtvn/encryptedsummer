@@ -1,5 +1,6 @@
 import logging
 import os
+import traceback
 from collections import deque
 
 import matplotlib.pyplot as plt
@@ -217,7 +218,7 @@ class GraphAutoencoder(nn.Module):
                 edge_features = torch.cat([z[src], z[dst]], dim=1)
                 # Adjust edge_decoder_input_dim in __init__ if this path is taken without a dummy feature
 
-        return torch.sigmoid(self.edge_decoder(edge_features)).squeeze()
+        return self.edge_decoder(edge_features).squeeze()  # Removed torch.sigmoid
 
     def forward(self, data):
         x, edge_index, edge_attr = data.x, data.edge_index, data.edge_attr
@@ -548,12 +549,13 @@ class HybridGNNAnomalyDetector(nn.Module):
 
             # Edge Reconstruction Loss
             recon_loss_edge = torch.tensor(0.0, device=self.device)
+            '''
             if batch.edge_attr is not None and batch.edge_attr.numel() > 0:
                 if self.edge_recon_loss_type == 'bce':
-                    # Use more realistic edge existence probability for existing edges
-                    # Assuming edge_recon is output of sigmoid, target should be 0-1
-                    edge_recon_target = torch.ones_like(edge_recon) * 0.8  # Higher probability for existing edges
-                    recon_loss_edge = F.binary_cross_entropy(edge_recon, edge_recon_target)
+                    # Use F.binary_cross_entropy_with_logits for numerical stability
+                    # Target should be the actual binary edge attributes (0 or 1)
+                    # Assuming batch.edge_attr is 0/1, and edge_recon is raw logits
+                    recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, batch.edge_attr.squeeze())
                 elif self.edge_recon_loss_type == 'mse':
                     # Target should be the actual normalized edge attributes
                     recon_loss_edge = F.mse_loss(edge_recon, batch.edge_attr)
@@ -563,7 +565,7 @@ class HybridGNNAnomalyDetector(nn.Module):
                 else:
                     raise ValueError(f"Unsupported edge reconstruction loss type: {self.edge_recon_loss_type}")
             logging.debug(f"Edge reconstruction loss: {recon_loss_edge.item():.4f}")
-
+            '''
             # Anomaly loss with regularization
             if use_focal_loss:
                 # Focal loss for anomaly scores (assuming normal data should have low scores, target 0)
@@ -587,12 +589,13 @@ class HybridGNNAnomalyDetector(nn.Module):
                 anomaly_loss = (anomaly_loss_node + anomaly_loss_edge) / 2
 
             # Combined loss with better weighting
-            total_recon_loss = recon_loss_node + recon_loss_edge
+            total_recon_loss = recon_weight * recon_loss_node + 0.0 * recon_loss_edge
             loss = recon_weight * total_recon_loss + anomaly_weight * anomaly_loss
 
             return loss
         except Exception as e:
             logging.error(f"Error during loss calculation: {e}")
+            traceback.print_exc()
             return None
 
     def detect_feature_drift(self, data):
@@ -684,11 +687,12 @@ class HybridGNNAnomalyDetector(nn.Module):
                     # For BCE, compare probability output (edge_recon) with a binary target (e.g., 0.8 for existing)
                     # This is for anomaly detection, so we want to see how far it is from the 'normal' target.
                     # Using abs difference from target 0.8 for anomaly scoring, not BCE loss.
-                    edge_recon_error = torch.abs(edge_recon - 0.8)  # How far is it from the 'normal' probability
+                    edge_recon_error = torch.abs(
+                        torch.sigmoid(edge_recon) - 0.8)  # How far is it from the 'normal' probability
                 else:  # mse or l1
                     edge_recon_error = F.mse_loss(edge_recon, normalized_data.edge_attr, reduction='none').mean(dim=1)
             else:
-                edge_recon_error = torch.abs(edge_recon - 0.5)  # Default if no edge_attr
+                edge_recon_error = torch.abs(torch.sigmoid(edge_recon) - 0.5)  # Default if no edge_attr
 
             logging.debug(f"Node reconstruction errors: {node_recon_error.cpu().numpy()}")
             logging.debug(f"Edge reconstruction errors: {edge_recon_error.cpu().numpy()}")
@@ -816,10 +820,13 @@ class HybridGNNAnomalyDetector(nn.Module):
             if normalized_data.edge_attr is not None and normalized_data.edge_attr.numel() > 0:
                 original_edges_np = normalized_data.edge_attr.cpu().numpy()
                 # Ensure edge_recon matches shape for plotting
-                if edge_recon.dim() == 1:  # If edge_recon is squeezed to 1D
-                    reconstructed_edges_np = edge_recon.unsqueeze(1).cpu().numpy()
-                else:
-                    reconstructed_edges_np = edge_recon.cpu().numpy()
+                # For BCE, edge_recon is logits, so apply sigmoid for visualization
+                if self.edge_recon_loss_type == 'bce':
+                    reconstructed_edges_np = torch.sigmoid(edge_recon).unsqueeze(
+                        1).cpu().numpy() if edge_recon.dim() == 1 else torch.sigmoid(edge_recon).cpu().numpy()
+                else:  # For MSE/L1, edge_recon is already direct reconstruction
+                    reconstructed_edges_np = edge_recon.unsqueeze(
+                        1).cpu().numpy() if edge_recon.dim() == 1 else edge_recon.cpu().numpy()
 
                 plt.figure(figsize=(16, 8))
                 plt.subplot(1, 2, 1)

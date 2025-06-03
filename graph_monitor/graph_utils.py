@@ -99,16 +99,16 @@ def aggregate_node_data(graph):
         # HTTP/HTTPS specific
         http_connections = 0
         https_connections = 0
-        user_agents_seen = set()
-        http_4xx_count = 0
-        http_5xx_count = 0
+        #user_agents_seen = set()
+        #http_4xx_count = 0
+        #http_5xx_count = 0
 
         # SSL/TLS specific
         ssl_connections = 0
-        ssl_versions_seen = set()
-        ssl_ciphers_seen = set()
-        ssl_resumptions = 0
-        ssl_sni_connections = 0
+        #ssl_versions_seen = set()
+        #ssl_ciphers_seen = set()
+        #ssl_resumptions = 0
+        #ssl_sni_connections = 0
 
         # Traffic volume aggregation
         total_outgoing_bytes = 0
@@ -191,16 +191,16 @@ def aggregate_node_data(graph):
             # HTTP/HTTPS features
             'http_connections': http_connections,
             'https_connections': https_connections,
-            'user_agents_seen': list(user_agents_seen),
-            'http_4xx_count': http_4xx_count,
-            'http_5xx_count': http_5xx_count,
+            #'user_agents_seen': list(user_agents_seen),
+            #'http_4xx_count': http_4xx_count,
+            #'http_5xx_count': http_5xx_count,
 
             # SSL/TLS features
             'ssl_connections': ssl_connections,
-            'ssl_versions_seen': list(ssl_versions_seen),
-            'ssl_ciphers_seen': list(ssl_ciphers_seen),
-            'ssl_resumptions': ssl_resumptions,
-            'ssl_sni_connections': ssl_sni_connections,
+            #'ssl_versions_seen': list(ssl_versions_seen),
+            #'ssl_ciphers_seen': list(ssl_ciphers_seen),
+            #'ssl_resumptions': ssl_resumptions,
+            #'ssl_sni_connections': ssl_sni_connections,
 
             # Traffic volume
             'total_outgoing_bytes': total_outgoing_bytes,
@@ -293,65 +293,84 @@ def extract_node_features_improved(node_data, time_window_stats=None):
     ])
 
     # Add activity duration and consistency
-    activity_span_hours = node_data.get('activity_span_hours', 0)
-    connection_consistency = calculate_connection_consistency(node_data.get('hourly_connections', []))
-    features.extend([activity_span_hours, connection_consistency])
+    # activity_span_hours = node_data.get('activity_span_hours', 0) # Needs 'activity_span_hours' in node_data
+    # connection_consistency = calculate_connection_consistency(node_data.get('hourly_connections', [])) # Needs 'hourly_connections' and 'calculate_connection_consistency'
+    # features.extend([activity_span_hours, connection_consistency])
 
     # 5. APPLICATION LAYER FEATURES
     http_connections = node_data.get('http_connections', 0)
     http_ratio = http_connections / (total_connections + 1e-9)
 
-    user_agents = node_data.get('user_agents_seen', [])
-    unique_user_agents = len(set(user_agents))
-    user_agent_diversity = unique_user_agents / (http_connections + 1e-9)
+    # user_agents = node_data.get('user_agents_seen', []) # Needs 'user_agents_seen' in node_data
+    # unique_user_agents = len(set(user_agents)) # Needs 'user_agents_seen' in node_data
+    # user_agent_diversity = unique_user_agents / (http_connections + 1e-9) # Needs 'user_agents_seen' in node_data
 
-    http_error_ratio = (node_data.get('http_4xx_count', 0) + node_data.get('http_5xx_count', 0)) / (
-                http_connections + 1e-9)
+    # http_error_ratio = (node_data.get('http_4xx_count', 0) + node_data.get('http_5xx_count', 0)) / ( # Needs 'http_4xx_count', 'http_5xx_count' in node_data
+    #     http_connections + 1e-9) # Needs 'http_4xx_count', 'http_5xx_count' in node_data
 
-    features.extend([http_ratio, user_agent_diversity, http_error_ratio])
+    # features.extend([http_ratio, user_agent_diversity, http_error_ratio])
+    features.extend([http_ratio])
 
     # SSL/TLS features
     ssl_connections = node_data.get('ssl_connections', 0)
     ssl_ratio = ssl_connections / (total_connections + 1e-9)
 
-    ssl_versions = node_data.get('ssl_versions_seen', [])
-    ssl_ciphers = node_data.get('ssl_ciphers_seen', [])
-    ssl_version_diversity = len(set(ssl_versions)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0
-    ssl_cipher_diversity = len(set(ssl_ciphers)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0
+    # ssl_versions = node_data.get('ssl_versions_seen', []) # Needs 'ssl_versions_seen' in node_data
+    # ssl_ciphers = node_data.get('ssl_ciphers_seen', []) # Needs 'ssl_ciphers_seen' in node_data
+    # ssl_version_diversity = len(set(ssl_versions)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0 # Needs 'ssl_versions_seen' in node_data
+    # ssl_cipher_diversity = len(set(ssl_ciphers)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0 # Needs 'ssl_ciphers_seen' in node_data
 
-    ssl_resumption_ratio = node_data.get('ssl_resumptions', 0) / (ssl_connections + 1e-9)
-    sni_usage_ratio = node_data.get('ssl_sni_connections', 0) / (ssl_connections + 1e-9)
+    # ssl_resumption_ratio = node_data.get('ssl_resumptions', 0) / (ssl_connections + 1e-9) # Needs 'ssl_resumptions' in node_data
+    # sni_usage_ratio = node_data.get('ssl_sni_connections', 0) / (ssl_connections + 1e-9) # Needs 'ssl_sni_connections' in node_data
 
-    features.extend([
-        ssl_ratio, ssl_version_diversity, ssl_cipher_diversity,
-        ssl_resumption_ratio, sni_usage_ratio
-    ])
+    # features.extend([
+    #     ssl_ratio, ssl_version_diversity, ssl_cipher_diversity,
+    #     ssl_resumption_ratio, sni_usage_ratio
+    # ])
+    features.extend([ssl_ratio])
 
     # 6. NETWORK TOPOLOGY FEATURES
-    degree_centrality = node_data.get('degree_centrality', 0)
-    betweenness_centrality = node_data.get('betweenness_centrality', 0)
-    clustering_coefficient = node_data.get('clustering_coefficient', 0)
+    # degree_centrality = node_data.get('degree_centrality', 0) # Needs 'degree_centrality' in node_data
+    # betweenness_centrality = node_data.get('betweenness_centrality', 0) # Needs 'betweenness_centrality' in node_data
+    # clustering_coefficient = node_data.get('clustering_coefficient', 0) # Needs 'clustering_coefficient' in node_data
 
-    features.extend([degree_centrality, betweenness_centrality, clustering_coefficient])
+    # features.extend([degree_centrality, betweenness_centrality, clustering_coefficient])
 
     return np.array(features, dtype=float)
-
 
 def get_sorted_node_features(nx_graph):
     """Returns a sorted list of all unique node attribute keys used by extract_node_features_improved."""
     return [
-        'outgoing_ratio', 'incoming_ratio', 'server_score', 'client_score',
-        'unique_protocols', 'protocol_entropy', 'most_freq_proto_ratio',
-        'unique_remote_ports', 'unique_local_ports',
-        'remote_port_diversity', 'local_port_diversity',
-        'privileged_remote_ratio', 'privileged_local_ratio',
-        'first_seen_hour_minute_sin', 'first_seen_hour_minute_cos',
-        'last_seen_hour_minute_sin', 'last_seen_hour_minute_cos',
-        'activity_span_hours', 'connection_consistency',
-        'http_ratio', 'user_agent_diversity', 'http_error_ratio',
-        'ssl_ratio', 'ssl_version_diversity', 'ssl_cipher_diversity',
-        'ssl_resumption_ratio', 'sni_usage_ratio',
-        'degree_centrality', 'betweenness_centrality', 'clustering_coefficient'
+        'outgoing_ratio', # Behavioral role feature: Ratio of outgoing connections to total connections.
+        'incoming_ratio', # Behavioral role feature: Ratio of incoming connections to total connections.
+        'server_score', # Behavioral role feature: Score indicating server-like behavior.
+        'client_score', # Behavioral role feature: Score indicating client-like behavior.
+        'unique_protocols', # Protocol diversity feature: Number of unique protocols used by the node.
+        'protocol_entropy', # Protocol diversity feature: Entropy of the protocol distribution.
+        'most_freq_proto_ratio', # Protocol diversity feature: Ratio of the most frequent protocol to total connections.
+        'unique_remote_ports', # Port usage pattern feature: Number of unique remote ports the node connected to.
+        'unique_local_ports', # Port usage pattern feature: Number of unique local ports used by the node.
+        'remote_port_diversity', # Port usage pattern feature: Ratio of unique remote ports to outgoing connections.
+        'local_port_diversity', # Port usage pattern feature: Ratio of unique local ports to incoming connections.
+        'privileged_remote_ratio', # Port usage pattern feature: Ratio of privileged remote connections to outgoing connections.
+        'privileged_local_ratio', # Port usage pattern feature: Ratio of privileged local connections to incoming connections.
+        'first_seen_hour_minute_sin', # Temporal pattern feature: Sine of the hour and minute when the node was first seen.
+        'first_seen_hour_minute_cos', # Temporal pattern feature: Cosine of the hour and minute when the node was first seen.
+        'last_seen_hour_minute_sin', # Temporal pattern feature: Sine of the hour and minute when the node was last seen.
+        'last_seen_hour_minute_cos', # Temporal pattern feature: Cosine of the hour and minute when the node was last seen.
+        # 'activity_span_hours', # Temporal pattern feature: Duration of the node's activity (needs 'activity_span_hours' in node_data).
+        # 'connection_consistency', # Temporal pattern feature: Consistency of the node's connection activity over time (needs 'hourly_connections' and 'calculate_connection_consistency').
+        'http_ratio', # Application layer feature: Ratio of HTTP connections to total connections.
+        # 'user_agent_diversity', # Application layer feature: Diversity of user agents seen in HTTP traffic (needs 'user_agents_seen' in node_data).
+        # 'http_error_ratio', # Application layer feature: Ratio of HTTP error responses (4xx and 5xx) to total HTTP connections (needs 'http_4xx_count', 'http_5xx_count' in node_data).
+        'ssl_ratio', # Application layer feature: Ratio of SSL/TLS connections to total connections.
+        # 'ssl_version_diversity', # Application layer feature: Diversity of SSL/TLS versions used (needs 'ssl_versions_seen' in node_data).
+        # 'ssl_cipher_diversity', # Application layer feature: Diversity of SSL/TLS ciphers used (needs 'ssl_ciphers_seen' in node_data).
+        # 'ssl_resumption_ratio', # Application layer feature: Ratio of SSL/TLS session resumptions to total SSL/TLS connections (needs 'ssl_resumptions' in node_data).
+        # 'sni_usage_ratio', # Application layer feature: Ratio of SSL/TLS connections with SNI to total SSL/TLS connections (needs 'ssl_sni_connections' in node_data).
+        # 'degree_centrality', # Network topology feature: Degree centrality of the node (needs 'degree_centrality' in node_data).
+        # 'betweenness_centrality', # Network topology feature: Betweenness centrality of the node (needs 'betweenness_centrality' in node_data).
+        # 'clustering_coefficient' # Network topology feature: Clustering coefficient of the node (needs 'clustering_coefficient' in node_data).
     ]
 
 

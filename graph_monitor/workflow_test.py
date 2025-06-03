@@ -87,7 +87,7 @@ def process_existing_directory(directory, model_save_path, stats_save_path, anom
                         gat_heads=4,
                         recon_loss_type='mse',  # Or 'l1'
                         edge_recon_loss_type='bce', # Or 'mse', 'l1'
-                        batch_size=8
+                        batch_size=16
                     )
                 logging.info(f"Initialized Hybrid GNN (node_dim={node_feature_dim}, edge_dim={edge_feature_dim})")
 
