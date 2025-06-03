@@ -80,50 +80,54 @@ python main.py --path <path_to_graph>
 You can override the default configuration by providing command-line arguments. Here is a list of the available
 parameters:
 
-- **`--path` / `-p` (required):**  
+- **`--path` / `-p` (required):**
   Path to the directory to monitor for `.dot` graph files (e.g., `samples/big_web_enum`).
-- **`--update_interval_seconds` (optional):**  
-  Interval (in seconds) for graph updates and online learning
+- **`--update_interval_seconds` (optional):**
+  Interval (in seconds) for graph updates and online learning.
   **Default:** `30`.
-- **`--export_period_updates` (optional):**  
+- **`--export_period_updates` (optional):**
   Number of update intervals for exporting visualization.
   **Default:** `30`.
-- **`--visualization_path` (optional):**  
-  Path to save embeddings and features plot.  
+- **`--visualization_path` (optional):**
+  Path to save embeddings and features plots.
   If not specified, the data is not exported.
-- **`--log_level` / `-l` (optional):**  
-  Set the logging level (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`).  
+- **`--log_level` / `-l` (optional):**
+  Set the logging level (`DEBUG`, `INFO`, `WARNING`, `ERROR`, `CRITICAL`).
   **Default:** `INFO`.
-- **`--log_path` (optional):**  
-  Path to save the application log file.  
+- **`--log_file` (optional):**
+  Enable logging to a file only. Requires `--log_path`. Mutually exclusive with `--log_console_file`.
+- **`--log_console_file` (optional):**
+  Enable logging to both console and a file. Requires `--log_path`. Mutually exclusive with `--log_file`.
+- **`--log_path` (optional):**
+  Path to save the application log file.
   If not specified, logs will only be printed to the console.
-- **`--log_max_bytes` (optional):**  
-  Maximum size of the application log file before it rolls over (in bytes).  
+- **`--log_max_bytes` (optional):**
+  Maximum size of the application log file before it rolls over (in bytes).
   **Default:** `10485760` (10 MB).
-- **`--log_backup_count` (optional):**  
-  Number of backup application log files to keep.  
+- **`--log_backup_count` (optional):**
+  Number of backup application log files to keep.
   **Default:** `5`.
-- **`--model_path` (optional):**  
-  Path to save the model checkpoints.  
+- **`--model_path` (optional):**
+  Path to save the model checkpoints.
   **Default:** `model_checkpoints`.
-- **`--stats_path` (optional):**  
-  Path to save training statistics.  
+- **`--stats_path` (optional):**
+  Path to save training statistics.
   **Default:** `stats`.
-- **`--anomaly_path` (optional):**  
-  Path to save anomaly logs.  
+- **`--anomaly_path` (optional):**
+  Path to save anomaly logs.
   **Default:** `anomaly_logs`.
 
 ### 🛠 Example
 
 ```bash
-  python main.py \
---path <path_to_graph> \
---log_level DEBUG \
---log_path logs \
---visualization_path vis \
---update_interval_seconds 60
-  ```
-
+python main.py \
+  --path <path_to_graph> \
+  --log_level DEBUG \
+  --log_path logs \
+  --visualization_path vis \
+  --update_interval_seconds 60
+```
+  
 ## Understanding the Output
 
 ### Anomaly Logs (anomaly_logs/)

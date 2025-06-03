@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 import numpy as np  # Ensure numpy is imported
 import torch
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
+from sklearn.preprocessing import StandardScaler, MinMaxScaler, LabelEncoder
 from torch_geometric.data import Data
 
 # Global variables
@@ -16,6 +16,7 @@ node_scaler = None
 edge_scaler = None
 last_update_time = None
 update_interval = 3600  # seconds (e.g., 1 hour)
+edge_categorical_encoders = {}
 NODE_FLOAT_FEATURES = [
     "first_seen_hour_minute_sin",
     "first_seen_hour_minute_cos",
@@ -37,8 +38,18 @@ NODE_FLOAT_FEATURES = [
     "ever_connected_to_privileged_port",
     "ever_listened_on_privileged_port",
 ]
-EDGE_FLOAT_FEATURES = []  # Add edge feature names if applicable
+EDGE_FLOAT_FEATURES = [
+    "count",
+    "total_orig_bytes",
+    "total_resp_bytes",
+    "total_orig_pkts",
+    "total_resp_pkts",
+    "total_orig_ip_bytes",
+    "total_resp_ip_bytes"
+]
 
+
+EDGE_CATEGORICAL_FEATURES = ["protocol", "service", "dst_port"]
 
 def dot_to_nx(dot_file):
     """
@@ -215,203 +226,175 @@ def get_sorted_edge_features(nx_graph):
 
 
 def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=True):
-    global node_scaler, edge_scaler, last_update_time, update_interval
+    global node_scaler, edge_scaler, edge_categorical_encoders, last_update_time, update_interval
 
     current_time = datetime.now().timestamp()
     logging.info("Starting NetworkX to PyG conversion.")
 
+    # 1. Create node index mapping and extract node features
     sorted_node_attr_keys = get_sorted_node_features(nx_graph)
     logging.debug(f"Sorted node attribute keys: {sorted_node_attr_keys}")
-
-    node_features = []
     node_to_index = {node: i for i, node in enumerate(nx_graph.nodes())}
-    for node in nx_graph.nodes():
-        node_feature_list = []
-        for key in sorted_node_attr_keys:
-            value = nx_graph.nodes[node].get(key)
-            if isinstance(value, (int, float)):
-                node_feature_list.append(value)
-            else:
-                node_feature_list.append(0.0)
-        node_features.append(node_feature_list)
+    node_features = [[nx_graph.nodes[node].get(key, 0.0) if isinstance(nx_graph.nodes[node].get(key), (int, float)) else 0.0
+                      for key in sorted_node_attr_keys] for node in nx_graph.nodes()]
     x = torch.tensor(node_features, dtype=torch.float)
     logging.debug(f"Initial node features tensor shape: {x.shape}")
 
-    # 3. Apply Node Feature Scaling
-    if node_scaling == 'standard':
-        if x.numel() > 0 and x.size(1) > 0:  # Check if there are features to scale
-            # Identify numerical features for scaling
-            numerical_node_indices = [sorted_node_attr_keys.index(f) for f in NODE_FLOAT_FEATURES if
-                                      f in sorted_node_attr_keys]
-            if numerical_node_indices:
-                x_numerical = x[:, numerical_node_indices].numpy()
-                if np.std(x_numerical, axis=0).any():  # Check if any std is non-zero
-                    if fit_scaler or node_scaler is None or (
-                            last_update_time is not None and (current_time - last_update_time) > update_interval):
-                        node_scaler = StandardScaler()
-                        x_scaled_numerical = node_scaler.fit_transform(x_numerical)
-                        if fit_scaler:
-                            logging.info("Numerical Node Features (x) after initial standard scaling.")
-                        else:
-                            logging.info("Numerical Node Features (x) after periodic standard scaling.")
-                        last_update_time = current_time
-                    elif node_scaler is not None:
-                        x_scaled_numerical = node_scaler.transform(x_numerical)
-                        logging.info("Numerical Node Features (x) after online standard scaling.")
-                    else:
-                        logging.warning("Skipping standard scaling for node features: Scaler not initialized.")
-                    x_scaled_tensor = torch.tensor(x_scaled_numerical, dtype=torch.float)
-                    x[:, numerical_node_indices] = x_scaled_tensor
-                else:
-                    logging.warning(
-                        "Skipping standard scaling for node features: Zero standard deviation in numerical features.")
-            else:
-                logging.info("No numerical node features found for standard scaling.")
-        else:
-            logging.warning("Skipping standard scaling for node features: No features to scale.")
-    elif node_scaling == 'minmax':
+    # 2. Apply Node Feature Scaling
+    if node_scaling in ['standard', 'minmax']:
         if x.numel() > 0 and x.size(1) > 0:
-            numerical_node_indices = [sorted_node_attr_keys.index(f) for f in NODE_FLOAT_FEATURES if
-                                      f in sorted_node_attr_keys]
+            numerical_node_indices = [sorted_node_attr_keys.index(f) for f in NODE_FLOAT_FEATURES if f in sorted_node_attr_keys]
             if numerical_node_indices:
                 x_numerical = x[:, numerical_node_indices].numpy()
-                x_min = np.min(x_numerical, axis=0)
-                x_max = np.max(x_numerical, axis=0)
-                # Avoid division by zero
-                if np.any(x_max > x_min):
-                    if fit_scaler or node_scaler is None or (
-                            last_update_time is not None and (current_time - last_update_time) > update_interval):
-                        node_scaler = MinMaxScaler()
-                        x_scaled_numerical = node_scaler.fit_transform(x_numerical)
-                        if fit_scaler:
-                            logging.info("Numerical Node Features (x) after initial min-max scaling.")
+                scaler = None
+                scaler_type = None
+                if node_scaling == 'standard':
+                    scaler = StandardScaler()
+                    scaler_type = "standard"
+                elif node_scaling == 'minmax':
+                    scaler = MinMaxScaler()
+                    scaler_type = "min-max"
+
+                if scaler is not None:
+                    if np.std(x_numerical, axis=0).any() if scaler_type == 'standard' else (np.max(x_numerical, axis=0) > np.min(x_numerical, axis=0)).any():
+                        if fit_scaler or node_scaler is None or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+                            node_scaler = scaler.fit(x_numerical)
+                            x_scaled_numerical = node_scaler.transform(x_numerical)
+                            log_message = f"Numerical Node Features (x) after initial {scaler_type} scaling." if fit_scaler else f"Numerical Node Features (x) after periodic {scaler_type} scaling."
+                            logging.info(log_message)
+                            last_update_time = current_time
+                        elif node_scaler is not None:
+                            x_scaled_numerical = node_scaler.transform(x_numerical)
+                            logging.info(f"Numerical Node Features (x) after online {scaler_type} scaling.")
                         else:
-                            logging.info("Numerical Node Features (x) after periodic min-max scaling.")
-                        last_update_time = current_time
-                    elif node_scaler is not None:
-                        x_scaled_numerical = node_scaler.transform(x_numerical)
-                        logging.info("Numerical Node Features (x) after online min-max scaling.")
+                            logging.warning(f"Skipping {scaler_type} scaling for node features: Scaler not initialized.")
+                        x[:, numerical_node_indices] = torch.tensor(x_scaled_numerical, dtype=torch.float)
                     else:
-                        logging.warning("Skipping min-max scaling for node features: Scaler not initialized.")
-                    x_scaled_tensor = torch.tensor(x_scaled_numerical, dtype=torch.float)
-                    x[:, numerical_node_indices] = x_scaled_tensor
-                else:
-                    logging.warning("Skipping min-max scaling for node features: All values are the same.")
+                        logging.warning(f"Skipping {scaler_type} scaling for node features: Zero standard deviation or all values are the same.")
             else:
-                logging.info("No numerical node features found for min-max scaling.")
+                logging.info(f"No numerical node features found for {node_scaling} scaling.")
         else:
-            logging.warning("Skipping min-max scaling for node features: No features to scale.")
+            logging.warning(f"Skipping {node_scaling} scaling for node features: No features to scale.")
     elif node_scaling == 'none':
         logging.info("No node feature scaling applied.")
     else:
-        raise ValueError(f"Invalid node_scaling method: {node_scaling}.  Choose 'none', 'standard', or 'minmax'.")
+        raise ValueError(f"Invalid node_scaling method: {node_scaling}. Choose 'none', 'standard', or 'minmax'.")
     logging.debug(f"Node features tensor shape after scaling: {x.shape}")
 
-    # Edge indices
-    edge_index_list = []
-    for u, v in nx_graph.edges():
-        edge_index_list.append([node_to_index[u], node_to_index[v]])
-
-    if edge_index_list:
-        edge_index = torch.tensor(edge_index_list, dtype=torch.long).t().contiguous()
-    else:
-        edge_index = torch.empty((2, 0), dtype=torch.long)
-
+    # 3. Create edge indices
+    edge_index = torch.tensor([[node_to_index[u], node_to_index[v]] for u, v in nx_graph.edges()], dtype=torch.long).t().contiguous() if nx_graph.edges else torch.empty((2, 0), dtype=torch.long)
     logging.debug(f"Edge index tensor shape: {edge_index.shape}")
 
-    edge_features = []
+    # 4. Extract edge features
     sorted_edge_attr_keys = get_sorted_edge_features(nx_graph)
     logging.debug(f"Sorted edge attribute keys: {sorted_edge_attr_keys}")
-
-    for u, v, data in nx_graph.edges(data=True):
-        edge_feature_list = []
+    edge_features_list = []
+    for _, _, data in nx_graph.edges(data=True):
+        feature_vector = []
         for key in sorted_edge_attr_keys:
-            value = data.get(key)
-            if isinstance(value, (int, float)):
-                edge_feature_list.append(value)
-            else:
-                edge_feature_list.append(0.0)
-        edge_features.append(edge_feature_list)
+            feature_vector.append(data.get(key))
+        edge_features_list.append(feature_vector)
 
-    edge_attr = torch.tensor(edge_features, dtype=torch.float) if edge_features else None
-    if edge_attr is not None:
-        logging.debug(f"Initial edge attributes tensor shape: {edge_attr.shape}")
-        # 4. Apply Edge Feature Scaling
-        if edge_scaling == 'standard':
-            if edge_attr.numel() > 0 and edge_attr.size(1) > 0:
-                numerical_edge_indices = [sorted_edge_attr_keys.index(f) for f in EDGE_FLOAT_FEATURES if
-                                          f in sorted_edge_attr_keys]
-                if numerical_edge_indices:
-                    edge_attr_numerical = edge_attr[:, numerical_edge_indices].numpy()
-                    if np.std(edge_attr_numerical, axis=0).any():
-                        if fit_scaler or edge_scaler is None or (
-                                last_update_time is not None and (current_time - last_update_time) > update_interval):
-                            edge_scaler = StandardScaler()
-                            edge_attr_scaled_numerical = edge_scaler.fit_transform(edge_attr_numerical)
-                            if fit_scaler:
-                                logging.info("Numerical Edge Attributes (edge_attr) after initial standard scaling.")
-                            else:
-                                logging.info("Numerical Edge Attributes (edge_attr) after periodic standard scaling.")
+    if edge_features_list:
+        edge_attr_raw = np.array(edge_features_list, dtype=object)
+        num_edges = edge_attr_raw.shape[0]
+        encoded_categorical = []
+        numerical_edge_features = []
+
+        for i, feature_name in enumerate(sorted_edge_attr_keys):
+            feature_values = edge_attr_raw[:, i]
+            if feature_name in EDGE_CATEGORICAL_FEATURES:
+                encoder = edge_categorical_encoders.get(feature_name)
+                if encoder is None or fit_scaler or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+                    encoder = LabelEncoder()
+                    encoder.fit(feature_values.astype(str))
+                    edge_categorical_encoders[feature_name] = encoder
+                    encoded = encoder.transform(feature_values.astype(str)).reshape(-1, 1)
+                    logging.info(f"Fitted and transformed categorical edge feature: {feature_name}. Unique values: {len(encoder.classes_)}")
+                    if fit_scaler or last_update_time is None or (current_time - last_update_time) > update_interval:
+                        last_update_time = current_time
+                else:
+                    encoded = encoder.transform(feature_values.astype(str)).reshape(-1, 1)
+                    logging.info(f"Transformed categorical edge feature: {feature_name}.")
+                encoded_categorical.append(torch.tensor(encoded, dtype=torch.float))  # Use float for concatenation
+
+            elif feature_name in EDGE_FLOAT_FEATURES:
+                numerical_values = []
+                for val in feature_values:
+                    numerical_values.append(float(val) if isinstance(val, (int, float)) else 0.0)
+                numerical_edge_features.append(np.array(numerical_values).reshape(-1, 1))
+
+        # Concatenate encoded categorical features
+        if encoded_categorical:
+            edge_attr_categorical = torch.cat(encoded_categorical, dim=1)
+            logging.debug(f"Shape of encoded categorical edge features: {edge_attr_categorical.shape}")
+
+        # Scale numerical edge features
+        edge_attr_numerical_scaled = None
+        if numerical_edge_features:
+            edge_attr_numerical_concat = np.concatenate(numerical_edge_features, axis=1)
+            if edge_scaling in ['standard', 'minmax']:
+                scaler = None
+                scaler_type = None
+                if edge_scaling == 'standard':
+                    scaler = StandardScaler()
+                    scaler_type = "standard"
+                elif edge_scaling == 'minmax':
+                    scaler = MinMaxScaler()
+                    scaler_type = "min-max"
+
+                if scaler is not None:
+                    if np.std(edge_attr_numerical_concat, axis=0).any() if scaler_type == 'standard' else (
+                            np.max(edge_attr_numerical_concat, axis=0) > np.min(edge_attr_numerical_concat,
+                                                                                axis=0)).any():
+                        if fit_scaler or edge_scaler is None or (last_update_time is not None and (
+                                current_time - last_update_time) > update_interval):
+                            edge_scaler = scaler.fit(edge_attr_numerical_concat)
+                            edge_attr_numerical_scaled = edge_scaler.transform(edge_attr_numerical_concat)
+                            log_message = f"Numerical Edge Attributes after initial {scaler_type} scaling." if fit_scaler else f"Numerical Edge Attributes after periodic {scaler_type} scaling."
+                            logging.info(log_message)
                             last_update_time = current_time
                         elif edge_scaler is not None:
-                            edge_attr_scaled_numerical = edge_scaler.transform(edge_attr_numerical)
-                            logging.info("Numerical Edge Attributes (edge_attr) after online standard scaling.")
+                            edge_attr_numerical_scaled = edge_scaler.transform(edge_attr_numerical_concat)
+                            logging.info(f"Numerical Edge Attributes after online {scaler_type} scaling.")
                         else:
-                            logging.warning("Skipping standard scaling for edge features: Scaler not initialized.")
-                        edge_attr_scaled_tensor = torch.tensor(edge_attr_scaled_numerical, dtype=torch.float)
-                        edge_attr[:, numerical_edge_indices] = edge_attr_scaled_tensor
+                            logging.warning(
+                                f"Skipping {scaler_type} scaling for numerical edge features: Scaler not initialized.")
                     else:
                         logging.warning(
-                            "Skipping standard scaling for edge features: Zero standard deviation in numerical features.")
-                else:
-                    logging.warning("Skipping standard scaling for edge features: No features to scale.")
-            elif edge_scaling == 'minmax':
-                if edge_attr.numel() > 0 and edge_attr.size(1) > 0:
-                    numerical_edge_indices = [sorted_edge_attr_keys.index(f) for f in EDGE_FLOAT_FEATURES if
-                                              f in sorted_edge_attr_keys]
-                    if numerical_edge_indices:
-                        edge_attr_numerical = edge_attr[:, numerical_edge_indices].numpy()
-                        edge_attr_min = np.min(edge_attr_numerical, axis=0)
-                        edge_attr_max = np.max(edge_attr_numerical, axis=0)
-                        if np.any(edge_attr_max > edge_attr_min):
-                            if fit_scaler or edge_scaler is None or (
-                                    last_update_time is not None and (
-                                    current_time - last_update_time) > update_interval):
-                                edge_scaler = MinMaxScaler()
-                                edge_attr_scaled_numerical = edge_scaler.fit_transform(edge_attr_numerical)
-                                if fit_scaler:
-                                    logging.info(
-                                        "Numerical Edge Attributes (edge_attr) after initial min-max scaling.")
-                                else:
-                                    logging.info(
-                                        "Numerical Edge Attributes (edge_attr) after periodic min-max scaling.")
-                                last_update_time = current_time
-                            elif edge_scaler is not None:
-                                edge_attr_scaled_numerical = edge_scaler.transform(edge_attr_numerical)
-                                logging.info("Numerical Edge Attributes (edge_attr) after online min-max scaling.")
-                            else:
-                                logging.warning(
-                                    "Skipping min-max scaling for edge features: Scaler not initialized.")
-                            edge_attr_scaled_tensor = torch.tensor(edge_attr_scaled_numerical, dtype=torch.float)
-                            edge_attr[:, numerical_edge_indices] = edge_attr_scaled_tensor
-                        else:
-                            logging.warning("Skipping min-max scaling for edge features: All values are the same.")
-                    else:
-                        logging.info("No numerical edge features found for min-max scaling.")
-                else:
-                    logging.warning("Skipping min-max scaling for edge features: No features to scale.")
+                            f"Skipping {scaler_type} scaling for numerical edge features: Zero standard deviation or all values are the same.")
+                edge_attr_numerical_scaled = torch.tensor(edge_attr_numerical_scaled, dtype=torch.float)
+                logging.debug(f"Shape of scaled numerical edge features: {edge_attr_numerical_scaled.shape}")
             elif edge_scaling == 'none':
-                logging.info("No edge feature scaling applied.")
+                edge_attr_numerical_scaled = torch.tensor(edge_attr_numerical_concat, dtype=torch.float)
+                logging.info("No scaling applied to numerical edge features.")
             else:
                 raise ValueError(
                     f"Invalid edge_scaling method: {edge_scaling}. Choose 'none', 'standard', or 'minmax'.")
-            logging.debug(f"Edge attributes tensor shape after scaling: {edge_attr.shape}")
-        else:
-            logging.info("No edge attributes found.")
 
-            data = Data(x=x, edge_index=edge_index, edge_attr=edge_attr)
-            logging.info("Successfully converted NetworkX graph to PyG Data object.")
-            return data
+        # Concatenate categorical and numerical edge features
+        if encoded_categorical and edge_attr_numerical_scaled is not None:
+            edge_attr = torch.cat([edge_attr_categorical, edge_attr_numerical_scaled], dim=1)
+        elif encoded_categorical:
+            edge_attr = edge_attr_categorical
+        elif edge_attr_numerical_scaled is not None:
+            edge_attr = edge_attr_numerical_scaled
+        else:
+            edge_attr = None
+
+        if edge_attr is not None:
+            logging.debug(f"Final edge attributes tensor shape: {edge_attr.shape}")
+        else:
+            logging.info("No edge attributes (numerical or categorical) found.")
+
+    else:
+        edge_attr = None
+        logging.info("No edges found in the graph.")
+
+    # 6. Create the PyG Data object
+    data = Data(x=x, edge_index=edge_index, edge_attr=edge_attr)
+    logging.info("Successfully converted NetworkX graph to PyG Data object.")
+    return data
 
 
 def update_nx_graph(nx_graph, update_dot_file):
@@ -434,11 +417,11 @@ def update_nx_graph(nx_graph, update_dot_file):
             # Update existing node attributes
             for key, value in attrs.items():
                 nx_graph.nodes[node_id][key] = value
-            logging.debug(f"Updated node: {node_id} with attributes {attrs}.")
+           # logging.debug(f"Updated node: {node_id} with attributes {attrs}.")
         else:
             # Add new node with attributes
             nx_graph.add_node(node_id, **attrs)
-            logging.debug(f"Added node: {node_id} with attributes {attrs}.")
+            #logging.debug(f"Added node: {node_id} with attributes {attrs}.")
 
     # 2. Update or add edges and their attributes
     logging.info("Processing edge updates/additions.")
@@ -453,11 +436,11 @@ def update_nx_graph(nx_graph, update_dot_file):
             # Update existing edge attributes
             for k, val in attrs.items():
                 nx_graph[u][v][key][k] = val
-            logging.debug(f"Updated edge: '{u}' -> '{v}' with key={key} and attributes {attrs}.")
+            #logging.debug(f"Updated edge: '{u}' -> '{v}' with key={key} and attributes {attrs}.")
         else:
             # Add new edge with attributes
             nx_graph.add_edge(u, v, key=key, **attrs)
-            logging.debug(f"Added edge: '{u}' -> '{v}' with key={key} and attributes {attrs}.")
+            #logging.debug(f"Added edge: '{u}' -> '{v}' with key={key} and attributes {attrs}.")
 
     # 3. Handle Deletions (Nodes and Edges)
     logging.info("Processing deletions (nodes and edges).")

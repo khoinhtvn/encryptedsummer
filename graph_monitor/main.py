@@ -99,8 +99,16 @@ if __name__ == '__main__':
         default=30,
         help="Number of update intervals for exporting visualization. Default is 30"
     )
-
+    parser.add_argument(
+        "--mode",
+        type=str,
+        default="train",
+        choices=["train", "detect"],
+        help="Specify the mode: 'train' for learning normal patterns, 'detect' for anomaly recognition.",
+    )
     args = parser.parse_args()
+    mode = args.mode
+    print(f"Running in '{mode}' mode.")
     log_level = getattr(logging, args.log_level.upper(), logging.INFO)
     target_directory = args.path
     model_save_path = args.model_path
@@ -158,4 +166,5 @@ if __name__ == '__main__':
     """
     process_existing_directory(target_directory, model_save_path, stats_save_path, anomaly_log_path,
                                  export_period_updates=args.export_period_updates,
-                                 visualization_path=args.visualization_path)
+                                 visualization_path=args.visualization_path,
+                                            train_mode=mode)

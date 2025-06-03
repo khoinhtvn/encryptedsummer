@@ -1,7 +1,12 @@
 import json
 import pickle
 import time
+import os
+import logging
+from datetime import datetime
+import re
 
+import torch
 import torch.nn.functional as F
 
 from graph_utils import *
@@ -11,7 +16,7 @@ from utils import *
 
 
 def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None,
-                           timestamp=None):
+                         timestamp=None):
     """Saves detected anomalies to a JSON file with more details, including IP addresses."""
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -82,25 +87,27 @@ def save_checkpoint(model, optimizer, scheduler, processed_files_count, model_sa
         'model_state_dict': model.state_dict(),
         'optimizer_state_dict': optimizer.state_dict(),
         'scheduler_state_dict': scheduler.state_dict(),
-        'node_stats': model.node_stats,
-        'edge_stats': model.edge_stats,
+        'node_stats': model.node_stats.__dict__ if hasattr(model, 'node_stats') else None,
+        'edge_stats': model.edge_stats.__dict__ if hasattr(model, 'edge_stats') else None,
     }
     torch.save(obj, filename)
 
     try:
-        os.remove(os.path.join(model_save_path, "latest_checkpoint.pth"))
-    except OSError:
-        pass
+        latest_checkpoint_path = os.path.join(model_save_path, "latest_checkpoint.pth")
+        if os.path.exists(latest_checkpoint_path):
+            os.remove(latest_checkpoint_path)
+    except OSError as e:
+        logging.warning(f"Could not remove previous latest checkpoint: {e}")
 
     torch.save(obj, os.path.join(model_save_path, "latest_checkpoint.pth"))
-    logging.info(f"Checkpoint saved to {filename}")
+    logging.info(f"Checkpoint saved to {filename} and as latest_checkpoint.pth")
 
 
 def load_checkpoint(model, optimizer, scheduler, model_save_path, filename="latest_checkpoint.pth"):
     filepath = os.path.join(model_save_path, filename)
     if os.path.exists(filepath):
         try:
-            checkpoint = torch.load(filepath, weights_only=False)
+            checkpoint = torch.load(filepath, map_location=model.device if model is not None else 'cpu', weights_only=False)
             if model is not None:
                 model.load_state_dict(checkpoint['model_state_dict'])
                 if optimizer is not None and 'optimizer_state_dict' in checkpoint:
@@ -108,16 +115,24 @@ def load_checkpoint(model, optimizer, scheduler, model_save_path, filename="late
                 if scheduler is not None and 'scheduler_state_dict' in checkpoint:
                     scheduler.load_state_dict(checkpoint['scheduler_state_dict'])
 
-                model.node_stats = checkpoint.get('node_stats', model.node_stats)
-                model.edge_stats = checkpoint.get('edge_stats', model.edge_stats)
-                epoch = checkpoint['epoch']
+                if hasattr(model, 'node_stats') and 'node_stats' in checkpoint and checkpoint['node_stats'] is not None:
+                    model.node_stats.__dict__.update(checkpoint['node_stats'])
+                elif hasattr(model, 'node_stats'):
+                    logging.warning("Node statistics not found in checkpoint.")
+
+                if hasattr(model, 'edge_stats') and 'edge_stats' in checkpoint and checkpoint['edge_stats'] is not None:
+                    model.edge_stats.__dict__.update(checkpoint['edge_stats'])
+                elif hasattr(model, 'edge_stats'):
+                    logging.warning("Edge statistics not found in checkpoint.")
+
+                epoch = checkpoint.get('epoch', 0)
                 logging.info(f"Checkpoint loaded from {filepath} at epoch {epoch}")
                 return epoch
             else:
                 logging.info(f"Checkpoint metadata loaded from {filepath}")
-            return checkpoint.get('epoch', 0)
+                return checkpoint.get('epoch', 0)
         except Exception as e:
-            logging.error(f"Error loading checkpoint: {e}")
+            logging.error(f"Error loading checkpoint from {filepath}: {e}")
             return 0
     else:
         logging.info("No checkpoint found. Starting from scratch.")
@@ -126,19 +141,34 @@ def load_checkpoint(model, optimizer, scheduler, model_save_path, filename="late
 
 def save_running_stats(node_stats, edge_stats, stats_save_path, filename="running_stats.pkl"):
     filepath = os.path.join(stats_save_path, filename)
+    stats_dict = {
+        'node_stats': node_stats.__dict__ if hasattr(node_stats, '__dict__') else None,
+        'edge_stats': edge_stats.__dict__ if hasattr(edge_stats, '__dict__') else None
+    }
     with open(filepath, 'wb') as f:
-        pickle.dump({'node_stats': node_stats, 'edge_stats': edge_stats}, f)
+        pickle.dump(stats_dict, f)
     logging.info(f"Running statistics saved to {filepath}")
 
 
 def load_running_stats(model, stats_save_path, filename="running_stats.pkl"):
     filepath = os.path.join(stats_save_path, filename)
     if os.path.exists(filepath):
-        with open(filepath, 'rb') as f:
-            stats = pickle.load(f)
-            model.node_stats = stats.get('node_stats', model.node_stats)
-            model.edge_stats = stats.get('edge_stats', model.edge_stats)
-        logging.info(f"Running statistics loaded from {filepath}")
+        try:
+            with open(filepath, 'rb') as f:
+                stats_dict = pickle.load(f)
+            if hasattr(model, 'node_stats') and 'node_stats' in stats_dict and stats_dict['node_stats'] is not None:
+                model.node_stats.__dict__.update(stats_dict['node_stats'])
+            elif hasattr(model, 'node_stats'):
+                logging.warning("Node statistics not found in loaded running stats.")
+
+            if hasattr(model, 'edge_stats') and 'edge_stats' in stats_dict and stats_dict['edge_stats'] is not None:
+                model.edge_stats.__dict__.update(stats_dict['edge_stats'])
+            elif hasattr(model, 'edge_stats'):
+                logging.warning("Edge statistics not found in loaded running stats.")
+
+            logging.info(f"Running statistics loaded from {filepath}")
+        except Exception as e:
+            logging.error(f"Error loading running statistics from {filepath}: {e}")
     else:
         logging.info("No running statistics file found. Starting with new statistics.")
 
