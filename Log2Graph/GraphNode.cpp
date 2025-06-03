@@ -500,14 +500,16 @@ std::string GraphNode::to_dot_string_encoded() const {
             ss << feature_name << "=";
 
             if (feature_name == "most_freq_proto" || feature_name == "top_proto_1") {
-                int hot_index = -1;
-                for (size_t i = 0; i < NodeFeatureEncoder::PROTOCOLS.size(); ++i) {
-                    if (encoded_features_local[encoded_index + i] == 1.0f) {
-                        hot_index = static_cast<int>(i);
-                        break;
+                if (feature_name == "top_proto_1") {
+                    int hot_index = -1;
+                    for (size_t i = 0; i < NodeFeatureEncoder::PROTOCOLS.size(); ++i) {
+                        if (encoded_features_local[encoded_index + i] == 1.0f) {
+                            hot_index = static_cast<int>(i);
+                            break;
+                        }
                     }
+                    ss << hot_index;
                 }
-                ss << hot_index;
                 encoded_index += NodeFeatureEncoder::PROTOCOLS.size();
             } else if (feature_name == "most_freq_conn_state") {
                 int hot_index = -1;
@@ -567,7 +569,13 @@ std::string GraphNode::to_dot_string_encoded() const {
                 encoded_index += 1;
             }
             else { // Handle other scalar (non-one-hot) float or int features
-                ss << encoded_features_local[encoded_index];
+                if (feature_name != "service_3" && feature_name != "incoming_connection_ratio" && feature_name != "outgoing_connection_ratio"
+                    && feature_name != "unique_remote_ports_connected_to" && feature_name != "unique_local_ports_used"
+                    && feature_name != "unique_remote_ports_connected_from" && feature_name != "unique_local_ports_listening_on"
+                    && feature_name != "ever_connected_to_privileged_port" && feature_name != "ever_listened_on_privileged_port"
+                    && feature_name != "has_http_error_4xx" && feature_name != "has_http_error_5xx"
+                    && feature_name != "unique_http_status_codes_seen" && feature_name != "unique_http_versions_used")
+                    ss << encoded_features_local[encoded_index];
                 encoded_index += 1;
             }
         }
