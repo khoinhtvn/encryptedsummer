@@ -1,0 +1,19 @@
+2025-06-02 15:18:27,692 - INFO - Application logging to file: logs/app_20250602_151827.log
+2025-06-02 15:18:27,693 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: DEBUG
+2025-06-02 15:18:27,695 - INFO - Starting processing of existing directory: /home/lu/Desktop/output/
+2025-06-02 15:18:27,695 - INFO - 
+--- Processing file: nw_graph_encoded_1748869125.dot (Timestamp: 2025-06-02 14:58:45) ---
+2025-06-02 15:18:38,057 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748869125.dot
+2025-06-02 15:18:40,641 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748869125.dot
+2025-06-02 15:18:40,654 - INFO - Parsed 7 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748869125.dot'.
+2025-06-02 15:18:40,662 - INFO - Parsed 5 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748869125.dot'.
+2025-06-02 15:18:43,551 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 15:18:43,554 - DEBUG - Sorted node attribute keys: ['ever_connected_to_privileged_port', 'ever_listened_on_privileged_port', 'first_seen_hour_minute_cos', 'first_seen_hour_minute_sin', 'has_http_error_4xx', 'has_http_error_5xx', 'has_ssl_history', 'has_ssl_resumption', 'has_ssl_server_name', 'incoming_connection_ratio', 'last_seen_hour_minute_cos', 'last_seen_hour_minute_sin', 'most_freq_conn_state', 'most_freq_http_version', 'most_freq_proto', 'most_freq_ssl_version', 'outgoing_connection_ratio', 'service_1', 'service_2', 'service_3', 'top_proto_1', 'top_user_agent_1', 'unique_http_status_codes_seen', 'unique_http_versions_used', 'unique_local_ports_listening_on', 'unique_local_ports_used', 'unique_remote_ports_connected_from', 'unique_remote_ports_connected_to', 'unique_ssl_ciphers_used', 'unique_ssl_versions_used']
+2025-06-02 15:18:43,558 - DEBUG - Initial node features tensor shape: torch.Size([7, 30])
+2025-06-02 15:18:43,570 - INFO - Numerical Node Features (x) after initial standard scaling.
+2025-06-02 15:18:43,572 - DEBUG - Node features tensor shape after scaling: torch.Size([7, 30])
+2025-06-02 15:18:43,574 - DEBUG - Edge index tensor shape: torch.Size([2, 5])
+2025-06-02 15:18:43,575 - DEBUG - Sorted edge attribute keys: ['count', 'dst_port', 'protocol', 'service', 'total_orig_bytes', 'total_orig_ip_bytes', 'total_orig_pkts', 'total_resp_bytes', 'total_resp_ip_bytes', 'total_resp_pkts']
+2025-06-02 15:18:43,577 - DEBUG - Initial edge attributes tensor shape: torch.Size([5, 10])
+2025-06-02 15:18:43,587 - INFO - Numerical Edge Attributes (edge_attr) after initial standard scaling.
+2025-06-02 15:18:43,588 - DEBUG - Edge attributes tensor shape after scaling: torch.Size([5, 10])

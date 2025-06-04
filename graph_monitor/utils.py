@@ -1,22 +1,17 @@
+import datetime
 import json
-import pickle
-import time
-import os
 import logging
-from datetime import datetime
+import os
+import pickle
 import re
 
 import torch
-import torch.nn.functional as F
 
-from graph_utils import *
-from neural_net import HybridGNNAnomalyDetector
-from visualization import *
 from utils import *
 
 
 def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None,
-                         timestamp=None):
+                           timestamp=None):
     """Saves detected anomalies to a JSON file with more details, including IP addresses."""
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -107,7 +102,8 @@ def load_checkpoint(model, optimizer, scheduler, model_save_path, filename="late
     filepath = os.path.join(model_save_path, filename)
     if os.path.exists(filepath):
         try:
-            checkpoint = torch.load(filepath, map_location=model.device if model is not None else 'cpu', weights_only=False)
+            checkpoint = torch.load(filepath, map_location=model.device if model is not None else 'cpu',
+                                    weights_only=False)
             if model is not None:
                 model.load_state_dict(checkpoint['model_state_dict'])
                 if optimizer is not None and 'optimizer_state_dict' in checkpoint:

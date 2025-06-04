@@ -1,0 +1,1601 @@
+2025-06-02 10:47:24,648 - INFO - Application logging to file: logs/app_20250602_104724.log
+2025-06-02 10:47:24,648 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: INFO
+2025-06-02 10:47:24,649 - INFO - Starting processing of existing directory: /home/lu/Desktop/output/
+2025-06-02 10:47:24,649 - INFO - 
+--- Processing file: nw_graph_encoded_1748706078.dot (Timestamp: 2025-05-31 17:41:18) ---
+2025-06-02 10:47:24,649 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706078.dot
+2025-06-02 10:47:24,650 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706078.dot
+2025-06-02 10:47:24,657 - INFO - Parsed 170 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706078.dot'.
+2025-06-02 10:47:24,666 - INFO - Parsed 986 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706078.dot'.
+2025-06-02 10:47:24,666 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:24,669 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:24,676 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:24,677 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:24,677 - INFO - Initialized main graph with 170 nodes and 986 edges.
+2025-06-02 10:47:24,677 - INFO - Initializing HybridGNNAnomalyDetector with node_dim=29, edge_dim=7, hidden_dim=64, embedding_dim=32, heads=4
+2025-06-02 10:47:24,678 - INFO - Initializing GraphAutoencoder with node_dim=29, edge_dim=7, hidden_dim=64, embedding_dim=32
+2025-06-02 10:47:24,741 - INFO - Optimizer and scheduler initialized.
+2025-06-02 10:47:24,741 - INFO - Replay buffer initialized with maxlen=1000, batch_size=32
+2025-06-02 10:47:24,741 - INFO - RunningStats initialized.
+2025-06-02 10:47:24,741 - INFO - RunningStats initialized.
+2025-06-02 10:47:24,741 - INFO - Statistical controls initialized: drift_threshold=0.15
+2025-06-02 10:47:24,741 - INFO - Embedding export will occur every 5 updates, saving to vis
+2025-06-02 10:47:24,741 - INFO - Initialized Hybrid GNN (node_dim=29, edge_dim=7)
+2025-06-02 10:47:24,742 - INFO - Performing initial training for 50 epochs...
+2025-06-02 10:47:24,774 - INFO - Epoch 1/50, Loss: 1.0974
+2025-06-02 10:47:24,844 - INFO - Epoch 2/50, Loss: 1.0609
+2025-06-02 10:47:25,029 - INFO - Epoch 3/50, Loss: 1.0433
+2025-06-02 10:47:25,096 - INFO - Epoch 4/50, Loss: 1.0281
+2025-06-02 10:47:25,153 - INFO - Epoch 5/50, Loss: 1.0139
+2025-06-02 10:47:25,198 - INFO - Epoch 6/50, Loss: 1.0058
+2025-06-02 10:47:25,276 - INFO - Epoch 7/50, Loss: 0.9995
+2025-06-02 10:47:25,367 - INFO - Epoch 8/50, Loss: 0.9931
+2025-06-02 10:47:25,421 - INFO - Epoch 9/50, Loss: 0.9879
+2025-06-02 10:47:25,474 - INFO - Epoch 10/50, Loss: 0.9875
+2025-06-02 10:47:25,589 - INFO - Epoch 11/50, Loss: 0.9854
+2025-06-02 10:47:25,629 - INFO - Epoch 12/50, Loss: 0.9810
+2025-06-02 10:47:25,658 - INFO - Epoch 13/50, Loss: 0.9761
+2025-06-02 10:47:25,669 - INFO - Epoch 14/50, Loss: 0.9734
+2025-06-02 10:47:25,688 - INFO - Epoch 15/50, Loss: 0.9696
+2025-06-02 10:47:25,700 - INFO - Epoch 16/50, Loss: 0.9651
+2025-06-02 10:47:25,721 - INFO - Epoch 17/50, Loss: 0.9615
+2025-06-02 10:47:25,732 - INFO - Epoch 18/50, Loss: 0.9576
+2025-06-02 10:47:25,779 - INFO - Epoch 19/50, Loss: 0.9534
+2025-06-02 10:47:25,792 - INFO - Epoch 20/50, Loss: 0.9496
+2025-06-02 10:47:25,874 - INFO - Epoch 21/50, Loss: 0.9447
+2025-06-02 10:47:25,927 - INFO - Epoch 22/50, Loss: 0.9408
+2025-06-02 10:47:25,989 - INFO - Epoch 23/50, Loss: 0.9356
+2025-06-02 10:47:26,022 - INFO - Epoch 24/50, Loss: 0.9306
+2025-06-02 10:47:26,045 - INFO - Epoch 25/50, Loss: 0.9254
+2025-06-02 10:47:26,056 - INFO - Epoch 26/50, Loss: 0.9210
+2025-06-02 10:47:26,112 - INFO - Epoch 27/50, Loss: 0.9151
+2025-06-02 10:47:26,170 - INFO - Epoch 28/50, Loss: 0.9097
+2025-06-02 10:47:26,197 - INFO - Epoch 29/50, Loss: 0.9036
+2025-06-02 10:47:26,222 - INFO - Epoch 30/50, Loss: 0.8973
+2025-06-02 10:47:26,294 - INFO - Epoch 31/50, Loss: 0.8914
+2025-06-02 10:47:26,324 - INFO - Epoch 32/50, Loss: 0.8857
+2025-06-02 10:47:26,344 - INFO - Epoch 33/50, Loss: 0.8789
+2025-06-02 10:47:26,364 - INFO - Epoch 34/50, Loss: 0.8738
+2025-06-02 10:47:26,373 - INFO - Epoch 35/50, Loss: 0.8669
+2025-06-02 10:47:26,386 - INFO - Epoch 36/50, Loss: 0.8604
+2025-06-02 10:47:26,395 - INFO - Epoch 37/50, Loss: 0.8540
+2025-06-02 10:47:26,405 - INFO - Epoch 38/50, Loss: 0.8481
+2025-06-02 10:47:26,415 - INFO - Epoch 39/50, Loss: 0.8421
+2025-06-02 10:47:26,432 - INFO - Epoch 40/50, Loss: 0.8349
+2025-06-02 10:47:26,441 - INFO - Epoch 41/50, Loss: 0.8300
+2025-06-02 10:47:26,450 - INFO - Epoch 42/50, Loss: 0.8230
+2025-06-02 10:47:26,459 - INFO - Epoch 43/50, Loss: 0.8181
+2025-06-02 10:47:26,467 - INFO - Epoch 44/50, Loss: 0.8110
+2025-06-02 10:47:26,475 - INFO - Epoch 45/50, Loss: 0.8074
+2025-06-02 10:47:26,484 - INFO - Epoch 46/50, Loss: 0.8011
+2025-06-02 10:47:26,492 - INFO - Epoch 47/50, Loss: 0.7932
+2025-06-02 10:47:26,547 - INFO - Epoch 48/50, Loss: 0.7876
+2025-06-02 10:47:26,622 - INFO - Epoch 49/50, Loss: 0.7809
+2025-06-02 10:47:26,647 - INFO - Epoch 50/50, Loss: 0.7751
+2025-06-02 10:47:26,648 - INFO - Initial training complete.
+2025-06-02 10:47:26,663 - INFO - Checkpoint loaded from model_checkpoints/latest_checkpoint.pth at epoch 32
+2025-06-02 10:47:26,663 - INFO - Starting or resuming online updates from step: 32
+2025-06-02 10:47:26,664 - INFO - Running statistics loaded from stats/running_stats.pkl
+2025-06-02 10:47:26,664 - INFO - Running anomaly detection...
+2025-06-02 10:47:26,664 - INFO - Starting anomaly detection.
+2025-06-02 10:47:26,695 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104726_update_1.json
+2025-06-02 10:47:26,695 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:26,708 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104726_update_1.pth
+2025-06-02 10:47:26,708 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706078.dot): 0.4771
+2025-06-02 10:47:26,708 - WARNING - Detected 4 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:26,708 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.6891, MLP Score: 0.5127
+2025-06-02 10:47:26,708 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.7081, MLP Score: 0.5028
+2025-06-02 10:47:26,709 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.6891, MLP Score: 0.5127
+2025-06-02 10:47:26,709 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.3541, MLP Score: 0.4934
+2025-06-02 10:47:26,709 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:27,429 - INFO - Embeddings visualization saved to vis/embeddings_1_updates_20250602_104726.png
+2025-06-02 10:47:27,430 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:47:27,430 - INFO - Starting visualization of node features.
+2025-06-02 10:47:27,430 - INFO - Graph has 170 nodes and 29 features.
+2025-06-02 10:47:27,430 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:47:27,430 - INFO - Calculating feature statistics:
+2025-06-02 10:47:27,430 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,430 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-1.8959416), 'max': np.float32(0.5274424)}
+2025-06-02 10:47:27,431 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(7.012311e-09), 'std': np.float32(1.0), 'min': np.float32(-0.31108552), 'max': np.float32(3.2145503)}
+2025-06-02 10:47:27,431 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(3.085417e-08), 'std': np.float32(1.0), 'min': np.float32(-4.5), 'max': np.float32(0.22222222)}
+2025-06-02 10:47:27,431 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,431 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 5, 'mean': np.float32(-4.207387e-09), 'std': np.float32(1.0), 'min': np.float32(-2.3804762), 'max': np.float32(3.1129303)}
+2025-06-02 10:47:27,432 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-4.0), 'max': np.float32(0.25)}
+2025-06-02 10:47:27,432 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(-1.1219698e-08), 'std': np.float32(0.99999994), 'min': np.float32(-0.6006045), 'max': np.float32(3.3264246)}
+2025-06-02 10:47:27,432 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,432 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(-2.524432e-08), 'std': np.float32(0.9999999), 'min': np.float32(-0.20723124), 'max': np.float32(4.825527)}
+2025-06-02 10:47:27,432 - INFO - - service_1: {'name': 'service_1', 'unique': 5, 'mean': np.float32(-1.5427085e-08), 'std': np.float32(1.0), 'min': np.float32(-1.2326487), 'max': np.float32(1.4325377)}
+2025-06-02 10:47:27,432 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(2.2439396e-08), 'std': np.float32(1.0), 'min': np.float32(-1.6506772), 'max': np.float32(0.7654432)}
+2025-06-02 10:47:27,432 - INFO - - service_3: {'name': 'service_3', 'unique': 3, 'mean': np.float32(-5.609849e-09), 'std': np.float32(1.0000001), 'min': np.float32(-6.928571), 'max': np.float32(0.15476191)}
+2025-06-02 10:47:27,432 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(-1.1219698e-08), 'std': np.float32(0.99999994), 'min': np.float32(-0.6006045), 'max': np.float32(3.3264246)}
+2025-06-02 10:47:27,432 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(1.4024622e-08), 'std': np.float32(1.0000001), 'min': np.float32(-7.46101), 'max': np.float32(0.13403012)}
+2025-06-02 10:47:27,432 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 3, 'mean': np.float32(1.4024622e-08), 'std': np.float32(1.0), 'min': np.float32(-0.23643312), 'max': np.float32(6.4625053)}
+2025-06-02 10:47:27,433 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-0.25), 'max': np.float32(4.0)}
+2025-06-02 10:47:27,433 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,433 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,433 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,433 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,434 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:27,434 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(2.1738165e-08), 'std': np.float32(1.0), 'min': np.float32(-2.2458754), 'max': np.float32(5.240376)}
+2025-06-02 10:47:29,793 - INFO - Node feature visualization saved to vis/node_features_20250602_104728.png
+2025-06-02 10:47:29,793 - INFO - Finished visualization of node features.
+2025-06-02 10:47:29,794 - INFO - Performing additional feature analysis:
+2025-06-02 10:47:29,794 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:47:29,794 - INFO - Starting visualization of edge features.
+2025-06-02 10:47:29,794 - INFO - Graph has 986 edges and 7 edge features.
+2025-06-02 10:47:29,794 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:47:29,794 - INFO - Calculating edge feature statistics:
+2025-06-02 10:47:29,795 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:47:29,795 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.010141988), 'std': np.float32(0.10019546), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.12068965), 'std': np.float32(0.32576627), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.86916834), 'std': np.float32(0.33721614), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.004056795), 'std': np.float32(0.063563645), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.3458418), 'std': np.float32(0.47564194), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.86916834), 'std': np.float32(0.33721614), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.004056795), 'std': np.float32(0.063563645), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.3458418), 'std': np.float32(0.47564194), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.6501014), 'std': np.float32(0.47693765), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:29,795 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:31,495 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104730.png
+2025-06-02 10:47:31,495 - INFO - Finished visualization of edge features.
+2025-06-02 10:47:31,495 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:47:31,495 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:47:31,495 - INFO - - Highest correlation (0.99) between features: 'protocol_TCP' and 'protocol_UDP'.
+2025-06-02 10:47:31,496 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:47:31,496 - INFO - Graph has 986 edges and 7 edge features.
+2025-06-02 10:47:31,496 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:47:32,031 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104731_summary.png
+2025-06-02 10:47:32,298 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104731_pca_3d.png
+2025-06-02 10:47:32,585 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104731_pca_variance.png
+2025-06-02 10:47:32,585 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:47:32,585 - INFO - 
+--- Processing file: nw_graph_encoded_1748706138.dot (Timestamp: 2025-05-31 17:42:18) ---
+2025-06-02 10:47:32,585 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706138.dot
+2025-06-02 10:47:32,585 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706138.dot'.
+2025-06-02 10:47:32,585 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706138.dot
+2025-06-02 10:47:32,591 - INFO - Parsed 215 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706138.dot'.
+2025-06-02 10:47:32,600 - INFO - Parsed 1339 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706138.dot'.
+2025-06-02 10:47:32,600 - INFO - Processing node updates/additions.
+2025-06-02 10:47:32,602 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:32,613 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:32,613 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:32,613 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:32,619 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:32,625 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:32,626 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:32,626 - INFO - Updated main graph to 215 nodes and 1339 edges.
+2025-06-02 10:47:32,626 - INFO - Performing online update...
+2025-06-02 10:47:32,627 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:33,634 - INFO - Online update finished. Average loss: 0.5668, Learning rate: 0.000100
+2025-06-02 10:47:33,638 - INFO - Online update complete. Loss: 0.5668
+2025-06-02 10:47:33,639 - INFO - Running anomaly detection...
+2025-06-02 10:47:33,639 - INFO - Starting anomaly detection.
+2025-06-02 10:47:33,651 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104733_update_2.json
+2025-06-02 10:47:33,652 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:33,673 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104733_update_2.pth
+2025-06-02 10:47:33,673 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706138.dot): 0.4819
+2025-06-02 10:47:33,674 - WARNING - Detected 4 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:33,674 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.1842, MLP Score: 0.4996
+2025-06-02 10:47:33,674 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.7871, MLP Score: 0.4997
+2025-06-02 10:47:33,674 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.1842, MLP Score: 0.4996
+2025-06-02 10:47:33,674 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.3026, MLP Score: 0.4953
+2025-06-02 10:47:33,674 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:33,674 - INFO - 
+--- Processing file: nw_graph_encoded_1748706198.dot (Timestamp: 2025-05-31 17:43:18) ---
+2025-06-02 10:47:33,674 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706198.dot
+2025-06-02 10:47:33,674 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706198.dot'.
+2025-06-02 10:47:33,674 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706198.dot
+2025-06-02 10:47:33,683 - INFO - Parsed 249 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706198.dot'.
+2025-06-02 10:47:33,696 - INFO - Parsed 1605 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706198.dot'.
+2025-06-02 10:47:33,696 - INFO - Processing node updates/additions.
+2025-06-02 10:47:33,699 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:33,713 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:33,713 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:33,713 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:33,717 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:33,720 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:33,720 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:33,721 - INFO - Updated main graph to 249 nodes and 1605 edges.
+2025-06-02 10:47:33,721 - INFO - Performing online update...
+2025-06-02 10:47:33,721 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:34,407 - INFO - Online update finished. Average loss: 0.5662, Learning rate: 0.000100
+2025-06-02 10:47:34,408 - INFO - Online update complete. Loss: 0.5662
+2025-06-02 10:47:34,409 - INFO - Running anomaly detection...
+2025-06-02 10:47:34,409 - INFO - Starting anomaly detection.
+2025-06-02 10:47:34,414 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104734_update_3.json
+2025-06-02 10:47:34,415 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:34,423 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104734_update_3.pth
+2025-06-02 10:47:34,423 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706198.dot): 0.4801
+2025-06-02 10:47:34,423 - WARNING - Detected 1 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:34,423 - WARNING -   Node ID: 192.168.239.101, Recon Error: 1.4250, MLP Score: 0.5003
+2025-06-02 10:47:34,423 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:34,423 - INFO - 
+--- Processing file: nw_graph_encoded_1748706258.dot (Timestamp: 2025-05-31 17:44:18) ---
+2025-06-02 10:47:34,423 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706258.dot
+2025-06-02 10:47:34,423 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706258.dot'.
+2025-06-02 10:47:34,423 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706258.dot
+2025-06-02 10:47:34,433 - INFO - Parsed 292 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706258.dot'.
+2025-06-02 10:47:34,451 - INFO - Parsed 2222 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706258.dot'.
+2025-06-02 10:47:34,451 - INFO - Processing node updates/additions.
+2025-06-02 10:47:34,454 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:34,467 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:34,468 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:34,468 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:34,471 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:34,475 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:34,475 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:34,476 - INFO - Updated main graph to 292 nodes and 2222 edges.
+2025-06-02 10:47:34,476 - INFO - Performing online update...
+2025-06-02 10:47:34,476 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:35,743 - INFO - Online update finished. Average loss: 0.5632, Learning rate: 0.000100
+2025-06-02 10:47:35,745 - WARNING - Feature drift detected (1 consecutive)
+2025-06-02 10:47:35,747 - INFO - Online update complete. Loss: 0.5632
+2025-06-02 10:47:35,747 - INFO - Running anomaly detection...
+2025-06-02 10:47:35,747 - INFO - Starting anomaly detection.
+2025-06-02 10:47:35,756 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104735_update_4.json
+2025-06-02 10:47:35,756 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:35,766 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104735_update_4.pth
+2025-06-02 10:47:35,766 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706258.dot): 0.4824
+2025-06-02 10:47:35,766 - WARNING - Detected 1 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:35,767 - WARNING -   Node ID: 192.168.239.101, Recon Error: 1.2739, MLP Score: 0.5005
+2025-06-02 10:47:35,767 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:35,767 - INFO - 
+--- Processing file: nw_graph_encoded_1748706318.dot (Timestamp: 2025-05-31 17:45:18) ---
+2025-06-02 10:47:35,767 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706318.dot
+2025-06-02 10:47:35,767 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706318.dot'.
+2025-06-02 10:47:35,767 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706318.dot
+2025-06-02 10:47:35,780 - INFO - Parsed 309 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706318.dot'.
+2025-06-02 10:47:35,803 - INFO - Parsed 2308 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706318.dot'.
+2025-06-02 10:47:35,803 - INFO - Processing node updates/additions.
+2025-06-02 10:47:35,808 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:35,832 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:35,834 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:35,834 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:35,843 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:35,852 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:35,852 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:35,853 - INFO - Updated main graph to 309 nodes and 2308 edges.
+2025-06-02 10:47:35,853 - INFO - Performing online update...
+2025-06-02 10:47:35,853 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:36,956 - INFO - Online update finished. Average loss: 0.5601, Learning rate: 0.000010
+2025-06-02 10:47:36,960 - INFO - Online update complete. Loss: 0.5601
+2025-06-02 10:47:36,960 - INFO - Running anomaly detection...
+2025-06-02 10:47:36,960 - INFO - Starting anomaly detection.
+2025-06-02 10:47:36,978 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104736_update_5.json
+2025-06-02 10:47:36,979 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:36,991 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104736_update_5.pth
+2025-06-02 10:47:36,992 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706318.dot): 0.4826
+2025-06-02 10:47:36,992 - WARNING - Detected 1 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:36,992 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.8214, MLP Score: 0.5037
+2025-06-02 10:47:36,992 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:36,992 - INFO - 
+--- Processing file: nw_graph_encoded_1748706378.dot (Timestamp: 2025-05-31 17:46:18) ---
+2025-06-02 10:47:36,992 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706378.dot
+2025-06-02 10:47:36,992 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706378.dot'.
+2025-06-02 10:47:36,992 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706378.dot
+2025-06-02 10:47:37,008 - INFO - Parsed 330 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706378.dot'.
+2025-06-02 10:47:37,042 - INFO - Parsed 3522 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706378.dot'.
+2025-06-02 10:47:37,042 - INFO - Processing node updates/additions.
+2025-06-02 10:47:37,047 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:37,075 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:37,077 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:37,077 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:37,082 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:37,092 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:37,092 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:37,093 - INFO - Updated main graph to 330 nodes and 3522 edges.
+2025-06-02 10:47:37,093 - INFO - Performing online update...
+2025-06-02 10:47:37,093 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:38,677 - INFO - Online update finished. Average loss: 0.5634, Learning rate: 0.000010
+2025-06-02 10:47:38,679 - WARNING - Feature drift detected (1 consecutive)
+2025-06-02 10:47:38,680 - INFO - Online update complete. Loss: 0.5634
+2025-06-02 10:47:38,680 - INFO - Running anomaly detection...
+2025-06-02 10:47:38,680 - INFO - Starting anomaly detection.
+2025-06-02 10:47:38,711 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104738_update_6.json
+2025-06-02 10:47:38,712 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:38,739 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104738_update_6.pth
+2025-06-02 10:47:38,740 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706378.dot): 0.4841
+2025-06-02 10:47:38,740 - WARNING - Detected 1 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:38,740 - WARNING -   Node ID: 192.168.239.101, Recon Error: 1.8603, MLP Score: 0.5048
+2025-06-02 10:47:38,741 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:39,857 - INFO - Embeddings visualization saved to vis/embeddings_6_updates_20250602_104738.png
+2025-06-02 10:47:39,858 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:47:39,859 - INFO - Starting visualization of node features.
+2025-06-02 10:47:39,860 - INFO - Graph has 330 nodes and 29 features.
+2025-06-02 10:47:39,860 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:47:39,860 - INFO - Calculating feature statistics:
+2025-06-02 10:47:39,861 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,861 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,861 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,861 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 4, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-0.81784195), 'max': np.float32(2.6422586)}
+2025-06-02 10:47:39,861 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,861 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,862 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(2.3119377e-08), 'std': np.float32(1.0), 'min': np.float32(-1.5844994), 'max': np.float32(0.6311142)}
+2025-06-02 10:47:39,862 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,862 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(-3.6846508e-08), 'std': np.float32(1.0), 'min': np.float32(-0.3389172), 'max': np.float32(2.9505732)}
+2025-06-02 10:47:39,862 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(1.1559688e-08), 'std': np.float32(0.9999999), 'min': np.float32(-5.656854), 'max': np.float32(0.17677669)}
+2025-06-02 10:47:39,862 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 4, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-1.3089234), 'max': np.float32(1.725817)}
+2025-06-02 10:47:39,862 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 8, 'mean': np.float32(1.1559688e-08), 'std': np.float32(1.0), 'min': np.float32(-2.0146213), 'max': np.float32(6.609288)}
+2025-06-02 10:47:39,862 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(-2.3119377e-08), 'std': np.float32(1.0), 'min': np.float32(-4.163332), 'max': np.float32(0.24019223)}
+2025-06-02 10:47:39,863 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(2.8899223e-08), 'std': np.float32(1.0), 'min': np.float32(-0.4516042), 'max': np.float32(4.2794876)}
+2025-06-02 10:47:39,863 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,863 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(5.779844e-09), 'std': np.float32(1.0), 'min': np.float32(-0.16744368), 'max': np.float32(5.9721575)}
+2025-06-02 10:47:39,863 - INFO - - service_1: {'name': 'service_1', 'unique': 5, 'mean': np.float32(-1.4449611e-08), 'std': np.float32(1.0), 'min': np.float32(-1.1823945), 'max': np.float32(1.4385303)}
+2025-06-02 10:47:39,863 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(0.0), 'std': np.float32(0.99999994), 'min': np.float32(-1.6438494), 'max': np.float32(0.76407206)}
+2025-06-02 10:47:39,863 - INFO - - service_3: {'name': 'service_3', 'unique': 4, 'mean': np.float32(1.1559688e-08), 'std': np.float32(1.0), 'min': np.float32(-4.928037), 'max': np.float32(0.23232815)}
+2025-06-02 10:47:39,863 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(2.8899223e-08), 'std': np.float32(1.0), 'min': np.float32(-0.4516042), 'max': np.float32(4.2794876)}
+2025-06-02 10:47:39,863 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(-2.889922e-09), 'std': np.float32(1.0), 'min': np.float32(-5.9721575), 'max': np.float32(0.16744368)}
+2025-06-02 10:47:39,864 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 3, 'mean': np.float32(-2.889922e-09), 'std': np.float32(0.99999994), 'min': np.float32(-0.2306328), 'max': np.float32(7.3802495)}
+2025-06-02 10:47:39,864 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(2.3119377e-08), 'std': np.float32(1.0), 'min': np.float32(-0.24019223), 'max': np.float32(4.163332)}
+2025-06-02 10:47:39,864 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,864 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,864 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,864 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,864 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:39,864 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-1.8285309), 'max': np.float32(4.500999)}
+2025-06-02 10:47:42,234 - INFO - Node feature visualization saved to vis/node_features_20250602_104740.png
+2025-06-02 10:47:42,234 - INFO - Finished visualization of node features.
+2025-06-02 10:47:42,235 - INFO - Performing additional feature analysis:
+2025-06-02 10:47:42,235 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:47:42,236 - INFO - Starting visualization of edge features.
+2025-06-02 10:47:42,236 - INFO - Graph has 3522 edges and 7 edge features.
+2025-06-02 10:47:42,236 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:47:42,236 - INFO - Calculating edge feature statistics:
+2025-06-02 10:47:42,236 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:47:42,236 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.04826803), 'std': np.float32(0.21433207), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,236 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.37762636), 'std': np.float32(0.48479345), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,236 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.5741056), 'std': np.float32(0.49447787), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,236 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0022714366), 'std': np.float32(0.04760544), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,236 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.55905735), 'std': np.float32(0.49649993), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,236 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.5741056), 'std': np.float32(0.49447787), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,237 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0022714366), 'std': np.float32(0.04760544), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,237 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.55905735), 'std': np.float32(0.49649993), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,237 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.4386712), 'std': np.float32(0.49622452), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:42,237 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:44,304 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104742.png
+2025-06-02 10:47:44,304 - INFO - Finished visualization of edge features.
+2025-06-02 10:47:44,304 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:47:44,304 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:47:44,305 - INFO - - Highest correlation (1.00) between features: 'protocol_TCP' and 'protocol_UDP'.
+2025-06-02 10:47:44,306 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:47:44,306 - INFO - Graph has 3522 edges and 7 edge features.
+2025-06-02 10:47:44,306 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:47:44,769 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104744_summary.png
+2025-06-02 10:47:45,232 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104744_pca_3d.png
+2025-06-02 10:47:45,557 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104744_pca_variance.png
+2025-06-02 10:47:45,557 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:47:45,557 - INFO - 
+--- Processing file: nw_graph_encoded_1748706438.dot (Timestamp: 2025-05-31 17:47:18) ---
+2025-06-02 10:47:45,558 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706438.dot
+2025-06-02 10:47:45,558 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706438.dot'.
+2025-06-02 10:47:45,558 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706438.dot
+2025-06-02 10:47:45,573 - INFO - Parsed 342 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706438.dot'.
+2025-06-02 10:47:45,609 - INFO - Parsed 3846 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706438.dot'.
+2025-06-02 10:47:45,609 - INFO - Processing node updates/additions.
+2025-06-02 10:47:45,615 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:45,652 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:45,655 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:45,655 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:45,662 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:45,673 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:45,673 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:45,674 - INFO - Updated main graph to 342 nodes and 3846 edges.
+2025-06-02 10:47:45,674 - INFO - Performing online update...
+2025-06-02 10:47:45,675 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:46,479 - INFO - Online update finished. Average loss: 0.5614, Learning rate: 0.000010
+2025-06-02 10:47:46,482 - INFO - Online update complete. Loss: 0.5614
+2025-06-02 10:47:46,482 - INFO - Running anomaly detection...
+2025-06-02 10:47:46,482 - INFO - Starting anomaly detection.
+2025-06-02 10:47:46,494 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104746_update_7.json
+2025-06-02 10:47:46,495 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:46,511 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104746_update_7.pth
+2025-06-02 10:47:46,511 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706438.dot): 0.4834
+2025-06-02 10:47:46,512 - WARNING - Detected 3 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:46,512 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.3049, MLP Score: 0.4926
+2025-06-02 10:47:46,512 - WARNING -   Node ID: 8.8.8.8, Recon Error: 0.0901, MLP Score: 0.5108
+2025-06-02 10:47:46,512 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.3812, MLP Score: 0.4935
+2025-06-02 10:47:46,512 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:46,512 - INFO - 
+--- Processing file: nw_graph_encoded_1748706498.dot (Timestamp: 2025-05-31 17:48:18) ---
+2025-06-02 10:47:46,512 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706498.dot
+2025-06-02 10:47:46,513 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706498.dot'.
+2025-06-02 10:47:46,513 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706498.dot
+2025-06-02 10:47:46,527 - INFO - Parsed 357 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706498.dot'.
+2025-06-02 10:47:46,551 - INFO - Parsed 4081 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706498.dot'.
+2025-06-02 10:47:46,551 - INFO - Processing node updates/additions.
+2025-06-02 10:47:46,555 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:46,578 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:46,578 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:46,578 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:46,582 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:46,589 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:46,589 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:46,590 - INFO - Updated main graph to 357 nodes and 4081 edges.
+2025-06-02 10:47:46,590 - INFO - Performing online update...
+2025-06-02 10:47:46,590 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:47,116 - INFO - Online update finished. Average loss: 0.5599, Learning rate: 0.000010
+2025-06-02 10:47:47,118 - INFO - Online update complete. Loss: 0.5599
+2025-06-02 10:47:47,118 - INFO - Running anomaly detection...
+2025-06-02 10:47:47,118 - INFO - Starting anomaly detection.
+2025-06-02 10:47:47,126 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104747_update_8.json
+2025-06-02 10:47:47,126 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:47,134 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104747_update_8.pth
+2025-06-02 10:47:47,134 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706498.dot): 0.4845
+2025-06-02 10:47:47,134 - WARNING - Detected 3 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:47,135 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2643, MLP Score: 0.4940
+2025-06-02 10:47:47,135 - WARNING -   Node ID: 8.8.8.8, Recon Error: 0.0702, MLP Score: 0.5104
+2025-06-02 10:47:47,135 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.3333, MLP Score: 0.4951
+2025-06-02 10:47:47,135 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:47,135 - INFO - 
+--- Processing file: nw_graph_encoded_1748706558.dot (Timestamp: 2025-05-31 17:49:18) ---
+2025-06-02 10:47:47,135 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706558.dot
+2025-06-02 10:47:47,135 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706558.dot'.
+2025-06-02 10:47:47,135 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706558.dot
+2025-06-02 10:47:47,149 - INFO - Parsed 366 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706558.dot'.
+2025-06-02 10:47:47,177 - INFO - Parsed 4260 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706558.dot'.
+2025-06-02 10:47:47,177 - INFO - Processing node updates/additions.
+2025-06-02 10:47:47,181 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:47,204 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:47,205 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:47,205 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:47,208 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:47,215 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:47,216 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:47,216 - INFO - Updated main graph to 366 nodes and 4260 edges.
+2025-06-02 10:47:47,216 - INFO - Performing online update...
+2025-06-02 10:47:47,216 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:48,601 - INFO - Online update finished. Average loss: 0.5590, Learning rate: 0.000001
+2025-06-02 10:47:48,604 - INFO - Online update complete. Loss: 0.5590
+2025-06-02 10:47:48,604 - INFO - Running anomaly detection...
+2025-06-02 10:47:48,604 - INFO - Starting anomaly detection.
+2025-06-02 10:47:48,615 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104748_update_9.json
+2025-06-02 10:47:48,615 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:48,627 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104748_update_9.pth
+2025-06-02 10:47:48,627 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706558.dot): 0.4840
+2025-06-02 10:47:48,627 - WARNING - Detected 3 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:48,627 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2226, MLP Score: 0.4955
+2025-06-02 10:47:48,627 - WARNING -   Node ID: 8.8.8.8, Recon Error: 0.0841, MLP Score: 0.5112
+2025-06-02 10:47:48,628 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.3131, MLP Score: 0.4965
+2025-06-02 10:47:48,628 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:48,628 - INFO - 
+--- Processing file: nw_graph_encoded_1748706618.dot (Timestamp: 2025-05-31 17:50:18) ---
+2025-06-02 10:47:48,628 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706618.dot
+2025-06-02 10:47:48,628 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706618.dot'.
+2025-06-02 10:47:48,628 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706618.dot
+2025-06-02 10:47:48,644 - INFO - Parsed 372 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706618.dot'.
+2025-06-02 10:47:48,681 - INFO - Parsed 4358 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706618.dot'.
+2025-06-02 10:47:48,682 - INFO - Processing node updates/additions.
+2025-06-02 10:47:48,687 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:48,718 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:48,719 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:48,719 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:48,723 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:48,732 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:48,732 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:48,733 - INFO - Updated main graph to 372 nodes and 4358 edges.
+2025-06-02 10:47:48,733 - INFO - Performing online update...
+2025-06-02 10:47:48,733 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:49,561 - INFO - Online update finished. Average loss: 0.5591, Learning rate: 0.000001
+2025-06-02 10:47:49,565 - INFO - Online update complete. Loss: 0.5591
+2025-06-02 10:47:49,565 - INFO - Running anomaly detection...
+2025-06-02 10:47:49,565 - INFO - Starting anomaly detection.
+2025-06-02 10:47:49,578 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104749_update_10.json
+2025-06-02 10:47:49,578 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:49,594 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104749_update_10.pth
+2025-06-02 10:47:49,595 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706618.dot): 0.4847
+2025-06-02 10:47:49,595 - WARNING - Detected 4 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:49,595 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2544, MLP Score: 0.4971
+2025-06-02 10:47:49,595 - WARNING -   Node ID: 8.8.8.8, Recon Error: 0.0799, MLP Score: 0.5106
+2025-06-02 10:47:49,595 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0569, MLP Score: 0.4909
+2025-06-02 10:47:49,596 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2785, MLP Score: 0.4984
+2025-06-02 10:47:49,596 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:49,596 - INFO - 
+--- Processing file: nw_graph_encoded_1748706678.dot (Timestamp: 2025-05-31 17:51:18) ---
+2025-06-02 10:47:49,596 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706678.dot
+2025-06-02 10:47:49,596 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706678.dot'.
+2025-06-02 10:47:49,596 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706678.dot
+2025-06-02 10:47:49,611 - INFO - Parsed 392 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706678.dot'.
+2025-06-02 10:47:49,643 - INFO - Parsed 4460 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706678.dot'.
+2025-06-02 10:47:49,643 - INFO - Processing node updates/additions.
+2025-06-02 10:47:49,648 - INFO - Processing edge updates/additions.
+2025-06-02 10:47:49,682 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:47:49,685 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:47:49,685 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:47:49,692 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:47:49,708 - INFO - No edge feature scaling applied.
+2025-06-02 10:47:49,708 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:47:49,709 - INFO - Updated main graph to 392 nodes and 4460 edges.
+2025-06-02 10:47:49,709 - INFO - Performing online update...
+2025-06-02 10:47:49,709 - INFO - Starting online update for 25 steps.
+2025-06-02 10:47:50,948 - INFO - Online update finished. Average loss: 0.5589, Learning rate: 0.000001
+2025-06-02 10:47:50,951 - INFO - Online update complete. Loss: 0.5589
+2025-06-02 10:47:50,951 - INFO - Running anomaly detection...
+2025-06-02 10:47:50,952 - INFO - Starting anomaly detection.
+2025-06-02 10:47:50,964 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104750_update_11.json
+2025-06-02 10:47:50,965 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:47:50,975 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104750_update_11.pth
+2025-06-02 10:47:50,975 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706678.dot): 0.4835
+2025-06-02 10:47:50,975 - WARNING - Detected 3 anomalous nodes (reconstruction-based):
+2025-06-02 10:47:50,976 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2648, MLP Score: 0.4978
+2025-06-02 10:47:50,976 - WARNING -   Node ID: 8.8.8.8, Recon Error: 0.0872, MLP Score: 0.5113
+2025-06-02 10:47:50,976 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2866, MLP Score: 0.4987
+2025-06-02 10:47:50,976 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:47:52,376 - INFO - Embeddings visualization saved to vis/embeddings_11_updates_20250602_104750.png
+2025-06-02 10:47:52,376 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:47:52,378 - INFO - Starting visualization of node features.
+2025-06-02 10:47:52,378 - INFO - Graph has 392 nodes and 29 features.
+2025-06-02 10:47:52,378 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:47:52,378 - INFO - Calculating feature statistics:
+2025-06-02 10:47:52,379 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,379 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,379 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,379 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 6, 'mean': np.float32(-1.1677645e-07), 'std': np.float32(0.9999999), 'min': np.float32(-0.83143497), 'max': np.float32(2.5495038)}
+2025-06-02 10:47:52,379 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 2, 'mean': np.float32(9.73137e-09), 'std': np.float32(1.0), 'min': np.float32(-0.07161149), 'max': np.float32(13.96424)}
+2025-06-02 10:47:52,379 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 2, 'mean': np.float32(9.73137e-09), 'std': np.float32(1.0), 'min': np.float32(-0.07161149), 'max': np.float32(13.96424)}
+2025-06-02 10:47:52,380 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(-1.946274e-08), 'std': np.float32(1.0), 'min': np.float32(-1.5616006), 'max': np.float32(0.6403686)}
+2025-06-02 10:47:52,380 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,380 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(-5.1089696e-08), 'std': np.float32(0.9999999), 'min': np.float32(-0.33709994), 'max': np.float32(2.9664793)}
+2025-06-02 10:47:52,380 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(-2.9194112e-08), 'std': np.float32(0.9999999), 'min': np.float32(-5.885267), 'max': np.float32(0.16991584)}
+2025-06-02 10:47:52,380 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 6, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-1.2950063), 'max': np.float32(1.6841162)}
+2025-06-02 10:47:52,380 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 8, 'mean': np.float32(-1.70299e-08), 'std': np.float32(0.99999994), 'min': np.float32(-1.978139), 'max': np.float32(6.5944595)}
+2025-06-02 10:47:52,380 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(7.298528e-09), 'std': np.float32(1.0), 'min': np.float32(-3.4737108), 'max': np.float32(0.28787658)}
+2025-06-02 10:47:52,380 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(3.892548e-08), 'std': np.float32(1.0), 'min': np.float32(-0.42450148), 'max': np.float32(4.5427995)}
+2025-06-02 10:47:52,381 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,381 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(0.99999994), 'min': np.float32(-0.15329283), 'max': np.float32(6.523462)}
+2025-06-02 10:47:52,381 - INFO - - service_1: {'name': 'service_1', 'unique': 6, 'mean': np.float32(1.946274e-08), 'std': np.float32(1.0), 'min': np.float32(-1.1766529), 'max': np.float32(1.44967)}
+2025-06-02 10:47:52,381 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-1.6399794), 'max': np.float32(0.7600758)}
+2025-06-02 10:47:52,381 - INFO - - service_3: {'name': 'service_3', 'unique': 4, 'mean': np.float32(2.9194112e-08), 'std': np.float32(0.9999998), 'min': np.float32(-4.8499026), 'max': np.float32(0.2373041)}
+2025-06-02 10:47:52,381 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(3.892548e-08), 'std': np.float32(1.0), 'min': np.float32(-0.42450148), 'max': np.float32(4.5427995)}
+2025-06-02 10:47:52,381 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(-4.865685e-09), 'std': np.float32(0.9999999), 'min': np.float32(-6.180615), 'max': np.float32(0.1617962)}
+2025-06-02 10:47:52,382 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 4, 'mean': np.float32(7.298528e-09), 'std': np.float32(1.0), 'min': np.float32(-0.24409828), 'max': np.float32(9.569904)}
+2025-06-02 10:47:52,382 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(-7.298528e-09), 'std': np.float32(1.0), 'min': np.float32(-0.28787658), 'max': np.float32(3.4737108)}
+2025-06-02 10:47:52,382 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,382 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,382 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,382 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,382 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:52,382 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(3.892548e-08), 'std': np.float32(1.0), 'min': np.float32(-1.7609254), 'max': np.float32(4.329805)}
+2025-06-02 10:47:54,538 - INFO - Node feature visualization saved to vis/node_features_20250602_104753.png
+2025-06-02 10:47:54,538 - INFO - Finished visualization of node features.
+2025-06-02 10:47:54,538 - INFO - Performing additional feature analysis:
+2025-06-02 10:47:54,539 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:47:54,543 - INFO - Starting visualization of edge features.
+2025-06-02 10:47:54,544 - INFO - Graph has 4460 edges and 7 edge features.
+2025-06-02 10:47:54,544 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:47:54,544 - INFO - Calculating edge feature statistics:
+2025-06-02 10:47:54,545 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:47:54,546 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.04865471), 'std': np.float32(0.21514513), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.34013453), 'std': np.float32(0.4737542), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.61121076), 'std': np.float32(0.48747528), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0029147982), 'std': np.float32(0.053910132), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.5600897), 'std': np.float32(0.49637607), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.61121076), 'std': np.float32(0.48747528), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0029147982), 'std': np.float32(0.053910132), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.5600897), 'std': np.float32(0.49637607), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.4369955), 'std': np.float32(0.49601457), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:47:54,546 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:47:58,574 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104756.png
+2025-06-02 10:47:58,575 - INFO - Finished visualization of edge features.
+2025-06-02 10:47:58,575 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:47:58,575 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:47:58,576 - INFO - - Highest correlation (0.99) between features: 'protocol_TCP' and 'protocol_UDP'.
+2025-06-02 10:47:58,580 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:47:58,581 - INFO - Graph has 4460 edges and 7 edge features.
+2025-06-02 10:47:58,581 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:47:59,230 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104758_summary.png
+2025-06-02 10:47:59,936 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104758_pca_3d.png
+2025-06-02 10:48:00,275 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104758_pca_variance.png
+2025-06-02 10:48:00,275 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:48:00,276 - INFO - 
+--- Processing file: nw_graph_encoded_1748706738.dot (Timestamp: 2025-05-31 17:52:18) ---
+2025-06-02 10:48:00,276 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706738.dot
+2025-06-02 10:48:00,276 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706738.dot'.
+2025-06-02 10:48:00,276 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706738.dot
+2025-06-02 10:48:00,295 - INFO - Parsed 406 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706738.dot'.
+2025-06-02 10:48:00,341 - INFO - Parsed 4753 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706738.dot'.
+2025-06-02 10:48:00,341 - INFO - Processing node updates/additions.
+2025-06-02 10:48:00,349 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:00,400 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:00,403 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:00,403 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:00,412 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:00,437 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:00,438 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:00,440 - INFO - Updated main graph to 406 nodes and 4753 edges.
+2025-06-02 10:48:00,441 - INFO - Performing online update...
+2025-06-02 10:48:00,441 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:02,786 - INFO - Online update finished. Average loss: 0.5604, Learning rate: 0.000001
+2025-06-02 10:48:02,790 - INFO - Online update complete. Loss: 0.5604
+2025-06-02 10:48:02,790 - INFO - Running anomaly detection...
+2025-06-02 10:48:02,790 - INFO - Starting anomaly detection.
+2025-06-02 10:48:02,810 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104802_update_12.json
+2025-06-02 10:48:02,811 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:02,825 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104802_update_12.pth
+2025-06-02 10:48:02,825 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706738.dot): 0.4847
+2025-06-02 10:48:02,826 - WARNING - Detected 5 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:02,826 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0635, MLP Score: 0.4957
+2025-06-02 10:48:02,826 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2723, MLP Score: 0.4976
+2025-06-02 10:48:02,826 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0594, MLP Score: 0.4956
+2025-06-02 10:48:02,826 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2909, MLP Score: 0.4986
+2025-06-02 10:48:02,826 - WARNING -   Node ID: 192.168.209.1, Recon Error: 0.0619, MLP Score: 0.5048
+2025-06-02 10:48:02,826 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:02,826 - INFO - 
+--- Processing file: nw_graph_encoded_1748706798.dot (Timestamp: 2025-05-31 17:53:18) ---
+2025-06-02 10:48:02,826 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706798.dot
+2025-06-02 10:48:02,826 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706798.dot'.
+2025-06-02 10:48:02,826 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706798.dot
+2025-06-02 10:48:02,846 - INFO - Parsed 417 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706798.dot'.
+2025-06-02 10:48:02,888 - INFO - Parsed 4870 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706798.dot'.
+2025-06-02 10:48:02,888 - INFO - Processing node updates/additions.
+2025-06-02 10:48:02,896 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:02,947 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:02,951 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:02,951 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:02,960 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:02,983 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:02,984 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:02,985 - INFO - Updated main graph to 417 nodes and 4870 edges.
+2025-06-02 10:48:02,986 - INFO - Performing online update...
+2025-06-02 10:48:02,986 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:05,061 - INFO - Online update finished. Average loss: 0.5599, Learning rate: 0.000000
+2025-06-02 10:48:05,065 - INFO - Online update complete. Loss: 0.5599
+2025-06-02 10:48:05,065 - INFO - Running anomaly detection...
+2025-06-02 10:48:05,065 - INFO - Starting anomaly detection.
+2025-06-02 10:48:05,087 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104805_update_13.json
+2025-06-02 10:48:05,087 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:05,100 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104805_update_13.pth
+2025-06-02 10:48:05,100 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706798.dot): 0.4843
+2025-06-02 10:48:05,100 - WARNING - Detected 7 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:05,101 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0559, MLP Score: 0.5004
+2025-06-02 10:48:05,101 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0688, MLP Score: 0.4958
+2025-06-02 10:48:05,102 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2436, MLP Score: 0.4976
+2025-06-02 10:48:05,102 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0688, MLP Score: 0.4958
+2025-06-02 10:48:05,102 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0625, MLP Score: 0.4925
+2025-06-02 10:48:05,102 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:05,102 - INFO - 
+--- Processing file: nw_graph_encoded_1748706858.dot (Timestamp: 2025-05-31 17:54:18) ---
+2025-06-02 10:48:05,102 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706858.dot
+2025-06-02 10:48:05,102 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706858.dot'.
+2025-06-02 10:48:05,102 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706858.dot
+2025-06-02 10:48:05,123 - INFO - Parsed 429 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706858.dot'.
+2025-06-02 10:48:05,177 - INFO - Parsed 4986 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706858.dot'.
+2025-06-02 10:48:05,177 - INFO - Processing node updates/additions.
+2025-06-02 10:48:05,185 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:05,247 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:05,250 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:05,250 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:05,259 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:05,283 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:05,284 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:05,286 - INFO - Updated main graph to 429 nodes and 4986 edges.
+2025-06-02 10:48:05,286 - INFO - Performing online update...
+2025-06-02 10:48:05,286 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:08,506 - INFO - Online update finished. Average loss: 0.5598, Learning rate: 0.000000
+2025-06-02 10:48:08,517 - INFO - Online update complete. Loss: 0.5598
+2025-06-02 10:48:08,517 - INFO - Running anomaly detection...
+2025-06-02 10:48:08,519 - INFO - Starting anomaly detection.
+2025-06-02 10:48:08,568 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104808_update_14.json
+2025-06-02 10:48:08,570 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:08,595 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104808_update_14.pth
+2025-06-02 10:48:08,595 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706858.dot): 0.4831
+2025-06-02 10:48:08,595 - WARNING - Detected 7 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:08,595 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0559, MLP Score: 0.4994
+2025-06-02 10:48:08,596 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0801, MLP Score: 0.4959
+2025-06-02 10:48:08,596 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2390, MLP Score: 0.4984
+2025-06-02 10:48:08,596 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0801, MLP Score: 0.4959
+2025-06-02 10:48:08,596 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0618, MLP Score: 0.4930
+2025-06-02 10:48:08,596 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:08,596 - INFO - 
+--- Processing file: nw_graph_encoded_1748706918.dot (Timestamp: 2025-05-31 17:55:18) ---
+2025-06-02 10:48:08,596 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706918.dot
+2025-06-02 10:48:08,596 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706918.dot'.
+2025-06-02 10:48:08,596 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706918.dot
+2025-06-02 10:48:08,616 - INFO - Parsed 454 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706918.dot'.
+2025-06-02 10:48:08,660 - INFO - Parsed 5292 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706918.dot'.
+2025-06-02 10:48:08,661 - INFO - Processing node updates/additions.
+2025-06-02 10:48:08,669 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:08,719 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:08,723 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:08,723 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:08,734 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:08,778 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:08,779 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:08,783 - INFO - Updated main graph to 454 nodes and 5292 edges.
+2025-06-02 10:48:08,783 - INFO - Performing online update...
+2025-06-02 10:48:08,784 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:10,575 - INFO - Online update finished. Average loss: 0.5600, Learning rate: 0.000000
+2025-06-02 10:48:10,590 - INFO - Online update complete. Loss: 0.5600
+2025-06-02 10:48:10,591 - INFO - Running anomaly detection...
+2025-06-02 10:48:10,592 - INFO - Starting anomaly detection.
+2025-06-02 10:48:10,628 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104810_update_15.json
+2025-06-02 10:48:10,629 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:10,639 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104810_update_15.pth
+2025-06-02 10:48:10,639 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706918.dot): 0.4834
+2025-06-02 10:48:10,640 - WARNING - Detected 7 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:10,640 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0545, MLP Score: 0.4992
+2025-06-02 10:48:10,640 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0848, MLP Score: 0.4964
+2025-06-02 10:48:10,640 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2509, MLP Score: 0.4990
+2025-06-02 10:48:10,640 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0848, MLP Score: 0.4964
+2025-06-02 10:48:10,640 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0639, MLP Score: 0.4931
+2025-06-02 10:48:10,640 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:10,640 - INFO - 
+--- Processing file: nw_graph_encoded_1748706978.dot (Timestamp: 2025-05-31 17:56:18) ---
+2025-06-02 10:48:10,640 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748706978.dot
+2025-06-02 10:48:10,640 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748706978.dot'.
+2025-06-02 10:48:10,640 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748706978.dot
+2025-06-02 10:48:10,661 - INFO - Parsed 460 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748706978.dot'.
+2025-06-02 10:48:10,717 - INFO - Parsed 5404 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748706978.dot'.
+2025-06-02 10:48:10,717 - INFO - Processing node updates/additions.
+2025-06-02 10:48:10,726 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:10,779 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:10,783 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:10,783 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:10,794 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:10,833 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:10,834 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:10,838 - INFO - Updated main graph to 460 nodes and 5404 edges.
+2025-06-02 10:48:10,838 - INFO - Performing online update...
+2025-06-02 10:48:10,839 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:12,717 - INFO - Online update finished. Average loss: 0.5597, Learning rate: 0.000000
+2025-06-02 10:48:12,720 - INFO - Online update complete. Loss: 0.5597
+2025-06-02 10:48:12,720 - INFO - Running anomaly detection...
+2025-06-02 10:48:12,720 - INFO - Starting anomaly detection.
+2025-06-02 10:48:12,738 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104812_update_16.json
+2025-06-02 10:48:12,738 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:12,747 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104812_update_16.pth
+2025-06-02 10:48:12,747 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748706978.dot): 0.4837
+2025-06-02 10:48:12,748 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:12,748 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0572, MLP Score: 0.4984
+2025-06-02 10:48:12,748 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0985, MLP Score: 0.4965
+2025-06-02 10:48:12,748 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2404, MLP Score: 0.4993
+2025-06-02 10:48:12,748 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0985, MLP Score: 0.4965
+2025-06-02 10:48:12,748 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.3082, MLP Score: 0.5003
+2025-06-02 10:48:12,748 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:13,645 - INFO - Embeddings visualization saved to vis/embeddings_16_updates_20250602_104812.png
+2025-06-02 10:48:13,645 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:48:13,647 - INFO - Starting visualization of node features.
+2025-06-02 10:48:13,648 - INFO - Graph has 460 nodes and 29 features.
+2025-06-02 10:48:13,648 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:48:13,648 - INFO - Calculating feature statistics:
+2025-06-02 10:48:13,648 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,648 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,648 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,648 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 8, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-0.87440383), 'max': np.float32(2.2470822)}
+2025-06-02 10:48:13,649 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 2, 'mean': np.float32(-9.329423e-09), 'std': np.float32(1.0), 'min': np.float32(-0.06608186), 'max': np.float32(15.132746)}
+2025-06-02 10:48:13,649 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 2, 'mean': np.float32(-9.329423e-09), 'std': np.float32(1.0), 'min': np.float32(-0.06608186), 'max': np.float32(15.132746)}
+2025-06-02 10:48:13,649 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(-1.658564e-08), 'std': np.float32(0.99999994), 'min': np.float32(-1.6105124), 'max': np.float32(0.6209204)}
+2025-06-02 10:48:13,649 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,649 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(-8.29282e-09), 'std': np.float32(1.0), 'min': np.float32(-0.3128131), 'max': np.float32(3.1967971)}
+2025-06-02 10:48:13,649 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(3.317128e-08), 'std': np.float32(0.9999999), 'min': np.float32(-6.388911), 'max': np.float32(0.1565212)}
+2025-06-02 10:48:13,649 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 8, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-1.3110807), 'max': np.float32(1.4645143)}
+2025-06-02 10:48:13,649 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 8, 'mean': np.float32(-1.0366025e-08), 'std': np.float32(0.99999994), 'min': np.float32(-2.0466213), 'max': np.float32(7.0215955)}
+2025-06-02 10:48:13,650 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(2.3841858e-08), 'std': np.float32(0.99999994), 'min': np.float32(-3.597137), 'max': np.float32(0.27799886)}
+2025-06-02 10:48:13,650 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(1.658564e-08), 'std': np.float32(1.0), 'min': np.float32(-0.48507914), 'max': np.float32(4.2125297)}
+2025-06-02 10:48:13,650 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,650 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(2.487846e-08), 'std': np.float32(0.9999999), 'min': np.float32(-0.12430824), 'max': np.float32(8.044519)}
+2025-06-02 10:48:13,650 - INFO - - service_1: {'name': 'service_1', 'unique': 6, 'mean': np.float32(-2.3841858e-08), 'std': np.float32(1.0), 'min': np.float32(-1.225823), 'max': np.float32(1.3127413)}
+2025-06-02 10:48:13,650 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(3.731769e-08), 'std': np.float32(1.0), 'min': np.float32(-1.5126266), 'max': np.float32(0.836943)}
+2025-06-02 10:48:13,650 - INFO - - service_3: {'name': 'service_3', 'unique': 4, 'mean': np.float32(0.0), 'std': np.float32(0.99999994), 'min': np.float32(-4.733364), 'max': np.float32(0.24424282)}
+2025-06-02 10:48:13,650 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(1.658564e-08), 'std': np.float32(1.0), 'min': np.float32(-0.48507914), 'max': np.float32(4.2125297)}
+2025-06-02 10:48:13,650 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(1.8658845e-08), 'std': np.float32(0.99999994), 'min': np.float32(-6.388911), 'max': np.float32(0.1565212)}
+2025-06-02 10:48:13,651 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 4, 'mean': np.float32(-1.0366025e-08), 'std': np.float32(1.0), 'min': np.float32(-0.23718596), 'max': np.float32(10.153817)}
+2025-06-02 10:48:13,651 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(-2.3841858e-08), 'std': np.float32(0.99999994), 'min': np.float32(-0.27799886), 'max': np.float32(3.597137)}
+2025-06-02 10:48:13,651 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,651 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,651 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,651 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,651 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:13,651 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(-8.29282e-09), 'std': np.float32(1.0), 'min': np.float32(-1.7947273), 'max': np.float32(4.4438715)}
+2025-06-02 10:48:16,316 - INFO - Node feature visualization saved to vis/node_features_20250602_104814.png
+2025-06-02 10:48:16,316 - INFO - Finished visualization of node features.
+2025-06-02 10:48:16,316 - INFO - Performing additional feature analysis:
+2025-06-02 10:48:16,316 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:48:16,320 - INFO - Starting visualization of edge features.
+2025-06-02 10:48:16,320 - INFO - Graph has 5404 edges and 7 edge features.
+2025-06-02 10:48:16,320 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:48:16,320 - INFO - Calculating edge feature statistics:
+2025-06-02 10:48:16,321 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:48:16,321 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.041635826), 'std': np.float32(0.19975556), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,321 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.30514434), 'std': np.float32(0.46046853), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,321 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6532198), 'std': np.float32(0.47594506), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0029607697), 'std': np.float32(0.054332346), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.5233161), 'std': np.float32(0.49945605), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6532198), 'std': np.float32(0.47594506), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0029607697), 'std': np.float32(0.054332346), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.5233161), 'std': np.float32(0.49945605), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.47372317), 'std': np.float32(0.49930903), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:16,322 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:19,352 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104817.png
+2025-06-02 10:48:19,353 - INFO - Finished visualization of edge features.
+2025-06-02 10:48:19,353 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:48:19,353 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:48:19,354 - INFO - - Highest correlation (0.99) between features: 'protocol_UDP' and 'protocol_TCP'.
+2025-06-02 10:48:19,360 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:48:19,361 - INFO - Graph has 5404 edges and 7 edge features.
+2025-06-02 10:48:19,361 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:48:19,954 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104819_summary.png
+2025-06-02 10:48:20,657 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104819_pca_3d.png
+2025-06-02 10:48:20,967 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104819_pca_variance.png
+2025-06-02 10:48:20,968 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:48:20,968 - INFO - 
+--- Processing file: nw_graph_encoded_1748707038.dot (Timestamp: 2025-05-31 17:57:18) ---
+2025-06-02 10:48:20,968 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707038.dot
+2025-06-02 10:48:20,968 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707038.dot'.
+2025-06-02 10:48:20,968 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707038.dot
+2025-06-02 10:48:20,990 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707038.dot'.
+2025-06-02 10:48:21,043 - INFO - Parsed 5441 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707038.dot'.
+2025-06-02 10:48:21,043 - INFO - Processing node updates/additions.
+2025-06-02 10:48:21,052 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:21,106 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:21,108 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:21,109 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:21,117 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:21,137 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:21,137 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:21,140 - INFO - Updated main graph to 461 nodes and 5441 edges.
+2025-06-02 10:48:21,140 - INFO - Performing online update...
+2025-06-02 10:48:21,140 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:23,634 - INFO - Online update finished. Average loss: 0.5595, Learning rate: 0.000000
+2025-06-02 10:48:23,638 - INFO - Online update complete. Loss: 0.5595
+2025-06-02 10:48:23,638 - INFO - Running anomaly detection...
+2025-06-02 10:48:23,638 - INFO - Starting anomaly detection.
+2025-06-02 10:48:23,660 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104823_update_17.json
+2025-06-02 10:48:23,660 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:23,669 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104823_update_17.pth
+2025-06-02 10:48:23,669 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707038.dot): 0.4843
+2025-06-02 10:48:23,669 - WARNING - Detected 7 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:23,669 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0562, MLP Score: 0.4992
+2025-06-02 10:48:23,669 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0940, MLP Score: 0.4961
+2025-06-02 10:48:23,670 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2457, MLP Score: 0.4989
+2025-06-02 10:48:23,670 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0940, MLP Score: 0.4961
+2025-06-02 10:48:23,670 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0539, MLP Score: 0.4973
+2025-06-02 10:48:23,670 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:23,670 - INFO - 
+--- Processing file: nw_graph_encoded_1748707098.dot (Timestamp: 2025-05-31 17:58:18) ---
+2025-06-02 10:48:23,670 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707098.dot
+2025-06-02 10:48:23,670 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707098.dot'.
+2025-06-02 10:48:23,670 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707098.dot
+2025-06-02 10:48:23,690 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707098.dot'.
+2025-06-02 10:48:23,741 - INFO - Parsed 5443 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707098.dot'.
+2025-06-02 10:48:23,742 - INFO - Processing node updates/additions.
+2025-06-02 10:48:23,751 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:23,802 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:23,803 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:23,804 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:23,811 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:23,829 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:23,829 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:23,830 - INFO - Updated main graph to 461 nodes and 5443 edges.
+2025-06-02 10:48:23,830 - INFO - Performing online update...
+2025-06-02 10:48:23,830 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:25,982 - INFO - Online update finished. Average loss: 0.5595, Learning rate: 0.000000
+2025-06-02 10:48:26,005 - INFO - Online update complete. Loss: 0.5595
+2025-06-02 10:48:26,006 - INFO - Running anomaly detection...
+2025-06-02 10:48:26,008 - INFO - Starting anomaly detection.
+2025-06-02 10:48:26,036 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104826_update_18.json
+2025-06-02 10:48:26,036 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:26,046 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104826_update_18.pth
+2025-06-02 10:48:26,047 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707098.dot): 0.4843
+2025-06-02 10:48:26,047 - WARNING - Detected 7 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:26,047 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0562, MLP Score: 0.4991
+2025-06-02 10:48:26,047 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0941, MLP Score: 0.4962
+2025-06-02 10:48:26,047 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2456, MLP Score: 0.4989
+2025-06-02 10:48:26,047 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0941, MLP Score: 0.4962
+2025-06-02 10:48:26,047 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0539, MLP Score: 0.4973
+2025-06-02 10:48:26,047 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:26,047 - INFO - 
+--- Processing file: nw_graph_encoded_1748707158.dot (Timestamp: 2025-05-31 17:59:18) ---
+2025-06-02 10:48:26,047 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707158.dot
+2025-06-02 10:48:26,047 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707158.dot'.
+2025-06-02 10:48:26,047 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707158.dot
+2025-06-02 10:48:26,068 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707158.dot'.
+2025-06-02 10:48:26,114 - INFO - Parsed 5444 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707158.dot'.
+2025-06-02 10:48:26,114 - INFO - Processing node updates/additions.
+2025-06-02 10:48:26,122 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:26,179 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:26,182 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:26,182 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:26,194 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:26,225 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:26,226 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:26,229 - INFO - Updated main graph to 461 nodes and 5444 edges.
+2025-06-02 10:48:26,229 - INFO - Performing online update...
+2025-06-02 10:48:26,230 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:28,502 - INFO - Online update finished. Average loss: 0.5594, Learning rate: 0.000000
+2025-06-02 10:48:28,505 - INFO - Online update complete. Loss: 0.5594
+2025-06-02 10:48:28,505 - INFO - Running anomaly detection...
+2025-06-02 10:48:28,505 - INFO - Starting anomaly detection.
+2025-06-02 10:48:28,525 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104828_update_19.json
+2025-06-02 10:48:28,526 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:28,535 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104828_update_19.pth
+2025-06-02 10:48:28,535 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707158.dot): 0.4849
+2025-06-02 10:48:28,536 - WARNING - Detected 7 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:28,536 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0562, MLP Score: 0.4991
+2025-06-02 10:48:28,536 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4962
+2025-06-02 10:48:28,536 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2534, MLP Score: 0.4986
+2025-06-02 10:48:28,536 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:28,536 - WARNING -   Node ID: 192.168.27.11, Recon Error: 0.0538, MLP Score: 0.4973
+2025-06-02 10:48:28,536 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:28,536 - INFO - 
+--- Processing file: nw_graph_encoded_1748707218.dot (Timestamp: 2025-05-31 18:00:18) ---
+2025-06-02 10:48:28,536 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707218.dot
+2025-06-02 10:48:28,536 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707218.dot'.
+2025-06-02 10:48:28,536 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707218.dot
+2025-06-02 10:48:28,566 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707218.dot'.
+2025-06-02 10:48:28,612 - INFO - Parsed 5447 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707218.dot'.
+2025-06-02 10:48:28,612 - INFO - Processing node updates/additions.
+2025-06-02 10:48:28,620 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:28,674 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:28,677 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:28,677 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:28,685 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:28,706 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:28,707 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:28,709 - INFO - Updated main graph to 461 nodes and 5447 edges.
+2025-06-02 10:48:28,710 - INFO - Performing online update...
+2025-06-02 10:48:28,710 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:30,839 - INFO - Online update finished. Average loss: 0.5594, Learning rate: 0.000000
+2025-06-02 10:48:30,842 - INFO - Online update complete. Loss: 0.5594
+2025-06-02 10:48:30,842 - INFO - Running anomaly detection...
+2025-06-02 10:48:30,842 - INFO - Starting anomaly detection.
+2025-06-02 10:48:30,870 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104830_update_20.json
+2025-06-02 10:48:30,870 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:30,888 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104830_update_20.pth
+2025-06-02 10:48:30,892 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707218.dot): 0.4849
+2025-06-02 10:48:30,892 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:30,892 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:48:30,893 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0922, MLP Score: 0.4962
+2025-06-02 10:48:30,893 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2534, MLP Score: 0.4986
+2025-06-02 10:48:30,893 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:30,893 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2969, MLP Score: 0.4998
+2025-06-02 10:48:30,893 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:30,893 - INFO - 
+--- Processing file: nw_graph_encoded_1748707278.dot (Timestamp: 2025-05-31 18:01:18) ---
+2025-06-02 10:48:30,893 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707278.dot
+2025-06-02 10:48:30,893 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707278.dot'.
+2025-06-02 10:48:30,893 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707278.dot
+2025-06-02 10:48:30,915 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707278.dot'.
+2025-06-02 10:48:30,965 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707278.dot'.
+2025-06-02 10:48:30,966 - INFO - Processing node updates/additions.
+2025-06-02 10:48:30,974 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:31,030 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:31,033 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:31,033 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:31,044 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:31,076 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:31,076 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:31,079 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:48:31,079 - INFO - Performing online update...
+2025-06-02 10:48:31,080 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:33,380 - INFO - Online update finished. Average loss: 0.5594, Learning rate: 0.000000
+2025-06-02 10:48:33,392 - INFO - Online update complete. Loss: 0.5594
+2025-06-02 10:48:33,393 - INFO - Running anomaly detection...
+2025-06-02 10:48:33,394 - INFO - Starting anomaly detection.
+2025-06-02 10:48:33,446 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104833_update_21.json
+2025-06-02 10:48:33,448 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:33,477 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104833_update_21.pth
+2025-06-02 10:48:33,478 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707278.dot): 0.4849
+2025-06-02 10:48:33,478 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:33,478 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:48:33,478 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0922, MLP Score: 0.4962
+2025-06-02 10:48:33,478 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2535, MLP Score: 0.4986
+2025-06-02 10:48:33,478 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:33,478 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2969, MLP Score: 0.4998
+2025-06-02 10:48:33,478 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:34,731 - INFO - Embeddings visualization saved to vis/embeddings_21_updates_20250602_104833.png
+2025-06-02 10:48:34,731 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:48:34,733 - INFO - Starting visualization of node features.
+2025-06-02 10:48:34,733 - INFO - Graph has 461 nodes and 29 features.
+2025-06-02 10:48:34,734 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:48:34,734 - INFO - Calculating feature statistics:
+2025-06-02 10:48:34,734 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,734 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,735 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,735 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 9, 'mean': np.float32(-3.3099326e-08), 'std': np.float32(1.0), 'min': np.float32(-0.8743511), 'max': np.float32(2.669173)}
+2025-06-02 10:48:34,735 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 2, 'mean': np.float32(1.9652724e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.066009834), 'max': np.float32(15.149258)}
+2025-06-02 10:48:34,735 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 2, 'mean': np.float32(1.9652724e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.066009834), 'max': np.float32(15.149258)}
+2025-06-02 10:48:34,735 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(2.4824494e-08), 'std': np.float32(1.0), 'min': np.float32(-1.612936), 'max': np.float32(0.6199874)}
+2025-06-02 10:48:34,735 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,735 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(1.0343539e-09), 'std': np.float32(0.99999994), 'min': np.float32(-0.31244048), 'max': np.float32(3.2006097)}
+2025-06-02 10:48:34,736 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(4.1374157e-09), 'std': np.float32(1.0), 'min': np.float32(-6.3960214), 'max': np.float32(0.15634719)}
+2025-06-02 10:48:34,736 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 10, 'mean': np.float32(-3.3099326e-08), 'std': np.float32(0.99999994), 'min': np.float32(-1.2899646), 'max': np.float32(2.116823)}
+2025-06-02 10:48:34,736 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 8, 'mean': np.float32(1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-2.047629), 'max': np.float32(7.028881)}
+2025-06-02 10:48:34,736 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-3.6013465), 'max': np.float32(0.27767393)}
+2025-06-02 10:48:34,736 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(8.2748315e-09), 'std': np.float32(1.0), 'min': np.float32(-0.49120378), 'max': np.float32(4.177764)}
+2025-06-02 10:48:34,736 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,736 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-0.124171264), 'max': np.float32(8.053393)}
+2025-06-02 10:48:34,736 - INFO - - service_1: {'name': 'service_1', 'unique': 6, 'mean': np.float32(2.7927555e-08), 'std': np.float32(1.0), 'min': np.float32(-1.2277129), 'max': np.float32(1.3088727)}
+2025-06-02 10:48:34,737 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(-3.1030616e-08), 'std': np.float32(1.0), 'min': np.float32(-1.5094478), 'max': np.float32(0.83914816)}
+2025-06-02 10:48:34,737 - INFO - - service_3: {'name': 'service_3', 'unique': 4, 'mean': np.float32(4.1374157e-08), 'std': np.float32(0.99999994), 'min': np.float32(-4.73873), 'max': np.float32(0.24396199)}
+2025-06-02 10:48:34,737 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(8.2748315e-09), 'std': np.float32(1.0), 'min': np.float32(-0.49120378), 'max': np.float32(4.177764)}
+2025-06-02 10:48:34,737 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(1.0343539e-09), 'std': np.float32(0.99999994), 'min': np.float32(-6.3960214), 'max': np.float32(0.15634719)}
+2025-06-02 10:48:34,737 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 4, 'mean': np.float32(-9.309185e-09), 'std': np.float32(1.0), 'min': np.float32(-0.2369141), 'max': np.float32(10.164743)}
+2025-06-02 10:48:34,737 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(-1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-0.27767393), 'max': np.float32(3.6013465)}
+2025-06-02 10:48:34,737 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,737 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,738 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,738 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,738 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:34,738 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(8.2748315e-09), 'std': np.float32(0.99999994), 'min': np.float32(-1.7971374), 'max': np.float32(4.447689)}
+2025-06-02 10:48:38,501 - INFO - Node feature visualization saved to vis/node_features_20250602_104836.png
+2025-06-02 10:48:38,501 - INFO - Finished visualization of node features.
+2025-06-02 10:48:38,501 - INFO - Performing additional feature analysis:
+2025-06-02 10:48:38,501 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:48:38,505 - INFO - Starting visualization of edge features.
+2025-06-02 10:48:38,506 - INFO - Graph has 5448 edges and 7 edge features.
+2025-06-02 10:48:38,506 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:48:38,506 - INFO - Calculating edge feature statistics:
+2025-06-02 10:48:38,507 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:48:38,507 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.04148311), 'std': np.float32(0.19940478), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.30469897), 'std': np.float32(0.46027982), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6538179), 'std': np.float32(0.4757521), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0031204112), 'std': np.float32(0.05577342), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.52477974), 'std': np.float32(0.49938557), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6538179), 'std': np.float32(0.4757521), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0031204112), 'std': np.float32(0.05577342), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.52477974), 'std': np.float32(0.49938557), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.47209984), 'std': np.float32(0.49922097), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:48:38,507 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:48:41,919 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104839.png
+2025-06-02 10:48:41,919 - INFO - Finished visualization of edge features.
+2025-06-02 10:48:41,919 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:48:41,919 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:48:41,920 - INFO - - Highest correlation (0.99) between features: 'protocol_TCP' and 'protocol_UDP'.
+2025-06-02 10:48:41,926 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:48:41,926 - INFO - Graph has 5448 edges and 7 edge features.
+2025-06-02 10:48:41,926 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:48:42,504 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104841_summary.png
+2025-06-02 10:48:43,215 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104841_pca_3d.png
+2025-06-02 10:48:43,555 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104841_pca_variance.png
+2025-06-02 10:48:43,555 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:48:43,555 - INFO - 
+--- Processing file: nw_graph_encoded_1748707338.dot (Timestamp: 2025-05-31 18:02:18) ---
+2025-06-02 10:48:43,555 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707338.dot
+2025-06-02 10:48:43,555 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707338.dot'.
+2025-06-02 10:48:43,556 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707338.dot
+2025-06-02 10:48:43,576 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707338.dot'.
+2025-06-02 10:48:43,624 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707338.dot'.
+2025-06-02 10:48:43,624 - INFO - Processing node updates/additions.
+2025-06-02 10:48:43,633 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:43,690 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:43,693 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:43,693 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:43,701 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:43,728 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:43,729 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:43,733 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:48:43,733 - INFO - Performing online update...
+2025-06-02 10:48:43,733 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:45,988 - INFO - Online update finished. Average loss: 0.5594, Learning rate: 0.000000
+2025-06-02 10:48:45,991 - INFO - Online update complete. Loss: 0.5594
+2025-06-02 10:48:45,997 - INFO - Running anomaly detection...
+2025-06-02 10:48:45,998 - INFO - Starting anomaly detection.
+2025-06-02 10:48:46,804 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104846_update_22.json
+2025-06-02 10:48:46,805 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:46,814 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104846_update_22.pth
+2025-06-02 10:48:46,814 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707338.dot): 0.4849
+2025-06-02 10:48:46,814 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:46,814 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:48:46,814 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0922, MLP Score: 0.4962
+2025-06-02 10:48:46,814 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2534, MLP Score: 0.4986
+2025-06-02 10:48:46,814 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:46,814 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2969, MLP Score: 0.4998
+2025-06-02 10:48:46,814 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:46,814 - INFO - 
+--- Processing file: nw_graph_encoded_1748707398.dot (Timestamp: 2025-05-31 18:03:18) ---
+2025-06-02 10:48:46,814 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707398.dot
+2025-06-02 10:48:46,814 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707398.dot'.
+2025-06-02 10:48:46,815 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707398.dot
+2025-06-02 10:48:46,834 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707398.dot'.
+2025-06-02 10:48:46,881 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707398.dot'.
+2025-06-02 10:48:46,881 - INFO - Processing node updates/additions.
+2025-06-02 10:48:46,888 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:46,936 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:46,938 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:46,938 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:46,944 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:46,958 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:46,958 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:46,959 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:48:46,959 - INFO - Performing online update...
+2025-06-02 10:48:46,959 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:50,431 - INFO - Online update finished. Average loss: 0.5594, Learning rate: 0.000000
+2025-06-02 10:48:50,433 - INFO - Online update complete. Loss: 0.5594
+2025-06-02 10:48:50,433 - INFO - Running anomaly detection...
+2025-06-02 10:48:50,433 - INFO - Starting anomaly detection.
+2025-06-02 10:48:50,449 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104850_update_23.json
+2025-06-02 10:48:50,449 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:50,459 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104850_update_23.pth
+2025-06-02 10:48:50,459 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707398.dot): 0.4849
+2025-06-02 10:48:50,459 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:50,460 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:48:50,460 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4962
+2025-06-02 10:48:50,460 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2534, MLP Score: 0.4986
+2025-06-02 10:48:50,460 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:50,460 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2969, MLP Score: 0.4998
+2025-06-02 10:48:50,460 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:50,460 - INFO - 
+--- Processing file: nw_graph_encoded_1748707458.dot (Timestamp: 2025-05-31 18:04:18) ---
+2025-06-02 10:48:50,460 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707458.dot
+2025-06-02 10:48:50,460 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707458.dot'.
+2025-06-02 10:48:50,460 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707458.dot
+2025-06-02 10:48:50,480 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707458.dot'.
+2025-06-02 10:48:50,524 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707458.dot'.
+2025-06-02 10:48:50,525 - INFO - Processing node updates/additions.
+2025-06-02 10:48:50,531 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:50,570 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:50,572 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:50,572 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:50,577 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:50,587 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:50,587 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:50,588 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:48:50,588 - INFO - Performing online update...
+2025-06-02 10:48:50,588 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:51,706 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:48:51,709 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:48:51,709 - INFO - Running anomaly detection...
+2025-06-02 10:48:51,710 - INFO - Starting anomaly detection.
+2025-06-02 10:48:51,727 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104851_update_24.json
+2025-06-02 10:48:51,728 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:51,746 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104851_update_24.pth
+2025-06-02 10:48:51,747 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707458.dot): 0.4849
+2025-06-02 10:48:51,747 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:51,747 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:48:51,747 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4962
+2025-06-02 10:48:51,748 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2533, MLP Score: 0.4986
+2025-06-02 10:48:51,748 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:51,748 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2970, MLP Score: 0.4998
+2025-06-02 10:48:51,748 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:51,748 - INFO - 
+--- Processing file: nw_graph_encoded_1748707518.dot (Timestamp: 2025-05-31 18:05:18) ---
+2025-06-02 10:48:51,749 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707518.dot
+2025-06-02 10:48:51,749 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707518.dot'.
+2025-06-02 10:48:51,749 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707518.dot
+2025-06-02 10:48:51,767 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707518.dot'.
+2025-06-02 10:48:51,805 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707518.dot'.
+2025-06-02 10:48:51,805 - INFO - Processing node updates/additions.
+2025-06-02 10:48:51,810 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:51,849 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:51,851 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:51,851 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:48:51,856 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:48:51,869 - INFO - No edge feature scaling applied.
+2025-06-02 10:48:51,869 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:48:51,870 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:48:51,870 - INFO - Performing online update...
+2025-06-02 10:48:51,870 - INFO - Starting online update for 25 steps.
+2025-06-02 10:48:59,802 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:48:59,805 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:48:59,805 - INFO - Running anomaly detection...
+2025-06-02 10:48:59,805 - INFO - Starting anomaly detection.
+2025-06-02 10:48:59,829 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104859_update_25.json
+2025-06-02 10:48:59,830 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:48:59,861 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104859_update_25.pth
+2025-06-02 10:48:59,861 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707518.dot): 0.4849
+2025-06-02 10:48:59,861 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:48:59,861 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:48:59,861 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:48:59,861 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2533, MLP Score: 0.4986
+2025-06-02 10:48:59,861 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0911, MLP Score: 0.4955
+2025-06-02 10:48:59,862 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2970, MLP Score: 0.4998
+2025-06-02 10:48:59,862 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:48:59,862 - INFO - 
+--- Processing file: nw_graph_encoded_1748707578.dot (Timestamp: 2025-05-31 18:06:18) ---
+2025-06-02 10:48:59,862 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707578.dot
+2025-06-02 10:48:59,862 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707578.dot'.
+2025-06-02 10:48:59,862 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707578.dot
+2025-06-02 10:48:59,882 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707578.dot'.
+2025-06-02 10:48:59,928 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707578.dot'.
+2025-06-02 10:48:59,928 - INFO - Processing node updates/additions.
+2025-06-02 10:48:59,936 - INFO - Processing edge updates/additions.
+2025-06-02 10:48:59,987 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:48:59,990 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:48:59,990 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:00,001 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:00,023 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:00,024 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:00,025 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:00,026 - INFO - Performing online update...
+2025-06-02 10:49:00,026 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:02,340 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:02,347 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:02,347 - INFO - Running anomaly detection...
+2025-06-02 10:49:02,348 - INFO - Starting anomaly detection.
+2025-06-02 10:49:02,374 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104902_update_26.json
+2025-06-02 10:49:02,375 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:02,408 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104902_update_26.pth
+2025-06-02 10:49:02,408 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707578.dot): 0.4849
+2025-06-02 10:49:02,408 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:02,408 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5001
+2025-06-02 10:49:02,408 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:02,408 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2533, MLP Score: 0.4986
+2025-06-02 10:49:02,408 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:02,409 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2970, MLP Score: 0.4998
+2025-06-02 10:49:02,409 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:06,533 - INFO - Embeddings visualization saved to vis/embeddings_26_updates_20250602_104902.png
+2025-06-02 10:49:06,533 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:49:06,533 - INFO - Starting visualization of node features.
+2025-06-02 10:49:06,533 - INFO - Graph has 461 nodes and 29 features.
+2025-06-02 10:49:06,533 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:49:06,533 - INFO - Calculating feature statistics:
+2025-06-02 10:49:06,534 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,534 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,534 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,534 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 9, 'mean': np.float32(-3.3099326e-08), 'std': np.float32(1.0), 'min': np.float32(-0.8743511), 'max': np.float32(2.669173)}
+2025-06-02 10:49:06,534 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 2, 'mean': np.float32(1.9652724e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.066009834), 'max': np.float32(15.149258)}
+2025-06-02 10:49:06,534 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 2, 'mean': np.float32(1.9652724e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.066009834), 'max': np.float32(15.149258)}
+2025-06-02 10:49:06,534 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(2.4824494e-08), 'std': np.float32(1.0), 'min': np.float32(-1.612936), 'max': np.float32(0.6199874)}
+2025-06-02 10:49:06,534 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,534 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(1.0343539e-09), 'std': np.float32(0.99999994), 'min': np.float32(-0.31244048), 'max': np.float32(3.2006097)}
+2025-06-02 10:49:06,534 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(4.1374157e-09), 'std': np.float32(1.0), 'min': np.float32(-6.3960214), 'max': np.float32(0.15634719)}
+2025-06-02 10:49:06,534 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 10, 'mean': np.float32(-3.3099326e-08), 'std': np.float32(0.99999994), 'min': np.float32(-1.2899646), 'max': np.float32(2.116823)}
+2025-06-02 10:49:06,534 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 8, 'mean': np.float32(1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-2.047629), 'max': np.float32(7.028881)}
+2025-06-02 10:49:06,535 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-3.6013465), 'max': np.float32(0.27767393)}
+2025-06-02 10:49:06,535 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(8.2748315e-09), 'std': np.float32(1.0), 'min': np.float32(-0.49120378), 'max': np.float32(4.177764)}
+2025-06-02 10:49:06,535 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,535 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-0.124171264), 'max': np.float32(8.053393)}
+2025-06-02 10:49:06,535 - INFO - - service_1: {'name': 'service_1', 'unique': 6, 'mean': np.float32(2.7927555e-08), 'std': np.float32(1.0), 'min': np.float32(-1.2277129), 'max': np.float32(1.3088727)}
+2025-06-02 10:49:06,535 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(-3.1030616e-08), 'std': np.float32(1.0), 'min': np.float32(-1.5094478), 'max': np.float32(0.83914816)}
+2025-06-02 10:49:06,535 - INFO - - service_3: {'name': 'service_3', 'unique': 4, 'mean': np.float32(4.1374157e-08), 'std': np.float32(0.99999994), 'min': np.float32(-4.73873), 'max': np.float32(0.24396199)}
+2025-06-02 10:49:06,535 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(8.2748315e-09), 'std': np.float32(1.0), 'min': np.float32(-0.49120378), 'max': np.float32(4.177764)}
+2025-06-02 10:49:06,535 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(1.0343539e-09), 'std': np.float32(0.99999994), 'min': np.float32(-6.3960214), 'max': np.float32(0.15634719)}
+2025-06-02 10:49:06,535 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 4, 'mean': np.float32(-9.309185e-09), 'std': np.float32(1.0), 'min': np.float32(-0.2369141), 'max': np.float32(10.164743)}
+2025-06-02 10:49:06,535 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(-1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-0.27767393), 'max': np.float32(3.6013465)}
+2025-06-02 10:49:06,535 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,535 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,536 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,536 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,536 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:06,536 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(8.2748315e-09), 'std': np.float32(0.99999994), 'min': np.float32(-1.7971374), 'max': np.float32(4.447689)}
+2025-06-02 10:49:08,434 - INFO - Node feature visualization saved to vis/node_features_20250602_104907.png
+2025-06-02 10:49:08,434 - INFO - Finished visualization of node features.
+2025-06-02 10:49:08,434 - INFO - Performing additional feature analysis:
+2025-06-02 10:49:08,434 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:49:08,436 - INFO - Starting visualization of edge features.
+2025-06-02 10:49:08,437 - INFO - Graph has 5448 edges and 7 edge features.
+2025-06-02 10:49:08,437 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:49:08,437 - INFO - Calculating edge feature statistics:
+2025-06-02 10:49:08,437 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:49:08,437 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.04148311), 'std': np.float32(0.19940478), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.30469897), 'std': np.float32(0.46027982), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6538179), 'std': np.float32(0.4757521), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0031204112), 'std': np.float32(0.05577342), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.52477974), 'std': np.float32(0.49938557), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6538179), 'std': np.float32(0.4757521), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0031204112), 'std': np.float32(0.05577342), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.52477974), 'std': np.float32(0.49938557), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.47209984), 'std': np.float32(0.49922097), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:08,437 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:10,588 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104909.png
+2025-06-02 10:49:10,589 - INFO - Finished visualization of edge features.
+2025-06-02 10:49:10,589 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:49:10,589 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:49:10,590 - INFO - - Highest correlation (0.99) between features: 'protocol_TCP' and 'protocol_UDP'.
+2025-06-02 10:49:10,593 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:49:10,594 - INFO - Graph has 5448 edges and 7 edge features.
+2025-06-02 10:49:10,594 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:49:11,053 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104910_summary.png
+2025-06-02 10:49:11,448 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104910_pca_3d.png
+2025-06-02 10:49:11,607 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104910_pca_variance.png
+2025-06-02 10:49:11,607 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:49:11,607 - INFO - 
+--- Processing file: nw_graph_encoded_1748707638.dot (Timestamp: 2025-05-31 18:07:18) ---
+2025-06-02 10:49:11,607 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707638.dot
+2025-06-02 10:49:11,607 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707638.dot'.
+2025-06-02 10:49:11,607 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707638.dot
+2025-06-02 10:49:11,619 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707638.dot'.
+2025-06-02 10:49:11,647 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707638.dot'.
+2025-06-02 10:49:11,647 - INFO - Processing node updates/additions.
+2025-06-02 10:49:11,651 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:11,683 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:11,685 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:11,685 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:11,690 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:11,711 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:11,711 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:11,713 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:11,713 - INFO - Performing online update...
+2025-06-02 10:49:11,713 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:12,677 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:12,680 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:12,680 - INFO - Running anomaly detection...
+2025-06-02 10:49:12,680 - INFO - Starting anomaly detection.
+2025-06-02 10:49:12,692 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104912_update_27.json
+2025-06-02 10:49:12,692 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:12,701 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104912_update_27.pth
+2025-06-02 10:49:12,701 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707638.dot): 0.4849
+2025-06-02 10:49:12,701 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:12,702 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5002
+2025-06-02 10:49:12,702 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:12,702 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2532, MLP Score: 0.4986
+2025-06-02 10:49:12,702 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:12,702 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2970, MLP Score: 0.4998
+2025-06-02 10:49:12,702 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:12,702 - INFO - 
+--- Processing file: nw_graph_encoded_1748707698.dot (Timestamp: 2025-05-31 18:08:18) ---
+2025-06-02 10:49:12,702 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707698.dot
+2025-06-02 10:49:12,702 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707698.dot'.
+2025-06-02 10:49:12,702 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707698.dot
+2025-06-02 10:49:12,724 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707698.dot'.
+2025-06-02 10:49:12,764 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707698.dot'.
+2025-06-02 10:49:12,764 - INFO - Processing node updates/additions.
+2025-06-02 10:49:12,769 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:12,801 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:12,803 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:12,803 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:12,807 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:12,817 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:12,817 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:12,818 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:12,818 - INFO - Performing online update...
+2025-06-02 10:49:12,818 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:13,738 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:13,741 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:13,741 - INFO - Running anomaly detection...
+2025-06-02 10:49:13,741 - INFO - Starting anomaly detection.
+2025-06-02 10:49:13,755 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104913_update_28.json
+2025-06-02 10:49:13,756 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:13,765 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104913_update_28.pth
+2025-06-02 10:49:13,765 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707698.dot): 0.4849
+2025-06-02 10:49:13,765 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:13,765 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5002
+2025-06-02 10:49:13,765 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:13,765 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2532, MLP Score: 0.4986
+2025-06-02 10:49:13,765 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:13,766 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2971, MLP Score: 0.4998
+2025-06-02 10:49:13,766 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:13,766 - INFO - 
+--- Processing file: nw_graph_encoded_1748707758.dot (Timestamp: 2025-05-31 18:09:18) ---
+2025-06-02 10:49:13,766 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707758.dot
+2025-06-02 10:49:13,766 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707758.dot'.
+2025-06-02 10:49:13,766 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707758.dot
+2025-06-02 10:49:13,784 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707758.dot'.
+2025-06-02 10:49:13,820 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707758.dot'.
+2025-06-02 10:49:13,820 - INFO - Processing node updates/additions.
+2025-06-02 10:49:13,825 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:13,858 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:13,859 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:13,859 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:13,864 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:13,873 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:13,873 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:13,874 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:13,874 - INFO - Performing online update...
+2025-06-02 10:49:13,874 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:14,598 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:14,600 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:14,600 - INFO - Running anomaly detection...
+2025-06-02 10:49:14,600 - INFO - Starting anomaly detection.
+2025-06-02 10:49:14,609 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104914_update_29.json
+2025-06-02 10:49:14,610 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:14,618 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104914_update_29.pth
+2025-06-02 10:49:14,618 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707758.dot): 0.4849
+2025-06-02 10:49:14,618 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:14,618 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5002
+2025-06-02 10:49:14,619 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:14,619 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2531, MLP Score: 0.4986
+2025-06-02 10:49:14,619 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:14,619 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2971, MLP Score: 0.4998
+2025-06-02 10:49:14,619 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:14,619 - INFO - 
+--- Processing file: nw_graph_encoded_1748707818.dot (Timestamp: 2025-05-31 18:10:18) ---
+2025-06-02 10:49:14,619 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707818.dot
+2025-06-02 10:49:14,619 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707818.dot'.
+2025-06-02 10:49:14,619 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707818.dot
+2025-06-02 10:49:14,638 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707818.dot'.
+2025-06-02 10:49:14,673 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707818.dot'.
+2025-06-02 10:49:14,673 - INFO - Processing node updates/additions.
+2025-06-02 10:49:14,678 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:14,708 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:14,709 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:14,709 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:14,713 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:15,027 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:15,027 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:15,028 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:15,028 - INFO - Performing online update...
+2025-06-02 10:49:15,028 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:15,891 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:15,896 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:15,896 - INFO - Running anomaly detection...
+2025-06-02 10:49:15,897 - INFO - Starting anomaly detection.
+2025-06-02 10:49:15,909 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104915_update_30.json
+2025-06-02 10:49:15,909 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:15,918 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104915_update_30.pth
+2025-06-02 10:49:15,918 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707818.dot): 0.4849
+2025-06-02 10:49:15,918 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:15,918 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5002
+2025-06-02 10:49:15,918 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:15,918 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2531, MLP Score: 0.4987
+2025-06-02 10:49:15,918 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:15,918 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2971, MLP Score: 0.4998
+2025-06-02 10:49:15,918 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:15,918 - INFO - 
+--- Processing file: nw_graph_encoded_1748707878.dot (Timestamp: 2025-05-31 18:11:18) ---
+2025-06-02 10:49:15,918 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707878.dot
+2025-06-02 10:49:15,918 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707878.dot'.
+2025-06-02 10:49:15,918 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707878.dot
+2025-06-02 10:49:15,938 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707878.dot'.
+2025-06-02 10:49:15,977 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707878.dot'.
+2025-06-02 10:49:15,977 - INFO - Processing node updates/additions.
+2025-06-02 10:49:15,982 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:16,014 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:16,015 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:16,015 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:16,019 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:16,029 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:16,029 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:16,029 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:16,029 - INFO - Performing online update...
+2025-06-02 10:49:16,030 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:17,221 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:17,224 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:17,225 - INFO - Running anomaly detection...
+2025-06-02 10:49:17,225 - INFO - Starting anomaly detection.
+2025-06-02 10:49:17,239 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104917_update_31.json
+2025-06-02 10:49:17,240 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:17,259 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104917_update_31.pth
+2025-06-02 10:49:17,259 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707878.dot): 0.4849
+2025-06-02 10:49:17,259 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:17,260 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5002
+2025-06-02 10:49:17,260 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:17,260 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2531, MLP Score: 0.4987
+2025-06-02 10:49:17,260 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:17,260 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2971, MLP Score: 0.4998
+2025-06-02 10:49:17,261 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:17,833 - INFO - Embeddings visualization saved to vis/embeddings_31_updates_20250602_104917.png
+2025-06-02 10:49:17,833 - INFO - Performing visualization of node and edge features.
+2025-06-02 10:49:17,834 - INFO - Starting visualization of node features.
+2025-06-02 10:49:17,834 - INFO - Graph has 461 nodes and 29 features.
+2025-06-02 10:49:17,834 - INFO - Feature names: encoded_feature_count, ever_connected_to_privileged_port, ever_listened_on_privileged_port, first_seen_seconds, has_http_error_4xx, has_http_error_5xx, has_ssl_history, has_ssl_resumption, has_ssl_server_name, incoming_connection_ratio, last_seen_seconds, most_freq_conn_state, most_freq_http_version, most_freq_proto, most_freq_ssl_version, outgoing_connection_ratio, service_1, service_2, service_3, top_proto_1, top_user_agent_1, unique_http_status_codes_seen, unique_http_versions_used, unique_local_ports_listening_on, unique_local_ports_used, unique_remote_ports_connected_from, unique_remote_ports_connected_to, unique_ssl_ciphers_used, unique_ssl_versions_used
+2025-06-02 10:49:17,834 - INFO - Calculating feature statistics:
+2025-06-02 10:49:17,834 - INFO - - encoded_feature_count: {'name': 'encoded_feature_count', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,835 - INFO - - ever_connected_to_privileged_port: {'name': 'ever_connected_to_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,835 - INFO - - ever_listened_on_privileged_port: {'name': 'ever_listened_on_privileged_port', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,835 - INFO - - first_seen_seconds: {'name': 'first_seen_seconds', 'unique': 9, 'mean': np.float32(-3.3099326e-08), 'std': np.float32(1.0), 'min': np.float32(-0.8743511), 'max': np.float32(2.669173)}
+2025-06-02 10:49:17,835 - INFO - - has_http_error_4xx: {'name': 'has_http_error_4xx', 'unique': 2, 'mean': np.float32(1.9652724e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.066009834), 'max': np.float32(15.149258)}
+2025-06-02 10:49:17,835 - INFO - - has_http_error_5xx: {'name': 'has_http_error_5xx', 'unique': 2, 'mean': np.float32(1.9652724e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.066009834), 'max': np.float32(15.149258)}
+2025-06-02 10:49:17,835 - INFO - - has_ssl_history: {'name': 'has_ssl_history', 'unique': 2, 'mean': np.float32(2.4824494e-08), 'std': np.float32(1.0), 'min': np.float32(-1.612936), 'max': np.float32(0.6199874)}
+2025-06-02 10:49:17,835 - INFO - - has_ssl_resumption: {'name': 'has_ssl_resumption', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,835 - INFO - - has_ssl_server_name: {'name': 'has_ssl_server_name', 'unique': 2, 'mean': np.float32(1.0343539e-09), 'std': np.float32(0.99999994), 'min': np.float32(-0.31244048), 'max': np.float32(3.2006097)}
+2025-06-02 10:49:17,835 - INFO - - incoming_connection_ratio: {'name': 'incoming_connection_ratio', 'unique': 2, 'mean': np.float32(4.1374157e-09), 'std': np.float32(1.0), 'min': np.float32(-6.3960214), 'max': np.float32(0.15634719)}
+2025-06-02 10:49:17,835 - INFO - - last_seen_seconds: {'name': 'last_seen_seconds', 'unique': 10, 'mean': np.float32(-3.3099326e-08), 'std': np.float32(0.99999994), 'min': np.float32(-1.2899646), 'max': np.float32(2.116823)}
+2025-06-02 10:49:17,835 - INFO - - most_freq_conn_state: {'name': 'most_freq_conn_state', 'unique': 8, 'mean': np.float32(1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-2.047629), 'max': np.float32(7.028881)}
+2025-06-02 10:49:17,835 - INFO - - most_freq_http_version: {'name': 'most_freq_http_version', 'unique': 2, 'mean': np.float32(1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-3.6013465), 'max': np.float32(0.27767393)}
+2025-06-02 10:49:17,836 - INFO - - most_freq_proto: {'name': 'most_freq_proto', 'unique': 3, 'mean': np.float32(8.2748315e-09), 'std': np.float32(1.0), 'min': np.float32(-0.49120378), 'max': np.float32(4.177764)}
+2025-06-02 10:49:17,836 - INFO - - most_freq_ssl_version: {'name': 'most_freq_ssl_version', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,836 - INFO - - outgoing_connection_ratio: {'name': 'outgoing_connection_ratio', 'unique': 2, 'mean': np.float32(0.0), 'std': np.float32(1.0), 'min': np.float32(-0.124171264), 'max': np.float32(8.053393)}
+2025-06-02 10:49:17,836 - INFO - - service_1: {'name': 'service_1', 'unique': 6, 'mean': np.float32(2.7927555e-08), 'std': np.float32(1.0), 'min': np.float32(-1.2277129), 'max': np.float32(1.3088727)}
+2025-06-02 10:49:17,836 - INFO - - service_2: {'name': 'service_2', 'unique': 4, 'mean': np.float32(-3.1030616e-08), 'std': np.float32(1.0), 'min': np.float32(-1.5094478), 'max': np.float32(0.83914816)}
+2025-06-02 10:49:17,836 - INFO - - service_3: {'name': 'service_3', 'unique': 4, 'mean': np.float32(4.1374157e-08), 'std': np.float32(0.99999994), 'min': np.float32(-4.73873), 'max': np.float32(0.24396199)}
+2025-06-02 10:49:17,836 - INFO - - top_proto_1: {'name': 'top_proto_1', 'unique': 3, 'mean': np.float32(8.2748315e-09), 'std': np.float32(1.0), 'min': np.float32(-0.49120378), 'max': np.float32(4.177764)}
+2025-06-02 10:49:17,836 - INFO - - top_user_agent_1: {'name': 'top_user_agent_1', 'unique': 2, 'mean': np.float32(1.0343539e-09), 'std': np.float32(0.99999994), 'min': np.float32(-6.3960214), 'max': np.float32(0.15634719)}
+2025-06-02 10:49:17,836 - INFO - - unique_http_status_codes_seen: {'name': 'unique_http_status_codes_seen', 'unique': 4, 'mean': np.float32(-9.309185e-09), 'std': np.float32(1.0), 'min': np.float32(-0.2369141), 'max': np.float32(10.164743)}
+2025-06-02 10:49:17,836 - INFO - - unique_http_versions_used: {'name': 'unique_http_versions_used', 'unique': 2, 'mean': np.float32(-1.2412247e-08), 'std': np.float32(1.0), 'min': np.float32(-0.27767393), 'max': np.float32(3.6013465)}
+2025-06-02 10:49:17,836 - INFO - - unique_local_ports_listening_on: {'name': 'unique_local_ports_listening_on', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,836 - INFO - - unique_local_ports_used: {'name': 'unique_local_ports_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,836 - INFO - - unique_remote_ports_connected_from: {'name': 'unique_remote_ports_connected_from', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,837 - INFO - - unique_remote_ports_connected_to: {'name': 'unique_remote_ports_connected_to', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,837 - INFO - - unique_ssl_ciphers_used: {'name': 'unique_ssl_ciphers_used', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:17,837 - INFO - - unique_ssl_versions_used: {'name': 'unique_ssl_versions_used', 'unique': 4, 'mean': np.float32(8.2748315e-09), 'std': np.float32(0.99999994), 'min': np.float32(-1.7971374), 'max': np.float32(4.447689)}
+2025-06-02 10:49:19,674 - INFO - Node feature visualization saved to vis/node_features_20250602_104918.png
+2025-06-02 10:49:19,674 - INFO - Finished visualization of node features.
+2025-06-02 10:49:19,674 - INFO - Performing additional feature analysis:
+2025-06-02 10:49:19,674 - INFO - - Maximum correlation between different features: nan
+2025-06-02 10:49:19,677 - INFO - Starting visualization of edge features.
+2025-06-02 10:49:19,677 - INFO - Graph has 5448 edges and 7 edge features.
+2025-06-02 10:49:19,677 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:49:19,677 - INFO - Calculating edge feature statistics:
+2025-06-02 10:49:19,677 - INFO - Showing statistics for the first 5 and last 5 edge features:
+2025-06-02 10:49:19,678 - INFO - - conn_state_partial_other_unknown: {'name': 'conn_state_partial_other_unknown', 'unique': 2, 'mean': np.float32(0.04148311), 'std': np.float32(0.19940478), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - conn_state_rejected_reset: {'name': 'conn_state_rejected_reset', 'unique': 2, 'mean': np.float32(0.30469897), 'std': np.float32(0.46027982), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6538179), 'std': np.float32(0.4757521), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0031204112), 'std': np.float32(0.05577342), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.52477974), 'std': np.float32(0.49938557), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - conn_state_successful: {'name': 'conn_state_successful', 'unique': 2, 'mean': np.float32(0.6538179), 'std': np.float32(0.4757521), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - protocol_ICMP: {'name': 'protocol_ICMP', 'unique': 2, 'mean': np.float32(0.0031204112), 'std': np.float32(0.05577342), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - protocol_TCP: {'name': 'protocol_TCP', 'unique': 2, 'mean': np.float32(0.52477974), 'std': np.float32(0.49938557), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - protocol_UDP: {'name': 'protocol_UDP', 'unique': 2, 'mean': np.float32(0.47209984), 'std': np.float32(0.49922097), 'min': np.float32(0.0), 'max': np.float32(1.0)}
+2025-06-02 10:49:19,678 - INFO - - protocol_UNKNOWN: {'name': 'protocol_UNKNOWN', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-02 10:49:21,964 - INFO - Edge feature visualization saved to vis/edge_features_20250602_104920.png
+2025-06-02 10:49:21,964 - INFO - Finished visualization of edge features.
+2025-06-02 10:49:21,964 - INFO - Performing additional edge feature analysis:
+2025-06-02 10:49:21,964 - INFO - - 1 out of 7 edge features are constant.
+2025-06-02 10:49:21,964 - INFO - - Highest correlation (0.99) between features: 'protocol_TCP' and 'protocol_UDP'.
+2025-06-02 10:49:21,966 - INFO - Starting visualization of all edge features with 3D PCA.
+2025-06-02 10:49:21,966 - INFO - Graph has 5448 edges and 7 edge features.
+2025-06-02 10:49:21,966 - INFO - Edge feature names: conn_state_partial_other_unknown, conn_state_rejected_reset, conn_state_successful, protocol_ICMP, protocol_TCP, protocol_UDP, protocol_UNKNOWN
+2025-06-02 10:49:22,256 - INFO - Summary statistics plot saved to vis/all_edge_features_3d_pca_20250602_104921_summary.png
+2025-06-02 10:49:22,639 - INFO - PCA (3D) plot saved to vis/all_edge_features_3d_pca_20250602_104921_pca_3d.png
+2025-06-02 10:49:22,799 - INFO - PCA explained variance ratio plot saved to vis/all_edge_features_3d_pca_20250602_104921_pca_variance.png
+2025-06-02 10:49:22,799 - INFO - Finished visualization of all edge features with 3D PCA.
+2025-06-02 10:49:22,799 - INFO - 
+--- Processing file: nw_graph_encoded_1748707938.dot (Timestamp: 2025-05-31 18:12:18) ---
+2025-06-02 10:49:22,799 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707938.dot
+2025-06-02 10:49:22,800 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707938.dot'.
+2025-06-02 10:49:22,800 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707938.dot
+2025-06-02 10:49:22,811 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707938.dot'.
+2025-06-02 10:49:22,840 - INFO - Parsed 5448 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707938.dot'.
+2025-06-02 10:49:22,840 - INFO - Processing node updates/additions.
+2025-06-02 10:49:22,845 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:22,876 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:22,877 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:22,877 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:22,881 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:23,030 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:23,031 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:23,031 - INFO - Updated main graph to 461 nodes and 5448 edges.
+2025-06-02 10:49:23,031 - INFO - Performing online update...
+2025-06-02 10:49:23,032 - INFO - Starting online update for 25 steps.
+2025-06-02 10:49:24,680 - INFO - Online update finished. Average loss: 0.5593, Learning rate: 0.000000
+2025-06-02 10:49:24,684 - INFO - Online update complete. Loss: 0.5593
+2025-06-02 10:49:24,684 - INFO - Running anomaly detection...
+2025-06-02 10:49:24,684 - INFO - Starting anomaly detection.
+2025-06-02 10:49:24,702 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250602_104924_update_32.json
+2025-06-02 10:49:24,703 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-02 10:49:24,722 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250602_104924_update_32.pth
+2025-06-02 10:49:24,722 - INFO - 
+Global anomaly score (after nw_graph_encoded_1748707938.dot): 0.4849
+2025-06-02 10:49:24,722 - WARNING - Detected 6 anomalous nodes (reconstruction-based):
+2025-06-02 10:49:24,723 - WARNING -   Node ID: 192.168.209.130, Recon Error: 0.0582, MLP Score: 0.5002
+2025-06-02 10:49:24,723 - WARNING -   Node ID: 192.168.27.12, Recon Error: 0.0921, MLP Score: 0.4963
+2025-06-02 10:49:24,723 - WARNING -   Node ID: 192.168.239.101, Recon Error: 0.2530, MLP Score: 0.4987
+2025-06-02 10:49:24,723 - WARNING -   Node ID: 192.168.27.13, Recon Error: 0.0910, MLP Score: 0.4955
+2025-06-02 10:49:24,723 - WARNING -   Node ID: 192.168.209.128, Recon Error: 0.2971, MLP Score: 0.4998
+2025-06-02 10:49:24,723 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-02 10:49:24,723 - INFO - 
+--- Processing file: nw_graph_encoded_1748707998.dot (Timestamp: 2025-05-31 18:13:18) ---
+2025-06-02 10:49:24,724 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748707998.dot
+2025-06-02 10:49:24,724 - INFO - Updating NetworkX graph from '/home/lu/Desktop/output/nw_graph_encoded_1748707998.dot'.
+2025-06-02 10:49:24,724 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748707998.dot
+2025-06-02 10:49:24,742 - INFO - Parsed 461 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748707998.dot'.
+2025-06-02 10:49:24,774 - INFO - Parsed 5449 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748707998.dot'.
+2025-06-02 10:49:24,774 - INFO - Processing node updates/additions.
+2025-06-02 10:49:24,779 - INFO - Processing edge updates/additions.
+2025-06-02 10:49:24,809 - INFO - Processing deletions (nodes and edges).
+2025-06-02 10:49:24,811 - INFO - Finished updating NetworkX graph.
+2025-06-02 10:49:24,812 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 10:49:24,818 - INFO - Node Features (x) after initial standard scaling.
+2025-06-02 10:49:24,834 - INFO - No edge feature scaling applied.
+2025-06-02 10:49:24,834 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 10:49:24,835 - INFO - Updated main graph to 461 nodes and 5449 edges.
+2025-06-02 10:49:24,835 - INFO - Performing online update...
+2025-06-02 10:49:24,835 - INFO - Starting online update for 25 steps.

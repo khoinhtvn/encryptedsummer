@@ -1,0 +1,32 @@
+{
+  "timestamp": "20250604_154726",
+  "update_count": 13,
+  "global_anomaly_score": 0.9612857103347778,
+  "node_anomalies": [
+    {
+      "node_id": 177,
+      "recon_error": 3496.03076171875,
+      "mlp_score": 1.0,
+      "ip": "192.168.27.12"
+    },
+    {
+      "node_id": 262,
+      "recon_error": 4254.435546875,
+      "mlp_score": 1.0,
+      "ip": "192.168.27.13"
+    },
+    {
+      "node_id": 308,
+      "recon_error": 3357.203857421875,
+      "mlp_score": 1.0,
+      "ip": "192.168.27.10"
+    },
+    {
+      "node_id": 578,
+      "recon_error": 683.1776123046875,
+      "mlp_score": 1.0,
+      "ip": "210.245.26.97"
+    }
+  ],
+  "edge_anomalies": []
+}

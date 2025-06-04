@@ -5,8 +5,7 @@ import time
 from logging.handlers import RotatingFileHandler
 
 # Import the workflow functions
-from workflow import process_and_learn  # Import the function
-from workflow_test import process_existing_directory
+from workflow_test import monitor_new_files
 
 # Define default paths here, can be overridden by arguments
 DEFAULT_MODEL_SAVE_PATH = "model_checkpoints"
@@ -149,7 +148,8 @@ if __name__ == '__main__':
             logger.addHandler(file_handler)
             logging.info(f"Application logging to file: {log_filename}")
         else:
-            logging.warning("--log_file or --log_console_file enabled but --log_path not specified. Logging to file will be disabled.")
+            logging.warning(
+                "--log_file or --log_console_file enabled but --log_path not specified. Logging to file will be disabled.")
             if args.log_file and not args.log_console_file:
                 # If only file logging was requested but path is missing, add console logging back
                 console_handler = logging.StreamHandler()
@@ -164,7 +164,7 @@ if __name__ == '__main__':
                         update_interval_seconds=args.update_interval_seconds,
                         visualization_path=args.visualization_path)
     """
-    process_existing_directory(target_directory, model_save_path, stats_save_path, anomaly_log_path,
-                                 export_period_updates=args.export_period_updates,
-                                 visualization_path=args.visualization_path,
-                                            train_mode=mode)
+    monitor_new_files(target_directory, model_save_path, stats_save_path, anomaly_log_path,
+                      export_period_updates=args.export_period_updates,
+                      visualization_path=args.visualization_path,
+                      train_mode=mode)

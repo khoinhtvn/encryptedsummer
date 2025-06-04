@@ -1,0 +1,465 @@
+2025-06-04 15:31:41,225 - INFO - Application logging to file: logs/app_20250604_153141.log
+2025-06-04 15:31:41,225 - INFO - Starting to monitor directory: /home/lu/Desktop/output_/ with log level: DEBUG
+2025-06-04 15:31:41,225 - INFO - Starting to monitor directory: /home/lu/Desktop/output_/ for new and existing files every 30 seconds.
+2025-06-04 15:31:41,225 - INFO - Train Mode: train, Visualization Path: vis
+2025-06-04 15:31:41,225 - INFO - Found 2 files to process.
+2025-06-04 15:31:41,225 - INFO - 
+--- Processing file: nw_graph_encoded_1749027962.dot ---
+2025-06-04 15:31:41,225 - INFO - Processing update from: /home/lu/Desktop/output_/nw_graph_encoded_1749027962.dot
+2025-06-04 15:31:41,225 - INFO - Processing /home/lu/Desktop/output_/nw_graph_encoded_1749027962.dot file.
+2025-06-04 15:31:41,247 - INFO - Parsed 1010 nodes.
+2025-06-04 15:31:41,267 - INFO - Parsed 2221 edges.
+2025-06-04 15:31:41,911 - INFO - Starting NetworkX to PyG conversion.
+2025-06-04 15:31:41,911 - DEBUG - Sorted node attribute keys: ['outgoing_ratio', 'incoming_ratio', 'server_score', 'client_score', 'unique_protocols', 'protocol_entropy', 'most_freq_proto_ratio', 'unique_remote_ports', 'unique_local_ports', 'remote_port_diversity', 'local_port_diversity', 'privileged_remote_ratio', 'privileged_local_ratio', 'first_seen_hour_minute_sin', 'first_seen_hour_minute_cos', 'last_seen_hour_minute_sin', 'last_seen_hour_minute_cos', 'http_ratio', 'ssl_ratio']
+2025-06-04 15:31:41,916 - DEBUG - Initial node features tensor shape: torch.Size([1010, 19])
+2025-06-04 15:31:41,918 - INFO - Numerical Node Features (x) after initial standard scaling.
+2025-06-04 15:31:41,918 - DEBUG - Node features tensor shape after scaling: torch.Size([1010, 19])
+2025-06-04 15:31:41,919 - DEBUG - Edge index tensor shape: torch.Size([2, 2221])
+2025-06-04 15:31:41,920 - DEBUG - Sorted edge attribute keys: ['dst_port', 'count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts', 'total_orig_ip_bytes', 'total_resp_ip_bytes', 'protocol', 'service']
+2025-06-04 15:31:41,931 - INFO - Fitted and transformed categorical edge feature: protocol. Unique values: 3
+2025-06-04 15:31:41,932 - INFO - Fitted and transformed categorical edge feature: service. Unique values: 8
+2025-06-04 15:31:41,934 - DEBUG - Shape of encoded categorical edge features: torch.Size([2221, 2])
+2025-06-04 15:31:41,936 - INFO - Numerical Edge Attributes after initial standard scaling.
+2025-06-04 15:31:41,936 - DEBUG - Shape of scaled numerical edge features: torch.Size([2221, 20])
+2025-06-04 15:31:41,936 - DEBUG - Final edge attributes tensor shape: torch.Size([2221, 22])
+2025-06-04 15:31:41,936 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-04 15:31:41,936 - INFO - Initializing HybridGNNAnomalyDetector with node_dim=19, edge_dim=22, hidden_dim=128, embedding_dim=64, heads=4, num_gat_layers=3, gat_heads=4, recon_loss_type=mse, edge_recon_loss_type=bce
+2025-06-04 15:31:41,937 - INFO - Initializing GraphAutoencoder with node_dim=19, edge_dim=22, hidden_dim=128, embedding_dim=64, num_gat_layers=3, gat_heads=4, use_batch_norm=True, use_residual=True
+2025-06-04 15:31:41,984 - DEBUG - Encoder GATConv layers initialized with final embedding dimension: 64
+2025-06-04 15:31:41,986 - DEBUG - Decoder MLP layers initialized with proper weight initialization.
+2025-06-04 15:31:41,988 - DEBUG - Anomaly scoring MLPs initialized.
+2025-06-04 15:31:41,988 - INFO - Optimizer (AdamW) and scheduler (CosineAnnealingWarmRestarts) initialized.
+2025-06-04 15:31:41,988 - INFO - Replay buffer initialized with maxlen=2000, batch_size=16
+2025-06-04 15:31:41,988 - INFO - RunningStats initialized.
+2025-06-04 15:31:41,988 - INFO - RunningStats initialized.
+2025-06-04 15:31:41,988 - INFO - Statistical controls initialized: drift_threshold=0.15
+2025-06-04 15:31:41,989 - INFO - Using device: cpu
+2025-06-04 15:31:41,989 - INFO - Initialized Hybrid GNN (node_dim=19, edge_dim=22)
+2025-06-04 15:31:42,010 - INFO - Checkpoint loaded from model_checkpoints/latest_checkpoint.pth at epoch 16
+2025-06-04 15:31:42,010 - INFO - Resuming online updates from step: 16
+2025-06-04 15:31:42,010 - INFO - Running statistics loaded from stats/running_stats.pkl
+2025-06-04 15:31:42,011 - INFO - Performing online update...
+2025-06-04 15:31:42,011 - INFO - Starting online update for 50 steps.
+2025-06-04 15:31:42,011 - DEBUG - Updated RunningStats: new_mean=[ 5.47386503e-10 -5.28408579e-10 -2.29153622e-09  2.39077050e-09
+ -2.72414540e-08  1.47846431e-08 -1.05921212e-08 -2.33428199e-09
+ -3.09648684e-09  9.03963591e-10  1.66168941e-09 -1.65692583e-09
+  4.03972891e-09 -3.47284676e-09  9.39943395e-10  9.34474364e-10
+ -3.99486086e-09  1.43183765e-09 -5.26278404e-09], new_M2=[176740.00522416 176740.00515151 176740.00034167 176740.00408387
+ 176739.99872166 176739.99837365 176739.99612347 176739.99839534
+ 176739.99339312 176739.99827837 176740.00189334 176739.99385425
+ 176739.99270499 140031.99643628 140032.00026795 140031.99903983
+ 140032.00007233 176740.00043721 176740.00743397], new_n=176740
+2025-06-04 15:31:42,012 - DEBUG - Updated RunningStats: new_mean=[ 1.41760477e+00  5.52230221e+00  1.15587391e-10  3.18807790e-10
+  1.61331101e-10 -1.61101951e-10 -1.34206561e-09  2.89598195e-10
+  3.47487380e-10 -3.09500779e-10  4.52093903e-10 -3.93672601e-09
+ -9.03888234e-10  7.95758541e-10  3.87726050e-10 -1.73109079e-10
+ -1.73109079e-10 -1.73109079e-10 -1.73109079e-10 -1.73109079e-10
+ -1.73109079e-10 -6.95977902e-11], new_M2=[  97896.90042523 1692734.77509035  381441.99909674  381442.0066983
+  381442.00557887  381441.99367384  381442.00030598  381441.99920754
+  381442.0017034   381441.99936882  381441.99362255  381442.00887213
+  381442.00114395  381441.99968358  381442.0019065   381441.9944923
+  381441.9944923   381441.9944923   381441.9944923   381441.9944923
+  381441.9944923   381441.99954425], new_n=381442
+2025-06-04 15:31:42,012 - DEBUG - Calculated standard deviation: [1.00000001 1.00000001 1.         1.00000001 1.         1.
+ 0.99999999 1.         0.99999998 1.         1.00000001 0.99999998
+ 0.99999998 0.8901152  0.89011521 0.8901152  0.89011521 1.
+ 1.00000002]
+2025-06-04 15:31:42,012 - DEBUG - Calculated standard deviation: [0.50660587 2.10659089 1.         1.00000001 1.00000001 0.99999999
+ 1.         1.         1.         1.         0.99999999 1.00000001
+ 1.         1.         1.         0.99999999 0.99999999 0.99999999
+ 0.99999999 0.99999999 0.99999999 1.        ]
+2025-06-04 15:31:42,012 - DEBUG - Adding data to replay buffer. Has edge_index: True
+2025-06-04 15:31:42,012 - DEBUG - Online update step: 1/50
+2025-06-04 15:31:42,012 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,012 - DEBUG - Online update step: 2/50
+2025-06-04 15:31:42,012 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,012 - DEBUG - Online update step: 3/50
+2025-06-04 15:31:42,012 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,012 - DEBUG - Online update step: 4/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 5/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 6/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 7/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 8/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 9/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 10/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 11/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 12/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 13/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 14/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 15/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 16/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 17/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 18/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 19/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 20/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 21/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 22/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 23/50
+2025-06-04 15:31:42,013 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,013 - DEBUG - Online update step: 24/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 25/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 26/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 27/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 28/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 29/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 30/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 31/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 32/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 33/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 34/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 35/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 36/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 37/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 38/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 39/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 40/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 41/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 42/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 43/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,014 - DEBUG - Online update step: 44/50
+2025-06-04 15:31:42,014 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - DEBUG - Online update step: 45/50
+2025-06-04 15:31:42,015 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - DEBUG - Online update step: 46/50
+2025-06-04 15:31:42,015 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - DEBUG - Online update step: 47/50
+2025-06-04 15:31:42,015 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - DEBUG - Online update step: 48/50
+2025-06-04 15:31:42,015 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - DEBUG - Online update step: 49/50
+2025-06-04 15:31:42,015 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - DEBUG - Online update step: 50/50
+2025-06-04 15:31:42,015 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:42,015 - WARNING - No successful steps during online update.
+2025-06-04 15:31:42,020 - DEBUG - Current node mean: [ 2.0773104e-08 -2.0773104e-08 -3.6352933e-08  2.2425510e-08
+ -5.3821225e-08  5.8542383e-08  4.2490438e-09  9.4423198e-09
+  1.4163480e-09  9.4423198e-09  1.8884641e-09 -5.6653922e-09
+ -2.2661569e-08  0.0000000e+00  0.0000000e+00  0.0000000e+00
+  0.0000000e+00 -2.1717335e-08  1.9828873e-08], current edge mean: [ 1.4218820e+00  5.7005854e+00 -2.7910325e-09  1.7175584e-09
+  0.0000000e+00  0.0000000e+00  0.0000000e+00 -2.1469480e-09
+ -8.3730978e-09  3.4351169e-09 -9.0171817e-09  2.7910325e-09
+ -3.8645065e-09 -7.2996231e-09 -3.4351169e-09 -4.2938959e-09
+ -4.2938959e-09 -4.2938959e-09 -4.2938959e-09 -4.2938959e-09
+ -4.2938959e-09  5.1526752e-09]
+2025-06-04 15:31:42,021 - DEBUG - Node drift difference (max): 0.0000, Edge drift difference (max): 0.0846
+2025-06-04 15:31:42,021 - DEBUG - Updated reference mean: node=[ 2.0773104e-08 -2.0773104e-08 -3.6352933e-08  2.2425510e-08
+ -5.3821225e-08  5.8542383e-08  4.2490438e-09  9.4423198e-09
+  1.4163480e-09  9.4423198e-09  1.8884641e-09 -5.6653922e-09
+ -2.2661569e-08  0.0000000e+00  0.0000000e+00  0.0000000e+00
+  0.0000000e+00 -2.1717335e-08  1.9828873e-08], edge=[ 1.4218820e+00  5.7005854e+00 -2.7910325e-09  1.7175584e-09
+  0.0000000e+00  0.0000000e+00  0.0000000e+00 -2.1469480e-09
+ -8.3730978e-09  3.4351169e-09 -9.0171817e-09  2.7910325e-09
+ -3.8645065e-09 -7.2996231e-09 -3.4351169e-09 -4.2938959e-09
+ -4.2938959e-09 -4.2938959e-09 -4.2938959e-09 -4.2938959e-09
+ -4.2938959e-09  5.1526752e-09]
+2025-06-04 15:31:42,021 - DEBUG - Updated reference std: node=[1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954
+ 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 0.
+ 0.        0.        0.        1.0004954 1.0004954], edge=[0.5056868 2.1382287 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252
+ 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252
+ 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252
+ 1.0002252]
+2025-06-04 15:31:42,021 - INFO - Online update complete. Loss: 0.0000
+2025-06-04 15:31:42,021 - INFO - Running anomaly detection...
+2025-06-04 15:31:42,021 - INFO - Starting anomaly detection.
+2025-06-04 15:31:42,071 - DEBUG - Node reconstruction errors: [0.08554234 0.45920774 0.45920774 ... 0.45920774 0.09546381 0.09546381]
+2025-06-04 15:31:42,071 - DEBUG - Edge reconstruction errors: [0.8        0.8        0.19999927 ... 0.8        0.19999415 0.8       ]
+2025-06-04 15:31:42,074 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250604_153142_update_1.json
+2025-06-04 15:31:42,075 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-04 15:31:42,100 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250604_153142_update_1.pth and as latest_checkpoint.pth
+2025-06-04 15:31:42,100 - INFO - 
+Global anomaly score (after nw_graph_encoded_1749027962.dot): 0.0000
+2025-06-04 15:31:42,100 - WARNING - Detected 10 anomalous nodes (reconstruction-based):
+2025-06-04 15:31:42,100 - WARNING -   Node ID: 210.245.26.100, Recon Error: 96.2367, MLP Score: 0.0000
+2025-06-04 15:31:42,100 - WARNING -   Node ID: ff02::fb, Recon Error: 94.9342, MLP Score: 0.0000
+2025-06-04 15:31:42,100 - WARNING -   Node ID: 239.255.255.250, Recon Error: 96.2367, MLP Score: 0.0000
+2025-06-04 15:31:42,100 - WARNING -   Node ID: 192.168.239.101, Recon Error: 21.2966, MLP Score: 0.0000
+2025-06-04 15:31:42,100 - WARNING -   Node ID: 192.168.27.13, Recon Error: 26.3666, MLP Score: 0.0000
+2025-06-04 15:31:42,100 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-04 15:31:42,136 - INFO - Starting 3D embedding visualization...
+2025-06-04 15:31:43,084 - DEBUG - Loaded backend module://backend_interagg version unknown.
+2025-06-04 15:31:43,109 - DEBUG - colorbar update normal <matplotlib.colors.Normalize object at 0x748d5fabfd70> <matplotlib.colors.Normalize object at 0x748d5fabfd70>
+2025-06-04 15:31:43,110 - DEBUG - locator: <matplotlib.ticker.AutoLocator object at 0x748d5fa52ab0>
+2025-06-04 15:31:43,113 - DEBUG - colorbar update normal <matplotlib.colors.Normalize object at 0x748d5fabfd70> <matplotlib.colors.Normalize object at 0x748d5fabfd70>
+2025-06-04 15:31:43,114 - DEBUG - locator: <matplotlib.ticker.AutoLocator object at 0x748d5fa52ab0>
+2025-06-04 15:31:43,116 - DEBUG - locator: <matplotlib.ticker.AutoLocator object at 0x748d6452e150>
+2025-06-04 15:31:43,261 - INFO - 3D embeddings visualization saved to vis/embeddings_3d_1_updates_20250604_153142.png
+2025-06-04 15:31:43,261 - INFO - Performing visualization of node and edge features.
+2025-06-04 15:31:43,261 - INFO - Starting visualization of node features.
+2025-06-04 15:31:43,261 - INFO - Graph has 1010 nodes and 19 features.
+2025-06-04 15:31:43,261 - INFO - Feature names: outgoing_ratio, incoming_ratio, server_score, client_score, unique_protocols, protocol_entropy, most_freq_proto_ratio, unique_remote_ports, unique_local_ports, remote_port_diversity, local_port_diversity, privileged_remote_ratio, privileged_local_ratio, first_seen_hour_minute_sin, first_seen_hour_minute_cos, last_seen_hour_minute_sin, last_seen_hour_minute_cos, http_ratio, ssl_ratio
+2025-06-04 15:31:43,261 - INFO - Calculating feature statistics:
+2025-06-04 15:31:43,261 - INFO - - outgoing_ratio: {'name': 'outgoing_ratio', 'unique': 4, 'mean': np.float32(7.553856e-09), 'std': np.float32(0.9999998), 'min': np.float32(-0.10731402), 'max': np.float32(9.494974)}
+2025-06-04 15:31:43,261 - INFO - - incoming_ratio: {'name': 'incoming_ratio', 'unique': 4, 'mean': np.float32(-7.553856e-09), 'std': np.float32(0.9999998), 'min': np.float32(-9.494974), 'max': np.float32(0.10731402)}
+2025-06-04 15:31:43,262 - INFO - - server_score: {'name': 'server_score', 'unique': 14, 'mean': np.float32(-3.776928e-08), 'std': np.float32(1.0), 'min': np.float32(-2.2924573), 'max': np.float32(3.179208)}
+2025-06-04 15:31:43,262 - INFO - - client_score: {'name': 'client_score', 'unique': 8, 'mean': np.float32(2.2661569e-08), 'std': np.float32(1.0000001), 'min': np.float32(-0.07549707), 'max': np.float32(18.159897)}
+2025-06-04 15:31:43,262 - INFO - - unique_protocols: {'name': 'unique_protocols', 'unique': 3, 'mean': np.float32(-5.287699e-08), 'std': np.float32(1.0), 'min': np.float32(-0.64383537), 'max': np.float32(3.5112681)}
+2025-06-04 15:31:43,262 - INFO - - protocol_entropy: {'name': 'protocol_entropy', 'unique': 16, 'mean': np.float32(6.043085e-08), 'std': np.float32(1.0), 'min': np.float32(-0.65014666), 'max': np.float32(2.8871822)}
+2025-06-04 15:31:43,262 - INFO - - most_freq_proto_ratio: {'name': 'most_freq_proto_ratio', 'unique': 14, 'mean': np.float32(3.776928e-09), 'std': np.float32(0.99999994), 'min': np.float32(-2.9084294), 'max': np.float32(0.63373893)}
+2025-06-04 15:31:43,262 - INFO - - unique_remote_ports: {'name': 'unique_remote_ports', 'unique': 8, 'mean': np.float32(9.44232e-09), 'std': np.float32(0.99999994), 'min': np.float32(-0.07902002), 'max': np.float32(20.264761)}
+2025-06-04 15:31:43,262 - INFO - - unique_local_ports: {'name': 'unique_local_ports', 'unique': 5, 'mean': np.float32(-1.888464e-09), 'std': np.float32(0.99999994), 'min': np.float32(-4.2803183), 'max': np.float32(21.025759)}
+2025-06-04 15:31:43,262 - INFO - - remote_port_diversity: {'name': 'remote_port_diversity', 'unique': 7, 'mean': np.float32(9.44232e-09), 'std': np.float32(0.99999994), 'min': np.float32(-0.09293793), 'max': np.float32(11.41274)}
+2025-06-04 15:31:43,262 - INFO - - local_port_diversity: {'name': 'local_port_diversity', 'unique': 16, 'mean': np.float32(-1.5107712e-08), 'std': np.float32(1.0), 'min': np.float32(-2.002014), 'max': np.float32(0.92043453)}
+2025-06-04 15:31:43,262 - INFO - - privileged_remote_ratio: {'name': 'privileged_remote_ratio', 'unique': 6, 'mean': np.float32(-9.44232e-09), 'std': np.float32(1.0000001), 'min': np.float32(-0.1026304), 'max': np.float32(10.273981)}
+2025-06-04 15:31:43,262 - INFO - - privileged_local_ratio: {'name': 'privileged_local_ratio', 'unique': 3, 'mean': np.float32(-2.2661569e-08), 'std': np.float32(0.9999998), 'min': np.float32(-8.024705), 'max': np.float32(0.12643686)}
+2025-06-04 15:31:43,262 - INFO - - first_seen_hour_minute_sin: {'name': 'first_seen_hour_minute_sin', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-04 15:31:43,262 - INFO - - first_seen_hour_minute_cos: {'name': 'first_seen_hour_minute_cos', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-04 15:31:43,262 - INFO - - last_seen_hour_minute_sin: {'name': 'last_seen_hour_minute_sin', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-04 15:31:43,263 - INFO - - last_seen_hour_minute_cos: {'name': 'last_seen_hour_minute_cos', 'unique': 1, 'mean': np.float32(0.0), 'std': np.float32(0.0), 'min': np.float32(0.0), 'max': np.float32(0.0)}
+2025-06-04 15:31:43,263 - INFO - - http_ratio: {'name': 'http_ratio', 'unique': 13, 'mean': np.float32(-1.6051944e-08), 'std': np.float32(1.0), 'min': np.float32(-7.4247913), 'max': np.float32(0.15153895)}
+2025-06-04 15:31:43,263 - INFO - - ssl_ratio: {'name': 'ssl_ratio', 'unique': 16, 'mean': np.float32(1.5107712e-08), 'std': np.float32(0.99999994), 'min': np.float32(-4.1466002), 'max': np.float32(4.358143)}
+2025-06-04 15:31:43,274 - DEBUG - locator: <matplotlib.ticker.AutoLocator object at 0x748d6452fdd0>
+2025-06-04 15:31:43,390 - DEBUG - Plotted correlation matrix of node features.
+2025-06-04 15:31:43,442 - DEBUG - Plotted ranges of node feature values.
+2025-06-04 15:31:43,465 - DEBUG - Plotted sparsity of node features.
+2025-06-04 15:31:44,456 - INFO - Node feature visualization saved to vis/node_features_20250604_153143.png
+2025-06-04 15:31:44,456 - INFO - Finished visualization of node features.
+2025-06-04 15:31:44,456 - INFO - Performing additional feature analysis:
+2025-06-04 15:31:44,457 - INFO - - Maximum correlation between different features: nan
+2025-06-04 15:31:44,457 - INFO - Starting visualization of edge features.
+2025-06-04 15:31:44,457 - INFO - Graph has 2221 edges and 22 edge features.
+2025-06-04 15:31:44,457 - ERROR - Expected 22 edge feature names, but got 10.
+2025-06-04 15:31:44,457 - ERROR - Error during 2D feature visualization: Expected 22 names, got 10
+2025-06-04 15:31:44,457 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 491, in monitor_new_files
+    visualize_edge_features(main_data, save_path=visualization_path,
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/visualization.py", line 197, in visualize_edge_features
+    raise ValueError(f"Expected {num_features} names, got {len(edge_feature_names)}")
+ValueError: Expected 22 names, got 10
+
+2025-06-04 15:31:44,457 - INFO - 
+--- Processing file: nw_graph_encoded_1749027962.dot ---
+2025-06-04 15:31:44,457 - INFO - Processing update from: /home/lu/Desktop/output_/nw_graph_encoded_1749027962.dot
+2025-06-04 15:31:44,457 - INFO - Processing /home/lu/Desktop/output_/nw_graph_encoded_1749027962.dot file.
+2025-06-04 15:31:44,469 - INFO - Parsed 1010 nodes.
+2025-06-04 15:31:44,487 - INFO - Parsed 2221 edges.
+2025-06-04 15:31:45,131 - INFO - Starting NetworkX to PyG conversion.
+2025-06-04 15:31:45,131 - DEBUG - Sorted node attribute keys: ['outgoing_ratio', 'incoming_ratio', 'server_score', 'client_score', 'unique_protocols', 'protocol_entropy', 'most_freq_proto_ratio', 'unique_remote_ports', 'unique_local_ports', 'remote_port_diversity', 'local_port_diversity', 'privileged_remote_ratio', 'privileged_local_ratio', 'first_seen_hour_minute_sin', 'first_seen_hour_minute_cos', 'last_seen_hour_minute_sin', 'last_seen_hour_minute_cos', 'http_ratio', 'ssl_ratio']
+2025-06-04 15:31:45,136 - DEBUG - Initial node features tensor shape: torch.Size([1010, 19])
+2025-06-04 15:31:45,137 - INFO - Numerical Node Features (x) after initial standard scaling.
+2025-06-04 15:31:45,137 - DEBUG - Node features tensor shape after scaling: torch.Size([1010, 19])
+2025-06-04 15:31:45,235 - DEBUG - Edge index tensor shape: torch.Size([2, 2221])
+2025-06-04 15:31:45,235 - DEBUG - Sorted edge attribute keys: ['dst_port', 'count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts', 'total_orig_ip_bytes', 'total_resp_ip_bytes', 'protocol', 'service']
+2025-06-04 15:31:45,245 - INFO - Fitted and transformed categorical edge feature: protocol. Unique values: 3
+2025-06-04 15:31:45,246 - INFO - Fitted and transformed categorical edge feature: service. Unique values: 8
+2025-06-04 15:31:45,247 - DEBUG - Shape of encoded categorical edge features: torch.Size([2221, 2])
+2025-06-04 15:31:45,248 - INFO - Numerical Edge Attributes after initial standard scaling.
+2025-06-04 15:31:45,249 - DEBUG - Shape of scaled numerical edge features: torch.Size([2221, 20])
+2025-06-04 15:31:45,249 - DEBUG - Final edge attributes tensor shape: torch.Size([2221, 22])
+2025-06-04 15:31:45,249 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-04 15:31:45,249 - INFO - Performing online update...
+2025-06-04 15:31:45,249 - INFO - Starting online update for 50 steps.
+2025-06-04 15:31:45,250 - DEBUG - Updated RunningStats: new_mean=[ 5.43270192e-10 -5.25741417e-10 -2.42413180e-09  2.42421563e-09
+ -2.73529152e-08  1.49377120e-08 -1.06339590e-08 -2.34985653e-09
+ -3.10890408e-09  8.75375107e-10  1.64652592e-09 -1.66716958e-09
+  4.05332543e-09 -3.45311357e-09  9.34602507e-10  9.29164552e-10
+ -3.97216151e-09  1.42303109e-09 -5.25987412e-09], new_M2=[177750.00525178 177750.0051804  177750.00037746 177750.0041774
+ 177749.99869988 177749.99836962 177749.99603818 177749.99838708
+ 177749.99331255 177749.99824358 177750.00193351 177749.99378538
+ 177749.99263615 140031.99643628 140032.00026795 140031.99903983
+ 140032.00007233 177750.00043346 177750.00748944], new_n=177750
+2025-06-04 15:31:45,250 - DEBUG - Updated RunningStats: new_mean=[ 1.41762953e+00  5.52333428e+00  1.16417745e-10  3.13563614e-10
+  1.61437480e-10 -1.65872939e-10 -1.33026692e-09  2.72729992e-10
+  3.19666548e-10 -3.04687228e-10  4.20500295e-10 -3.89213192e-09
+ -9.20043942e-10  7.44370139e-10  3.77898177e-10 -1.72221659e-10
+ -1.72221659e-10 -1.72221659e-10 -1.72221659e-10 -1.72221659e-10
+ -1.72221659e-10 -7.13135256e-11], new_M2=[  98464.63735622 1702954.84985525  383662.99907843  383663.00660422
+  383663.00555103  383662.99356579  383663.00032226  383662.99914717
+  383663.00171034  383662.99937433  383662.99345092  383663.00881329
+  383663.00114495  383662.99970634  383663.00186178  383662.9944787
+  383662.9944787   383662.9944787   383662.9944787   383662.9944787
+  383662.9944787   383662.99948341], new_n=383663
+2025-06-04 15:31:45,250 - DEBUG - Calculated standard deviation: [1.00000001 1.00000001 1.         1.00000001 1.         1.
+ 0.99999999 1.         0.99999998 1.         1.00000001 0.99999998
+ 0.99999998 0.88758271 0.88758273 0.88758272 0.88758273 1.
+ 1.00000002]
+2025-06-04 15:31:45,250 - DEBUG - Calculated standard deviation: [0.5066     2.106816   1.         1.00000001 1.00000001 0.99999999
+ 1.         1.         1.         1.         0.99999999 1.00000001
+ 1.         1.         1.         0.99999999 0.99999999 0.99999999
+ 0.99999999 0.99999999 0.99999999 1.        ]
+2025-06-04 15:31:45,250 - DEBUG - Adding data to replay buffer. Has edge_index: True
+2025-06-04 15:31:45,250 - DEBUG - Online update step: 1/50
+2025-06-04 15:31:45,250 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,250 - DEBUG - Online update step: 2/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 3/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 4/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 5/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 6/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 7/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 8/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 9/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 10/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 11/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 12/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 13/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 14/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 15/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 16/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 17/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 18/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 19/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 20/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 21/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 22/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 23/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,251 - DEBUG - Online update step: 24/50
+2025-06-04 15:31:45,251 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 25/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 26/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 27/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 28/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 29/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 30/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 31/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 32/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 33/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 34/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 35/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 36/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 37/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 38/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 39/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 40/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 41/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 42/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 43/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 44/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 45/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 46/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,252 - DEBUG - Online update step: 47/50
+2025-06-04 15:31:45,252 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,253 - DEBUG - Online update step: 48/50
+2025-06-04 15:31:45,253 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,253 - DEBUG - Online update step: 49/50
+2025-06-04 15:31:45,253 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,253 - DEBUG - Online update step: 50/50
+2025-06-04 15:31:45,253 - WARNING - Not enough data in replay buffer for a full batch. Skipping this step.
+2025-06-04 15:31:45,253 - WARNING - No successful steps during online update.
+2025-06-04 15:31:45,253 - DEBUG - Current node mean: [ 2.0773104e-08 -2.0773104e-08 -3.6352933e-08  2.2425510e-08
+ -5.3821225e-08  5.8542383e-08  4.2490438e-09  9.4423198e-09
+  1.4163480e-09  9.4423198e-09  1.8884641e-09 -5.6653922e-09
+ -2.2661569e-08  0.0000000e+00  0.0000000e+00  0.0000000e+00
+  0.0000000e+00 -2.1717335e-08  1.9828873e-08], current edge mean: [ 1.4218820e+00  5.7005854e+00 -2.7910325e-09  1.7175584e-09
+  0.0000000e+00  0.0000000e+00  0.0000000e+00 -2.1469480e-09
+ -8.3730978e-09  3.4351169e-09 -9.0171817e-09  2.7910325e-09
+ -3.8645065e-09 -7.2996231e-09 -3.4351169e-09 -4.2938959e-09
+ -4.2938959e-09 -4.2938959e-09 -4.2938959e-09 -4.2938959e-09
+ -4.2938959e-09  5.1526752e-09]
+2025-06-04 15:31:45,253 - DEBUG - Node drift difference (max): 0.0000, Edge drift difference (max): 0.0841
+2025-06-04 15:31:45,253 - DEBUG - Updated reference mean: node=[ 2.0773104e-08 -2.0773104e-08 -3.6352933e-08  2.2425510e-08
+ -5.3821225e-08  5.8542383e-08  4.2490438e-09  9.4423198e-09
+  1.4163480e-09  9.4423198e-09  1.8884641e-09 -5.6653922e-09
+ -2.2661569e-08  0.0000000e+00  0.0000000e+00  0.0000000e+00
+  0.0000000e+00 -2.1717335e-08  1.9828873e-08], edge=[ 1.4218820e+00  5.7005854e+00 -2.7910325e-09  1.7175584e-09
+  0.0000000e+00  0.0000000e+00  0.0000000e+00 -2.1469480e-09
+ -8.3730978e-09  3.4351169e-09 -9.0171817e-09  2.7910325e-09
+ -3.8645065e-09 -7.2996231e-09 -3.4351169e-09 -4.2938959e-09
+ -4.2938959e-09 -4.2938959e-09 -4.2938959e-09 -4.2938959e-09
+ -4.2938959e-09  5.1526752e-09]
+2025-06-04 15:31:45,254 - DEBUG - Updated reference std: node=[1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954
+ 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 1.0004954 0.
+ 0.        0.        0.        1.0004954 1.0004954], edge=[0.5056868 2.1382287 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252
+ 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252
+ 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252 1.0002252
+ 1.0002252]
+2025-06-04 15:31:45,254 - INFO - Online update complete. Loss: 0.0000
+2025-06-04 15:31:45,254 - INFO - Running anomaly detection...
+2025-06-04 15:31:45,254 - INFO - Starting anomaly detection.
+2025-06-04 15:31:45,270 - DEBUG - Node reconstruction errors: [0.08554234 0.45920774 0.45920774 ... 0.45920774 0.09546381 0.09546381]
+2025-06-04 15:31:45,271 - DEBUG - Edge reconstruction errors: [0.8        0.8        0.19999927 ... 0.8        0.19999415 0.8       ]
+2025-06-04 15:31:45,273 - INFO - Anomalies saved to: anomaly_logs/anomalies_20250604_153145_update_2.json
+2025-06-04 15:31:45,273 - INFO - Running statistics saved to stats/running_stats.pkl
+2025-06-04 15:31:45,300 - INFO - Checkpoint saved to model_checkpoints/checkpoint_20250604_153145_update_2.pth and as latest_checkpoint.pth
+2025-06-04 15:31:45,300 - INFO - 
+Global anomaly score (after nw_graph_encoded_1749027962.dot): 0.0000
+2025-06-04 15:31:45,300 - WARNING - Detected 10 anomalous nodes (reconstruction-based):
+2025-06-04 15:31:45,300 - WARNING -   Node ID: 210.245.26.100, Recon Error: 96.2367, MLP Score: 0.0000
+2025-06-04 15:31:45,300 - WARNING -   Node ID: ff02::fb, Recon Error: 94.9342, MLP Score: 0.0000
+2025-06-04 15:31:45,300 - WARNING -   Node ID: 239.255.255.250, Recon Error: 96.2367, MLP Score: 0.0000
+2025-06-04 15:31:45,300 - WARNING -   Node ID: 192.168.239.101, Recon Error: 21.2966, MLP Score: 0.0000
+2025-06-04 15:31:45,300 - WARNING -   Node ID: 192.168.27.13, Recon Error: 26.3666, MLP Score: 0.0000
+2025-06-04 15:31:45,300 - INFO - No significant edge anomalies detected (reconstruction-based)
+2025-06-04 15:32:15,301 - INFO - No new .dot files found in /home/lu/Desktop/output_/. Waiting for 30 seconds...
+2025-06-04 15:32:45,301 - INFO - No new .dot files found in /home/lu/Desktop/output_/. Waiting for 30 seconds...

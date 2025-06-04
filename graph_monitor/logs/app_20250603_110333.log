@@ -1,0 +1,8 @@
+2025-06-03 11:03:33,293 - INFO - Application logging to file: logs/app_20250603_110333.log
+2025-06-03 11:03:33,293 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: DEBUG
+2025-06-03 11:03:33,295 - INFO - Starting processing of existing directory: /home/lu/Desktop/output/, Train Mode: train
+2025-06-03 11:03:33,295 - INFO - 
+--- Processing file: nw_graph_encoded_1748869365.dot (Timestamp: 2025-06-02 15:02:45) ---
+2025-06-03 11:03:37,025 - INFO - Processing update from: /home/lu/Desktop/output/nw_graph_encoded_1748869365.dot
+2025-06-03 11:03:41,425 - INFO - Processing .dot file content.
+2025-06-03 11:03:41,976 - INFO - Parsed 0 nodes.

@@ -1,0 +1,130 @@
+2025-06-03 12:38:32,742 - INFO - Application logging to file: logs/app_20250603_123832.log
+2025-06-03 12:38:32,742 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: DEBUG
+2025-06-03 12:38:32,742 - INFO - Starting processing of existing directory: /home/lu/Desktop/output/, Train Mode: train
+2025-06-03 12:38:32,742 - INFO - 
+--- Processing file: nw_graph_encoded_1748945537.dot (Timestamp: 2025-06-03 12:12:17) ---
+2025-06-03 12:38:32,742 - INFO - Processing update from: /home/lu/Desktop/output/nw_graph_encoded_1748945537.dot
+2025-06-03 12:38:32,743 - INFO - Processing /home/lu/Desktop/output/nw_graph_encoded_1748945537.dot file.
+2025-06-03 12:38:32,746 - INFO - Parsed 260 nodes.
+2025-06-03 12:38:32,750 - INFO - Parsed 412 edges.
+2025-06-03 12:38:32,790 - INFO - Starting NetworkX to PyG conversion.
+2025-06-03 12:38:32,790 - DEBUG - Sorted node attribute keys: ['outgoing_ratio', 'incoming_ratio', 'server_score', 'client_score', 'unique_protocols', 'protocol_entropy', 'most_freq_proto_ratio', 'unique_remote_ports', 'unique_local_ports', 'remote_port_diversity', 'local_port_diversity', 'privileged_remote_ratio', 'privileged_local_ratio', 'first_seen_hour_minute_sin', 'first_seen_hour_minute_cos', 'last_seen_hour_minute_sin', 'last_seen_hour_minute_cos', 'http_ratio', 'ssl_ratio']
+2025-06-03 12:38:32,792 - DEBUG - Initial node features tensor shape: torch.Size([260, 19])
+2025-06-03 12:38:32,801 - INFO - Numerical Node Features (x) after initial standard scaling.
+2025-06-03 12:38:32,805 - DEBUG - Node features tensor shape after scaling: torch.Size([260, 19])
+2025-06-03 12:38:32,805 - DEBUG - Edge index tensor shape: torch.Size([2, 412])
+2025-06-03 12:38:32,805 - DEBUG - Sorted edge attribute keys: ['dst_port', 'count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts', 'total_orig_ip_bytes', 'total_resp_ip_bytes', 'protocol', 'service']
+2025-06-03 12:38:32,808 - INFO - Fitted and transformed categorical edge feature: protocol. Unique values: 3
+2025-06-03 12:38:32,808 - INFO - Fitted and transformed categorical edge feature: service. Unique values: 7
+2025-06-03 12:38:32,809 - DEBUG - Shape of encoded categorical edge features: torch.Size([412, 2])
+2025-06-03 12:38:32,809 - INFO - Numerical Edge Attributes after initial standard scaling.
+2025-06-03 12:38:32,809 - DEBUG - Shape of scaled numerical edge features: torch.Size([412, 20])
+2025-06-03 12:38:32,810 - DEBUG - Final edge attributes tensor shape: torch.Size([412, 22])
+2025-06-03 12:38:32,810 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-03 12:38:32,810 - INFO - Initializing HybridGNNAnomalyDetector with node_dim=19, edge_dim=22, hidden_dim=128, embedding_dim=64, heads=4, num_gat_layers=3, gat_heads=4, recon_loss_type=mse, edge_recon_loss_type=bce
+2025-06-03 12:38:32,810 - INFO - Initializing GraphAutoencoder with node_dim=19, edge_dim=22, hidden_dim=128, embedding_dim=64, num_gat_layers=3, gat_heads=4, use_batch_norm=True, use_residual=True
+2025-06-03 12:38:32,858 - DEBUG - Encoder GATConv layers initialized with final embedding dimension: 64
+2025-06-03 12:38:32,860 - DEBUG - Decoder MLP layers initialized with proper weight initialization.
+2025-06-03 12:38:32,862 - DEBUG - Anomaly scoring MLPs initialized.
+2025-06-03 12:38:32,862 - INFO - Optimizer (AdamW) and scheduler (CosineAnnealingWarmRestarts) initialized.
+2025-06-03 12:38:32,862 - INFO - Replay buffer initialized with maxlen=2000, batch_size=8
+2025-06-03 12:38:32,862 - INFO - RunningStats initialized.
+2025-06-03 12:38:32,862 - INFO - RunningStats initialized.
+2025-06-03 12:38:32,862 - INFO - Statistical controls initialized: drift_threshold=0.15
+2025-06-03 12:38:32,863 - INFO - Using device: cpu
+2025-06-03 12:38:32,863 - INFO - Initialized Hybrid GNN (node_dim=19, edge_dim=22)
+2025-06-03 12:38:32,863 - INFO - Performing initial training for 100 epochs...
+2025-06-03 12:38:32,864 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:33,506 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:33,522 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:33,523 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:33,542 - INFO - Epoch 1/100, Loss: 33.2934
+2025-06-03 12:38:33,542 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:33,559 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:33,561 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:33,561 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:33,598 - INFO - Epoch 2/100, Loss: 34.8439
+2025-06-03 12:38:33,598 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:33,613 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:33,615 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:33,615 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:33,665 - INFO - Epoch 3/100, Loss: 28.8640
+2025-06-03 12:38:33,665 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:33,674 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:33,675 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:33,675 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:33,736 - INFO - Epoch 4/100, Loss: 28.7993
+2025-06-03 12:38:33,737 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:33,828 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:33,829 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:33,830 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,133 - INFO - Epoch 5/100, Loss: 24.3045
+2025-06-03 12:38:34,134 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,355 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,356 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,357 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,373 - INFO - Epoch 6/100, Loss: 25.7909
+2025-06-03 12:38:34,373 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,386 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,387 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,388 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,403 - INFO - Epoch 7/100, Loss: 25.0178
+2025-06-03 12:38:34,404 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,417 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,419 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,419 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,435 - INFO - Epoch 8/100, Loss: 21.9135
+2025-06-03 12:38:34,435 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,450 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,451 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,452 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,469 - INFO - Epoch 9/100, Loss: 18.3754
+2025-06-03 12:38:34,469 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,483 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,485 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,485 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,504 - INFO - Epoch 10/100, Loss: 19.2773
+2025-06-03 12:38:34,504 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,518 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,519 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,520 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,535 - INFO - Epoch 11/100, Loss: 16.5195
+2025-06-03 12:38:34,535 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,549 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,551 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,551 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,599 - INFO - Epoch 12/100, Loss: 17.3052
+2025-06-03 12:38:34,600 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,613 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,615 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,615 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,626 - INFO - Epoch 13/100, Loss: 19.0135
+2025-06-03 12:38:34,627 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,640 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,642 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,642 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,679 - INFO - Epoch 14/100, Loss: 17.9788
+2025-06-03 12:38:34,680 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,690 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,691 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,691 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,737 - INFO - Epoch 15/100, Loss: 15.0609
+2025-06-03 12:38:34,737 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,747 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,748 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,748 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,788 - INFO - Epoch 16/100, Loss: 14.5559
+2025-06-03 12:38:34,788 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,797 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,798 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,798 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,833 - INFO - Epoch 17/100, Loss: 14.2362
+2025-06-03 12:38:34,833 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,842 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,843 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,843 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-03 12:38:34,880 - INFO - Epoch 18/100, Loss: 12.6855
+2025-06-03 12:38:34,881 - WARNING - Feature statistics not yet available for normalization. Skipping normalization.
+2025-06-03 12:38:34,890 - DEBUG - Node anomaly scores shape: torch.Size([260, 1])
+2025-06-03 12:38:34,891 - DEBUG - Edge anomaly scores shape: torch.Size([412, 1])
+2025-06-03 12:38:34,891 - DEBUG - Global anomaly score shape: torch.Size([1, 1])

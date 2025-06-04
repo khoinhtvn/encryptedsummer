@@ -1,0 +1,94 @@
+2025-06-02 15:15:45,908 - INFO - Application logging to file: logs/app_20250602_151545.log
+2025-06-02 15:15:45,908 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: DEBUG
+2025-06-02 15:15:45,909 - INFO - Starting processing of existing directory: /home/lu/Desktop/output/
+2025-06-02 15:15:45,909 - INFO - 
+--- Processing file: nw_graph_encoded_1748869125.dot (Timestamp: 2025-06-02 14:58:45) ---
+2025-06-02 15:15:45,909 - INFO - Processing update file: /home/lu/Desktop/output/nw_graph_encoded_1748869125.dot
+2025-06-02 15:15:45,909 - INFO - Processing .dot file: /home/lu/Desktop/output/nw_graph_encoded_1748869125.dot
+2025-06-02 15:15:45,909 - INFO - Parsed 7 nodes from '/home/lu/Desktop/output/nw_graph_encoded_1748869125.dot'.
+2025-06-02 15:15:45,910 - INFO - Parsed 5 edges from '/home/lu/Desktop/output/nw_graph_encoded_1748869125.dot'.
+2025-06-02 15:15:45,910 - INFO - Starting NetworkX to PyG conversion.
+2025-06-02 15:15:45,910 - DEBUG - Sorted node attribute keys: ['ever_connected_to_privileged_port', 'ever_listened_on_privileged_port', 'first_seen_hour_minute_cos', 'first_seen_hour_minute_sin', 'has_http_error_4xx', 'has_http_error_5xx', 'has_ssl_history', 'has_ssl_resumption', 'has_ssl_server_name', 'incoming_connection_ratio', 'last_seen_hour_minute_cos', 'last_seen_hour_minute_sin', 'most_freq_conn_state', 'most_freq_http_version', 'most_freq_proto', 'most_freq_ssl_version', 'outgoing_connection_ratio', 'service_1', 'service_2', 'service_3', 'top_proto_1', 'top_user_agent_1', 'unique_http_status_codes_seen', 'unique_http_versions_used', 'unique_local_ports_listening_on', 'unique_local_ports_used', 'unique_remote_ports_connected_from', 'unique_remote_ports_connected_to', 'unique_ssl_ciphers_used', 'unique_ssl_versions_used']
+2025-06-02 15:15:45,910 - DEBUG - Initial node features tensor shape: torch.Size([7, 30])
+2025-06-02 15:15:45,910 - DEBUG - Edge index tensor shape: torch.Size([2, 5])
+2025-06-02 15:15:45,911 - DEBUG - Sorted edge attribute keys: ['count', 'dst_port', 'protocol', 'service', 'total_orig_bytes', 'total_orig_ip_bytes', 'total_orig_pkts', 'total_resp_bytes', 'total_resp_ip_bytes', 'total_resp_pkts']
+2025-06-02 15:15:45,911 - DEBUG - Initial edge attributes tensor shape: torch.Size([5, 10])
+2025-06-02 15:15:45,911 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-02 15:15:45,911 - INFO - Initialized main graph with 7 nodes and 5 edges.
+2025-06-02 15:15:45,911 - INFO - Initializing HybridGNNAnomalyDetector with node_dim=30, edge_dim=10, hidden_dim=64, embedding_dim=32, heads=4
+2025-06-02 15:15:45,911 - INFO - Initializing GraphAutoencoder with node_dim=30, edge_dim=10, hidden_dim=64, embedding_dim=32
+2025-06-02 15:15:45,988 - DEBUG - Encoder GATConv layers initialized: conv1 out_channels=256, conv2 out_channels=32
+2025-06-02 15:15:45,989 - DEBUG - Decoder MLP layers initialized.
+2025-06-02 15:15:45,989 - DEBUG - Anomaly scoring MLPs initialized.
+2025-06-02 15:15:45,990 - INFO - Optimizer and scheduler initialized.
+2025-06-02 15:15:45,990 - INFO - Replay buffer initialized with maxlen=1000, batch_size=32
+2025-06-02 15:15:45,990 - INFO - RunningStats initialized.
+2025-06-02 15:15:45,990 - INFO - RunningStats initialized.
+2025-06-02 15:15:45,990 - INFO - Statistical controls initialized: drift_threshold=0.15
+2025-06-02 15:15:45,990 - INFO - Embedding export will occur every 5 updates, saving to vis
+2025-06-02 15:15:45,991 - INFO - Using device: cpu
+2025-06-02 15:15:45,991 - INFO - Initialized Hybrid GNN (node_dim=30, edge_dim=10)
+2025-06-02 15:15:45,991 - INFO - Performing initial training for 50 epochs...
+2025-06-02 15:15:46,169 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:46,170 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:46,221 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:46,425 - INFO - Epoch 1/50, Loss: 27.3036
+2025-06-02 15:15:46,548 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:46,548 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:46,603 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:46,741 - INFO - Epoch 2/50, Loss: 23.6174
+2025-06-02 15:15:46,864 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:46,865 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:46,916 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:47,092 - INFO - Epoch 3/50, Loss: 20.0541
+2025-06-02 15:15:47,200 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:47,201 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:47,251 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:47,425 - INFO - Epoch 4/50, Loss: 16.5366
+2025-06-02 15:15:47,554 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:47,555 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:47,605 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:47,758 - INFO - Epoch 5/50, Loss: 13.0296
+2025-06-02 15:15:47,879 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:47,880 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:47,928 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:48,091 - INFO - Epoch 6/50, Loss: 9.5270
+2025-06-02 15:15:48,220 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:48,221 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:48,274 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:48,430 - INFO - Epoch 7/50, Loss: 7.0139
+2025-06-02 15:15:48,554 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:48,559 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:48,608 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:48,775 - INFO - Epoch 8/50, Loss: 8.8006
+2025-06-02 15:15:48,886 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:48,887 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:48,930 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:49,094 - INFO - Epoch 9/50, Loss: 9.9873
+2025-06-02 15:15:49,209 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:49,210 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:49,254 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:49,403 - INFO - Epoch 10/50, Loss: 10.5032
+2025-06-02 15:15:49,509 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:49,510 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:49,556 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:49,686 - INFO - Epoch 11/50, Loss: 10.4885
+2025-06-02 15:15:49,820 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:49,821 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:49,867 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:50,042 - INFO - Epoch 12/50, Loss: 10.0400
+2025-06-02 15:15:50,146 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:50,146 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:50,206 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:50,370 - INFO - Epoch 13/50, Loss: 9.2345
+2025-06-02 15:15:50,478 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:50,478 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:50,524 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:50,677 - INFO - Epoch 14/50, Loss: 8.1310
+2025-06-02 15:15:50,784 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:50,788 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:50,817 - DEBUG - Global anomaly score shape: torch.Size([1, 1])
+2025-06-02 15:15:50,960 - INFO - Epoch 15/50, Loss: 6.7752
+2025-06-02 15:15:51,071 - DEBUG - Node anomaly scores shape: torch.Size([7, 1])
+2025-06-02 15:15:51,072 - DEBUG - Edge anomaly scores shape: torch.Size([5, 1])
+2025-06-02 15:15:51,130 - DEBUG - Global anomaly score shape: torch.Size([1, 1])

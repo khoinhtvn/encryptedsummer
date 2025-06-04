@@ -1,0 +1,31 @@
+2025-06-03 11:00:22,261 - INFO - Application logging to file: logs/app_20250603_110022.log
+2025-06-03 11:00:22,261 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: DEBUG
+2025-06-03 11:00:22,263 - INFO - Starting processing of existing directory: /home/lu/Desktop/output/, Train Mode: train
+2025-06-03 11:00:22,263 - INFO - 
+--- Processing file: nw_graph_encoded_1748869365.dot (Timestamp: 2025-06-02 15:02:45) ---
+2025-06-03 11:00:22,263 - INFO - Processing update from: /home/lu/Desktop/output/nw_graph_encoded_1748869365.dot
+2025-06-03 11:00:22,263 - INFO - Processing .dot file content.
+2025-06-03 11:00:22,263 - INFO - Parsed 0 nodes.
+2025-06-03 11:00:22,264 - INFO - Parsed 0 edges.
+2025-06-03 11:00:22,264 - INFO - Starting NetworkX to PyG conversion.
+2025-06-03 11:00:22,264 - DEBUG - Sorted node attribute keys: ['outgoing_ratio', 'incoming_ratio', 'server_score', 'client_score', 'unique_protocols', 'protocol_entropy', 'most_freq_proto_ratio', 'unique_remote_ports', 'unique_local_ports', 'remote_port_diversity', 'local_port_diversity', 'privileged_remote_ratio', 'privileged_local_ratio', 'first_seen_hour_minute_sin', 'first_seen_hour_minute_cos', 'last_seen_hour_minute_sin', 'last_seen_hour_minute_cos', 'activity_span_hours', 'connection_consistency', 'http_ratio', 'user_agent_diversity', 'http_error_ratio', 'ssl_ratio', 'ssl_version_diversity', 'ssl_cipher_diversity', 'ssl_resumption_ratio', 'sni_usage_ratio', 'degree_centrality', 'betweenness_centrality', 'clustering_coefficient']
+2025-06-03 11:00:22,264 - DEBUG - Initial node features tensor shape: torch.Size([0, 30])
+2025-06-03 11:00:22,264 - WARNING - Skipping standard scaling for node features: No features to scale.
+2025-06-03 11:00:22,264 - DEBUG - Node features tensor shape after scaling: torch.Size([0, 30])
+2025-06-03 11:00:22,264 - DEBUG - Edge index tensor shape: torch.Size([2, 0])
+2025-06-03 11:00:22,264 - DEBUG - Sorted edge attribute keys: ['dst_port', 'count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts', 'total_orig_ip_bytes', 'total_resp_ip_bytes', 'protocol', 'service']
+2025-06-03 11:00:22,265 - INFO - No edge attributes (numerical or categorical) found.
+2025-06-03 11:00:22,265 - INFO - Successfully converted NetworkX graph to PyG Data object.
+2025-06-03 11:00:22,265 - INFO - Initializing HybridGNNAnomalyDetector with node_dim=30, edge_dim=0, hidden_dim=128, embedding_dim=64, heads=4, num_gat_layers=3, gat_heads=4, recon_loss_type=mse, edge_recon_loss_type=bce
+2025-06-03 11:00:22,265 - INFO - Initializing GraphAutoencoder with node_dim=30, edge_dim=0, hidden_dim=128, embedding_dim=64, num_gat_layers=3, gat_heads=4, use_batch_norm=True, use_residual=True
+2025-06-03 11:00:22,424 - DEBUG - Encoder GATConv layers initialized with final embedding dimension: 64
+2025-06-03 11:00:22,426 - DEBUG - Decoder MLP layers initialized with proper weight initialization.
+2025-06-03 11:00:22,429 - DEBUG - Anomaly scoring MLPs initialized.
+2025-06-03 11:00:22,430 - INFO - Optimizer (AdamW) and scheduler (CosineAnnealingWarmRestarts) initialized.
+2025-06-03 11:00:22,430 - INFO - Replay buffer initialized with maxlen=2000, batch_size=64
+2025-06-03 11:00:22,430 - INFO - RunningStats initialized.
+2025-06-03 11:00:22,430 - INFO - RunningStats initialized.
+2025-06-03 11:00:22,430 - INFO - Statistical controls initialized: drift_threshold=0.15
+2025-06-03 11:00:22,432 - INFO - Using device: cpu
+2025-06-03 11:00:22,433 - INFO - Initialized Hybrid GNN (node_dim=30, edge_dim=0)
+2025-06-03 11:00:22,433 - INFO - Performing initial training for 100 epochs...

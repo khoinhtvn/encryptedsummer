@@ -1,13 +1,15 @@
 # evaluate.py
 
+import logging
 import os
 import re
-import logging
 import traceback
-from datetime import datetime
-import torch
-from torch_geometric.loader import DataLoader
+
+import matplotlib.pyplot as plt
 import numpy as np
+import torch
+from sklearn.manifold import TSNE
+from torch_geometric.loader import DataLoader
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -28,34 +30,76 @@ except ImportError as e:
 # Define paths for your model checkpoint, running statistics, and validation data
 MODEL_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/model_checkpoints'
 STATS_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/stats'
-VALIDATION_DATA_DIR = '/home/lu/Desktop/output'  # Update with your actual path to .dot files
+VALIDATION_DATA_DIR = '/home/lu/Desktop/output_ssl_bruteforce'
+EMBEDDING_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/embeddings'
+os.makedirs(EMBEDDING_SAVE_PATH, exist_ok=True)
 
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logging.info(f"Using device: {DEVICE}")
 
 
-# --- Analysis Function (copied from previous response) ---
-def analyze_node_reconstruction(model, dataloader, device):
+def visualize_embeddings_3d(embeddings, labels, filename="embeddings_3d.png"):
+    """Visualizes node embeddings in 3D using t-SNE."""
+    logging.info("Starting 3D embedding visualization...")
+    tsne = TSNE(n_components=3, random_state=42, n_iter=300, perplexity=30)
+    try:
+        reduced_embeddings = tsne.fit_transform(embeddings)
+
+        fig = plt.figure(figsize=(12, 10))
+        ax = fig.add_subplot(111, projection='3d')
+        scatter = ax.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], reduced_embeddings[:, 2], c=labels,
+                             cmap='viridis')
+        ax.set_title("Node Embeddings Visualization (t-SNE 3D)")
+        ax.set_xlabel("t-SNE Dimension 1")
+        ax.set_ylabel("t-SNE Dimension 2")
+        ax.set_zlabel("t-SNE Dimension 3")
+        # Add a colorbar for the labels if they are numerical
+        if np.issubdtype(np.array(labels).dtype, np.number):
+            cbar = fig.colorbar(scatter)
+            cbar.set_label('Label')
+        else:
+            # Create a legend for categorical labels
+            unique_labels = np.unique(labels)
+            for label in unique_labels:
+                ax.scatter(reduced_embeddings[labels == label, 0], reduced_embeddings[labels == label, 1],
+                           reduced_embeddings[labels == label, 2], label=label)
+            ax.legend()
+
+        filepath = os.path.join(EMBEDDING_SAVE_PATH, filename)
+        plt.savefig(filepath)
+        logging.info(f"3D embeddings visualization saved to {filepath}")
+        plt.close()
+    except Exception as e:
+        logging.error(f"Error during 3D t-SNE or plotting: {e}")
+        logging.error(traceback.format_exc())
+
+
+# --- Analysis Function (modified to call 3D visualization) ---
+def analyze_node_reconstruction(model, dataloader, device, visualize_2d=False, visualize_3d=False):
     """
-    Analyzes node reconstruction errors on a per-feature basis.
+    Analyzes node reconstruction errors on a per-feature basis and optionally visualizes embeddings in 2D or 3D.
     Args:
         model (HybridGNNAnomalyDetector): The trained GNN model.
         dataloader (torch_geometric.loader.DataLoader): DataLoader for the validation data.
         device (torch.device): The device (CPU or CUDA) to run the analysis on.
+        visualize_2d (bool): Whether to visualize the node embeddings in 2D.
+        visualize_3d (bool): Whether to visualize the node embeddings in 3D.
     Returns:
         numpy.ndarray: Array of mean absolute reconstruction errors for each node feature,
                        or None if no data to analyze.
     """
     model.eval()  # Set the model to evaluation mode
     total_feature_errors = None
+    total_embeddings = []
+    node_labels = []
     total_samples = 0
 
     with torch.no_grad():
         for batch in dataloader:
             batch = batch.to(device)
             # The forward pass returns: node_scores, edge_scores, global_score, node_recon, edge_recon, embedding, global_embedding
-            # We only need node_recon and batch.x for this analysis
-            _, _, _, node_recon, _, _, _ = model(batch)
+            # We need node_recon, batch.x, and embedding for this analysis
+            _, _, _, node_recon, _, embedding, _ = model(batch)
 
             if batch.x is not None and node_recon is not None and batch.x.numel() > 0:
                 recon_error = torch.abs(node_recon - batch.x)  # L1 error per element
@@ -67,11 +111,21 @@ def analyze_node_reconstruction(model, dataloader, device):
                     total_feature_errors += torch.sum(recon_error, dim=0)
 
                 total_samples += num_nodes
+                total_embeddings.append(embedding.cpu().numpy())
+                node_labels.extend([0] * num_nodes)  # Assuming all validation data is 'normal' for visualization
+
             else:
                 logging.warning("Skipping batch in analysis: node features or reconstruction are None/empty.")
 
     if total_feature_errors is not None and total_samples > 0:
         mean_feature_errors = total_feature_errors / total_samples
+        if total_embeddings:
+            all_embeddings = np.concatenate(total_embeddings, axis=0)
+            all_labels = np.array(node_labels)
+            if visualize_2d:
+                visualize_embeddings(all_embeddings, all_labels, filename="validation_embeddings_2d.png")
+            if visualize_3d:
+                visualize_embeddings_3d(all_embeddings, all_labels, filename="validation_embeddings_3d.png")
         return mean_feature_errors.cpu().numpy()
     else:
         logging.warning("No node reconstruction data to analyze after processing all batches.")
@@ -167,9 +221,10 @@ def main():
     # Ensure this uses the same logic/order as during training
     sorted_node_feature_names = get_sorted_node_features(nx_graph)
 
-    # 5. Perform Node Reconstruction Analysis
-    logging.info("Starting node reconstruction analysis...")
-    feature_errors = analyze_node_reconstruction(model, validation_dataloader, DEVICE)
+    # 5. Perform Node Reconstruction Analysis and Embedding Visualization
+    logging.info("Starting node reconstruction analysis and embedding visualization...")
+    feature_errors = analyze_node_reconstruction(model, validation_dataloader, DEVICE, visualize_2d=False,
+                                                 visualize_3d=True)
 
     if feature_errors is not None:
         logging.info("\n--- Node Reconstruction Error Analysis ---")

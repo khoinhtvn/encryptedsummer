@@ -1,0 +1,74 @@
+{
+  "timestamp": "20250604_154531",
+  "update_count": 11,
+  "global_anomaly_score": 0.9999653100967407,
+  "node_anomalies": [
+    {
+      "node_id": 72,
+      "recon_error": 1974.9683837890625,
+      "mlp_score": 1.0,
+      "ip": "fe80::a425:e54:93a8:261c"
+    },
+    {
+      "node_id": 126,
+      "recon_error": 2509.07763671875,
+      "mlp_score": 1.0,
+      "ip": "192.168.27.12"
+    },
+    {
+      "node_id": 184,
+      "recon_error": 2020.76171875,
+      "mlp_score": 1.0,
+      "ip": "fe80::eb4e:a54d:8c61:6ce1"
+    },
+    {
+      "node_id": 200,
+      "recon_error": 2882.6513671875,
+      "mlp_score": 1.0,
+      "ip": "fe80::6cf3:6ff:fe19:4d85"
+    },
+    {
+      "node_id": 206,
+      "recon_error": 2762.60302734375,
+      "mlp_score": 1.0,
+      "ip": "192.168.27.13"
+    },
+    {
+      "node_id": 252,
+      "recon_error": 2315.9814453125,
+      "mlp_score": 1.0,
+      "ip": "192.168.27.10"
+    },
+    {
+      "node_id": 351,
+      "recon_error": 712.2028198242188,
+      "mlp_score": 1.0,
+      "ip": "ff02::fb"
+    },
+    {
+      "node_id": 353,
+      "recon_error": 712.2028198242188,
+      "mlp_score": 1.0,
+      "ip": "224.0.0.251"
+    },
+    {
+      "node_id": 360,
+      "recon_error": 1707.4481201171875,
+      "mlp_score": 1.0,
+      "ip": "192.168.209.130"
+    },
+    {
+      "node_id": 508,
+      "recon_error": 741.8674926757812,
+      "mlp_score": 1.0,
+      "ip": "210.245.26.97"
+    },
+    {
+      "node_id": 636,
+      "recon_error": 1975.4239501953125,
+      "mlp_score": 1.0,
+      "ip": "fe80::3674:28:2588:1274"
+    }
+  ],
+  "edge_anomalies": []
+}

@@ -1,0 +1,403 @@
+{
+  "timestamp": "20250604_161522",
+  "update_count": 18,
+  "global_anomaly_score": 5.857925134478137e-05,
+  "node_anomalies": [
+    {
+      "node_id": 89,
+      "recon_error": 3.8399763107299805,
+      "mlp_score": 0.0,
+      "ip": "fe80::20c:29ff:fe02:9537"
+    },
+    {
+      "node_id": 281,
+      "recon_error": 3.0260512828826904,
+      "mlp_score": 0.0,
+      "ip": "fe80::a425:e54:93a8:261c"
+    },
+    {
+      "node_id": 344,
+      "recon_error": 4.788071632385254,
+      "mlp_score": 0.0,
+      "ip": "192.168.27.12"
+    },
+    {
+      "node_id": 416,
+      "recon_error": 3.409410238265991,
+      "mlp_score": 0.0,
+      "ip": "fe80::eb4e:a54d:8c61:6ce1"
+    },
+    {
+      "node_id": 438,
+      "recon_error": 3.9742753505706787,
+      "mlp_score": 0.0,
+      "ip": "fe80::6cf3:6ff:fe19:4d85"
+    },
+    {
+      "node_id": 445,
+      "recon_error": 4.60603141784668,
+      "mlp_score": 0.0,
+      "ip": "192.168.27.13"
+    },
+    {
+      "node_id": 483,
+      "recon_error": 4.400733947753906,
+      "mlp_score": 0.0,
+      "ip": "192.168.209.1"
+    },
+    {
+      "node_id": 502,
+      "recon_error": 3.5147452354431152,
+      "mlp_score": 0.0,
+      "ip": "192.168.27.10"
+    },
+    {
+      "node_id": 641,
+      "recon_error": 3.7464518547058105,
+      "mlp_score": 0.0,
+      "ip": "192.168.209.130"
+    },
+    {
+      "node_id": 702,
+      "recon_error": 1.5292569398880005,
+      "mlp_score": 0.0,
+      "ip": "192.168.239.101"
+    },
+    {
+      "node_id": 969,
+      "recon_error": 3.0264182090759277,
+      "mlp_score": 0.0,
+      "ip": "fe80::3674:28:2588:1274"
+    }
+  ],
+  "edge_anomalies": [
+    {
+      "source_node_id": 89,
+      "target_node_id": 330,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::20c:29ff:fe02:9537",
+      "target_ip": "ff02::2"
+    },
+    {
+      "source_node_id": 281,
+      "target_node_id": 330,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::a425:e54:93a8:261c",
+      "target_ip": "ff02::2"
+    },
+    {
+      "source_node_id": 281,
+      "target_node_id": 631,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::a425:e54:93a8:261c",
+      "target_ip": "ff02::fb"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999894022941589,
+      "mlp_score": 8.387515400103129e-13,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999886870384216,
+      "mlp_score": 8.240911208642898e-13,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999873757362366,
+      "mlp_score": 7.569615507324601e-13,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999882102012634,
+      "mlp_score": 8.001484132387493e-13,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999935150146484,
+      "mlp_score": 1.1433496293830614e-12,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999932169914246,
+      "mlp_score": 1.0694473735403665e-12,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 344,
+      "target_node_id": 702,
+      "recon_error": 0.7999856472015381,
+      "mlp_score": 7.046633784292544e-13,
+      "source_ip": "192.168.27.12",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 416,
+      "target_node_id": 631,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::eb4e:a54d:8c61:6ce1",
+      "target_ip": "ff02::fb"
+    },
+    {
+      "source_node_id": 438,
+      "target_node_id": 330,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::6cf3:6ff:fe19:4d85",
+      "target_ip": "ff02::2"
+    },
+    {
+      "source_node_id": 445,
+      "target_node_id": 702,
+      "recon_error": 0.7988799810409546,
+      "mlp_score": 4.722192756723316e-14,
+      "source_ip": "192.168.27.13",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 445,
+      "target_node_id": 702,
+      "recon_error": 0.7983874678611755,
+      "mlp_score": 4.4068264662411316e-14,
+      "source_ip": "192.168.27.13",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 445,
+      "target_node_id": 702,
+      "recon_error": 0.798285722732544,
+      "mlp_score": 4.331195910820332e-14,
+      "source_ip": "192.168.27.13",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 445,
+      "target_node_id": 702,
+      "recon_error": 0.7983837723731995,
+      "mlp_score": 3.943253126911968e-14,
+      "source_ip": "192.168.27.13",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 483,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.1",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 502,
+      "target_node_id": 702,
+      "recon_error": 0.7999849915504456,
+      "mlp_score": 7.297464498998152e-13,
+      "source_ip": "192.168.27.10",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 502,
+      "target_node_id": 702,
+      "recon_error": 0.7999839186668396,
+      "mlp_score": 7.564362005697822e-13,
+      "source_ip": "192.168.27.10",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 502,
+      "target_node_id": 702,
+      "recon_error": 0.7999851703643799,
+      "mlp_score": 7.578138962703596e-13,
+      "source_ip": "192.168.27.10",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 502,
+      "target_node_id": 702,
+      "recon_error": 0.7999905943870544,
+      "mlp_score": 9.032314284528054e-13,
+      "source_ip": "192.168.27.10",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 502,
+      "target_node_id": 702,
+      "recon_error": 0.799987256526947,
+      "mlp_score": 7.585224766001875e-13,
+      "source_ip": "192.168.27.10",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 502,
+      "target_node_id": 344,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.27.10",
+      "target_ip": "192.168.27.12"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 641,
+      "target_node_id": 702,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.209.130",
+      "target_ip": "192.168.239.101"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 449,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "8.8.8.8"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 235,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "54.247.62.1"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 233,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "34.243.160.129"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 229,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "34.254.182.186"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 227,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "54.171.230.55"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 224,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "185.125.190.24"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 710,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "185.125.190.39"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 325,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "103.245.249.90"
+    },
+    {
+      "source_node_id": 702,
+      "target_node_id": 188,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "192.168.239.101",
+      "target_ip": "54.217.10.153"
+    },
+    {
+      "source_node_id": 969,
+      "target_node_id": 631,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::3674:28:2588:1274",
+      "target_ip": "ff02::fb"
+    },
+    {
+      "source_node_id": 969,
+      "target_node_id": 330,
+      "recon_error": 0.800000011920929,
+      "mlp_score": 0.0,
+      "source_ip": "fe80::3674:28:2588:1274",
+      "target_ip": "ff02::2"
+    }
+  ]
+}
