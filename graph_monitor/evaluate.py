@@ -15,7 +15,6 @@ from torch_geometric.loader import DataLoader
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Import necessary functions and classes from your project files
-# Ensure these paths are correct relative to where evaluate.py is run
 try:
     from graph_utils import dot_to_nx, nx_to_pyg, get_sorted_node_features, get_sorted_edge_features
     from neural_net import HybridGNNAnomalyDetector
@@ -30,7 +29,7 @@ except ImportError as e:
 # Define paths for your model checkpoint, running statistics, and validation data
 MODEL_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/model_checkpoints'
 STATS_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/stats'
-VALIDATION_DATA_DIR = '/home/lu/Desktop/output_ssl_bruteforce'
+# VALIDATION_DATA_DIR will now be passed as a parameter to main()
 EMBEDDING_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/embeddings'
 os.makedirs(EMBEDDING_SAVE_PATH, exist_ok=True)
 
@@ -38,8 +37,8 @@ DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 logging.info(f"Using device: {DEVICE}")
 
 
-def visualize_embeddings_3d(embeddings, labels, filename="embeddings_3d.png"):
-    """Visualizes node embeddings in 3D using t-SNE."""
+def visualize_embeddings_3d(embeddings, labels, timestamp, filename_prefix="embeddings_3d"):
+    """Visualizes node embeddings in 3D using t-SNE, including timestamp in filename."""
     logging.info("Starting 3D embedding visualization...")
     tsne = TSNE(n_components=3, random_state=42, n_iter=300, perplexity=30)
     try:
@@ -49,7 +48,7 @@ def visualize_embeddings_3d(embeddings, labels, filename="embeddings_3d.png"):
         ax = fig.add_subplot(111, projection='3d')
         scatter = ax.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], reduced_embeddings[:, 2], c=labels,
                              cmap='viridis')
-        ax.set_title("Node Embeddings Visualization (t-SNE 3D)")
+        ax.set_title(f"Node Embeddings Visualization (t-SNE 3D) - Timestamp: {timestamp}")
         ax.set_xlabel("t-SNE Dimension 1")
         ax.set_ylabel("t-SNE Dimension 2")
         ax.set_zlabel("t-SNE Dimension 3")
@@ -65,7 +64,8 @@ def visualize_embeddings_3d(embeddings, labels, filename="embeddings_3d.png"):
                            reduced_embeddings[labels == label, 2], label=label)
             ax.legend()
 
-        filepath = os.path.join(EMBEDDING_SAVE_PATH, filename)
+        # Incorporate timestamp into the filename
+        filepath = os.path.join(EMBEDDING_SAVE_PATH, f"{filename_prefix}_{timestamp}.png")
         plt.savefig(filepath)
         logging.info(f"3D embeddings visualization saved to {filepath}")
         plt.close()
@@ -75,13 +75,14 @@ def visualize_embeddings_3d(embeddings, labels, filename="embeddings_3d.png"):
 
 
 # --- Analysis Function (modified to call 3D visualization) ---
-def analyze_node_reconstruction(model, dataloader, device, visualize_2d=False, visualize_3d=False):
+def analyze_node_reconstruction(model, dataloader, device, graph_timestamp, visualize_2d=False, visualize_3d=False):
     """
     Analyzes node reconstruction errors on a per-feature basis and optionally visualizes embeddings in 2D or 3D.
     Args:
         model (HybridGNNAnomalyDetector): The trained GNN model.
         dataloader (torch_geometric.loader.DataLoader): DataLoader for the validation data.
         device (torch.device): The device (CPU or CUDA) to run the analysis on.
+        graph_timestamp (int): Timestamp of the graph being analyzed, for use in filenames.
         visualize_2d (bool): Whether to visualize the node embeddings in 2D.
         visualize_3d (bool): Whether to visualize the node embeddings in 3D.
     Returns:
@@ -97,8 +98,6 @@ def analyze_node_reconstruction(model, dataloader, device, visualize_2d=False, v
     with torch.no_grad():
         for batch in dataloader:
             batch = batch.to(device)
-            # The forward pass returns: node_scores, edge_scores, global_score, node_recon, edge_recon, embedding, global_embedding
-            # We need node_recon, batch.x, and embedding for this analysis
             _, _, _, node_recon, _, embedding, _ = model(batch)
 
             if batch.x is not None and node_recon is not None and batch.x.numel() > 0:
@@ -122,10 +121,9 @@ def analyze_node_reconstruction(model, dataloader, device, visualize_2d=False, v
         if total_embeddings:
             all_embeddings = np.concatenate(total_embeddings, axis=0)
             all_labels = np.array(node_labels)
-            if visualize_2d:
-                visualize_embeddings(all_embeddings, all_labels, filename="validation_embeddings_2d.png")
             if visualize_3d:
-                visualize_embeddings_3d(all_embeddings, all_labels, filename="validation_embeddings_3d.png")
+                visualize_embeddings_3d(all_embeddings, all_labels, graph_timestamp,
+                                        filename_prefix="validation_embeddings_3d")
         return mean_feature_errors.cpu().numpy()
     else:
         logging.warning("No node reconstruction data to analyze after processing all batches.")
@@ -133,48 +131,44 @@ def analyze_node_reconstruction(model, dataloader, device, visualize_2d=False, v
 
 
 # --- Main Evaluation Logic ---
-def main():
+def main(validation_data_dir: str):  # VALIDATION_DATA_DIR is now a parameter
     # 1. Find the most recent validation graph file
     most_recent_file = None
-    most_recent_timestamp = -1  # Use -1 to ensure any valid timestamp is greater
+    most_recent_timestamp = -1
 
-    if not os.path.exists(VALIDATION_DATA_DIR):
-        logging.error(f"Validation data directory not found: {VALIDATION_DATA_DIR}")
+    if not os.path.exists(validation_data_dir):
+        logging.error(f"Validation data directory not found: {validation_data_dir}")
         return
 
-    for filename in os.listdir(VALIDATION_DATA_DIR):
+    for filename in os.listdir(validation_data_dir):
         if filename.startswith("nw_graph_encoded_") and filename.endswith(".dot"):
             match = re.search(r"nw_graph_encoded_(\d+)\.dot", filename)
             if match:
                 timestamp = int(match.group(1))
                 if timestamp > most_recent_timestamp:
                     most_recent_timestamp = timestamp
-                    most_recent_file = os.path.join(VALIDATION_DATA_DIR, filename)
+                    most_recent_file = os.path.join(validation_data_dir, filename)
 
     if not most_recent_file:
-        logging.error(f"No .dot files found in {VALIDATION_DATA_DIR} matching the pattern 'nw_graph_encoded_*.dot'.")
+        logging.error(f"No .dot files found in {validation_data_dir} matching the pattern 'nw_graph_encoded_*.dot'.")
         return
 
     logging.info(f"Using most recent validation graph: {most_recent_file}")
 
     # 2. Load NetworkX graph and convert to PyG Data object
     try:
-        nx_graph = dot_to_nx(most_recent_file)
+        nx_graph = dot_to_nx(most_recent_file)  # Keep nx_graph here!
         if nx_graph.number_of_nodes() == 0:
             logging.error(f"Loaded graph from {most_recent_file} has no nodes. Cannot proceed with evaluation.")
             return
 
-        # nx_to_pyg needs to handle feature extraction and initial scaling if any
-        # It should return a Data object with .x (node features) and .edge_attr (edge features)
-        # Ensure that nx_to_pyg is consistent with how training data was prepared
-        data_pyg = nx_to_pyg(nx_graph, node_scaling='standard', edge_scaling='standard')  # Use same scaling as training
+        data_pyg = nx_to_pyg(nx_graph, node_scaling='standard', edge_scaling='standard')
 
         if data_pyg.x is None or data_pyg.x.numel() == 0:
             logging.error(
                 f"No node features (data.x) found in the PyG Data object from {most_recent_file}. Cannot proceed.")
             return
 
-        # Create a DataLoader for the single graph
         validation_dataloader = DataLoader([data_pyg], batch_size=1)
 
     except Exception as e:
@@ -183,7 +177,6 @@ def main():
         return
 
     # 3. Initialize and Load the Model
-    # We need to instantiate the model with correct dimensions before loading state_dict
     node_feature_dim = data_pyg.x.size(1)
     edge_feature_dim = data_pyg.edge_attr.size(1) if data_pyg.edge_attr is not None else 0
 
@@ -195,12 +188,11 @@ def main():
         num_gat_layers=3,
         gat_heads=4,
         recon_loss_type='mse',
-        edge_recon_loss_type='mse',  # Set to 'mse' or 'none' if not reconstructing edges
+        edge_recon_loss_type='bce',
         batch_size=8
     )
     model.to(DEVICE)
 
-    # Create dummy optimizer and scheduler for loading checkpoint (their state won't be used for eval)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(optimizer, mode='min', factor=0.7, patience=5)
 
@@ -218,12 +210,13 @@ def main():
         return
 
     # 4. Get Sorted Node Feature Keys for display
-    # Ensure this uses the same logic/order as during training
     sorted_node_feature_names = get_sorted_node_features(nx_graph)
+    sorted_edge_feature_names = get_sorted_edge_features(nx_graph)
 
     # 5. Perform Node Reconstruction Analysis and Embedding Visualization
     logging.info("Starting node reconstruction analysis and embedding visualization...")
-    feature_errors = analyze_node_reconstruction(model, validation_dataloader, DEVICE, visualize_2d=False,
+    feature_errors = analyze_node_reconstruction(model, validation_dataloader, DEVICE, most_recent_timestamp,
+                                                 visualize_2d=False,
                                                  visualize_3d=True)
 
     if feature_errors is not None:
@@ -237,6 +230,84 @@ def main():
     else:
         logging.info("Node reconstruction analysis could not be performed.")
 
+    # --- ANOMALY DETECTION INTEGRATION ---
+    logging.info("\n--- Starting Anomaly Detection ---")
+    try:
+        ANOMALY_THRESHOLD_SIGMAS = 2.5  # Tune this based on your dataset and desired sensitivity
+
+        anomaly_results = model.detect_anomalies(data_pyg, threshold=ANOMALY_THRESHOLD_SIGMAS)
+
+        if anomaly_results:
+            logging.info(f"Anomaly detection completed for graph: {most_recent_file}")
+
+            # Get the list of node IPs from the NetworkX graph.
+            # nx_graph.nodes() gives the node keys, which are your IPs.
+            # It's crucial that this order matches the PyG node indexing.
+            # nx_to_pyg should handle this consistently.
+            node_ips = list(nx_graph.nodes())
+
+            # Log Node Anomaly Results
+            anomalous_nodes_indices = anomaly_results['node_anomalies_recon']
+            node_recon_errors = anomaly_results['node_recon_errors']
+            node_scores_mlp = anomaly_results['node_scores_mlp']
+
+            logging.info(f"Total Nodes: {data_pyg.x.shape[0]}")
+            logging.info(
+                f"Anomalous Nodes (Reconstruction Error > {ANOMALY_THRESHOLD_SIGMAS} std dev): {len(anomalous_nodes_indices)}")
+
+            if len(anomalous_nodes_indices) > 0:
+                logging.info("--- Details for Anomalous Nodes (by Reconstruction Error) ---")
+                for i in anomalous_nodes_indices:
+                    node_index = i.item()  # Convert tensor to Python int
+                    node_ip = "N/A"
+                    if 0 <= node_index < len(node_ips):
+                        node_ip = node_ips[node_index]  # Get the IP
+
+                    logging.info(
+                        f"Node Index {node_index} (IP: {node_ip}): Recon Error = {node_recon_errors[i]:.6f}, MLP Score = {node_scores_mlp[i]:.6f}")
+
+            # Log Edge Anomaly Results
+            anomalous_edges_indices = anomaly_results['edge_anomalies_recon']
+            edge_recon_errors = anomaly_results['edge_recon_errors']
+            edge_scores_mlp = anomaly_results['edge_scores_mlp']
+
+            logging.info(f"Total Edges: {data_pyg.edge_index.shape[1]}")
+            logging.info(
+                f"Anomalous Edges (Reconstruction Error > {ANOMALY_THRESHOLD_SIGMAS} std dev): {len(anomalous_edges_indices)}")
+
+            if len(anomalous_edges_indices) > 0:
+                logging.info("--- Details for Anomalous Edges (by Reconstruction Error) ---")
+                for i in anomalous_edges_indices:
+                    edge_idx = i.item()  # Convert tensor to Python int
+                    src_node_idx = data_pyg.edge_index[0, edge_idx].item()
+                    dst_node_idx = data_pyg.edge_index[1, edge_idx].item()
+
+                    src_ip = "N/A"
+                    dst_ip = "N/A"
+                    if 0 <= src_node_idx < len(node_ips):
+                        src_ip = node_ips[src_node_idx]
+                    if 0 <= dst_node_idx < len(node_ips):
+                        dst_ip = node_ips[dst_node_idx]
+
+                    logging.info(
+                        f"Edge ({src_node_idx} -> {dst_node_idx}) (IPs: {src_ip} -> {dst_ip}) Index {edge_idx}: Recon Error = {edge_recon_errors[i]:.6f}, MLP Score = {edge_scores_mlp[i]:.6f}")
+
+            # Log Global Anomaly Score
+            global_anomaly_score_mlp = anomaly_results['global_anomaly_mlp']
+            logging.info(f"Global Anomaly Score (from MLP): {global_anomaly_score_mlp:.6f}")
+
+            if global_anomaly_score_mlp > 0.5:  # Example threshold for global score
+                logging.warning("Global anomaly score is high, indicating potential overall anomalous graph behavior.")
+
+        else:
+            logging.info("No anomaly results returned.")
+
+    except Exception as e:
+        logging.error(f"Error during anomaly detection: {e}")
+        logging.error(traceback.format_exc())
+
 
 if __name__ == "__main__":
-    main()
+    # Example usage: Pass the directory containing your graph files
+    # This line should be adjusted when you run the script
+    main(validation_data_dir='/home/lu/Desktop/output_ssl_bruteforce')
