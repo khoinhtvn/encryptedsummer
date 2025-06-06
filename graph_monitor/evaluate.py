@@ -30,7 +30,6 @@ except ImportError as e:
 # Define paths for your model checkpoint, running statistics, and validation data
 MODEL_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/model_checkpoints'
 STATS_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/stats'
-# VALIDATION_DATA_DIR will now be passed as a parameter to main()
 EMBEDDING_SAVE_PATH = '/home/lu/Documents/graph_anomaly_detection/graph_monitor/embeddings'
 os.makedirs(EMBEDDING_SAVE_PATH, exist_ok=True)
 

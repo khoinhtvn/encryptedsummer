@@ -2,74 +2,190 @@ import json
 import logging
 import pickle
 import re
+import traceback
 
+import numpy as np
 import torch
+from matplotlib import pyplot as plt
+from sklearn.manifold import TSNE
 
 from utils import *
 from datetime import datetime
 import os
 
+
+def visualize_embeddings_3d(embeddings, labels, save_path, filename="embeddings_3d.png"):
+    """Visualizes node embeddings in 3D using t-SNE.
+
+    Args:
+        embeddings (numpy.ndarray): The node embeddings, shape (n_samples, n_features).
+        labels (numpy.ndarray or list): The labels for each node, used for coloring.
+        save_path (str): Directory path to save the visualization.
+        filename (str): Name of the image file to save.
+    """
+    logging.info("Starting 3D embedding visualization...")
+
+    n_samples = embeddings.shape[0]
+
+    # Define a default perplexity
+    default_perplexity = 30
+
+    # Adjust perplexity based on n_samples
+    if n_samples < 5:
+        logging.warning(f"Not enough samples ({n_samples}) for meaningful t-SNE. Skipping 3D embedding visualization.")
+        return
+    elif n_samples <= default_perplexity:
+        # If n_samples is small, set perplexity to n_samples - 1
+        # t-SNE requires perplexity < n_samples
+        perplexity_val = n_samples - 1
+        logging.warning(
+            f"Number of samples ({n_samples}) is less than or equal to default perplexity ({default_perplexity}). "
+            f"Adjusting perplexity to {perplexity_val} for t-SNE."
+        )
+    else:
+        perplexity_val = default_perplexity
+
+    # Ensure labels are a numpy array for consistent indexing/slicing
+    labels = np.array(labels)
+
+    try:
+        # Initialize TSNE with the determined perplexity
+        # Also addressing the FutureWarning: 'n_iter' was renamed to 'max_iter'
+        tsne = TSNE(n_components=3, random_state=42, max_iter=500, perplexity=perplexity_val)
+        reduced_embeddings = tsne.fit_transform(embeddings)
+
+        fig = plt.figure(figsize=(12, 10))
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Use numerical labels for coloring, or map categorical labels to numbers if needed
+        # Assuming labels might be categorical strings, convert them to numerical for cmap
+        unique_labels = np.unique(labels)
+        label_mapping = {label: i for i, label in enumerate(unique_labels)}
+        numerical_labels = np.array([label_mapping[label] for label in labels])
+
+        scatter = ax.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], reduced_embeddings[:, 2],
+                             c=numerical_labels, cmap='viridis', s=50)  # Added s for marker size
+
+        ax.set_title("Node Embeddings Visualization (t-SNE 3D)")
+        ax.set_xlabel("t-SNE Dimension 1")
+        ax.set_ylabel("t-SNE Dimension 2")
+        ax.set_zlabel("t-SNE Dimension 3")
+
+        # Add a colorbar
+        cbar = fig.colorbar(scatter)
+        cbar.set_label('Label Index')  # Label for the colorbar
+
+        # If labels are categorical, create a custom legend to show actual labels
+        if len(unique_labels) < 20:  # Limit legend entries for readability
+            legend_elements = [
+                plt.Line2D([0], [0], marker='o', color='w', label=label,
+                           markerfacecolor=scatter.cmap(scatter.norm(label_mapping[label])),
+                           markersize=10)
+                for label in unique_labels
+            ]
+            ax.legend(handles=legend_elements, title="Original Labels", loc='best')
+
+        # Create the directory if it doesn't exist
+        os.makedirs(save_path, exist_ok=True)
+        filepath = os.path.join(save_path, filename)
+
+        plt.savefig(filepath, dpi=300)  # Use dpi for better quality
+        logging.info(f"3D embeddings visualization saved to {filepath}")
+        plt.close(fig)  # Close the figure to free up memory
+    except Exception as e:
+        logging.error(f"Error during 3D t-SNE or plotting: {e}")
+        logging.error(traceback.format_exc())  # Log the full traceback for debugging
+
 def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None,
                            timestamp=None):
-    """Saves detected anomalies to a JSON file with more details, including IP addresses."""
+    """Saves detected anomalies to a JSON file with details, focusing only on node anomalies.
+
+    Args:
+        main_data (torch_geometric.data.Data): The PyG Data object containing the graph data.
+        anomalies (dict): Dictionary of anomaly detection results, expected to contain:
+                          'node_anomalies_recon', 'node_anomalies_mlp',
+                          'node_recon_errors', 'node_scores_mlp'.
+        processed_files_count (int): The sequential count of files processed.
+        anomaly_log_path (str): The directory path where anomaly logs will be saved.
+        nx_graph (networkx.Graph, optional): The NetworkX graph corresponding to main_data,
+                                             used to retrieve node IP addresses. Defaults to None.
+        timestamp (str, optional): A pre-generated timestamp string. If None, current timestamp is used.
+    """
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    # Construct the filename for the JSON log
     filename = os.path.join(anomaly_log_path, f"anomalies_{timestamp}_update_{processed_files_count}.json")
+
+    # Initialize the anomaly data structure, focusing only on node anomalies
     anomaly_data = {
         "timestamp": timestamp,
         "update_count": processed_files_count,
-        "global_anomaly_score": anomalies.get('global_anomaly_mlp', None),  # Use the MLP global score
-        "node_anomalies": [],
-        "edge_anomalies": []
+        "nodes_in_graph": main_data.num_nodes,
+        "node_anomalies": []
     }
 
-    if nx_graph is not None and main_data is not None:
-        node_list = list(nx_graph.nodes())  # Get the list of node IPs from the NetworkX graph
+    # Prepare a dictionary to store unique node anomalies and their detection methods
+    # This helps consolidate entries if a node is anomalous by multiple criteria.
+    unique_node_anomalies = {}
 
-        for idx in anomalies.get('node_anomalies_recon', []):  # Use reconstruction-based anomalies
-            node_index = idx.item()
-            node_info = {"node_id": node_index, "recon_error": anomalies.get('node_recon_errors', [])[idx].item(),
-                         "mlp_score": anomalies.get('node_scores_mlp', [])[idx].item()}
-            if 0 <= node_index < len(node_list):
-                node_info['ip'] = str(node_list[node_index])  # Use the index to get the IP
-            anomaly_data["node_anomalies"].append(node_info)
+    # Get the list of node identifiers from the NetworkX graph if available
+    node_list_from_nx = list(nx_graph.nodes()) if nx_graph is not None else []
 
-        if main_data.edge_index is not None:
-            for idx in anomalies.get('edge_anomalies_recon', []):  # Use reconstruction-based anomalies
-                src_index = main_data.edge_index[0][idx].item()
-                dst_index = main_data.edge_index[1][idx].item()
-                edge_info = {
-                    "source_node_id": src_index,
-                    "target_node_id": dst_index,
-                    "recon_error": anomalies.get('edge_recon_errors', [])[idx].item(),
-                    "mlp_score": anomalies.get('edge_scores_mlp', [])[idx].item()
-                }
-                if 0 <= src_index < len(node_list):
-                    edge_info['source_ip'] = str(node_list[src_index])  # Source IP
-                if 0 <= dst_index < len(node_list):
-                    edge_info['target_ip'] = str(node_list[dst_index])  # Target IP
-                anomaly_data["edge_anomalies"].append(edge_info)
-    else:
-        logging.warning("NetworkX graph or main_data not provided, cannot include IP addresses in anomaly details.")
-        for idx in anomalies.get('node_anomalies_recon', []):
-            anomaly_data["node_anomalies"].append(
-                {"node_id": idx.item(), "recon_error": anomalies.get('node_recon_errors', [])[idx].item(),
-                 "mlp_score": anomalies.get('node_scores_mlp', [])[idx].item()})
-        if main_data is not None and main_data.edge_index is not None:
-            for idx in anomalies.get('edge_anomalies_recon', []):
-                anomaly_data["edge_anomalies"].append({
-                    "source_node_id": main_data.edge_index[0][idx].item(),
-                    "target_node_id": main_data.edge_index[1][idx].item(),
-                    "recon_error": anomalies.get('edge_recon_errors', [])[idx].item(),
-                    "mlp_score": anomalies.get('edge_scores_mlp', [])[idx].item()
-                })
+    # Process nodes identified as anomalous by reconstruction error
+    for idx_tensor in anomalies.get('node_anomalies_recon', []):
+        node_index = idx_tensor.item()  # Convert tensor index to Python int
 
+        # Create initial node info, assuming detected by reconstruction
+        node_info = {
+            "node_id": node_index,
+            "detected_by": "reconstruction",
+            "recon_error": float(anomalies.get('node_recon_errors', [])[idx_tensor].item()),
+            "mlp_score": float(anomalies.get('node_scores_mlp', [])[idx_tensor].item())
+        }
+
+        # Add IP if nx_graph is available and index is valid
+        if nx_graph is not None and 0 <= node_index < len(node_list_from_nx):
+            node_info['ip'] = str(node_list_from_nx[node_index])
+
+        unique_node_anomalies[node_index] = node_info
+
+    # Process nodes identified as anomalous by MLP score
+    for idx_tensor in anomalies.get('node_anomalies_mlp', []):
+        node_index = idx_tensor.item()  # Convert tensor index to Python int
+
+        # If this node was already flagged by reconstruction, update its detection method to "both"
+        if node_index in unique_node_anomalies:
+            unique_node_anomalies[node_index]["detected_by"] = "both"
+        else:
+            # Otherwise, add it as a new anomaly detected by MLP
+            node_info = {
+                "node_id": node_index,
+                "detected_by": "mlp",
+                "recon_error": float(anomalies.get('node_recon_errors', [])[idx_tensor].item()),
+                "mlp_score": float(anomalies.get('node_scores_mlp', [])[idx_tensor].item())
+            }
+            # Add IP if nx_graph is available and index is valid
+            if nx_graph is not None and 0 <= node_index < len(node_list_from_nx):
+                node_info['ip'] = str(node_list_from_nx[node_index])
+            unique_node_anomalies[node_index] = node_info
+
+    # Convert the collected unique anomalies into a list for the JSON output
+    for node_index in sorted(unique_node_anomalies.keys()):  # Sort for consistent output
+        anomaly_data["node_anomalies"].append(unique_node_anomalies[node_index])
+
+    # Log a warning if NetworkX graph was not provided for IP mapping
+    if nx_graph is None:
+        logging.warning(
+            "NetworkX graph not provided to save_anomalies_to_file. Node IP addresses will not be included in anomaly details.")
+
+    # Attempt to save the anomaly data to a JSON file
     try:
         with open(filename, 'w') as f:
             json.dump(anomaly_data, f, indent=4)
-        logging.info(f"Anomalies saved to: {filename}")
+        logging.info(f"Node anomaly report saved to: {filename}")
     except Exception as e:
-        logging.error(f"Error saving anomalies to file: {e}")
+        logging.error(f"Error saving node anomalies to file: {e}")
 
 
 def save_checkpoint(model, optimizer, scheduler, processed_files_count, model_save_path, filename_prefix="checkpoint"):
