@@ -56,7 +56,7 @@ def monitor_new_files(directory, model_save_path, stats_save_path, anomaly_log_p
         export_period_updates (int): Frequency (in number of updates) to export embeddings.
         visualization_path (str, optional): Path to save visualizations. Defaults to None.
         train_mode (bool): If True, performs initial training and online updates.
-                           If False (detect mode), loads model and performs detection only.
+                            If False (detect mode), loads model and performs detection only.
     """
     logging.info(
         f"Starting to monitor directory: {directory} for new and existing files every {update_interval_seconds} seconds.")
@@ -97,7 +97,7 @@ def monitor_new_files(directory, model_save_path, stats_save_path, anomaly_log_p
                             node_feature_dim = main_data.x.size(1)
                             # Ensure edge_feature_dim is handled if edge_attr is None
                             edge_feature_dim = main_data.edge_attr.size(1) if hasattr(main_data,
-                                                                                      'edge_attr') and main_data.edge_attr is not None else 0
+                                                                                       'edge_attr') and main_data.edge_attr is not None else 0
 
                             gnn_model = NodeGNNAnomalyDetector(
                                 node_feature_dim=node_feature_dim,
@@ -232,38 +232,55 @@ def monitor_new_files(directory, model_save_path, stats_save_path, anomaly_log_p
                         else:
                             logging.info("No significant node anomalies detected (MLP-based)")
 
-                        # Visualization (optional)
+                        # --- Visualization (optional) ---
                         if visualization_path is not None:
                             if gnn_model and export_period_updates > 0:
                                 if export_counter % export_period_updates == 0:
                                     try:
-                                        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-                                        filename_3d = f"embeddings_3d_{processed_count}_updates_{timestamp}.png"
+                                        # Get current node embeddings from the model
                                         embeddings = gnn_model.autoencoder.encode(
                                             main_data.x.to(gnn_model.device),
                                             main_data.edge_index.to(gnn_model.device),
                                             main_data.edge_attr.to(
                                                 gnn_model.device) if main_data.edge_attr is not None else None
                                         ).detach().cpu().numpy()
-                                        labels = [0] * main_data.num_nodes
-                                        visualize_embeddings_3d(embeddings, labels, visualization_path,
-                                                                filename=filename_3d)
+
+                                        # Get the list of all node IPs from the current graph
+                                        node_ips = list(main_graph.nodes) if main_graph else []
+
+                                        # Use the reconstruction-based anomalies for visualization highlighting
+                                        anomalous_indices_for_viz = anomalies.get('node_anomalies_recon', torch.tensor([]))
+
+                                        # Use the processed_count as a timestamp for the filename
+                                        # Or if you have a real timestamp for the graph update, use that instead.
+                                        current_timestamp_for_viz = processed_count # Using processed_count as a unique identifier
+
+                                        # Call the NEW visualize_embeddings_3d function
+                                        visualize_embeddings_3d(
+                                            embeddings=embeddings,
+                                            node_ips=node_ips,
+                                            anomalous_indices_tensor=anomalous_indices_for_viz,
+                                            save_path=visualization_path,
+                                            timestamp=current_timestamp_for_viz,
+                                            filename_prefix="gcn_tsne_anomalies" # Custom prefix
+                                        )
+                                        logging.info("3D embeddings visualization triggered.")
+
                                     except Exception as e:
                                         logging.error(f"Error during periodic 3D embedding visualization: {e}")
                                         logging.error(traceback.format_exc())
 
-                                    if main_data.x is not None and main_graph is not None:  # Removed edge_attr condition
-                                        logging.info("Performing visualization of node features.")
-                                        try:
-                                            visualize_node_features(main_data, save_path=visualization_path,
-                                                                    feature_names=get_sorted_node_features(main_graph))
-                                            # Removed edge feature visualizations
-                                        except Exception as e:
-                                            logging.error(f"Error during 2D feature visualization: {e}")
-                                            logging.error(traceback.format_exc())
-                                    elif main_data.x is None:
-                                        logging.warning(
-                                            "Skipping node feature visualization: No node features available.")
+                                if main_data.x is not None and main_graph is not None:
+                                    logging.info("Performing visualization of node features.")
+                                    try:
+                                        visualize_node_features(main_data, save_path=visualization_path,
+                                                                feature_names=get_sorted_node_features(main_graph))
+                                    except Exception as e:
+                                        logging.error(f"Error during 2D feature visualization: {e}")
+                                        logging.error(traceback.format_exc())
+                                elif main_data.x is None:
+                                    logging.warning(
+                                        "Skipping node feature visualization: No node features available.")
                                 export_counter += 1
 
                         processed_files.add(filename)

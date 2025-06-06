@@ -213,7 +213,7 @@ if __name__ == '__main__':
     logging.info(f"Statistics will be saved to: {stats_save_path}")
     logging.info(f"Anomaly logs will be saved to: {anomaly_log_path}")
 
-    train_bool = (mode == 'train')  # More concise way to set boolean
+    train_bool = (mode == 'train')
 
     try:
         monitor_new_files(
