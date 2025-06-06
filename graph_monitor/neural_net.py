@@ -526,13 +526,27 @@ class HybridGNNAnomalyDetector(nn.Module):
         return batch
 
     def _calculate_online_loss(self, batch, recon_weight, anomaly_weight,
-                               use_focal_loss=True, focal_alpha=0.25, focal_gamma=2.0):
-        """Enhanced loss calculation with focal loss and better reconstruction targets"""
+                                 use_focal_loss=True, focal_alpha=0.25, focal_gamma=2.0):
+        """
+        Enhanced loss calculation with focal loss and better reconstruction targets.
+
+        Args:
+            batch (torch_geometric.data.Batch): A batch of graph data (already normalized and augmented).
+            recon_weight (float): Weight for the total reconstruction loss.
+            anomaly_weight (float): Weight for the total anomaly regularization loss.
+            use_focal_loss (bool): Whether to use focal loss for anomaly regularization.
+            focal_alpha (float): Alpha parameter for focal loss.
+            focal_gamma (float): Gamma parameter for focal loss.
+
+        Returns:
+            torch.Tensor: The calculated total loss, or None if an error occurs.
+        """
         try:
-            # Note: `batch` here is already normalized and augmented by _get_training_batch
+            # Forward pass: get anomaly scores, reconstructions, and embeddings
             node_scores, edge_scores, _, node_recon, edge_recon, _, _ = self(batch)
 
             # Node Reconstruction Loss
+            # This measures how well the model reconstructs the original node features.
             recon_loss_node = torch.tensor(0.0, device=self.device)
             if batch.x is not None and batch.x.numel() > 0:
                 if self.recon_loss_type == 'mse':
@@ -540,61 +554,91 @@ class HybridGNNAnomalyDetector(nn.Module):
                 elif self.recon_loss_type == 'l1':
                     recon_loss_node = F.l1_loss(node_recon, batch.x)
                 elif self.recon_loss_type == 'huber':
-                    recon_loss_node = F.huber_loss(node_recon, batch.x, delta=1.0)  # Delta parameter for Huber loss
+                    # Huber loss is less sensitive to outliers than MSE
+                    recon_loss_node = F.huber_loss(node_recon, batch.x, delta=1.0)
                 elif self.recon_loss_type == 'log_cosh':
+                    # Log-cosh loss is smoother than L1 and less sensitive to outliers than MSE
                     recon_loss_node = torch.log(torch.cosh(node_recon - batch.x)).mean()
                 else:
                     raise ValueError(f"Unsupported node reconstruction loss type: {self.recon_loss_type}")
             logging.debug(f"Node reconstruction loss: {recon_loss_node.item():.4f}")
 
             # Edge Reconstruction Loss
+            # This measures how well the model reconstructs the specified edge properties.
             recon_loss_edge = torch.tensor(0.0, device=self.device)
-            '''
-            if batch.edge_attr is not None and batch.edge_attr.numel() > 0:
+
+            # Only calculate edge reconstruction loss if edge_index exists and has elements
+            if batch.edge_index is not None and batch.edge_index.numel() > 0:
                 if self.edge_recon_loss_type == 'bce':
-                    # Use F.binary_cross_entropy_with_logits for numerical stability
-                    # Target should be the actual binary edge attributes (0 or 1)
-                    # Assuming batch.edge_attr is 0/1, and edge_recon is raw logits
-                    recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, batch.edge_attr.squeeze())
+                    # For BCE, the target should be a binary tensor (0 or 1).
+                    # Since we are training on "normal" data, we assume all existing edges
+                    # are "normal" and thus the target for reconstruction is '1' (or 'true').
+                    # torch.ones_like(edge_recon) creates a tensor of ones with the same shape as edge_recon,
+                    # ensuring the target matches the model's output dimension.
+                    target_edge_existence = torch.ones_like(edge_recon, dtype=torch.float32)
+                    recon_loss_edge = F.binary_cross_entropy_with_logits(edge_recon, target_edge_existence)
                 elif self.edge_recon_loss_type == 'mse':
-                    # Target should be the actual normalized edge attributes
-                    recon_loss_edge = F.mse_loss(edge_recon, batch.edge_attr)
+                    # If recon_loss_type is 'mse', the model's edge_decoder is expected
+                    # to reconstruct continuous edge features. The edge_recon's shape
+                    # must match the target batch.edge_attr's shape for MSE.
+                    # This path is generally used if you want to reconstruct all 22 original
+                    # edge features using MSE, which would require the edge_decoder's
+                    # output dimension to be 22.
+                    if batch.edge_attr is not None and batch.edge_attr.shape == edge_recon.shape:
+                        recon_loss_edge = F.mse_loss(edge_recon, batch.edge_attr)
+                    else:
+                        logging.warning("Edge recon MSE not applied: edge_attr shape mismatch or None. "
+                                        "Ensure edge_decoder outputs correct dimensions for MSE target.")
                 elif self.edge_recon_loss_type == 'l1':
-                    # Target should be the actual normalized edge attributes
-                    recon_loss_edge = F.l1_loss(edge_recon, batch.edge_attr)
+                    # Similar to MSE, if recon_loss_type is 'l1', edge_recon's shape
+                    # must match batch.edge_attr's shape.
+                    if batch.edge_attr is not None and batch.edge_attr.shape == edge_recon.shape:
+                        recon_loss_edge = F.l1_loss(edge_recon, batch.edge_attr)
+                    else:
+                        logging.warning("Edge recon L1 not applied: edge_attr shape mismatch or None. "
+                                        "Ensure edge_decoder outputs correct dimensions for L1 target.")
                 else:
                     raise ValueError(f"Unsupported edge reconstruction loss type: {self.edge_recon_loss_type}")
             logging.debug(f"Edge reconstruction loss: {recon_loss_edge.item():.4f}")
-            '''
-            # Anomaly loss with regularization
+
+            # Anomaly Loss (Regularization)
+            # This component encourages the anomaly scoring MLPs to output low scores
+            # for "normal" data, effectively regularizing them towards zero or a specific "normal" target.
             if use_focal_loss:
-                # Focal loss for anomaly scores (assuming normal data should have low scores, target 0)
+                # Focal Loss for binary anomaly scores. It's designed to down-weight
+                # easy examples and focus training on hard, misclassified examples.
+                # Here, we assume normal data should have low anomaly scores (target 0).
                 node_probs = torch.sigmoid(node_scores)
                 edge_probs = torch.sigmoid(edge_scores)
 
-                # Focal loss computation for target 0 (normal data)
+                # For target 0 (normal), the probability of the target class (p_t) is (1 - p_pred).
                 # FL(p_t) = - alpha * (1 - p_t)^gamma * log(p_t)
-                # Here, p_t is the probability of being the target class (normal, which is 0)
-                # So p_t = 1 - node_probs (prob of being normal)
+                # Where p_t = 1 - node_probs (for node_scores where lower means normal)
                 node_focal_loss = -focal_alpha * (node_probs) ** focal_gamma * torch.log(1 - node_probs + 1e-8)
                 edge_focal_loss = -focal_alpha * (edge_probs) ** focal_gamma * torch.log(1 - edge_probs + 1e-8)
 
                 anomaly_loss = (node_focal_loss.mean() + edge_focal_loss.mean()) / 2
             else:
-                # Standard L1 regularization for normal behavior (push scores towards zero)
+                # Standard L1 regularization: pushes anomaly scores directly towards zero.
                 anomaly_loss_node = node_scores.abs().mean() if node_scores is not None and node_scores.numel() > 0 else torch.tensor(
                     0.0, device=self.device)
                 anomaly_loss_edge = edge_scores.abs().mean() if edge_scores is not None and edge_scores.numel() > 0 else torch.tensor(
                     0.0, device=self.device)
                 anomaly_loss = (anomaly_loss_node + anomaly_loss_edge) / 2
+            logging.debug(f"Anomaly regularization loss: {anomaly_loss.item():.4f}")
 
-            # Combined loss with better weighting
-            total_recon_loss = recon_weight * recon_loss_node + 0.0 * recon_loss_edge
-            loss = recon_weight * total_recon_loss + anomaly_weight * anomaly_loss
+
+            # Combined Total Loss
+            # This combines the reconstruction and anomaly regularization components.
+            # The weights (recon_weight, anomaly_weight) balance their importance.
+            # (1.0 - recon_weight) * recon_loss_edge implicitly sets the weight for edge recon.
+            total_recon_loss = recon_weight * recon_loss_node + (1.0 - recon_weight) * recon_loss_edge
+            loss = total_recon_loss + anomaly_weight * anomaly_loss
 
             return loss
         except Exception as e:
             logging.error(f"Error during loss calculation: {e}")
+            # Print full traceback for debugging purposes
             traceback.print_exc()
             return None
 
