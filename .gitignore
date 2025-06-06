@@ -1,1 +1,3 @@
 /graph_builder/zeek_logs/
+*.pyc
+__pycache__/
