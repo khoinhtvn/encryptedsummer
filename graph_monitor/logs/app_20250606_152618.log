@@ -1,0 +1,212 @@
+2025-06-06 15:26:18,956 - INFO - Application logging to file: logs/app_20250606_152618.log
+2025-06-06 15:26:18,957 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ with log level: DEBUG
+2025-06-06 15:26:18,957 - INFO - Starting to monitor directory: /home/lu/Desktop/output/ for new and existing files every 30 seconds.
+2025-06-06 15:26:18,957 - INFO - Train Mode: train, Visualization Path: vis
+2025-06-06 15:26:18,957 - INFO - Found 23 files to process.
+2025-06-06 15:26:18,957 - INFO - 
+--- Processing file: nw_graph_encoded_1749044168.dot ---
+2025-06-06 15:26:18,957 - ERROR - An error occurred while processing file nw_graph_encoded_1749044168.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,960 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,960 - INFO - 
+--- Processing file: nw_graph_encoded_1749044228.dot ---
+2025-06-06 15:26:18,960 - ERROR - An error occurred while processing file nw_graph_encoded_1749044228.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,963 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,963 - INFO - 
+--- Processing file: nw_graph_encoded_1749044288.dot ---
+2025-06-06 15:26:18,963 - ERROR - An error occurred while processing file nw_graph_encoded_1749044288.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,966 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,966 - INFO - 
+--- Processing file: nw_graph_encoded_1749044348.dot ---
+2025-06-06 15:26:18,966 - ERROR - An error occurred while processing file nw_graph_encoded_1749044348.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,969 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,969 - INFO - 
+--- Processing file: nw_graph_encoded_1749044408.dot ---
+2025-06-06 15:26:18,969 - ERROR - An error occurred while processing file nw_graph_encoded_1749044408.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,972 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,972 - INFO - 
+--- Processing file: nw_graph_encoded_1749044468.dot ---
+2025-06-06 15:26:18,972 - ERROR - An error occurred while processing file nw_graph_encoded_1749044468.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,976 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,976 - INFO - 
+--- Processing file: nw_graph_encoded_1749044528.dot ---
+2025-06-06 15:26:18,976 - ERROR - An error occurred while processing file nw_graph_encoded_1749044528.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,979 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,979 - INFO - 
+--- Processing file: nw_graph_encoded_1749044588.dot ---
+2025-06-06 15:26:18,979 - ERROR - An error occurred while processing file nw_graph_encoded_1749044588.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,982 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,982 - INFO - 
+--- Processing file: nw_graph_encoded_1749044648.dot ---
+2025-06-06 15:26:18,982 - ERROR - An error occurred while processing file nw_graph_encoded_1749044648.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,985 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,985 - INFO - 
+--- Processing file: nw_graph_encoded_1749044708.dot ---
+2025-06-06 15:26:18,985 - ERROR - An error occurred while processing file nw_graph_encoded_1749044708.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,988 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,988 - INFO - 
+--- Processing file: nw_graph_encoded_1749044768.dot ---
+2025-06-06 15:26:18,988 - ERROR - An error occurred while processing file nw_graph_encoded_1749044768.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,992 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,992 - INFO - 
+--- Processing file: nw_graph_encoded_1749044828.dot ---
+2025-06-06 15:26:18,992 - ERROR - An error occurred while processing file nw_graph_encoded_1749044828.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,995 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,995 - INFO - 
+--- Processing file: nw_graph_encoded_1749044888.dot ---
+2025-06-06 15:26:18,995 - ERROR - An error occurred while processing file nw_graph_encoded_1749044888.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:18,998 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:18,998 - INFO - 
+--- Processing file: nw_graph_encoded_1749044948.dot ---
+2025-06-06 15:26:18,998 - ERROR - An error occurred while processing file nw_graph_encoded_1749044948.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,001 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,001 - INFO - 
+--- Processing file: nw_graph_encoded_1749045008.dot ---
+2025-06-06 15:26:19,001 - ERROR - An error occurred while processing file nw_graph_encoded_1749045008.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,004 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,004 - INFO - 
+--- Processing file: nw_graph_encoded_1749046127.dot ---
+2025-06-06 15:26:19,005 - ERROR - An error occurred while processing file nw_graph_encoded_1749046127.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,008 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,008 - INFO - 
+--- Processing file: nw_graph_encoded_1749046187.dot ---
+2025-06-06 15:26:19,008 - ERROR - An error occurred while processing file nw_graph_encoded_1749046187.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,011 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,011 - INFO - 
+--- Processing file: nw_graph_encoded_1749046247.dot ---
+2025-06-06 15:26:19,011 - ERROR - An error occurred while processing file nw_graph_encoded_1749046247.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,014 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,014 - INFO - 
+--- Processing file: nw_graph_encoded_1749046307.dot ---
+2025-06-06 15:26:19,014 - ERROR - An error occurred while processing file nw_graph_encoded_1749046307.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,017 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,017 - INFO - 
+--- Processing file: nw_graph_encoded_1749046367.dot ---
+2025-06-06 15:26:19,017 - ERROR - An error occurred while processing file nw_graph_encoded_1749046367.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,020 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,021 - INFO - 
+--- Processing file: nw_graph_encoded_1749046427.dot ---
+2025-06-06 15:26:19,021 - ERROR - An error occurred while processing file nw_graph_encoded_1749046427.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,024 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,024 - INFO - 
+--- Processing file: nw_graph_encoded_1749046487.dot ---
+2025-06-06 15:26:19,024 - ERROR - An error occurred while processing file nw_graph_encoded_1749046487.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,027 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
+2025-06-06 15:26:19,027 - INFO - 
+--- Processing file: nw_graph_encoded_1749046547.dot ---
+2025-06-06 15:26:19,027 - ERROR - An error occurred while processing file nw_graph_encoded_1749046547.dot: name 'process_single_update' is not defined
+2025-06-06 15:26:19,030 - ERROR - Traceback (most recent call last):
+  File "/home/lu/Documents/graph_anomaly_detection/graph_monitor/workflow_test.py", line 319, in monitor_new_files
+    main_graph, main_data = process_single_update(filepath)
+                            ^^^^^^^^^^^^^^^^^^^^^
+NameError: name 'process_single_update' is not defined
+
