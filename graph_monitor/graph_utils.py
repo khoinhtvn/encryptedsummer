@@ -210,8 +210,8 @@ def aggregate_node_data(graph):
             'total_incoming_packets': total_incoming_packets,
 
             # Placeholder for temporal features
-            #'hourly_connections': [0] * 24,
-            #'activity_span_hours': 0,
+            # 'hourly_connections': [0] * 24,
+            # 'activity_span_hours': 0,
         })
 
     return graph

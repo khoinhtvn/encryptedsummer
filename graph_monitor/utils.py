@@ -1,14 +1,13 @@
-from datetime import datetime
 import json
 import logging
-import os
 import pickle
 import re
 
 import torch
 
 from utils import *
-
+from datetime import datetime
+import os
 
 def save_anomalies_to_file(main_data, anomalies, processed_files_count, anomaly_log_path, nx_graph=None,
                            timestamp=None):

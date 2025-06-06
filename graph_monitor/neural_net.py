@@ -526,7 +526,7 @@ class HybridGNNAnomalyDetector(nn.Module):
         return batch
 
     def _calculate_online_loss(self, batch, recon_weight, anomaly_weight,
-                                 use_focal_loss=True, focal_alpha=0.25, focal_gamma=2.0):
+                               use_focal_loss=True, focal_alpha=0.25, focal_gamma=2.0):
         """
         Enhanced loss calculation with focal loss and better reconstruction targets.
 
@@ -626,7 +626,6 @@ class HybridGNNAnomalyDetector(nn.Module):
                     0.0, device=self.device)
                 anomaly_loss = (anomaly_loss_node + anomaly_loss_edge) / 2
             logging.debug(f"Anomaly regularization loss: {anomaly_loss.item():.4f}")
-
 
             # Combined Total Loss
             # This combines the reconstruction and anomaly regularization components.

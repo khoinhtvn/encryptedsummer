@@ -5,8 +5,8 @@ import os
 import re
 import traceback
 
+import matplotlib.colors  # Import matplotlib.colors for custom colormap
 import matplotlib.pyplot as plt
-import matplotlib.colors # Import matplotlib.colors for custom colormap
 import numpy as np
 import torch
 from sklearn.manifold import TSNE
@@ -64,7 +64,8 @@ def visualize_embeddings_3d(embeddings, node_ips, anomalous_indices_tensor, time
         elif isinstance(anomalous_indices_tensor, np.ndarray):
             anomalous_indices_list = anomalous_indices_tensor
         else:
-            logging.error(f"Unexpected type for anomalous_indices_tensor: {type(anomalous_indices_tensor)}. Expected torch.Tensor or numpy.ndarray.")
+            logging.error(
+                f"Unexpected type for anomalous_indices_tensor: {type(anomalous_indices_tensor)}. Expected torch.Tensor or numpy.ndarray.")
             return
 
         # Create numerical labels for plotting: 0 for normal, 1 for anomalous
@@ -73,7 +74,7 @@ def visualize_embeddings_3d(embeddings, node_ips, anomalous_indices_tensor, time
         # Mark anomalous nodes with label 1
         for idx in anomalous_indices_list:
             if 0 <= idx < len(plot_labels):
-                plot_labels[idx] = 1 # Mark as anomalous
+                plot_labels[idx] = 1  # Mark as anomalous
 
         # Set up the 3D plot
         fig = plt.figure(figsize=(12, 10))
@@ -109,14 +110,15 @@ def visualize_embeddings_3d(embeddings, node_ips, anomalous_indices_tensor, time
         filepath = os.path.join(EMBEDDING_SAVE_PATH, f"{filename_prefix}_{timestamp}.png")
         plt.savefig(filepath)
         logging.info(f"3D embeddings visualization saved to {filepath}")
-        plt.close() # Close the plot to free up memory
+        plt.close()  # Close the plot to free up memory
     except Exception as e:
         logging.error(f"Error during 3D t-SNE or plotting: {e}")
         logging.error(traceback.format_exc())
 
 
 # --- Analysis Function (modified to call 3D visualization) ---
-def analyze_node_reconstruction(model, dataloader, device, graph_timestamp, node_ips_list, anomalous_nodes_indices_tensor, visualize_2d=False, visualize_3d=False):
+def analyze_node_reconstruction(model, dataloader, device, graph_timestamp, node_ips_list,
+                                anomalous_nodes_indices_tensor, visualize_2d=False, visualize_3d=False):
     """
     Analyzes node reconstruction errors on a per-feature basis and optionally visualizes embeddings in 2D or 3D.
     Args:
@@ -242,7 +244,7 @@ def main(validation_data_dir: str):  # VALIDATION_DATA_DIR is now a parameter
         edge_recon_loss_type='bce',
         batch_size=8
     )
-    model.to(DEVICE) # Move model to the specified device (CPU/CUDA)
+    model.to(DEVICE)  # Move model to the specified device (CPU/CUDA)
 
     # Initialize optimizer and scheduler (even if not training, needed for loading checkpoint)
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
@@ -270,8 +272,8 @@ def main(validation_data_dir: str):  # VALIDATION_DATA_DIR is now a parameter
 
     # --- ANOMALY DETECTION ---
     logging.info("\n--- Starting Anomaly Detection ---")
-    ANOMALY_THRESHOLD_SIGMAS = 4.5 # Tune this based on your dataset and desired sensitivity
-    anomalous_nodes_indices = torch.tensor([], dtype=torch.long, device=DEVICE) # Initialize as empty tensor
+    ANOMALY_THRESHOLD_SIGMAS = 4.5  # Tune this based on your dataset and desired sensitivity
+    anomalous_nodes_indices = torch.tensor([], dtype=torch.long, device=DEVICE)  # Initialize as empty tensor
 
     try:
         # Perform anomaly detection using the loaded model
@@ -338,7 +340,6 @@ def main(validation_data_dir: str):  # VALIDATION_DATA_DIR is now a parameter
     except Exception as e:
         logging.error(f"Error during anomaly detection: {e}")
         logging.error(traceback.format_exc())
-
 
     # 5. Perform Node Reconstruction Analysis and Embedding Visualization
     logging.info("Starting node reconstruction analysis and embedding visualization...")

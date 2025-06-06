@@ -5,7 +5,7 @@ import time
 from logging.handlers import RotatingFileHandler
 
 # Import the workflow functions
-from workflow_test import monitor_new_files
+from workflow import monitor_new_files
 
 # Define default paths here, can be overridden by arguments
 DEFAULT_MODEL_SAVE_PATH = "model_checkpoints"
