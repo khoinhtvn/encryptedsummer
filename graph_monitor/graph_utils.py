@@ -1,14 +1,15 @@
-import networkx as nx
-import re
 import logging
+import math
+import re
 import traceback
+from collections import Counter
 from datetime import datetime
-import torch
+
+import networkx as nx
 import numpy as np
+import torch
 from sklearn.preprocessing import StandardScaler, MinMaxScaler, LabelEncoder
 from torch_geometric.data import Data
-from collections import Counter, defaultdict
-import math
 
 # Define feature lists
 EDGE_CATEGORICAL_FEATURES = ["protocol", "service"]
@@ -99,16 +100,16 @@ def aggregate_node_data(graph):
         # HTTP/HTTPS specific
         http_connections = 0
         https_connections = 0
-        user_agents_seen = set()
-        http_4xx_count = 0
-        http_5xx_count = 0
+        # user_agents_seen = set()
+        # http_4xx_count = 0
+        # http_5xx_count = 0
 
         # SSL/TLS specific
         ssl_connections = 0
-        ssl_versions_seen = set()
-        ssl_ciphers_seen = set()
-        ssl_resumptions = 0
-        ssl_sni_connections = 0
+        # ssl_versions_seen = set()
+        # ssl_ciphers_seen = set()
+        # ssl_resumptions = 0
+        # ssl_sni_connections = 0
 
         # Traffic volume aggregation
         total_outgoing_bytes = 0
@@ -191,16 +192,16 @@ def aggregate_node_data(graph):
             # HTTP/HTTPS features
             'http_connections': http_connections,
             'https_connections': https_connections,
-            'user_agents_seen': list(user_agents_seen),
-            'http_4xx_count': http_4xx_count,
-            'http_5xx_count': http_5xx_count,
+            # 'user_agents_seen': list(user_agents_seen),
+            # 'http_4xx_count': http_4xx_count,
+            # 'http_5xx_count': http_5xx_count,
 
             # SSL/TLS features
             'ssl_connections': ssl_connections,
-            'ssl_versions_seen': list(ssl_versions_seen),
-            'ssl_ciphers_seen': list(ssl_ciphers_seen),
-            'ssl_resumptions': ssl_resumptions,
-            'ssl_sni_connections': ssl_sni_connections,
+            # 'ssl_versions_seen': list(ssl_versions_seen),
+            # 'ssl_ciphers_seen': list(ssl_ciphers_seen),
+            # 'ssl_resumptions': ssl_resumptions,
+            # 'ssl_sni_connections': ssl_sni_connections,
 
             # Traffic volume
             'total_outgoing_bytes': total_outgoing_bytes,
@@ -209,8 +210,8 @@ def aggregate_node_data(graph):
             'total_incoming_packets': total_incoming_packets,
 
             # Placeholder for temporal features
-            'hourly_connections': [0] * 24,
-            'activity_span_hours': 0,
+            # 'hourly_connections': [0] * 24,
+            # 'activity_span_hours': 0,
         })
 
     return graph
@@ -293,46 +294,48 @@ def extract_node_features_improved(node_data, time_window_stats=None):
     ])
 
     # Add activity duration and consistency
-    activity_span_hours = node_data.get('activity_span_hours', 0)
-    connection_consistency = calculate_connection_consistency(node_data.get('hourly_connections', []))
-    features.extend([activity_span_hours, connection_consistency])
+    # activity_span_hours = node_data.get('activity_span_hours', 0) # Needs 'activity_span_hours' in node_data
+    # connection_consistency = calculate_connection_consistency(node_data.get('hourly_connections', [])) # Needs 'hourly_connections' and 'calculate_connection_consistency'
+    # features.extend([activity_span_hours, connection_consistency])
 
     # 5. APPLICATION LAYER FEATURES
     http_connections = node_data.get('http_connections', 0)
     http_ratio = http_connections / (total_connections + 1e-9)
 
-    user_agents = node_data.get('user_agents_seen', [])
-    unique_user_agents = len(set(user_agents))
-    user_agent_diversity = unique_user_agents / (http_connections + 1e-9)
+    # user_agents = node_data.get('user_agents_seen', []) # Needs 'user_agents_seen' in node_data
+    # unique_user_agents = len(set(user_agents)) # Needs 'user_agents_seen' in node_data
+    # user_agent_diversity = unique_user_agents / (http_connections + 1e-9) # Needs 'user_agents_seen' in node_data
 
-    http_error_ratio = (node_data.get('http_4xx_count', 0) + node_data.get('http_5xx_count', 0)) / (
-                http_connections + 1e-9)
+    # http_error_ratio = (node_data.get('http_4xx_count', 0) + node_data.get('http_5xx_count', 0)) / ( # Needs 'http_4xx_count', 'http_5xx_count' in node_data
+    #     http_connections + 1e-9) # Needs 'http_4xx_count', 'http_5xx_count' in node_data
 
-    features.extend([http_ratio, user_agent_diversity, http_error_ratio])
+    # features.extend([http_ratio, user_agent_diversity, http_error_ratio])
+    features.extend([http_ratio])
 
     # SSL/TLS features
     ssl_connections = node_data.get('ssl_connections', 0)
     ssl_ratio = ssl_connections / (total_connections + 1e-9)
 
-    ssl_versions = node_data.get('ssl_versions_seen', [])
-    ssl_ciphers = node_data.get('ssl_ciphers_seen', [])
-    ssl_version_diversity = len(set(ssl_versions)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0
-    ssl_cipher_diversity = len(set(ssl_ciphers)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0
+    # ssl_versions = node_data.get('ssl_versions_seen', []) # Needs 'ssl_versions_seen' in node_data
+    # ssl_ciphers = node_data.get('ssl_ciphers_seen', []) # Needs 'ssl_ciphers_seen' in node_data
+    # ssl_version_diversity = len(set(ssl_versions)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0 # Needs 'ssl_versions_seen' in node_data
+    # ssl_cipher_diversity = len(set(ssl_ciphers)) / (ssl_connections + 1e-9) if ssl_connections > 0 else 0 # Needs 'ssl_ciphers_seen' in node_data
 
-    ssl_resumption_ratio = node_data.get('ssl_resumptions', 0) / (ssl_connections + 1e-9)
-    sni_usage_ratio = node_data.get('ssl_sni_connections', 0) / (ssl_connections + 1e-9)
+    # ssl_resumption_ratio = node_data.get('ssl_resumptions', 0) / (ssl_connections + 1e-9) # Needs 'ssl_resumptions' in node_data
+    # sni_usage_ratio = node_data.get('ssl_sni_connections', 0) / (ssl_connections + 1e-9) # Needs 'ssl_sni_connections' in node_data
 
-    features.extend([
-        ssl_ratio, ssl_version_diversity, ssl_cipher_diversity,
-        ssl_resumption_ratio, sni_usage_ratio
-    ])
+    # features.extend([
+    #     ssl_ratio, ssl_version_diversity, ssl_cipher_diversity,
+    #     ssl_resumption_ratio, sni_usage_ratio
+    # ])
+    features.extend([ssl_ratio])
 
     # 6. NETWORK TOPOLOGY FEATURES
-    degree_centrality = node_data.get('degree_centrality', 0)
-    betweenness_centrality = node_data.get('betweenness_centrality', 0)
-    clustering_coefficient = node_data.get('clustering_coefficient', 0)
+    # degree_centrality = node_data.get('degree_centrality', 0) # Needs 'degree_centrality' in node_data
+    # betweenness_centrality = node_data.get('betweenness_centrality', 0) # Needs 'betweenness_centrality' in node_data
+    # clustering_coefficient = node_data.get('clustering_coefficient', 0) # Needs 'clustering_coefficient' in node_data
 
-    features.extend([degree_centrality, betweenness_centrality, clustering_coefficient])
+    # features.extend([degree_centrality, betweenness_centrality, clustering_coefficient])
 
     return np.array(features, dtype=float)
 
@@ -340,18 +343,43 @@ def extract_node_features_improved(node_data, time_window_stats=None):
 def get_sorted_node_features(nx_graph):
     """Returns a sorted list of all unique node attribute keys used by extract_node_features_improved."""
     return [
-        'outgoing_ratio', 'incoming_ratio', 'server_score', 'client_score',
-        'unique_protocols', 'protocol_entropy', 'most_freq_proto_ratio',
-        'unique_remote_ports', 'unique_local_ports',
-        'remote_port_diversity', 'local_port_diversity',
-        'privileged_remote_ratio', 'privileged_local_ratio',
-        'first_seen_hour_minute_sin', 'first_seen_hour_minute_cos',
-        'last_seen_hour_minute_sin', 'last_seen_hour_minute_cos',
-        'activity_span_hours', 'connection_consistency',
-        'http_ratio', 'user_agent_diversity', 'http_error_ratio',
-        'ssl_ratio', 'ssl_version_diversity', 'ssl_cipher_diversity',
-        'ssl_resumption_ratio', 'sni_usage_ratio',
-        'degree_centrality', 'betweenness_centrality', 'clustering_coefficient'
+        'outgoing_ratio',  # Behavioral role feature: Ratio of outgoing connections to total connections.
+        'incoming_ratio',  # Behavioral role feature: Ratio of incoming connections to total connections.
+        'server_score',  # Behavioral role feature: Score indicating server-like behavior.
+        'client_score',  # Behavioral role feature: Score indicating client-like behavior.
+        'unique_protocols',  # Protocol diversity feature: Number of unique protocols used by the node.
+        'protocol_entropy',  # Protocol diversity feature: Entropy of the protocol distribution.
+        'most_freq_proto_ratio',
+        # Protocol diversity feature: Ratio of the most frequent protocol to total connections.
+        'unique_remote_ports',  # Port usage pattern feature: Number of unique remote ports the node connected to.
+        'unique_local_ports',  # Port usage pattern feature: Number of unique local ports used by the node.
+        'remote_port_diversity',  # Port usage pattern feature: Ratio of unique remote ports to outgoing connections.
+        'local_port_diversity',  # Port usage pattern feature: Ratio of unique local ports to incoming connections.
+        'privileged_remote_ratio',
+        # Port usage pattern feature: Ratio of privileged remote connections to outgoing connections.
+        'privileged_local_ratio',
+        # Port usage pattern feature: Ratio of privileged local connections to incoming connections.
+        'first_seen_hour_minute_sin',
+        # Temporal pattern feature: Sine of the hour and minute when the node was first seen.
+        'first_seen_hour_minute_cos',
+        # Temporal pattern feature: Cosine of the hour and minute when the node was first seen.
+        'last_seen_hour_minute_sin',
+        # Temporal pattern feature: Sine of the hour and minute when the node was last seen.
+        'last_seen_hour_minute_cos',
+        # Temporal pattern feature: Cosine of the hour and minute when the node was last seen.
+        # 'activity_span_hours', # Temporal pattern feature: Duration of the node's activity (needs 'activity_span_hours' in node_data).
+        # 'connection_consistency', # Temporal pattern feature: Consistency of the node's connection activity over time (needs 'hourly_connections' and 'calculate_connection_consistency').
+        'http_ratio',  # Application layer feature: Ratio of HTTP connections to total connections.
+        # 'user_agent_diversity', # Application layer feature: Diversity of user agents seen in HTTP traffic (needs 'user_agents_seen' in node_data).
+        # 'http_error_ratio', # Application layer feature: Ratio of HTTP error responses (4xx and 5xx) to total HTTP connections (needs 'http_4xx_count', 'http_5xx_count' in node_data).
+        'ssl_ratio',  # Application layer feature: Ratio of SSL/TLS connections to total connections.
+        # 'ssl_version_diversity', # Application layer feature: Diversity of SSL/TLS versions used (needs 'ssl_versions_seen' in node_data).
+        # 'ssl_cipher_diversity', # Application layer feature: Diversity of SSL/TLS ciphers used (needs 'ssl_ciphers_seen' in node_data).
+        # 'ssl_resumption_ratio', # Application layer feature: Ratio of SSL/TLS session resumptions to total SSL/TLS connections (needs 'ssl_resumptions' in node_data).
+        # 'sni_usage_ratio', # Application layer feature: Ratio of SSL/TLS connections with SNI to total SSL/TLS connections (needs 'ssl_sni_connections' in node_data).
+        # 'degree_centrality', # Network topology feature: Degree centrality of the node (needs 'degree_centrality' in node_data).
+        # 'betweenness_centrality', # Network topology feature: Betweenness centrality of the node (needs 'betweenness_centrality' in node_data).
+        # 'clustering_coefficient' # Network topology feature: Clustering coefficient of the node (needs 'clustering_coefficient' in node_data).
     ]
 
 
@@ -397,7 +425,7 @@ def scale_node_features(x, sorted_node_attr_keys, node_scaling, fit_scaler):
 
     if node_scaling in ['standard', 'minmax']:
         if x.numel() > 0 and x.size(1) > 0:
-            numerical_node_indices = list(range(x.size(1))) # Scale all the new features
+            numerical_node_indices = list(range(x.size(1)))  # Scale all the new features
             if numerical_node_indices:
                 x_numerical = x[:, numerical_node_indices].numpy()
                 scaler = None
@@ -410,8 +438,10 @@ def scale_node_features(x, sorted_node_attr_keys, node_scaling, fit_scaler):
                     scaler_type = "min-max"
 
                 if scaler is not None:
-                    if np.std(x_numerical, axis=0).any() if scaler_type == 'standard' else (np.max(x_numerical, axis=0) > np.min(x_numerical, axis=0)).any():
-                        if fit_scaler or node_scaler is None or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+                    if np.std(x_numerical, axis=0).any() if scaler_type == 'standard' else (
+                            np.max(x_numerical, axis=0) > np.min(x_numerical, axis=0)).any():
+                        if fit_scaler or node_scaler is None or (
+                                last_update_time is not None and (current_time - last_update_time) > update_interval):
                             node_scaler = scaler.fit(x_numerical)
                             x_scaled_numerical = node_scaler.transform(x_numerical)
                             log_message = f"Numerical Node Features (x) after initial {scaler_type} scaling." if fit_scaler else f"Numerical Node Features (x) after periodic {scaler_type} scaling."
@@ -421,10 +451,12 @@ def scale_node_features(x, sorted_node_attr_keys, node_scaling, fit_scaler):
                             x_scaled_numerical = node_scaler.transform(x_numerical)
                             logging.info(f"Numerical Node Features (x) after online {scaler_type} scaling.")
                         else:
-                            logging.warning(f"Skipping {scaler_type} scaling for node features: Scaler not initialized.")
+                            logging.warning(
+                                f"Skipping {scaler_type} scaling for node features: Scaler not initialized.")
                         x[:, numerical_node_indices] = torch.tensor(x_scaled_numerical, dtype=torch.float)
                     else:
-                        logging.warning(f"Skipping {scaler_type} scaling for node features: Zero standard deviation or all values are the same.")
+                        logging.warning(
+                            f"Skipping {scaler_type} scaling for node features: Zero standard deviation or all values are the same.")
             else:
                 logging.info(f"No numerical node features found for {node_scaling} scaling.")
         else:
@@ -436,11 +468,15 @@ def scale_node_features(x, sorted_node_attr_keys, node_scaling, fit_scaler):
     logging.debug(f"Node features tensor shape after scaling: {x.shape}")
     return x
 
+
 def create_edge_index(nx_graph, node_to_index):
     """Creates the edge index tensor."""
-    edge_index = torch.tensor([[node_to_index[u], node_to_index[v]] for u, v in nx_graph.edges()], dtype=torch.long).t().contiguous() if nx_graph.edges else torch.empty((2, 0), dtype=torch.long)
+    edge_index = torch.tensor([[node_to_index[u], node_to_index[v]] for u, v in nx_graph.edges()],
+                              dtype=torch.long).t().contiguous() if nx_graph.edges else torch.empty((2, 0),
+                                                                                                    dtype=torch.long)
     logging.debug(f"Edge index tensor shape: {edge_index.shape}")
     return edge_index
+
 
 def process_edge_features(nx_graph, sorted_edge_attr_keys, fit_scaler, current_time):
     """Extracts, calculates meaningful traffic features, and encodes edge features."""
@@ -511,22 +547,29 @@ def process_edge_features(nx_graph, sorted_edge_attr_keys, fit_scaler, current_t
 
         for i, feature_name in enumerate(processed_edge_feature_names):
             feature_values = edge_attr_raw[:, i]
-            numerical_edge_features.append(np.array([float(val) if isinstance(val, (int, float)) else 0.0 for val in feature_values]).reshape(-1, 1))
+            numerical_edge_features.append(
+                np.array([float(val) if isinstance(val, (int, float)) else 0.0 for val in feature_values]).reshape(-1,
+                                                                                                                   1))
 
-        original_categorical_indices = [i for i, key in enumerate(sorted_edge_attr_keys) if key in EDGE_CATEGORICAL_FEATURES]
+        original_categorical_indices = [i for i, key in enumerate(sorted_edge_attr_keys) if
+                                        key in EDGE_CATEGORICAL_FEATURES]
         for original_index in original_categorical_indices:
             feature_name = sorted_edge_attr_keys[original_index]
-            categorical_data_index = len(processed_edge_feature_names) + original_index - sum(1 for k in sorted_edge_attr_keys[:original_index] if k in ['count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts'])
+            categorical_data_index = len(processed_edge_feature_names) + original_index - sum(
+                1 for k in sorted_edge_attr_keys[:original_index] if
+                k in ['count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts'])
 
             if categorical_data_index < edge_attr_raw.shape[1]:
                 feature_values = edge_attr_raw[:, categorical_data_index]
                 encoder = edge_categorical_encoders.get(feature_name)
-                if encoder is None or fit_scaler or (last_update_time is not None and (current_time - last_update_time) > update_interval):
+                if encoder is None or fit_scaler or (
+                        last_update_time is not None and (current_time - last_update_time) > update_interval):
                     encoder = LabelEncoder()
                     encoder.fit(feature_values.astype(str))
                     edge_categorical_encoders[feature_name] = encoder
                     encoded = encoder.transform(feature_values.astype(str)).reshape(-1, 1)
-                    logging.info(f"Fitted and transformed categorical edge feature: {feature_name}. Unique values: {len(encoder.classes_)}")
+                    logging.info(
+                        f"Fitted and transformed categorical edge feature: {feature_name}. Unique values: {len(encoder.classes_)}")
                     if fit_scaler or last_update_time is None or (current_time - last_update_time) > update_interval:
                         last_update_time = current_time
                 else:
@@ -537,19 +580,24 @@ def process_edge_features(nx_graph, sorted_edge_attr_keys, fit_scaler, current_t
         original_numerical_indices = [i for i, key in enumerate(sorted_edge_attr_keys) if key in EDGE_FLOAT_FEATURES]
         for original_index in original_numerical_indices:
             feature_name = sorted_edge_attr_keys[original_index]
-            numerical_data_index = len(processed_edge_feature_names) + original_index - sum(1 for k in sorted_edge_attr_keys[:original_index] if k in ['count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts'])
+            numerical_data_index = len(processed_edge_feature_names) + original_index - sum(
+                1 for k in sorted_edge_attr_keys[:original_index] if
+                k in ['count', 'total_orig_bytes', 'total_resp_bytes', 'total_orig_pkts', 'total_resp_pkts'])
             if numerical_data_index < edge_attr_raw.shape[1]:
                 feature_values = edge_attr_raw[:, numerical_data_index]
                 numerical_values = [float(val) if isinstance(val, (int, float)) else 0.0 for val in feature_values]
                 numerical_edge_features.append(np.array(numerical_values).reshape(-1, 1))
 
         edge_attr_categorical = torch.cat(encoded_categorical, dim=1) if encoded_categorical else None
-        logging.debug(f"Shape of encoded categorical edge features: {edge_attr_categorical.shape if edge_attr_categorical is not None else (0,)}")
+        logging.debug(
+            f"Shape of encoded categorical edge features: {edge_attr_categorical.shape if edge_attr_categorical is not None else (0,)}")
 
-        edge_attr_numerical_concat = np.concatenate(numerical_edge_features, axis=1) if numerical_edge_features else None
+        edge_attr_numerical_concat = np.concatenate(numerical_edge_features,
+                                                    axis=1) if numerical_edge_features else None
         return edge_attr_categorical, edge_attr_numerical_concat
     else:
         return None, None
+
 
 def scale_edge_features(edge_attr_numerical_concat, edge_scaling, fit_scaler):
     """Scales numerical edge features."""
@@ -587,15 +635,19 @@ def scale_edge_features(edge_attr_numerical_concat, edge_scaling, fit_scaler):
                 else:
                     logging.warning(
                         f"Skipping {scaler_type} scaling for numerical edge features: Zero standard deviation or all values are the same.")
-            edge_attr_numerical_scaled = torch.tensor(edge_attr_numerical_scaled, dtype=torch.float) if edge_attr_numerical_scaled is not None else None
-            logging.debug(f"Shape of scaled numerical edge features: {edge_attr_numerical_scaled.shape if edge_attr_numerical_scaled is not None else (0,)}")
+            edge_attr_numerical_scaled = torch.tensor(edge_attr_numerical_scaled,
+                                                      dtype=torch.float) if edge_attr_numerical_scaled is not None else None
+            logging.debug(
+                f"Shape of scaled numerical edge features: {edge_attr_numerical_scaled.shape if edge_attr_numerical_scaled is not None else (0,)}")
         elif edge_scaling == 'none':
-            edge_attr_numerical_scaled = torch.tensor(edge_attr_numerical_concat, dtype=torch.float) if edge_attr_numerical_concat is not None else None
+            edge_attr_numerical_scaled = torch.tensor(edge_attr_numerical_concat,
+                                                      dtype=torch.float) if edge_attr_numerical_concat is not None else None
             logging.info("No scaling applied to numerical edge features.")
         else:
             raise ValueError(
                 f"Invalid edge_scaling method: {edge_scaling}. Choose 'none', 'standard', or 'minmax'.")
     return edge_attr_numerical_scaled
+
 
 def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=True):
     """Converts a NetworkX graph to a PyG Data object."""
@@ -620,7 +672,8 @@ def nx_to_pyg(nx_graph, node_scaling='none', edge_scaling='none', fit_scaler=Tru
     # 4. Extract and process edge features
     sorted_edge_attr_keys = get_sorted_edge_features(nx_graph)
     logging.debug(f"Sorted edge attribute keys: {sorted_edge_attr_keys}")
-    edge_attr_categorical, edge_attr_numerical_concat = process_edge_features(nx_graph, sorted_edge_attr_keys, fit_scaler, current_time)
+    edge_attr_categorical, edge_attr_numerical_concat = process_edge_features(nx_graph, sorted_edge_attr_keys,
+                                                                              fit_scaler, current_time)
 
     # 5. Scale numerical edge features
     edge_attr_numerical_scaled = scale_edge_features(edge_attr_numerical_concat, edge_scaling, fit_scaler)
