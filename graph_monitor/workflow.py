@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 from sklearn.manifold import TSNE
 import torch.nn.functional as F
 
-from visualization import visualize_node_features
+from visualization import visualize_node_features, visualize_embeddings_3d
 
 # Import necessary functions and classes from your project files
 # Ensure these paths are correct relative to where this script is run
@@ -18,7 +18,7 @@ try:
     from graph_utils import dot_to_nx, nx_to_pyg, get_sorted_node_features, get_sorted_edge_features
     from neural_net import NodeGNNAnomalyDetector
     from utils import load_checkpoint, save_checkpoint, load_running_stats, save_running_stats, \
-        extract_timestamp_from_epoch, save_anomalies_to_file, visualize_embeddings_3d
+        extract_timestamp_from_epoch, save_anomalies_to_file
 except ImportError as e:
     logging.error(
         f"Error importing modules. Please ensure graph_utils.py, neural_net.py, and utils.py are in your PYTHONPATH or the same directory.")

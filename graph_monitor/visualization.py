@@ -1,12 +1,17 @@
 import logging
 import os
+import traceback
 from datetime import datetime
 
+import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+import torch
+from matplotlib import pyplot
 from sklearn.decomposition import PCA
+from sklearn.manifold import TSNE
 from sklearn.preprocessing import StandardScaler
 from torch_geometric.data import Data
 
@@ -466,3 +471,113 @@ def visualize_all_edge_features(data: Data, edge_feature_names: list = None, sav
 
 # Example usage (assuming you have a PyTorch Geometric Data object named 'data'):
 # visualize_all_edge_features_3d_pca(data, save_path='./edge_feature_plots')
+def visualize_embeddings_3d(embeddings, node_ips, anomalous_indices_tensor,
+                            save_path, timestamp=None, filename_prefix="embeddings_3d"):
+    """
+    Visualizes node embeddings in 3D using t-SNE, highlighting anomalous nodes,
+    and includes timestamp in filename.
+
+    Args:
+        embeddings (np.ndarray): The node embeddings to visualize, shape (n_samples, n_features).
+        node_ips (list): List of IP addresses (or node identifiers) corresponding
+                         to the node indices in 'embeddings'. Used for total count.
+        anomalous_indices_tensor (torch.Tensor or np.ndarray): Tensor/array containing
+                                indices (0-based) of anomalous nodes.
+        save_path (str): The directory path where the visualization image will be saved.
+        timestamp (str, optional): A specific timestamp string (e.g., "20250606_173000").
+                                   If None, the current UTC time will be used.
+        filename_prefix (str): Prefix for the saved filename (e.g., "embeddings_3d").
+    """
+    logging.info("Starting 3D embedding visualization...")
+
+    if timestamp is None:
+        timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_UTC")
+    else:
+        timestamp_str = str(timestamp) # Ensure it's a string for filename
+
+    n_samples = embeddings.shape[0]
+
+    # --- Perplexity Adjustment for t-SNE ---
+    # t-SNE requires perplexity < n_samples. Minimum samples for t-SNE is usually 5.
+    default_perplexity = 30
+    perplexity_val = default_perplexity
+
+    if n_samples < 5:
+        logging.warning(f"Not enough samples ({n_samples}) for meaningful t-SNE. Skipping 3D embedding visualization.")
+        return
+    elif n_samples <= default_perplexity:
+        # If n_samples is small, set perplexity to n_samples - 1 (must be > 0)
+        perplexity_val = max(1, n_samples - 1)
+        logging.warning(
+            f"Number of samples ({n_samples}) is small. Adjusting t-SNE perplexity to {perplexity_val}."
+        )
+    # No 'else' needed, as perplexity_val is already default_perplexity
+
+    try:
+        # Initialize t-SNE. Use 'max_iter' instead of 'n_iter' to avoid FutureWarning.
+        tsne = TSNE(n_components=3, random_state=42, max_iter=500, perplexity=perplexity_val)
+        reduced_embeddings = tsne.fit_transform(embeddings)
+
+        # --- Prepare Plot Labels (Normal vs. Anomalous) ---
+        # Ensure anomalous_indices_tensor is a NumPy array for consistent indexing
+        anomalous_indices_list = []
+        if isinstance(anomalous_indices_tensor, torch.Tensor):
+            anomalous_indices_list = anomalous_indices_tensor.cpu().numpy()
+        elif isinstance(anomalous_indices_tensor, np.ndarray):
+            anomalous_indices_list = anomalous_indices_tensor
+        elif anomalous_indices_tensor is not None: # Handle cases where it might be None
+            logging.warning(
+                f"Unexpected type for anomalous_indices_tensor: {type(anomalous_indices_tensor)}. "
+                "Expected torch.Tensor or numpy.ndarray. No anomalies will be highlighted."
+            )
+
+        # Initialize all nodes as normal (0)
+        plot_labels = np.zeros(len(node_ips), dtype=int) # Use len(node_ips) for total nodes
+        # Mark anomalous nodes with label 1
+        for idx in anomalous_indices_list:
+            if 0 <= idx < len(plot_labels):
+                plot_labels[idx] = 1 # Mark as anomalous
+            else:
+                logging.warning(f"Anomalous index {idx} out of bounds for node_ips length {len(node_ips)}.")
+
+        # --- Set up the 3D plot ---
+        fig = plt.figure(figsize=(12, 10))
+        ax = fig.add_subplot(111, projection='3d')
+
+        # Define colors: Blue for normal, Red for anomalous
+        colors = ['blue', 'red']
+        cmap = matplotlib.colors.ListedColormap(colors)
+        bounds = [0, 1, 2] # Boundaries for the colormap (0 -> blue, 1 -> red)
+        norm = matplotlib.colors.BoundaryNorm(bounds, cmap.N)
+
+        # Create the 3D scatter plot
+        scatter = ax.scatter(reduced_embeddings[:, 0], reduced_embeddings[:, 1], reduced_embeddings[:, 2],
+                             c=plot_labels, cmap=cmap, norm=norm, alpha=0.7, s=50) # 's' for marker size
+
+        # --- Set plot title and axis labels ---
+        ax.set_title(f"Node Embeddings Visualization (t-SNE 3D)\nGraph Timestamp: {timestamp_str}")
+        ax.set_xlabel("t-SNE Dimension 1")
+        ax.set_ylabel("t-SNE Dimension 2")
+        ax.set_zlabel("t-SNE Dimension 3")
+
+        # --- Create Custom Legend ---
+        from matplotlib.lines import Line2D # Import here to avoid potential circular dependencies if at top
+        legend_elements = [
+            Line2D([0], [0], marker='o', color='w', label='Normal Node',
+                   markerfacecolor='blue', markersize=10),
+            Line2D([0], [0], marker='o', color='w', label='Anomalous Node',
+                   markerfacecolor='red', markersize=10)
+        ]
+        ax.legend(handles=legend_elements, title="Node Type", loc='upper left')
+
+        # --- Save the plot to a file ---
+        os.makedirs(save_path, exist_ok=True) # Ensure save directory exists
+        filepath = os.path.join(save_path, f"{filename_prefix}_{timestamp_str}.png")
+
+        plt.savefig(filepath, dpi=300) # Save with higher DPI for better quality
+        logging.info(f"3D embeddings visualization saved to {filepath}")
+        plt.close(fig) # Close the plot to free up memory
+
+    except Exception as e:
+        logging.error(f"Error during 3D t-SNE or plotting: {e}")
+        logging.error(traceback.format_exc()) # Log the full traceback for detailed debugging
